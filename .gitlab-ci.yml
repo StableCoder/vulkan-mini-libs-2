@@ -1,0 +1,124 @@
+# Global
+
+stages:
+  - Platform Tests
+  - Analysis
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+  CTEST_OUTPUT_ON_FAILURE: '1'
+
+# Platform Tests
+
+.platform_unix_template: &platform_unix_template
+  stage: Platform Tests
+  tags:
+    - docker-linux
+  script:
+    - mkdir build && cd build
+    - cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DBUILD_EXAMPLES=ON -DBUILD_TESTS=ON
+    - ninja
+    - ctest
+
+.platform_windows_template: &platform_windows_template
+  stage: Platform Tests
+  image: stabletec/build-foe:windows
+  tags:
+    - docker-windows
+    - amd64
+  script:
+    - mkdir build; cd build
+    - cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DBUILD_EXAMPLES=ON -DBUILD_TESTS=ON
+    - ninja
+    - ninja test
+
+.platform_macos_template: &platform_macos_template
+  stage: Platform Tests
+  tags:
+    - macos
+    - amd64
+  dependencies: []
+  script:
+    - mkdir build && cd build
+    - cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DBUILD_EXAMPLES=ON -DBUILD_TESTS=ON
+    - ninja
+    - ctest
+
+Arch/GCC:
+  image: stabletec/build-foe:arch
+  variables:
+    CC: gcc
+    CXX: g++
+  <<: *platform_unix_template
+
+Arch/Clang:
+  image: stabletec/build-foe:arch
+  variables:
+    CC: clang
+    CXX: clang++
+  <<: *platform_unix_template
+
+Fedora/GCC:
+  image: stabletec/build-foe:fedora
+  variables:
+    CC: gcc
+    CXX: g++
+  <<: *platform_unix_template
+
+Fedora/Clang:
+  image: stabletec/build-foe:fedora
+  variables:
+    CC: clang
+    CXX: clang++
+  <<: *platform_unix_template
+
+Ubuntu/GCC:
+  image: stabletec/build-foe:ubuntu
+  variables:
+    CC: gcc
+    CXX: g++
+  <<: *platform_unix_template
+
+Ubuntu/Clang:
+  image: stabletec/build-foe:ubuntu
+  variables:
+    CC: clang
+    CXX: clang++
+  <<: *platform_unix_template
+
+Windows/MSVC:
+  <<: *platform_windows_template
+
+Windows/Clang-cl:
+  variables:
+    CC: clang-cl
+    CXX: clang-cl
+  <<: *platform_windows_template
+
+macOS/Clang (amd64):
+  variables:
+    CC: clang
+    CXX: clang++
+  <<: *platform_macos_template
+
+# Analysis
+Code Coverage:
+  stage: Analysis
+  image: stabletec/build-foe:fedora
+  tags:
+    - docker-linux
+  dependencies: []
+  variables:
+    CC: clang
+    CXX: clang++
+  script:
+    - mkdir build && cd build
+    - cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DCODE_COVERAGE=ON -DBUILD_TESTS=ON
+    - ninja
+    - ninja ccov-VkSerializationTests
+    - ninja ccov-report-VkSerializationTests
+  artifacts:
+    name: CodeCoverage
+    paths: 
+      - build/ccov
+    expire_in: 1 day

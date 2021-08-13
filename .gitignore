@@ -1,0 +1,8 @@
+.cache/
+.clangd/
+.vscode/
+auto-gen/
+build/
+Vulkan-Docs/
+compile_commands.json
+*.xml
