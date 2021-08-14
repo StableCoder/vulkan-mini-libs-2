@@ -86,8 +86,8 @@ Ubuntu/Clang:
     CXX: clang++
   <<: *platform_unix_template
 
-Debian/GCC (Old v97):
-  image: stabletec/build-core:debian
+Debian 10/GCC (Old v97):
+  image: stabletec/build-core:debian-10
   variables:
     CC: gcc
     CXX: g++
@@ -101,8 +101,8 @@ Debian/GCC (Old v97):
     - ninja
     - ctest
 
-Debian/Clang (Old v97):
-  image: stabletec/build-core:debian
+Debian 10/Clang (Old v97):
+  image: stabletec/build-core:debian-10
   variables:
     CC: clang
     CXX: clang++
