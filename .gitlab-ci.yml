@@ -86,6 +86,36 @@ Ubuntu/Clang:
     CXX: clang++
   <<: *platform_unix_template
 
+Debian/GCC (Old v97):
+  image: stabletec/build-core:debian
+  variables:
+    CC: gcc
+    CXX: g++
+  stage: Platform Tests
+  tags:
+    - docker-linux
+  script:
+    - apt install -y libvulkan-dev
+    - mkdir build && cd build
+    - cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DBUILD_EXAMPLES=ON -DBUILD_TESTS=ON
+    - ninja
+    - ctest
+
+Debian/Clang (Old v97):
+  image: stabletec/build-core:debian
+  variables:
+    CC: clang
+    CXX: clang++
+  stage: Platform Tests
+  tags:
+    - docker-linux
+  script:
+    - apt install -y libvulkan-dev
+    - mkdir build && cd build
+    - cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DBUILD_EXAMPLES=ON -DBUILD_TESTS=ON
+    - ninja
+    - ctest
+
 Windows/MSVC:
   <<: *platform_windows_template
 
