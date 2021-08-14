@@ -104,7 +104,7 @@ macOS/Clang (amd64):
 # Analysis
 Code Coverage:
   stage: Analysis
-  image: stabletec/build-foe:fedora
+  image: stabletec/build-foe:arch
   tags:
     - docker-linux
   dependencies: []
