@@ -11,6 +11,16 @@ def processVendors(outFile, vendors):
 
     outFile.write("}};\n\n")
 
+def processEnumValue(outFile, enum, value):
+    if 'value' in enum['values'][value]:
+        # Spitting out plain values
+        outFile.write(enum['values'][value]['value'])
+    elif 'bitpos' in enum['values'][value]:
+        # Bitflag
+        outFile.writelines(['0x', format(1 << int(enum['values'][value]['bitpos']), '08X')])
+    elif 'alias' in enum['values'][value]:
+        processEnumValue(outFile, enum, enum['values'][value]['alias'])
+
 def processEnums(outFile, enums, vendors):
     for enumIt in enums:
         # If there aren't any values assiociated with the enum set, skip it
@@ -70,20 +80,7 @@ def processEnums(outFile, enums, vendors):
 
             outFile.write(valueStr)
             outFile.write("\", ")
-            if 'value' in enum['values'][value]:
-                # Spitting out plain values
-                outFile.write(enum['values'][value]['value'])
-            elif 'bitpos' in enum['values'][value]:
-                # Bitflag
-                outFile.writelines(['0x', format(1 << int(enum['values'][value]['bitpos']), '08X')])
-            elif 'alias' in enum['values'][value]:
-                value = enum['values'][value]['alias']
-                if 'value' in enum['values'][value]:
-                    # Spitting out plain values
-                    outFile.write(enum['values'][value]['value'])
-                elif 'bitpos' in enum['values'][value]:
-                    # Bitflag
-                    outFile.writelines(['0x', format(1 << int(enum['values'][value]['bitpos']), '08X')])
+            processEnumValue(outFile, enum, value)
 
             outFile.write("},\n")
 

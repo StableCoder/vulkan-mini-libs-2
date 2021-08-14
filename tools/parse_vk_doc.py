@@ -95,6 +95,112 @@ def processEnums(registryNode, version, enums):
 
     return enums
 
+def processFeatureEnum(enum, version, enums):
+    if '@extends' in enum:
+        enumSetName = enum['@extends']
+        if enumSetName == 'VkStructureType':
+            return enums
+
+        if enumSetName in enums:
+            enums[enumSetName]['first'] = version
+        else:
+            enums[enumSetName] = {
+                "first": version,
+                "last": version,
+                "values": dict(),
+            }
+
+        enumName = enum['@name']
+        if enumName in enums[enumSetName]['values']:
+            # Found previously
+            enums[enumSetName]['values'][enumName]['first'] = version
+        else:
+            enums[enumSetName]['values'][enumName] = {
+                "first": version,
+                "last": version,
+            }
+            if '@value' in enum:
+                enums[enumSetName]['values'][enumName]['value'] = enum['@value']
+            elif '@offset' in enum:
+                enums[enumSetName]['values'][enumName]['value'] = 1000000000 + (int(enum['@extnumber'])-1) * (1000) + int(enum['@offset'])
+                if '@dir' in enum and enum['@dir'] == '-':
+                    enums[enumSetName]['values'][enumName]['value'] = -enums[enumSetName]['values'][enumName]['value']
+            elif '@bitpos' in enum:
+                enums[enumSetName]['values'][enumName]['bitpos'] = enum['@bitpos']
+            elif '@alias' in enum:
+                enums[enumSetName]['values'][enumName]['alias'] = enum['@alias']
+            else:
+                print('FFF')
+                sys.exit(1)
+
+    return enums
+
+def processFeatures(registryNode, version, enums):
+    for feature in registryNode['feature']:
+        # Ignore the base spec feature set
+        featureName = feature['@name']
+        if featureName == 'VK_VERSION_1_0':
+            continue
+
+        for require in feature['require']:
+            if 'enum' in require:
+                if isinstance(require['enum'], list):
+                    for enum in require['enum']:
+                        enums = processFeatureEnum(enum, version, enums)
+                else:
+                    enums = processFeatureEnum(require['enum'], version, enums)
+
+    return enums
+
+def processExtensions(registryNode, version, enums):
+    for extension in registryNode['extensions']['extension']:
+        if extension['@supported'] == 'disabled':
+            continue
+        extName = extension['@name']
+        extNumber = int(extension['@number'])
+
+        if 'require' in extension:
+            if 'enum' in extension['require']:
+                for enum in extension['require']['enum']:
+                    if '@extends' in enum:
+                        enumSetName = enum['@extends']
+                        if enumSetName == 'VkStructureType':
+                            continue
+
+                        if enumSetName in enums:
+                            enums[enumSetName]['first'] = version
+                        else:
+                            enums[enumSetName] = {
+                                "first": version,
+                                "last": version,
+                                "values": dict(),
+                            }
+
+                        enumName = enum['@name']
+                        if enumName in enums[enumSetName]['values']:
+                            # Found previously
+                            enums[enumSetName]['values'][enumName]['first'] = version
+                        else:
+                            enums[enumSetName]['values'][enumName] = {
+                                "first": version,
+                                "last": version,
+                            }
+                            if '@value' in enum:
+                                enums[enumSetName]['values'][enumName]['value'] = enum['@value']
+                            elif '@offset' in enum:
+                                enums[enumSetName]['values'][enumName]['value'] = 1000000000 + (extNumber-1) * (1000) + int(enum['@offset'])
+                            elif '@bitpos' in enum:
+                                enums[enumSetName]['values'][enumName]['bitpos'] = enum['@bitpos']
+                            elif '@alias' in enum:
+                                enums[enumSetName]['values'][enumName]['alias'] = enum['@alias']
+                            else:
+                                print('FFF')
+                                sys.exit(1)
+
+
+
+    return enums
+
 def main(argv):
     inputFile=''
     workingFile=''
@@ -158,6 +264,12 @@ def main(argv):
             data['root']['enums'] = processEnums(registryNode, version, data['root']['enums'])
         else:
             data['root']['enums'] = processEnums(registryNode, version, dict())
+
+        # Features
+        data['root']['enums'] = processFeatures(registryNode, version, data['root']['enums'])
+
+        # Extensions
+        data['root']['enums'] = processExtensions(registryNode, version, data['root']['enums'])
 
         # Output data back to the working file
         f = open(workingFile, "w")
