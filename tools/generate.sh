@@ -45,7 +45,9 @@ pushd Vulkan-Docs >/dev/null
 git fetch -p
 
 # Collect the per-version XML data
+FIRST=1
 for TAG in $(git tag | grep -e "^v[0-9]*\.[0-9]*\.[0-9]*$" | sort -t '.' -k3nr); do
+    EXTRA_OPTS=
     VER=$(echo $TAG | cut -d'.' -f3)
     if [[ $VER -lt $START ]]; then
         # Prior to v72, vk.xml was not published, so that's the default minimum.
@@ -55,7 +57,12 @@ for TAG in $(git tag | grep -e "^v[0-9]*\.[0-9]*\.[0-9]*$" | sort -t '.' -k3nr);
     fi
     git checkout $TAG
 
-    ../parse_vk_doc.py -i xml/vk.xml -w ../.gen_cache.xml
+    if [[ $FIRST -eq 1 ]]; then
+        EXTRA_OPTS="-a"
+    fi
+
+    ../parse_vk_doc.py -i xml/vk.xml -w ../.gen_cache.xml $EXTRA_OPTS
+    FIRST=0
 done
 popd >/dev/null
 

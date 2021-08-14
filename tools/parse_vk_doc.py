@@ -58,10 +58,6 @@ def processEnumValue(enum, values, version):
     return values
 
 def processEnums(registryNode, version, enums):
-    for enum in enums:
-        if enums[enum] is None:
-            enum[enum] = dict()
-
     for enumSet in registryNode['enums']:
         if not '@type' in enumSet:
             continue
@@ -197,17 +193,93 @@ def processExtensions(registryNode, version, enums):
                                 print('FFF')
                                 sys.exit(1)
 
-
-
     return enums
+
+def processStructMember(newMember, memberList):
+    member = {
+        "type": newMember['type'],
+    }
+    if '#text' in newMember:
+        member['text'] = newMember['#text']
+    if '@len' in newMember:
+        member['len'] = newMember['@len']
+    if '@values' in newMember:
+        member['values'] = newMember['@values']
+
+    memberList[newMember['name']] = member
+
+def processStructs(registryNode, version, structs):
+    for type in registryNode['types']['type']:
+        if not '@category' in type:
+            continue
+        if type['@category'] != 'struct':
+            continue
+
+        structName = type['@name']
+        if structName in structs:
+            structs[structName]['first'] = version
+        else:
+
+            structs[structName] = {
+                "first": version,
+                "last": version,
+                "members": dict(),
+                "platforms": []
+            }
+            if '@alias' in type:
+                structs[structName]['alias'] = type['@alias']
+            if 'member' in type:
+                if isinstance(type['member'], list):
+                    for member in type['member']:
+                        processStructMember(member, structs[structName]['members'])
+                else:
+                    processStructMember(type['member'], structs[structName]['members'])
+
+    return structs
+
+def processFeatureStructs(feature, structs):
+    featureName = feature['@name']
+    # Skip the original feature set
+    if featureName == 'VK_VERSION_1_0':
+        return structs
+    
+    for require in feature['require']:
+        if 'type' in require:
+            if isinstance(require['type'], list):
+                for type in require['type']:
+                    if type['@name'] in structs:
+                        structs[type['@name']]['platforms'].append(featureName)
+            elif not require['type']['@name'].startswith('VK_API_VERSION'):
+                if require['type']['@name'] in structs:
+                    structs[require['type']['@name']]['platforms'].append(featureName)
+
+    return structs
+
+def processExtensionStructs(extension, structs):
+    if extension['@supported'] == 'disabled':
+        return structs
+    extName = extension['@name']
+    require = extension['require']
+
+    if 'type' in require:
+        if isinstance(require['type'], list):
+            for type in require['type']:
+                if type['@name'] in structs:
+                    structs[type['@name']]['platforms'].append(extName)
+        else:
+            if require['type']['@name'] in structs:
+                structs[require['type']['@name']]['platforms'].append(extName)
+
+    return structs
 
 def main(argv):
     inputFile=''
     workingFile=''
+    processExtra=False
     data = dict()
 
     try:
-       opts, args =  getopt.getopt(argv, 'i:w:', [])
+       opts, args =  getopt.getopt(argv, 'i:w:a', [])
     except getopt.GetoptError:
         print('Error parsing options')
         sys.exit(1)
@@ -216,6 +288,9 @@ def main(argv):
             inputFile = arg
         elif opt == '-w':
             workingFile = arg
+        elif opt == '-a':
+            processExtra = True
+
 
     if(inputFile == ''):
         print("Error: No Vulkan XML file specified")
@@ -265,11 +340,21 @@ def main(argv):
         else:
             data['root']['enums'] = processEnums(registryNode, version, dict())
 
-        # Features
+        # Enum features/extensions
         data['root']['enums'] = processFeatures(registryNode, version, data['root']['enums'])
-
-        # Extensions
         data['root']['enums'] = processExtensions(registryNode, version, data['root']['enums'])
+
+        # Structs
+        if 'structs' in data['root']:
+            data['root']['structs'] = processStructs(registryNode, version, data['root']['structs'])
+        else:
+            data['root']['structs'] = processStructs(registryNode, version, dict())
+
+        if processExtra:
+            for feature in registryNode['feature']:
+                data['root']['structs'] = processFeatureStructs(feature, data['root']['structs'])
+            for extension in registryNode['extensions']['extension']:
+                data['root']['structs'] = processExtensionStructs(extension, data['root']['structs'])
 
         # Output data back to the working file
         f = open(workingFile, "w")
