@@ -16,6 +16,9 @@ def processEnums(outFile, enums, vendors):
         # If there aren't any values assiociated with the enum set, skip it
         if enums[enumIt]['values'] is None:
             continue
+        # Skip VkResult serialization
+        if str(enumIt) == 'VkResult':
+            continue
 
         outFile.write('constexpr EnumValueSet ')
         outFile.write(str(enumIt))
@@ -270,8 +273,11 @@ bool vk_parse(std::string_view vkType, std::string vkString, T *pValue) {
     outFile.write("};\n")
 
     # Enum Pointer Array
-    outFile.writelines(["\nconstexpr std::array<EnumType, ", str(len(root['enums'])), "> enumTypes = {{\n"])
+    outFile.writelines(["\nconstexpr std::array<EnumType, ", str(len(root['enums'])-1), "> enumTypes = {{\n"]) # -1 for not doing VkResult
     for enum in root['enums']:
+        if str(enum) == 'VkResult':
+            continue
+
         if root['enums'][enum]['values'] is None:
             # If there aren't any values assiociated with the enum set, set the ptr to null
             outFile.writelines(["  {\"", str(enum), "\", nullptr, ", str(0), "},\n"])

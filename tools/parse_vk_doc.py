@@ -68,8 +68,6 @@ def processEnums(registryNode, version, enums):
         enumSetName = enumSet['@name']
         if enumSetName == 'API Constants':
             continue
-        if enumSetName == 'VkResult':
-            continue
         if enumSetName == 'VkStructureType':
             continue
 
