@@ -97,7 +97,7 @@ def main(argv):
     outFile.writelines(["static_assert(VK_HEADER_VERSION <= ", root['last'], ", \"VK_HEADER_VERSION is from after the supported range.\");\n"])
 
     # Special comparison of unknown VkStruct
-    outFile.write('\nbool ncompare_VkNextStruct(void const* s1, void const*s2, bool deepCompare);\n')
+    outFile.write('\nbool compare_VkBaseStruct(void const* s1, void const*s2, bool deepCompare);\n')
 
     # Per-struct function declarations
     structs = root['structs']
@@ -112,12 +112,9 @@ def main(argv):
     outFile.write('\n//#ifdef VK_STRUCT_COMPARE_CONFIG_MAIN\n')
 
     # Unknown struct
-    outFile.write("""\nbool compare_VkNextStruct(void const*s1, void const*s2, bool deepCompare) {
-  struct VkTempStruct {
-      VkStructureType sType;
-  };
-  VkTempStruct const* pTemp1 = static_cast<VkTempStruct const*>(s1);
-  VkTempStruct const* pTemp2 = static_cast<VkTempStruct const*>(s2);
+    outFile.write("""\nbool compare_VkBaseStruct(void const*s1, void const*s2, bool deepCompare) {
+  VkBaseInStructure const* pTemp1 = static_cast<VkBaseInStructure const*>(s1);
+  VkBaseInStructure const* pTemp2 = static_cast<VkBaseInStructure const*>(s2);
 
   if(pTemp1->sType != pTemp2->sType)
       return false;
@@ -130,7 +127,7 @@ def main(argv):
         if not struct['members'] is None and 'sType' in struct['members'] and 'values' in struct['members']['sType']:
             guarded = guardStruct(struct, outFile, firstVersion, lastVersion)
             outFile.writelines(['\n  case ', struct['members']['sType']['values'], ':\n'])
-            outFile.writelines(['    return compare_', structName, '(s1, s2, deepCompare);\n'])
+            outFile.writelines(['    return compare_', structName, '((', structName, ' const*)s1, (', structName, ' const*)s2, deepCompare);\n'])
             if guarded:
                 outFile.write('#endif\n')
 
@@ -139,13 +136,14 @@ def main(argv):
     // Can't figure out, maybe a guarded/disabled one?
     return false;
   }
+}
 """)
 
     # All defined structs
     for it in structs:
         structName = str(it)
         guarded = guardStruct(structs[it], outFile, firstVersion, lastVersion)
-        outFile.writelines(['\nbool compare_', structName, '(', structName, ' const *s1, ', structName, ' const* s2, bool deepCompare) {\n'])
+        outFile.writelines(['\nbool compare_', structName, '(', structName, ' const *s1, ', structName, ' const* s2, bool deepCompare) {'])
 
         # First, rule out the basic types (no pointers/sType/arrays)
         started = False
@@ -164,7 +162,7 @@ def main(argv):
                         continue
                 
                 if not started:
-                    outFile.write('  if (\n')
+                    outFile.write('\n  if (\n')
                     started = True
                 else:
                     outFile.write(' ||\n')
@@ -210,20 +208,27 @@ def main(argv):
                     continue
 
                 if not started:
-                    outFile.write('\n  if(deepCopy) {\n')
+                    outFile.write('\n  if(deepCompare) {\n')
+                    started = True
 
                 if 'len' in member:
                     # There's a count or something for this member
-                    outFile.write('lol')
+                    outFile.writelines(['    for (uint32_t i = 0; i < ', member['len'], '; ++i) {\n'])
+                    if member['type'] in structs:
+                        outFile.writelines(['      if(compare_', member['type'], '(&s1->', memberName, '[i], &s2->', memberName, '[i], deepCompare))\n'])
+                    else:
+                        outFile.writelines(['      if(s1->', memberName, '[i] != s2->', memberName, '[i])\n'])
+                    outFile.writelines('        return false;\n')
+                    outFile.write('    }\n')
                 else:
                     # Single pointer member
-                    if member['type'] == 'void' and memberName == 'pNext':
-                        outFile.write("""  if(s1->pNext != s2->pNext) {
-    if(s1->pNext == nullptr || s2->pNext == nullptr)
-      return false;
-    if(!ncompare_VkNextStruct(s1->pNext, s2->pNext))
-      return false;
-  }
+                    if memberName == 'pNext':
+                        outFile.write("""    if(s1->pNext != s2->pNext) {
+      if(s1->pNext == nullptr || s2->pNext == nullptr)
+        return false;
+      if(!compare_VkNextStruct(s1->pNext, s2->pNext))
+        return false;
+    }
 """)
 
         if started:

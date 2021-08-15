@@ -64,6 +64,8 @@ for TAG in $(git tag | grep -e "^v[0-9]*\.[0-9]*\.[0-9]*$" | sort -t '.' -k3nr);
     ../parse_vk_doc.py -i xml/vk.xml -w ../.gen_cache.xml $EXTRA_OPTS
     FIRST=0
 done
+
+git checkout main
 popd >/dev/null
 
 # Generate headers

@@ -258,10 +258,15 @@ def processFeatureStructs(feature, structs):
     return structs
 
 def processExtensionStructs(extension, structs):
-    if extension['@supported'] == 'disabled':
+    if not 'require' in extension:
         return structs
     extName = extension['@name']
     require = extension['require']
+
+    if extName == 'VK_EXT_full_screen_exclusive':
+        print(extension)
+        print('\n\n')
+        print(require)
 
     if 'type' in require:
         if isinstance(require['type'], list):
