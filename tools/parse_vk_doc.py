@@ -205,6 +205,8 @@ def processStructMember(newMember, memberList):
         member['len'] = newMember['@len']
     if '@values' in newMember:
         member['values'] = newMember['@values']
+    if 'enum' in newMember:
+        member['enum'] = newMember['enum']
 
     memberList[newMember['name']] = member
 
