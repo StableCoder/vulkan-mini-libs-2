@@ -3,6 +3,38 @@
 import sys, getopt
 import xmltodict
 
+def guardStruct(struct, outFile, firstVersion, lastVersion):
+    guarded = False
+
+    if struct['first'] != firstVersion:
+        guarded = True
+        outFile.writelines(['\n#if VK_HEADER_VERSION >= ', struct['first']])
+    if struct['last'] != lastVersion:
+        if guarded:
+            # If already started, append to it
+            outFile.writelines([' && VK_HEADER_VERSION <= ', struct['last']])
+        else:
+            guarded = True
+            outFile.writelines(['\n#if VK_HEADER_VERSION <= ', struct['last']])
+    if 'platforms' in struct:
+        if isinstance(struct['platforms'], list):
+            for platform in struct['platforms']:
+                if guarded:
+                    # If already started, append to it
+                    outFile.writelines([' && ', str(platform)])
+                else:
+                    guarded = True
+                    outFile.writelines(['\n#if ', str(platform)])
+        else:
+            if guarded:
+                # If already started, append to it
+                outFile.writelines([' && ', struct['platforms']])
+            else:
+                guarded = True
+                outFile.writelines(['\n#if ', struct['platforms']])
+
+    return guarded
+
 def main(argv):
     inputFile=''
     outputFile=''
@@ -64,86 +96,146 @@ def main(argv):
     outFile.writelines(["\nstatic_assert(VK_HEADER_VERSION >= ", root['first'], ", \"VK_HEADER_VERSION is from before the supported range.\");\n"])
     outFile.writelines(["static_assert(VK_HEADER_VERSION <= ", root['last'], ", \"VK_HEADER_VERSION is from after the supported range.\");\n"])
 
+    # Special comparison of unknown VkStruct
+    outFile.write('\nbool ncompare_VkNextStruct(void const* s1, void const*s2, bool deepCompare);\n')
+
     # Per-struct function declarations
     structs = root['structs']
     for it in structs:
         structName = str(it)
-        guarded = False
-        if structs[it]['first'] != firstVersion:
-            guarded = True
-            outFile.writelines(['\n#if VK_HEADER_VERSION >= ', structs[it]['first']])
-        if structs[it]['last'] != lastVersion:
-            if guarded:
-                # If already started, append to it
-                outFile.writelines([' && VK_HEADER_VERSION <= ', structs[it]['last']])
-            else:
-                guarded = True
-                outFile.writelines(['\n#if VK_HEADER_VERSION <= ', structs[it]['last']])
-        if 'platforms' in structs[it]:
-            if isinstance(structs[it]['platforms'], list):
-                for platform in structs[it]['platforms']:
-                    if guarded:
-                        # If already started, append to it
-                        outFile.writelines([' && ', str(platform)])
-                    else:
-                        guarded = True
-                        outFile.writelines(['\n#if ', str(platform)])
-            else:
-                if guarded:
-                    # If already started, append to it
-                    outFile.writelines([' && ', structs[it]['platforms']])
-                else:
-                    guarded = True
-                    outFile.writelines(['\n#if ', structs[it]['platforms']])
-        outFile.writelines(['\nbool compare_', structName, '(', structName, ' const *s1, ', structName, ' const* s2);\n'])
+        guarded = guardStruct(structs[it], outFile, firstVersion, lastVersion)
+        outFile.writelines(['\nbool compare_', structName, '(', structName, ' const *s1, ', structName, ' const* s2, bool deepCompare);\n'])
         if guarded:
             outFile.write("#endif\n")
 
     # Definitions
-    outFile.write('\n#ifdef VK_STRUCT_COMPARE_CONFIG_MAIN\n')
+    outFile.write('\n//#ifdef VK_STRUCT_COMPARE_CONFIG_MAIN\n')
+
+    # Unknown struct
+    outFile.write("""\nbool compare_VkNextStruct(void const*s1, void const*s2, bool deepCompare) {
+  struct VkTempStruct {
+      VkStructureType sType;
+  };
+  VkTempStruct const* pTemp1 = static_cast<VkTempStruct const*>(s1);
+  VkTempStruct const* pTemp2 = static_cast<VkTempStruct const*>(s2);
+
+  if(pTemp1->sType != pTemp2->sType)
+      return false;
+
+  switch(pTemp1->sType) {""")
 
     for it in structs:
         structName = str(it)
-        guarded = False
-        if structs[it]['first'] != firstVersion:
-            guarded = True
-            outFile.writelines(['\n#if VK_HEADER_VERSION >= ', structs[it]['first']])
-        if structs[it]['last'] != lastVersion:
+        struct = structs[it]
+        if not struct['members'] is None and 'sType' in struct['members'] and 'values' in struct['members']['sType']:
+            guarded = guardStruct(struct, outFile, firstVersion, lastVersion)
+            outFile.writelines(['\n  case ', struct['members']['sType']['values'], ':\n'])
+            outFile.writelines(['    return compare_', structName, '(s1, s2, deepCompare);\n'])
             if guarded:
-                # If already started, append to it
-                outFile.writelines([' && VK_HEADER_VERSION <= ', structs[it]['last']])
-            else:
-                guarded = True
-                outFile.writelines(['\n#if VK_HEADER_VERSION <= ', structs[it]['last']])
-        if 'platforms' in structs[it]:
-            if isinstance(structs[it]['platforms'], list):
-                for platform in structs[it]['platforms']:
-                    if guarded:
-                        # If already started, append to it
-                        outFile.writelines([' && ', str(platform)])
-                    else:
-                        guarded = True
-                        outFile.writelines(['\n#if ', str(platform)])
-            else:
-                if guarded:
-                    # If already started, append to it
-                    outFile.writelines([' && ', structs[it]['platforms']])
-                else:
-                    guarded = True
-                    outFile.writelines(['\n#if ', structs[it]['platforms']])
-        outFile.writelines(['\nbool compare_', structName, '(', structName, ' const *s1, ', structName, ' const* s2) {\n'])
+                outFile.write('#endif\n')
 
+    outFile.write("""
+  default:
+    // Can't figure out, maybe a guarded/disabled one?
+    return false;
+  }
+""")
+
+    # All defined structs
+    for it in structs:
+        structName = str(it)
+        guarded = guardStruct(structs[it], outFile, firstVersion, lastVersion)
+        outFile.writelines(['\nbool compare_', structName, '(', structName, ' const *s1, ', structName, ' const* s2, bool deepCompare) {\n'])
+
+        # First, rule out the basic types (no pointers/sType/arrays)
+        started = False
         if not structs[it]['members'] is None:
-            for member in structs[it]['members']:
-                print(member)
+            for memberIt in structs[it]['members']:
+                memberName = str(memberIt)
+                if memberName == 'sType':
+                    continue
+                member = structs[it]['members'][memberIt]
+                if 'len' in member:
+                    continue
+                if 'text' in member:
+                    if '*' in member['text']:
+                        continue
+                    if '[' in member['text']:
+                        continue
+                
+                if not started:
+                    outFile.write('  if (\n')
+                    started = True
+                else:
+                    outFile.write(' ||\n')
+                if member['type'] in structs:
+                    outFile.writelines(['  (compare_', member['type'], '(&s1->', memberName, ', &s2->', memberName, ', deepCompare))'])
+                else:
+                    outFile.writelines(['  (s1->', memberName, ' != s2->', memberName, ')'])
+        if started:
+            outFile.write(')\n    return false;\n\n')
+
+        # Now for local arrays
+        if not structs[it]['members'] is None:
+            for memberIt in structs[it]['members']:
+                memberName = str(memberIt)
+                member = structs[it]['members'][memberIt]
+                if not 'text' in member:
+                    continue
+
+                if '[]' in member['text']: # Array using enum value
+                    outFile.writelines(['  for(uint32_t i = 0; i < ', member['enum'], '; ++i) {\n'])
+                    if member['type'] in structs:
+                        outFile.writelines(['    if(compare_', member['type'], '(&s1->', memberName, '[i], &s2->', memberName, '[i], deepCompare))\n'])
+                    else:
+                        outFile.writelines(['    if(s1->', memberName, '[i] != s2->', memberName, '[i])\n'])
+                    outFile.writelines(['      return false;\n'])
+                    outFile.writelines(['  }\n'])
+                elif '[' in member['text']: # 
+                    outFile.writelines(['  for (uint32_t i = 0; i < ', member['text'][1:-1], '; ++i) {\n'])
+                    if member['type'] in structs:
+                        outFile.writelines(['    if(compare_', member['type'], '(&s1->', memberName, '[i], &s2->', memberName, '[i], deepCompare))\n'])
+                    else:
+                        outFile.writelines(['    if(s1->', memberName, '[i] != s2->', memberName, '[i])\n'])
+                    outFile.writelines(['      return false;\n'])
+                    outFile.writelines(['  }\n'])
         
-        outFile.write('  return true;\n')
+        # Now for non-local data
+        started = False
+        if not structs[it]['members'] is None:
+            for memberIt in structs[it]['members']:
+                memberName = str(memberIt)
+                member = structs[it]['members'][memberIt]
+                if not 'text' in member or not '*' in member['text']:
+                    continue
+
+                if not started:
+                    outFile.write('\n  if(deepCopy) {\n')
+
+                if 'len' in member:
+                    # There's a count or something for this member
+                    outFile.write('lol')
+                else:
+                    # Single pointer member
+                    if member['type'] == 'void' and memberName == 'pNext':
+                        outFile.write("""  if(s1->pNext != s2->pNext) {
+    if(s1->pNext == nullptr || s2->pNext == nullptr)
+      return false;
+    if(!ncompare_VkNextStruct(s1->pNext, s2->pNext))
+      return false;
+  }
+""")
+
+        if started:
+            outFile.write('  }')
+        
+        outFile.write('\n  return true;\n')
         outFile.write('}\n')
         if guarded:
             outFile.write("#endif\n")
 
     # Footer
-    outFile.write('\n#endif // VK_STRUCT_COMPARE_CONFIG_MAIN')
+    outFile.write('\n//#endif // VK_STRUCT_COMPARE_CONFIG_MAIN')
     outFile.write('\n#endif // VK_STRUCT_COMPARE_HPP\n')
     
 
