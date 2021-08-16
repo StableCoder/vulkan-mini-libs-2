@@ -1,292 +1,141 @@
 #!/usr/bin/env python3
 
-# WARNING! THIS APPLICATION ASSUMES OPERATING ON DECREASING VERSIONS
+from os.path import exists
+import sys
+import getopt
+import xml.etree.ElementTree as ET
 
-import sys, getopt
-import xmltodict
 
-def getVersion(registryNode):
-    for type in registryNode['types']['type']:
-            if 'name' in type and type['name'] == 'VK_HEADER_VERSION':
-                splitStr = type['#text'].split(' ')
-                return splitStr[-1]
+def findVersion(rootNode):
+    for type in rootNode.findall('./types/type'):
+        category = type.get('category')
+        if category is not None and category == 'define':
+            for name in type.findall('name'):
+                if name.text == 'VK_HEADER_VERSION':
+                    return str(int(name.tail))
 
-    return -1
+    return ''
 
-def processVendors(registryNode, version, vendors):
-    for tag in registryNode['tags']['tag']:
-        if tag['@name'] in vendors:
-            vendors[tag['@name']]['first'] = version
-        else:
-            vendors[tag['@name']] = {
-                "first": version,
-                "last": version,
-            }
-    return vendors
 
-def processPlatforms(registryNode, version, platforms):
-    for platform in registryNode['platforms']['platform']:
-        if platform['@name'] in platforms:
-            platforms[platform['@name']]['first'] = version
-        else:
-            platforms[platform['@name']] = {
-                "first": version,
-                "last": version,
-                "guard": platform['@protect']
-            }
-    return platforms
-
-def processEnumValue(enum, values, version):
-    name = enum['@name']
-    if name in values:
-        values[name]['first'] = version
+def processVendors(inVendor, outVendors, vkVersion):
+    name = inVendor.get('name')
+    vendor = outVendors.find(name)
+    if vendor is None:
+        vendor = ET.SubElement(
+            outVendors, name, {'first': vkVersion, 'last': vkVersion})
     else:
-        values[name] = {
-            "first": version,
-            "last": version,
-        }
-        if '@value' in enum:
-            values[name]['value'] = enum['@value']
-        elif '@bitpos' in enum:
-            values[name]['bitpos'] = enum['@bitpos']
-        elif '@alias' in enum:
-            values[name]['alias'] = enum['@alias']
-        else:
-            print("Could not determine enum value for ", name)
-            sys.exit(1)
+        vendor.set('first', vkVersion)
 
-    return values
 
-def processEnums(registryNode, version, enums):
-    for enumSet in registryNode['enums']:
-        if not '@type' in enumSet:
-            continue
-        enumSetName = enumSet['@name']
-        if enumSetName == 'API Constants':
-            continue
-        if enumSetName == 'VkStructureType':
-            continue
+def processEnum(inEnum, outEnum, vkVersion):
+    # If the enum has no type, just return
+    if inEnum.get('type') is None:
+        return
+    # Skip certain named enums
+    enumName = inEnum.get('name')
+    if enumName == 'API Constants' or enumName == 'VkStructureType':
+        return
 
-        if enumSetName in enums:
-            enums[enumSetName]['first'] = version
-        else:
-            enums[enumSetName] = {
-                "first": version,
-                "last": version,
-                "values": dict(),
-            }
-        
-        values = enums[enumSetName]['values']
+    # Add or edit
+    enum = outEnum.find(enumName)
+    if enum is None:
+        enum = ET.SubElement(outEnum, enumName,  {
+                             'first': vkVersion, 'last': vkVersion})
+    else:
+        enum.set('first', vkVersion)
 
-        # If it's an empty enum set, continue
-        if not 'enum' in enumSet:
-            continue
-
-        # If a list need to iterate, otherwise pass plainly
-        if isinstance(enumSet['enum'], list):
-            for enum in enumSet['enum']:
-                values = processEnumValue(enum, values, version)
-        else:
-            values = processEnumValue(enumSet['enum'], values, version)
-
-    return enums
-
-def processFeatureEnum(enum, version, enums):
-    if '@extends' in enum:
-        enumSetName = enum['@extends']
-        if enumSetName == 'VkStructureType':
-            return enums
-
-        if enumSetName in enums:
-            enums[enumSetName]['first'] = version
-        else:
-            enums[enumSetName] = {
-                "first": version,
-                "last": version,
-                "values": dict(),
-            }
-
-        enumName = enum['@name']
-        if enumName in enums[enumSetName]['values']:
-            # Found previously
-            enums[enumSetName]['values'][enumName]['first'] = version
-        else:
-            enums[enumSetName]['values'][enumName] = {
-                "first": version,
-                "last": version,
-            }
-            if '@value' in enum:
-                enums[enumSetName]['values'][enumName]['value'] = enum['@value']
-            elif '@offset' in enum:
-                enums[enumSetName]['values'][enumName]['value'] = 1000000000 + (int(enum['@extnumber'])-1) * (1000) + int(enum['@offset'])
-                if '@dir' in enum and enum['@dir'] == '-':
-                    enums[enumSetName]['values'][enumName]['value'] = -enums[enumSetName]['values'][enumName]['value']
-            elif '@bitpos' in enum:
-                enums[enumSetName]['values'][enumName]['bitpos'] = enum['@bitpos']
-            elif '@alias' in enum:
-                enums[enumSetName]['values'][enumName]['alias'] = enum['@alias']
+    for value in inEnum.findall('enum'):
+        valName = value.get('name')
+        enumVal = enum.find(valName)
+        if enumVal is None:
+            enumVal = ET.SubElement(
+                enum, valName, {'first': vkVersion, 'last': vkVersion})
+            ET.SubElement(enumVal, 'platforms')
+            if not value.get('value') is None:
+                enumVal.set('value', value.get('value'))
+            elif not value.get('bitpos') is None:
+                enumVal.set('bitpos', value.get('bitpos'))
+            elif not value.get('alias') is None:
+                enumVal.set('alias', value.get('alias'))
             else:
-                print('FFF')
+                print("Could not determine enum value for ", valName)
                 sys.exit(1)
-
-    return enums
-
-def processFeatures(registryNode, version, enums):
-    for feature in registryNode['feature']:
-        # Ignore the base spec feature set
-        featureName = feature['@name']
-        if featureName == 'VK_VERSION_1_0':
-            continue
-
-        for require in feature['require']:
-            if 'enum' in require:
-                if isinstance(require['enum'], list):
-                    for enum in require['enum']:
-                        enums = processFeatureEnum(enum, version, enums)
-                else:
-                    enums = processFeatureEnum(require['enum'], version, enums)
-
-    return enums
-
-def processExtensions(registryNode, version, enums):
-    for extension in registryNode['extensions']['extension']:
-        if extension['@supported'] == 'disabled':
-            continue
-        extName = extension['@name']
-        extNumber = int(extension['@number'])
-
-        if 'require' in extension:
-            if 'enum' in extension['require']:
-                for enum in extension['require']['enum']:
-                    if '@extends' in enum:
-                        enumSetName = enum['@extends']
-                        if enumSetName == 'VkStructureType':
-                            continue
-
-                        if enumSetName in enums:
-                            enums[enumSetName]['first'] = version
-                        else:
-                            enums[enumSetName] = {
-                                "first": version,
-                                "last": version,
-                                "values": dict(),
-                            }
-
-                        enumName = enum['@name']
-                        if enumName in enums[enumSetName]['values']:
-                            # Found previously
-                            enums[enumSetName]['values'][enumName]['first'] = version
-                        else:
-                            enums[enumSetName]['values'][enumName] = {
-                                "first": version,
-                                "last": version,
-                            }
-                            if '@value' in enum:
-                                enums[enumSetName]['values'][enumName]['value'] = enum['@value']
-                            elif '@offset' in enum:
-                                enums[enumSetName]['values'][enumName]['value'] = 1000000000 + (extNumber-1) * (1000) + int(enum['@offset'])
-                            elif '@bitpos' in enum:
-                                enums[enumSetName]['values'][enumName]['bitpos'] = enum['@bitpos']
-                            elif '@alias' in enum:
-                                enums[enumSetName]['values'][enumName]['alias'] = enum['@alias']
-                            else:
-                                print('FFF')
-                                sys.exit(1)
-
-    return enums
-
-def processStructMember(newMember, memberList):
-    member = {
-        "type": newMember['type'],
-    }
-    if '#text' in newMember:
-        member['text'] = newMember['#text']
-    if '@len' in newMember:
-        member['len'] = newMember['@len']
-    if '@values' in newMember:
-        member['values'] = newMember['@values']
-    if 'enum' in newMember:
-        member['enum'] = newMember['enum']
-
-    memberList[newMember['name']] = member
-
-def processStructs(registryNode, version, structs):
-    for type in registryNode['types']['type']:
-        if not '@category' in type:
-            continue
-        if type['@category'] != 'struct':
-            continue
-
-        structName = type['@name']
-        if structName in structs:
-            structs[structName]['first'] = version
         else:
+            enumVal.set('first', vkVersion)
 
-            structs[structName] = {
-                "first": version,
-                "last": version,
-                "members": dict(),
-                "platforms": []
-            }
-            if '@alias' in type:
-                structs[structName]['alias'] = type['@alias']
-            if 'member' in type:
-                if isinstance(type['member'], list):
-                    for member in type['member']:
-                        processStructMember(member, structs[structName]['members'])
-                else:
-                    processStructMember(type['member'], structs[structName]['members'])
 
-    return structs
+def processFeatureEnum(featureEnum, outEnum, vkVersion):
+    extends = featureEnum.get('extends')
+    valName = featureEnum.get('name')
+    if extends is None or extends == 'VkStructureType':
+        return
 
-def processFeatureStructs(feature, structs):
-    featureName = feature['@name']
-    # Skip the original feature set
-    if featureName == 'VK_VERSION_1_0':
-        return structs
-    
-    for require in feature['require']:
-        if 'type' in require:
-            if isinstance(require['type'], list):
-                for type in require['type']:
-                    if type['@name'] in structs:
-                        structs[type['@name']]['platforms'].append(featureName)
-            elif not require['type']['@name'].startswith('VK_API_VERSION'):
-                if require['type']['@name'] in structs:
-                    structs[require['type']['@name']]['platforms'].append(featureName)
-
-    return structs
-
-def processExtensionStructs(extension, structs):
-    if not 'require' in extension:
-        return structs
-    extName = extension['@name']
-    require = extension['require']
-
-    if extName == 'VK_EXT_full_screen_exclusive':
-        print(extension)
-        print('\n\n')
-        print(require)
-
-    if 'type' in require:
-        if isinstance(require['type'], list):
-            for type in require['type']:
-                if type['@name'] in structs:
-                    structs[type['@name']]['platforms'].append(extName)
+    # Get the enum
+    enum = outEnum.find(extends)
+    value = enum.find(valName)
+    if value is None:
+        value = ET.SubElement(
+            enum, valName, {'first': vkVersion, 'last': vkVersion})
+        ET.SubElement(value, 'platforms')
+        if not featureEnum.get('offset') is None:
+            extNum = int(featureEnum.get('extnumber'))
+            value.set('value', str(1000000000 + (extNum - 1)
+                      * 1000 + int(featureEnum.get('offset'))))
+        elif not featureEnum.get('value') is None:
+            value.set('value', featureEnum.get('value'))
+        elif not featureEnum.get('bitpos') is None:
+            value.set('bitpos', featureEnum.get('bitpos'))
+        elif not featureEnum.get('alias') is None:
+            value.set('alias', featureEnum.get('alias'))
         else:
-            if require['type']['@name'] in structs:
-                structs[require['type']['@name']]['platforms'].append(extName)
+            print("Could not determine enum value for ", valName)
+            sys.exit(1)
+    else:
+        value.set('first', vkVersion)
 
-    return structs
+
+def processExtensionEnums(extension, outEnum, vkVersion):
+    extName = extension.get('name')
+    extNum = int(extension.get('number'))
+
+    for extEnum in extension.findall('require/enum'):
+        extends = extEnum.get('extends')
+        valName = extEnum.get('name')
+        if extends is None or extends == 'VkStructureType':
+            continue
+
+        enum = outEnum.find(extends)
+        value = enum.find(valName)
+        if value is None:
+            value = ET.SubElement(
+                enum, valName, {'first': vkVersion, 'last': vkVersion})
+            ET.SubElement(value, 'platforms')
+            if not extEnum.get('offset') is None:
+                value.set('value', str(1000000000 + (extNum - 1)
+                          * 1000 + int(extEnum.get('offset'))))
+            elif not extEnum.get('value') is None:
+                value.set('value', extEnum.get('value'))
+            elif not extEnum.get('bitpos') is None:
+                value.set('bitpos', extEnum.get('bitpos'))
+            elif not extEnum.get('alias') is None:
+                value.set('alias', extEnum.get('alias'))
+            else:
+                print("Could not determine enum value for ", valName)
+                sys.exit(1)
+        else:
+            value.set('first', vkVersion)
+
+        if value.find('platforms/' + extName) is None:
+            ET.SubElement(value.find('platforms'), extName)
+
 
 def main(argv):
-    inputFile=''
-    workingFile=''
-    processExtra=False
-    data = dict()
+    inputFile = ''
+    workingFile = ''
+    processExtra = False
 
     try:
-       opts, args =  getopt.getopt(argv, 'i:w:a', [])
+        opts, args = getopt.getopt(argv, 'i:w:a', [])
     except getopt.GetoptError:
         print('Error parsing options')
         sys.exit(1)
@@ -298,7 +147,6 @@ def main(argv):
         elif opt == '-a':
             processExtra = True
 
-
     if(inputFile == ''):
         print("Error: No Vulkan XML file specified")
         sys.exit(1)
@@ -306,67 +154,49 @@ def main(argv):
         print("Error: No working file specified")
         sys.exit(1)
 
-    try:
-        with open(workingFile) as fd:
-            data = xmltodict.parse(fd.read())
-    except:
-        print("No working file to read, assuming clean slate")
+    dataRoot = ET.Element('root')
+    if exists(workingFile):
+        dataXml = ET.parse(workingFile)
+        dataRoot = dataXml.getroot()
 
-    if not 'root' in data:
-        data['root'] = dict()
+    vkXml = ET.parse(inputFile)
+    vkRoot = vkXml.getroot()
 
-    with open(inputFile) as fd:
-        doc = xmltodict.parse(fd.read())
-        registryNode = doc['registry']
+    # Find current version
+    vkVersion = findVersion(vkRoot)
+    if vkVersion == '':
+        print("Error: Failed to determine Vulkan Header Version")
+        sys.exit(1)
 
-        version = getVersion(registryNode)
-        if version == -1:
-            print("Error: Failed to parse header version")
-            sys.exit(1)
+    dataRoot.set('first', vkVersion)
+    if dataRoot.get('last') is None:
+        dataRoot.set('last', vkVersion)
 
-        # Update the first version we're operating with
-        data['root']['first'] = version
-        if not 'last' in data['root']:
-            data['root']['last'] = version
-        
-        # Vendors
-        if 'vendors' in data['root']:
-            data['root']['vendors'] = processVendors(registryNode, version, data['root']['vendors'])
-        else:
-            data['root']['vendors'] = processVendors(registryNode, version, dict())
-        
-        # Platforms
-        if 'platforms' in data['root']:
-            data['root']['platforms'] = processPlatforms(registryNode, version, data['root']['platforms'])
-        else:
-            data['root']['platforms'] = processPlatforms(registryNode, version, dict())
+    # Process Vendors
+    if dataRoot.find('vendors') is None:
+        ET.SubElement(dataRoot, 'vendors')
+    vendorData = dataRoot.find('vendors')
 
-        # Enums
-        if 'enums' in data['root']:
-            data['root']['enums'] = processEnums(registryNode, version, data['root']['enums'])
-        else:
-            data['root']['enums'] = processEnums(registryNode, version, dict())
+    for vendor in vkRoot.findall('./tags/tag'):
+        processVendors(vendor, vendorData, vkVersion)
 
-        # Enum features/extensions
-        data['root']['enums'] = processFeatures(registryNode, version, data['root']['enums'])
-        data['root']['enums'] = processExtensions(registryNode, version, data['root']['enums'])
+    # Process Enums
+    if dataRoot.find('enums') is None:
+        ET.SubElement(dataRoot, 'enums')
+    enumData = dataRoot.find('enums')
 
-        # Structs
-        if 'structs' in data['root']:
-            data['root']['structs'] = processStructs(registryNode, version, data['root']['structs'])
-        else:
-            data['root']['structs'] = processStructs(registryNode, version, dict())
+    for enum in vkRoot.findall('enums'):
+        processEnum(enum, enumData, vkVersion)
 
-        if processExtra:
-            for feature in registryNode['feature']:
-                data['root']['structs'] = processFeatureStructs(feature, data['root']['structs'])
-            for extension in registryNode['extensions']['extension']:
-                data['root']['structs'] = processExtensionStructs(extension, data['root']['structs'])
+    for feature in vkRoot.findall('feature/require/enum'):
+        processFeatureEnum(feature, enumData, vkVersion)
+    for extension in vkRoot.findall('extensions/extension'):
+        processExtensionEnums(extension, enumData, vkVersion)
 
-        # Output data back to the working file
-        f = open(workingFile, "w")
-        f.write(xmltodict.unparse(data, pretty=True))
-        f.close()
+    # Output XML
+    tree = ET.ElementTree(dataRoot)
+    tree.write(workingFile)
+
 
 if __name__ == "__main__":
     main(sys.argv[1:])

@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
 
-import sys, getopt
-import xmltodict
+
+import sys
+import getopt
+import xml.etree.ElementTree as ET
+
 
 def main(argv):
-    inputFile=''
-    outputFile=''
-    data = dict()
+    inputFile = ''
+    outputFile = ''
 
     try:
-       opts, args =  getopt.getopt(argv, 'i:o:', [])
+        opts, args = getopt.getopt(argv, 'i:o:', [])
     except getopt.GetoptError:
         print('Error parsing options')
         sys.exit(1)
@@ -27,16 +29,19 @@ def main(argv):
         sys.exit(1)
 
     try:
-        with open(inputFile) as fd:
-            data = xmltodict.parse(fd.read())
+        dataXml = ET.parse(inputFile)
+        dataRoot = dataXml.getroot()
     except:
         print("Error: Could not open input file: ", inputFile)
         sys.exit(1)
 
+    # Get first/last versions
+    firstVersion = dataRoot.get('first')
+    lastVersion = dataRoot.get('last')
+
     outFile = open(outputFile, "w")
 
-    root = data['root']
-
+    # Common Header
     with open("common_header.txt") as fd:
         outFile.write(fd.read())
         outFile.write('\n')
@@ -79,33 +84,40 @@ std::string VulkanErrCategory::message(int ev) const {
   VkResult const vkRes = static_cast<VkResult>(ev);
 """)
 
-    # Get the start/end versions
-    firstVersion = data['root']['first']
-    lastVersion = data['root']['last']
-
     # Content
-    resultSet = root['enums']['VkResult']['values']
-    for resultCode in resultSet:
-        if '@alias' in resultSet[resultCode]:
-            continue
-
+    for enum in dataRoot.findall('enums/VkResult/'):
         guarded = False
-        if resultSet[resultCode]['first'] != firstVersion:
+        # Guard check for first version
+        if enum.get('first') != firstVersion:
             guarded = True
-            outFile.writelines(['#if VK_HEADER_VERSION >= ', resultSet[resultCode]['first']])
-        if resultSet[resultCode]['last'] != lastVersion:
+            outFile.writelines(
+                ['#if VK_HEADER_VERSION >= ', enum.get('first')])
+        # Guard check for last version
+        if enum.get('last') != lastVersion:
             if guarded:
                 # If already started, append to it
-                outFile.writelines([' && VK_HEADER_VERSION <= ', resultSet[resultCode]['last']])
+                outFile.writelines(
+                    [' && VK_HEADER_VERSION <= ', enum.get('last')])
             else:
                 guarded = True
-                outFile.writelines(['#if VK_HEADER_VERSION <= ', resultSet[resultCode]['last']])
+                outFile.writelines(
+                    ['#if VK_HEADER_VERSION <= ', enum.get('last')])
+        # Guard check for platforms
+        for platform in enum.findall('platforms/'):
+            if guarded:
+                # If already started, append to it
+                outFile.writelines(
+                    [' && ', platform.tag])
+            else:
+                guarded = True
+                outFile.writelines(
+                    ['#if ', platform.tag])
 
         if guarded:
             outFile.write('\n')
 
-        outFile.writelines(['  if (vkRes == ', str(resultCode), ')\n'])
-        outFile.writelines(['    return \"', str(resultCode), '\";\n'])
+        outFile.writelines(['  if (vkRes == ', enum.tag, ')\n'])
+        outFile.writelines(['    return \"', enum.tag, '\";\n'])
 
         if guarded:
             outFile.write('#endif\n')
@@ -129,6 +141,7 @@ std::error_code make_error_code(VkResult e) {
 #endif // VK_ERROR_CODE_CONFIG_MAIN
 #endif // VK_ERROR_CODE_HPP
 """)
+
 
 if __name__ == "__main__":
     main(sys.argv[1:])

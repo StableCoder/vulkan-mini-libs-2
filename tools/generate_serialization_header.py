@@ -1,47 +1,47 @@
 #!/usr/bin/env python3
 
-import sys, getopt
-import xmltodict
+import sys
+import getopt
+import xml.etree.ElementTree as ET
+
 
 def processVendors(outFile, vendors):
-    outFile.writelines(["\nconstexpr std::array<std::string_view, ", str(len(vendors)), "> vendors = {{\n"])
+    outFile.writelines(["\nconstexpr std::array<std::string_view, ", str(
+        len(vendors)), "> vendors = {{\n"])
+    for vendor in vendors:
+        outFile.writelines(['  \"', vendor.tag, '\",\n'])
+    outFile.write('}};\n')
 
-    for vendorName in vendors:
-        outFile.writelines(["  \"", vendorName, "\",\n"])
-
-    outFile.write("}};\n\n")
 
 def processEnumValue(outFile, enum, value):
-    if 'value' in enum['values'][value]:
+    if not value.get('value') is None:
         # Spitting out plain values
-        outFile.write(enum['values'][value]['value'])
-    elif 'bitpos' in enum['values'][value]:
+        outFile.write(value.get('value'))
+    elif not value.get('bitpos') is None:
         # Bitflag
-        outFile.writelines(['0x', format(1 << int(enum['values'][value]['bitpos']), '08X')])
-    elif 'alias' in enum['values'][value]:
-        processEnumValue(outFile, enum, enum['values'][value]['alias'])
+        outFile.writelines(
+            ['0x', format(1 << int(value.get('bitpos')), '08X')])
+    elif not value.get('alias') is None:
+        processEnumValue(outFile, enum, enum.find(value.get('alias')))
+
 
 def processEnums(outFile, enums, vendors):
-    for enumIt in enums:
-        # If there aren't any values assiociated with the enum set, skip it
-        if enums[enumIt]['values'] is None:
-            continue
-        # Skip VkResult serialization
-        if str(enumIt) == 'VkResult':
+    for enum in enums:
+        # Skip VkResult
+        if enum.tag == 'VkResult':
             continue
 
-        outFile.write('constexpr EnumValueSet ')
-        outFile.write(str(enumIt))
-        outFile.write('Sets[] = {\n')
+        outFile.writelines(
+            ['\nconstexpr EnumValueSet ', enum.tag, 'Sets[] = {\n'])
 
         # Determine how much to chop off the front
-        strName = str(enumIt)
+        strName = enum.tag
         typeDigit = ''
         # Determine if type ends with vendor tag
         vendorName = ''
         for vendor in vendors:
-            if strName.endswith(str(vendor)):
-                vendorName = str(vendor)
+            if strName.endswith(vendor.tag):
+                vendorName = vendor.tag
                 strName = strName[:-len(vendorName)]
 
         if strName[-1].isdigit():
@@ -64,13 +64,12 @@ def processEnums(outFile, enums, vendors):
         mainPrefix += '_'
         if typeDigit != '':
             mainPrefix += typeDigit
-            mainPrefix += '_' 
+            mainPrefix += '_'
 
-        enum = enums[enumIt]
-        for value in enum['values']:
+        for value in enum.findall('./'):
             outFile.write("  {\"")
 
-            valueStr = str(value)
+            valueStr = value.tag
             if valueStr.startswith(mainPrefix):
                 valueStr = valueStr[len(mainPrefix):]
             if vendorName != '' and valueStr.endswith(vendorName):
@@ -84,15 +83,15 @@ def processEnums(outFile, enums, vendors):
 
             outFile.write("},\n")
 
-        outFile.write("};\n")
+        outFile.write('};\n')
+
 
 def main(argv):
-    inputFile=''
-    outputFile=''
-    data = dict()
+    inputFile = ''
+    outputFile = ''
 
     try:
-       opts, args =  getopt.getopt(argv, 'i:o:', [])
+        opts, args = getopt.getopt(argv, 'i:o:', [])
     except getopt.GetoptError:
         print('Error parsing options')
         sys.exit(1)
@@ -110,22 +109,20 @@ def main(argv):
         sys.exit(1)
 
     try:
-        with open(inputFile) as fd:
-            data = xmltodict.parse(fd.read())
+        dataXml = ET.parse(inputFile)
+        dataRoot = dataXml.getroot()
     except:
         print("Error: Could not open input file: ", inputFile)
         sys.exit(1)
 
     outFile = open(outputFile, "w")
 
-    root = data['root']
-
-    # Common header
+    # Common Header
     with open("common_header.txt") as fd:
         outFile.write(fd.read())
         outFile.write('\n')
 
-    # 
+     #
     outFile.write("""#ifndef VK_VALUE_SERIALIZATION_HPP
 #define VK_VALUE_SERIALIZATION_HPP
 
@@ -142,9 +139,11 @@ def main(argv):
 #include <string_view>
 """)
 
-    # static_asserts
-    outFile.writelines(["\nstatic_assert(VK_HEADER_VERSION >= ", root['first'], ", \"VK_HEADER_VERSION is from before the supported range.\");\n"])
-    outFile.writelines(["static_assert(VK_HEADER_VERSION <= ", root['last'], ", \"VK_HEADER_VERSION is from after the supported range.\");\n"])
+    # Static Asserts
+    outFile.writelines(["\nstatic_assert(VK_HEADER_VERSION >= ", dataRoot.get(
+        'first'), ", \"VK_HEADER_VERSION is from before the supported range.\");\n"])
+    outFile.writelines(["static_assert(VK_HEADER_VERSION <= ", dataRoot.get(
+        'last'), ", \"VK_HEADER_VERSION is from after the supported range.\");\n"])
 
     # Function Declarataions
     outFile.write("""
@@ -231,17 +230,19 @@ bool vk_parse(std::string_view vkType, std::string vkString, T *pValue) {
     outFile.write("\nnamespace {\n")
 
     # Vendors
-    processVendors(outFile, root['vendors'])
+    vendors = dataRoot.findall('vendors/')
+    processVendors(outFile, vendors)
 
     # EnumSet Declaration
-    outFile.write("struct EnumValueSet {\n")
+    outFile.write("\nstruct EnumValueSet {\n")
     outFile.write("  std::string_view name;\n")
     outFile.write("  int64_t value;\n")
-    outFile.write("};\n\n")
+    outFile.write("};\n")
 
-    # EnumSets
-    processEnums(outFile, root['enums'], root['vendors'])
-    
+    # Enums
+    enums = dataRoot.findall('enums/')
+    processEnums(outFile, enums, vendors)
+
     # Enum Type Declaration
     outFile.write("\nstruct EnumType {\n")
     outFile.write("  std::string_view name;\n")
@@ -250,17 +251,15 @@ bool vk_parse(std::string_view vkType, std::string vkString, T *pValue) {
     outFile.write("};\n")
 
     # Enum Pointer Array
-    outFile.writelines(["\nconstexpr std::array<EnumType, ", str(len(root['enums'])-1), "> enumTypes = {{\n"]) # -1 for not doing VkResult
-    for enum in root['enums']:
-        if str(enum) == 'VkResult':
+    outFile.writelines(["\nconstexpr std::array<EnumType, ", str(
+        len(enums)-1), "> enumTypes = {{\n"])  # -1 for not doing VkResult
+    for enum in enums:
+        if enum.tag == 'VkResult':
             continue
 
-        if root['enums'][enum]['values'] is None:
-            # If there aren't any values assiociated with the enum set, set the ptr to null
-            outFile.writelines(["  {\"", str(enum), "\", nullptr, ", str(0), "},\n"])
-        else:
-            outFile.writelines(["  {\"", str(enum), "\", ", str(enum), "Sets, ", str(len(root['enums'][enum]['values'])), "},\n"])
-    outFile.write("}};\n")
+        outFile.writelines(["  {\"", str(enum.tag), "\", ", str(
+            enum.tag), "Sets, ", str(len(enum.findall('./'))), "},\n"])
+    outFile.write('}};\n')
 
     # Function definitions
     outFile.write("""
@@ -573,6 +572,7 @@ bool vk_parse(std::string_view vkType, std::string vkString, uint32_t *pValue) {
     outFile.write("\n#endif // VK_VALUE_SERIALIZATION_CONFIG_MAIN\n")
     outFile.write("#endif // VK_VALUE_SERIALIZATION_HPP\n")
     outFile.close()
+
 
 if __name__ == "__main__":
     main(sys.argv[1:])

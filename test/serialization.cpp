@@ -70,17 +70,19 @@ TEST_CASE("Serialize: Bitmask") {
         CHECK(retVal == cDummyStr);
     }
 
-    SECTION("Success case where there's extra vendor bits on the type name (such as after a "
+    SECTION("Success case where there's extra vendor bits on the type name (such "
+            "as after a "
             "promoted extension)") {
         CHECK(vk_serialize("VkCullModeFlagBitsVIV", VK_CULL_MODE_BACK_BIT, &retVal));
         CHECK(retVal == "BACK");
     }
 
-    SECTION("Successfully returns an empty string when the given type has no actual flags") {
-        CHECK(vk_serialize("VkShaderModuleCreateFlagBits", 0, &retVal));
+    SECTION("Successfully returns an empty string when the given type has no "
+            "actual flags") {
+        CHECK(vk_serialize("VkAcquireProfilingLockFlagBits", 0, &retVal));
         CHECK(retVal == "");
 
-        CHECK(vk_serialize("VkShaderModuleCreateFlagBitsVIV", 0, &retVal));
+        CHECK(vk_serialize("VkShaderCorePropertiesFlagBitsAMD", 0, &retVal));
         CHECK(retVal == "");
     }
 
@@ -89,7 +91,8 @@ TEST_CASE("Serialize: Bitmask") {
         CHECK(retVal == "NONE");
     }
 
-    SECTION("Fails to serialize when given a zero-value to a type that has enums but NOT a zero "
+    SECTION("Fails to serialize when given a zero-value to a type that has enums "
+            "but NOT a zero "
             "value") {
         CHECK_FALSE(vk_serialize("VkShaderStageFlagBits", 0, &retVal));
         CHECK(retVal == cDummyStr);
