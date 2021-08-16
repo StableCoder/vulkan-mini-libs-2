@@ -30,6 +30,9 @@ def processEnums(outFile, enums, vendors):
         # Skip VkResult
         if enum.tag == 'VkResult':
             continue
+        # Skip if there's no values, MSVC can't do zero-sized arrays
+        if len(enum.findall('./')) == 0:
+            continue
 
         outFile.writelines(
             ['\nconstexpr EnumValueSet ', enum.tag, 'Sets[] = {\n'])
@@ -257,8 +260,12 @@ bool vk_parse(std::string_view vkType, std::string vkString, T *pValue) {
         if enum.tag == 'VkResult':
             continue
 
-        outFile.writelines(["  {\"", str(enum.tag), "\", ", str(
-            enum.tag), "Sets, ", str(len(enum.findall('./'))), "},\n"])
+        valueCount = len(enum.findall('./'))
+        if valueCount == 0:
+            outFile.writelines(["  {\"", str(enum.tag), "\", nullptr, 0},\n"])
+        else:
+            outFile.writelines(["  {\"", str(enum.tag), "\", ", str(
+                enum.tag), "Sets, ", str(valueCount), "},\n"])
     outFile.write('}};\n')
 
     # Function definitions

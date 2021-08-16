@@ -1595,8 +1595,6 @@ constexpr EnumValueSet VkIndirectCommandsTokenTypeNVSets[] = {
     {"PUSH_CONSTANT", 4}, {"DRAW_INDEXED", 5}, {"DRAW", 6},         {"DRAW_TASKS", 7},
 };
 
-constexpr EnumValueSet VkPrivateDataSlotCreateFlagBitsEXTSets[] = {};
-
 constexpr EnumValueSet VkDescriptorSetLayoutCreateFlagBitsSets[] = {
     {"UPDATE_AFTER_BIND_POOL", 0x00000002},
     {"PUSH_DESCRIPTOR_BIT_KHR", 0x00000001},
@@ -2092,10 +2090,6 @@ constexpr EnumValueSet VkPerformanceCounterDescriptionFlagBitsKHRSets[] = {
     {"CONCURRENTLY_IMPACTED", 0x00000002},
 };
 
-constexpr EnumValueSet VkAcquireProfilingLockFlagBitsKHRSets[] = {};
-
-constexpr EnumValueSet VkShaderCorePropertiesFlagBitsAMDSets[] = {};
-
 constexpr EnumValueSet VkPerformanceConfigurationTypeINTELSets[] = {
     {"COMMAND_QUEUE_METRICS_DISCOVERY_ACTIVATED", 0},
 };
@@ -2140,8 +2134,6 @@ constexpr EnumValueSet VkLineRasterizationModeEXTSets[] = {
 constexpr EnumValueSet VkShaderModuleCreateFlagBitsSets[] = {
     {"RESERVED_0_BIT_NV", 0x00000001},
 };
-
-constexpr EnumValueSet VkPipelineCompilerControlFlagBitsAMDSets[] = {};
 
 constexpr EnumValueSet VkToolPurposeFlagBitsEXTSets[] = {
     {"VALIDATION", 0x00000001},
@@ -2425,8 +2417,6 @@ constexpr EnumValueSet VkAccelerationStructureMemoryRequirementsTypeKHRSets[] = 
     {"OBJECT_NV", 0}, {"BUILD_SCRATCH_NV", 1}, {"UPDATE_SCRATCH_NV", 2},
 };
 
-constexpr EnumValueSet VkSemaphoreCreateFlagBitsSets[] = {};
-
 constexpr EnumValueSet VkIndirectCommandsLayoutUsageFlagBitsNVXSets[] = {
     {"UNORDERED_SEQUENCES", 0x00000001},
     {"SPARSE_SEQUENCES", 0x00000002},
@@ -2662,7 +2652,7 @@ constexpr std::array<EnumType, 229> enumTypes = {{
     {"VkIndirectCommandsLayoutUsageFlagBitsNV", VkIndirectCommandsLayoutUsageFlagBitsNVSets, 3},
     {"VkIndirectStateFlagBitsNV", VkIndirectStateFlagBitsNVSets, 1},
     {"VkIndirectCommandsTokenTypeNV", VkIndirectCommandsTokenTypeNVSets, 8},
-    {"VkPrivateDataSlotCreateFlagBitsEXT", VkPrivateDataSlotCreateFlagBitsEXTSets, 0},
+    {"VkPrivateDataSlotCreateFlagBitsEXT", nullptr, 0},
     {"VkDescriptorSetLayoutCreateFlagBits", VkDescriptorSetLayoutCreateFlagBitsSets, 6},
     {"VkExternalMemoryHandleTypeFlagBits", VkExternalMemoryHandleTypeFlagBitsSets, 22},
     {"VkExternalMemoryFeatureFlagBits", VkExternalMemoryFeatureFlagBitsSets, 6},
@@ -2731,8 +2721,8 @@ constexpr std::array<EnumType, 229> enumTypes = {{
     {"VkPerformanceCounterStorageKHR", VkPerformanceCounterStorageKHRSets, 6},
     {"VkPerformanceCounterDescriptionFlagBitsKHR", VkPerformanceCounterDescriptionFlagBitsKHRSets,
      4},
-    {"VkAcquireProfilingLockFlagBitsKHR", VkAcquireProfilingLockFlagBitsKHRSets, 0},
-    {"VkShaderCorePropertiesFlagBitsAMD", VkShaderCorePropertiesFlagBitsAMDSets, 0},
+    {"VkAcquireProfilingLockFlagBitsKHR", nullptr, 0},
+    {"VkShaderCorePropertiesFlagBitsAMD", nullptr, 0},
     {"VkPerformanceConfigurationTypeINTEL", VkPerformanceConfigurationTypeINTELSets, 1},
     {"VkQueryPoolSamplingModeINTEL", VkQueryPoolSamplingModeINTELSets, 1},
     {"VkPerformanceOverrideTypeINTEL", VkPerformanceOverrideTypeINTELSets, 2},
@@ -2742,7 +2732,7 @@ constexpr std::array<EnumType, 229> enumTypes = {{
     {"VkPipelineExecutableStatisticFormatKHR", VkPipelineExecutableStatisticFormatKHRSets, 4},
     {"VkLineRasterizationModeEXT", VkLineRasterizationModeEXTSets, 4},
     {"VkShaderModuleCreateFlagBits", VkShaderModuleCreateFlagBitsSets, 1},
-    {"VkPipelineCompilerControlFlagBitsAMD", VkPipelineCompilerControlFlagBitsAMDSets, 0},
+    {"VkPipelineCompilerControlFlagBitsAMD", nullptr, 0},
     {"VkToolPurposeFlagBitsEXT", VkToolPurposeFlagBitsEXTSets, 7},
     {"VkFragmentShadingRateCombinerOpKHR", VkFragmentShadingRateCombinerOpKHRSets, 5},
     {"VkFragmentShadingRateNV", VkFragmentShadingRateNVSets, 12},
@@ -2777,7 +2767,7 @@ constexpr std::array<EnumType, 229> enumTypes = {{
     {"VkVideoEncodeH264CapabilitiesFlagBitsEXT", VkVideoEncodeH264CapabilitiesFlagBitsEXTSets, 11},
     {"VkAccelerationStructureMemoryRequirementsTypeKHR",
      VkAccelerationStructureMemoryRequirementsTypeKHRSets, 6},
-    {"VkSemaphoreCreateFlagBits", VkSemaphoreCreateFlagBitsSets, 0},
+    {"VkSemaphoreCreateFlagBits", nullptr, 0},
     {"VkIndirectCommandsLayoutUsageFlagBitsNVX", VkIndirectCommandsLayoutUsageFlagBitsNVXSets, 4},
     {"VkObjectEntryUsageFlagBitsNVX", VkObjectEntryUsageFlagBitsNVXSets, 2},
     {"VkIndirectCommandsTokenTypeNVX", VkIndirectCommandsTokenTypeNVXSets, 8},
