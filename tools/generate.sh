@@ -71,3 +71,5 @@ popd >/dev/null
 # Generate headers
 ./generate_serialization_header.py -i .gen_cache.xml -o ../include/vk_value_serialization.hpp
 ./generate_error_code_header.py -i .gen_cache.xml -o ../include/vk_error_code.hpp
+
+clang-format -i ../include/*.h ../include/*.hpp
