@@ -21,9 +21,9 @@
 #include "vk_error_code.hpp"
 
 int main(int argc, char **argv) {
-    std::error_code ec = VK_ERROR_DEVICE_LOST;
-    assert(ec);
-    assert(ec == VK_ERROR_DEVICE_LOST);
-    assert(ec != VK_SUCCESS);
-    std::cout << ec << std::endl;
+  std::error_code ec = VK_ERROR_DEVICE_LOST;
+  assert(ec);
+  assert(ec == VK_ERROR_DEVICE_LOST);
+  assert(ec != VK_SUCCESS);
+  std::cout << ec << std::endl;
 }
