@@ -53,6 +53,15 @@ def main(argv):
 
 #include <system_error>
 
+""")
+
+    # Static asserts
+    outFile.writelines(["static_assert(VK_HEADER_VERSION >= ", firstVersion,
+                        ", \"VK_HEADER_VERSION is from before the supported range.\");\n"])
+    outFile.writelines(["static_assert(VK_HEADER_VERSION <= ", lastVersion,
+                        ", \"VK_HEADER_VERSION is from after the supported range.\");\n"])
+
+    outFile.write("""
 /*  USAGE
     To use, include this header where the declarations for the boolean checks are required.
 
