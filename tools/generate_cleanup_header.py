@@ -60,8 +60,9 @@ def processMultiMember(member, suffix, dataRoot, lenSplit, outFile):
 
     if not typeNode is None:
         # A Vulkan struct, cleanup first
+        outFile.writelines(['    if (pData->',member.tag, suffix, ' != NULL)\n'])
         outFile.writelines(
-            ['    cleanup_', typeName, '(pData->', member.tag, suffix, ');\n'])
+            ['        cleanup_', typeName, '(pData->', member.tag, suffix, ');\n'])
     outFile.writelines(
         ['    free((void*)pData->', member.tag, suffix, ');\n'])
 
@@ -164,8 +165,7 @@ extern "C" {
 void cleanup_vk_struct(void const* pData) {
     VkBaseInStructure const* pTemp = pData;
 
-    switch(pTemp->sType) {
-""")
+    switch(pTemp->sType) {""")
 
     for struct in structs:
         sTypeValue = struct.find('members/sType/value')
@@ -210,8 +210,8 @@ void cleanup_vk_struct(void const* pData) {
                     # Single member, no iteration or counting business here
                     outFile.writelines(['\n    // ', member.tag, '\n'])
                     if member.tag == 'pNext':
-                        outFile.writelines(
-                            '    cleanup_vk_struct(pData->pNext);\n')
+                        outFile.write('    if (pData->pNext != NULL)\n')
+                        outFile.write('        cleanup_vk_struct(pData->pNext);\n')
                     elif not typeNode is None:
                         # A Vulkan struct, cleanup first
                         outFile.writelines(

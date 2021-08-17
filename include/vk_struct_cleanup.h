@@ -3566,7 +3566,6 @@ void cleanup_vk_struct(void const *pData) {
   VkBaseInStructure const *pTemp = pData;
 
   switch (pTemp->sType) {
-
   case VK_STRUCTURE_TYPE_APPLICATION_INFO:
     cleanup_VkApplicationInfo((VkApplicationInfo const *)pData);
     break;
@@ -7339,7 +7338,8 @@ extern inline void cleanup_VkLayerProperties(VkLayerProperties const *pData);
 
 void cleanup_VkApplicationInfo(VkApplicationInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pApplicationName - null-terminated
@@ -7356,7 +7356,8 @@ void cleanup_VkAllocationCallbacks(VkAllocationCallbacks const *pData) {
 
 void cleanup_VkDeviceQueueCreateInfo(VkDeviceQueueCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pQueuePriorities - queueCount
@@ -7365,11 +7366,13 @@ void cleanup_VkDeviceQueueCreateInfo(VkDeviceQueueCreateInfo const *pData) {
 
 void cleanup_VkDeviceCreateInfo(VkDeviceCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pQueueCreateInfos - queueCreateInfoCount
-  cleanup_VkDeviceQueueCreateInfo(pData->pQueueCreateInfos);
+  if (pData->pQueueCreateInfos != NULL)
+    cleanup_VkDeviceQueueCreateInfo(pData->pQueueCreateInfos);
   free((void *)pData->pQueueCreateInfos);
 
   // ppEnabledLayerNames - enabledLayerCount,null-terminated
@@ -7391,7 +7394,8 @@ void cleanup_VkDeviceCreateInfo(VkDeviceCreateInfo const *pData) {
 
 void cleanup_VkInstanceCreateInfo(VkInstanceCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pApplicationInfo
@@ -7418,7 +7422,8 @@ extern inline void cleanup_VkPhysicalDeviceMemoryProperties(
 
 void cleanup_VkMemoryAllocateInfo(VkMemoryAllocateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 
@@ -7436,7 +7441,8 @@ extern inline void cleanup_VkMemoryHeap(VkMemoryHeap const *pData);
 
 void cleanup_VkMappedMemoryRange(VkMappedMemoryRange const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 
@@ -7450,15 +7456,18 @@ extern inline void cleanup_VkDescriptorImageInfo(VkDescriptorImageInfo const *pD
 
 void cleanup_VkWriteDescriptorSet(VkWriteDescriptorSet const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pImageInfo - descriptorCount
-  cleanup_VkDescriptorImageInfo(pData->pImageInfo);
+  if (pData->pImageInfo != NULL)
+    cleanup_VkDescriptorImageInfo(pData->pImageInfo);
   free((void *)pData->pImageInfo);
 
   // pBufferInfo - descriptorCount
-  cleanup_VkDescriptorBufferInfo(pData->pBufferInfo);
+  if (pData->pBufferInfo != NULL)
+    cleanup_VkDescriptorBufferInfo(pData->pBufferInfo);
   free((void *)pData->pBufferInfo);
 
   // pTexelBufferView - descriptorCount
@@ -7467,13 +7476,15 @@ void cleanup_VkWriteDescriptorSet(VkWriteDescriptorSet const *pData) {
 
 void cleanup_VkCopyDescriptorSet(VkCopyDescriptorSet const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 
 void cleanup_VkBufferCreateInfo(VkBufferCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pQueueFamilyIndices - queueFamilyIndexCount
@@ -7482,7 +7493,8 @@ void cleanup_VkBufferCreateInfo(VkBufferCreateInfo const *pData) {
 
 void cleanup_VkBufferViewCreateInfo(VkBufferViewCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 
@@ -7494,25 +7506,29 @@ extern inline void cleanup_VkImageSubresourceRange(VkImageSubresourceRange const
 
 void cleanup_VkMemoryBarrier(VkMemoryBarrier const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 
 void cleanup_VkBufferMemoryBarrier(VkBufferMemoryBarrier const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 
 void cleanup_VkImageMemoryBarrier(VkImageMemoryBarrier const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 
 void cleanup_VkImageCreateInfo(VkImageCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pQueueFamilyIndices - queueFamilyIndexCount
@@ -7523,7 +7539,8 @@ extern inline void cleanup_VkSubresourceLayout(VkSubresourceLayout const *pData)
 
 void cleanup_VkImageViewCreateInfo(VkImageViewCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 
@@ -7535,40 +7552,47 @@ extern inline void cleanup_VkSparseImageMemoryBind(VkSparseImageMemoryBind const
 
 void cleanup_VkSparseBufferMemoryBindInfo(VkSparseBufferMemoryBindInfo const *pData) {
   // pBinds - bindCount
-  cleanup_VkSparseMemoryBind(pData->pBinds);
+  if (pData->pBinds != NULL)
+    cleanup_VkSparseMemoryBind(pData->pBinds);
   free((void *)pData->pBinds);
 }
 
 void cleanup_VkSparseImageOpaqueMemoryBindInfo(VkSparseImageOpaqueMemoryBindInfo const *pData) {
   // pBinds - bindCount
-  cleanup_VkSparseMemoryBind(pData->pBinds);
+  if (pData->pBinds != NULL)
+    cleanup_VkSparseMemoryBind(pData->pBinds);
   free((void *)pData->pBinds);
 }
 
 void cleanup_VkSparseImageMemoryBindInfo(VkSparseImageMemoryBindInfo const *pData) {
   // pBinds - bindCount
-  cleanup_VkSparseImageMemoryBind(pData->pBinds);
+  if (pData->pBinds != NULL)
+    cleanup_VkSparseImageMemoryBind(pData->pBinds);
   free((void *)pData->pBinds);
 }
 
 void cleanup_VkBindSparseInfo(VkBindSparseInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pWaitSemaphores - waitSemaphoreCount
   free((void *)pData->pWaitSemaphores);
 
   // pBufferBinds - bufferBindCount
-  cleanup_VkSparseBufferMemoryBindInfo(pData->pBufferBinds);
+  if (pData->pBufferBinds != NULL)
+    cleanup_VkSparseBufferMemoryBindInfo(pData->pBufferBinds);
   free((void *)pData->pBufferBinds);
 
   // pImageOpaqueBinds - imageOpaqueBindCount
-  cleanup_VkSparseImageOpaqueMemoryBindInfo(pData->pImageOpaqueBinds);
+  if (pData->pImageOpaqueBinds != NULL)
+    cleanup_VkSparseImageOpaqueMemoryBindInfo(pData->pImageOpaqueBinds);
   free((void *)pData->pImageOpaqueBinds);
 
   // pImageBinds - imageBindCount
-  cleanup_VkSparseImageMemoryBindInfo(pData->pImageBinds);
+  if (pData->pImageBinds != NULL)
+    cleanup_VkSparseImageMemoryBindInfo(pData->pImageBinds);
   free((void *)pData->pImageBinds);
 
   // pSignalSemaphores - signalSemaphoreCount
@@ -7585,7 +7609,8 @@ extern inline void cleanup_VkImageResolve(VkImageResolve const *pData);
 
 void cleanup_VkShaderModuleCreateInfo(VkShaderModuleCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pCode - codeSize / 4
@@ -7599,11 +7624,13 @@ void cleanup_VkDescriptorSetLayoutBinding(VkDescriptorSetLayoutBinding const *pD
 
 void cleanup_VkDescriptorSetLayoutCreateInfo(VkDescriptorSetLayoutCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pBindings - bindingCount
-  cleanup_VkDescriptorSetLayoutBinding(pData->pBindings);
+  if (pData->pBindings != NULL)
+    cleanup_VkDescriptorSetLayoutBinding(pData->pBindings);
   free((void *)pData->pBindings);
 }
 
@@ -7611,17 +7638,20 @@ extern inline void cleanup_VkDescriptorPoolSize(VkDescriptorPoolSize const *pDat
 
 void cleanup_VkDescriptorPoolCreateInfo(VkDescriptorPoolCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pPoolSizes - poolSizeCount
-  cleanup_VkDescriptorPoolSize(pData->pPoolSizes);
+  if (pData->pPoolSizes != NULL)
+    cleanup_VkDescriptorPoolSize(pData->pPoolSizes);
   free((void *)pData->pPoolSizes);
 }
 
 void cleanup_VkDescriptorSetAllocateInfo(VkDescriptorSetAllocateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pSetLayouts - descriptorSetCount
@@ -7632,7 +7662,8 @@ extern inline void cleanup_VkSpecializationMapEntry(VkSpecializationMapEntry con
 
 void cleanup_VkSpecializationInfo(VkSpecializationInfo const *pData) {
   // pMapEntries - mapEntryCount
-  cleanup_VkSpecializationMapEntry(pData->pMapEntries);
+  if (pData->pMapEntries != NULL)
+    cleanup_VkSpecializationMapEntry(pData->pMapEntries);
   free((void *)pData->pMapEntries);
 
   // pData - dataSize
@@ -7641,7 +7672,8 @@ void cleanup_VkSpecializationInfo(VkSpecializationInfo const *pData) {
 
 void cleanup_VkPipelineShaderStageCreateInfo(VkPipelineShaderStageCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pName - null-terminated
@@ -7654,7 +7686,8 @@ void cleanup_VkPipelineShaderStageCreateInfo(VkPipelineShaderStageCreateInfo con
 
 void cleanup_VkComputePipelineCreateInfo(VkComputePipelineCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 
@@ -7667,57 +7700,67 @@ extern inline void cleanup_VkVertexInputAttributeDescription(
 void cleanup_VkPipelineVertexInputStateCreateInfo(
     VkPipelineVertexInputStateCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pVertexBindingDescriptions - vertexBindingDescriptionCount
-  cleanup_VkVertexInputBindingDescription(pData->pVertexBindingDescriptions);
+  if (pData->pVertexBindingDescriptions != NULL)
+    cleanup_VkVertexInputBindingDescription(pData->pVertexBindingDescriptions);
   free((void *)pData->pVertexBindingDescriptions);
 
   // pVertexAttributeDescriptions - vertexAttributeDescriptionCount
-  cleanup_VkVertexInputAttributeDescription(pData->pVertexAttributeDescriptions);
+  if (pData->pVertexAttributeDescriptions != NULL)
+    cleanup_VkVertexInputAttributeDescription(pData->pVertexAttributeDescriptions);
   free((void *)pData->pVertexAttributeDescriptions);
 }
 
 void cleanup_VkPipelineInputAssemblyStateCreateInfo(
     VkPipelineInputAssemblyStateCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 
 void cleanup_VkPipelineTessellationStateCreateInfo(
     VkPipelineTessellationStateCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 
 void cleanup_VkPipelineViewportStateCreateInfo(VkPipelineViewportStateCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pViewports - viewportCount
-  cleanup_VkViewport(pData->pViewports);
+  if (pData->pViewports != NULL)
+    cleanup_VkViewport(pData->pViewports);
   free((void *)pData->pViewports);
 
   // pScissors - scissorCount
-  cleanup_VkRect2D(pData->pScissors);
+  if (pData->pScissors != NULL)
+    cleanup_VkRect2D(pData->pScissors);
   free((void *)pData->pScissors);
 }
 
 void cleanup_VkPipelineRasterizationStateCreateInfo(
     VkPipelineRasterizationStateCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 
 void cleanup_VkPipelineMultisampleStateCreateInfo(
     VkPipelineMultisampleStateCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pSampleMask - (rasterizationSamples + 31) / 32
@@ -7729,17 +7772,20 @@ extern inline void cleanup_VkPipelineColorBlendAttachmentState(
 
 void cleanup_VkPipelineColorBlendStateCreateInfo(VkPipelineColorBlendStateCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pAttachments - attachmentCount
-  cleanup_VkPipelineColorBlendAttachmentState(pData->pAttachments);
+  if (pData->pAttachments != NULL)
+    cleanup_VkPipelineColorBlendAttachmentState(pData->pAttachments);
   free((void *)pData->pAttachments);
 }
 
 void cleanup_VkPipelineDynamicStateCreateInfo(VkPipelineDynamicStateCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pDynamicStates - dynamicStateCount
@@ -7751,17 +7797,20 @@ extern inline void cleanup_VkStencilOpState(VkStencilOpState const *pData);
 void cleanup_VkPipelineDepthStencilStateCreateInfo(
     VkPipelineDepthStencilStateCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 
 void cleanup_VkGraphicsPipelineCreateInfo(VkGraphicsPipelineCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pStages - stageCount
-  cleanup_VkPipelineShaderStageCreateInfo(pData->pStages);
+  if (pData->pStages != NULL)
+    cleanup_VkPipelineShaderStageCreateInfo(pData->pStages);
   free((void *)pData->pStages);
 
   // pVertexInputState
@@ -7803,7 +7852,8 @@ void cleanup_VkGraphicsPipelineCreateInfo(VkGraphicsPipelineCreateInfo const *pD
 
 void cleanup_VkPipelineCacheCreateInfo(VkPipelineCacheCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pInitialData - initialDataSize
@@ -7819,44 +7869,51 @@ extern inline void cleanup_VkPushConstantRange(VkPushConstantRange const *pData)
 
 void cleanup_VkPipelineLayoutCreateInfo(VkPipelineLayoutCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pSetLayouts - setLayoutCount
   free((void *)pData->pSetLayouts);
 
   // pPushConstantRanges - pushConstantRangeCount
-  cleanup_VkPushConstantRange(pData->pPushConstantRanges);
+  if (pData->pPushConstantRanges != NULL)
+    cleanup_VkPushConstantRange(pData->pPushConstantRanges);
   free((void *)pData->pPushConstantRanges);
 }
 
 void cleanup_VkSamplerCreateInfo(VkSamplerCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 
 void cleanup_VkCommandPoolCreateInfo(VkCommandPoolCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 
 void cleanup_VkCommandBufferAllocateInfo(VkCommandBufferAllocateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 
 void cleanup_VkCommandBufferInheritanceInfo(VkCommandBufferInheritanceInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 
 void cleanup_VkCommandBufferBeginInfo(VkCommandBufferBeginInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pInheritanceInfo
@@ -7866,7 +7923,8 @@ void cleanup_VkCommandBufferBeginInfo(VkCommandBufferBeginInfo const *pData) {
 
 void cleanup_VkRenderPassBeginInfo(VkRenderPassBeginInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pClearValues - clearValueCount
@@ -7883,15 +7941,18 @@ extern inline void cleanup_VkAttachmentReference(VkAttachmentReference const *pD
 
 void cleanup_VkSubpassDescription(VkSubpassDescription const *pData) {
   // pInputAttachments - inputAttachmentCount
-  cleanup_VkAttachmentReference(pData->pInputAttachments);
+  if (pData->pInputAttachments != NULL)
+    cleanup_VkAttachmentReference(pData->pInputAttachments);
   free((void *)pData->pInputAttachments);
 
   // pColorAttachments - colorAttachmentCount
-  cleanup_VkAttachmentReference(pData->pColorAttachments);
+  if (pData->pColorAttachments != NULL)
+    cleanup_VkAttachmentReference(pData->pColorAttachments);
   free((void *)pData->pColorAttachments);
 
   // pResolveAttachments - colorAttachmentCount
-  cleanup_VkAttachmentReference(pData->pResolveAttachments);
+  if (pData->pResolveAttachments != NULL)
+    cleanup_VkAttachmentReference(pData->pResolveAttachments);
   free((void *)pData->pResolveAttachments);
 
   // pDepthStencilAttachment
@@ -7906,31 +7967,37 @@ extern inline void cleanup_VkSubpassDependency(VkSubpassDependency const *pData)
 
 void cleanup_VkRenderPassCreateInfo(VkRenderPassCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pAttachments - attachmentCount
-  cleanup_VkAttachmentDescription(pData->pAttachments);
+  if (pData->pAttachments != NULL)
+    cleanup_VkAttachmentDescription(pData->pAttachments);
   free((void *)pData->pAttachments);
 
   // pSubpasses - subpassCount
-  cleanup_VkSubpassDescription(pData->pSubpasses);
+  if (pData->pSubpasses != NULL)
+    cleanup_VkSubpassDescription(pData->pSubpasses);
   free((void *)pData->pSubpasses);
 
   // pDependencies - dependencyCount
-  cleanup_VkSubpassDependency(pData->pDependencies);
+  if (pData->pDependencies != NULL)
+    cleanup_VkSubpassDependency(pData->pDependencies);
   free((void *)pData->pDependencies);
 }
 
 void cleanup_VkEventCreateInfo(VkEventCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 
 void cleanup_VkFenceCreateInfo(VkFenceCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 
@@ -7943,19 +8010,22 @@ extern inline void cleanup_VkPhysicalDeviceLimits(VkPhysicalDeviceLimits const *
 
 void cleanup_VkSemaphoreCreateInfo(VkSemaphoreCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 
 void cleanup_VkQueryPoolCreateInfo(VkQueryPoolCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 
 void cleanup_VkFramebufferCreateInfo(VkFramebufferCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pAttachments - attachmentCount
@@ -7978,7 +8048,8 @@ extern inline void cleanup_VkMultiDrawIndexedInfoEXT(VkMultiDrawIndexedInfoEXT c
 
 void cleanup_VkSubmitInfo(VkSubmitInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pWaitSemaphores - waitSemaphoreCount
@@ -8016,7 +8087,8 @@ extern inline void cleanup_VkDisplayModePropertiesKHR(VkDisplayModePropertiesKHR
 #if VK_KHR_display
 void cleanup_VkDisplayModeCreateInfoKHR(VkDisplayModeCreateInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8029,7 +8101,8 @@ extern inline void cleanup_VkDisplayPlaneCapabilitiesKHR(
 #if VK_KHR_display
 void cleanup_VkDisplaySurfaceCreateInfoKHR(VkDisplaySurfaceCreateInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8037,7 +8110,8 @@ void cleanup_VkDisplaySurfaceCreateInfoKHR(VkDisplaySurfaceCreateInfoKHR const *
 #if VK_KHR_display_swapchain
 void cleanup_VkDisplayPresentInfoKHR(VkDisplayPresentInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8049,7 +8123,8 @@ extern inline void cleanup_VkSurfaceCapabilitiesKHR(VkSurfaceCapabilitiesKHR con
 #if VK_KHR_android_surface
 void cleanup_VkAndroidSurfaceCreateInfoKHR(VkAndroidSurfaceCreateInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // window
@@ -8060,7 +8135,8 @@ void cleanup_VkAndroidSurfaceCreateInfoKHR(VkAndroidSurfaceCreateInfoKHR const *
 #if VK_NN_vi_surface
 void cleanup_VkViSurfaceCreateInfoNN(VkViSurfaceCreateInfoNN const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // window
@@ -8071,7 +8147,8 @@ void cleanup_VkViSurfaceCreateInfoNN(VkViSurfaceCreateInfoNN const *pData) {
 #if VK_KHR_wayland_surface
 void cleanup_VkWaylandSurfaceCreateInfoKHR(VkWaylandSurfaceCreateInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // display
@@ -8085,7 +8162,8 @@ void cleanup_VkWaylandSurfaceCreateInfoKHR(VkWaylandSurfaceCreateInfoKHR const *
 #if VK_KHR_win32_surface
 void cleanup_VkWin32SurfaceCreateInfoKHR(VkWin32SurfaceCreateInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8093,7 +8171,8 @@ void cleanup_VkWin32SurfaceCreateInfoKHR(VkWin32SurfaceCreateInfoKHR const *pDat
 #if VK_KHR_xlib_surface
 void cleanup_VkXlibSurfaceCreateInfoKHR(VkXlibSurfaceCreateInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // dpy
@@ -8104,7 +8183,8 @@ void cleanup_VkXlibSurfaceCreateInfoKHR(VkXlibSurfaceCreateInfoKHR const *pData)
 #if VK_KHR_xcb_surface
 void cleanup_VkXcbSurfaceCreateInfoKHR(VkXcbSurfaceCreateInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // connection
@@ -8115,7 +8195,8 @@ void cleanup_VkXcbSurfaceCreateInfoKHR(VkXcbSurfaceCreateInfoKHR const *pData) {
 #if VK_HEADER_VERSION >= 146 && VK_EXT_directfb_surface
 void cleanup_VkDirectFBSurfaceCreateInfoEXT(VkDirectFBSurfaceCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // dfb
@@ -8129,7 +8210,8 @@ void cleanup_VkDirectFBSurfaceCreateInfoEXT(VkDirectFBSurfaceCreateInfoEXT const
 #if VK_HEADER_VERSION >= 87 && VK_FUCHSIA_imagepipe_surface
 void cleanup_VkImagePipeSurfaceCreateInfoFUCHSIA(VkImagePipeSurfaceCreateInfoFUCHSIA const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8138,7 +8220,8 @@ void cleanup_VkImagePipeSurfaceCreateInfoFUCHSIA(VkImagePipeSurfaceCreateInfoFUC
 void cleanup_VkStreamDescriptorSurfaceCreateInfoGGP(
     VkStreamDescriptorSurfaceCreateInfoGGP const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8146,7 +8229,8 @@ void cleanup_VkStreamDescriptorSurfaceCreateInfoGGP(
 #if VK_HEADER_VERSION >= 171 && VK_QNX_screen_surface
 void cleanup_VkScreenSurfaceCreateInfoQNX(VkScreenSurfaceCreateInfoQNX const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // context
@@ -8164,7 +8248,8 @@ extern inline void cleanup_VkSurfaceFormatKHR(VkSurfaceFormatKHR const *pData);
 #if VK_KHR_swapchain
 void cleanup_VkSwapchainCreateInfoKHR(VkSwapchainCreateInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pQueueFamilyIndices - queueFamilyIndexCount
@@ -8175,7 +8260,8 @@ void cleanup_VkSwapchainCreateInfoKHR(VkSwapchainCreateInfoKHR const *pData) {
 #if VK_KHR_swapchain
 void cleanup_VkPresentInfoKHR(VkPresentInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pWaitSemaphores - waitSemaphoreCount
@@ -8195,7 +8281,8 @@ void cleanup_VkPresentInfoKHR(VkPresentInfoKHR const *pData) {
 #if VK_EXT_debug_report
 void cleanup_VkDebugReportCallbackCreateInfoEXT(VkDebugReportCallbackCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pUserData
@@ -8206,7 +8293,8 @@ void cleanup_VkDebugReportCallbackCreateInfoEXT(VkDebugReportCallbackCreateInfoE
 #if VK_EXT_validation_flags
 void cleanup_VkValidationFlagsEXT(VkValidationFlagsEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pDisabledValidationChecks - disabledValidationCheckCount
@@ -8217,7 +8305,8 @@ void cleanup_VkValidationFlagsEXT(VkValidationFlagsEXT const *pData) {
 #if VK_HEADER_VERSION >= 97 && VK_EXT_validation_features
 void cleanup_VkValidationFeaturesEXT(VkValidationFeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pEnabledValidationFeatures - enabledValidationFeatureCount
@@ -8232,7 +8321,8 @@ void cleanup_VkValidationFeaturesEXT(VkValidationFeaturesEXT const *pData) {
 void cleanup_VkPipelineRasterizationStateRasterizationOrderAMD(
     VkPipelineRasterizationStateRasterizationOrderAMD const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8240,7 +8330,8 @@ void cleanup_VkPipelineRasterizationStateRasterizationOrderAMD(
 #if VK_EXT_debug_marker
 void cleanup_VkDebugMarkerObjectNameInfoEXT(VkDebugMarkerObjectNameInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pObjectName - null-terminated
@@ -8251,7 +8342,8 @@ void cleanup_VkDebugMarkerObjectNameInfoEXT(VkDebugMarkerObjectNameInfoEXT const
 #if VK_EXT_debug_marker
 void cleanup_VkDebugMarkerObjectTagInfoEXT(VkDebugMarkerObjectTagInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pTag - tagSize
@@ -8262,7 +8354,8 @@ void cleanup_VkDebugMarkerObjectTagInfoEXT(VkDebugMarkerObjectTagInfoEXT const *
 #if VK_EXT_debug_marker
 void cleanup_VkDebugMarkerMarkerInfoEXT(VkDebugMarkerMarkerInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pMarkerName - null-terminated
@@ -8274,7 +8367,8 @@ void cleanup_VkDebugMarkerMarkerInfoEXT(VkDebugMarkerMarkerInfoEXT const *pData)
 void cleanup_VkDedicatedAllocationImageCreateInfoNV(
     VkDedicatedAllocationImageCreateInfoNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8283,7 +8377,8 @@ void cleanup_VkDedicatedAllocationImageCreateInfoNV(
 void cleanup_VkDedicatedAllocationBufferCreateInfoNV(
     VkDedicatedAllocationBufferCreateInfoNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8292,7 +8387,8 @@ void cleanup_VkDedicatedAllocationBufferCreateInfoNV(
 void cleanup_VkDedicatedAllocationMemoryAllocateInfoNV(
     VkDedicatedAllocationMemoryAllocateInfoNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8305,7 +8401,8 @@ extern inline void cleanup_VkExternalImageFormatPropertiesNV(
 #if VK_NV_external_memory
 void cleanup_VkExternalMemoryImageCreateInfoNV(VkExternalMemoryImageCreateInfoNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8313,7 +8410,8 @@ void cleanup_VkExternalMemoryImageCreateInfoNV(VkExternalMemoryImageCreateInfoNV
 #if VK_NV_external_memory
 void cleanup_VkExportMemoryAllocateInfoNV(VkExportMemoryAllocateInfoNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8321,7 +8419,8 @@ void cleanup_VkExportMemoryAllocateInfoNV(VkExportMemoryAllocateInfoNV const *pD
 #if VK_NV_external_memory_win32
 void cleanup_VkImportMemoryWin32HandleInfoNV(VkImportMemoryWin32HandleInfoNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8329,7 +8428,8 @@ void cleanup_VkImportMemoryWin32HandleInfoNV(VkImportMemoryWin32HandleInfoNV con
 #if VK_NV_external_memory_win32
 void cleanup_VkExportMemoryWin32HandleInfoNV(VkExportMemoryWin32HandleInfoNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pAttributes
@@ -8341,7 +8441,8 @@ void cleanup_VkExportMemoryWin32HandleInfoNV(VkExportMemoryWin32HandleInfoNV con
 void cleanup_VkWin32KeyedMutexAcquireReleaseInfoNV(
     VkWin32KeyedMutexAcquireReleaseInfoNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pAcquireSyncs - acquireCount
@@ -8365,7 +8466,8 @@ void cleanup_VkWin32KeyedMutexAcquireReleaseInfoNV(
 void cleanup_VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV(
     VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8373,7 +8475,8 @@ void cleanup_VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV(
 #if VK_HEADER_VERSION >= 140 && VK_EXT_private_data
 void cleanup_VkDevicePrivateDataCreateInfoEXT(VkDevicePrivateDataCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8381,7 +8484,8 @@ void cleanup_VkDevicePrivateDataCreateInfoEXT(VkDevicePrivateDataCreateInfoEXT c
 #if VK_HEADER_VERSION >= 140 && VK_EXT_private_data
 void cleanup_VkPrivateDataSlotCreateInfoEXT(VkPrivateDataSlotCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8390,7 +8494,8 @@ void cleanup_VkPrivateDataSlotCreateInfoEXT(VkPrivateDataSlotCreateInfoEXT const
 void cleanup_VkPhysicalDevicePrivateDataFeaturesEXT(
     VkPhysicalDevicePrivateDataFeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8399,7 +8504,8 @@ void cleanup_VkPhysicalDevicePrivateDataFeaturesEXT(
 void cleanup_VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV(
     VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8408,7 +8514,8 @@ void cleanup_VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV(
 void cleanup_VkPhysicalDeviceMultiDrawPropertiesEXT(
     VkPhysicalDeviceMultiDrawPropertiesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8416,11 +8523,13 @@ void cleanup_VkPhysicalDeviceMultiDrawPropertiesEXT(
 #if VK_HEADER_VERSION >= 135 && VK_NV_device_generated_commands
 void cleanup_VkGraphicsShaderGroupCreateInfoNV(VkGraphicsShaderGroupCreateInfoNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pStages - stageCount
-  cleanup_VkPipelineShaderStageCreateInfo(pData->pStages);
+  if (pData->pStages != NULL)
+    cleanup_VkPipelineShaderStageCreateInfo(pData->pStages);
   free((void *)pData->pStages);
 
   // pVertexInputState
@@ -8437,11 +8546,13 @@ void cleanup_VkGraphicsShaderGroupCreateInfoNV(VkGraphicsShaderGroupCreateInfoNV
 void cleanup_VkGraphicsPipelineShaderGroupsCreateInfoNV(
     VkGraphicsPipelineShaderGroupsCreateInfoNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pGroups - groupCount
-  cleanup_VkGraphicsShaderGroupCreateInfoNV(pData->pGroups);
+  if (pData->pGroups != NULL)
+    cleanup_VkGraphicsShaderGroupCreateInfoNV(pData->pGroups);
   free((void *)pData->pGroups);
 
   // pPipelines - pipelineCount
@@ -8476,7 +8587,8 @@ extern inline void cleanup_VkIndirectCommandsStreamNV(VkIndirectCommandsStreamNV
 #if VK_HEADER_VERSION >= 135 && VK_NV_device_generated_commands
 void cleanup_VkIndirectCommandsLayoutTokenNV(VkIndirectCommandsLayoutTokenNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pIndexTypes - indexTypeCount
@@ -8491,11 +8603,13 @@ void cleanup_VkIndirectCommandsLayoutTokenNV(VkIndirectCommandsLayoutTokenNV con
 void cleanup_VkIndirectCommandsLayoutCreateInfoNV(
     VkIndirectCommandsLayoutCreateInfoNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pTokens - tokenCount
-  cleanup_VkIndirectCommandsLayoutTokenNV(pData->pTokens);
+  if (pData->pTokens != NULL)
+    cleanup_VkIndirectCommandsLayoutTokenNV(pData->pTokens);
   free((void *)pData->pTokens);
 
   // pStreamStrides - streamCount
@@ -8506,11 +8620,13 @@ void cleanup_VkIndirectCommandsLayoutCreateInfoNV(
 #if VK_HEADER_VERSION >= 135 && VK_NV_device_generated_commands
 void cleanup_VkGeneratedCommandsInfoNV(VkGeneratedCommandsInfoNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pStreams - streamCount
-  cleanup_VkIndirectCommandsStreamNV(pData->pStreams);
+  if (pData->pStreams != NULL)
+    cleanup_VkIndirectCommandsStreamNV(pData->pStreams);
   free((void *)pData->pStreams);
 }
 #endif
@@ -8519,7 +8635,8 @@ void cleanup_VkGeneratedCommandsInfoNV(VkGeneratedCommandsInfoNV const *pData) {
 void cleanup_VkGeneratedCommandsMemoryRequirementsInfoNV(
     VkGeneratedCommandsMemoryRequirementsInfoNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8527,7 +8644,8 @@ void cleanup_VkGeneratedCommandsMemoryRequirementsInfoNV(
 #if VK_VERSION_1_1
 void cleanup_VkPhysicalDeviceFeatures2(VkPhysicalDeviceFeatures2 const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8539,7 +8657,8 @@ extern inline void cleanup_VkPhysicalDeviceFeatures2KHR(VkPhysicalDeviceFeatures
 #if VK_VERSION_1_1
 void cleanup_VkPhysicalDeviceProperties2(VkPhysicalDeviceProperties2 const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8552,7 +8671,8 @@ extern inline void cleanup_VkPhysicalDeviceProperties2KHR(
 #if VK_VERSION_1_1
 void cleanup_VkFormatProperties2(VkFormatProperties2 const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8564,7 +8684,8 @@ extern inline void cleanup_VkFormatProperties2KHR(VkFormatProperties2KHR const *
 #if VK_VERSION_1_1
 void cleanup_VkImageFormatProperties2(VkImageFormatProperties2 const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8576,7 +8697,8 @@ extern inline void cleanup_VkImageFormatProperties2KHR(VkImageFormatProperties2K
 #if VK_VERSION_1_1
 void cleanup_VkPhysicalDeviceImageFormatInfo2(VkPhysicalDeviceImageFormatInfo2 const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8589,7 +8711,8 @@ extern inline void cleanup_VkPhysicalDeviceImageFormatInfo2KHR(
 #if VK_VERSION_1_1
 void cleanup_VkQueueFamilyProperties2(VkQueueFamilyProperties2 const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8601,7 +8724,8 @@ extern inline void cleanup_VkQueueFamilyProperties2KHR(VkQueueFamilyProperties2K
 #if VK_VERSION_1_1
 void cleanup_VkPhysicalDeviceMemoryProperties2(VkPhysicalDeviceMemoryProperties2 const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8614,7 +8738,8 @@ extern inline void cleanup_VkPhysicalDeviceMemoryProperties2KHR(
 #if VK_VERSION_1_1
 void cleanup_VkSparseImageFormatProperties2(VkSparseImageFormatProperties2 const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8628,7 +8753,8 @@ extern inline void cleanup_VkSparseImageFormatProperties2KHR(
 void cleanup_VkPhysicalDeviceSparseImageFormatInfo2(
     VkPhysicalDeviceSparseImageFormatInfo2 const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8642,7 +8768,8 @@ extern inline void cleanup_VkPhysicalDeviceSparseImageFormatInfo2KHR(
 void cleanup_VkPhysicalDevicePushDescriptorPropertiesKHR(
     VkPhysicalDevicePushDescriptorPropertiesKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8658,7 +8785,8 @@ extern inline void cleanup_VkConformanceVersionKHR(VkConformanceVersionKHR const
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
 void cleanup_VkPhysicalDeviceDriverProperties(VkPhysicalDeviceDriverProperties const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8671,11 +8799,13 @@ extern inline void cleanup_VkPhysicalDeviceDriverPropertiesKHR(
 #if VK_KHR_incremental_present
 void cleanup_VkPresentRegionsKHR(VkPresentRegionsKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pRegions - swapchainCount
-  cleanup_VkPresentRegionKHR(pData->pRegions);
+  if (pData->pRegions != NULL)
+    cleanup_VkPresentRegionKHR(pData->pRegions);
   free((void *)pData->pRegions);
 }
 #endif
@@ -8683,7 +8813,8 @@ void cleanup_VkPresentRegionsKHR(VkPresentRegionsKHR const *pData) {
 #if VK_KHR_incremental_present
 void cleanup_VkPresentRegionKHR(VkPresentRegionKHR const *pData) {
   // pRectangles - rectangleCount
-  cleanup_VkRectLayerKHR(pData->pRectangles);
+  if (pData->pRectangles != NULL)
+    cleanup_VkRectLayerKHR(pData->pRectangles);
   free((void *)pData->pRectangles);
 }
 #endif
@@ -8696,7 +8827,8 @@ extern inline void cleanup_VkRectLayerKHR(VkRectLayerKHR const *pData);
 void cleanup_VkPhysicalDeviceVariablePointersFeatures(
     VkPhysicalDeviceVariablePointersFeatures const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8729,7 +8861,8 @@ extern inline void cleanup_VkExternalMemoryPropertiesKHR(
 void cleanup_VkPhysicalDeviceExternalImageFormatInfo(
     VkPhysicalDeviceExternalImageFormatInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8742,7 +8875,8 @@ extern inline void cleanup_VkPhysicalDeviceExternalImageFormatInfoKHR(
 #if VK_VERSION_1_1
 void cleanup_VkExternalImageFormatProperties(VkExternalImageFormatProperties const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8755,7 +8889,8 @@ extern inline void cleanup_VkExternalImageFormatPropertiesKHR(
 #if VK_VERSION_1_1
 void cleanup_VkPhysicalDeviceExternalBufferInfo(VkPhysicalDeviceExternalBufferInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8768,7 +8903,8 @@ extern inline void cleanup_VkPhysicalDeviceExternalBufferInfoKHR(
 #if VK_VERSION_1_1
 void cleanup_VkExternalBufferProperties(VkExternalBufferProperties const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8781,7 +8917,8 @@ extern inline void cleanup_VkExternalBufferPropertiesKHR(
 #if VK_VERSION_1_1
 void cleanup_VkPhysicalDeviceIDProperties(VkPhysicalDeviceIDProperties const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8795,7 +8932,8 @@ extern inline void cleanup_VkPhysicalDeviceIDPropertiesKHR(
 #if VK_VERSION_1_1
 void cleanup_VkExternalMemoryImageCreateInfo(VkExternalMemoryImageCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8808,7 +8946,8 @@ extern inline void cleanup_VkExternalMemoryImageCreateInfoKHR(
 #if VK_VERSION_1_1
 void cleanup_VkExternalMemoryBufferCreateInfo(VkExternalMemoryBufferCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8821,7 +8960,8 @@ extern inline void cleanup_VkExternalMemoryBufferCreateInfoKHR(
 #if VK_VERSION_1_1
 void cleanup_VkExportMemoryAllocateInfo(VkExportMemoryAllocateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8834,7 +8974,8 @@ extern inline void cleanup_VkExportMemoryAllocateInfoKHR(
 #if VK_KHR_external_memory_win32
 void cleanup_VkImportMemoryWin32HandleInfoKHR(VkImportMemoryWin32HandleInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8842,7 +8983,8 @@ void cleanup_VkImportMemoryWin32HandleInfoKHR(VkImportMemoryWin32HandleInfoKHR c
 #if VK_KHR_external_memory_win32
 void cleanup_VkExportMemoryWin32HandleInfoKHR(VkExportMemoryWin32HandleInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pAttributes
@@ -8854,7 +8996,8 @@ void cleanup_VkExportMemoryWin32HandleInfoKHR(VkExportMemoryWin32HandleInfoKHR c
 void cleanup_VkImportMemoryZirconHandleInfoFUCHSIA(
     VkImportMemoryZirconHandleInfoFUCHSIA const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8863,7 +9006,8 @@ void cleanup_VkImportMemoryZirconHandleInfoFUCHSIA(
 void cleanup_VkMemoryZirconHandlePropertiesFUCHSIA(
     VkMemoryZirconHandlePropertiesFUCHSIA const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8871,7 +9015,8 @@ void cleanup_VkMemoryZirconHandlePropertiesFUCHSIA(
 #if VK_HEADER_VERSION >= 173 && VK_FUCHSIA_external_memory
 void cleanup_VkMemoryGetZirconHandleInfoFUCHSIA(VkMemoryGetZirconHandleInfoFUCHSIA const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8879,7 +9024,8 @@ void cleanup_VkMemoryGetZirconHandleInfoFUCHSIA(VkMemoryGetZirconHandleInfoFUCHS
 #if VK_KHR_external_memory_win32
 void cleanup_VkMemoryWin32HandlePropertiesKHR(VkMemoryWin32HandlePropertiesKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8887,7 +9033,8 @@ void cleanup_VkMemoryWin32HandlePropertiesKHR(VkMemoryWin32HandlePropertiesKHR c
 #if VK_KHR_external_memory_win32
 void cleanup_VkMemoryGetWin32HandleInfoKHR(VkMemoryGetWin32HandleInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8895,7 +9042,8 @@ void cleanup_VkMemoryGetWin32HandleInfoKHR(VkMemoryGetWin32HandleInfoKHR const *
 #if VK_KHR_external_memory_fd
 void cleanup_VkImportMemoryFdInfoKHR(VkImportMemoryFdInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8903,7 +9051,8 @@ void cleanup_VkImportMemoryFdInfoKHR(VkImportMemoryFdInfoKHR const *pData) {
 #if VK_KHR_external_memory_fd
 void cleanup_VkMemoryFdPropertiesKHR(VkMemoryFdPropertiesKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8911,7 +9060,8 @@ void cleanup_VkMemoryFdPropertiesKHR(VkMemoryFdPropertiesKHR const *pData) {
 #if VK_KHR_external_memory_fd
 void cleanup_VkMemoryGetFdInfoKHR(VkMemoryGetFdInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8920,7 +9070,8 @@ void cleanup_VkMemoryGetFdInfoKHR(VkMemoryGetFdInfoKHR const *pData) {
 void cleanup_VkWin32KeyedMutexAcquireReleaseInfoKHR(
     VkWin32KeyedMutexAcquireReleaseInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pAcquireSyncs - acquireCount
@@ -8944,7 +9095,8 @@ void cleanup_VkWin32KeyedMutexAcquireReleaseInfoKHR(
 void cleanup_VkPhysicalDeviceExternalSemaphoreInfo(
     VkPhysicalDeviceExternalSemaphoreInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8957,7 +9109,8 @@ extern inline void cleanup_VkPhysicalDeviceExternalSemaphoreInfoKHR(
 #if VK_VERSION_1_1
 void cleanup_VkExternalSemaphoreProperties(VkExternalSemaphoreProperties const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8970,7 +9123,8 @@ extern inline void cleanup_VkExternalSemaphorePropertiesKHR(
 #if VK_VERSION_1_1
 void cleanup_VkExportSemaphoreCreateInfo(VkExportSemaphoreCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8983,7 +9137,8 @@ extern inline void cleanup_VkExportSemaphoreCreateInfoKHR(
 #if VK_KHR_external_semaphore_win32
 void cleanup_VkImportSemaphoreWin32HandleInfoKHR(VkImportSemaphoreWin32HandleInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -8991,7 +9146,8 @@ void cleanup_VkImportSemaphoreWin32HandleInfoKHR(VkImportSemaphoreWin32HandleInf
 #if VK_KHR_external_semaphore_win32
 void cleanup_VkExportSemaphoreWin32HandleInfoKHR(VkExportSemaphoreWin32HandleInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pAttributes
@@ -9002,7 +9158,8 @@ void cleanup_VkExportSemaphoreWin32HandleInfoKHR(VkExportSemaphoreWin32HandleInf
 #if VK_KHR_external_semaphore_win32
 void cleanup_VkD3D12FenceSubmitInfoKHR(VkD3D12FenceSubmitInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pWaitSemaphoreValues - waitSemaphoreValuesCount
@@ -9016,7 +9173,8 @@ void cleanup_VkD3D12FenceSubmitInfoKHR(VkD3D12FenceSubmitInfoKHR const *pData) {
 #if VK_KHR_external_semaphore_win32
 void cleanup_VkSemaphoreGetWin32HandleInfoKHR(VkSemaphoreGetWin32HandleInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9024,7 +9182,8 @@ void cleanup_VkSemaphoreGetWin32HandleInfoKHR(VkSemaphoreGetWin32HandleInfoKHR c
 #if VK_KHR_external_semaphore_fd
 void cleanup_VkImportSemaphoreFdInfoKHR(VkImportSemaphoreFdInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9032,7 +9191,8 @@ void cleanup_VkImportSemaphoreFdInfoKHR(VkImportSemaphoreFdInfoKHR const *pData)
 #if VK_KHR_external_semaphore_fd
 void cleanup_VkSemaphoreGetFdInfoKHR(VkSemaphoreGetFdInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9041,7 +9201,8 @@ void cleanup_VkSemaphoreGetFdInfoKHR(VkSemaphoreGetFdInfoKHR const *pData) {
 void cleanup_VkImportSemaphoreZirconHandleInfoFUCHSIA(
     VkImportSemaphoreZirconHandleInfoFUCHSIA const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9050,7 +9211,8 @@ void cleanup_VkImportSemaphoreZirconHandleInfoFUCHSIA(
 void cleanup_VkSemaphoreGetZirconHandleInfoFUCHSIA(
     VkSemaphoreGetZirconHandleInfoFUCHSIA const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9058,7 +9220,8 @@ void cleanup_VkSemaphoreGetZirconHandleInfoFUCHSIA(
 #if VK_VERSION_1_1
 void cleanup_VkPhysicalDeviceExternalFenceInfo(VkPhysicalDeviceExternalFenceInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9071,7 +9234,8 @@ extern inline void cleanup_VkPhysicalDeviceExternalFenceInfoKHR(
 #if VK_VERSION_1_1
 void cleanup_VkExternalFenceProperties(VkExternalFenceProperties const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9083,7 +9247,8 @@ extern inline void cleanup_VkExternalFencePropertiesKHR(VkExternalFencePropertie
 #if VK_VERSION_1_1
 void cleanup_VkExportFenceCreateInfo(VkExportFenceCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9095,7 +9260,8 @@ extern inline void cleanup_VkExportFenceCreateInfoKHR(VkExportFenceCreateInfoKHR
 #if VK_KHR_external_fence_win32
 void cleanup_VkImportFenceWin32HandleInfoKHR(VkImportFenceWin32HandleInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9103,7 +9269,8 @@ void cleanup_VkImportFenceWin32HandleInfoKHR(VkImportFenceWin32HandleInfoKHR con
 #if VK_KHR_external_fence_win32
 void cleanup_VkExportFenceWin32HandleInfoKHR(VkExportFenceWin32HandleInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pAttributes
@@ -9114,7 +9281,8 @@ void cleanup_VkExportFenceWin32HandleInfoKHR(VkExportFenceWin32HandleInfoKHR con
 #if VK_KHR_external_fence_win32
 void cleanup_VkFenceGetWin32HandleInfoKHR(VkFenceGetWin32HandleInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9122,7 +9290,8 @@ void cleanup_VkFenceGetWin32HandleInfoKHR(VkFenceGetWin32HandleInfoKHR const *pD
 #if VK_KHR_external_fence_fd
 void cleanup_VkImportFenceFdInfoKHR(VkImportFenceFdInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9130,7 +9299,8 @@ void cleanup_VkImportFenceFdInfoKHR(VkImportFenceFdInfoKHR const *pData) {
 #if VK_KHR_external_fence_fd
 void cleanup_VkFenceGetFdInfoKHR(VkFenceGetFdInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9138,7 +9308,8 @@ void cleanup_VkFenceGetFdInfoKHR(VkFenceGetFdInfoKHR const *pData) {
 #if VK_VERSION_1_1
 void cleanup_VkPhysicalDeviceMultiviewFeatures(VkPhysicalDeviceMultiviewFeatures const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9151,7 +9322,8 @@ extern inline void cleanup_VkPhysicalDeviceMultiviewFeaturesKHR(
 #if VK_VERSION_1_1
 void cleanup_VkPhysicalDeviceMultiviewProperties(VkPhysicalDeviceMultiviewProperties const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9164,7 +9336,8 @@ extern inline void cleanup_VkPhysicalDeviceMultiviewPropertiesKHR(
 #if VK_VERSION_1_1
 void cleanup_VkRenderPassMultiviewCreateInfo(VkRenderPassMultiviewCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pViewMasks - subpassCount
@@ -9186,7 +9359,8 @@ extern inline void cleanup_VkRenderPassMultiviewCreateInfoKHR(
 #if VK_EXT_display_surface_counter
 void cleanup_VkSurfaceCapabilities2EXT(VkSurfaceCapabilities2EXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9194,7 +9368,8 @@ void cleanup_VkSurfaceCapabilities2EXT(VkSurfaceCapabilities2EXT const *pData) {
 #if VK_EXT_display_control
 void cleanup_VkDisplayPowerInfoEXT(VkDisplayPowerInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9202,7 +9377,8 @@ void cleanup_VkDisplayPowerInfoEXT(VkDisplayPowerInfoEXT const *pData) {
 #if VK_EXT_display_control
 void cleanup_VkDeviceEventInfoEXT(VkDeviceEventInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9210,7 +9386,8 @@ void cleanup_VkDeviceEventInfoEXT(VkDeviceEventInfoEXT const *pData) {
 #if VK_EXT_display_control
 void cleanup_VkDisplayEventInfoEXT(VkDisplayEventInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9218,7 +9395,8 @@ void cleanup_VkDisplayEventInfoEXT(VkDisplayEventInfoEXT const *pData) {
 #if VK_EXT_display_control
 void cleanup_VkSwapchainCounterCreateInfoEXT(VkSwapchainCounterCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9226,7 +9404,8 @@ void cleanup_VkSwapchainCounterCreateInfoEXT(VkSwapchainCounterCreateInfoEXT con
 #if VK_VERSION_1_1
 void cleanup_VkPhysicalDeviceGroupProperties(VkPhysicalDeviceGroupProperties const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9239,7 +9418,8 @@ extern inline void cleanup_VkPhysicalDeviceGroupPropertiesKHR(
 #if VK_VERSION_1_1
 void cleanup_VkMemoryAllocateFlagsInfo(VkMemoryAllocateFlagsInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9251,7 +9431,8 @@ extern inline void cleanup_VkMemoryAllocateFlagsInfoKHR(VkMemoryAllocateFlagsInf
 #if VK_VERSION_1_1
 void cleanup_VkBindBufferMemoryInfo(VkBindBufferMemoryInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9263,7 +9444,8 @@ extern inline void cleanup_VkBindBufferMemoryInfoKHR(VkBindBufferMemoryInfoKHR c
 #if VK_VERSION_1_1
 void cleanup_VkBindBufferMemoryDeviceGroupInfo(VkBindBufferMemoryDeviceGroupInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pDeviceIndices - deviceIndexCount
@@ -9279,7 +9461,8 @@ extern inline void cleanup_VkBindBufferMemoryDeviceGroupInfoKHR(
 #if VK_VERSION_1_1
 void cleanup_VkBindImageMemoryInfo(VkBindImageMemoryInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9291,14 +9474,16 @@ extern inline void cleanup_VkBindImageMemoryInfoKHR(VkBindImageMemoryInfoKHR con
 #if VK_VERSION_1_1
 void cleanup_VkBindImageMemoryDeviceGroupInfo(VkBindImageMemoryDeviceGroupInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pDeviceIndices - deviceIndexCount
   free((void *)pData->pDeviceIndices);
 
   // pSplitInstanceBindRegions - splitInstanceBindRegionCount
-  cleanup_VkRect2D(pData->pSplitInstanceBindRegions);
+  if (pData->pSplitInstanceBindRegions != NULL)
+    cleanup_VkRect2D(pData->pSplitInstanceBindRegions);
   free((void *)pData->pSplitInstanceBindRegions);
 }
 #endif
@@ -9311,11 +9496,13 @@ extern inline void cleanup_VkBindImageMemoryDeviceGroupInfoKHR(
 #if VK_VERSION_1_1
 void cleanup_VkDeviceGroupRenderPassBeginInfo(VkDeviceGroupRenderPassBeginInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pDeviceRenderAreas - deviceRenderAreaCount
-  cleanup_VkRect2D(pData->pDeviceRenderAreas);
+  if (pData->pDeviceRenderAreas != NULL)
+    cleanup_VkRect2D(pData->pDeviceRenderAreas);
   free((void *)pData->pDeviceRenderAreas);
 }
 #endif
@@ -9328,7 +9515,8 @@ extern inline void cleanup_VkDeviceGroupRenderPassBeginInfoKHR(
 #if VK_VERSION_1_1
 void cleanup_VkDeviceGroupCommandBufferBeginInfo(VkDeviceGroupCommandBufferBeginInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9341,7 +9529,8 @@ extern inline void cleanup_VkDeviceGroupCommandBufferBeginInfoKHR(
 #if VK_VERSION_1_1
 void cleanup_VkDeviceGroupSubmitInfo(VkDeviceGroupSubmitInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pWaitSemaphoreDeviceIndices - waitSemaphoreCount
@@ -9362,7 +9551,8 @@ extern inline void cleanup_VkDeviceGroupSubmitInfoKHR(VkDeviceGroupSubmitInfoKHR
 #if VK_VERSION_1_1
 void cleanup_VkDeviceGroupBindSparseInfo(VkDeviceGroupBindSparseInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9375,7 +9565,8 @@ extern inline void cleanup_VkDeviceGroupBindSparseInfoKHR(
 #if VK_KHR_swapchain && VK_KHR_device_group
 void cleanup_VkDeviceGroupPresentCapabilitiesKHR(VkDeviceGroupPresentCapabilitiesKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9383,7 +9574,8 @@ void cleanup_VkDeviceGroupPresentCapabilitiesKHR(VkDeviceGroupPresentCapabilitie
 #if VK_KHR_swapchain && VK_KHR_device_group
 void cleanup_VkImageSwapchainCreateInfoKHR(VkImageSwapchainCreateInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9391,7 +9583,8 @@ void cleanup_VkImageSwapchainCreateInfoKHR(VkImageSwapchainCreateInfoKHR const *
 #if VK_KHR_swapchain && VK_KHR_device_group
 void cleanup_VkBindImageMemorySwapchainInfoKHR(VkBindImageMemorySwapchainInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9399,7 +9592,8 @@ void cleanup_VkBindImageMemorySwapchainInfoKHR(VkBindImageMemorySwapchainInfoKHR
 #if VK_KHR_swapchain && VK_KHR_device_group
 void cleanup_VkAcquireNextImageInfoKHR(VkAcquireNextImageInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9407,7 +9601,8 @@ void cleanup_VkAcquireNextImageInfoKHR(VkAcquireNextImageInfoKHR const *pData) {
 #if VK_KHR_swapchain && VK_KHR_device_group
 void cleanup_VkDeviceGroupPresentInfoKHR(VkDeviceGroupPresentInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pDeviceMasks - swapchainCount
@@ -9418,7 +9613,8 @@ void cleanup_VkDeviceGroupPresentInfoKHR(VkDeviceGroupPresentInfoKHR const *pDat
 #if VK_VERSION_1_1
 void cleanup_VkDeviceGroupDeviceCreateInfo(VkDeviceGroupDeviceCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pPhysicalDevices - physicalDeviceCount
@@ -9434,7 +9630,8 @@ extern inline void cleanup_VkDeviceGroupDeviceCreateInfoKHR(
 #if VK_KHR_swapchain && VK_KHR_device_group
 void cleanup_VkDeviceGroupSwapchainCreateInfoKHR(VkDeviceGroupSwapchainCreateInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9453,11 +9650,13 @@ extern inline void cleanup_VkDescriptorUpdateTemplateEntryKHR(
 void cleanup_VkDescriptorUpdateTemplateCreateInfo(
     VkDescriptorUpdateTemplateCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pDescriptorUpdateEntries - descriptorUpdateEntryCount
-  cleanup_VkDescriptorUpdateTemplateEntry(pData->pDescriptorUpdateEntries);
+  if (pData->pDescriptorUpdateEntries != NULL)
+    cleanup_VkDescriptorUpdateTemplateEntry(pData->pDescriptorUpdateEntries);
   free((void *)pData->pDescriptorUpdateEntries);
 }
 #endif
@@ -9475,7 +9674,8 @@ extern inline void cleanup_VkXYColorEXT(VkXYColorEXT const *pData);
 void cleanup_VkPhysicalDevicePresentIdFeaturesKHR(
     VkPhysicalDevicePresentIdFeaturesKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9483,7 +9683,8 @@ void cleanup_VkPhysicalDevicePresentIdFeaturesKHR(
 #if VK_HEADER_VERSION >= 185 && VK_KHR_present_id
 void cleanup_VkPresentIdKHR(VkPresentIdKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pPresentIds - swapchainCount
@@ -9495,7 +9696,8 @@ void cleanup_VkPresentIdKHR(VkPresentIdKHR const *pData) {
 void cleanup_VkPhysicalDevicePresentWaitFeaturesKHR(
     VkPhysicalDevicePresentWaitFeaturesKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9503,7 +9705,8 @@ void cleanup_VkPhysicalDevicePresentWaitFeaturesKHR(
 #if VK_EXT_hdr_metadata
 void cleanup_VkHdrMetadataEXT(VkHdrMetadataEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9512,7 +9715,8 @@ void cleanup_VkHdrMetadataEXT(VkHdrMetadataEXT const *pData) {
 void cleanup_VkDisplayNativeHdrSurfaceCapabilitiesAMD(
     VkDisplayNativeHdrSurfaceCapabilitiesAMD const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9521,7 +9725,8 @@ void cleanup_VkDisplayNativeHdrSurfaceCapabilitiesAMD(
 void cleanup_VkSwapchainDisplayNativeHdrCreateInfoAMD(
     VkSwapchainDisplayNativeHdrCreateInfoAMD const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9538,11 +9743,13 @@ extern inline void cleanup_VkPastPresentationTimingGOOGLE(
 #if VK_GOOGLE_display_timing
 void cleanup_VkPresentTimesInfoGOOGLE(VkPresentTimesInfoGOOGLE const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pTimes - swapchainCount
-  cleanup_VkPresentTimeGOOGLE(pData->pTimes);
+  if (pData->pTimes != NULL)
+    cleanup_VkPresentTimeGOOGLE(pData->pTimes);
   free((void *)pData->pTimes);
 }
 #endif
@@ -9554,7 +9761,8 @@ extern inline void cleanup_VkPresentTimeGOOGLE(VkPresentTimeGOOGLE const *pData)
 #if VK_MVK_ios_surface
 void cleanup_VkIOSSurfaceCreateInfoMVK(VkIOSSurfaceCreateInfoMVK const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pView
@@ -9565,7 +9773,8 @@ void cleanup_VkIOSSurfaceCreateInfoMVK(VkIOSSurfaceCreateInfoMVK const *pData) {
 #if VK_MVK_macos_surface
 void cleanup_VkMacOSSurfaceCreateInfoMVK(VkMacOSSurfaceCreateInfoMVK const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pView
@@ -9576,7 +9785,8 @@ void cleanup_VkMacOSSurfaceCreateInfoMVK(VkMacOSSurfaceCreateInfoMVK const *pDat
 #if VK_HEADER_VERSION >= 102 && VK_EXT_metal_surface
 void cleanup_VkMetalSurfaceCreateInfoEXT(VkMetalSurfaceCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pLayer
@@ -9592,11 +9802,13 @@ extern inline void cleanup_VkViewportWScalingNV(VkViewportWScalingNV const *pDat
 void cleanup_VkPipelineViewportWScalingStateCreateInfoNV(
     VkPipelineViewportWScalingStateCreateInfoNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pViewportWScalings - viewportCount
-  cleanup_VkViewportWScalingNV(pData->pViewportWScalings);
+  if (pData->pViewportWScalings != NULL)
+    cleanup_VkViewportWScalingNV(pData->pViewportWScalings);
   free((void *)pData->pViewportWScalings);
 }
 #endif
@@ -9609,11 +9821,13 @@ extern inline void cleanup_VkViewportSwizzleNV(VkViewportSwizzleNV const *pData)
 void cleanup_VkPipelineViewportSwizzleStateCreateInfoNV(
     VkPipelineViewportSwizzleStateCreateInfoNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pViewportSwizzles - viewportCount
-  cleanup_VkViewportSwizzleNV(pData->pViewportSwizzles);
+  if (pData->pViewportSwizzles != NULL)
+    cleanup_VkViewportSwizzleNV(pData->pViewportSwizzles);
   free((void *)pData->pViewportSwizzles);
 }
 #endif
@@ -9622,7 +9836,8 @@ void cleanup_VkPipelineViewportSwizzleStateCreateInfoNV(
 void cleanup_VkPhysicalDeviceDiscardRectanglePropertiesEXT(
     VkPhysicalDeviceDiscardRectanglePropertiesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9631,11 +9846,13 @@ void cleanup_VkPhysicalDeviceDiscardRectanglePropertiesEXT(
 void cleanup_VkPipelineDiscardRectangleStateCreateInfoEXT(
     VkPipelineDiscardRectangleStateCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pDiscardRectangles - discardRectangleCount
-  cleanup_VkRect2D(pData->pDiscardRectangles);
+  if (pData->pDiscardRectangles != NULL)
+    cleanup_VkRect2D(pData->pDiscardRectangles);
   free((void *)pData->pDiscardRectangles);
 }
 #endif
@@ -9644,7 +9861,8 @@ void cleanup_VkPipelineDiscardRectangleStateCreateInfoEXT(
 void cleanup_VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX(
     VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9663,11 +9881,13 @@ extern inline void cleanup_VkInputAttachmentAspectReferenceKHR(
 void cleanup_VkRenderPassInputAttachmentAspectCreateInfo(
     VkRenderPassInputAttachmentAspectCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pAspectReferences - aspectReferenceCount
-  cleanup_VkInputAttachmentAspectReference(pData->pAspectReferences);
+  if (pData->pAspectReferences != NULL)
+    cleanup_VkInputAttachmentAspectReference(pData->pAspectReferences);
   free((void *)pData->pAspectReferences);
 }
 #endif
@@ -9680,7 +9900,8 @@ extern inline void cleanup_VkRenderPassInputAttachmentAspectCreateInfoKHR(
 #if VK_KHR_get_surface_capabilities2
 void cleanup_VkPhysicalDeviceSurfaceInfo2KHR(VkPhysicalDeviceSurfaceInfo2KHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9688,7 +9909,8 @@ void cleanup_VkPhysicalDeviceSurfaceInfo2KHR(VkPhysicalDeviceSurfaceInfo2KHR con
 #if VK_KHR_get_surface_capabilities2
 void cleanup_VkSurfaceCapabilities2KHR(VkSurfaceCapabilities2KHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9696,7 +9918,8 @@ void cleanup_VkSurfaceCapabilities2KHR(VkSurfaceCapabilities2KHR const *pData) {
 #if VK_KHR_get_surface_capabilities2
 void cleanup_VkSurfaceFormat2KHR(VkSurfaceFormat2KHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9704,7 +9927,8 @@ void cleanup_VkSurfaceFormat2KHR(VkSurfaceFormat2KHR const *pData) {
 #if VK_HEADER_VERSION >= 76 && VK_KHR_get_display_properties2
 void cleanup_VkDisplayProperties2KHR(VkDisplayProperties2KHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9712,7 +9936,8 @@ void cleanup_VkDisplayProperties2KHR(VkDisplayProperties2KHR const *pData) {
 #if VK_HEADER_VERSION >= 76 && VK_KHR_get_display_properties2
 void cleanup_VkDisplayPlaneProperties2KHR(VkDisplayPlaneProperties2KHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9720,7 +9945,8 @@ void cleanup_VkDisplayPlaneProperties2KHR(VkDisplayPlaneProperties2KHR const *pD
 #if VK_HEADER_VERSION >= 76 && VK_KHR_get_display_properties2
 void cleanup_VkDisplayModeProperties2KHR(VkDisplayModeProperties2KHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9728,7 +9954,8 @@ void cleanup_VkDisplayModeProperties2KHR(VkDisplayModeProperties2KHR const *pDat
 #if VK_HEADER_VERSION >= 76 && VK_KHR_get_display_properties2
 void cleanup_VkDisplayPlaneInfo2KHR(VkDisplayPlaneInfo2KHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9736,7 +9963,8 @@ void cleanup_VkDisplayPlaneInfo2KHR(VkDisplayPlaneInfo2KHR const *pData) {
 #if VK_HEADER_VERSION >= 76 && VK_KHR_get_display_properties2
 void cleanup_VkDisplayPlaneCapabilities2KHR(VkDisplayPlaneCapabilities2KHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9745,7 +9973,8 @@ void cleanup_VkDisplayPlaneCapabilities2KHR(VkDisplayPlaneCapabilities2KHR const
 void cleanup_VkSharedPresentSurfaceCapabilitiesKHR(
     VkSharedPresentSurfaceCapabilitiesKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9754,7 +9983,8 @@ void cleanup_VkSharedPresentSurfaceCapabilitiesKHR(
 void cleanup_VkPhysicalDevice16BitStorageFeatures(
     VkPhysicalDevice16BitStorageFeatures const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9767,7 +9997,8 @@ extern inline void cleanup_VkPhysicalDevice16BitStorageFeaturesKHR(
 #if VK_VERSION_1_1
 void cleanup_VkPhysicalDeviceSubgroupProperties(VkPhysicalDeviceSubgroupProperties const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9776,7 +10007,8 @@ void cleanup_VkPhysicalDeviceSubgroupProperties(VkPhysicalDeviceSubgroupProperti
 void cleanup_VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures(
     VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9789,7 +10021,8 @@ extern inline void cleanup_VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKH
 #if VK_VERSION_1_1
 void cleanup_VkBufferMemoryRequirementsInfo2(VkBufferMemoryRequirementsInfo2 const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9802,7 +10035,8 @@ extern inline void cleanup_VkBufferMemoryRequirementsInfo2KHR(
 #if VK_VERSION_1_1
 void cleanup_VkImageMemoryRequirementsInfo2(VkImageMemoryRequirementsInfo2 const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9816,7 +10050,8 @@ extern inline void cleanup_VkImageMemoryRequirementsInfo2KHR(
 void cleanup_VkImageSparseMemoryRequirementsInfo2(
     VkImageSparseMemoryRequirementsInfo2 const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9829,7 +10064,8 @@ extern inline void cleanup_VkImageSparseMemoryRequirementsInfo2KHR(
 #if VK_VERSION_1_1
 void cleanup_VkMemoryRequirements2(VkMemoryRequirements2 const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9841,7 +10077,8 @@ extern inline void cleanup_VkMemoryRequirements2KHR(VkMemoryRequirements2KHR con
 #if VK_VERSION_1_1
 void cleanup_VkSparseImageMemoryRequirements2(VkSparseImageMemoryRequirements2 const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9855,7 +10092,8 @@ extern inline void cleanup_VkSparseImageMemoryRequirements2KHR(
 void cleanup_VkPhysicalDevicePointClippingProperties(
     VkPhysicalDevicePointClippingProperties const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9868,7 +10106,8 @@ extern inline void cleanup_VkPhysicalDevicePointClippingPropertiesKHR(
 #if VK_VERSION_1_1
 void cleanup_VkMemoryDedicatedRequirements(VkMemoryDedicatedRequirements const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9881,7 +10120,8 @@ extern inline void cleanup_VkMemoryDedicatedRequirementsKHR(
 #if VK_VERSION_1_1
 void cleanup_VkMemoryDedicatedAllocateInfo(VkMemoryDedicatedAllocateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9894,7 +10134,8 @@ extern inline void cleanup_VkMemoryDedicatedAllocateInfoKHR(
 #if VK_VERSION_1_1
 void cleanup_VkImageViewUsageCreateInfo(VkImageViewUsageCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9908,7 +10149,8 @@ extern inline void cleanup_VkImageViewUsageCreateInfoKHR(
 void cleanup_VkPipelineTessellationDomainOriginStateCreateInfo(
     VkPipelineTessellationDomainOriginStateCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9921,7 +10163,8 @@ extern inline void cleanup_VkPipelineTessellationDomainOriginStateCreateInfoKHR(
 #if VK_VERSION_1_1
 void cleanup_VkSamplerYcbcrConversionInfo(VkSamplerYcbcrConversionInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9934,7 +10177,8 @@ extern inline void cleanup_VkSamplerYcbcrConversionInfoKHR(
 #if VK_VERSION_1_1
 void cleanup_VkSamplerYcbcrConversionCreateInfo(VkSamplerYcbcrConversionCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9947,7 +10191,8 @@ extern inline void cleanup_VkSamplerYcbcrConversionCreateInfoKHR(
 #if VK_VERSION_1_1
 void cleanup_VkBindImagePlaneMemoryInfo(VkBindImagePlaneMemoryInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9960,7 +10205,8 @@ extern inline void cleanup_VkBindImagePlaneMemoryInfoKHR(
 #if VK_VERSION_1_1
 void cleanup_VkImagePlaneMemoryRequirementsInfo(VkImagePlaneMemoryRequirementsInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9974,7 +10220,8 @@ extern inline void cleanup_VkImagePlaneMemoryRequirementsInfoKHR(
 void cleanup_VkPhysicalDeviceSamplerYcbcrConversionFeatures(
     VkPhysicalDeviceSamplerYcbcrConversionFeatures const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -9988,7 +10235,8 @@ extern inline void cleanup_VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR(
 void cleanup_VkSamplerYcbcrConversionImageFormatProperties(
     VkSamplerYcbcrConversionImageFormatProperties const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10002,7 +10250,8 @@ extern inline void cleanup_VkSamplerYcbcrConversionImageFormatPropertiesKHR(
 void cleanup_VkTextureLODGatherFormatPropertiesAMD(
     VkTextureLODGatherFormatPropertiesAMD const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10010,7 +10259,8 @@ void cleanup_VkTextureLODGatherFormatPropertiesAMD(
 #if VK_HEADER_VERSION >= 80 && VK_EXT_conditional_rendering
 void cleanup_VkConditionalRenderingBeginInfoEXT(VkConditionalRenderingBeginInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10018,7 +10268,8 @@ void cleanup_VkConditionalRenderingBeginInfoEXT(VkConditionalRenderingBeginInfoE
 #if VK_VERSION_1_1
 void cleanup_VkProtectedSubmitInfo(VkProtectedSubmitInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10027,7 +10278,8 @@ void cleanup_VkProtectedSubmitInfo(VkProtectedSubmitInfo const *pData) {
 void cleanup_VkPhysicalDeviceProtectedMemoryFeatures(
     VkPhysicalDeviceProtectedMemoryFeatures const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10036,7 +10288,8 @@ void cleanup_VkPhysicalDeviceProtectedMemoryFeatures(
 void cleanup_VkPhysicalDeviceProtectedMemoryProperties(
     VkPhysicalDeviceProtectedMemoryProperties const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10044,7 +10297,8 @@ void cleanup_VkPhysicalDeviceProtectedMemoryProperties(
 #if VK_VERSION_1_1
 void cleanup_VkDeviceQueueInfo2(VkDeviceQueueInfo2 const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10053,7 +10307,8 @@ void cleanup_VkDeviceQueueInfo2(VkDeviceQueueInfo2 const *pData) {
 void cleanup_VkPipelineCoverageToColorStateCreateInfoNV(
     VkPipelineCoverageToColorStateCreateInfoNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10062,7 +10317,8 @@ void cleanup_VkPipelineCoverageToColorStateCreateInfoNV(
 void cleanup_VkPhysicalDeviceSamplerFilterMinmaxProperties(
     VkPhysicalDeviceSamplerFilterMinmaxProperties const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10079,11 +10335,13 @@ extern inline void cleanup_VkSampleLocationEXT(VkSampleLocationEXT const *pData)
 #if VK_EXT_sample_locations
 void cleanup_VkSampleLocationsInfoEXT(VkSampleLocationsInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pSampleLocations - sampleLocationsCount
-  cleanup_VkSampleLocationEXT(pData->pSampleLocations);
+  if (pData->pSampleLocations != NULL)
+    cleanup_VkSampleLocationEXT(pData->pSampleLocations);
   free((void *)pData->pSampleLocations);
 }
 #endif
@@ -10101,15 +10359,18 @@ extern inline void cleanup_VkSubpassSampleLocationsEXT(VkSubpassSampleLocationsE
 void cleanup_VkRenderPassSampleLocationsBeginInfoEXT(
     VkRenderPassSampleLocationsBeginInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pAttachmentInitialSampleLocations - attachmentInitialSampleLocationsCount
-  cleanup_VkAttachmentSampleLocationsEXT(pData->pAttachmentInitialSampleLocations);
+  if (pData->pAttachmentInitialSampleLocations != NULL)
+    cleanup_VkAttachmentSampleLocationsEXT(pData->pAttachmentInitialSampleLocations);
   free((void *)pData->pAttachmentInitialSampleLocations);
 
   // pPostSubpassSampleLocations - postSubpassSampleLocationsCount
-  cleanup_VkSubpassSampleLocationsEXT(pData->pPostSubpassSampleLocations);
+  if (pData->pPostSubpassSampleLocations != NULL)
+    cleanup_VkSubpassSampleLocationsEXT(pData->pPostSubpassSampleLocations);
   free((void *)pData->pPostSubpassSampleLocations);
 }
 #endif
@@ -10118,7 +10379,8 @@ void cleanup_VkRenderPassSampleLocationsBeginInfoEXT(
 void cleanup_VkPipelineSampleLocationsStateCreateInfoEXT(
     VkPipelineSampleLocationsStateCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10127,7 +10389,8 @@ void cleanup_VkPipelineSampleLocationsStateCreateInfoEXT(
 void cleanup_VkPhysicalDeviceSampleLocationsPropertiesEXT(
     VkPhysicalDeviceSampleLocationsPropertiesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10135,7 +10398,8 @@ void cleanup_VkPhysicalDeviceSampleLocationsPropertiesEXT(
 #if VK_EXT_sample_locations
 void cleanup_VkMultisamplePropertiesEXT(VkMultisamplePropertiesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10143,7 +10407,8 @@ void cleanup_VkMultisamplePropertiesEXT(VkMultisamplePropertiesEXT const *pData)
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
 void cleanup_VkSamplerReductionModeCreateInfo(VkSamplerReductionModeCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10157,7 +10422,8 @@ extern inline void cleanup_VkSamplerReductionModeCreateInfoEXT(
 void cleanup_VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT(
     VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10166,7 +10432,8 @@ void cleanup_VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT(
 void cleanup_VkPhysicalDeviceMultiDrawFeaturesEXT(
     VkPhysicalDeviceMultiDrawFeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10175,7 +10442,8 @@ void cleanup_VkPhysicalDeviceMultiDrawFeaturesEXT(
 void cleanup_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT(
     VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10184,7 +10452,8 @@ void cleanup_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT(
 void cleanup_VkPipelineColorBlendAdvancedStateCreateInfoEXT(
     VkPipelineColorBlendAdvancedStateCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10193,7 +10462,8 @@ void cleanup_VkPipelineColorBlendAdvancedStateCreateInfoEXT(
 void cleanup_VkPhysicalDeviceInlineUniformBlockFeaturesEXT(
     VkPhysicalDeviceInlineUniformBlockFeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10202,7 +10472,8 @@ void cleanup_VkPhysicalDeviceInlineUniformBlockFeaturesEXT(
 void cleanup_VkPhysicalDeviceInlineUniformBlockPropertiesEXT(
     VkPhysicalDeviceInlineUniformBlockPropertiesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10211,7 +10482,8 @@ void cleanup_VkPhysicalDeviceInlineUniformBlockPropertiesEXT(
 void cleanup_VkWriteDescriptorSetInlineUniformBlockEXT(
     VkWriteDescriptorSetInlineUniformBlockEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pData - dataSize
@@ -10223,7 +10495,8 @@ void cleanup_VkWriteDescriptorSetInlineUniformBlockEXT(
 void cleanup_VkDescriptorPoolInlineUniformBlockCreateInfoEXT(
     VkDescriptorPoolInlineUniformBlockCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10232,7 +10505,8 @@ void cleanup_VkDescriptorPoolInlineUniformBlockCreateInfoEXT(
 void cleanup_VkPipelineCoverageModulationStateCreateInfoNV(
     VkPipelineCoverageModulationStateCreateInfoNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pCoverageModulationTable - coverageModulationTableCount
@@ -10243,7 +10517,8 @@ void cleanup_VkPipelineCoverageModulationStateCreateInfoNV(
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
 void cleanup_VkImageFormatListCreateInfo(VkImageFormatListCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pViewFormats - viewFormatCount
@@ -10259,7 +10534,8 @@ extern inline void cleanup_VkImageFormatListCreateInfoKHR(
 #if VK_EXT_validation_cache
 void cleanup_VkValidationCacheCreateInfoEXT(VkValidationCacheCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pInitialData - initialDataSize
@@ -10271,7 +10547,8 @@ void cleanup_VkValidationCacheCreateInfoEXT(VkValidationCacheCreateInfoEXT const
 void cleanup_VkShaderModuleValidationCacheCreateInfoEXT(
     VkShaderModuleValidationCacheCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10280,7 +10557,8 @@ void cleanup_VkShaderModuleValidationCacheCreateInfoEXT(
 void cleanup_VkPhysicalDeviceMaintenance3Properties(
     VkPhysicalDeviceMaintenance3Properties const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10293,7 +10571,8 @@ extern inline void cleanup_VkPhysicalDeviceMaintenance3PropertiesKHR(
 #if VK_VERSION_1_1
 void cleanup_VkDescriptorSetLayoutSupport(VkDescriptorSetLayoutSupport const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10307,7 +10586,8 @@ extern inline void cleanup_VkDescriptorSetLayoutSupportKHR(
 void cleanup_VkPhysicalDeviceShaderDrawParametersFeatures(
     VkPhysicalDeviceShaderDrawParametersFeatures const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10321,7 +10601,8 @@ extern inline void cleanup_VkPhysicalDeviceShaderDrawParameterFeatures(
 void cleanup_VkPhysicalDeviceShaderFloat16Int8Features(
     VkPhysicalDeviceShaderFloat16Int8Features const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10340,7 +10621,8 @@ extern inline void cleanup_VkPhysicalDeviceFloat16Int8FeaturesKHR(
 void cleanup_VkPhysicalDeviceFloatControlsProperties(
     VkPhysicalDeviceFloatControlsProperties const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10354,7 +10636,8 @@ extern inline void cleanup_VkPhysicalDeviceFloatControlsPropertiesKHR(
 void cleanup_VkPhysicalDeviceHostQueryResetFeatures(
     VkPhysicalDeviceHostQueryResetFeatures const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10371,7 +10654,8 @@ extern inline void cleanup_VkNativeBufferUsage2ANDROID(VkNativeBufferUsage2ANDRO
 #if VK_ANDROID_native_buffer
 void cleanup_VkNativeBufferANDROID(VkNativeBufferANDROID const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // handle
@@ -10382,7 +10666,8 @@ void cleanup_VkNativeBufferANDROID(VkNativeBufferANDROID const *pData) {
 #if VK_HEADER_VERSION >= 117 && VK_ANDROID_native_buffer
 void cleanup_VkSwapchainImageCreateInfoANDROID(VkSwapchainImageCreateInfoANDROID const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10391,7 +10676,8 @@ void cleanup_VkSwapchainImageCreateInfoANDROID(VkSwapchainImageCreateInfoANDROID
 void cleanup_VkPhysicalDevicePresentationPropertiesANDROID(
     VkPhysicalDevicePresentationPropertiesANDROID const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10408,7 +10694,8 @@ extern inline void cleanup_VkShaderStatisticsInfoAMD(VkShaderStatisticsInfoAMD c
 void cleanup_VkDeviceQueueGlobalPriorityCreateInfoEXT(
     VkDeviceQueueGlobalPriorityCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10417,7 +10704,8 @@ void cleanup_VkDeviceQueueGlobalPriorityCreateInfoEXT(
 void cleanup_VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT(
     VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10426,7 +10714,8 @@ void cleanup_VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT(
 void cleanup_VkQueueFamilyGlobalPriorityPropertiesEXT(
     VkQueueFamilyGlobalPriorityPropertiesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10434,7 +10723,8 @@ void cleanup_VkQueueFamilyGlobalPriorityPropertiesEXT(
 #if VK_EXT_debug_utils
 void cleanup_VkDebugUtilsObjectNameInfoEXT(VkDebugUtilsObjectNameInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pObjectName - null-terminated
@@ -10445,7 +10735,8 @@ void cleanup_VkDebugUtilsObjectNameInfoEXT(VkDebugUtilsObjectNameInfoEXT const *
 #if VK_EXT_debug_utils
 void cleanup_VkDebugUtilsObjectTagInfoEXT(VkDebugUtilsObjectTagInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pTag - tagSize
@@ -10456,7 +10747,8 @@ void cleanup_VkDebugUtilsObjectTagInfoEXT(VkDebugUtilsObjectTagInfoEXT const *pD
 #if VK_EXT_debug_utils
 void cleanup_VkDebugUtilsLabelEXT(VkDebugUtilsLabelEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pLabelName - null-terminated
@@ -10467,7 +10759,8 @@ void cleanup_VkDebugUtilsLabelEXT(VkDebugUtilsLabelEXT const *pData) {
 #if VK_EXT_debug_utils
 void cleanup_VkDebugUtilsMessengerCreateInfoEXT(VkDebugUtilsMessengerCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pUserData
@@ -10479,7 +10772,8 @@ void cleanup_VkDebugUtilsMessengerCreateInfoEXT(VkDebugUtilsMessengerCreateInfoE
 void cleanup_VkDebugUtilsMessengerCallbackDataEXT(
     VkDebugUtilsMessengerCallbackDataEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pMessageIdName - null-terminated
@@ -10489,15 +10783,18 @@ void cleanup_VkDebugUtilsMessengerCallbackDataEXT(
   free((void *)pData->pMessage);
 
   // pQueueLabels - queueLabelCount
-  cleanup_VkDebugUtilsLabelEXT(pData->pQueueLabels);
+  if (pData->pQueueLabels != NULL)
+    cleanup_VkDebugUtilsLabelEXT(pData->pQueueLabels);
   free((void *)pData->pQueueLabels);
 
   // pCmdBufLabels - cmdBufLabelCount
-  cleanup_VkDebugUtilsLabelEXT(pData->pCmdBufLabels);
+  if (pData->pCmdBufLabels != NULL)
+    cleanup_VkDebugUtilsLabelEXT(pData->pCmdBufLabels);
   free((void *)pData->pCmdBufLabels);
 
   // pObjects - objectCount
-  cleanup_VkDebugUtilsObjectNameInfoEXT(pData->pObjects);
+  if (pData->pObjects != NULL)
+    cleanup_VkDebugUtilsObjectNameInfoEXT(pData->pObjects);
   free((void *)pData->pObjects);
 }
 #endif
@@ -10506,7 +10803,8 @@ void cleanup_VkDebugUtilsMessengerCallbackDataEXT(
 void cleanup_VkPhysicalDeviceDeviceMemoryReportFeaturesEXT(
     VkPhysicalDeviceDeviceMemoryReportFeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10515,7 +10813,8 @@ void cleanup_VkPhysicalDeviceDeviceMemoryReportFeaturesEXT(
 void cleanup_VkDeviceDeviceMemoryReportCreateInfoEXT(
     VkDeviceDeviceMemoryReportCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pUserData
@@ -10526,7 +10825,8 @@ void cleanup_VkDeviceDeviceMemoryReportCreateInfoEXT(
 #if VK_HEADER_VERSION >= 156 && VK_EXT_device_memory_report
 void cleanup_VkDeviceMemoryReportCallbackDataEXT(VkDeviceMemoryReportCallbackDataEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10534,7 +10834,8 @@ void cleanup_VkDeviceMemoryReportCallbackDataEXT(VkDeviceMemoryReportCallbackDat
 #if VK_EXT_external_memory_host
 void cleanup_VkImportMemoryHostPointerInfoEXT(VkImportMemoryHostPointerInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pHostPointer
@@ -10545,7 +10846,8 @@ void cleanup_VkImportMemoryHostPointerInfoEXT(VkImportMemoryHostPointerInfoEXT c
 #if VK_EXT_external_memory_host
 void cleanup_VkMemoryHostPointerPropertiesEXT(VkMemoryHostPointerPropertiesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10554,7 +10856,8 @@ void cleanup_VkMemoryHostPointerPropertiesEXT(VkMemoryHostPointerPropertiesEXT c
 void cleanup_VkPhysicalDeviceExternalMemoryHostPropertiesEXT(
     VkPhysicalDeviceExternalMemoryHostPropertiesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10563,7 +10866,8 @@ void cleanup_VkPhysicalDeviceExternalMemoryHostPropertiesEXT(
 void cleanup_VkPhysicalDeviceConservativeRasterizationPropertiesEXT(
     VkPhysicalDeviceConservativeRasterizationPropertiesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10571,7 +10875,8 @@ void cleanup_VkPhysicalDeviceConservativeRasterizationPropertiesEXT(
 #if VK_HEADER_VERSION >= 88 && VK_EXT_calibrated_timestamps
 void cleanup_VkCalibratedTimestampInfoEXT(VkCalibratedTimestampInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10580,7 +10885,8 @@ void cleanup_VkCalibratedTimestampInfoEXT(VkCalibratedTimestampInfoEXT const *pD
 void cleanup_VkPhysicalDeviceShaderCorePropertiesAMD(
     VkPhysicalDeviceShaderCorePropertiesAMD const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10589,7 +10895,8 @@ void cleanup_VkPhysicalDeviceShaderCorePropertiesAMD(
 void cleanup_VkPhysicalDeviceShaderCoreProperties2AMD(
     VkPhysicalDeviceShaderCoreProperties2AMD const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10598,7 +10905,8 @@ void cleanup_VkPhysicalDeviceShaderCoreProperties2AMD(
 void cleanup_VkPipelineRasterizationConservativeStateCreateInfoEXT(
     VkPipelineRasterizationConservativeStateCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10607,7 +10915,8 @@ void cleanup_VkPipelineRasterizationConservativeStateCreateInfoEXT(
 void cleanup_VkPhysicalDeviceDescriptorIndexingFeatures(
     VkPhysicalDeviceDescriptorIndexingFeatures const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10621,7 +10930,8 @@ extern inline void cleanup_VkPhysicalDeviceDescriptorIndexingFeaturesEXT(
 void cleanup_VkPhysicalDeviceDescriptorIndexingProperties(
     VkPhysicalDeviceDescriptorIndexingProperties const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10635,7 +10945,8 @@ extern inline void cleanup_VkPhysicalDeviceDescriptorIndexingPropertiesEXT(
 void cleanup_VkDescriptorSetLayoutBindingFlagsCreateInfo(
     VkDescriptorSetLayoutBindingFlagsCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pBindingFlags - bindingCount
@@ -10652,7 +10963,8 @@ extern inline void cleanup_VkDescriptorSetLayoutBindingFlagsCreateInfoEXT(
 void cleanup_VkDescriptorSetVariableDescriptorCountAllocateInfo(
     VkDescriptorSetVariableDescriptorCountAllocateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pDescriptorCounts - descriptorSetCount
@@ -10669,7 +10981,8 @@ extern inline void cleanup_VkDescriptorSetVariableDescriptorCountAllocateInfoEXT
 void cleanup_VkDescriptorSetVariableDescriptorCountLayoutSupport(
     VkDescriptorSetVariableDescriptorCountLayoutSupport const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10682,7 +10995,8 @@ extern inline void cleanup_VkDescriptorSetVariableDescriptorCountLayoutSupportEX
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
 void cleanup_VkAttachmentDescription2(VkAttachmentDescription2 const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10694,7 +11008,8 @@ extern inline void cleanup_VkAttachmentDescription2KHR(VkAttachmentDescription2K
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
 void cleanup_VkAttachmentReference2(VkAttachmentReference2 const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10706,19 +11021,23 @@ extern inline void cleanup_VkAttachmentReference2KHR(VkAttachmentReference2KHR c
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
 void cleanup_VkSubpassDescription2(VkSubpassDescription2 const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pInputAttachments - inputAttachmentCount
-  cleanup_VkAttachmentReference2(pData->pInputAttachments);
+  if (pData->pInputAttachments != NULL)
+    cleanup_VkAttachmentReference2(pData->pInputAttachments);
   free((void *)pData->pInputAttachments);
 
   // pColorAttachments - colorAttachmentCount
-  cleanup_VkAttachmentReference2(pData->pColorAttachments);
+  if (pData->pColorAttachments != NULL)
+    cleanup_VkAttachmentReference2(pData->pColorAttachments);
   free((void *)pData->pColorAttachments);
 
   // pResolveAttachments - colorAttachmentCount
-  cleanup_VkAttachmentReference2(pData->pResolveAttachments);
+  if (pData->pResolveAttachments != NULL)
+    cleanup_VkAttachmentReference2(pData->pResolveAttachments);
   free((void *)pData->pResolveAttachments);
 
   // pDepthStencilAttachment
@@ -10737,7 +11056,8 @@ extern inline void cleanup_VkSubpassDescription2KHR(VkSubpassDescription2KHR con
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
 void cleanup_VkSubpassDependency2(VkSubpassDependency2 const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10749,19 +11069,23 @@ extern inline void cleanup_VkSubpassDependency2KHR(VkSubpassDependency2KHR const
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
 void cleanup_VkRenderPassCreateInfo2(VkRenderPassCreateInfo2 const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pAttachments - attachmentCount
-  cleanup_VkAttachmentDescription2(pData->pAttachments);
+  if (pData->pAttachments != NULL)
+    cleanup_VkAttachmentDescription2(pData->pAttachments);
   free((void *)pData->pAttachments);
 
   // pSubpasses - subpassCount
-  cleanup_VkSubpassDescription2(pData->pSubpasses);
+  if (pData->pSubpasses != NULL)
+    cleanup_VkSubpassDescription2(pData->pSubpasses);
   free((void *)pData->pSubpasses);
 
   // pDependencies - dependencyCount
-  cleanup_VkSubpassDependency2(pData->pDependencies);
+  if (pData->pDependencies != NULL)
+    cleanup_VkSubpassDependency2(pData->pDependencies);
   free((void *)pData->pDependencies);
 
   // pCorrelatedViewMasks - correlatedViewMaskCount
@@ -10776,7 +11100,8 @@ extern inline void cleanup_VkRenderPassCreateInfo2KHR(VkRenderPassCreateInfo2KHR
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
 void cleanup_VkSubpassBeginInfo(VkSubpassBeginInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10788,7 +11113,8 @@ extern inline void cleanup_VkSubpassBeginInfoKHR(VkSubpassBeginInfoKHR const *pD
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
 void cleanup_VkSubpassEndInfo(VkSubpassEndInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10801,7 +11127,8 @@ extern inline void cleanup_VkSubpassEndInfoKHR(VkSubpassEndInfoKHR const *pData)
 void cleanup_VkPhysicalDeviceTimelineSemaphoreFeatures(
     VkPhysicalDeviceTimelineSemaphoreFeatures const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10815,7 +11142,8 @@ extern inline void cleanup_VkPhysicalDeviceTimelineSemaphoreFeaturesKHR(
 void cleanup_VkPhysicalDeviceTimelineSemaphoreProperties(
     VkPhysicalDeviceTimelineSemaphoreProperties const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10828,7 +11156,8 @@ extern inline void cleanup_VkPhysicalDeviceTimelineSemaphorePropertiesKHR(
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
 void cleanup_VkSemaphoreTypeCreateInfo(VkSemaphoreTypeCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10840,7 +11169,8 @@ extern inline void cleanup_VkSemaphoreTypeCreateInfoKHR(VkSemaphoreTypeCreateInf
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
 void cleanup_VkTimelineSemaphoreSubmitInfo(VkTimelineSemaphoreSubmitInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pWaitSemaphoreValues - waitSemaphoreValueCount
@@ -10859,7 +11189,8 @@ extern inline void cleanup_VkTimelineSemaphoreSubmitInfoKHR(
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
 void cleanup_VkSemaphoreWaitInfo(VkSemaphoreWaitInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pSemaphores - semaphoreCount
@@ -10877,7 +11208,8 @@ extern inline void cleanup_VkSemaphoreWaitInfoKHR(VkSemaphoreWaitInfoKHR const *
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
 void cleanup_VkSemaphoreSignalInfo(VkSemaphoreSignalInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10895,11 +11227,13 @@ extern inline void cleanup_VkVertexInputBindingDivisorDescriptionEXT(
 void cleanup_VkPipelineVertexInputDivisorStateCreateInfoEXT(
     VkPipelineVertexInputDivisorStateCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pVertexBindingDivisors - vertexBindingDivisorCount
-  cleanup_VkVertexInputBindingDivisorDescriptionEXT(pData->pVertexBindingDivisors);
+  if (pData->pVertexBindingDivisors != NULL)
+    cleanup_VkVertexInputBindingDivisorDescriptionEXT(pData->pVertexBindingDivisors);
   free((void *)pData->pVertexBindingDivisors);
 }
 #endif
@@ -10908,7 +11242,8 @@ void cleanup_VkPipelineVertexInputDivisorStateCreateInfoEXT(
 void cleanup_VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT(
     VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10917,7 +11252,8 @@ void cleanup_VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT(
 void cleanup_VkPhysicalDevicePCIBusInfoPropertiesEXT(
     VkPhysicalDevicePCIBusInfoPropertiesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10926,7 +11262,8 @@ void cleanup_VkPhysicalDevicePCIBusInfoPropertiesEXT(
 void cleanup_VkImportAndroidHardwareBufferInfoANDROID(
     VkImportAndroidHardwareBufferInfoANDROID const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // buffer
@@ -10937,7 +11274,8 @@ void cleanup_VkImportAndroidHardwareBufferInfoANDROID(
 #if VK_ANDROID_external_memory_android_hardware_buffer
 void cleanup_VkAndroidHardwareBufferUsageANDROID(VkAndroidHardwareBufferUsageANDROID const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10946,7 +11284,8 @@ void cleanup_VkAndroidHardwareBufferUsageANDROID(VkAndroidHardwareBufferUsageAND
 void cleanup_VkAndroidHardwareBufferPropertiesANDROID(
     VkAndroidHardwareBufferPropertiesANDROID const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10955,7 +11294,8 @@ void cleanup_VkAndroidHardwareBufferPropertiesANDROID(
 void cleanup_VkMemoryGetAndroidHardwareBufferInfoANDROID(
     VkMemoryGetAndroidHardwareBufferInfoANDROID const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10964,7 +11304,8 @@ void cleanup_VkMemoryGetAndroidHardwareBufferInfoANDROID(
 void cleanup_VkAndroidHardwareBufferFormatPropertiesANDROID(
     VkAndroidHardwareBufferFormatPropertiesANDROID const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10973,7 +11314,8 @@ void cleanup_VkAndroidHardwareBufferFormatPropertiesANDROID(
 void cleanup_VkCommandBufferInheritanceConditionalRenderingInfoEXT(
     VkCommandBufferInheritanceConditionalRenderingInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10981,7 +11323,8 @@ void cleanup_VkCommandBufferInheritanceConditionalRenderingInfoEXT(
 #if VK_ANDROID_external_memory_android_hardware_buffer
 void cleanup_VkExternalFormatANDROID(VkExternalFormatANDROID const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -10989,7 +11332,8 @@ void cleanup_VkExternalFormatANDROID(VkExternalFormatANDROID const *pData) {
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
 void cleanup_VkPhysicalDevice8BitStorageFeatures(VkPhysicalDevice8BitStorageFeatures const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11003,7 +11347,8 @@ extern inline void cleanup_VkPhysicalDevice8BitStorageFeaturesKHR(
 void cleanup_VkPhysicalDeviceConditionalRenderingFeaturesEXT(
     VkPhysicalDeviceConditionalRenderingFeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11012,7 +11357,8 @@ void cleanup_VkPhysicalDeviceConditionalRenderingFeaturesEXT(
 void cleanup_VkPhysicalDeviceVulkanMemoryModelFeatures(
     VkPhysicalDeviceVulkanMemoryModelFeatures const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11026,7 +11372,8 @@ extern inline void cleanup_VkPhysicalDeviceVulkanMemoryModelFeaturesKHR(
 void cleanup_VkPhysicalDeviceShaderAtomicInt64Features(
     VkPhysicalDeviceShaderAtomicInt64Features const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11040,7 +11387,8 @@ extern inline void cleanup_VkPhysicalDeviceShaderAtomicInt64FeaturesKHR(
 void cleanup_VkPhysicalDeviceShaderAtomicFloatFeaturesEXT(
     VkPhysicalDeviceShaderAtomicFloatFeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11049,7 +11397,8 @@ void cleanup_VkPhysicalDeviceShaderAtomicFloatFeaturesEXT(
 void cleanup_VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT(
     VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11058,7 +11407,8 @@ void cleanup_VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT(
 void cleanup_VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT(
     VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11066,7 +11416,8 @@ void cleanup_VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT(
 #if VK_HEADER_VERSION >= 82 && VK_NV_device_diagnostic_checkpoints
 void cleanup_VkQueueFamilyCheckpointPropertiesNV(VkQueueFamilyCheckpointPropertiesNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11074,7 +11425,8 @@ void cleanup_VkQueueFamilyCheckpointPropertiesNV(VkQueueFamilyCheckpointProperti
 #if VK_HEADER_VERSION >= 82 && VK_NV_device_diagnostic_checkpoints
 void cleanup_VkCheckpointDataNV(VkCheckpointDataNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pCheckpointMarker
@@ -11086,7 +11438,8 @@ void cleanup_VkCheckpointDataNV(VkCheckpointDataNV const *pData) {
 void cleanup_VkPhysicalDeviceDepthStencilResolveProperties(
     VkPhysicalDeviceDepthStencilResolveProperties const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11100,7 +11453,8 @@ extern inline void cleanup_VkPhysicalDeviceDepthStencilResolvePropertiesKHR(
 void cleanup_VkSubpassDescriptionDepthStencilResolve(
     VkSubpassDescriptionDepthStencilResolve const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pDepthStencilResolveAttachment
@@ -11117,7 +11471,8 @@ extern inline void cleanup_VkSubpassDescriptionDepthStencilResolveKHR(
 #if VK_HEADER_VERSION >= 84 && VK_EXT_astc_decode_mode
 void cleanup_VkImageViewASTCDecodeModeEXT(VkImageViewASTCDecodeModeEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11126,7 +11481,8 @@ void cleanup_VkImageViewASTCDecodeModeEXT(VkImageViewASTCDecodeModeEXT const *pD
 void cleanup_VkPhysicalDeviceASTCDecodeFeaturesEXT(
     VkPhysicalDeviceASTCDecodeFeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11135,7 +11491,8 @@ void cleanup_VkPhysicalDeviceASTCDecodeFeaturesEXT(
 void cleanup_VkPhysicalDeviceTransformFeedbackFeaturesEXT(
     VkPhysicalDeviceTransformFeedbackFeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11144,7 +11501,8 @@ void cleanup_VkPhysicalDeviceTransformFeedbackFeaturesEXT(
 void cleanup_VkPhysicalDeviceTransformFeedbackPropertiesEXT(
     VkPhysicalDeviceTransformFeedbackPropertiesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11153,7 +11511,8 @@ void cleanup_VkPhysicalDeviceTransformFeedbackPropertiesEXT(
 void cleanup_VkPipelineRasterizationStateStreamCreateInfoEXT(
     VkPipelineRasterizationStateStreamCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11162,7 +11521,8 @@ void cleanup_VkPipelineRasterizationStateStreamCreateInfoEXT(
 void cleanup_VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV(
     VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11171,7 +11531,8 @@ void cleanup_VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV(
 void cleanup_VkPipelineRepresentativeFragmentTestStateCreateInfoNV(
     VkPipelineRepresentativeFragmentTestStateCreateInfoNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11180,7 +11541,8 @@ void cleanup_VkPipelineRepresentativeFragmentTestStateCreateInfoNV(
 void cleanup_VkPhysicalDeviceExclusiveScissorFeaturesNV(
     VkPhysicalDeviceExclusiveScissorFeaturesNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11189,11 +11551,13 @@ void cleanup_VkPhysicalDeviceExclusiveScissorFeaturesNV(
 void cleanup_VkPipelineViewportExclusiveScissorStateCreateInfoNV(
     VkPipelineViewportExclusiveScissorStateCreateInfoNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pExclusiveScissors - exclusiveScissorCount
-  cleanup_VkRect2D(pData->pExclusiveScissors);
+  if (pData->pExclusiveScissors != NULL)
+    cleanup_VkRect2D(pData->pExclusiveScissors);
   free((void *)pData->pExclusiveScissors);
 }
 #endif
@@ -11202,7 +11566,8 @@ void cleanup_VkPipelineViewportExclusiveScissorStateCreateInfoNV(
 void cleanup_VkPhysicalDeviceCornerSampledImageFeaturesNV(
     VkPhysicalDeviceCornerSampledImageFeaturesNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11211,7 +11576,8 @@ void cleanup_VkPhysicalDeviceCornerSampledImageFeaturesNV(
 void cleanup_VkPhysicalDeviceComputeShaderDerivativesFeaturesNV(
     VkPhysicalDeviceComputeShaderDerivativesFeaturesNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11220,7 +11586,8 @@ void cleanup_VkPhysicalDeviceComputeShaderDerivativesFeaturesNV(
 void cleanup_VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV(
     VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11229,7 +11596,8 @@ void cleanup_VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV(
 void cleanup_VkPhysicalDeviceShaderImageFootprintFeaturesNV(
     VkPhysicalDeviceShaderImageFootprintFeaturesNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11238,7 +11606,8 @@ void cleanup_VkPhysicalDeviceShaderImageFootprintFeaturesNV(
 void cleanup_VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV(
     VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11254,11 +11623,13 @@ void cleanup_VkShadingRatePaletteNV(VkShadingRatePaletteNV const *pData) {
 void cleanup_VkPipelineViewportShadingRateImageStateCreateInfoNV(
     VkPipelineViewportShadingRateImageStateCreateInfoNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pShadingRatePalettes - viewportCount
-  cleanup_VkShadingRatePaletteNV(pData->pShadingRatePalettes);
+  if (pData->pShadingRatePalettes != NULL)
+    cleanup_VkShadingRatePaletteNV(pData->pShadingRatePalettes);
   free((void *)pData->pShadingRatePalettes);
 }
 #endif
@@ -11267,7 +11638,8 @@ void cleanup_VkPipelineViewportShadingRateImageStateCreateInfoNV(
 void cleanup_VkPhysicalDeviceShadingRateImageFeaturesNV(
     VkPhysicalDeviceShadingRateImageFeaturesNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11276,7 +11648,8 @@ void cleanup_VkPhysicalDeviceShadingRateImageFeaturesNV(
 void cleanup_VkPhysicalDeviceShadingRateImagePropertiesNV(
     VkPhysicalDeviceShadingRateImagePropertiesNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11285,7 +11658,8 @@ void cleanup_VkPhysicalDeviceShadingRateImagePropertiesNV(
 void cleanup_VkPhysicalDeviceInvocationMaskFeaturesHUAWEI(
     VkPhysicalDeviceInvocationMaskFeaturesHUAWEI const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11297,7 +11671,8 @@ extern inline void cleanup_VkCoarseSampleLocationNV(VkCoarseSampleLocationNV con
 #if VK_HEADER_VERSION >= 85 && VK_NV_shading_rate_image
 void cleanup_VkCoarseSampleOrderCustomNV(VkCoarseSampleOrderCustomNV const *pData) {
   // pSampleLocations - sampleLocationCount
-  cleanup_VkCoarseSampleLocationNV(pData->pSampleLocations);
+  if (pData->pSampleLocations != NULL)
+    cleanup_VkCoarseSampleLocationNV(pData->pSampleLocations);
   free((void *)pData->pSampleLocations);
 }
 #endif
@@ -11306,11 +11681,13 @@ void cleanup_VkCoarseSampleOrderCustomNV(VkCoarseSampleOrderCustomNV const *pDat
 void cleanup_VkPipelineViewportCoarseSampleOrderStateCreateInfoNV(
     VkPipelineViewportCoarseSampleOrderStateCreateInfoNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pCustomSampleOrders - customSampleOrderCount
-  cleanup_VkCoarseSampleOrderCustomNV(pData->pCustomSampleOrders);
+  if (pData->pCustomSampleOrders != NULL)
+    cleanup_VkCoarseSampleOrderCustomNV(pData->pCustomSampleOrders);
   free((void *)pData->pCustomSampleOrders);
 }
 #endif
@@ -11319,7 +11696,8 @@ void cleanup_VkPipelineViewportCoarseSampleOrderStateCreateInfoNV(
 void cleanup_VkPhysicalDeviceMeshShaderFeaturesNV(
     VkPhysicalDeviceMeshShaderFeaturesNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11328,7 +11706,8 @@ void cleanup_VkPhysicalDeviceMeshShaderFeaturesNV(
 void cleanup_VkPhysicalDeviceMeshShaderPropertiesNV(
     VkPhysicalDeviceMeshShaderPropertiesNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11341,7 +11720,8 @@ extern inline void cleanup_VkDrawMeshTasksIndirectCommandNV(
 #if VK_HEADER_VERSION >= 91 && VK_NV_ray_tracing
 void cleanup_VkRayTracingShaderGroupCreateInfoNV(VkRayTracingShaderGroupCreateInfoNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11350,7 +11730,8 @@ void cleanup_VkRayTracingShaderGroupCreateInfoNV(VkRayTracingShaderGroupCreateIn
 void cleanup_VkRayTracingShaderGroupCreateInfoKHR(
     VkRayTracingShaderGroupCreateInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pShaderGroupCaptureReplayHandle
@@ -11361,15 +11742,18 @@ void cleanup_VkRayTracingShaderGroupCreateInfoKHR(
 #if VK_HEADER_VERSION >= 91 && VK_NV_ray_tracing
 void cleanup_VkRayTracingPipelineCreateInfoNV(VkRayTracingPipelineCreateInfoNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pStages - stageCount
-  cleanup_VkPipelineShaderStageCreateInfo(pData->pStages);
+  if (pData->pStages != NULL)
+    cleanup_VkPipelineShaderStageCreateInfo(pData->pStages);
   free((void *)pData->pStages);
 
   // pGroups - groupCount
-  cleanup_VkRayTracingShaderGroupCreateInfoNV(pData->pGroups);
+  if (pData->pGroups != NULL)
+    cleanup_VkRayTracingShaderGroupCreateInfoNV(pData->pGroups);
   free((void *)pData->pGroups);
 }
 #endif
@@ -11377,15 +11761,18 @@ void cleanup_VkRayTracingPipelineCreateInfoNV(VkRayTracingPipelineCreateInfoNV c
 #if VK_HEADER_VERSION >= 135 && VK_KHR_ray_tracing_pipeline && VK_KHR_ray_tracing
 void cleanup_VkRayTracingPipelineCreateInfoKHR(VkRayTracingPipelineCreateInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pStages - stageCount
-  cleanup_VkPipelineShaderStageCreateInfo(pData->pStages);
+  if (pData->pStages != NULL)
+    cleanup_VkPipelineShaderStageCreateInfo(pData->pStages);
   free((void *)pData->pStages);
 
   // pGroups - groupCount
-  cleanup_VkRayTracingShaderGroupCreateInfoKHR(pData->pGroups);
+  if (pData->pGroups != NULL)
+    cleanup_VkRayTracingShaderGroupCreateInfoKHR(pData->pGroups);
   free((void *)pData->pGroups);
 
   // pLibraryInfo
@@ -11405,7 +11792,8 @@ void cleanup_VkRayTracingPipelineCreateInfoKHR(VkRayTracingPipelineCreateInfoKHR
 #if VK_HEADER_VERSION >= 91 && VK_NV_ray_tracing
 void cleanup_VkGeometryTrianglesNV(VkGeometryTrianglesNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11413,7 +11801,8 @@ void cleanup_VkGeometryTrianglesNV(VkGeometryTrianglesNV const *pData) {
 #if VK_HEADER_VERSION >= 91 && VK_NV_ray_tracing
 void cleanup_VkGeometryAABBNV(VkGeometryAABBNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11425,7 +11814,8 @@ extern inline void cleanup_VkGeometryDataNV(VkGeometryDataNV const *pData);
 #if VK_HEADER_VERSION >= 91 && VK_NV_ray_tracing
 void cleanup_VkGeometryNV(VkGeometryNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11433,11 +11823,13 @@ void cleanup_VkGeometryNV(VkGeometryNV const *pData) {
 #if VK_HEADER_VERSION >= 91 && VK_NV_ray_tracing
 void cleanup_VkAccelerationStructureInfoNV(VkAccelerationStructureInfoNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pGeometries - geometryCount
-  cleanup_VkGeometryNV(pData->pGeometries);
+  if (pData->pGeometries != NULL)
+    cleanup_VkGeometryNV(pData->pGeometries);
   free((void *)pData->pGeometries);
 }
 #endif
@@ -11445,7 +11837,8 @@ void cleanup_VkAccelerationStructureInfoNV(VkAccelerationStructureInfoNV const *
 #if VK_HEADER_VERSION >= 91 && VK_NV_ray_tracing
 void cleanup_VkAccelerationStructureCreateInfoNV(VkAccelerationStructureCreateInfoNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11454,7 +11847,8 @@ void cleanup_VkAccelerationStructureCreateInfoNV(VkAccelerationStructureCreateIn
 void cleanup_VkBindAccelerationStructureMemoryInfoNV(
     VkBindAccelerationStructureMemoryInfoNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pDeviceIndices - deviceIndexCount
@@ -11466,7 +11860,8 @@ void cleanup_VkBindAccelerationStructureMemoryInfoNV(
 void cleanup_VkWriteDescriptorSetAccelerationStructureKHR(
     VkWriteDescriptorSetAccelerationStructureKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pAccelerationStructures - accelerationStructureCount
@@ -11478,7 +11873,8 @@ void cleanup_VkWriteDescriptorSetAccelerationStructureKHR(
 void cleanup_VkWriteDescriptorSetAccelerationStructureNV(
     VkWriteDescriptorSetAccelerationStructureNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pAccelerationStructures - accelerationStructureCount
@@ -11490,7 +11886,8 @@ void cleanup_VkWriteDescriptorSetAccelerationStructureNV(
 void cleanup_VkAccelerationStructureMemoryRequirementsInfoNV(
     VkAccelerationStructureMemoryRequirementsInfoNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11499,7 +11896,8 @@ void cleanup_VkAccelerationStructureMemoryRequirementsInfoNV(
 void cleanup_VkPhysicalDeviceAccelerationStructureFeaturesKHR(
     VkPhysicalDeviceAccelerationStructureFeaturesKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11508,7 +11906,8 @@ void cleanup_VkPhysicalDeviceAccelerationStructureFeaturesKHR(
 void cleanup_VkPhysicalDeviceRayTracingPipelineFeaturesKHR(
     VkPhysicalDeviceRayTracingPipelineFeaturesKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11516,7 +11915,8 @@ void cleanup_VkPhysicalDeviceRayTracingPipelineFeaturesKHR(
 #if VK_HEADER_VERSION >= 162 && VK_KHR_ray_query
 void cleanup_VkPhysicalDeviceRayQueryFeaturesKHR(VkPhysicalDeviceRayQueryFeaturesKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11525,7 +11925,8 @@ void cleanup_VkPhysicalDeviceRayQueryFeaturesKHR(VkPhysicalDeviceRayQueryFeature
 void cleanup_VkPhysicalDeviceAccelerationStructurePropertiesKHR(
     VkPhysicalDeviceAccelerationStructurePropertiesKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11534,7 +11935,8 @@ void cleanup_VkPhysicalDeviceAccelerationStructurePropertiesKHR(
 void cleanup_VkPhysicalDeviceRayTracingPipelinePropertiesKHR(
     VkPhysicalDeviceRayTracingPipelinePropertiesKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11543,7 +11945,8 @@ void cleanup_VkPhysicalDeviceRayTracingPipelinePropertiesKHR(
 void cleanup_VkPhysicalDeviceRayTracingPropertiesNV(
     VkPhysicalDeviceRayTracingPropertiesNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11562,11 +11965,13 @@ extern inline void cleanup_VkTraceRaysIndirectCommandKHR(
 void cleanup_VkDrmFormatModifierPropertiesListEXT(
     VkDrmFormatModifierPropertiesListEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pDrmFormatModifierProperties - drmFormatModifierCount
-  cleanup_VkDrmFormatModifierPropertiesEXT(pData->pDrmFormatModifierProperties);
+  if (pData->pDrmFormatModifierProperties != NULL)
+    cleanup_VkDrmFormatModifierPropertiesEXT(pData->pDrmFormatModifierProperties);
   free((void *)pData->pDrmFormatModifierProperties);
 }
 #endif
@@ -11580,7 +11985,8 @@ extern inline void cleanup_VkDrmFormatModifierPropertiesEXT(
 void cleanup_VkPhysicalDeviceImageDrmFormatModifierInfoEXT(
     VkPhysicalDeviceImageDrmFormatModifierInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pQueueFamilyIndices - queueFamilyIndexCount
@@ -11592,7 +11998,8 @@ void cleanup_VkPhysicalDeviceImageDrmFormatModifierInfoEXT(
 void cleanup_VkImageDrmFormatModifierListCreateInfoEXT(
     VkImageDrmFormatModifierListCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pDrmFormatModifiers - drmFormatModifierCount
@@ -11604,11 +12011,13 @@ void cleanup_VkImageDrmFormatModifierListCreateInfoEXT(
 void cleanup_VkImageDrmFormatModifierExplicitCreateInfoEXT(
     VkImageDrmFormatModifierExplicitCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pPlaneLayouts - drmFormatModifierPlaneCount
-  cleanup_VkSubresourceLayout(pData->pPlaneLayouts);
+  if (pData->pPlaneLayouts != NULL)
+    cleanup_VkSubresourceLayout(pData->pPlaneLayouts);
   free((void *)pData->pPlaneLayouts);
 }
 #endif
@@ -11617,7 +12026,8 @@ void cleanup_VkImageDrmFormatModifierExplicitCreateInfoEXT(
 void cleanup_VkImageDrmFormatModifierPropertiesEXT(
     VkImageDrmFormatModifierPropertiesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11625,7 +12035,8 @@ void cleanup_VkImageDrmFormatModifierPropertiesEXT(
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
 void cleanup_VkImageStencilUsageCreateInfo(VkImageStencilUsageCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11639,7 +12050,8 @@ extern inline void cleanup_VkImageStencilUsageCreateInfoEXT(
 void cleanup_VkDeviceMemoryOverallocationCreateInfoAMD(
     VkDeviceMemoryOverallocationCreateInfoAMD const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11648,7 +12060,8 @@ void cleanup_VkDeviceMemoryOverallocationCreateInfoAMD(
 void cleanup_VkPhysicalDeviceFragmentDensityMapFeaturesEXT(
     VkPhysicalDeviceFragmentDensityMapFeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11657,7 +12070,8 @@ void cleanup_VkPhysicalDeviceFragmentDensityMapFeaturesEXT(
 void cleanup_VkPhysicalDeviceFragmentDensityMap2FeaturesEXT(
     VkPhysicalDeviceFragmentDensityMap2FeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11666,7 +12080,8 @@ void cleanup_VkPhysicalDeviceFragmentDensityMap2FeaturesEXT(
 void cleanup_VkPhysicalDeviceFragmentDensityMapPropertiesEXT(
     VkPhysicalDeviceFragmentDensityMapPropertiesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11675,7 +12090,8 @@ void cleanup_VkPhysicalDeviceFragmentDensityMapPropertiesEXT(
 void cleanup_VkPhysicalDeviceFragmentDensityMap2PropertiesEXT(
     VkPhysicalDeviceFragmentDensityMap2PropertiesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11684,7 +12100,8 @@ void cleanup_VkPhysicalDeviceFragmentDensityMap2PropertiesEXT(
 void cleanup_VkRenderPassFragmentDensityMapCreateInfoEXT(
     VkRenderPassFragmentDensityMapCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11693,7 +12110,8 @@ void cleanup_VkRenderPassFragmentDensityMapCreateInfoEXT(
 void cleanup_VkPhysicalDeviceScalarBlockLayoutFeatures(
     VkPhysicalDeviceScalarBlockLayoutFeatures const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11706,7 +12124,8 @@ extern inline void cleanup_VkPhysicalDeviceScalarBlockLayoutFeaturesEXT(
 #if VK_HEADER_VERSION >= 104 && VK_KHR_surface_protected_capabilities
 void cleanup_VkSurfaceProtectedCapabilitiesKHR(VkSurfaceProtectedCapabilitiesKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11715,7 +12134,8 @@ void cleanup_VkSurfaceProtectedCapabilitiesKHR(VkSurfaceProtectedCapabilitiesKHR
 void cleanup_VkPhysicalDeviceUniformBufferStandardLayoutFeatures(
     VkPhysicalDeviceUniformBufferStandardLayoutFeatures const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11729,7 +12149,8 @@ extern inline void cleanup_VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKH
 void cleanup_VkPhysicalDeviceDepthClipEnableFeaturesEXT(
     VkPhysicalDeviceDepthClipEnableFeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11738,7 +12159,8 @@ void cleanup_VkPhysicalDeviceDepthClipEnableFeaturesEXT(
 void cleanup_VkPipelineRasterizationDepthClipStateCreateInfoEXT(
     VkPipelineRasterizationDepthClipStateCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11747,7 +12169,8 @@ void cleanup_VkPipelineRasterizationDepthClipStateCreateInfoEXT(
 void cleanup_VkPhysicalDeviceMemoryBudgetPropertiesEXT(
     VkPhysicalDeviceMemoryBudgetPropertiesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11756,7 +12179,8 @@ void cleanup_VkPhysicalDeviceMemoryBudgetPropertiesEXT(
 void cleanup_VkPhysicalDeviceMemoryPriorityFeaturesEXT(
     VkPhysicalDeviceMemoryPriorityFeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11764,7 +12188,8 @@ void cleanup_VkPhysicalDeviceMemoryPriorityFeaturesEXT(
 #if VK_HEADER_VERSION >= 97 && VK_EXT_memory_priority
 void cleanup_VkMemoryPriorityAllocateInfoEXT(VkMemoryPriorityAllocateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11773,7 +12198,8 @@ void cleanup_VkMemoryPriorityAllocateInfoEXT(VkMemoryPriorityAllocateInfoEXT con
 void cleanup_VkPhysicalDeviceBufferDeviceAddressFeatures(
     VkPhysicalDeviceBufferDeviceAddressFeatures const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11787,7 +12213,8 @@ extern inline void cleanup_VkPhysicalDeviceBufferDeviceAddressFeaturesKHR(
 void cleanup_VkPhysicalDeviceBufferDeviceAddressFeaturesEXT(
     VkPhysicalDeviceBufferDeviceAddressFeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11800,7 +12227,8 @@ extern inline void cleanup_VkPhysicalDeviceBufferAddressFeaturesEXT(
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
 void cleanup_VkBufferDeviceAddressInfo(VkBufferDeviceAddressInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11817,7 +12245,8 @@ extern inline void cleanup_VkBufferDeviceAddressInfoEXT(VkBufferDeviceAddressInf
 void cleanup_VkBufferOpaqueCaptureAddressCreateInfo(
     VkBufferOpaqueCaptureAddressCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11830,7 +12259,8 @@ extern inline void cleanup_VkBufferOpaqueCaptureAddressCreateInfoKHR(
 #if VK_HEADER_VERSION >= 97 && VK_EXT_buffer_device_address
 void cleanup_VkBufferDeviceAddressCreateInfoEXT(VkBufferDeviceAddressCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11839,7 +12269,8 @@ void cleanup_VkBufferDeviceAddressCreateInfoEXT(VkBufferDeviceAddressCreateInfoE
 void cleanup_VkPhysicalDeviceImageViewImageFormatInfoEXT(
     VkPhysicalDeviceImageViewImageFormatInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11848,7 +12279,8 @@ void cleanup_VkPhysicalDeviceImageViewImageFormatInfoEXT(
 void cleanup_VkFilterCubicImageViewImageFormatPropertiesEXT(
     VkFilterCubicImageViewImageFormatPropertiesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11857,7 +12289,8 @@ void cleanup_VkFilterCubicImageViewImageFormatPropertiesEXT(
 void cleanup_VkPhysicalDeviceImagelessFramebufferFeatures(
     VkPhysicalDeviceImagelessFramebufferFeatures const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11870,11 +12303,13 @@ extern inline void cleanup_VkPhysicalDeviceImagelessFramebufferFeaturesKHR(
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
 void cleanup_VkFramebufferAttachmentsCreateInfo(VkFramebufferAttachmentsCreateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pAttachmentImageInfos - attachmentImageInfoCount
-  cleanup_VkFramebufferAttachmentImageInfo(pData->pAttachmentImageInfos);
+  if (pData->pAttachmentImageInfos != NULL)
+    cleanup_VkFramebufferAttachmentImageInfo(pData->pAttachmentImageInfos);
   free((void *)pData->pAttachmentImageInfos);
 }
 #endif
@@ -11887,7 +12322,8 @@ extern inline void cleanup_VkFramebufferAttachmentsCreateInfoKHR(
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
 void cleanup_VkFramebufferAttachmentImageInfo(VkFramebufferAttachmentImageInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pViewFormats - viewFormatCount
@@ -11903,7 +12339,8 @@ extern inline void cleanup_VkFramebufferAttachmentImageInfoKHR(
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
 void cleanup_VkRenderPassAttachmentBeginInfo(VkRenderPassAttachmentBeginInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pAttachments - attachmentCount
@@ -11920,7 +12357,8 @@ extern inline void cleanup_VkRenderPassAttachmentBeginInfoKHR(
 void cleanup_VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT(
     VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11929,7 +12367,8 @@ void cleanup_VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT(
 void cleanup_VkPhysicalDeviceCooperativeMatrixFeaturesNV(
     VkPhysicalDeviceCooperativeMatrixFeaturesNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11938,7 +12377,8 @@ void cleanup_VkPhysicalDeviceCooperativeMatrixFeaturesNV(
 void cleanup_VkPhysicalDeviceCooperativeMatrixPropertiesNV(
     VkPhysicalDeviceCooperativeMatrixPropertiesNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11946,7 +12386,8 @@ void cleanup_VkPhysicalDeviceCooperativeMatrixPropertiesNV(
 #if VK_HEADER_VERSION >= 101 && VK_NV_cooperative_matrix
 void cleanup_VkCooperativeMatrixPropertiesNV(VkCooperativeMatrixPropertiesNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11955,7 +12396,8 @@ void cleanup_VkCooperativeMatrixPropertiesNV(VkCooperativeMatrixPropertiesNV con
 void cleanup_VkPhysicalDeviceYcbcrImageArraysFeaturesEXT(
     VkPhysicalDeviceYcbcrImageArraysFeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11963,7 +12405,8 @@ void cleanup_VkPhysicalDeviceYcbcrImageArraysFeaturesEXT(
 #if VK_HEADER_VERSION >= 102 && VK_NVX_image_view_handle
 void cleanup_VkImageViewHandleInfoNVX(VkImageViewHandleInfoNVX const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11971,7 +12414,8 @@ void cleanup_VkImageViewHandleInfoNVX(VkImageViewHandleInfoNVX const *pData) {
 #if VK_HEADER_VERSION >= 137 && VK_NVX_image_view_handle
 void cleanup_VkImageViewAddressPropertiesNVX(VkImageViewAddressPropertiesNVX const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11979,7 +12423,8 @@ void cleanup_VkImageViewAddressPropertiesNVX(VkImageViewAddressPropertiesNVX con
 #if VK_HEADER_VERSION >= 105 && VK_GGP_frame_token
 void cleanup_VkPresentFrameTokenGGP(VkPresentFrameTokenGGP const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -11993,7 +12438,8 @@ extern inline void cleanup_VkPipelineCreationFeedbackEXT(
 void cleanup_VkPipelineCreationFeedbackCreateInfoEXT(
     VkPipelineCreationFeedbackCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pPipelineCreationFeedback
@@ -12001,7 +12447,8 @@ void cleanup_VkPipelineCreationFeedbackCreateInfoEXT(
   free((void *)pData->pPipelineCreationFeedback);
 
   // pPipelineStageCreationFeedbacks - pipelineStageCreationFeedbackCount
-  cleanup_VkPipelineCreationFeedbackEXT(pData->pPipelineStageCreationFeedbacks);
+  if (pData->pPipelineStageCreationFeedbacks != NULL)
+    cleanup_VkPipelineCreationFeedbackEXT(pData->pPipelineStageCreationFeedbacks);
   free((void *)pData->pPipelineStageCreationFeedbacks);
 }
 #endif
@@ -12009,7 +12456,8 @@ void cleanup_VkPipelineCreationFeedbackCreateInfoEXT(
 #if VK_HEADER_VERSION >= 104 && VK_EXT_full_screen_exclusive
 void cleanup_VkSurfaceFullScreenExclusiveInfoEXT(VkSurfaceFullScreenExclusiveInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12018,7 +12466,8 @@ void cleanup_VkSurfaceFullScreenExclusiveInfoEXT(VkSurfaceFullScreenExclusiveInf
 void cleanup_VkSurfaceFullScreenExclusiveWin32InfoEXT(
     VkSurfaceFullScreenExclusiveWin32InfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12027,7 +12476,8 @@ void cleanup_VkSurfaceFullScreenExclusiveWin32InfoEXT(
 void cleanup_VkSurfaceCapabilitiesFullScreenExclusiveEXT(
     VkSurfaceCapabilitiesFullScreenExclusiveEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12036,7 +12486,8 @@ void cleanup_VkSurfaceCapabilitiesFullScreenExclusiveEXT(
 void cleanup_VkPhysicalDevicePerformanceQueryFeaturesKHR(
     VkPhysicalDevicePerformanceQueryFeaturesKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12045,7 +12496,8 @@ void cleanup_VkPhysicalDevicePerformanceQueryFeaturesKHR(
 void cleanup_VkPhysicalDevicePerformanceQueryPropertiesKHR(
     VkPhysicalDevicePerformanceQueryPropertiesKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12053,7 +12505,8 @@ void cleanup_VkPhysicalDevicePerformanceQueryPropertiesKHR(
 #if VK_HEADER_VERSION >= 128 && VK_KHR_performance_query
 void cleanup_VkPerformanceCounterKHR(VkPerformanceCounterKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12061,7 +12514,8 @@ void cleanup_VkPerformanceCounterKHR(VkPerformanceCounterKHR const *pData) {
 #if VK_HEADER_VERSION >= 128 && VK_KHR_performance_query
 void cleanup_VkPerformanceCounterDescriptionKHR(VkPerformanceCounterDescriptionKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12069,7 +12523,8 @@ void cleanup_VkPerformanceCounterDescriptionKHR(VkPerformanceCounterDescriptionK
 #if VK_HEADER_VERSION >= 128 && VK_KHR_performance_query
 void cleanup_VkQueryPoolPerformanceCreateInfoKHR(VkQueryPoolPerformanceCreateInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pCounterIndices - counterIndexCount
@@ -12080,7 +12535,8 @@ void cleanup_VkQueryPoolPerformanceCreateInfoKHR(VkQueryPoolPerformanceCreateInf
 #if VK_HEADER_VERSION >= 128 && VK_KHR_performance_query
 void cleanup_VkAcquireProfilingLockInfoKHR(VkAcquireProfilingLockInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12088,7 +12544,8 @@ void cleanup_VkAcquireProfilingLockInfoKHR(VkAcquireProfilingLockInfoKHR const *
 #if VK_HEADER_VERSION >= 128 && VK_KHR_performance_query
 void cleanup_VkPerformanceQuerySubmitInfoKHR(VkPerformanceQuerySubmitInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12096,7 +12553,8 @@ void cleanup_VkPerformanceQuerySubmitInfoKHR(VkPerformanceQuerySubmitInfoKHR con
 #if VK_HEADER_VERSION >= 107 && VK_EXT_headless_surface
 void cleanup_VkHeadlessSurfaceCreateInfoEXT(VkHeadlessSurfaceCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12105,7 +12563,8 @@ void cleanup_VkHeadlessSurfaceCreateInfoEXT(VkHeadlessSurfaceCreateInfoEXT const
 void cleanup_VkPhysicalDeviceCoverageReductionModeFeaturesNV(
     VkPhysicalDeviceCoverageReductionModeFeaturesNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12114,7 +12573,8 @@ void cleanup_VkPhysicalDeviceCoverageReductionModeFeaturesNV(
 void cleanup_VkPipelineCoverageReductionStateCreateInfoNV(
     VkPipelineCoverageReductionStateCreateInfoNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12123,7 +12583,8 @@ void cleanup_VkPipelineCoverageReductionStateCreateInfoNV(
 void cleanup_VkFramebufferMixedSamplesCombinationNV(
     VkFramebufferMixedSamplesCombinationNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12132,7 +12593,8 @@ void cleanup_VkFramebufferMixedSamplesCombinationNV(
 void cleanup_VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL(
     VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12144,7 +12606,8 @@ extern inline void cleanup_VkPerformanceValueINTEL(VkPerformanceValueINTEL const
 #if VK_HEADER_VERSION >= 109 && VK_INTEL_performance_query
 void cleanup_VkInitializePerformanceApiInfoINTEL(VkInitializePerformanceApiInfoINTEL const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pUserData
@@ -12156,7 +12619,8 @@ void cleanup_VkInitializePerformanceApiInfoINTEL(VkInitializePerformanceApiInfoI
 void cleanup_VkQueryPoolPerformanceQueryCreateInfoINTEL(
     VkQueryPoolPerformanceQueryCreateInfoINTEL const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12168,7 +12632,8 @@ extern inline void cleanup_VkQueryPoolCreateInfoINTEL(VkQueryPoolCreateInfoINTEL
 #if VK_HEADER_VERSION >= 109 && VK_INTEL_performance_query
 void cleanup_VkPerformanceMarkerInfoINTEL(VkPerformanceMarkerInfoINTEL const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12176,7 +12641,8 @@ void cleanup_VkPerformanceMarkerInfoINTEL(VkPerformanceMarkerInfoINTEL const *pD
 #if VK_HEADER_VERSION >= 109 && VK_INTEL_performance_query
 void cleanup_VkPerformanceStreamMarkerInfoINTEL(VkPerformanceStreamMarkerInfoINTEL const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12184,7 +12650,8 @@ void cleanup_VkPerformanceStreamMarkerInfoINTEL(VkPerformanceStreamMarkerInfoINT
 #if VK_HEADER_VERSION >= 109 && VK_INTEL_performance_query
 void cleanup_VkPerformanceOverrideInfoINTEL(VkPerformanceOverrideInfoINTEL const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12193,7 +12660,8 @@ void cleanup_VkPerformanceOverrideInfoINTEL(VkPerformanceOverrideInfoINTEL const
 void cleanup_VkPerformanceConfigurationAcquireInfoINTEL(
     VkPerformanceConfigurationAcquireInfoINTEL const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12202,7 +12670,8 @@ void cleanup_VkPerformanceConfigurationAcquireInfoINTEL(
 void cleanup_VkPhysicalDeviceShaderClockFeaturesKHR(
     VkPhysicalDeviceShaderClockFeaturesKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12211,7 +12680,8 @@ void cleanup_VkPhysicalDeviceShaderClockFeaturesKHR(
 void cleanup_VkPhysicalDeviceIndexTypeUint8FeaturesEXT(
     VkPhysicalDeviceIndexTypeUint8FeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12220,7 +12690,8 @@ void cleanup_VkPhysicalDeviceIndexTypeUint8FeaturesEXT(
 void cleanup_VkPhysicalDeviceShaderSMBuiltinsPropertiesNV(
     VkPhysicalDeviceShaderSMBuiltinsPropertiesNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12229,7 +12700,8 @@ void cleanup_VkPhysicalDeviceShaderSMBuiltinsPropertiesNV(
 void cleanup_VkPhysicalDeviceShaderSMBuiltinsFeaturesNV(
     VkPhysicalDeviceShaderSMBuiltinsFeaturesNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12238,7 +12710,8 @@ void cleanup_VkPhysicalDeviceShaderSMBuiltinsFeaturesNV(
 void cleanup_VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT(
     VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12247,7 +12720,8 @@ void cleanup_VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT(
 void cleanup_VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures(
     VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12260,7 +12734,8 @@ extern inline void cleanup_VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKH
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
 void cleanup_VkAttachmentReferenceStencilLayout(VkAttachmentReferenceStencilLayout const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12274,7 +12749,8 @@ extern inline void cleanup_VkAttachmentReferenceStencilLayoutKHR(
 void cleanup_VkAttachmentDescriptionStencilLayout(
     VkAttachmentDescriptionStencilLayout const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12288,7 +12764,8 @@ extern inline void cleanup_VkAttachmentDescriptionStencilLayoutKHR(
 void cleanup_VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR(
     VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12296,7 +12773,8 @@ void cleanup_VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR(
 #if VK_HEADER_VERSION >= 119 && VK_KHR_pipeline_executable_properties
 void cleanup_VkPipelineInfoKHR(VkPipelineInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12304,7 +12782,8 @@ void cleanup_VkPipelineInfoKHR(VkPipelineInfoKHR const *pData) {
 #if VK_HEADER_VERSION >= 119 && VK_KHR_pipeline_executable_properties
 void cleanup_VkPipelineExecutablePropertiesKHR(VkPipelineExecutablePropertiesKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12312,7 +12791,8 @@ void cleanup_VkPipelineExecutablePropertiesKHR(VkPipelineExecutablePropertiesKHR
 #if VK_HEADER_VERSION >= 119 && VK_KHR_pipeline_executable_properties
 void cleanup_VkPipelineExecutableInfoKHR(VkPipelineExecutableInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12320,7 +12800,8 @@ void cleanup_VkPipelineExecutableInfoKHR(VkPipelineExecutableInfoKHR const *pDat
 #if VK_HEADER_VERSION >= 119 && VK_KHR_pipeline_executable_properties
 void cleanup_VkPipelineExecutableStatisticKHR(VkPipelineExecutableStatisticKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12329,7 +12810,8 @@ void cleanup_VkPipelineExecutableStatisticKHR(VkPipelineExecutableStatisticKHR c
 void cleanup_VkPipelineExecutableInternalRepresentationKHR(
     VkPipelineExecutableInternalRepresentationKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pData - dataSize
@@ -12341,7 +12823,8 @@ void cleanup_VkPipelineExecutableInternalRepresentationKHR(
 void cleanup_VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT(
     VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12350,7 +12833,8 @@ void cleanup_VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT(
 void cleanup_VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT(
     VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12359,7 +12843,8 @@ void cleanup_VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT(
 void cleanup_VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT(
     VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12368,7 +12853,8 @@ void cleanup_VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT(
 void cleanup_VkPhysicalDeviceSubgroupSizeControlFeaturesEXT(
     VkPhysicalDeviceSubgroupSizeControlFeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12377,7 +12863,8 @@ void cleanup_VkPhysicalDeviceSubgroupSizeControlFeaturesEXT(
 void cleanup_VkPhysicalDeviceSubgroupSizeControlPropertiesEXT(
     VkPhysicalDeviceSubgroupSizeControlPropertiesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12386,7 +12873,8 @@ void cleanup_VkPhysicalDeviceSubgroupSizeControlPropertiesEXT(
 void cleanup_VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT(
     VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12395,7 +12883,8 @@ void cleanup_VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT(
 void cleanup_VkSubpassShadingPipelineCreateInfoHUAWEI(
     VkSubpassShadingPipelineCreateInfoHUAWEI const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12404,7 +12893,8 @@ void cleanup_VkSubpassShadingPipelineCreateInfoHUAWEI(
 void cleanup_VkPhysicalDeviceSubpassShadingPropertiesHUAWEI(
     VkPhysicalDeviceSubpassShadingPropertiesHUAWEI const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12413,7 +12903,8 @@ void cleanup_VkPhysicalDeviceSubpassShadingPropertiesHUAWEI(
 void cleanup_VkMemoryOpaqueCaptureAddressAllocateInfo(
     VkMemoryOpaqueCaptureAddressAllocateInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12427,7 +12918,8 @@ extern inline void cleanup_VkMemoryOpaqueCaptureAddressAllocateInfoKHR(
 void cleanup_VkDeviceMemoryOpaqueCaptureAddressInfo(
     VkDeviceMemoryOpaqueCaptureAddressInfo const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12441,7 +12933,8 @@ extern inline void cleanup_VkDeviceMemoryOpaqueCaptureAddressInfoKHR(
 void cleanup_VkPhysicalDeviceLineRasterizationFeaturesEXT(
     VkPhysicalDeviceLineRasterizationFeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12450,7 +12943,8 @@ void cleanup_VkPhysicalDeviceLineRasterizationFeaturesEXT(
 void cleanup_VkPhysicalDeviceLineRasterizationPropertiesEXT(
     VkPhysicalDeviceLineRasterizationPropertiesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12459,7 +12953,8 @@ void cleanup_VkPhysicalDeviceLineRasterizationPropertiesEXT(
 void cleanup_VkPipelineRasterizationLineStateCreateInfoEXT(
     VkPipelineRasterizationLineStateCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12468,7 +12963,8 @@ void cleanup_VkPipelineRasterizationLineStateCreateInfoEXT(
 void cleanup_VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT(
     VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12476,7 +12972,8 @@ void cleanup_VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT(
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
 void cleanup_VkPhysicalDeviceVulkan11Features(VkPhysicalDeviceVulkan11Features const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12484,7 +12981,8 @@ void cleanup_VkPhysicalDeviceVulkan11Features(VkPhysicalDeviceVulkan11Features c
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
 void cleanup_VkPhysicalDeviceVulkan11Properties(VkPhysicalDeviceVulkan11Properties const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12492,7 +12990,8 @@ void cleanup_VkPhysicalDeviceVulkan11Properties(VkPhysicalDeviceVulkan11Properti
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
 void cleanup_VkPhysicalDeviceVulkan12Features(VkPhysicalDeviceVulkan12Features const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12500,7 +12999,8 @@ void cleanup_VkPhysicalDeviceVulkan12Features(VkPhysicalDeviceVulkan12Features c
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
 void cleanup_VkPhysicalDeviceVulkan12Properties(VkPhysicalDeviceVulkan12Properties const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12509,7 +13009,8 @@ void cleanup_VkPhysicalDeviceVulkan12Properties(VkPhysicalDeviceVulkan12Properti
 void cleanup_VkPipelineCompilerControlCreateInfoAMD(
     VkPipelineCompilerControlCreateInfoAMD const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12518,7 +13019,8 @@ void cleanup_VkPipelineCompilerControlCreateInfoAMD(
 void cleanup_VkPhysicalDeviceCoherentMemoryFeaturesAMD(
     VkPhysicalDeviceCoherentMemoryFeaturesAMD const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12526,7 +13028,8 @@ void cleanup_VkPhysicalDeviceCoherentMemoryFeaturesAMD(
 #if VK_HEADER_VERSION >= 130 && VK_EXT_tooling_info
 void cleanup_VkPhysicalDeviceToolPropertiesEXT(VkPhysicalDeviceToolPropertiesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12535,7 +13038,8 @@ void cleanup_VkPhysicalDeviceToolPropertiesEXT(VkPhysicalDeviceToolPropertiesEXT
 void cleanup_VkSamplerCustomBorderColorCreateInfoEXT(
     VkSamplerCustomBorderColorCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12544,7 +13048,8 @@ void cleanup_VkSamplerCustomBorderColorCreateInfoEXT(
 void cleanup_VkPhysicalDeviceCustomBorderColorPropertiesEXT(
     VkPhysicalDeviceCustomBorderColorPropertiesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12553,7 +13058,8 @@ void cleanup_VkPhysicalDeviceCustomBorderColorPropertiesEXT(
 void cleanup_VkPhysicalDeviceCustomBorderColorFeaturesEXT(
     VkPhysicalDeviceCustomBorderColorFeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12562,7 +13068,8 @@ void cleanup_VkPhysicalDeviceCustomBorderColorFeaturesEXT(
 void cleanup_VkAccelerationStructureGeometryTrianglesDataKHR(
     VkAccelerationStructureGeometryTrianglesDataKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12571,7 +13078,8 @@ void cleanup_VkAccelerationStructureGeometryTrianglesDataKHR(
 void cleanup_VkAccelerationStructureGeometryAabbsDataKHR(
     VkAccelerationStructureGeometryAabbsDataKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12580,7 +13088,8 @@ void cleanup_VkAccelerationStructureGeometryAabbsDataKHR(
 void cleanup_VkAccelerationStructureGeometryInstancesDataKHR(
     VkAccelerationStructureGeometryInstancesDataKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12588,7 +13097,8 @@ void cleanup_VkAccelerationStructureGeometryInstancesDataKHR(
 #if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
 void cleanup_VkAccelerationStructureGeometryKHR(VkAccelerationStructureGeometryKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12597,19 +13107,23 @@ void cleanup_VkAccelerationStructureGeometryKHR(VkAccelerationStructureGeometryK
 void cleanup_VkAccelerationStructureBuildGeometryInfoKHR(
     VkAccelerationStructureBuildGeometryInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pGeometries - geometryCount
-  cleanup_VkAccelerationStructureGeometryKHR(pData->pGeometries);
+  if (pData->pGeometries != NULL)
+    cleanup_VkAccelerationStructureGeometryKHR(pData->pGeometries);
   free((void *)pData->pGeometries);
 
   // ppGeometries - geometryCount,1
   for (uint32_t i = 0; i < pData->geometryCount; ++i) {
-    cleanup_VkAccelerationStructureGeometryKHR(pData->ppGeometries[i]);
+    if (pData->ppGeometries[i] != NULL)
+      cleanup_VkAccelerationStructureGeometryKHR(pData->ppGeometries[i]);
     free((void *)pData->ppGeometries[i]);
   }
-  cleanup_VkAccelerationStructureGeometryKHR(pData->ppGeometries);
+  if (pData->ppGeometries != NULL)
+    cleanup_VkAccelerationStructureGeometryKHR(pData->ppGeometries);
   free((void *)pData->ppGeometries);
 }
 #endif
@@ -12623,7 +13137,8 @@ extern inline void cleanup_VkAccelerationStructureBuildRangeInfoKHR(
 void cleanup_VkAccelerationStructureCreateInfoKHR(
     VkAccelerationStructureCreateInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12658,7 +13173,8 @@ extern inline void cleanup_VkAccelerationStructureInstanceNV(
 void cleanup_VkAccelerationStructureDeviceAddressInfoKHR(
     VkAccelerationStructureDeviceAddressInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12667,7 +13183,8 @@ void cleanup_VkAccelerationStructureDeviceAddressInfoKHR(
 void cleanup_VkAccelerationStructureVersionInfoKHR(
     VkAccelerationStructureVersionInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pVersionData - 2*VK_UUID_SIZE
@@ -12678,7 +13195,8 @@ void cleanup_VkAccelerationStructureVersionInfoKHR(
 #if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
 void cleanup_VkCopyAccelerationStructureInfoKHR(VkCopyAccelerationStructureInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12687,7 +13205,8 @@ void cleanup_VkCopyAccelerationStructureInfoKHR(VkCopyAccelerationStructureInfoK
 void cleanup_VkCopyAccelerationStructureToMemoryInfoKHR(
     VkCopyAccelerationStructureToMemoryInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12696,7 +13215,8 @@ void cleanup_VkCopyAccelerationStructureToMemoryInfoKHR(
 void cleanup_VkCopyMemoryToAccelerationStructureInfoKHR(
     VkCopyMemoryToAccelerationStructureInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12705,7 +13225,8 @@ void cleanup_VkCopyMemoryToAccelerationStructureInfoKHR(
 void cleanup_VkRayTracingPipelineInterfaceCreateInfoKHR(
     VkRayTracingPipelineInterfaceCreateInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12713,7 +13234,8 @@ void cleanup_VkRayTracingPipelineInterfaceCreateInfoKHR(
 #if VK_HEADER_VERSION >= 135 && VK_KHR_pipeline_library
 void cleanup_VkPipelineLibraryCreateInfoKHR(VkPipelineLibraryCreateInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pLibraries - libraryCount
@@ -12725,7 +13247,8 @@ void cleanup_VkPipelineLibraryCreateInfoKHR(VkPipelineLibraryCreateInfoKHR const
 void cleanup_VkPhysicalDeviceExtendedDynamicStateFeaturesEXT(
     VkPhysicalDeviceExtendedDynamicStateFeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12734,7 +13257,8 @@ void cleanup_VkPhysicalDeviceExtendedDynamicStateFeaturesEXT(
 void cleanup_VkPhysicalDeviceExtendedDynamicState2FeaturesEXT(
     VkPhysicalDeviceExtendedDynamicState2FeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12742,7 +13266,8 @@ void cleanup_VkPhysicalDeviceExtendedDynamicState2FeaturesEXT(
 #if VK_HEADER_VERSION >= 134 && VK_QCOM_render_pass_transform
 void cleanup_VkRenderPassTransformBeginInfoQCOM(VkRenderPassTransformBeginInfoQCOM const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12750,7 +13275,8 @@ void cleanup_VkRenderPassTransformBeginInfoQCOM(VkRenderPassTransformBeginInfoQC
 #if VK_HEADER_VERSION >= 159 && VK_QCOM_rotated_copy_commands
 void cleanup_VkCopyCommandTransformInfoQCOM(VkCopyCommandTransformInfoQCOM const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12759,7 +13285,8 @@ void cleanup_VkCopyCommandTransformInfoQCOM(VkCopyCommandTransformInfoQCOM const
 void cleanup_VkCommandBufferInheritanceRenderPassTransformInfoQCOM(
     VkCommandBufferInheritanceRenderPassTransformInfoQCOM const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12768,7 +13295,8 @@ void cleanup_VkCommandBufferInheritanceRenderPassTransformInfoQCOM(
 void cleanup_VkPhysicalDeviceDiagnosticsConfigFeaturesNV(
     VkPhysicalDeviceDiagnosticsConfigFeaturesNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12777,7 +13305,8 @@ void cleanup_VkPhysicalDeviceDiagnosticsConfigFeaturesNV(
 void cleanup_VkDeviceDiagnosticsConfigCreateInfoNV(
     VkDeviceDiagnosticsConfigCreateInfoNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12786,7 +13315,8 @@ void cleanup_VkDeviceDiagnosticsConfigCreateInfoNV(
 void cleanup_VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR(
     VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12795,7 +13325,8 @@ void cleanup_VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR(
 void cleanup_VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR(
     VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12804,7 +13335,8 @@ void cleanup_VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR(
 void cleanup_VkPhysicalDeviceRobustness2FeaturesEXT(
     VkPhysicalDeviceRobustness2FeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12813,7 +13345,8 @@ void cleanup_VkPhysicalDeviceRobustness2FeaturesEXT(
 void cleanup_VkPhysicalDeviceRobustness2PropertiesEXT(
     VkPhysicalDeviceRobustness2PropertiesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12822,7 +13355,8 @@ void cleanup_VkPhysicalDeviceRobustness2PropertiesEXT(
 void cleanup_VkPhysicalDeviceImageRobustnessFeaturesEXT(
     VkPhysicalDeviceImageRobustnessFeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12831,7 +13365,8 @@ void cleanup_VkPhysicalDeviceImageRobustnessFeaturesEXT(
 void cleanup_VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR(
     VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12840,7 +13375,8 @@ void cleanup_VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR(
 void cleanup_VkPhysicalDevicePortabilitySubsetFeaturesKHR(
     VkPhysicalDevicePortabilitySubsetFeaturesKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12849,7 +13385,8 @@ void cleanup_VkPhysicalDevicePortabilitySubsetFeaturesKHR(
 void cleanup_VkPhysicalDevicePortabilitySubsetPropertiesKHR(
     VkPhysicalDevicePortabilitySubsetPropertiesKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12858,7 +13395,8 @@ void cleanup_VkPhysicalDevicePortabilitySubsetPropertiesKHR(
 void cleanup_VkPhysicalDevice4444FormatsFeaturesEXT(
     VkPhysicalDevice4444FormatsFeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12867,7 +13405,8 @@ void cleanup_VkPhysicalDevice4444FormatsFeaturesEXT(
 void cleanup_VkPhysicalDeviceSubpassShadingFeaturesHUAWEI(
     VkPhysicalDeviceSubpassShadingFeaturesHUAWEI const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12875,7 +13414,8 @@ void cleanup_VkPhysicalDeviceSubpassShadingFeaturesHUAWEI(
 #if VK_HEADER_VERSION >= 154 && VK_KHR_copy_commands2
 void cleanup_VkBufferCopy2KHR(VkBufferCopy2KHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12883,7 +13423,8 @@ void cleanup_VkBufferCopy2KHR(VkBufferCopy2KHR const *pData) {
 #if VK_HEADER_VERSION >= 154 && VK_KHR_copy_commands2
 void cleanup_VkImageCopy2KHR(VkImageCopy2KHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12891,7 +13432,8 @@ void cleanup_VkImageCopy2KHR(VkImageCopy2KHR const *pData) {
 #if VK_HEADER_VERSION >= 154 && VK_KHR_copy_commands2
 void cleanup_VkImageBlit2KHR(VkImageBlit2KHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12899,7 +13441,8 @@ void cleanup_VkImageBlit2KHR(VkImageBlit2KHR const *pData) {
 #if VK_HEADER_VERSION >= 154 && VK_KHR_copy_commands2
 void cleanup_VkBufferImageCopy2KHR(VkBufferImageCopy2KHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12907,7 +13450,8 @@ void cleanup_VkBufferImageCopy2KHR(VkBufferImageCopy2KHR const *pData) {
 #if VK_HEADER_VERSION >= 154 && VK_KHR_copy_commands2
 void cleanup_VkImageResolve2KHR(VkImageResolve2KHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12915,11 +13459,13 @@ void cleanup_VkImageResolve2KHR(VkImageResolve2KHR const *pData) {
 #if VK_HEADER_VERSION >= 154 && VK_KHR_copy_commands2
 void cleanup_VkCopyBufferInfo2KHR(VkCopyBufferInfo2KHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pRegions - regionCount
-  cleanup_VkBufferCopy2KHR(pData->pRegions);
+  if (pData->pRegions != NULL)
+    cleanup_VkBufferCopy2KHR(pData->pRegions);
   free((void *)pData->pRegions);
 }
 #endif
@@ -12927,11 +13473,13 @@ void cleanup_VkCopyBufferInfo2KHR(VkCopyBufferInfo2KHR const *pData) {
 #if VK_HEADER_VERSION >= 154 && VK_KHR_copy_commands2
 void cleanup_VkCopyImageInfo2KHR(VkCopyImageInfo2KHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pRegions - regionCount
-  cleanup_VkImageCopy2KHR(pData->pRegions);
+  if (pData->pRegions != NULL)
+    cleanup_VkImageCopy2KHR(pData->pRegions);
   free((void *)pData->pRegions);
 }
 #endif
@@ -12939,11 +13487,13 @@ void cleanup_VkCopyImageInfo2KHR(VkCopyImageInfo2KHR const *pData) {
 #if VK_HEADER_VERSION >= 154 && VK_KHR_copy_commands2
 void cleanup_VkBlitImageInfo2KHR(VkBlitImageInfo2KHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pRegions - regionCount
-  cleanup_VkImageBlit2KHR(pData->pRegions);
+  if (pData->pRegions != NULL)
+    cleanup_VkImageBlit2KHR(pData->pRegions);
   free((void *)pData->pRegions);
 }
 #endif
@@ -12951,11 +13501,13 @@ void cleanup_VkBlitImageInfo2KHR(VkBlitImageInfo2KHR const *pData) {
 #if VK_HEADER_VERSION >= 154 && VK_KHR_copy_commands2
 void cleanup_VkCopyBufferToImageInfo2KHR(VkCopyBufferToImageInfo2KHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pRegions - regionCount
-  cleanup_VkBufferImageCopy2KHR(pData->pRegions);
+  if (pData->pRegions != NULL)
+    cleanup_VkBufferImageCopy2KHR(pData->pRegions);
   free((void *)pData->pRegions);
 }
 #endif
@@ -12963,11 +13515,13 @@ void cleanup_VkCopyBufferToImageInfo2KHR(VkCopyBufferToImageInfo2KHR const *pDat
 #if VK_HEADER_VERSION >= 154 && VK_KHR_copy_commands2
 void cleanup_VkCopyImageToBufferInfo2KHR(VkCopyImageToBufferInfo2KHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pRegions - regionCount
-  cleanup_VkBufferImageCopy2KHR(pData->pRegions);
+  if (pData->pRegions != NULL)
+    cleanup_VkBufferImageCopy2KHR(pData->pRegions);
   free((void *)pData->pRegions);
 }
 #endif
@@ -12975,11 +13529,13 @@ void cleanup_VkCopyImageToBufferInfo2KHR(VkCopyImageToBufferInfo2KHR const *pDat
 #if VK_HEADER_VERSION >= 154 && VK_KHR_copy_commands2
 void cleanup_VkResolveImageInfo2KHR(VkResolveImageInfo2KHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pRegions - regionCount
-  cleanup_VkImageResolve2KHR(pData->pRegions);
+  if (pData->pRegions != NULL)
+    cleanup_VkImageResolve2KHR(pData->pRegions);
   free((void *)pData->pRegions);
 }
 #endif
@@ -12988,7 +13544,8 @@ void cleanup_VkResolveImageInfo2KHR(VkResolveImageInfo2KHR const *pData) {
 void cleanup_VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT(
     VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -12997,7 +13554,8 @@ void cleanup_VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT(
 void cleanup_VkFragmentShadingRateAttachmentInfoKHR(
     VkFragmentShadingRateAttachmentInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pFragmentShadingRateAttachment
@@ -13010,7 +13568,8 @@ void cleanup_VkFragmentShadingRateAttachmentInfoKHR(
 void cleanup_VkPipelineFragmentShadingRateStateCreateInfoKHR(
     VkPipelineFragmentShadingRateStateCreateInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13019,7 +13578,8 @@ void cleanup_VkPipelineFragmentShadingRateStateCreateInfoKHR(
 void cleanup_VkPhysicalDeviceFragmentShadingRateFeaturesKHR(
     VkPhysicalDeviceFragmentShadingRateFeaturesKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13028,7 +13588,8 @@ void cleanup_VkPhysicalDeviceFragmentShadingRateFeaturesKHR(
 void cleanup_VkPhysicalDeviceFragmentShadingRatePropertiesKHR(
     VkPhysicalDeviceFragmentShadingRatePropertiesKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13037,7 +13598,8 @@ void cleanup_VkPhysicalDeviceFragmentShadingRatePropertiesKHR(
 void cleanup_VkPhysicalDeviceFragmentShadingRateKHR(
     VkPhysicalDeviceFragmentShadingRateKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13046,7 +13608,8 @@ void cleanup_VkPhysicalDeviceFragmentShadingRateKHR(
 void cleanup_VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR(
     VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13055,7 +13618,8 @@ void cleanup_VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR(
 void cleanup_VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV(
     VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13064,7 +13628,8 @@ void cleanup_VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV(
 void cleanup_VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV(
     VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13073,7 +13638,8 @@ void cleanup_VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV(
 void cleanup_VkPipelineFragmentShadingRateEnumStateCreateInfoNV(
     VkPipelineFragmentShadingRateEnumStateCreateInfoNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13082,7 +13648,8 @@ void cleanup_VkPipelineFragmentShadingRateEnumStateCreateInfoNV(
 void cleanup_VkAccelerationStructureBuildSizesInfoKHR(
     VkAccelerationStructureBuildSizesInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13091,7 +13658,8 @@ void cleanup_VkAccelerationStructureBuildSizesInfoKHR(
 void cleanup_VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE(
     VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13107,11 +13675,13 @@ void cleanup_VkMutableDescriptorTypeListVALVE(VkMutableDescriptorTypeListVALVE c
 void cleanup_VkMutableDescriptorTypeCreateInfoVALVE(
     VkMutableDescriptorTypeCreateInfoVALVE const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pMutableDescriptorTypeLists - mutableDescriptorTypeListCount
-  cleanup_VkMutableDescriptorTypeListVALVE(pData->pMutableDescriptorTypeLists);
+  if (pData->pMutableDescriptorTypeLists != NULL)
+    cleanup_VkMutableDescriptorTypeListVALVE(pData->pMutableDescriptorTypeLists);
   free((void *)pData->pMutableDescriptorTypeLists);
 }
 #endif
@@ -13120,7 +13690,8 @@ void cleanup_VkMutableDescriptorTypeCreateInfoVALVE(
 void cleanup_VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT(
     VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13129,7 +13700,8 @@ void cleanup_VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT(
 void cleanup_VkPhysicalDeviceExternalMemoryRDMAFeaturesNV(
     VkPhysicalDeviceExternalMemoryRDMAFeaturesNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13137,7 +13709,8 @@ void cleanup_VkPhysicalDeviceExternalMemoryRDMAFeaturesNV(
 #if VK_HEADER_VERSION >= 175 && VK_EXT_vertex_input_dynamic_state
 void cleanup_VkVertexInputBindingDescription2EXT(VkVertexInputBindingDescription2EXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13146,7 +13719,8 @@ void cleanup_VkVertexInputBindingDescription2EXT(VkVertexInputBindingDescription
 void cleanup_VkVertexInputAttributeDescription2EXT(
     VkVertexInputAttributeDescription2EXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13155,7 +13729,8 @@ void cleanup_VkVertexInputAttributeDescription2EXT(
 void cleanup_VkPhysicalDeviceColorWriteEnableFeaturesEXT(
     VkPhysicalDeviceColorWriteEnableFeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13163,7 +13738,8 @@ void cleanup_VkPhysicalDeviceColorWriteEnableFeaturesEXT(
 #if VK_HEADER_VERSION >= 175 && VK_EXT_color_write_enable
 void cleanup_VkPipelineColorWriteCreateInfoEXT(VkPipelineColorWriteCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pColorWriteEnables - attachmentCount
@@ -13174,7 +13750,8 @@ void cleanup_VkPipelineColorWriteCreateInfoEXT(VkPipelineColorWriteCreateInfoEXT
 #if VK_HEADER_VERSION >= 170 && VK_KHR_synchronization2
 void cleanup_VkMemoryBarrier2KHR(VkMemoryBarrier2KHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13182,7 +13759,8 @@ void cleanup_VkMemoryBarrier2KHR(VkMemoryBarrier2KHR const *pData) {
 #if VK_HEADER_VERSION >= 170 && VK_KHR_synchronization2
 void cleanup_VkImageMemoryBarrier2KHR(VkImageMemoryBarrier2KHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13190,7 +13768,8 @@ void cleanup_VkImageMemoryBarrier2KHR(VkImageMemoryBarrier2KHR const *pData) {
 #if VK_HEADER_VERSION >= 170 && VK_KHR_synchronization2
 void cleanup_VkBufferMemoryBarrier2KHR(VkBufferMemoryBarrier2KHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13198,19 +13777,23 @@ void cleanup_VkBufferMemoryBarrier2KHR(VkBufferMemoryBarrier2KHR const *pData) {
 #if VK_HEADER_VERSION >= 170 && VK_KHR_synchronization2
 void cleanup_VkDependencyInfoKHR(VkDependencyInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pMemoryBarriers - memoryBarrierCount
-  cleanup_VkMemoryBarrier2KHR(pData->pMemoryBarriers);
+  if (pData->pMemoryBarriers != NULL)
+    cleanup_VkMemoryBarrier2KHR(pData->pMemoryBarriers);
   free((void *)pData->pMemoryBarriers);
 
   // pBufferMemoryBarriers - bufferMemoryBarrierCount
-  cleanup_VkBufferMemoryBarrier2KHR(pData->pBufferMemoryBarriers);
+  if (pData->pBufferMemoryBarriers != NULL)
+    cleanup_VkBufferMemoryBarrier2KHR(pData->pBufferMemoryBarriers);
   free((void *)pData->pBufferMemoryBarriers);
 
   // pImageMemoryBarriers - imageMemoryBarrierCount
-  cleanup_VkImageMemoryBarrier2KHR(pData->pImageMemoryBarriers);
+  if (pData->pImageMemoryBarriers != NULL)
+    cleanup_VkImageMemoryBarrier2KHR(pData->pImageMemoryBarriers);
   free((void *)pData->pImageMemoryBarriers);
 }
 #endif
@@ -13218,7 +13801,8 @@ void cleanup_VkDependencyInfoKHR(VkDependencyInfoKHR const *pData) {
 #if VK_HEADER_VERSION >= 170 && VK_KHR_synchronization2
 void cleanup_VkSemaphoreSubmitInfoKHR(VkSemaphoreSubmitInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13226,7 +13810,8 @@ void cleanup_VkSemaphoreSubmitInfoKHR(VkSemaphoreSubmitInfoKHR const *pData) {
 #if VK_HEADER_VERSION >= 170 && VK_KHR_synchronization2
 void cleanup_VkCommandBufferSubmitInfoKHR(VkCommandBufferSubmitInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13234,19 +13819,23 @@ void cleanup_VkCommandBufferSubmitInfoKHR(VkCommandBufferSubmitInfoKHR const *pD
 #if VK_HEADER_VERSION >= 170 && VK_KHR_synchronization2
 void cleanup_VkSubmitInfo2KHR(VkSubmitInfo2KHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pWaitSemaphoreInfos - waitSemaphoreInfoCount
-  cleanup_VkSemaphoreSubmitInfoKHR(pData->pWaitSemaphoreInfos);
+  if (pData->pWaitSemaphoreInfos != NULL)
+    cleanup_VkSemaphoreSubmitInfoKHR(pData->pWaitSemaphoreInfos);
   free((void *)pData->pWaitSemaphoreInfos);
 
   // pCommandBufferInfos - commandBufferInfoCount
-  cleanup_VkCommandBufferSubmitInfoKHR(pData->pCommandBufferInfos);
+  if (pData->pCommandBufferInfos != NULL)
+    cleanup_VkCommandBufferSubmitInfoKHR(pData->pCommandBufferInfos);
   free((void *)pData->pCommandBufferInfos);
 
   // pSignalSemaphoreInfos - signalSemaphoreInfoCount
-  cleanup_VkSemaphoreSubmitInfoKHR(pData->pSignalSemaphoreInfos);
+  if (pData->pSignalSemaphoreInfos != NULL)
+    cleanup_VkSemaphoreSubmitInfoKHR(pData->pSignalSemaphoreInfos);
   free((void *)pData->pSignalSemaphoreInfos);
 }
 #endif
@@ -13255,7 +13844,8 @@ void cleanup_VkSubmitInfo2KHR(VkSubmitInfo2KHR const *pData) {
 void cleanup_VkQueueFamilyCheckpointProperties2NV(
     VkQueueFamilyCheckpointProperties2NV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13263,7 +13853,8 @@ void cleanup_VkQueueFamilyCheckpointProperties2NV(
 #if VK_HEADER_VERSION >= 170 && VK_KHR_synchronization2
 void cleanup_VkCheckpointData2NV(VkCheckpointData2NV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pCheckpointMarker
@@ -13275,7 +13866,8 @@ void cleanup_VkCheckpointData2NV(VkCheckpointData2NV const *pData) {
 void cleanup_VkPhysicalDeviceSynchronization2FeaturesKHR(
     VkPhysicalDeviceSynchronization2FeaturesKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13283,7 +13875,8 @@ void cleanup_VkPhysicalDeviceSynchronization2FeaturesKHR(
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
 void cleanup_VkVideoQueueFamilyProperties2KHR(VkVideoQueueFamilyProperties2KHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13291,7 +13884,8 @@ void cleanup_VkVideoQueueFamilyProperties2KHR(VkVideoQueueFamilyProperties2KHR c
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
 void cleanup_VkVideoProfilesKHR(VkVideoProfilesKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pProfiles
@@ -13303,7 +13897,8 @@ void cleanup_VkVideoProfilesKHR(VkVideoProfilesKHR const *pData) {
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
 void cleanup_VkPhysicalDeviceVideoFormatInfoKHR(VkPhysicalDeviceVideoFormatInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pVideoProfiles
@@ -13315,7 +13910,8 @@ void cleanup_VkPhysicalDeviceVideoFormatInfoKHR(VkPhysicalDeviceVideoFormatInfoK
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
 void cleanup_VkVideoFormatPropertiesKHR(VkVideoFormatPropertiesKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13323,7 +13919,8 @@ void cleanup_VkVideoFormatPropertiesKHR(VkVideoFormatPropertiesKHR const *pData)
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
 void cleanup_VkVideoProfileKHR(VkVideoProfileKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13331,7 +13928,8 @@ void cleanup_VkVideoProfileKHR(VkVideoProfileKHR const *pData) {
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
 void cleanup_VkVideoCapabilitiesKHR(VkVideoCapabilitiesKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13339,7 +13937,8 @@ void cleanup_VkVideoCapabilitiesKHR(VkVideoCapabilitiesKHR const *pData) {
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
 void cleanup_VkVideoGetMemoryPropertiesKHR(VkVideoGetMemoryPropertiesKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pMemoryRequirements
@@ -13351,7 +13950,8 @@ void cleanup_VkVideoGetMemoryPropertiesKHR(VkVideoGetMemoryPropertiesKHR const *
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
 void cleanup_VkVideoBindMemoryKHR(VkVideoBindMemoryKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13359,7 +13959,8 @@ void cleanup_VkVideoBindMemoryKHR(VkVideoBindMemoryKHR const *pData) {
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
 void cleanup_VkVideoPictureResourceKHR(VkVideoPictureResourceKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13367,7 +13968,8 @@ void cleanup_VkVideoPictureResourceKHR(VkVideoPictureResourceKHR const *pData) {
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
 void cleanup_VkVideoReferenceSlotKHR(VkVideoReferenceSlotKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pPictureResource
@@ -13379,7 +13981,8 @@ void cleanup_VkVideoReferenceSlotKHR(VkVideoReferenceSlotKHR const *pData) {
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_decode_queue
 void cleanup_VkVideoDecodeInfoKHR(VkVideoDecodeInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pSetupReferenceSlot
@@ -13387,7 +13990,8 @@ void cleanup_VkVideoDecodeInfoKHR(VkVideoDecodeInfoKHR const *pData) {
   free((void *)pData->pSetupReferenceSlot);
 
   // pReferenceSlots - referenceSlotCount
-  cleanup_VkVideoReferenceSlotKHR(pData->pReferenceSlots);
+  if (pData->pReferenceSlots != NULL)
+    cleanup_VkVideoReferenceSlotKHR(pData->pReferenceSlots);
   free((void *)pData->pReferenceSlots);
 }
 #endif
@@ -13395,7 +13999,8 @@ void cleanup_VkVideoDecodeInfoKHR(VkVideoDecodeInfoKHR const *pData) {
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_decode_h264
 void cleanup_VkVideoDecodeH264ProfileEXT(VkVideoDecodeH264ProfileEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13403,7 +14008,8 @@ void cleanup_VkVideoDecodeH264ProfileEXT(VkVideoDecodeH264ProfileEXT const *pDat
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_decode_h264
 void cleanup_VkVideoDecodeH264CapabilitiesEXT(VkVideoDecodeH264CapabilitiesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13412,7 +14018,8 @@ void cleanup_VkVideoDecodeH264CapabilitiesEXT(VkVideoDecodeH264CapabilitiesEXT c
 void cleanup_VkVideoDecodeH264SessionCreateInfoEXT(
     VkVideoDecodeH264SessionCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pStdExtensionVersion
@@ -13425,7 +14032,8 @@ void cleanup_VkVideoDecodeH264SessionCreateInfoEXT(
 void cleanup_VkVideoDecodeH264SessionParametersAddInfoEXT(
     VkVideoDecodeH264SessionParametersAddInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pSpsStd - spsStdCount
@@ -13440,7 +14048,8 @@ void cleanup_VkVideoDecodeH264SessionParametersAddInfoEXT(
 void cleanup_VkVideoDecodeH264SessionParametersCreateInfoEXT(
     VkVideoDecodeH264SessionParametersCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pParametersAddInfo
@@ -13452,7 +14061,8 @@ void cleanup_VkVideoDecodeH264SessionParametersCreateInfoEXT(
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_decode_h264
 void cleanup_VkVideoDecodeH264PictureInfoEXT(VkVideoDecodeH264PictureInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pStdPictureInfo
@@ -13466,7 +14076,8 @@ void cleanup_VkVideoDecodeH264PictureInfoEXT(VkVideoDecodeH264PictureInfoEXT con
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_decode_h264
 void cleanup_VkVideoDecodeH264DpbSlotInfoEXT(VkVideoDecodeH264DpbSlotInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pStdReferenceInfo
@@ -13477,7 +14088,8 @@ void cleanup_VkVideoDecodeH264DpbSlotInfoEXT(VkVideoDecodeH264DpbSlotInfoEXT con
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_decode_h264
 void cleanup_VkVideoDecodeH264MvcEXT(VkVideoDecodeH264MvcEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pStdMvc
@@ -13488,7 +14100,8 @@ void cleanup_VkVideoDecodeH264MvcEXT(VkVideoDecodeH264MvcEXT const *pData) {
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_decode_h265
 void cleanup_VkVideoDecodeH265ProfileEXT(VkVideoDecodeH265ProfileEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13496,7 +14109,8 @@ void cleanup_VkVideoDecodeH265ProfileEXT(VkVideoDecodeH265ProfileEXT const *pDat
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_decode_h265
 void cleanup_VkVideoDecodeH265CapabilitiesEXT(VkVideoDecodeH265CapabilitiesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13505,7 +14119,8 @@ void cleanup_VkVideoDecodeH265CapabilitiesEXT(VkVideoDecodeH265CapabilitiesEXT c
 void cleanup_VkVideoDecodeH265SessionCreateInfoEXT(
     VkVideoDecodeH265SessionCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pStdExtensionVersion
@@ -13518,7 +14133,8 @@ void cleanup_VkVideoDecodeH265SessionCreateInfoEXT(
 void cleanup_VkVideoDecodeH265SessionParametersAddInfoEXT(
     VkVideoDecodeH265SessionParametersAddInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pSpsStd - spsStdCount
@@ -13533,7 +14149,8 @@ void cleanup_VkVideoDecodeH265SessionParametersAddInfoEXT(
 void cleanup_VkVideoDecodeH265SessionParametersCreateInfoEXT(
     VkVideoDecodeH265SessionParametersCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pParametersAddInfo
@@ -13545,7 +14162,8 @@ void cleanup_VkVideoDecodeH265SessionParametersCreateInfoEXT(
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_decode_h265
 void cleanup_VkVideoDecodeH265PictureInfoEXT(VkVideoDecodeH265PictureInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pStdPictureInfo
@@ -13559,7 +14177,8 @@ void cleanup_VkVideoDecodeH265PictureInfoEXT(VkVideoDecodeH265PictureInfoEXT con
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_decode_h265
 void cleanup_VkVideoDecodeH265DpbSlotInfoEXT(VkVideoDecodeH265DpbSlotInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pStdReferenceInfo
@@ -13570,7 +14189,8 @@ void cleanup_VkVideoDecodeH265DpbSlotInfoEXT(VkVideoDecodeH265DpbSlotInfoEXT con
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
 void cleanup_VkVideoSessionCreateInfoKHR(VkVideoSessionCreateInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pVideoProfile
@@ -13583,7 +14203,8 @@ void cleanup_VkVideoSessionCreateInfoKHR(VkVideoSessionCreateInfoKHR const *pDat
 void cleanup_VkVideoSessionParametersCreateInfoKHR(
     VkVideoSessionParametersCreateInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13592,7 +14213,8 @@ void cleanup_VkVideoSessionParametersCreateInfoKHR(
 void cleanup_VkVideoSessionParametersUpdateInfoKHR(
     VkVideoSessionParametersUpdateInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13600,11 +14222,13 @@ void cleanup_VkVideoSessionParametersUpdateInfoKHR(
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
 void cleanup_VkVideoBeginCodingInfoKHR(VkVideoBeginCodingInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pReferenceSlots - referenceSlotCount
-  cleanup_VkVideoReferenceSlotKHR(pData->pReferenceSlots);
+  if (pData->pReferenceSlots != NULL)
+    cleanup_VkVideoReferenceSlotKHR(pData->pReferenceSlots);
   free((void *)pData->pReferenceSlots);
 }
 #endif
@@ -13612,7 +14236,8 @@ void cleanup_VkVideoBeginCodingInfoKHR(VkVideoBeginCodingInfoKHR const *pData) {
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
 void cleanup_VkVideoEndCodingInfoKHR(VkVideoEndCodingInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13620,7 +14245,8 @@ void cleanup_VkVideoEndCodingInfoKHR(VkVideoEndCodingInfoKHR const *pData) {
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
 void cleanup_VkVideoCodingControlInfoKHR(VkVideoCodingControlInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13628,7 +14254,8 @@ void cleanup_VkVideoCodingControlInfoKHR(VkVideoCodingControlInfoKHR const *pDat
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_encode_queue
 void cleanup_VkVideoEncodeInfoKHR(VkVideoEncodeInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pSetupReferenceSlot
@@ -13636,7 +14263,8 @@ void cleanup_VkVideoEncodeInfoKHR(VkVideoEncodeInfoKHR const *pData) {
   free((void *)pData->pSetupReferenceSlot);
 
   // pReferenceSlots - referenceSlotCount
-  cleanup_VkVideoReferenceSlotKHR(pData->pReferenceSlots);
+  if (pData->pReferenceSlots != NULL)
+    cleanup_VkVideoReferenceSlotKHR(pData->pReferenceSlots);
   free((void *)pData->pReferenceSlots);
 }
 #endif
@@ -13644,7 +14272,8 @@ void cleanup_VkVideoEncodeInfoKHR(VkVideoEncodeInfoKHR const *pData) {
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_encode_queue
 void cleanup_VkVideoEncodeRateControlInfoKHR(VkVideoEncodeRateControlInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13652,7 +14281,8 @@ void cleanup_VkVideoEncodeRateControlInfoKHR(VkVideoEncodeRateControlInfoKHR con
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_encode_h264
 void cleanup_VkVideoEncodeH264CapabilitiesEXT(VkVideoEncodeH264CapabilitiesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13661,7 +14291,8 @@ void cleanup_VkVideoEncodeH264CapabilitiesEXT(VkVideoEncodeH264CapabilitiesEXT c
 void cleanup_VkVideoEncodeH264SessionCreateInfoEXT(
     VkVideoEncodeH264SessionCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pStdExtensionVersion
@@ -13674,7 +14305,8 @@ void cleanup_VkVideoEncodeH264SessionCreateInfoEXT(
 void cleanup_VkVideoEncodeH264SessionParametersAddInfoEXT(
     VkVideoEncodeH264SessionParametersAddInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pSpsStd - spsStdCount
@@ -13689,7 +14321,8 @@ void cleanup_VkVideoEncodeH264SessionParametersAddInfoEXT(
 void cleanup_VkVideoEncodeH264SessionParametersCreateInfoEXT(
     VkVideoEncodeH264SessionParametersCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pParametersAddInfo
@@ -13701,7 +14334,8 @@ void cleanup_VkVideoEncodeH264SessionParametersCreateInfoEXT(
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_encode_h264
 void cleanup_VkVideoEncodeH264DpbSlotInfoEXT(VkVideoEncodeH264DpbSlotInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pStdPictureInfo
@@ -13712,19 +14346,23 @@ void cleanup_VkVideoEncodeH264DpbSlotInfoEXT(VkVideoEncodeH264DpbSlotInfoEXT con
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_encode_h264
 void cleanup_VkVideoEncodeH264VclFrameInfoEXT(VkVideoEncodeH264VclFrameInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pRefDefaultFinalList0Entries - refDefaultFinalList0EntryCount
-  cleanup_VkVideoEncodeH264DpbSlotInfoEXT(pData->pRefDefaultFinalList0Entries);
+  if (pData->pRefDefaultFinalList0Entries != NULL)
+    cleanup_VkVideoEncodeH264DpbSlotInfoEXT(pData->pRefDefaultFinalList0Entries);
   free((void *)pData->pRefDefaultFinalList0Entries);
 
   // pRefDefaultFinalList1Entries - refDefaultFinalList1EntryCount
-  cleanup_VkVideoEncodeH264DpbSlotInfoEXT(pData->pRefDefaultFinalList1Entries);
+  if (pData->pRefDefaultFinalList1Entries != NULL)
+    cleanup_VkVideoEncodeH264DpbSlotInfoEXT(pData->pRefDefaultFinalList1Entries);
   free((void *)pData->pRefDefaultFinalList1Entries);
 
   // pNaluSliceEntries - naluSliceEntryCount
-  cleanup_VkVideoEncodeH264NaluSliceEXT(pData->pNaluSliceEntries);
+  if (pData->pNaluSliceEntries != NULL)
+    cleanup_VkVideoEncodeH264NaluSliceEXT(pData->pNaluSliceEntries);
   free((void *)pData->pNaluSliceEntries);
 
   // pCurrentPictureInfo
@@ -13737,7 +14375,8 @@ void cleanup_VkVideoEncodeH264VclFrameInfoEXT(VkVideoEncodeH264VclFrameInfoEXT c
 void cleanup_VkVideoEncodeH264EmitPictureParametersEXT(
     VkVideoEncodeH264EmitPictureParametersEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // ppsIdEntries - ppsIdEntryCount
@@ -13748,7 +14387,8 @@ void cleanup_VkVideoEncodeH264EmitPictureParametersEXT(
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_encode_h264
 void cleanup_VkVideoEncodeH264ProfileEXT(VkVideoEncodeH264ProfileEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13756,18 +14396,21 @@ void cleanup_VkVideoEncodeH264ProfileEXT(VkVideoEncodeH264ProfileEXT const *pDat
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_encode_h264
 void cleanup_VkVideoEncodeH264NaluSliceEXT(VkVideoEncodeH264NaluSliceEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pSliceHeaderStd
   free((void *)pData->pSliceHeaderStd);
 
   // pRefFinalList0Entries - refFinalList0EntryCount
-  cleanup_VkVideoEncodeH264DpbSlotInfoEXT(pData->pRefFinalList0Entries);
+  if (pData->pRefFinalList0Entries != NULL)
+    cleanup_VkVideoEncodeH264DpbSlotInfoEXT(pData->pRefFinalList0Entries);
   free((void *)pData->pRefFinalList0Entries);
 
   // pRefFinalList1Entries - refFinalList1EntryCount
-  cleanup_VkVideoEncodeH264DpbSlotInfoEXT(pData->pRefFinalList1Entries);
+  if (pData->pRefFinalList1Entries != NULL)
+    cleanup_VkVideoEncodeH264DpbSlotInfoEXT(pData->pRefFinalList1Entries);
   free((void *)pData->pRefFinalList1Entries);
 }
 #endif
@@ -13776,7 +14419,8 @@ void cleanup_VkVideoEncodeH264NaluSliceEXT(VkVideoEncodeH264NaluSliceEXT const *
 void cleanup_VkPhysicalDeviceInheritedViewportScissorFeaturesNV(
     VkPhysicalDeviceInheritedViewportScissorFeaturesNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13785,7 +14429,8 @@ void cleanup_VkPhysicalDeviceInheritedViewportScissorFeaturesNV(
 void cleanup_VkCommandBufferInheritanceViewportScissorInfoNV(
     VkCommandBufferInheritanceViewportScissorInfoNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pViewportDepths
@@ -13798,7 +14443,8 @@ void cleanup_VkCommandBufferInheritanceViewportScissorInfoNV(
 void cleanup_VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT(
     VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13807,7 +14453,8 @@ void cleanup_VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT(
 void cleanup_VkPhysicalDeviceProvokingVertexFeaturesEXT(
     VkPhysicalDeviceProvokingVertexFeaturesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13816,7 +14463,8 @@ void cleanup_VkPhysicalDeviceProvokingVertexFeaturesEXT(
 void cleanup_VkPhysicalDeviceProvokingVertexPropertiesEXT(
     VkPhysicalDeviceProvokingVertexPropertiesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13825,7 +14473,8 @@ void cleanup_VkPhysicalDeviceProvokingVertexPropertiesEXT(
 void cleanup_VkPipelineRasterizationProvokingVertexStateCreateInfoEXT(
     VkPipelineRasterizationProvokingVertexStateCreateInfoEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13833,7 +14482,8 @@ void cleanup_VkPipelineRasterizationProvokingVertexStateCreateInfoEXT(
 #if VK_HEADER_VERSION >= 178 && VK_NVX_binary_import
 void cleanup_VkCuModuleCreateInfoNVX(VkCuModuleCreateInfoNVX const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pData
@@ -13844,7 +14494,8 @@ void cleanup_VkCuModuleCreateInfoNVX(VkCuModuleCreateInfoNVX const *pData) {
 #if VK_HEADER_VERSION >= 178 && VK_NVX_binary_import
 void cleanup_VkCuFunctionCreateInfoNVX(VkCuFunctionCreateInfoNVX const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pName - null-terminated
@@ -13855,7 +14506,8 @@ void cleanup_VkCuFunctionCreateInfoNVX(VkCuFunctionCreateInfoNVX const *pData) {
 #if VK_HEADER_VERSION >= 178 && VK_NVX_binary_import
 void cleanup_VkCuLaunchInfoNVX(VkCuLaunchInfoNVX const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pParams - paramCount
@@ -13869,7 +14521,8 @@ void cleanup_VkCuLaunchInfoNVX(VkCuLaunchInfoNVX const *pData) {
 #if VK_HEADER_VERSION >= 182 && VK_EXT_physical_device_drm
 void cleanup_VkPhysicalDeviceDrmPropertiesEXT(VkPhysicalDeviceDrmPropertiesEXT const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13878,7 +14531,8 @@ void cleanup_VkPhysicalDeviceDrmPropertiesEXT(VkPhysicalDeviceDrmPropertiesEXT c
 void cleanup_VkPhysicalDeviceRayTracingMotionBlurFeaturesNV(
     VkPhysicalDeviceRayTracingMotionBlurFeaturesNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13887,7 +14541,8 @@ void cleanup_VkPhysicalDeviceRayTracingMotionBlurFeaturesNV(
 void cleanup_VkAccelerationStructureGeometryMotionTrianglesDataNV(
     VkAccelerationStructureGeometryMotionTrianglesDataNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13895,7 +14550,8 @@ void cleanup_VkAccelerationStructureGeometryMotionTrianglesDataNV(
 #if VK_HEADER_VERSION >= 182 && VK_NV_ray_tracing_motion_blur
 void cleanup_VkAccelerationStructureMotionInfoNV(VkAccelerationStructureMotionInfoNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13922,7 +14578,8 @@ extern inline void cleanup_VkAccelerationStructureMotionInstanceNV(
 #if VK_HEADER_VERSION >= 184 && VK_NV_external_memory_rdma
 void cleanup_VkMemoryGetRemoteAddressInfoNV(VkMemoryGetRemoteAddressInfoNV const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13931,7 +14588,8 @@ void cleanup_VkMemoryGetRemoteAddressInfoNV(VkMemoryGetRemoteAddressInfoNV const
 void cleanup_VkBindAccelerationStructureMemoryInfoKHR(
     VkBindAccelerationStructureMemoryInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pDeviceIndices - deviceIndexCount
@@ -13943,7 +14601,8 @@ void cleanup_VkBindAccelerationStructureMemoryInfoKHR(
 void cleanup_VkAccelerationStructureMemoryRequirementsInfoKHR(
     VkAccelerationStructureMemoryRequirementsInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13952,7 +14611,8 @@ void cleanup_VkAccelerationStructureMemoryRequirementsInfoKHR(
 void cleanup_VkPhysicalDeviceRayTracingFeaturesKHR(
     VkPhysicalDeviceRayTracingFeaturesKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13961,7 +14621,8 @@ void cleanup_VkPhysicalDeviceRayTracingFeaturesKHR(
 void cleanup_VkPhysicalDeviceRayTracingPropertiesKHR(
     VkPhysicalDeviceRayTracingPropertiesKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13979,7 +14640,8 @@ extern inline void cleanup_VkAccelerationStructureBuildOffsetInfoKHR(
 void cleanup_VkAccelerationStructureCreateGeometryTypeInfoKHR(
     VkAccelerationStructureCreateGeometryTypeInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -13987,7 +14649,8 @@ void cleanup_VkAccelerationStructureCreateGeometryTypeInfoKHR(
 #if VK_HEADER_VERSION >= 135 && VK_HEADER_VERSION <= 161 && VK_KHR_ray_tracing
 void cleanup_VkAccelerationStructureVersionKHR(VkAccelerationStructureVersionKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // versionData - 2*VK_UUID_SIZE
@@ -13998,7 +14661,8 @@ void cleanup_VkAccelerationStructureVersionKHR(VkAccelerationStructureVersionKHR
 #if VK_HEADER_VERSION >= 135 && VK_HEADER_VERSION <= 161 && VK_KHR_deferred_host_operations
 void cleanup_VkDeferredOperationInfoKHR(VkDeferredOperationInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -14007,7 +14671,8 @@ void cleanup_VkDeferredOperationInfoKHR(VkDeferredOperationInfoKHR const *pData)
 void cleanup_VkDeviceGeneratedCommandsFeaturesNVX(
     VkDeviceGeneratedCommandsFeaturesNVX const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -14015,7 +14680,8 @@ void cleanup_VkDeviceGeneratedCommandsFeaturesNVX(
 #if VK_HEADER_VERSION <= 134 && VK_NVX_device_generated_commands
 void cleanup_VkDeviceGeneratedCommandsLimitsNVX(VkDeviceGeneratedCommandsLimitsNVX const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -14033,11 +14699,13 @@ extern inline void cleanup_VkIndirectCommandsLayoutTokenNVX(
 void cleanup_VkIndirectCommandsLayoutCreateInfoNVX(
     VkIndirectCommandsLayoutCreateInfoNVX const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pTokens - tokenCount
-  cleanup_VkIndirectCommandsLayoutTokenNVX(pData->pTokens);
+  if (pData->pTokens != NULL)
+    cleanup_VkIndirectCommandsLayoutTokenNVX(pData->pTokens);
   free((void *)pData->pTokens);
 }
 #endif
@@ -14045,11 +14713,13 @@ void cleanup_VkIndirectCommandsLayoutCreateInfoNVX(
 #if VK_HEADER_VERSION <= 134 && VK_NVX_device_generated_commands
 void cleanup_VkCmdProcessCommandsInfoNVX(VkCmdProcessCommandsInfoNVX const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pIndirectCommandsTokens - indirectCommandsTokenCount
-  cleanup_VkIndirectCommandsTokenNVX(pData->pIndirectCommandsTokens);
+  if (pData->pIndirectCommandsTokens != NULL)
+    cleanup_VkIndirectCommandsTokenNVX(pData->pIndirectCommandsTokens);
   free((void *)pData->pIndirectCommandsTokens);
 }
 #endif
@@ -14057,7 +14727,8 @@ void cleanup_VkCmdProcessCommandsInfoNVX(VkCmdProcessCommandsInfoNVX const *pDat
 #if VK_HEADER_VERSION <= 134 && VK_NVX_device_generated_commands
 void cleanup_VkCmdReserveSpaceForCommandsInfoNVX(VkCmdReserveSpaceForCommandsInfoNVX const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -14065,7 +14736,8 @@ void cleanup_VkCmdReserveSpaceForCommandsInfoNVX(VkCmdReserveSpaceForCommandsInf
 #if VK_HEADER_VERSION <= 134 && VK_NVX_device_generated_commands
 void cleanup_VkObjectTableCreateInfoNVX(VkObjectTableCreateInfoNVX const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pObjectEntryTypes - objectCount
@@ -14112,7 +14784,8 @@ extern inline void cleanup_VkObjectTablePushConstantEntryNVX(
 void cleanup_VkPhysicalDeviceShaderIntegerFunctions2INTEL(
     VkPhysicalDeviceShaderIntegerFunctions2INTEL const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -14120,7 +14793,8 @@ void cleanup_VkPhysicalDeviceShaderIntegerFunctions2INTEL(
 #if VK_HEADER_VERSION <= 90 && VK_KHR_mir_surface
 void cleanup_VkMirSurfaceCreateInfoKHR(VkMirSurfaceCreateInfoKHR const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // connection
@@ -14134,11 +14808,13 @@ void cleanup_VkMirSurfaceCreateInfoKHR(VkMirSurfaceCreateInfoKHR const *pData) {
 #if VK_HEADER_VERSION >= 85 && VK_HEADER_VERSION <= 90 && VK_NVX_raytracing
 void cleanup_VkRaytracingPipelineCreateInfoNVX(VkRaytracingPipelineCreateInfoNVX const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pStages - stageCount
-  cleanup_VkPipelineShaderStageCreateInfo(pData->pStages);
+  if (pData->pStages != NULL)
+    cleanup_VkPipelineShaderStageCreateInfo(pData->pStages);
   free((void *)pData->pStages);
 
   // pGroupNumbers - stageCount
@@ -14149,7 +14825,8 @@ void cleanup_VkRaytracingPipelineCreateInfoNVX(VkRaytracingPipelineCreateInfoNVX
 #if VK_HEADER_VERSION >= 85 && VK_HEADER_VERSION <= 90 && VK_NVX_raytracing
 void cleanup_VkGeometryTrianglesNVX(VkGeometryTrianglesNVX const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -14157,7 +14834,8 @@ void cleanup_VkGeometryTrianglesNVX(VkGeometryTrianglesNVX const *pData) {
 #if VK_HEADER_VERSION >= 85 && VK_HEADER_VERSION <= 90 && VK_NVX_raytracing
 void cleanup_VkGeometryAABBNVX(VkGeometryAABBNVX const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -14169,7 +14847,8 @@ extern inline void cleanup_VkGeometryDataNVX(VkGeometryDataNVX const *pData);
 #if VK_HEADER_VERSION >= 85 && VK_HEADER_VERSION <= 90 && VK_NVX_raytracing
 void cleanup_VkGeometryNVX(VkGeometryNVX const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -14178,11 +14857,13 @@ void cleanup_VkGeometryNVX(VkGeometryNVX const *pData) {
 void cleanup_VkAccelerationStructureCreateInfoNVX(
     VkAccelerationStructureCreateInfoNVX const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pGeometries - geometryCount
-  cleanup_VkGeometryNVX(pData->pGeometries);
+  if (pData->pGeometries != NULL)
+    cleanup_VkGeometryNVX(pData->pGeometries);
   free((void *)pData->pGeometries);
 }
 #endif
@@ -14191,7 +14872,8 @@ void cleanup_VkAccelerationStructureCreateInfoNVX(
 void cleanup_VkBindAccelerationStructureMemoryInfoNVX(
     VkBindAccelerationStructureMemoryInfoNVX const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pDeviceIndices - deviceIndexCount
@@ -14203,7 +14885,8 @@ void cleanup_VkBindAccelerationStructureMemoryInfoNVX(
 void cleanup_VkDescriptorAccelerationStructureInfoNVX(
     VkDescriptorAccelerationStructureInfoNVX const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
   // pAccelerationStructures - accelerationStructureCount
@@ -14215,7 +14898,8 @@ void cleanup_VkDescriptorAccelerationStructureInfoNVX(
 void cleanup_VkAccelerationStructureMemoryRequirementsInfoNVX(
     VkAccelerationStructureMemoryRequirementsInfoNVX const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
@@ -14224,7 +14908,8 @@ void cleanup_VkAccelerationStructureMemoryRequirementsInfoNVX(
 void cleanup_VkPhysicalDeviceRaytracingPropertiesNVX(
     VkPhysicalDeviceRaytracingPropertiesNVX const *pData) {
   // pNext
-  cleanup_vk_struct(pData->pNext);
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
 #endif
