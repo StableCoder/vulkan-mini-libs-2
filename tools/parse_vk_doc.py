@@ -129,6 +129,76 @@ def processExtensionEnums(extension, outEnum, vkVersion):
             ET.SubElement(value.find('platforms'), extName)
 
 
+def processStruct(structNode, structData, vkVersion):
+    category = structNode.get('category')
+    if category is None or category != 'struct':
+        return
+    structName = structNode.get('name')
+
+    struct = structData.find(structName)
+    if struct is None:
+        struct = ET.SubElement(structData, structName, {
+                               'first': vkVersion, 'last': vkVersion})
+        members = ET.SubElement(struct, 'members')
+        ET.SubElement(struct, 'platforms')
+
+        # Only need to process the members the first time it appears, as they don't change through time
+        for member in structNode.findall('./member'):
+            nameNode = member.find('name')
+            node = ET.SubElement(members, nameNode.text)
+            if not member.get('values') is None:
+                value = ET.SubElement(node, 'value')
+                value.text = member.get('values')
+            if not member.get('altlen') is None:
+                node.set('len', member.get('altlen'))
+            elif not member.get('len') is None:
+                node.set('len', member.get('len'))
+            if not member.find('enum') is None:
+                node.set('suffix', '[' + member.find('enum').text + ']')
+
+            # Type Info
+            type = ET.SubElement(node, 'type')
+            type.text = member.find('type').text
+            # Type Suffix
+            typeSuffix = ''
+            if not member.text is None:
+                typeSuffix += member.text
+            if not member.find('type').tail is None:
+                typeSuffix += member.find('type').tail
+            typeSuffix = typeSuffix.strip()
+            if typeSuffix != '':
+                type.set('suffix', typeSuffix)
+
+            # Array Stuff
+            if not nameNode.tail is None and nameNode.tail != '[':
+                node.set('suffix', nameNode.tail)
+
+    else:
+        struct.set('first', vkVersion)
+
+
+def processFeatureStruct(featureName, featureType, structData):
+    name = featureType.get('name')
+
+    struct = structData.find(name)
+    if not struct is None:
+        platforms = struct.find('platforms')
+        if platforms.find(featureName) is None:
+            ET.SubElement(platforms, featureName)
+
+
+def processExtensionStruct(extension, structData):
+    extName = extension.get('name')
+
+    for type in extension.findall('require/type'):
+        typeName = type.get('name')
+        struct = structData.find(typeName)
+        if not struct is None:
+            platforms = struct.find('platforms')
+            if platforms.find(extName) is None:
+                ET.SubElement(platforms, extName)
+
+
 def main(argv):
     inputFile = ''
     workingFile = ''
@@ -192,6 +262,25 @@ def main(argv):
         processFeatureEnum(feature, enumData, vkVersion)
     for extension in vkRoot.findall('extensions/extension'):
         processExtensionEnums(extension, enumData, vkVersion)
+
+    # Process Structs
+    if dataRoot.find('structs') is None:
+        ET.SubElement(dataRoot, 'structs')
+    structData = dataRoot.find('structs')
+
+    for struct in vkRoot.findall('types/type'):
+        processStruct(struct, structData, vkVersion)
+
+    for feature in vkRoot.findall('feature'):
+        featureName = feature.get('name')
+        # Skip the core set
+        if featureName == 'VK_VERSION_1_0':
+            continue
+        for featureType in feature.findall('require/type'):
+            processFeatureStruct(featureName, featureType, structData)
+
+    for extension in vkRoot.findall('extensions/extension'):
+        processExtensionStruct(extension, structData)
 
     # Output XML
     tree = ET.ElementTree(dataRoot)
