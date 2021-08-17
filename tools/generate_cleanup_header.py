@@ -46,25 +46,30 @@ def getExternalDataMembers(members):
     return externalMembers
 
 
-def processMultiMember(member, suffix, dataRoot, lenSplit, outFile):
+def processMultiMember(member, suffix, dataRoot, lenSplit, availableVars, outFile):
+    if len(availableVars) == 0:
+        print('Error, ran out of nestable variable names, add more!')
+        sys.exit(1)
+    curVar = availableVars[0]
     count = lenSplit[0]
     typeName = member.find('type').text
     typeNode = dataRoot.find('structs/' + typeName)
 
     if len(lenSplit) > 1:
+        
         outFile.writelines(
-            ['    for(uint32_t i = 0; i < pData->', count, suffix, '; ++i) {\n'])
-        processMultiMember(member, '[i]', dataRoot,
-                           lenSplit[1:], outFile)
+            ['    for(uint32_t ',curVar,' = 0; ',curVar,' < pData->', count, suffix, '; ++',curVar,') {\n'])
+        processMultiMember(member, '[' + curVar + ']', dataRoot,
+                           lenSplit[1:], availableVars[1:], outFile)
         outFile.write('    }\n')
     else:
         if not typeNode is None:
             # A Vulkan struct, cleanup first
             outFile.writelines(['    if (pData->',member.tag, suffix, ' != NULL) {\n'])
             outFile.writelines(
-                ['        for (uint32_t c = 0; c < pData->', count, '; ++c)\n'])
+                ['    for(uint32_t ',curVar,' = 0; ',curVar,' < pData->', count, suffix, '; ++',curVar,')\n'])
             outFile.writelines(
-                ['            cleanup_', typeName, '(&pData->', member.tag, suffix, '[c]);\n'])
+                ['            cleanup_', typeName, '(&pData->', member.tag, suffix, '[', curVar,']);\n'])
             outFile.write('    }\n')
     outFile.writelines(
             ['    free((void*)pData->', member.tag, suffix, ');\n'])
@@ -228,7 +233,7 @@ void cleanup_vk_struct(void const* pData) {
                     outFile.writelines(
                         ['\n    // ', member.tag, ' - ', member.get('len'), '\n'])
                     processMultiMember(member, '', dataRoot,
-                                    member.get('len').split(','), outFile)
+                                    member.get('len').split(','), 'ijklmn', outFile)
             outFile.write('}\n')
             
         if guarded:

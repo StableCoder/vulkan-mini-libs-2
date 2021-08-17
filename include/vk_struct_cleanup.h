@@ -7372,8 +7372,8 @@ void cleanup_VkDeviceCreateInfo(VkDeviceCreateInfo const *pData) {
 
   // pQueueCreateInfos - queueCreateInfoCount
   if (pData->pQueueCreateInfos != NULL) {
-    for (uint32_t c = 0; c < pData->queueCreateInfoCount; ++c)
-      cleanup_VkDeviceQueueCreateInfo(&pData->pQueueCreateInfos[c]);
+    for (uint32_t i = 0; i < pData->queueCreateInfoCount; ++i)
+      cleanup_VkDeviceQueueCreateInfo(&pData->pQueueCreateInfos[i]);
   }
   free((void *)pData->pQueueCreateInfos);
 
@@ -7466,15 +7466,15 @@ void cleanup_VkWriteDescriptorSet(VkWriteDescriptorSet const *pData) {
 
   // pImageInfo - descriptorCount
   if (pData->pImageInfo != NULL) {
-    for (uint32_t c = 0; c < pData->descriptorCount; ++c)
-      cleanup_VkDescriptorImageInfo(&pData->pImageInfo[c]);
+    for (uint32_t i = 0; i < pData->descriptorCount; ++i)
+      cleanup_VkDescriptorImageInfo(&pData->pImageInfo[i]);
   }
   free((void *)pData->pImageInfo);
 
   // pBufferInfo - descriptorCount
   if (pData->pBufferInfo != NULL) {
-    for (uint32_t c = 0; c < pData->descriptorCount; ++c)
-      cleanup_VkDescriptorBufferInfo(&pData->pBufferInfo[c]);
+    for (uint32_t i = 0; i < pData->descriptorCount; ++i)
+      cleanup_VkDescriptorBufferInfo(&pData->pBufferInfo[i]);
   }
   free((void *)pData->pBufferInfo);
 
@@ -7561,8 +7561,8 @@ extern inline void cleanup_VkSparseImageMemoryBind(VkSparseImageMemoryBind const
 void cleanup_VkSparseBufferMemoryBindInfo(VkSparseBufferMemoryBindInfo const *pData) {
   // pBinds - bindCount
   if (pData->pBinds != NULL) {
-    for (uint32_t c = 0; c < pData->bindCount; ++c)
-      cleanup_VkSparseMemoryBind(&pData->pBinds[c]);
+    for (uint32_t i = 0; i < pData->bindCount; ++i)
+      cleanup_VkSparseMemoryBind(&pData->pBinds[i]);
   }
   free((void *)pData->pBinds);
 }
@@ -7570,8 +7570,8 @@ void cleanup_VkSparseBufferMemoryBindInfo(VkSparseBufferMemoryBindInfo const *pD
 void cleanup_VkSparseImageOpaqueMemoryBindInfo(VkSparseImageOpaqueMemoryBindInfo const *pData) {
   // pBinds - bindCount
   if (pData->pBinds != NULL) {
-    for (uint32_t c = 0; c < pData->bindCount; ++c)
-      cleanup_VkSparseMemoryBind(&pData->pBinds[c]);
+    for (uint32_t i = 0; i < pData->bindCount; ++i)
+      cleanup_VkSparseMemoryBind(&pData->pBinds[i]);
   }
   free((void *)pData->pBinds);
 }
@@ -7579,8 +7579,8 @@ void cleanup_VkSparseImageOpaqueMemoryBindInfo(VkSparseImageOpaqueMemoryBindInfo
 void cleanup_VkSparseImageMemoryBindInfo(VkSparseImageMemoryBindInfo const *pData) {
   // pBinds - bindCount
   if (pData->pBinds != NULL) {
-    for (uint32_t c = 0; c < pData->bindCount; ++c)
-      cleanup_VkSparseImageMemoryBind(&pData->pBinds[c]);
+    for (uint32_t i = 0; i < pData->bindCount; ++i)
+      cleanup_VkSparseImageMemoryBind(&pData->pBinds[i]);
   }
   free((void *)pData->pBinds);
 }
@@ -7596,22 +7596,22 @@ void cleanup_VkBindSparseInfo(VkBindSparseInfo const *pData) {
 
   // pBufferBinds - bufferBindCount
   if (pData->pBufferBinds != NULL) {
-    for (uint32_t c = 0; c < pData->bufferBindCount; ++c)
-      cleanup_VkSparseBufferMemoryBindInfo(&pData->pBufferBinds[c]);
+    for (uint32_t i = 0; i < pData->bufferBindCount; ++i)
+      cleanup_VkSparseBufferMemoryBindInfo(&pData->pBufferBinds[i]);
   }
   free((void *)pData->pBufferBinds);
 
   // pImageOpaqueBinds - imageOpaqueBindCount
   if (pData->pImageOpaqueBinds != NULL) {
-    for (uint32_t c = 0; c < pData->imageOpaqueBindCount; ++c)
-      cleanup_VkSparseImageOpaqueMemoryBindInfo(&pData->pImageOpaqueBinds[c]);
+    for (uint32_t i = 0; i < pData->imageOpaqueBindCount; ++i)
+      cleanup_VkSparseImageOpaqueMemoryBindInfo(&pData->pImageOpaqueBinds[i]);
   }
   free((void *)pData->pImageOpaqueBinds);
 
   // pImageBinds - imageBindCount
   if (pData->pImageBinds != NULL) {
-    for (uint32_t c = 0; c < pData->imageBindCount; ++c)
-      cleanup_VkSparseImageMemoryBindInfo(&pData->pImageBinds[c]);
+    for (uint32_t i = 0; i < pData->imageBindCount; ++i)
+      cleanup_VkSparseImageMemoryBindInfo(&pData->pImageBinds[i]);
   }
   free((void *)pData->pImageBinds);
 
@@ -7650,8 +7650,8 @@ void cleanup_VkDescriptorSetLayoutCreateInfo(VkDescriptorSetLayoutCreateInfo con
 
   // pBindings - bindingCount
   if (pData->pBindings != NULL) {
-    for (uint32_t c = 0; c < pData->bindingCount; ++c)
-      cleanup_VkDescriptorSetLayoutBinding(&pData->pBindings[c]);
+    for (uint32_t i = 0; i < pData->bindingCount; ++i)
+      cleanup_VkDescriptorSetLayoutBinding(&pData->pBindings[i]);
   }
   free((void *)pData->pBindings);
 }
@@ -7666,8 +7666,8 @@ void cleanup_VkDescriptorPoolCreateInfo(VkDescriptorPoolCreateInfo const *pData)
 
   // pPoolSizes - poolSizeCount
   if (pData->pPoolSizes != NULL) {
-    for (uint32_t c = 0; c < pData->poolSizeCount; ++c)
-      cleanup_VkDescriptorPoolSize(&pData->pPoolSizes[c]);
+    for (uint32_t i = 0; i < pData->poolSizeCount; ++i)
+      cleanup_VkDescriptorPoolSize(&pData->pPoolSizes[i]);
   }
   free((void *)pData->pPoolSizes);
 }
@@ -7687,8 +7687,8 @@ extern inline void cleanup_VkSpecializationMapEntry(VkSpecializationMapEntry con
 void cleanup_VkSpecializationInfo(VkSpecializationInfo const *pData) {
   // pMapEntries - mapEntryCount
   if (pData->pMapEntries != NULL) {
-    for (uint32_t c = 0; c < pData->mapEntryCount; ++c)
-      cleanup_VkSpecializationMapEntry(&pData->pMapEntries[c]);
+    for (uint32_t i = 0; i < pData->mapEntryCount; ++i)
+      cleanup_VkSpecializationMapEntry(&pData->pMapEntries[i]);
   }
   free((void *)pData->pMapEntries);
 
@@ -7733,15 +7733,15 @@ void cleanup_VkPipelineVertexInputStateCreateInfo(
 
   // pVertexBindingDescriptions - vertexBindingDescriptionCount
   if (pData->pVertexBindingDescriptions != NULL) {
-    for (uint32_t c = 0; c < pData->vertexBindingDescriptionCount; ++c)
-      cleanup_VkVertexInputBindingDescription(&pData->pVertexBindingDescriptions[c]);
+    for (uint32_t i = 0; i < pData->vertexBindingDescriptionCount; ++i)
+      cleanup_VkVertexInputBindingDescription(&pData->pVertexBindingDescriptions[i]);
   }
   free((void *)pData->pVertexBindingDescriptions);
 
   // pVertexAttributeDescriptions - vertexAttributeDescriptionCount
   if (pData->pVertexAttributeDescriptions != NULL) {
-    for (uint32_t c = 0; c < pData->vertexAttributeDescriptionCount; ++c)
-      cleanup_VkVertexInputAttributeDescription(&pData->pVertexAttributeDescriptions[c]);
+    for (uint32_t i = 0; i < pData->vertexAttributeDescriptionCount; ++i)
+      cleanup_VkVertexInputAttributeDescription(&pData->pVertexAttributeDescriptions[i]);
   }
   free((void *)pData->pVertexAttributeDescriptions);
 }
@@ -7770,15 +7770,15 @@ void cleanup_VkPipelineViewportStateCreateInfo(VkPipelineViewportStateCreateInfo
 
   // pViewports - viewportCount
   if (pData->pViewports != NULL) {
-    for (uint32_t c = 0; c < pData->viewportCount; ++c)
-      cleanup_VkViewport(&pData->pViewports[c]);
+    for (uint32_t i = 0; i < pData->viewportCount; ++i)
+      cleanup_VkViewport(&pData->pViewports[i]);
   }
   free((void *)pData->pViewports);
 
   // pScissors - scissorCount
   if (pData->pScissors != NULL) {
-    for (uint32_t c = 0; c < pData->scissorCount; ++c)
-      cleanup_VkRect2D(&pData->pScissors[c]);
+    for (uint32_t i = 0; i < pData->scissorCount; ++i)
+      cleanup_VkRect2D(&pData->pScissors[i]);
   }
   free((void *)pData->pScissors);
 }
@@ -7813,8 +7813,8 @@ void cleanup_VkPipelineColorBlendStateCreateInfo(VkPipelineColorBlendStateCreate
 
   // pAttachments - attachmentCount
   if (pData->pAttachments != NULL) {
-    for (uint32_t c = 0; c < pData->attachmentCount; ++c)
-      cleanup_VkPipelineColorBlendAttachmentState(&pData->pAttachments[c]);
+    for (uint32_t i = 0; i < pData->attachmentCount; ++i)
+      cleanup_VkPipelineColorBlendAttachmentState(&pData->pAttachments[i]);
   }
   free((void *)pData->pAttachments);
 }
@@ -7847,8 +7847,8 @@ void cleanup_VkGraphicsPipelineCreateInfo(VkGraphicsPipelineCreateInfo const *pD
 
   // pStages - stageCount
   if (pData->pStages != NULL) {
-    for (uint32_t c = 0; c < pData->stageCount; ++c)
-      cleanup_VkPipelineShaderStageCreateInfo(&pData->pStages[c]);
+    for (uint32_t i = 0; i < pData->stageCount; ++i)
+      cleanup_VkPipelineShaderStageCreateInfo(&pData->pStages[i]);
   }
   free((void *)pData->pStages);
 
@@ -7926,8 +7926,8 @@ void cleanup_VkPipelineLayoutCreateInfo(VkPipelineLayoutCreateInfo const *pData)
 
   // pPushConstantRanges - pushConstantRangeCount
   if (pData->pPushConstantRanges != NULL) {
-    for (uint32_t c = 0; c < pData->pushConstantRangeCount; ++c)
-      cleanup_VkPushConstantRange(&pData->pPushConstantRanges[c]);
+    for (uint32_t i = 0; i < pData->pushConstantRangeCount; ++i)
+      cleanup_VkPushConstantRange(&pData->pPushConstantRanges[i]);
   }
   free((void *)pData->pPushConstantRanges);
 }
@@ -7993,22 +7993,22 @@ extern inline void cleanup_VkAttachmentReference(VkAttachmentReference const *pD
 void cleanup_VkSubpassDescription(VkSubpassDescription const *pData) {
   // pInputAttachments - inputAttachmentCount
   if (pData->pInputAttachments != NULL) {
-    for (uint32_t c = 0; c < pData->inputAttachmentCount; ++c)
-      cleanup_VkAttachmentReference(&pData->pInputAttachments[c]);
+    for (uint32_t i = 0; i < pData->inputAttachmentCount; ++i)
+      cleanup_VkAttachmentReference(&pData->pInputAttachments[i]);
   }
   free((void *)pData->pInputAttachments);
 
   // pColorAttachments - colorAttachmentCount
   if (pData->pColorAttachments != NULL) {
-    for (uint32_t c = 0; c < pData->colorAttachmentCount; ++c)
-      cleanup_VkAttachmentReference(&pData->pColorAttachments[c]);
+    for (uint32_t i = 0; i < pData->colorAttachmentCount; ++i)
+      cleanup_VkAttachmentReference(&pData->pColorAttachments[i]);
   }
   free((void *)pData->pColorAttachments);
 
   // pResolveAttachments - colorAttachmentCount
   if (pData->pResolveAttachments != NULL) {
-    for (uint32_t c = 0; c < pData->colorAttachmentCount; ++c)
-      cleanup_VkAttachmentReference(&pData->pResolveAttachments[c]);
+    for (uint32_t i = 0; i < pData->colorAttachmentCount; ++i)
+      cleanup_VkAttachmentReference(&pData->pResolveAttachments[i]);
   }
   free((void *)pData->pResolveAttachments);
 
@@ -8031,22 +8031,22 @@ void cleanup_VkRenderPassCreateInfo(VkRenderPassCreateInfo const *pData) {
 
   // pAttachments - attachmentCount
   if (pData->pAttachments != NULL) {
-    for (uint32_t c = 0; c < pData->attachmentCount; ++c)
-      cleanup_VkAttachmentDescription(&pData->pAttachments[c]);
+    for (uint32_t i = 0; i < pData->attachmentCount; ++i)
+      cleanup_VkAttachmentDescription(&pData->pAttachments[i]);
   }
   free((void *)pData->pAttachments);
 
   // pSubpasses - subpassCount
   if (pData->pSubpasses != NULL) {
-    for (uint32_t c = 0; c < pData->subpassCount; ++c)
-      cleanup_VkSubpassDescription(&pData->pSubpasses[c]);
+    for (uint32_t i = 0; i < pData->subpassCount; ++i)
+      cleanup_VkSubpassDescription(&pData->pSubpasses[i]);
   }
   free((void *)pData->pSubpasses);
 
   // pDependencies - dependencyCount
   if (pData->pDependencies != NULL) {
-    for (uint32_t c = 0; c < pData->dependencyCount; ++c)
-      cleanup_VkSubpassDependency(&pData->pDependencies[c]);
+    for (uint32_t i = 0; i < pData->dependencyCount; ++i)
+      cleanup_VkSubpassDependency(&pData->pDependencies[i]);
   }
   free((void *)pData->pDependencies);
 }
@@ -8593,8 +8593,8 @@ void cleanup_VkGraphicsShaderGroupCreateInfoNV(VkGraphicsShaderGroupCreateInfoNV
 
   // pStages - stageCount
   if (pData->pStages != NULL) {
-    for (uint32_t c = 0; c < pData->stageCount; ++c)
-      cleanup_VkPipelineShaderStageCreateInfo(&pData->pStages[c]);
+    for (uint32_t i = 0; i < pData->stageCount; ++i)
+      cleanup_VkPipelineShaderStageCreateInfo(&pData->pStages[i]);
   }
   free((void *)pData->pStages);
 
@@ -8620,8 +8620,8 @@ void cleanup_VkGraphicsPipelineShaderGroupsCreateInfoNV(
 
   // pGroups - groupCount
   if (pData->pGroups != NULL) {
-    for (uint32_t c = 0; c < pData->groupCount; ++c)
-      cleanup_VkGraphicsShaderGroupCreateInfoNV(&pData->pGroups[c]);
+    for (uint32_t i = 0; i < pData->groupCount; ++i)
+      cleanup_VkGraphicsShaderGroupCreateInfoNV(&pData->pGroups[i]);
   }
   free((void *)pData->pGroups);
 
@@ -8679,8 +8679,8 @@ void cleanup_VkIndirectCommandsLayoutCreateInfoNV(
 
   // pTokens - tokenCount
   if (pData->pTokens != NULL) {
-    for (uint32_t c = 0; c < pData->tokenCount; ++c)
-      cleanup_VkIndirectCommandsLayoutTokenNV(&pData->pTokens[c]);
+    for (uint32_t i = 0; i < pData->tokenCount; ++i)
+      cleanup_VkIndirectCommandsLayoutTokenNV(&pData->pTokens[i]);
   }
   free((void *)pData->pTokens);
 
@@ -8698,8 +8698,8 @@ void cleanup_VkGeneratedCommandsInfoNV(VkGeneratedCommandsInfoNV const *pData) {
 
   // pStreams - streamCount
   if (pData->pStreams != NULL) {
-    for (uint32_t c = 0; c < pData->streamCount; ++c)
-      cleanup_VkIndirectCommandsStreamNV(&pData->pStreams[c]);
+    for (uint32_t i = 0; i < pData->streamCount; ++i)
+      cleanup_VkIndirectCommandsStreamNV(&pData->pStreams[i]);
   }
   free((void *)pData->pStreams);
 }
@@ -8879,8 +8879,8 @@ void cleanup_VkPresentRegionsKHR(VkPresentRegionsKHR const *pData) {
 
   // pRegions - swapchainCount
   if (pData->pRegions != NULL) {
-    for (uint32_t c = 0; c < pData->swapchainCount; ++c)
-      cleanup_VkPresentRegionKHR(&pData->pRegions[c]);
+    for (uint32_t i = 0; i < pData->swapchainCount; ++i)
+      cleanup_VkPresentRegionKHR(&pData->pRegions[i]);
   }
   free((void *)pData->pRegions);
 }
@@ -8890,8 +8890,8 @@ void cleanup_VkPresentRegionsKHR(VkPresentRegionsKHR const *pData) {
 void cleanup_VkPresentRegionKHR(VkPresentRegionKHR const *pData) {
   // pRectangles - rectangleCount
   if (pData->pRectangles != NULL) {
-    for (uint32_t c = 0; c < pData->rectangleCount; ++c)
-      cleanup_VkRectLayerKHR(&pData->pRectangles[c]);
+    for (uint32_t i = 0; i < pData->rectangleCount; ++i)
+      cleanup_VkRectLayerKHR(&pData->pRectangles[i]);
   }
   free((void *)pData->pRectangles);
 }
@@ -9561,8 +9561,8 @@ void cleanup_VkBindImageMemoryDeviceGroupInfo(VkBindImageMemoryDeviceGroupInfo c
 
   // pSplitInstanceBindRegions - splitInstanceBindRegionCount
   if (pData->pSplitInstanceBindRegions != NULL) {
-    for (uint32_t c = 0; c < pData->splitInstanceBindRegionCount; ++c)
-      cleanup_VkRect2D(&pData->pSplitInstanceBindRegions[c]);
+    for (uint32_t i = 0; i < pData->splitInstanceBindRegionCount; ++i)
+      cleanup_VkRect2D(&pData->pSplitInstanceBindRegions[i]);
   }
   free((void *)pData->pSplitInstanceBindRegions);
 }
@@ -9582,8 +9582,8 @@ void cleanup_VkDeviceGroupRenderPassBeginInfo(VkDeviceGroupRenderPassBeginInfo c
 
   // pDeviceRenderAreas - deviceRenderAreaCount
   if (pData->pDeviceRenderAreas != NULL) {
-    for (uint32_t c = 0; c < pData->deviceRenderAreaCount; ++c)
-      cleanup_VkRect2D(&pData->pDeviceRenderAreas[c]);
+    for (uint32_t i = 0; i < pData->deviceRenderAreaCount; ++i)
+      cleanup_VkRect2D(&pData->pDeviceRenderAreas[i]);
   }
   free((void *)pData->pDeviceRenderAreas);
 }
@@ -9738,8 +9738,8 @@ void cleanup_VkDescriptorUpdateTemplateCreateInfo(
 
   // pDescriptorUpdateEntries - descriptorUpdateEntryCount
   if (pData->pDescriptorUpdateEntries != NULL) {
-    for (uint32_t c = 0; c < pData->descriptorUpdateEntryCount; ++c)
-      cleanup_VkDescriptorUpdateTemplateEntry(&pData->pDescriptorUpdateEntries[c]);
+    for (uint32_t i = 0; i < pData->descriptorUpdateEntryCount; ++i)
+      cleanup_VkDescriptorUpdateTemplateEntry(&pData->pDescriptorUpdateEntries[i]);
   }
   free((void *)pData->pDescriptorUpdateEntries);
 }
@@ -9833,8 +9833,8 @@ void cleanup_VkPresentTimesInfoGOOGLE(VkPresentTimesInfoGOOGLE const *pData) {
 
   // pTimes - swapchainCount
   if (pData->pTimes != NULL) {
-    for (uint32_t c = 0; c < pData->swapchainCount; ++c)
-      cleanup_VkPresentTimeGOOGLE(&pData->pTimes[c]);
+    for (uint32_t i = 0; i < pData->swapchainCount; ++i)
+      cleanup_VkPresentTimeGOOGLE(&pData->pTimes[i]);
   }
   free((void *)pData->pTimes);
 }
@@ -9894,8 +9894,8 @@ void cleanup_VkPipelineViewportWScalingStateCreateInfoNV(
 
   // pViewportWScalings - viewportCount
   if (pData->pViewportWScalings != NULL) {
-    for (uint32_t c = 0; c < pData->viewportCount; ++c)
-      cleanup_VkViewportWScalingNV(&pData->pViewportWScalings[c]);
+    for (uint32_t i = 0; i < pData->viewportCount; ++i)
+      cleanup_VkViewportWScalingNV(&pData->pViewportWScalings[i]);
   }
   free((void *)pData->pViewportWScalings);
 }
@@ -9915,8 +9915,8 @@ void cleanup_VkPipelineViewportSwizzleStateCreateInfoNV(
 
   // pViewportSwizzles - viewportCount
   if (pData->pViewportSwizzles != NULL) {
-    for (uint32_t c = 0; c < pData->viewportCount; ++c)
-      cleanup_VkViewportSwizzleNV(&pData->pViewportSwizzles[c]);
+    for (uint32_t i = 0; i < pData->viewportCount; ++i)
+      cleanup_VkViewportSwizzleNV(&pData->pViewportSwizzles[i]);
   }
   free((void *)pData->pViewportSwizzles);
 }
@@ -9942,8 +9942,8 @@ void cleanup_VkPipelineDiscardRectangleStateCreateInfoEXT(
 
   // pDiscardRectangles - discardRectangleCount
   if (pData->pDiscardRectangles != NULL) {
-    for (uint32_t c = 0; c < pData->discardRectangleCount; ++c)
-      cleanup_VkRect2D(&pData->pDiscardRectangles[c]);
+    for (uint32_t i = 0; i < pData->discardRectangleCount; ++i)
+      cleanup_VkRect2D(&pData->pDiscardRectangles[i]);
   }
   free((void *)pData->pDiscardRectangles);
 }
@@ -9979,8 +9979,8 @@ void cleanup_VkRenderPassInputAttachmentAspectCreateInfo(
 
   // pAspectReferences - aspectReferenceCount
   if (pData->pAspectReferences != NULL) {
-    for (uint32_t c = 0; c < pData->aspectReferenceCount; ++c)
-      cleanup_VkInputAttachmentAspectReference(&pData->pAspectReferences[c]);
+    for (uint32_t i = 0; i < pData->aspectReferenceCount; ++i)
+      cleanup_VkInputAttachmentAspectReference(&pData->pAspectReferences[i]);
   }
   free((void *)pData->pAspectReferences);
 }
@@ -10435,8 +10435,8 @@ void cleanup_VkSampleLocationsInfoEXT(VkSampleLocationsInfoEXT const *pData) {
 
   // pSampleLocations - sampleLocationsCount
   if (pData->pSampleLocations != NULL) {
-    for (uint32_t c = 0; c < pData->sampleLocationsCount; ++c)
-      cleanup_VkSampleLocationEXT(&pData->pSampleLocations[c]);
+    for (uint32_t i = 0; i < pData->sampleLocationsCount; ++i)
+      cleanup_VkSampleLocationEXT(&pData->pSampleLocations[i]);
   }
   free((void *)pData->pSampleLocations);
 }
@@ -10461,15 +10461,15 @@ void cleanup_VkRenderPassSampleLocationsBeginInfoEXT(
 
   // pAttachmentInitialSampleLocations - attachmentInitialSampleLocationsCount
   if (pData->pAttachmentInitialSampleLocations != NULL) {
-    for (uint32_t c = 0; c < pData->attachmentInitialSampleLocationsCount; ++c)
-      cleanup_VkAttachmentSampleLocationsEXT(&pData->pAttachmentInitialSampleLocations[c]);
+    for (uint32_t i = 0; i < pData->attachmentInitialSampleLocationsCount; ++i)
+      cleanup_VkAttachmentSampleLocationsEXT(&pData->pAttachmentInitialSampleLocations[i]);
   }
   free((void *)pData->pAttachmentInitialSampleLocations);
 
   // pPostSubpassSampleLocations - postSubpassSampleLocationsCount
   if (pData->pPostSubpassSampleLocations != NULL) {
-    for (uint32_t c = 0; c < pData->postSubpassSampleLocationsCount; ++c)
-      cleanup_VkSubpassSampleLocationsEXT(&pData->pPostSubpassSampleLocations[c]);
+    for (uint32_t i = 0; i < pData->postSubpassSampleLocationsCount; ++i)
+      cleanup_VkSubpassSampleLocationsEXT(&pData->pPostSubpassSampleLocations[i]);
   }
   free((void *)pData->pPostSubpassSampleLocations);
 }
@@ -10884,22 +10884,22 @@ void cleanup_VkDebugUtilsMessengerCallbackDataEXT(
 
   // pQueueLabels - queueLabelCount
   if (pData->pQueueLabels != NULL) {
-    for (uint32_t c = 0; c < pData->queueLabelCount; ++c)
-      cleanup_VkDebugUtilsLabelEXT(&pData->pQueueLabels[c]);
+    for (uint32_t i = 0; i < pData->queueLabelCount; ++i)
+      cleanup_VkDebugUtilsLabelEXT(&pData->pQueueLabels[i]);
   }
   free((void *)pData->pQueueLabels);
 
   // pCmdBufLabels - cmdBufLabelCount
   if (pData->pCmdBufLabels != NULL) {
-    for (uint32_t c = 0; c < pData->cmdBufLabelCount; ++c)
-      cleanup_VkDebugUtilsLabelEXT(&pData->pCmdBufLabels[c]);
+    for (uint32_t i = 0; i < pData->cmdBufLabelCount; ++i)
+      cleanup_VkDebugUtilsLabelEXT(&pData->pCmdBufLabels[i]);
   }
   free((void *)pData->pCmdBufLabels);
 
   // pObjects - objectCount
   if (pData->pObjects != NULL) {
-    for (uint32_t c = 0; c < pData->objectCount; ++c)
-      cleanup_VkDebugUtilsObjectNameInfoEXT(&pData->pObjects[c]);
+    for (uint32_t i = 0; i < pData->objectCount; ++i)
+      cleanup_VkDebugUtilsObjectNameInfoEXT(&pData->pObjects[i]);
   }
   free((void *)pData->pObjects);
 }
@@ -11133,22 +11133,22 @@ void cleanup_VkSubpassDescription2(VkSubpassDescription2 const *pData) {
 
   // pInputAttachments - inputAttachmentCount
   if (pData->pInputAttachments != NULL) {
-    for (uint32_t c = 0; c < pData->inputAttachmentCount; ++c)
-      cleanup_VkAttachmentReference2(&pData->pInputAttachments[c]);
+    for (uint32_t i = 0; i < pData->inputAttachmentCount; ++i)
+      cleanup_VkAttachmentReference2(&pData->pInputAttachments[i]);
   }
   free((void *)pData->pInputAttachments);
 
   // pColorAttachments - colorAttachmentCount
   if (pData->pColorAttachments != NULL) {
-    for (uint32_t c = 0; c < pData->colorAttachmentCount; ++c)
-      cleanup_VkAttachmentReference2(&pData->pColorAttachments[c]);
+    for (uint32_t i = 0; i < pData->colorAttachmentCount; ++i)
+      cleanup_VkAttachmentReference2(&pData->pColorAttachments[i]);
   }
   free((void *)pData->pColorAttachments);
 
   // pResolveAttachments - colorAttachmentCount
   if (pData->pResolveAttachments != NULL) {
-    for (uint32_t c = 0; c < pData->colorAttachmentCount; ++c)
-      cleanup_VkAttachmentReference2(&pData->pResolveAttachments[c]);
+    for (uint32_t i = 0; i < pData->colorAttachmentCount; ++i)
+      cleanup_VkAttachmentReference2(&pData->pResolveAttachments[i]);
   }
   free((void *)pData->pResolveAttachments);
 
@@ -11188,22 +11188,22 @@ void cleanup_VkRenderPassCreateInfo2(VkRenderPassCreateInfo2 const *pData) {
 
   // pAttachments - attachmentCount
   if (pData->pAttachments != NULL) {
-    for (uint32_t c = 0; c < pData->attachmentCount; ++c)
-      cleanup_VkAttachmentDescription2(&pData->pAttachments[c]);
+    for (uint32_t i = 0; i < pData->attachmentCount; ++i)
+      cleanup_VkAttachmentDescription2(&pData->pAttachments[i]);
   }
   free((void *)pData->pAttachments);
 
   // pSubpasses - subpassCount
   if (pData->pSubpasses != NULL) {
-    for (uint32_t c = 0; c < pData->subpassCount; ++c)
-      cleanup_VkSubpassDescription2(&pData->pSubpasses[c]);
+    for (uint32_t i = 0; i < pData->subpassCount; ++i)
+      cleanup_VkSubpassDescription2(&pData->pSubpasses[i]);
   }
   free((void *)pData->pSubpasses);
 
   // pDependencies - dependencyCount
   if (pData->pDependencies != NULL) {
-    for (uint32_t c = 0; c < pData->dependencyCount; ++c)
-      cleanup_VkSubpassDependency2(&pData->pDependencies[c]);
+    for (uint32_t i = 0; i < pData->dependencyCount; ++i)
+      cleanup_VkSubpassDependency2(&pData->pDependencies[i]);
   }
   free((void *)pData->pDependencies);
 
@@ -11352,8 +11352,8 @@ void cleanup_VkPipelineVertexInputDivisorStateCreateInfoEXT(
 
   // pVertexBindingDivisors - vertexBindingDivisorCount
   if (pData->pVertexBindingDivisors != NULL) {
-    for (uint32_t c = 0; c < pData->vertexBindingDivisorCount; ++c)
-      cleanup_VkVertexInputBindingDivisorDescriptionEXT(&pData->pVertexBindingDivisors[c]);
+    for (uint32_t i = 0; i < pData->vertexBindingDivisorCount; ++i)
+      cleanup_VkVertexInputBindingDivisorDescriptionEXT(&pData->pVertexBindingDivisors[i]);
   }
   free((void *)pData->pVertexBindingDivisors);
 }
@@ -11679,8 +11679,8 @@ void cleanup_VkPipelineViewportExclusiveScissorStateCreateInfoNV(
 
   // pExclusiveScissors - exclusiveScissorCount
   if (pData->pExclusiveScissors != NULL) {
-    for (uint32_t c = 0; c < pData->exclusiveScissorCount; ++c)
-      cleanup_VkRect2D(&pData->pExclusiveScissors[c]);
+    for (uint32_t i = 0; i < pData->exclusiveScissorCount; ++i)
+      cleanup_VkRect2D(&pData->pExclusiveScissors[i]);
   }
   free((void *)pData->pExclusiveScissors);
 }
@@ -11753,8 +11753,8 @@ void cleanup_VkPipelineViewportShadingRateImageStateCreateInfoNV(
 
   // pShadingRatePalettes - viewportCount
   if (pData->pShadingRatePalettes != NULL) {
-    for (uint32_t c = 0; c < pData->viewportCount; ++c)
-      cleanup_VkShadingRatePaletteNV(&pData->pShadingRatePalettes[c]);
+    for (uint32_t i = 0; i < pData->viewportCount; ++i)
+      cleanup_VkShadingRatePaletteNV(&pData->pShadingRatePalettes[i]);
   }
   free((void *)pData->pShadingRatePalettes);
 }
@@ -11798,8 +11798,8 @@ extern inline void cleanup_VkCoarseSampleLocationNV(VkCoarseSampleLocationNV con
 void cleanup_VkCoarseSampleOrderCustomNV(VkCoarseSampleOrderCustomNV const *pData) {
   // pSampleLocations - sampleLocationCount
   if (pData->pSampleLocations != NULL) {
-    for (uint32_t c = 0; c < pData->sampleLocationCount; ++c)
-      cleanup_VkCoarseSampleLocationNV(&pData->pSampleLocations[c]);
+    for (uint32_t i = 0; i < pData->sampleLocationCount; ++i)
+      cleanup_VkCoarseSampleLocationNV(&pData->pSampleLocations[i]);
   }
   free((void *)pData->pSampleLocations);
 }
@@ -11815,8 +11815,8 @@ void cleanup_VkPipelineViewportCoarseSampleOrderStateCreateInfoNV(
 
   // pCustomSampleOrders - customSampleOrderCount
   if (pData->pCustomSampleOrders != NULL) {
-    for (uint32_t c = 0; c < pData->customSampleOrderCount; ++c)
-      cleanup_VkCoarseSampleOrderCustomNV(&pData->pCustomSampleOrders[c]);
+    for (uint32_t i = 0; i < pData->customSampleOrderCount; ++i)
+      cleanup_VkCoarseSampleOrderCustomNV(&pData->pCustomSampleOrders[i]);
   }
   free((void *)pData->pCustomSampleOrders);
 }
@@ -11878,15 +11878,15 @@ void cleanup_VkRayTracingPipelineCreateInfoNV(VkRayTracingPipelineCreateInfoNV c
 
   // pStages - stageCount
   if (pData->pStages != NULL) {
-    for (uint32_t c = 0; c < pData->stageCount; ++c)
-      cleanup_VkPipelineShaderStageCreateInfo(&pData->pStages[c]);
+    for (uint32_t i = 0; i < pData->stageCount; ++i)
+      cleanup_VkPipelineShaderStageCreateInfo(&pData->pStages[i]);
   }
   free((void *)pData->pStages);
 
   // pGroups - groupCount
   if (pData->pGroups != NULL) {
-    for (uint32_t c = 0; c < pData->groupCount; ++c)
-      cleanup_VkRayTracingShaderGroupCreateInfoNV(&pData->pGroups[c]);
+    for (uint32_t i = 0; i < pData->groupCount; ++i)
+      cleanup_VkRayTracingShaderGroupCreateInfoNV(&pData->pGroups[i]);
   }
   free((void *)pData->pGroups);
 }
@@ -11901,15 +11901,15 @@ void cleanup_VkRayTracingPipelineCreateInfoKHR(VkRayTracingPipelineCreateInfoKHR
 
   // pStages - stageCount
   if (pData->pStages != NULL) {
-    for (uint32_t c = 0; c < pData->stageCount; ++c)
-      cleanup_VkPipelineShaderStageCreateInfo(&pData->pStages[c]);
+    for (uint32_t i = 0; i < pData->stageCount; ++i)
+      cleanup_VkPipelineShaderStageCreateInfo(&pData->pStages[i]);
   }
   free((void *)pData->pStages);
 
   // pGroups - groupCount
   if (pData->pGroups != NULL) {
-    for (uint32_t c = 0; c < pData->groupCount; ++c)
-      cleanup_VkRayTracingShaderGroupCreateInfoKHR(&pData->pGroups[c]);
+    for (uint32_t i = 0; i < pData->groupCount; ++i)
+      cleanup_VkRayTracingShaderGroupCreateInfoKHR(&pData->pGroups[i]);
   }
   free((void *)pData->pGroups);
 
@@ -11970,8 +11970,8 @@ void cleanup_VkAccelerationStructureInfoNV(VkAccelerationStructureInfoNV const *
 
   // pGeometries - geometryCount
   if (pData->pGeometries != NULL) {
-    for (uint32_t c = 0; c < pData->geometryCount; ++c)
-      cleanup_VkGeometryNV(&pData->pGeometries[c]);
+    for (uint32_t i = 0; i < pData->geometryCount; ++i)
+      cleanup_VkGeometryNV(&pData->pGeometries[i]);
   }
   free((void *)pData->pGeometries);
 }
@@ -12114,8 +12114,8 @@ void cleanup_VkDrmFormatModifierPropertiesListEXT(
 
   // pDrmFormatModifierProperties - drmFormatModifierCount
   if (pData->pDrmFormatModifierProperties != NULL) {
-    for (uint32_t c = 0; c < pData->drmFormatModifierCount; ++c)
-      cleanup_VkDrmFormatModifierPropertiesEXT(&pData->pDrmFormatModifierProperties[c]);
+    for (uint32_t i = 0; i < pData->drmFormatModifierCount; ++i)
+      cleanup_VkDrmFormatModifierPropertiesEXT(&pData->pDrmFormatModifierProperties[i]);
   }
   free((void *)pData->pDrmFormatModifierProperties);
 }
@@ -12162,8 +12162,8 @@ void cleanup_VkImageDrmFormatModifierExplicitCreateInfoEXT(
 
   // pPlaneLayouts - drmFormatModifierPlaneCount
   if (pData->pPlaneLayouts != NULL) {
-    for (uint32_t c = 0; c < pData->drmFormatModifierPlaneCount; ++c)
-      cleanup_VkSubresourceLayout(&pData->pPlaneLayouts[c]);
+    for (uint32_t i = 0; i < pData->drmFormatModifierPlaneCount; ++i)
+      cleanup_VkSubresourceLayout(&pData->pPlaneLayouts[i]);
   }
   free((void *)pData->pPlaneLayouts);
 }
@@ -12456,8 +12456,8 @@ void cleanup_VkFramebufferAttachmentsCreateInfo(VkFramebufferAttachmentsCreateIn
 
   // pAttachmentImageInfos - attachmentImageInfoCount
   if (pData->pAttachmentImageInfos != NULL) {
-    for (uint32_t c = 0; c < pData->attachmentImageInfoCount; ++c)
-      cleanup_VkFramebufferAttachmentImageInfo(&pData->pAttachmentImageInfos[c]);
+    for (uint32_t i = 0; i < pData->attachmentImageInfoCount; ++i)
+      cleanup_VkFramebufferAttachmentImageInfo(&pData->pAttachmentImageInfos[i]);
   }
   free((void *)pData->pAttachmentImageInfos);
 }
@@ -12598,8 +12598,8 @@ void cleanup_VkPipelineCreationFeedbackCreateInfoEXT(
 
   // pPipelineStageCreationFeedbacks - pipelineStageCreationFeedbackCount
   if (pData->pPipelineStageCreationFeedbacks != NULL) {
-    for (uint32_t c = 0; c < pData->pipelineStageCreationFeedbackCount; ++c)
-      cleanup_VkPipelineCreationFeedbackEXT(&pData->pPipelineStageCreationFeedbacks[c]);
+    for (uint32_t i = 0; i < pData->pipelineStageCreationFeedbackCount; ++i)
+      cleanup_VkPipelineCreationFeedbackEXT(&pData->pPipelineStageCreationFeedbacks[i]);
   }
   free((void *)pData->pPipelineStageCreationFeedbacks);
 }
@@ -13265,16 +13265,16 @@ void cleanup_VkAccelerationStructureBuildGeometryInfoKHR(
 
   // pGeometries - geometryCount
   if (pData->pGeometries != NULL) {
-    for (uint32_t c = 0; c < pData->geometryCount; ++c)
-      cleanup_VkAccelerationStructureGeometryKHR(&pData->pGeometries[c]);
+    for (uint32_t i = 0; i < pData->geometryCount; ++i)
+      cleanup_VkAccelerationStructureGeometryKHR(&pData->pGeometries[i]);
   }
   free((void *)pData->pGeometries);
 
   // ppGeometries - geometryCount,1
   for (uint32_t i = 0; i < pData->geometryCount; ++i) {
     if (pData->ppGeometries[i] != NULL) {
-      for (uint32_t c = 0; c < pData->1; ++c)
-        cleanup_VkAccelerationStructureGeometryKHR(&pData->ppGeometries[i][c]);
+      for (uint32_t j = 0; j < pData->1 [i]; ++j)
+        cleanup_VkAccelerationStructureGeometryKHR(&pData->ppGeometries[i][j]);
     }
     free((void *)pData->ppGeometries[i]);
   }
@@ -13619,8 +13619,8 @@ void cleanup_VkCopyBufferInfo2KHR(VkCopyBufferInfo2KHR const *pData) {
 
   // pRegions - regionCount
   if (pData->pRegions != NULL) {
-    for (uint32_t c = 0; c < pData->regionCount; ++c)
-      cleanup_VkBufferCopy2KHR(&pData->pRegions[c]);
+    for (uint32_t i = 0; i < pData->regionCount; ++i)
+      cleanup_VkBufferCopy2KHR(&pData->pRegions[i]);
   }
   free((void *)pData->pRegions);
 }
@@ -13635,8 +13635,8 @@ void cleanup_VkCopyImageInfo2KHR(VkCopyImageInfo2KHR const *pData) {
 
   // pRegions - regionCount
   if (pData->pRegions != NULL) {
-    for (uint32_t c = 0; c < pData->regionCount; ++c)
-      cleanup_VkImageCopy2KHR(&pData->pRegions[c]);
+    for (uint32_t i = 0; i < pData->regionCount; ++i)
+      cleanup_VkImageCopy2KHR(&pData->pRegions[i]);
   }
   free((void *)pData->pRegions);
 }
@@ -13651,8 +13651,8 @@ void cleanup_VkBlitImageInfo2KHR(VkBlitImageInfo2KHR const *pData) {
 
   // pRegions - regionCount
   if (pData->pRegions != NULL) {
-    for (uint32_t c = 0; c < pData->regionCount; ++c)
-      cleanup_VkImageBlit2KHR(&pData->pRegions[c]);
+    for (uint32_t i = 0; i < pData->regionCount; ++i)
+      cleanup_VkImageBlit2KHR(&pData->pRegions[i]);
   }
   free((void *)pData->pRegions);
 }
@@ -13667,8 +13667,8 @@ void cleanup_VkCopyBufferToImageInfo2KHR(VkCopyBufferToImageInfo2KHR const *pDat
 
   // pRegions - regionCount
   if (pData->pRegions != NULL) {
-    for (uint32_t c = 0; c < pData->regionCount; ++c)
-      cleanup_VkBufferImageCopy2KHR(&pData->pRegions[c]);
+    for (uint32_t i = 0; i < pData->regionCount; ++i)
+      cleanup_VkBufferImageCopy2KHR(&pData->pRegions[i]);
   }
   free((void *)pData->pRegions);
 }
@@ -13683,8 +13683,8 @@ void cleanup_VkCopyImageToBufferInfo2KHR(VkCopyImageToBufferInfo2KHR const *pDat
 
   // pRegions - regionCount
   if (pData->pRegions != NULL) {
-    for (uint32_t c = 0; c < pData->regionCount; ++c)
-      cleanup_VkBufferImageCopy2KHR(&pData->pRegions[c]);
+    for (uint32_t i = 0; i < pData->regionCount; ++i)
+      cleanup_VkBufferImageCopy2KHR(&pData->pRegions[i]);
   }
   free((void *)pData->pRegions);
 }
@@ -13699,8 +13699,8 @@ void cleanup_VkResolveImageInfo2KHR(VkResolveImageInfo2KHR const *pData) {
 
   // pRegions - regionCount
   if (pData->pRegions != NULL) {
-    for (uint32_t c = 0; c < pData->regionCount; ++c)
-      cleanup_VkImageResolve2KHR(&pData->pRegions[c]);
+    for (uint32_t i = 0; i < pData->regionCount; ++i)
+      cleanup_VkImageResolve2KHR(&pData->pRegions[i]);
   }
   free((void *)pData->pRegions);
 }
@@ -13848,8 +13848,8 @@ void cleanup_VkMutableDescriptorTypeCreateInfoVALVE(
 
   // pMutableDescriptorTypeLists - mutableDescriptorTypeListCount
   if (pData->pMutableDescriptorTypeLists != NULL) {
-    for (uint32_t c = 0; c < pData->mutableDescriptorTypeListCount; ++c)
-      cleanup_VkMutableDescriptorTypeListVALVE(&pData->pMutableDescriptorTypeLists[c]);
+    for (uint32_t i = 0; i < pData->mutableDescriptorTypeListCount; ++i)
+      cleanup_VkMutableDescriptorTypeListVALVE(&pData->pMutableDescriptorTypeLists[i]);
   }
   free((void *)pData->pMutableDescriptorTypeLists);
 }
@@ -13952,22 +13952,22 @@ void cleanup_VkDependencyInfoKHR(VkDependencyInfoKHR const *pData) {
 
   // pMemoryBarriers - memoryBarrierCount
   if (pData->pMemoryBarriers != NULL) {
-    for (uint32_t c = 0; c < pData->memoryBarrierCount; ++c)
-      cleanup_VkMemoryBarrier2KHR(&pData->pMemoryBarriers[c]);
+    for (uint32_t i = 0; i < pData->memoryBarrierCount; ++i)
+      cleanup_VkMemoryBarrier2KHR(&pData->pMemoryBarriers[i]);
   }
   free((void *)pData->pMemoryBarriers);
 
   // pBufferMemoryBarriers - bufferMemoryBarrierCount
   if (pData->pBufferMemoryBarriers != NULL) {
-    for (uint32_t c = 0; c < pData->bufferMemoryBarrierCount; ++c)
-      cleanup_VkBufferMemoryBarrier2KHR(&pData->pBufferMemoryBarriers[c]);
+    for (uint32_t i = 0; i < pData->bufferMemoryBarrierCount; ++i)
+      cleanup_VkBufferMemoryBarrier2KHR(&pData->pBufferMemoryBarriers[i]);
   }
   free((void *)pData->pBufferMemoryBarriers);
 
   // pImageMemoryBarriers - imageMemoryBarrierCount
   if (pData->pImageMemoryBarriers != NULL) {
-    for (uint32_t c = 0; c < pData->imageMemoryBarrierCount; ++c)
-      cleanup_VkImageMemoryBarrier2KHR(&pData->pImageMemoryBarriers[c]);
+    for (uint32_t i = 0; i < pData->imageMemoryBarrierCount; ++i)
+      cleanup_VkImageMemoryBarrier2KHR(&pData->pImageMemoryBarriers[i]);
   }
   free((void *)pData->pImageMemoryBarriers);
 }
@@ -14000,22 +14000,22 @@ void cleanup_VkSubmitInfo2KHR(VkSubmitInfo2KHR const *pData) {
 
   // pWaitSemaphoreInfos - waitSemaphoreInfoCount
   if (pData->pWaitSemaphoreInfos != NULL) {
-    for (uint32_t c = 0; c < pData->waitSemaphoreInfoCount; ++c)
-      cleanup_VkSemaphoreSubmitInfoKHR(&pData->pWaitSemaphoreInfos[c]);
+    for (uint32_t i = 0; i < pData->waitSemaphoreInfoCount; ++i)
+      cleanup_VkSemaphoreSubmitInfoKHR(&pData->pWaitSemaphoreInfos[i]);
   }
   free((void *)pData->pWaitSemaphoreInfos);
 
   // pCommandBufferInfos - commandBufferInfoCount
   if (pData->pCommandBufferInfos != NULL) {
-    for (uint32_t c = 0; c < pData->commandBufferInfoCount; ++c)
-      cleanup_VkCommandBufferSubmitInfoKHR(&pData->pCommandBufferInfos[c]);
+    for (uint32_t i = 0; i < pData->commandBufferInfoCount; ++i)
+      cleanup_VkCommandBufferSubmitInfoKHR(&pData->pCommandBufferInfos[i]);
   }
   free((void *)pData->pCommandBufferInfos);
 
   // pSignalSemaphoreInfos - signalSemaphoreInfoCount
   if (pData->pSignalSemaphoreInfos != NULL) {
-    for (uint32_t c = 0; c < pData->signalSemaphoreInfoCount; ++c)
-      cleanup_VkSemaphoreSubmitInfoKHR(&pData->pSignalSemaphoreInfos[c]);
+    for (uint32_t i = 0; i < pData->signalSemaphoreInfoCount; ++i)
+      cleanup_VkSemaphoreSubmitInfoKHR(&pData->pSignalSemaphoreInfos[i]);
   }
   free((void *)pData->pSignalSemaphoreInfos);
 }
@@ -14177,8 +14177,8 @@ void cleanup_VkVideoDecodeInfoKHR(VkVideoDecodeInfoKHR const *pData) {
 
   // pReferenceSlots - referenceSlotCount
   if (pData->pReferenceSlots != NULL) {
-    for (uint32_t c = 0; c < pData->referenceSlotCount; ++c)
-      cleanup_VkVideoReferenceSlotKHR(&pData->pReferenceSlots[c]);
+    for (uint32_t i = 0; i < pData->referenceSlotCount; ++i)
+      cleanup_VkVideoReferenceSlotKHR(&pData->pReferenceSlots[i]);
   }
   free((void *)pData->pReferenceSlots);
 }
@@ -14421,8 +14421,8 @@ void cleanup_VkVideoBeginCodingInfoKHR(VkVideoBeginCodingInfoKHR const *pData) {
 
   // pReferenceSlots - referenceSlotCount
   if (pData->pReferenceSlots != NULL) {
-    for (uint32_t c = 0; c < pData->referenceSlotCount; ++c)
-      cleanup_VkVideoReferenceSlotKHR(&pData->pReferenceSlots[c]);
+    for (uint32_t i = 0; i < pData->referenceSlotCount; ++i)
+      cleanup_VkVideoReferenceSlotKHR(&pData->pReferenceSlots[i]);
   }
   free((void *)pData->pReferenceSlots);
 }
@@ -14460,8 +14460,8 @@ void cleanup_VkVideoEncodeInfoKHR(VkVideoEncodeInfoKHR const *pData) {
 
   // pReferenceSlots - referenceSlotCount
   if (pData->pReferenceSlots != NULL) {
-    for (uint32_t c = 0; c < pData->referenceSlotCount; ++c)
-      cleanup_VkVideoReferenceSlotKHR(&pData->pReferenceSlots[c]);
+    for (uint32_t i = 0; i < pData->referenceSlotCount; ++i)
+      cleanup_VkVideoReferenceSlotKHR(&pData->pReferenceSlots[i]);
   }
   free((void *)pData->pReferenceSlots);
 }
@@ -14552,22 +14552,22 @@ void cleanup_VkVideoEncodeH264VclFrameInfoEXT(VkVideoEncodeH264VclFrameInfoEXT c
 
   // pRefDefaultFinalList0Entries - refDefaultFinalList0EntryCount
   if (pData->pRefDefaultFinalList0Entries != NULL) {
-    for (uint32_t c = 0; c < pData->refDefaultFinalList0EntryCount; ++c)
-      cleanup_VkVideoEncodeH264DpbSlotInfoEXT(&pData->pRefDefaultFinalList0Entries[c]);
+    for (uint32_t i = 0; i < pData->refDefaultFinalList0EntryCount; ++i)
+      cleanup_VkVideoEncodeH264DpbSlotInfoEXT(&pData->pRefDefaultFinalList0Entries[i]);
   }
   free((void *)pData->pRefDefaultFinalList0Entries);
 
   // pRefDefaultFinalList1Entries - refDefaultFinalList1EntryCount
   if (pData->pRefDefaultFinalList1Entries != NULL) {
-    for (uint32_t c = 0; c < pData->refDefaultFinalList1EntryCount; ++c)
-      cleanup_VkVideoEncodeH264DpbSlotInfoEXT(&pData->pRefDefaultFinalList1Entries[c]);
+    for (uint32_t i = 0; i < pData->refDefaultFinalList1EntryCount; ++i)
+      cleanup_VkVideoEncodeH264DpbSlotInfoEXT(&pData->pRefDefaultFinalList1Entries[i]);
   }
   free((void *)pData->pRefDefaultFinalList1Entries);
 
   // pNaluSliceEntries - naluSliceEntryCount
   if (pData->pNaluSliceEntries != NULL) {
-    for (uint32_t c = 0; c < pData->naluSliceEntryCount; ++c)
-      cleanup_VkVideoEncodeH264NaluSliceEXT(&pData->pNaluSliceEntries[c]);
+    for (uint32_t i = 0; i < pData->naluSliceEntryCount; ++i)
+      cleanup_VkVideoEncodeH264NaluSliceEXT(&pData->pNaluSliceEntries[i]);
   }
   free((void *)pData->pNaluSliceEntries);
 
@@ -14612,15 +14612,15 @@ void cleanup_VkVideoEncodeH264NaluSliceEXT(VkVideoEncodeH264NaluSliceEXT const *
 
   // pRefFinalList0Entries - refFinalList0EntryCount
   if (pData->pRefFinalList0Entries != NULL) {
-    for (uint32_t c = 0; c < pData->refFinalList0EntryCount; ++c)
-      cleanup_VkVideoEncodeH264DpbSlotInfoEXT(&pData->pRefFinalList0Entries[c]);
+    for (uint32_t i = 0; i < pData->refFinalList0EntryCount; ++i)
+      cleanup_VkVideoEncodeH264DpbSlotInfoEXT(&pData->pRefFinalList0Entries[i]);
   }
   free((void *)pData->pRefFinalList0Entries);
 
   // pRefFinalList1Entries - refFinalList1EntryCount
   if (pData->pRefFinalList1Entries != NULL) {
-    for (uint32_t c = 0; c < pData->refFinalList1EntryCount; ++c)
-      cleanup_VkVideoEncodeH264DpbSlotInfoEXT(&pData->pRefFinalList1Entries[c]);
+    for (uint32_t i = 0; i < pData->refFinalList1EntryCount; ++i)
+      cleanup_VkVideoEncodeH264DpbSlotInfoEXT(&pData->pRefFinalList1Entries[i]);
   }
   free((void *)pData->pRefFinalList1Entries);
 }
@@ -14917,8 +14917,8 @@ void cleanup_VkIndirectCommandsLayoutCreateInfoNVX(
 
   // pTokens - tokenCount
   if (pData->pTokens != NULL) {
-    for (uint32_t c = 0; c < pData->tokenCount; ++c)
-      cleanup_VkIndirectCommandsLayoutTokenNVX(&pData->pTokens[c]);
+    for (uint32_t i = 0; i < pData->tokenCount; ++i)
+      cleanup_VkIndirectCommandsLayoutTokenNVX(&pData->pTokens[i]);
   }
   free((void *)pData->pTokens);
 }
@@ -14933,8 +14933,8 @@ void cleanup_VkCmdProcessCommandsInfoNVX(VkCmdProcessCommandsInfoNVX const *pDat
 
   // pIndirectCommandsTokens - indirectCommandsTokenCount
   if (pData->pIndirectCommandsTokens != NULL) {
-    for (uint32_t c = 0; c < pData->indirectCommandsTokenCount; ++c)
-      cleanup_VkIndirectCommandsTokenNVX(&pData->pIndirectCommandsTokens[c]);
+    for (uint32_t i = 0; i < pData->indirectCommandsTokenCount; ++i)
+      cleanup_VkIndirectCommandsTokenNVX(&pData->pIndirectCommandsTokens[i]);
   }
   free((void *)pData->pIndirectCommandsTokens);
 }
@@ -15030,8 +15030,8 @@ void cleanup_VkRaytracingPipelineCreateInfoNVX(VkRaytracingPipelineCreateInfoNVX
 
   // pStages - stageCount
   if (pData->pStages != NULL) {
-    for (uint32_t c = 0; c < pData->stageCount; ++c)
-      cleanup_VkPipelineShaderStageCreateInfo(&pData->pStages[c]);
+    for (uint32_t i = 0; i < pData->stageCount; ++i)
+      cleanup_VkPipelineShaderStageCreateInfo(&pData->pStages[i]);
   }
   free((void *)pData->pStages);
 
@@ -15081,8 +15081,8 @@ void cleanup_VkAccelerationStructureCreateInfoNVX(
 
   // pGeometries - geometryCount
   if (pData->pGeometries != NULL) {
-    for (uint32_t c = 0; c < pData->geometryCount; ++c)
-      cleanup_VkGeometryNVX(&pData->pGeometries[c]);
+    for (uint32_t i = 0; i < pData->geometryCount; ++i)
+      cleanup_VkGeometryNVX(&pData->pGeometries[i]);
   }
   free((void *)pData->pGeometries);
 }
