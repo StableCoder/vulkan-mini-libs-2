@@ -135,10 +135,17 @@ extern "C" {
 """)
 
     # static_asserts
-    outFile.writelines(["\n_Static_assert(VK_HEADER_VERSION >= ", firstVersion,
+    outFile.write('\n#ifdef __cplusplus\n')
+    outFile.writelines(["static_assert(VK_HEADER_VERSION >= ", firstVersion,
+                        ", \"VK_HEADER_VERSION is from before the supported range.\");\n"])
+    outFile.writelines(["static_assert(VK_HEADER_VERSION <= ", lastVersion,
+                        ", \"VK_HEADER_VERSION is from after the supported range.\");\n"])
+    outFile.write('#else\n')
+    outFile.writelines(["_Static_assert(VK_HEADER_VERSION >= ", firstVersion,
                         ", \"VK_HEADER_VERSION is from before the supported range.\");\n"])
     outFile.writelines(["_Static_assert(VK_HEADER_VERSION <= ", lastVersion,
                         ", \"VK_HEADER_VERSION is from after the supported range.\");\n"])
+    outFile.write('#endif\n')
 
     # Generic struct catchall
     outFile.write('\nvoid cleanup_vk_struct(void const* pData);\n')

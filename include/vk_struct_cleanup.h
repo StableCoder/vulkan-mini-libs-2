@@ -39,8 +39,13 @@ extern "C" {
 
 #include <vulkan/vulkan.h>
 
+#ifdef __cplusplus
+static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
+static_assert(VK_HEADER_VERSION <= 188, "VK_HEADER_VERSION is from after the supported range.");
+#else
 _Static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
 _Static_assert(VK_HEADER_VERSION <= 188, "VK_HEADER_VERSION is from after the supported range.");
+#endif
 
 void cleanup_vk_struct(void const *pData);
 
