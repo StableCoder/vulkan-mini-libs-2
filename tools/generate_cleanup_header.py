@@ -193,40 +193,40 @@ void cleanup_vk_struct(void const* pData) {
         if name == 'VkBaseOutStructure' or name == 'VkBaseInStructure':
             continue
         members = getExternalDataMembers(struct.findall('members/'))
-        # If there are no external data related to this struct, skip
-        if len(members) == 0:
-            continue
 
         outFile.write('\n')
         guarded = guardStruct(struct, firstVersion, lastVersion, outFile)
-        outFile.writelines(
-            ['void cleanup_', name, '(', name, ' const* pData){'])
+        if len(members) == 0:
+            outFile.writelines(['extern inline void cleanup_', name, '(', name, ' const* pData);\n'])
+        else:
+            outFile.writelines(
+                ['void cleanup_', name, '(', name, ' const* pData){'])
 
-        for member in members:
-            typeName = member.find('type').text
-            typeNode = dataRoot.find('structs/' + typeName)
+            for member in members:
+                typeName = member.find('type').text
+                typeNode = dataRoot.find('structs/' + typeName)
 
-            if member.get('len') is None:
-                # Single member, no iteration or counting business here
-                outFile.writelines(['\n    // ', member.tag, '\n'])
-                if member.tag == 'pNext':
+                if member.get('len') is None:
+                    # Single member, no iteration or counting business here
+                    outFile.writelines(['\n    // ', member.tag, '\n'])
+                    if member.tag == 'pNext':
+                        outFile.writelines(
+                            '    cleanup_vk_struct(pData->pNext);\n')
+                    elif not typeNode is None:
+                        # A Vulkan struct, cleanup first
+                        outFile.writelines(
+                            ['    cleanup_', typeName, '(pData->', member.tag, ');\n'])
                     outFile.writelines(
-                        '    cleanup_vk_struct(pData->pNext);\n')
-                elif not typeNode is None:
-                    # A Vulkan struct, cleanup first
+                        ['    free((void *)pData->', member.tag, ');\n'])
+
+                else:
+                    # Multiple member or levels of indirection
                     outFile.writelines(
-                        ['    cleanup_', typeName, '(pData->', member.tag, ');\n'])
-                outFile.writelines(
-                    ['    free((void *)pData->', member.tag, ');\n'])
-
-            else:
-                # Multiple member or levels of indirection
-                outFile.writelines(
-                    ['\n    // ', member.tag, ' - ', member.get('len'), '\n'])
-                processMultiMember(member, '', dataRoot,
-                                   member.get('len').split(','), outFile)
-
-        outFile.write('}\n')
+                        ['\n    // ', member.tag, ' - ', member.get('len'), '\n'])
+                    processMultiMember(member, '', dataRoot,
+                                    member.get('len').split(','), outFile)
+            outFile.write('}\n')
+            
         if guarded:
             outFile.write('#endif\n')
 
