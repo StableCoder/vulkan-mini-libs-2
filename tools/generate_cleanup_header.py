@@ -231,13 +231,12 @@ void cleanup_vk_struct(void const* pData) {
             outFile.write('#endif\n')
 
     # Footer
+    outFile.write('\n#endif // VK_STRUCT_CLEANUP_CONFIG_MAIN\n')
     outFile.write("""
 #ifdef __cplusplus
 }
 #endif
 """)
-
-    outFile.write('\n#endif // VK_STRUCT_CLEANUP_CONFIG_MAIN')
     outFile.write('\n#endif // VK_STRUCT_CLEANUP_H\n')
 
 

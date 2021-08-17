@@ -13282,9 +13282,10 @@ void cleanup_VkPhysicalDeviceRaytracingPropertiesNVX(
 }
 #endif
 
+#endif // VK_STRUCT_CLEANUP_CONFIG_MAIN
+
 #ifdef __cplusplus
 }
 #endif
 
-#endif // VK_STRUCT_CLEANUP_CONFIG_MAIN
 #endif // VK_STRUCT_CLEANUP_H
