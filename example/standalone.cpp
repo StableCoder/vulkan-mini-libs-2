@@ -16,6 +16,10 @@
 
 #include <vulkan/vulkan.h>
 
-// The define adds the definitions to this unit to be compiled.
+// This define adds the definitions from the single-include header file to be compiled
 #define VK_VALUE_SERIALIZATION_CONFIG_MAIN
 #include "vk_value_serialization.hpp"
+
+// This define adds the definitions from the single-include header file to be compiled
+#define VK_ERROR_CODE_CONFIG_MAIN
+#include "vk_error_code.hpp"
