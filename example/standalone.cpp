@@ -14,8 +14,6 @@
     limitations under the License.
 */
 
-#include <vulkan/vulkan.h>
-
 // This define adds the definitions from the single-include header file to be compiled
 #define VK_VALUE_SERIALIZATION_CONFIG_MAIN
 #include "vk_value_serialization.hpp"

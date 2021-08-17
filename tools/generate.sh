@@ -64,12 +64,13 @@ for TAG in $(git tag | grep -e "^v[0-9]*\.[0-9]*\.[0-9]*$" | sort -t '.' -k3nr);
     ../parse_vk_doc.py -i xml/vk.xml -w ../.gen_cache.xml $EXTRA_OPTS
     FIRST=0
 done
-
-git checkout main
 popd >/dev/null
 
 # Generate headers
 ./generate_serialization_header.py -i .gen_cache.xml -o ../include/vk_value_serialization.hpp
 ./generate_error_code_header.py -i .gen_cache.xml -o ../include/vk_error_code.hpp
+./generate_cleanup_header.py -i .gen_cache.xml -o ../include/vk_struct_cleanup.h
 
-clang-format -i ../include/*.h ../include/*.hpp
+# Format headers
+clang-format -i ../include/*.h
+clang-format -i ../include/*.hpp
