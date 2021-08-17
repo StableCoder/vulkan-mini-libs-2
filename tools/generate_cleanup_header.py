@@ -57,17 +57,17 @@ def processMultiMember(member, suffix, dataRoot, lenSplit, outFile):
         processMultiMember(member, '[i]', dataRoot,
                            lenSplit[1:], outFile)
         outFile.write('    }\n')
-
-    if not typeNode is None:
-        # A Vulkan struct, cleanup first
-        outFile.writelines(['    if (pData->',member.tag, suffix, ' != NULL) {\n'])
-        outFile.writelines(
-            ['        for (uint32_t c = 0; c < pData->', count, '; ++c)\n'])
-        outFile.writelines(
-            ['            cleanup_', typeName, '(&pData->', member.tag, suffix, '[c]);\n'])
-        outFile.write('    }\n')
+    else:
+        if not typeNode is None:
+            # A Vulkan struct, cleanup first
+            outFile.writelines(['    if (pData->',member.tag, suffix, ' != NULL) {\n'])
+            outFile.writelines(
+                ['        for (uint32_t c = 0; c < pData->', count, '; ++c)\n'])
+            outFile.writelines(
+                ['            cleanup_', typeName, '(&pData->', member.tag, suffix, '[c]);\n'])
+            outFile.write('    }\n')
     outFile.writelines(
-        ['    free((void*)pData->', member.tag, suffix, ');\n'])
+            ['    free((void*)pData->', member.tag, suffix, ');\n'])
 
 
 def main(argv):

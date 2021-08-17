@@ -13278,10 +13278,6 @@ void cleanup_VkAccelerationStructureBuildGeometryInfoKHR(
     }
     free((void *)pData->ppGeometries[i]);
   }
-  if (pData->ppGeometries != NULL) {
-    for (uint32_t c = 0; c < pData->geometryCount; ++c)
-      cleanup_VkAccelerationStructureGeometryKHR(&pData->ppGeometries[c]);
-  }
   free((void *)pData->ppGeometries);
 }
 #endif
