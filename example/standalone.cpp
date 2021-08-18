@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2020 George Cave - gcave@stablecoder.ca
+    Copyright (C) 2020-2021 George Cave - gcave@stablecoder.ca
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -21,3 +21,7 @@
 // This define adds the definitions from the single-include header file to be compiled
 #define VK_ERROR_CODE_CONFIG_MAIN
 #include "vk_error_code.hpp"
+
+// This define adds the definitions from the single-include header file to be compiled
+#define VK_STRUCT_CLEANUP_CONFIG_MAIN
+#include "vk_struct_cleanup.h"

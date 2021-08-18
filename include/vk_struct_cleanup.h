@@ -3568,7 +3568,7 @@ void cleanup_VkPhysicalDeviceRaytracingPropertiesNVX(
 #include <stdlib.h>
 
 void cleanup_vk_struct(void const *pData) {
-  VkBaseInStructure const *pTemp = pData;
+  VkBaseInStructure const *pTemp = (VkBaseInStructure const *)pData;
 
   switch (pTemp->sType) {
   case VK_STRUCTURE_TYPE_APPLICATION_INFO:

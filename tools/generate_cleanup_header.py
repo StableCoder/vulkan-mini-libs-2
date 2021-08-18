@@ -178,7 +178,7 @@ extern "C" {
     # Definitions
     outFile.write("""
 void cleanup_vk_struct(void const* pData) {
-    VkBaseInStructure const* pTemp = pData;
+    VkBaseInStructure const* pTemp = (VkBaseInStructure const*)pData;
 
     switch(pTemp->sType) {""")
 
