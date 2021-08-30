@@ -41,10 +41,10 @@ extern "C" {
 
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-static_assert(VK_HEADER_VERSION <= 189, "VK_HEADER_VERSION is from after the supported range.");
+static_assert(VK_HEADER_VERSION <= 190, "VK_HEADER_VERSION is from after the supported range.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-_Static_assert(VK_HEADER_VERSION <= 189, "VK_HEADER_VERSION is from after the supported range.");
+_Static_assert(VK_HEADER_VERSION <= 190, "VK_HEADER_VERSION is from after the supported range.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -2612,6 +2612,11 @@ inline void cleanup_VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR(
 void cleanup_VkAttachmentReferenceStencilLayout(VkAttachmentReferenceStencilLayout const *pData);
 #endif
 
+#if VK_HEADER_VERSION >= 190 && VK_EXT_primitive_topology_list_restart
+void cleanup_VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT(
+    VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT const *pData);
+#endif
+
 #if VK_HEADER_VERSION >= 127 && VK_KHR_separate_depth_stencil_layouts
 inline void cleanup_VkAttachmentReferenceStencilLayoutKHR(
     VkAttachmentReferenceStencilLayoutKHR const *pData) {}
@@ -3361,6 +3366,16 @@ void cleanup_VkCuFunctionCreateInfoNVX(VkCuFunctionCreateInfoNVX const *pData);
 
 #if VK_HEADER_VERSION >= 178 && VK_NVX_binary_import
 void cleanup_VkCuLaunchInfoNVX(VkCuLaunchInfoNVX const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 190 && VK_KHR_shader_integer_dot_product
+void cleanup_VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR(
+    VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 190 && VK_KHR_shader_integer_dot_product
+void cleanup_VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR(
+    VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR const *pData);
 #endif
 
 #if VK_HEADER_VERSION >= 182 && VK_EXT_physical_device_drm
@@ -6123,6 +6138,13 @@ void cleanup_vk_struct(void const *pData) {
     break;
 #endif
 
+#if VK_HEADER_VERSION >= 190 && VK_EXT_primitive_topology_list_restart
+  case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVE_TOPOLOGY_LIST_RESTART_FEATURES_EXT:
+    cleanup_VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT(
+        (VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT const *)pData);
+    break;
+#endif
+
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
   case VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_STENCIL_LAYOUT:
     cleanup_VkAttachmentDescriptionStencilLayout(
@@ -7122,6 +7144,20 @@ void cleanup_vk_struct(void const *pData) {
 #if VK_HEADER_VERSION >= 178 && VK_NVX_binary_import
   case VK_STRUCTURE_TYPE_CU_LAUNCH_INFO_NVX:
     cleanup_VkCuLaunchInfoNVX((VkCuLaunchInfoNVX const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 190 && VK_KHR_shader_integer_dot_product
+  case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES_KHR:
+    cleanup_VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR(
+        (VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 190 && VK_KHR_shader_integer_dot_product
+  case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES_KHR:
+    cleanup_VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR(
+        (VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR const *)pData);
     break;
 #endif
 
@@ -12897,6 +12933,16 @@ void cleanup_VkAttachmentReferenceStencilLayout(VkAttachmentReferenceStencilLayo
 }
 #endif
 
+#if VK_HEADER_VERSION >= 190 && VK_EXT_primitive_topology_list_restart
+void cleanup_VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT(
+    VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
 #if VK_HEADER_VERSION >= 127 && VK_KHR_separate_depth_stencil_layouts
 extern inline void cleanup_VkAttachmentReferenceStencilLayoutKHR(
     VkAttachmentReferenceStencilLayoutKHR const *pData);
@@ -14732,6 +14778,26 @@ void cleanup_VkCuLaunchInfoNVX(VkCuLaunchInfoNVX const *pData) {
 
   // pExtras - extraCount
   free((void *)pData->pExtras);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 190 && VK_KHR_shader_integer_dot_product
+void cleanup_VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR(
+    VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 190 && VK_KHR_shader_integer_dot_product
+void cleanup_VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR(
+    VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
 }
 #endif
 

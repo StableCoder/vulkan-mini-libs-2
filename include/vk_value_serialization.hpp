@@ -40,7 +40,7 @@
 #include <string_view>
 
 static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-static_assert(VK_HEADER_VERSION <= 189, "VK_HEADER_VERSION is from after the supported range.");
+static_assert(VK_HEADER_VERSION <= 190, "VK_HEADER_VERSION is from after the supported range.");
 
 /**
  * @brief Macro that automatically stringifies the given Vulkan type for serialization
@@ -1134,6 +1134,7 @@ constexpr EnumValueSet VkImageViewCreateFlagBitsSets[] = {
 constexpr EnumValueSet VkSamplerCreateFlagBitsSets[] = {
     {"SUBSAMPLED_BIT_EXT", 0x00000001},
     {"SUBSAMPLED_COARSE_RECONSTRUCTION_BIT_EXT", 0x00000002},
+    {"RESERVED_2_BIT_EXT", 0x00000004},
 };
 
 constexpr EnumValueSet VkPipelineCreateFlagBitsSets[] = {
@@ -2608,11 +2609,12 @@ constexpr std::array<EnumType, 229> enumTypes = {{
     {"VkImageUsageFlagBits", VkImageUsageFlagBitsSets, 30},
     {"VkImageCreateFlagBits", VkImageCreateFlagBitsSets, 24},
     {"VkImageViewCreateFlagBits", VkImageViewCreateFlagBitsSets, 3},
-    {"VkSamplerCreateFlagBits", VkSamplerCreateFlagBitsSets, 2},
+    {"VkSamplerCreateFlagBits", VkSamplerCreateFlagBitsSets, 3},
     {"VkPipelineCreateFlagBits", VkPipelineCreateFlagBitsSets, 43},
     {"VkPipelineShaderStageCreateFlagBits", VkPipelineShaderStageCreateFlagBitsSets, 4},
     {"VkColorComponentFlagBits", VkColorComponentFlagBitsSets, 4},
     {"VkFenceCreateFlagBits", VkFenceCreateFlagBitsSets, 1},
+    {"VkSemaphoreCreateFlagBits", nullptr, 0},
     {"VkFormatFeatureFlagBits", VkFormatFeatureFlagBitsSets, 49},
     {"VkQueryControlFlagBits", VkQueryControlFlagBitsSets, 1},
     {"VkQueryResultFlagBits", VkQueryResultFlagBitsSets, 5},
@@ -2767,7 +2769,6 @@ constexpr std::array<EnumType, 229> enumTypes = {{
     {"VkVideoEncodeH264CapabilitiesFlagBitsEXT", VkVideoEncodeH264CapabilitiesFlagBitsEXTSets, 11},
     {"VkAccelerationStructureMemoryRequirementsTypeKHR",
      VkAccelerationStructureMemoryRequirementsTypeKHRSets, 6},
-    {"VkSemaphoreCreateFlagBits", nullptr, 0},
     {"VkIndirectCommandsLayoutUsageFlagBitsNVX", VkIndirectCommandsLayoutUsageFlagBitsNVXSets, 4},
     {"VkObjectEntryUsageFlagBitsNVX", VkObjectEntryUsageFlagBitsNVXSets, 2},
     {"VkIndirectCommandsTokenTypeNVX", VkIndirectCommandsTokenTypeNVXSets, 8},
