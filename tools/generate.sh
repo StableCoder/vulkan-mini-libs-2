@@ -57,11 +57,7 @@ for TAG in $(git tag | grep -e "^v[0-9]*\.[0-9]*\.[0-9]*$" | sort -t '.' -k3nr);
     fi
     git checkout $TAG
 
-    if [[ $FIRST -eq 1 ]]; then
-        EXTRA_OPTS="-a"
-    fi
-
-    ../parse_vk_doc.py -i xml/vk.xml -w ../.gen_cache.xml $EXTRA_OPTS
+    ../parse_vk_doc.py -i xml/vk.xml -w ../.gen_cache.xml
     FIRST=0
 done
 popd >/dev/null

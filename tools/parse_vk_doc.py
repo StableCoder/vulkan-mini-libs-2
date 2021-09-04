@@ -202,7 +202,6 @@ def processExtensionStruct(extension, structData):
 def main(argv):
     inputFile = ''
     workingFile = ''
-    processExtra = False
 
     try:
         opts, args = getopt.getopt(argv, 'i:w:a', [])
@@ -214,8 +213,6 @@ def main(argv):
             inputFile = arg
         elif opt == '-w':
             workingFile = arg
-        elif opt == '-a':
-            processExtra = True
 
     if(inputFile == ''):
         print("Error: No Vulkan XML file specified")
