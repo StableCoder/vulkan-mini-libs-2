@@ -15,7 +15,8 @@ target_code_coverage(VkErrorCodeTests EXCLUDE ".*/test/.*")
 add_test(NAME VkErrorCodeTests-Tests COMMAND VkErrorCodeTests)
 
 # Serialization
-add_executable(VkSerializationTests parsing.cpp serialization.cpp)
+add_executable(VkSerializationTests parsing.cpp serialization.cpp
+                                    serialization64.cpp)
 target_code_coverage(VkSerializationTests EXCLUDE ".*/test/.*")
 
 add_test(NAME VkSerializationTests-Tests COMMAND VkSerializationTests)

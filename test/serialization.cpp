@@ -19,7 +19,9 @@
 
 #include "vk_value_serialization.hpp"
 
+namespace {
 std::string cDummyStr = "AAABBBCCC";
+}
 
 TEST_CASE("Serialize: Failure cases") {
   std::string dummyStr = cDummyStr;

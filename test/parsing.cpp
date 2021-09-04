@@ -20,10 +20,10 @@
 #define VK_VALUE_SERIALIZATION_CONFIG_MAIN
 #include "vk_value_serialization.hpp"
 
-constexpr uint32_t cDummyNum = 999999;
+constexpr uint64_t cDummyNum = 999999;
 
 TEST_CASE("Parsing: Failure Cases") {
-  uint32_t dummy = cDummyNum;
+  uint64_t dummy = cDummyNum;
 
   SECTION("Garbage type fails") {
     CHECK_FALSE(vk_parse("VkGarbagio", "2D", &dummy));
