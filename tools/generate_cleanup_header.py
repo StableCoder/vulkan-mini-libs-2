@@ -56,23 +56,22 @@ def processMultiMember(member, suffix, dataRoot, lenSplit, availableVars, outFil
     typeNode = dataRoot.find('structs/' + typeName)
 
     if len(lenSplit) > 1:
-        
-        outFile.writelines(
-            ['    for(uint32_t ',curVar,' = 0; ',curVar,' < pData->', count, suffix, '; ++',curVar,') {\n'])
+        outFile.writelines(['    for(uint32_t ', curVar, ' = 0; ',
+                           curVar, ' < pData->', count, suffix, '; ++', curVar, ') {\n'])
         processMultiMember(member, '[' + curVar + ']', dataRoot,
                            lenSplit[1:], availableVars[1:], outFile)
         outFile.write('    }\n')
     else:
         if not typeNode is None:
             # A Vulkan struct, cleanup first
-            outFile.writelines(['    if (pData->',member.tag, suffix, ' != NULL) {\n'])
             outFile.writelines(
-                ['    for(uint32_t ',curVar,' = 0; ',curVar,' < pData->', count, suffix, '; ++',curVar,')\n'])
-            outFile.writelines(
-                ['            cleanup_', typeName, '(&pData->', member.tag, suffix, '[', curVar,']);\n'])
+                ['    if (pData->', member.tag, suffix, ' != NULL) {\n'])
+            outFile.writelines(['    for(uint32_t ', curVar, ' = 0; ',
+                               curVar, ' < pData->', count, suffix, '; ++', curVar, ')\n'])
+            outFile.writelines(['            cleanup_', typeName,
+                               '(&pData->', member.tag, suffix, '[', curVar, ']);\n'])
             outFile.write('    }\n')
-    outFile.writelines(
-            ['    free((void*)pData->', member.tag, suffix, ');\n'])
+    outFile.writelines(['    free((void*)pData->', member.tag, suffix, ');\n'])
 
 
 def main(argv):
@@ -151,22 +150,28 @@ extern "C" {
     outFile.write('\nvoid cleanup_vk_struct(void const* pData);\n')
 
     # Dynamic Declarations
-    for struct in structs:
-        name = struct.tag
-        if name == 'VkBaseOutStructure' or name == 'VkBaseInStructure':
-            continue
-        outFile.write('\n')
-        guarded = guardStruct(struct, firstVersion, lastVersion, outFile)
-        members = getExternalDataMembers(struct.findall('members/'))
-        # If there's not pointer members to delete, leave an empty inlinable function instead
-        if len(members) == 0:
-            outFile.writelines(
-                ['inline void cleanup_', name, '(', name, ' const* pData) {}\n'])
-        else:
-            outFile.writelines(
-                ['void cleanup_', name, '(', name, ' const* pData);\n'])
-        if guarded:
-            outFile.write('#endif\n')
+    currentVersion = int(firstVersion)
+    while currentVersion <= int(lastVersion):
+        for struct in structs:
+            if struct.get('first') != str(currentVersion):
+                continue
+
+            name = struct.tag
+            if name == 'VkBaseOutStructure' or name == 'VkBaseInStructure':
+                continue
+            outFile.write('\n')
+            guarded = guardStruct(struct, firstVersion, lastVersion, outFile)
+            members = getExternalDataMembers(struct.findall('members/'))
+            # If there's not pointer members to delete, leave an empty inlinable function instead
+            if len(members) == 0:
+                outFile.writelines(
+                    ['inline void cleanup_', name, '(', name, ' const* pData) {}\n'])
+            else:
+                outFile.writelines(
+                    ['void cleanup_', name, '(', name, ' const* pData);\n'])
+            if guarded:
+                outFile.write('#endif\n')
+        currentVersion += 1
 
     # Definition Header
     outFile.write("""
@@ -182,20 +187,26 @@ void cleanup_vk_struct(void const* pData) {
 
     switch(pTemp->sType) {""")
 
-    for struct in structs:
-        sTypeValue = struct.find('members/sType/value')
-        # Only deal with structs that have defined sType
-        if sTypeValue is None:
-            continue
+    currentVersion = int(firstVersion)
+    while currentVersion <= int(lastVersion):
+        for struct in structs:
+            if struct.get('first') != str(currentVersion):
+                continue
 
-        outFile.write('\n')
-        guarded = guardStruct(struct, firstVersion, lastVersion, outFile)
-        outFile.writelines(['    case ', sTypeValue.text, ':\n'])
-        outFile.writelines(['        cleanup_', struct.tag,
-                           '((', struct.tag, ' const*)pData);\n'])
-        outFile.write('        break;\n')
-        if guarded:
-            outFile.write('#endif\n')
+            sTypeValue = struct.find('members/sType/value')
+            # Only deal with structs that have defined sType
+            if sTypeValue is None:
+                continue
+
+            outFile.write('\n')
+            guarded = guardStruct(struct, firstVersion, lastVersion, outFile)
+            outFile.writelines(['    case ', sTypeValue.text, ':\n'])
+            outFile.writelines(['        cleanup_', struct.tag,
+                                '((', struct.tag, ' const*)pData);\n'])
+            outFile.write('        break;\n')
+            if guarded:
+                outFile.write('#endif\n')
+        currentVersion += 1
 
     outFile.write('\n    default:\n')
     outFile.write('        break;\n')
@@ -203,48 +214,57 @@ void cleanup_vk_struct(void const* pData) {
     outFile.write('}\n')
 
     # Dynamic Definitions
-    for struct in structs:
-        name = struct.tag
-        if name == 'VkBaseOutStructure' or name == 'VkBaseInStructure':
-            continue
-        members = getExternalDataMembers(struct.findall('members/'))
+    currentVersion = int(firstVersion)
+    while currentVersion <= int(lastVersion):
+        for struct in structs:
+            if struct.get('first') != str(currentVersion):
+                continue
 
-        outFile.write('\n')
-        guarded = guardStruct(struct, firstVersion, lastVersion, outFile)
-        if len(members) == 0:
-            outFile.writelines(['extern inline void cleanup_', name, '(', name, ' const* pData);\n'])
-        else:
-            outFile.writelines(
-                ['void cleanup_', name, '(', name, ' const* pData){'])
+            name = struct.tag
+            if name == 'VkBaseOutStructure' or name == 'VkBaseInStructure':
+                continue
+            members = getExternalDataMembers(struct.findall('members/'))
 
-            for member in members:
-                typeName = member.find('type').text
-                typeNode = dataRoot.find('structs/' + typeName)
+            outFile.write('\n')
+            guarded = guardStruct(struct, firstVersion, lastVersion, outFile)
+            if len(members) == 0:
+                outFile.writelines(
+                    ['extern inline void cleanup_', name, '(', name, ' const* pData);\n'])
+            else:
+                outFile.writelines(
+                    ['void cleanup_', name, '(', name, ' const* pData){'])
 
-                if member.get('len') is None:
-                    # Single member, no iteration or counting business here
-                    outFile.writelines(['\n    // ', member.tag, '\n'])
-                    if member.tag == 'pNext':
-                        outFile.write('    if (pData->pNext != NULL)\n')
-                        outFile.write('        cleanup_vk_struct(pData->pNext);\n')
-                    elif not typeNode is None:
-                        # A Vulkan struct, cleanup first
-                        outFile.writelines(['    if (pData->', member.tag, ' != NULL)\n'])
+                for member in members:
+                    typeName = member.find('type').text
+                    typeNode = dataRoot.find('structs/' + typeName)
+
+                    if member.get('len') is None:
+                        # Single member, no iteration or counting business here
+                        outFile.writelines(['\n    // ', member.tag, '\n'])
+                        if member.tag == 'pNext':
+                            outFile.write('    if (pData->pNext != NULL)\n')
+                            outFile.write(
+                                '        cleanup_vk_struct(pData->pNext);\n')
+                        elif not typeNode is None:
+                            # A Vulkan struct, cleanup first
+                            outFile.writelines(
+                                ['    if (pData->', member.tag, ' != NULL)\n'])
+                            outFile.writelines(
+                                ['        cleanup_', typeName, '(pData->', member.tag, ');\n'])
                         outFile.writelines(
-                            ['        cleanup_', typeName, '(pData->', member.tag, ');\n'])
-                    outFile.writelines(
-                        ['    free((void *)pData->', member.tag, ');\n'])
+                            ['    free((void *)pData->', member.tag, ');\n'])
 
-                else:
-                    # Multiple member or levels of indirection
-                    outFile.writelines(
-                        ['\n    // ', member.tag, ' - ', member.get('len'), '\n'])
-                    processMultiMember(member, '', dataRoot,
-                                    member.get('len').split(','), 'ijklmn', outFile)
-            outFile.write('}\n')
-            
-        if guarded:
-            outFile.write('#endif\n')
+                    else:
+                        # Multiple member or levels of indirection
+                        outFile.writelines(
+                            ['\n    // ', member.tag, ' - ', member.get('len'), '\n'])
+                        processMultiMember(member, '', dataRoot,
+                                           member.get('len').split(','), 'ijklmn', outFile)
+                outFile.write('}\n')
+
+            if guarded:
+                outFile.write('#endif\n')
+        currentVersion += 1
 
     # Footer
     outFile.write('\n#endif // VK_STRUCT_CLEANUP_CONFIG_MAIN\n')
