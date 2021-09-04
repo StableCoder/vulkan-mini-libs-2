@@ -50,7 +50,7 @@ TEST_CASE("Serialize64: Serializing one of the few 64-bit flag types, VkAccessFl
       CHECK(vk_serialize(
           "VkAccessFlagBits2KHR",
           VK_ACCESS_2_INDEX_READ_BIT_KHR | VK_ACCESS_2_INVOCATION_MASK_READ_BIT_HUAWEI, &retVal));
-      CHECK(retVal == "RESERVED_39_BIT_HUAWEI | INDEX_READ");
+      CHECK(retVal == "INVOCATION_MASK_READ_BIT_HUAWEI | INDEX_READ");
     }
     SECTION("Flags") {
       CHECK(vk_serialize("VkAccessFlags2KHR", VK_ACCESS_2_INDEX_READ_BIT_KHR, &retVal));
@@ -59,7 +59,7 @@ TEST_CASE("Serialize64: Serializing one of the few 64-bit flag types, VkAccessFl
       CHECK(vk_serialize(
           "VkAccessFlags2KHR",
           VK_ACCESS_2_INDEX_READ_BIT_KHR | VK_ACCESS_2_INVOCATION_MASK_READ_BIT_HUAWEI, &retVal));
-      CHECK(retVal == "RESERVED_39_BIT_HUAWEI | INDEX_READ");
+      CHECK(retVal == "INVOCATION_MASK_READ_BIT_HUAWEI | INDEX_READ");
     }
   }
 }

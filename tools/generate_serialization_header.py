@@ -25,7 +25,7 @@ def processEnumValue(outFile, enum, value):
         processEnumValue(outFile, enum, enum.find(value.get('alias')))
 
 
-def processEnums(outFile, enums, vendors):
+def processEnums(outFile, enums, vendors, first, last):
     for enum in enums:
         # Skip VkResult
         if enum.tag == 'VkResult':
@@ -69,22 +69,27 @@ def processEnums(outFile, enums, vendors):
             mainPrefix += typeDigit
             mainPrefix += '_'
 
-        for value in enum.findall('./'):
-            outFile.write("  {\"")
+        current = first
+        while current <= last:
+            for value in enum.findall('./'):
+                if int(value.get('first')) != current:
+                    continue
+                outFile.write("  {\"")
 
-            valueStr = value.tag
-            if valueStr.startswith(mainPrefix):
-                valueStr = valueStr[len(mainPrefix):]
-            if vendorName != '' and valueStr.endswith(vendorName):
-                valueStr = valueStr[:-len(vendorName)-1]
-            if valueStr.endswith('_BIT'):
-                valueStr = valueStr[:-4]
+                valueStr = value.tag
+                if valueStr.startswith(mainPrefix):
+                    valueStr = valueStr[len(mainPrefix):]
+                if vendorName != '' and valueStr.endswith(vendorName):
+                    valueStr = valueStr[:-len(vendorName)-1]
+                if valueStr.endswith('_BIT'):
+                    valueStr = valueStr[:-4]
 
-            outFile.write(valueStr)
-            outFile.write("\", ")
-            processEnumValue(outFile, enum, value)
+                outFile.write(valueStr)
+                outFile.write("\", ")
+                processEnumValue(outFile, enum, value)
 
-            outFile.write("},\n")
+                outFile.write("},\n")
+            current += 1
 
         outFile.write('};\n')
 
@@ -118,6 +123,9 @@ def main(argv):
         print("Error: Could not open input file: ", inputFile)
         sys.exit(1)
 
+    firstVersion = int(dataRoot.get('first'))
+    lastVersion = int(dataRoot.get('last'))
+
     outFile = open(outputFile, "w")
 
     # Common Header
@@ -143,10 +151,10 @@ def main(argv):
 """)
 
     # Static Asserts
-    outFile.writelines(["\nstatic_assert(VK_HEADER_VERSION >= ", dataRoot.get(
-        'first'), ", \"VK_HEADER_VERSION is from before the supported range.\");\n"])
-    outFile.writelines(["static_assert(VK_HEADER_VERSION <= ", dataRoot.get(
-        'last'), ", \"VK_HEADER_VERSION is from after the supported range.\");\n"])
+    outFile.writelines(["\nstatic_assert(VK_HEADER_VERSION >= ", str(
+        firstVersion), ", \"VK_HEADER_VERSION is from before the supported range.\");\n"])
+    outFile.writelines(["static_assert(VK_HEADER_VERSION <= ", str(
+        lastVersion), ", \"VK_HEADER_VERSION is from after the supported range.\");\n"])
 
     # Function Declarataions
     outFile.write("""
@@ -265,7 +273,7 @@ bool vk_parse(std::string_view vkType, std::string vkString, T *pValue) {
 
     # Enums
     enums = dataRoot.findall('enums/')
-    processEnums(outFile, enums, vendors)
+    processEnums(outFile, enums, vendors, firstVersion, lastVersion)
 
     # Enum Type Declaration
     outFile.write("\nstruct EnumType {\n")
