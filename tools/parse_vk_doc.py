@@ -126,7 +126,10 @@ def processExtensionEnums(extension, outEnum, vkVersion):
                 enum, valName, {'first': vkVersion, 'last': vkVersion})
             ET.SubElement(value, 'platforms')
             if not extEnum.get('offset') is None:
-                value.set('value', str(1000000000 + (extNum - 1)
+                tempExtNum = extNum
+                if not extEnum.get('extnumber') is None:
+                    tempExtNum = int(extEnum.get('extnumber'))
+                value.set('value', str(1000000000 + (tempExtNum - 1)
                           * 1000 + int(extEnum.get('offset'))))
             elif not extEnum.get('value') is None:
                 value.set('value', extEnum.get('value'))
