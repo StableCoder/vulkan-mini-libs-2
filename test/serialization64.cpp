@@ -17,6 +17,8 @@
 #include <catch.hpp>
 #include <vk_value_serialization.hpp>
 
+#ifdef VK_KHR_synchronization2
+
 namespace {
 std::string cDummyStr = "AAABBBCCC";
 }
@@ -61,3 +63,5 @@ TEST_CASE("Serialize64: Serializing one of the few 64-bit flag types, VkAccessFl
     }
   }
 }
+
+#endif // VK_KHR_synchronization2
