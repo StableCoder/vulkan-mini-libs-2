@@ -131,4 +131,20 @@ TEST_CASE("Serialize: Bitmask") {
       CHECK(retVal == "FRONT_AND_BACK");
     }
   }
+
+#if VK_HEADER_VERSION >= 134
+  SECTION("Ensure that previously reserved values that have been replaced with real names use the "
+          "real names instead") {
+    SECTION("FlagBits") {
+      CHECK(vk_serialize("VkRenderPassCreateFlagBits", VK_RENDER_PASS_CREATE_TRANSFORM_BIT_QCOM,
+                         &retVal));
+      CHECK(retVal == "TRANSFORM_BIT_QCOM");
+    }
+    SECTION("Flags") {
+      CHECK(vk_serialize("VkRenderPassCreateFlags", VK_RENDER_PASS_CREATE_TRANSFORM_BIT_QCOM,
+                         &retVal));
+      CHECK(retVal == "TRANSFORM_BIT_QCOM");
+    }
+  }
+#endif
 }
