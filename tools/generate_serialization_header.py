@@ -171,7 +171,7 @@ def main(argv):
 #define VK_PARSE(VKTYPE, STRING, VALPTR) vk_parse<VKTYPE>(#VKTYPE, STRING, VALPTR)
 
 /**
- * @brief Serializes a Vulkan enumerator/flag type
+ * @brief Serializes a Vulkan enumerator/flag type (32-bit)
  * @param vkType Name of the Vulkan enumerator/flag type
  * @param vkValue Value being serialized
  * @param pString Pointer to a string that will be modified with the serialized value. Only modified
@@ -181,7 +181,7 @@ def main(argv):
 bool vk_serialize(std::string_view vkType, uint32_t vkValue, std::string *pString);
 
 /**
- * @brief Parses a Vulkan enumerator/flag serialized string
+ * @brief Parses a Vulkan enumerator/flag serialized string (32-bit)
  * @param vkType Name of the Vulkan enumerator/flag type
  * @param vkString String being parsed
  * @param pValue Pointer to a value that will be modified with the parsed value. Only modified if
@@ -189,6 +189,27 @@ bool vk_serialize(std::string_view vkType, uint32_t vkValue, std::string *pStrin
  * @return True the value was successfully serialized. False otherwise.
  */
 bool vk_parse(std::string_view vkType, std::string vkString, uint32_t *pValue);
+
+
+/**
+ * @brief Serializes a Vulkan enumerator/flag type (64-bit)
+ * @param vkType Name of the Vulkan enumerator/flag type
+ * @param vkValue Value being serialized
+ * @param pString Pointer to a string that will be modified with the serialized value. Only modified
+ * if true is returned.
+ * @return True the value was successfully serialized. False otherwise.
+ */
+bool vk_serialize(std::string_view vkType, uint64_t vkValue, std::string *pString);
+
+/**
+ * @brief Parses a Vulkan enumerator/flag serialized string (64-bit)
+ * @param vkType Name of the Vulkan enumerator/flag type
+ * @param vkString String being parsed
+ * @param pValue Pointer to a value that will be modified with the parsed value. Only modified if
+ * true is returned.
+ * @return True the value was successfully serialized. False otherwise.
+ */
+bool vk_parse(std::string_view vkType, std::string vkString, uint64_t *pValue);
 
 /**
  * @brief Serializes a Vulkan enumerator/flag type
@@ -380,7 +401,7 @@ std::string processEnumPrefix(std::string_view typeName) {
 
 bool findValue(std::string_view findValue,
                std::string_view prefix,
-               uint32_t *pValue,
+               uint64_t *pValue,
                EnumValueSet const *start,
                EnumValueSet const *end) {
     // Remove the vendor tag suffix if it's on the value
@@ -445,7 +466,7 @@ std::string formatString(std::string str) {
     return str;
 }
 
-bool serializeBitmask(std::string_view vkType, uint32_t vkValue, std::string *pString) {
+bool serializeBitmask(std::string_view vkType, uint64_t vkValue, std::string *pString) {
     auto [end, start] = getEnumType(vkType);
     --end;
     --start;
@@ -482,7 +503,7 @@ bool serializeBitmask(std::string_view vkType, uint32_t vkValue, std::string *pS
     return true;
 }
 
-bool serializeEnum(std::string_view vkType, uint32_t vkValue, std::string *pString) {
+bool serializeEnum(std::string_view vkType, uint64_t vkValue, std::string *pString) {
     auto [start, end] = getEnumType(vkType);
 
     while (start != end) {
@@ -497,10 +518,10 @@ bool serializeEnum(std::string_view vkType, uint32_t vkValue, std::string *pStri
     return false;
 }
 
-bool parseBitmask(std::string_view vkType, std::string_view vkString, uint32_t *pValue) {
+bool parseBitmask(std::string_view vkType, std::string_view vkString, uint64_t *pValue) {
     auto [start, end] = getEnumType(vkType);
     std::string prefix = processEnumPrefix(stripVendor(vkType));
-    uint32_t retVal = 0;
+    uint64_t retVal = 0;
 
     auto startCh = vkString.begin();
     auto endCh = startCh;
@@ -529,10 +550,10 @@ bool parseBitmask(std::string_view vkType, std::string_view vkString, uint32_t *
     return true;
 }
 
-bool parseEnum(std::string_view vkType, std::string_view vkString, uint32_t *pValue) {
+bool parseEnum(std::string_view vkType, std::string_view vkString, uint64_t *pValue) {
     auto [start, end] = getEnumType(vkType);
     std::string prefix = processEnumPrefix(stripVendor(vkType));
-    uint32_t retVal = 0;
+    uint64_t retVal = 0;
 
     std::string token = formatString(std::string{vkString});
     bool found = findValue(token, prefix, &retVal, start, end);
@@ -544,7 +565,7 @@ bool parseEnum(std::string_view vkType, std::string_view vkString, uint32_t *pVa
 
 } // namespace
 
-bool vk_serialize(std::string_view vkType, uint32_t vkValue, std::string *pString) {
+bool vk_serialize(std::string_view vkType, uint64_t vkValue, std::string *pString) {
     if (vkType.empty()) {
         return false;
     }
@@ -557,7 +578,11 @@ bool vk_serialize(std::string_view vkType, uint32_t vkValue, std::string *pStrin
     return serializeEnum(vkType, vkValue, pString);
 }
 
-bool vk_parse(std::string_view vkType, std::string vkString, uint32_t *pValue) {
+bool vk_serialize(std::string_view vkType, uint32_t vkValue, std::string *pString) {
+    return vk_serialize(vkType, static_cast<uint64_t>(vkValue), pString);
+}
+
+bool vk_parse(std::string_view vkType, std::string vkString, uint64_t *pValue) {
     if (vkType.empty()) {
         return false;
     }
@@ -572,6 +597,15 @@ bool vk_parse(std::string_view vkType, std::string vkString, uint32_t *pValue) {
     }
 
     return parseEnum(vkType, vkString, pValue);
+}
+
+bool vk_parse(std::string_view vkType, std::string vkString, uint32_t *pValue) {
+    uint64_t tempValue;
+    if (vk_parse(vkType, vkString, &tempValue)) {
+        *pValue = static_cast<uint32_t>(tempValue);
+        return true;
+    }
+    return false;
 }
 """)
 
