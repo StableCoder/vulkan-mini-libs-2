@@ -2,7 +2,7 @@
 set -e
 
 # Variables
-START=72
+START=72 # Prior to v72, vk.xml was not published, so that's the default minimum.
 END=
 
 help_blurb() {
@@ -50,8 +50,7 @@ for TAG in $(git tag | grep -e "^v[0-9]*\.[0-9]*\.[0-9]*$" | sort -t '.' -k3nr);
     EXTRA_OPTS=
     VER=$(echo $TAG | cut -d'.' -f3)
     if [[ $VER -lt $START ]]; then
-        # Prior to v72, vk.xml was not published, so that's the default minimum.
-        break
+        continue
     elif [ "$END" != "" ] && [[ $VER -gt $END ]]; then
         continue
     fi
