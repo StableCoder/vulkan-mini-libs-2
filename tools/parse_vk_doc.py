@@ -72,6 +72,13 @@ def processFeatureEnum(featureEnum, outEnum, vkVersion):
 
     # Get the enum
     enum = outEnum.find(extends)
+    if enum is None:
+        enum = ET.SubElement(outEnum, extends, {
+            'first': vkVersion, 'last': vkVersion})
+    else:
+        enum.set('first', vkVersion)
+
+    # Value
     value = enum.find(valName)
     if value is None:
         value = ET.SubElement(
@@ -104,7 +111,15 @@ def processExtensionEnums(extension, outEnum, vkVersion):
         if extends is None or extends == 'VkStructureType':
             continue
 
+        # Enum
         enum = outEnum.find(extends)
+        if enum is None:
+            enum = ET.SubElement(outEnum, extends, {
+                                 'first': vkVersion, 'last': vkVersion})
+        else:
+            enum.set('first', vkVersion)
+
+        # Value
         value = enum.find(valName)
         if value is None:
             value = ET.SubElement(
