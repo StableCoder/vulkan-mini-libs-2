@@ -96,22 +96,10 @@ std::string VulkanErrCategory::message(int ev) const {
     return "VK_ERROR_FORMAT_NOT_SUPPORTED";
   if (vkRes == VK_ERROR_FRAGMENTED_POOL)
     return "VK_ERROR_FRAGMENTED_POOL";
-#if VK_HEADER_VERSION >= 131
-  if (vkRes == VK_ERROR_UNKNOWN)
-    return "VK_ERROR_UNKNOWN";
-#endif
   if (vkRes == VK_ERROR_OUT_OF_POOL_MEMORY)
     return "VK_ERROR_OUT_OF_POOL_MEMORY";
   if (vkRes == VK_ERROR_INVALID_EXTERNAL_HANDLE)
     return "VK_ERROR_INVALID_EXTERNAL_HANDLE";
-#if VK_HEADER_VERSION >= 131
-  if (vkRes == VK_ERROR_FRAGMENTATION)
-    return "VK_ERROR_FRAGMENTATION";
-#endif
-#if VK_HEADER_VERSION >= 131
-  if (vkRes == VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS)
-    return "VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS";
-#endif
 #if VK_KHR_surface
   if (vkRes == VK_ERROR_SURFACE_LOST_KHR)
     return "VK_ERROR_SURFACE_LOST_KHR";
@@ -148,10 +136,6 @@ std::string VulkanErrCategory::message(int ev) const {
   if (vkRes == VK_ERROR_INVALID_EXTERNAL_HANDLE_KHR)
     return "VK_ERROR_INVALID_EXTERNAL_HANDLE_KHR";
 #endif
-#if VK_HEADER_VERSION >= 86 && VK_EXT_image_drm_format_modifier
-  if (vkRes == VK_ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT)
-    return "VK_ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT";
-#endif
 #if VK_EXT_descriptor_indexing
   if (vkRes == VK_ERROR_FRAGMENTATION_EXT)
     return "VK_ERROR_FRAGMENTATION_EXT";
@@ -159,6 +143,10 @@ std::string VulkanErrCategory::message(int ev) const {
 #if VK_EXT_global_priority
   if (vkRes == VK_ERROR_NOT_PERMITTED_EXT)
     return "VK_ERROR_NOT_PERMITTED_EXT";
+#endif
+#if VK_HEADER_VERSION >= 86 && VK_EXT_image_drm_format_modifier
+  if (vkRes == VK_ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT)
+    return "VK_ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT";
 #endif
 #if VK_HEADER_VERSION >= 97 && VK_EXT_buffer_device_address
   if (vkRes == VK_ERROR_INVALID_DEVICE_ADDRESS_EXT)
@@ -168,9 +156,25 @@ std::string VulkanErrCategory::message(int ev) const {
   if (vkRes == VK_ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT)
     return "VK_ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT";
 #endif
+#if VK_HEADER_VERSION >= 128 && VK_HEADER_VERSION <= 134 && VK_EXT_extension_298
+  if (vkRes == VK_RESULT_EXT_298_RESERVED_VALUE_0_EXT)
+    return "VK_RESULT_EXT_298_RESERVED_VALUE_0_EXT";
+#endif
 #if VK_HEADER_VERSION >= 129 && VK_KHR_buffer_device_address
   if (vkRes == VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS_KHR)
     return "VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS_KHR";
+#endif
+#if VK_HEADER_VERSION >= 131
+  if (vkRes == VK_ERROR_UNKNOWN)
+    return "VK_ERROR_UNKNOWN";
+#endif
+#if VK_HEADER_VERSION >= 131
+  if (vkRes == VK_ERROR_FRAGMENTATION)
+    return "VK_ERROR_FRAGMENTATION";
+#endif
+#if VK_HEADER_VERSION >= 131
+  if (vkRes == VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS)
+    return "VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS";
 #endif
 #if VK_HEADER_VERSION >= 135 && VK_KHR_deferred_host_operations
   if (vkRes == VK_THREAD_IDLE_KHR)
@@ -188,10 +192,6 @@ std::string VulkanErrCategory::message(int ev) const {
   if (vkRes == VK_OPERATION_NOT_DEFERRED_KHR)
     return "VK_OPERATION_NOT_DEFERRED_KHR";
 #endif
-#if VK_HEADER_VERSION >= 136 && VK_EXT_pipeline_creation_cache_control
-  if (vkRes == VK_PIPELINE_COMPILE_REQUIRED_EXT)
-    return "VK_PIPELINE_COMPILE_REQUIRED_EXT";
-#endif
 #if VK_HEADER_VERSION >= 135 && VK_EXT_pipeline_creation_cache_control
   if (vkRes == VK_ERROR_PIPELINE_COMPILE_REQUIRED_EXT)
     return "VK_ERROR_PIPELINE_COMPILE_REQUIRED_EXT";
@@ -200,9 +200,9 @@ std::string VulkanErrCategory::message(int ev) const {
   if (vkRes == VK_ERROR_INCOMPATIBLE_VERSION_KHR)
     return "VK_ERROR_INCOMPATIBLE_VERSION_KHR";
 #endif
-#if VK_HEADER_VERSION >= 128 && VK_HEADER_VERSION <= 134 && VK_EXT_extension_298
-  if (vkRes == VK_RESULT_EXT_298_RESERVED_VALUE_0_EXT)
-    return "VK_RESULT_EXT_298_RESERVED_VALUE_0_EXT";
+#if VK_HEADER_VERSION >= 136 && VK_EXT_pipeline_creation_cache_control
+  if (vkRes == VK_PIPELINE_COMPILE_REQUIRED_EXT)
+    return "VK_PIPELINE_COMPILE_REQUIRED_EXT";
 #endif
 
   if (vkRes > 0)

@@ -36,8 +36,8 @@ def main(argv):
         sys.exit(1)
 
     # Get first/last versions
-    firstVersion = dataRoot.get('first')
-    lastVersion = dataRoot.get('last')
+    firstVersion = int(dataRoot.get('first'))
+    lastVersion = int(dataRoot.get('last'))
 
     outFile = open(outputFile, "w")
 
@@ -56,9 +56,9 @@ def main(argv):
 """)
 
     # Static asserts
-    outFile.writelines(["static_assert(VK_HEADER_VERSION >= ", firstVersion,
+    outFile.writelines(["static_assert(VK_HEADER_VERSION >= ", str(firstVersion),
                         ", \"VK_HEADER_VERSION is from before the supported range.\");\n"])
-    outFile.writelines(["static_assert(VK_HEADER_VERSION <= ", lastVersion,
+    outFile.writelines(["static_assert(VK_HEADER_VERSION <= ", str(lastVersion),
                         ", \"VK_HEADER_VERSION is from after the supported range.\");\n"])
 
     outFile.write("""
@@ -94,42 +94,48 @@ std::string VulkanErrCategory::message(int ev) const {
 """)
 
     # Content
-    for enum in dataRoot.findall('enums/VkResult/'):
-        guarded = False
-        # Guard check for first version
-        if enum.get('first') != firstVersion:
-            guarded = True
-            outFile.writelines(
-                ['#if VK_HEADER_VERSION >= ', enum.get('first')])
-        # Guard check for last version
-        if enum.get('last') != lastVersion:
-            if guarded:
-                # If already started, append to it
-                outFile.writelines(
-                    [' && VK_HEADER_VERSION <= ', enum.get('last')])
-            else:
+    currentVersion = firstVersion
+    while currentVersion <= lastVersion:
+        for enum in dataRoot.findall('enums/VkResult/'):
+            if int(enum.get('first')) != currentVersion:
+                continue
+
+            guarded = False
+            # Guard check for first version
+            if int(enum.get('first')) != firstVersion:
                 guarded = True
                 outFile.writelines(
-                    ['#if VK_HEADER_VERSION <= ', enum.get('last')])
-        # Guard check for platforms
-        for platform in enum.findall('platforms/'):
+                    ['#if VK_HEADER_VERSION >= ', enum.get('first')])
+            # Guard check for last version
+            if int(enum.get('last')) != lastVersion:
+                if guarded:
+                    # If already started, append to it
+                    outFile.writelines(
+                        [' && VK_HEADER_VERSION <= ', enum.get('last')])
+                else:
+                    guarded = True
+                    outFile.writelines(
+                        ['#if VK_HEADER_VERSION <= ', enum.get('last')])
+            # Guard check for platforms
+            for platform in enum.findall('platforms/'):
+                if guarded:
+                    # If already started, append to it
+                    outFile.writelines(
+                        [' && ', platform.tag])
+                else:
+                    guarded = True
+                    outFile.writelines(
+                        ['#if ', platform.tag])
+
             if guarded:
-                # If already started, append to it
-                outFile.writelines(
-                    [' && ', platform.tag])
-            else:
-                guarded = True
-                outFile.writelines(
-                    ['#if ', platform.tag])
+                outFile.write('\n')
 
-        if guarded:
-            outFile.write('\n')
+            outFile.writelines(['  if (vkRes == ', enum.tag, ')\n'])
+            outFile.writelines(['    return \"', enum.tag, '\";\n'])
 
-        outFile.writelines(['  if (vkRes == ', enum.tag, ')\n'])
-        outFile.writelines(['    return \"', enum.tag, '\";\n'])
-
-        if guarded:
-            outFile.write('#endif\n')
+            if guarded:
+                outFile.write('#endif\n')
+        currentVersion += 1
 
     # Footer
     outFile.write("""
