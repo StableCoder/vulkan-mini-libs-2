@@ -41,10 +41,10 @@ extern "C" {
 
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-static_assert(VK_HEADER_VERSION <= 190, "VK_HEADER_VERSION is from after the supported range.");
+static_assert(VK_HEADER_VERSION <= 191, "VK_HEADER_VERSION is from after the supported range.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-_Static_assert(VK_HEADER_VERSION <= 190, "VK_HEADER_VERSION is from after the supported range.");
+_Static_assert(VK_HEADER_VERSION <= 191, "VK_HEADER_VERSION is from after the supported range.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -3576,6 +3576,11 @@ void cleanup_VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR(
 #if VK_HEADER_VERSION >= 190 && VK_KHR_shader_integer_dot_product
 void cleanup_VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR(
     VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 191 && VK_EXT_pageable_device_local_memory
+void cleanup_VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT(
+    VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -7347,6 +7352,13 @@ void cleanup_vk_struct(void const *pData) {
   case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES_KHR:
     cleanup_VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR(
         (VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 191 && VK_EXT_pageable_device_local_memory
+  case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT:
+    cleanup_VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT(
+        (VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT const *)pData);
     break;
 #endif
 
@@ -15198,6 +15210,16 @@ void cleanup_VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR(
 #if VK_HEADER_VERSION >= 190 && VK_KHR_shader_integer_dot_product
 void cleanup_VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR(
     VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 191 && VK_EXT_pageable_device_local_memory
+void cleanup_VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT(
+    VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

@@ -31,7 +31,7 @@
 #include <system_error>
 
 static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-static_assert(VK_HEADER_VERSION <= 190, "VK_HEADER_VERSION is from after the supported range.");
+static_assert(VK_HEADER_VERSION <= 191, "VK_HEADER_VERSION is from after the supported range.");
 
 /*  USAGE
     To use, include this header where the declarations for the boolean checks are required.

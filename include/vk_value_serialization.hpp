@@ -40,7 +40,7 @@
 #include <string_view>
 
 static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-static_assert(VK_HEADER_VERSION <= 190, "VK_HEADER_VERSION is from after the supported range.");
+static_assert(VK_HEADER_VERSION <= 191, "VK_HEADER_VERSION is from after the supported range.");
 
 /**
  * @brief Macro that automatically stringifies the given Vulkan type for serialization
@@ -2333,10 +2333,10 @@ constexpr EnumValueSet VkVideoSessionCreateFlagBitsKHRSets[] = {
 };
 
 constexpr EnumValueSet VkVideoCodingQualityPresetFlagBitsKHRSets[] = {
-    {"DEFAULT", 0},
     {"NORMAL", 0x00000001},
     {"POWER", 0x00000002},
     {"QUALITY", 0x00000004},
+    {"DEFAULT", 0},
 };
 
 constexpr EnumValueSet VkVideoDecodeH264PictureLayoutFlagBitsEXTSets[] = {
