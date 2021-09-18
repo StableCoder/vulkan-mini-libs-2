@@ -40,7 +40,7 @@
 #include <string_view>
 
 static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-static_assert(VK_HEADER_VERSION <= 191, "VK_HEADER_VERSION is from after the supported range.");
+static_assert(VK_HEADER_VERSION <= 192, "VK_HEADER_VERSION is from after the supported range.");
 
 /**
  * @brief Macro that automatically stringifies the given Vulkan type for serialization
@@ -2230,6 +2230,7 @@ constexpr EnumValueSet VkAccessFlagBits2KHRSets[] = {
     {"VIDEO_ENCODE_WRITE", 0x4000000000},
     {"RESERVED_39_BIT_HUAWEI", 0x8000000000},
     {"INVOCATION_MASK_READ_BIT_HUAWEI", 0x8000000000},
+    {"RESERVED_387", 0x10000000000},
 };
 
 constexpr EnumValueSet VkPipelineStageFlagBits2KHRSets[] = {
@@ -2278,6 +2279,7 @@ constexpr EnumValueSet VkPipelineStageFlagBits2KHRSets[] = {
     {"RESERVED_40_BIT_HUAWEI", 0x10000000000},
     {"SUBPASS_SHADING_BIT_HUAWEI", 0x8000000000},
     {"INVOCATION_MASK_BIT_HUAWEI", 0x10000000000},
+    {"RESERVED_387", 0x10000000},
 };
 
 constexpr EnumValueSet VkSubmitFlagBitsKHRSets[] = {
@@ -2759,8 +2761,8 @@ constexpr std::array<EnumType, 229> enumTypes = {{
     {"VkFragmentShadingRateCombinerOpKHR", VkFragmentShadingRateCombinerOpKHRSets, 5},
     {"VkFragmentShadingRateNV", VkFragmentShadingRateNVSets, 12},
     {"VkFragmentShadingRateTypeNV", VkFragmentShadingRateTypeNVSets, 2},
-    {"VkAccessFlagBits2KHR", VkAccessFlagBits2KHRSets, 45},
-    {"VkPipelineStageFlagBits2KHR", VkPipelineStageFlagBits2KHRSets, 45},
+    {"VkAccessFlagBits2KHR", VkAccessFlagBits2KHRSets, 46},
+    {"VkPipelineStageFlagBits2KHR", VkPipelineStageFlagBits2KHRSets, 46},
     {"VkSubmitFlagBitsKHR", VkSubmitFlagBitsKHRSets, 1},
     {"VkEventCreateFlagBits", VkEventCreateFlagBitsSets, 1},
     {"VkPipelineLayoutCreateFlagBits", VkPipelineLayoutCreateFlagBitsSets, 1},
