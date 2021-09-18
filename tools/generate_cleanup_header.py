@@ -165,7 +165,7 @@ extern "C" {
             # If there's not pointer members to delete, leave an empty inlinable function instead
             if len(members) == 0:
                 outFile.writelines(
-                    ['inline void cleanup_', name, '(', name, ' const*) {}\n'])
+                    ['inline void cleanup_', name, '(', name, ' const* pData) {}\n'])
             else:
                 outFile.writelines(
                     ['void cleanup_', name, '(', name, ' const* pData);\n'])
