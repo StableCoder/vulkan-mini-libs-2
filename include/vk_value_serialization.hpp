@@ -40,7 +40,7 @@
 #include <string_view>
 
 static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-static_assert(VK_HEADER_VERSION <= 192, "VK_HEADER_VERSION is from after the supported range.");
+static_assert(VK_HEADER_VERSION <= 193, "VK_HEADER_VERSION is from after the supported range.");
 
 /**
  * @brief Macro that automatically stringifies the given Vulkan type for serialization
@@ -1145,6 +1145,7 @@ constexpr EnumValueSet VkImageCreateFlagBitsSets[] = {
     {"CORNER_SAMPLED_BIT_NV", 0x00002000},
     {"SUBSAMPLED_BIT_EXT", 0x00004000},
     {"RESERVED_15_BIT_NV", 0x00008000},
+    {"RESERVED_426_BIT_QCOM", 0x00008000},
 };
 
 constexpr EnumValueSet VkImageViewCreateFlagBitsSets[] = {
@@ -1914,6 +1915,9 @@ constexpr EnumValueSet VkDriverIdSets[] = {
     {"COREAVI_PROPRIETARY", 15},
     {"JUICE_PROPRIETARY", 16},
     {"VERISILICON_PROPRIETARY", 17},
+    {"MESA_TURNIP", 18},
+    {"MESA_V3DV", 19},
+    {"MESA_PANVK", 20},
 };
 
 constexpr EnumValueSet VkConditionalRenderingFlagBitsEXTSets[] = {
@@ -2629,7 +2633,7 @@ constexpr std::array<EnumType, 229> enumTypes = {{
     {"VkBufferCreateFlagBits", VkBufferCreateFlagBitsSets, 8},
     {"VkShaderStageFlagBits", VkShaderStageFlagBitsSets, 37},
     {"VkImageUsageFlagBits", VkImageUsageFlagBitsSets, 30},
-    {"VkImageCreateFlagBits", VkImageCreateFlagBitsSets, 24},
+    {"VkImageCreateFlagBits", VkImageCreateFlagBitsSets, 25},
     {"VkImageViewCreateFlagBits", VkImageViewCreateFlagBitsSets, 3},
     {"VkSamplerCreateFlagBits", VkSamplerCreateFlagBitsSets, 3},
     {"VkPipelineCreateFlagBits", VkPipelineCreateFlagBitsSets, 43},
@@ -2714,7 +2718,7 @@ constexpr std::array<EnumType, 229> enumTypes = {{
     {"VkConservativeRasterizationModeEXT", VkConservativeRasterizationModeEXTSets, 3},
     {"VkDescriptorBindingFlagBits", VkDescriptorBindingFlagBitsSets, 9},
     {"VkVendorId", VkVendorIdSets, 6},
-    {"VkDriverId", VkDriverIdSets, 29},
+    {"VkDriverId", VkDriverIdSets, 32},
     {"VkConditionalRenderingFlagBitsEXT", VkConditionalRenderingFlagBitsEXTSets, 1},
     {"VkResolveModeFlagBits", VkResolveModeFlagBitsSets, 10},
     {"VkShadingRatePaletteEntryNV", VkShadingRatePaletteEntryNVSets, 12},
