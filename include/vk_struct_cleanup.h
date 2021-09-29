@@ -41,10 +41,10 @@ extern "C" {
 
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-static_assert(VK_HEADER_VERSION <= 193, "VK_HEADER_VERSION is from after the supported range.");
+static_assert(VK_HEADER_VERSION <= 194, "VK_HEADER_VERSION is from after the supported range.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-_Static_assert(VK_HEADER_VERSION <= 193, "VK_HEADER_VERSION is from after the supported range.");
+_Static_assert(VK_HEADER_VERSION <= 194, "VK_HEADER_VERSION is from after the supported range.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -3581,6 +3581,50 @@ void cleanup_VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR(
 #if VK_HEADER_VERSION >= 191 && VK_EXT_pageable_device_local_memory
 void cleanup_VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT(
     VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
+void cleanup_VkImportMemoryBufferCollectionFUCHSIA(
+    VkImportMemoryBufferCollectionFUCHSIA const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
+void cleanup_VkBufferCollectionImageCreateInfoFUCHSIA(
+    VkBufferCollectionImageCreateInfoFUCHSIA const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
+void cleanup_VkBufferCollectionBufferCreateInfoFUCHSIA(
+    VkBufferCollectionBufferCreateInfoFUCHSIA const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
+void cleanup_VkBufferCollectionCreateInfoFUCHSIA(VkBufferCollectionCreateInfoFUCHSIA const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
+void cleanup_VkBufferCollectionPropertiesFUCHSIA(VkBufferCollectionPropertiesFUCHSIA const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
+void cleanup_VkBufferConstraintsInfoFUCHSIA(VkBufferConstraintsInfoFUCHSIA const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
+void cleanup_VkSysmemColorSpaceFUCHSIA(VkSysmemColorSpaceFUCHSIA const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
+void cleanup_VkImageFormatConstraintsInfoFUCHSIA(VkImageFormatConstraintsInfoFUCHSIA const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
+void cleanup_VkImageConstraintsInfoFUCHSIA(VkImageConstraintsInfoFUCHSIA const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
+void cleanup_VkBufferCollectionConstraintsInfoFUCHSIA(
+    VkBufferCollectionConstraintsInfoFUCHSIA const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -7359,6 +7403,70 @@ void cleanup_vk_struct(void const *pData) {
   case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT:
     cleanup_VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT(
         (VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
+  case VK_STRUCTURE_TYPE_IMPORT_MEMORY_BUFFER_COLLECTION_FUCHSIA:
+    cleanup_VkImportMemoryBufferCollectionFUCHSIA(
+        (VkImportMemoryBufferCollectionFUCHSIA const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
+  case VK_STRUCTURE_TYPE_BUFFER_COLLECTION_IMAGE_CREATE_INFO_FUCHSIA:
+    cleanup_VkBufferCollectionImageCreateInfoFUCHSIA(
+        (VkBufferCollectionImageCreateInfoFUCHSIA const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
+  case VK_STRUCTURE_TYPE_BUFFER_COLLECTION_BUFFER_CREATE_INFO_FUCHSIA:
+    cleanup_VkBufferCollectionBufferCreateInfoFUCHSIA(
+        (VkBufferCollectionBufferCreateInfoFUCHSIA const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
+  case VK_STRUCTURE_TYPE_BUFFER_COLLECTION_CREATE_INFO_FUCHSIA:
+    cleanup_VkBufferCollectionCreateInfoFUCHSIA((VkBufferCollectionCreateInfoFUCHSIA const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
+  case VK_STRUCTURE_TYPE_BUFFER_COLLECTION_PROPERTIES_FUCHSIA:
+    cleanup_VkBufferCollectionPropertiesFUCHSIA((VkBufferCollectionPropertiesFUCHSIA const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
+  case VK_STRUCTURE_TYPE_BUFFER_CONSTRAINTS_INFO_FUCHSIA:
+    cleanup_VkBufferConstraintsInfoFUCHSIA((VkBufferConstraintsInfoFUCHSIA const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
+  case VK_STRUCTURE_TYPE_SYSMEM_COLOR_SPACE_FUCHSIA:
+    cleanup_VkSysmemColorSpaceFUCHSIA((VkSysmemColorSpaceFUCHSIA const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
+  case VK_STRUCTURE_TYPE_IMAGE_FORMAT_CONSTRAINTS_INFO_FUCHSIA:
+    cleanup_VkImageFormatConstraintsInfoFUCHSIA((VkImageFormatConstraintsInfoFUCHSIA const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
+  case VK_STRUCTURE_TYPE_IMAGE_CONSTRAINTS_INFO_FUCHSIA:
+    cleanup_VkImageConstraintsInfoFUCHSIA((VkImageConstraintsInfoFUCHSIA const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
+  case VK_STRUCTURE_TYPE_BUFFER_COLLECTION_CONSTRAINTS_INFO_FUCHSIA:
+    cleanup_VkBufferCollectionConstraintsInfoFUCHSIA(
+        (VkBufferCollectionConstraintsInfoFUCHSIA const *)pData);
     break;
 #endif
 
@@ -14934,7 +15042,7 @@ void cleanup_VkCuModuleCreateInfoNVX(VkCuModuleCreateInfoNVX const *pData) {
     cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
-  // pData
+  // pData - dataSize
   free((void *)pData->pData);
 }
 #endif
@@ -15220,6 +15328,112 @@ void cleanup_VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR(
 #if VK_HEADER_VERSION >= 191 && VK_EXT_pageable_device_local_memory
 void cleanup_VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT(
     VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
+void cleanup_VkImportMemoryBufferCollectionFUCHSIA(
+    VkImportMemoryBufferCollectionFUCHSIA const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
+void cleanup_VkBufferCollectionImageCreateInfoFUCHSIA(
+    VkBufferCollectionImageCreateInfoFUCHSIA const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
+void cleanup_VkBufferCollectionBufferCreateInfoFUCHSIA(
+    VkBufferCollectionBufferCreateInfoFUCHSIA const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
+void cleanup_VkBufferCollectionCreateInfoFUCHSIA(VkBufferCollectionCreateInfoFUCHSIA const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
+void cleanup_VkBufferCollectionPropertiesFUCHSIA(VkBufferCollectionPropertiesFUCHSIA const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
+void cleanup_VkBufferConstraintsInfoFUCHSIA(VkBufferConstraintsInfoFUCHSIA const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
+void cleanup_VkSysmemColorSpaceFUCHSIA(VkSysmemColorSpaceFUCHSIA const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
+void cleanup_VkImageFormatConstraintsInfoFUCHSIA(VkImageFormatConstraintsInfoFUCHSIA const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pColorSpaces
+  if (pData->pColorSpaces != NULL)
+    cleanup_VkSysmemColorSpaceFUCHSIA(pData->pColorSpaces);
+  free((void *)pData->pColorSpaces);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
+void cleanup_VkImageConstraintsInfoFUCHSIA(VkImageConstraintsInfoFUCHSIA const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pFormatConstraints - formatConstraintsCount
+  if (pData->pFormatConstraints != NULL) {
+    for (uint32_t i = 0; i < pData->formatConstraintsCount; ++i)
+      cleanup_VkImageFormatConstraintsInfoFUCHSIA(&pData->pFormatConstraints[i]);
+  }
+  free((void *)pData->pFormatConstraints);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
+void cleanup_VkBufferCollectionConstraintsInfoFUCHSIA(
+    VkBufferCollectionConstraintsInfoFUCHSIA const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

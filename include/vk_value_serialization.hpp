@@ -40,7 +40,7 @@
 #include <string_view>
 
 static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-static_assert(VK_HEADER_VERSION <= 193, "VK_HEADER_VERSION is from after the supported range.");
+static_assert(VK_HEADER_VERSION <= 194, "VK_HEADER_VERSION is from after the supported range.");
 
 /**
  * @brief Macro that automatically stringifies the given Vulkan type for serialization
@@ -902,6 +902,7 @@ constexpr EnumValueSet VkObjectTypeSets[] = {
     {"VIDEO_SESSION_PARAMETERS_KHR", 1000023001},
     {"CU_MODULE_NVX", 1000029000},
     {"CU_FUNCTION_NVX", 1000029001},
+    {"BUFFER_COLLECTION_FUCHSIA", 1000366000},
 };
 
 constexpr EnumValueSet VkQueueFlagBitsSets[] = {
@@ -1551,6 +1552,7 @@ constexpr EnumValueSet VkDebugReportObjectTypeEXTSets[] = {
     {"ACCELERATION_STRUCTURE_KHR", 1000150000},
     {"CU_MODULE_NVX", 1000029000},
     {"CU_FUNCTION_NVX", 1000029001},
+    {"BUFFER_COLLECTION_FUCHSIA", 1000366000},
 };
 
 constexpr EnumValueSet VkDeviceMemoryReportEventTypeEXTSets[] = {
@@ -2414,6 +2416,12 @@ constexpr EnumValueSet VkVideoEncodeH264CreateFlagBitsEXTSets[] = {
     {"RESERVED_0", 0x00000001},
 };
 
+constexpr EnumValueSet VkImageConstraintsInfoFlagBitsFUCHSIASets[] = {
+    {"CPU_READ_RARELY", 0x00000001},    {"CPU_READ_OFTEN", 0x00000002},
+    {"CPU_WRITE_RARELY", 0x00000004},   {"CPU_WRITE_OFTEN", 0x00000008},
+    {"PROTECTED_OPTIONAL", 0x00000010},
+};
+
 constexpr EnumValueSet VkVideoCapabilitiesFlagBitsKHRSets[] = {
     {"PROTECTED_CONTENT", 0x00000001},
     {"SEPARATE_REFERENCE_IMAGES", 0x00000002},
@@ -2585,7 +2593,7 @@ struct EnumType {
   uint32_t count;
 };
 
-constexpr std::array<EnumType, 229> enumTypes = {{
+constexpr std::array<EnumType, 231> enumTypes = {{
     {"VkImageLayout", VkImageLayoutSets, 34},
     {"VkAttachmentLoadOp", VkAttachmentLoadOpSets, 4},
     {"VkAttachmentStoreOp", VkAttachmentStoreOpSets, 4},
@@ -2621,7 +2629,7 @@ constexpr std::array<EnumType, 229> enumTypes = {{
     {"VkSubpassContents", VkSubpassContentsSets, 2},
     {"VkDynamicState", VkDynamicStateSets, 37},
     {"VkDescriptorUpdateTemplateType", VkDescriptorUpdateTemplateTypeSets, 3},
-    {"VkObjectType", VkObjectTypeSets, 50},
+    {"VkObjectType", VkObjectTypeSets, 51},
     {"VkQueueFlagBits", VkQueueFlagBitsSets, 9},
     {"VkCullModeFlagBits", VkCullModeFlagBitsSets, 4},
     {"VkRenderPassCreateFlagBits", VkRenderPassCreateFlagBitsSets, 3},
@@ -2668,7 +2676,7 @@ constexpr std::array<EnumType, 229> enumTypes = {{
     {"VkSwapchainImageUsageFlagBitsANDROID", VkSwapchainImageUsageFlagBitsANDROIDSets, 1},
     {"VkTimeDomainEXT", VkTimeDomainEXTSets, 4},
     {"VkDebugReportFlagBitsEXT", VkDebugReportFlagBitsEXTSets, 5},
-    {"VkDebugReportObjectTypeEXT", VkDebugReportObjectTypeEXTSets, 45},
+    {"VkDebugReportObjectTypeEXT", VkDebugReportObjectTypeEXTSets, 46},
     {"VkDeviceMemoryReportEventTypeEXT", VkDeviceMemoryReportEventTypeEXTSets, 5},
     {"VkRasterizationOrderAMD", VkRasterizationOrderAMDSets, 2},
     {"VkExternalMemoryHandleTypeFlagBitsNV", VkExternalMemoryHandleTypeFlagBitsNVSets, 4},
@@ -2790,6 +2798,8 @@ constexpr std::array<EnumType, 229> enumTypes = {{
     {"VkVideoEncodeH264InputModeFlagBitsEXT", VkVideoEncodeH264InputModeFlagBitsEXTSets, 3},
     {"VkVideoEncodeH264OutputModeFlagBitsEXT", VkVideoEncodeH264OutputModeFlagBitsEXTSets, 3},
     {"VkVideoEncodeH264CreateFlagBitsEXT", VkVideoEncodeH264CreateFlagBitsEXTSets, 2},
+    {"VkImageFormatConstraintsFlagBitsFUCHSIA", nullptr, 0},
+    {"VkImageConstraintsInfoFlagBitsFUCHSIA", VkImageConstraintsInfoFlagBitsFUCHSIASets, 5},
     {"VkVideoCapabilitiesFlagBitsKHR", VkVideoCapabilitiesFlagBitsKHRSets, 2},
     {"VkVideoDecodeH264FieldLayoutFlagBitsEXT", VkVideoDecodeH264FieldLayoutFlagBitsEXTSets, 3},
     {"VkVideoEncodeH264CapabilitiesFlagBitsEXT", VkVideoEncodeH264CapabilitiesFlagBitsEXTSets, 11},
