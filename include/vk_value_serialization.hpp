@@ -40,7 +40,7 @@
 #include <string_view>
 
 static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-static_assert(VK_HEADER_VERSION <= 194, "VK_HEADER_VERSION is from after the supported range.");
+static_assert(VK_HEADER_VERSION <= 195, "VK_HEADER_VERSION is from after the supported range.");
 
 /**
  * @brief Macro that automatically stringifies the given Vulkan type for serialization
@@ -1035,6 +1035,8 @@ constexpr EnumValueSet VkBufferUsageFlagBitsSets[] = {
     {"VIDEO_DECODE_DST_BIT_KHR", 0x00004000},
     {"VIDEO_ENCODE_DST_BIT_KHR", 0x00008000},
     {"VIDEO_ENCODE_SRC_BIT_KHR", 0x00010000},
+    {"RESERVED_21_BIT_AMD", 0x00200000},
+    {"RESERVED_22_BIT_AMD", 0x00400000},
 };
 
 constexpr EnumValueSet VkBufferCreateFlagBitsSets[] = {
@@ -1046,6 +1048,7 @@ constexpr EnumValueSet VkBufferCreateFlagBitsSets[] = {
     {"DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR", 0x00000010},
     {"DEVICE_ADDRESS_CAPTURE_REPLAY", 0x00000010},
     {"RESERVED_5_BIT_NV", 0x00000020},
+    {"RESERVED_5_BIT_AMD", 0x00000020},
 };
 
 constexpr EnumValueSet VkShaderStageFlagBitsSets[] = {
@@ -1147,6 +1150,7 @@ constexpr EnumValueSet VkImageCreateFlagBitsSets[] = {
     {"SUBSAMPLED_BIT_EXT", 0x00004000},
     {"RESERVED_15_BIT_NV", 0x00008000},
     {"RESERVED_426_BIT_QCOM", 0x00008000},
+    {"RESERVED_16_BIT_AMD", 0x00010000},
 };
 
 constexpr EnumValueSet VkImageViewCreateFlagBitsSets[] = {
@@ -1159,6 +1163,7 @@ constexpr EnumValueSet VkSamplerCreateFlagBitsSets[] = {
     {"SUBSAMPLED_BIT_EXT", 0x00000001},
     {"SUBSAMPLED_COARSE_RECONSTRUCTION_BIT_EXT", 0x00000002},
     {"RESERVED_2_BIT_EXT", 0x00000004},
+    {"RESERVED_3_BIT_AMD", 0x00000008},
 };
 
 constexpr EnumValueSet VkPipelineCreateFlagBitsSets[] = {
@@ -1626,6 +1631,7 @@ constexpr EnumValueSet VkDescriptorSetLayoutCreateFlagBitsSets[] = {
     {"VK_DESCRIPTOR_SET_LAYOUT_RESERVED_2_BIT_VALVE", 0x00000004},
     {"HOST_ONLY_POOL_BIT_VALVE", 0x00000004},
     {"RESERVED_3_BIT_AMD", 0x00000008},
+    {"RESERVED_4_BIT_AMD", 0x00000010},
 };
 
 constexpr EnumValueSet VkExternalMemoryHandleTypeFlagBitsSets[] = {
@@ -2298,6 +2304,7 @@ constexpr EnumValueSet VkEventCreateFlagBitsSets[] = {
 
 constexpr EnumValueSet VkPipelineLayoutCreateFlagBitsSets[] = {
     {"RESERVED_0_BIT_AMD", 0x00000001},
+    {"RESERVED_1_BIT_AMD", 0x00000002},
 };
 
 constexpr EnumValueSet VkProvokingVertexModeEXTSets[] = {
@@ -2420,6 +2427,43 @@ constexpr EnumValueSet VkImageConstraintsInfoFlagBitsFUCHSIASets[] = {
     {"CPU_READ_RARELY", 0x00000001},    {"CPU_READ_OFTEN", 0x00000002},
     {"CPU_WRITE_RARELY", 0x00000004},   {"CPU_WRITE_OFTEN", 0x00000008},
     {"PROTECTED_OPTIONAL", 0x00000010},
+};
+
+constexpr EnumValueSet VkFormatFeatureFlagBits2KHRSets[] = {
+    {"SAMPLED_IMAGE", 0x00000001},
+    {"STORAGE_IMAGE", 0x00000002},
+    {"STORAGE_IMAGE_ATOMIC", 0x00000004},
+    {"UNIFORM_TEXEL_BUFFER", 0x00000008},
+    {"STORAGE_TEXEL_BUFFER", 0x00000010},
+    {"STORAGE_TEXEL_BUFFER_ATOMIC", 0x00000020},
+    {"VERTEX_BUFFER", 0x00000040},
+    {"COLOR_ATTACHMENT", 0x00000080},
+    {"COLOR_ATTACHMENT_BLEND", 0x00000100},
+    {"DEPTH_STENCIL_ATTACHMENT", 0x00000200},
+    {"BLIT_SRC", 0x00000400},
+    {"BLIT_DST", 0x00000800},
+    {"SAMPLED_IMAGE_FILTER_LINEAR", 0x00001000},
+    {"SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT", 0x00002000},
+    {"TRANSFER_SRC", 0x00004000},
+    {"TRANSFER_DST", 0x00008000},
+    {"SAMPLED_IMAGE_FILTER_MINMAX", 0x00010000},
+    {"MIDPOINT_CHROMA_SAMPLES", 0x00020000},
+    {"SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER", 0x00040000},
+    {"SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER", 0x00080000},
+    {"SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT", 0x00100000},
+    {"SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE", 0x00200000},
+    {"DISJOINT", 0x00400000},
+    {"COSITED_CHROMA_SAMPLES", 0x00800000},
+    {"STORAGE_READ_WITHOUT_FORMAT", 0x80000000},
+    {"STORAGE_WRITE_WITHOUT_FORMAT", 0x100000000},
+    {"SAMPLED_IMAGE_DEPTH_COMPARISON", 0x200000000},
+    {"VIDEO_DECODE_OUTPUT", 0x02000000},
+    {"VIDEO_DECODE_DPB", 0x04000000},
+    {"ACCELERATION_STRUCTURE_VERTEX_BUFFER", 0x20000000},
+    {"FRAGMENT_DENSITY_MAP_BIT_EXT", 0x01000000},
+    {"FRAGMENT_SHADING_RATE_ATTACHMENT", 0x40000000},
+    {"VIDEO_ENCODE_INPUT", 0x08000000},
+    {"VIDEO_ENCODE_DPB", 0x10000000},
 };
 
 constexpr EnumValueSet VkVideoCapabilitiesFlagBitsKHRSets[] = {
@@ -2593,7 +2637,7 @@ struct EnumType {
   uint32_t count;
 };
 
-constexpr std::array<EnumType, 231> enumTypes = {{
+constexpr std::array<EnumType, 232> enumTypes = {{
     {"VkImageLayout", VkImageLayoutSets, 34},
     {"VkAttachmentLoadOp", VkAttachmentLoadOpSets, 4},
     {"VkAttachmentStoreOp", VkAttachmentStoreOpSets, 4},
@@ -2637,13 +2681,13 @@ constexpr std::array<EnumType, 231> enumTypes = {{
     {"VkMemoryPropertyFlagBits", VkMemoryPropertyFlagBitsSets, 10},
     {"VkMemoryHeapFlagBits", VkMemoryHeapFlagBitsSets, 4},
     {"VkAccessFlagBits", VkAccessFlagBitsSets, 44},
-    {"VkBufferUsageFlagBits", VkBufferUsageFlagBitsSets, 33},
-    {"VkBufferCreateFlagBits", VkBufferCreateFlagBitsSets, 8},
+    {"VkBufferUsageFlagBits", VkBufferUsageFlagBitsSets, 35},
+    {"VkBufferCreateFlagBits", VkBufferCreateFlagBitsSets, 9},
     {"VkShaderStageFlagBits", VkShaderStageFlagBitsSets, 37},
     {"VkImageUsageFlagBits", VkImageUsageFlagBitsSets, 30},
-    {"VkImageCreateFlagBits", VkImageCreateFlagBitsSets, 25},
+    {"VkImageCreateFlagBits", VkImageCreateFlagBitsSets, 26},
     {"VkImageViewCreateFlagBits", VkImageViewCreateFlagBitsSets, 3},
-    {"VkSamplerCreateFlagBits", VkSamplerCreateFlagBitsSets, 3},
+    {"VkSamplerCreateFlagBits", VkSamplerCreateFlagBitsSets, 4},
     {"VkPipelineCreateFlagBits", VkPipelineCreateFlagBitsSets, 43},
     {"VkPipelineShaderStageCreateFlagBits", VkPipelineShaderStageCreateFlagBitsSets, 4},
     {"VkColorComponentFlagBits", VkColorComponentFlagBitsSets, 4},
@@ -2689,7 +2733,7 @@ constexpr std::array<EnumType, 231> enumTypes = {{
     {"VkIndirectStateFlagBitsNV", VkIndirectStateFlagBitsNVSets, 1},
     {"VkIndirectCommandsTokenTypeNV", VkIndirectCommandsTokenTypeNVSets, 8},
     {"VkPrivateDataSlotCreateFlagBitsEXT", nullptr, 0},
-    {"VkDescriptorSetLayoutCreateFlagBits", VkDescriptorSetLayoutCreateFlagBitsSets, 6},
+    {"VkDescriptorSetLayoutCreateFlagBits", VkDescriptorSetLayoutCreateFlagBitsSets, 7},
     {"VkExternalMemoryHandleTypeFlagBits", VkExternalMemoryHandleTypeFlagBitsSets, 22},
     {"VkExternalMemoryFeatureFlagBits", VkExternalMemoryFeatureFlagBitsSets, 6},
     {"VkExternalSemaphoreHandleTypeFlagBits", VkExternalSemaphoreHandleTypeFlagBitsSets, 14},
@@ -2777,7 +2821,7 @@ constexpr std::array<EnumType, 231> enumTypes = {{
     {"VkPipelineStageFlagBits2KHR", VkPipelineStageFlagBits2KHRSets, 46},
     {"VkSubmitFlagBitsKHR", VkSubmitFlagBitsKHRSets, 1},
     {"VkEventCreateFlagBits", VkEventCreateFlagBitsSets, 1},
-    {"VkPipelineLayoutCreateFlagBits", VkPipelineLayoutCreateFlagBitsSets, 1},
+    {"VkPipelineLayoutCreateFlagBits", VkPipelineLayoutCreateFlagBitsSets, 2},
     {"VkProvokingVertexModeEXT", VkProvokingVertexModeEXTSets, 2},
     {"VkAccelerationStructureMotionInstanceTypeNV", VkAccelerationStructureMotionInstanceTypeNVSets,
      3},
@@ -2800,6 +2844,7 @@ constexpr std::array<EnumType, 231> enumTypes = {{
     {"VkVideoEncodeH264CreateFlagBitsEXT", VkVideoEncodeH264CreateFlagBitsEXTSets, 2},
     {"VkImageFormatConstraintsFlagBitsFUCHSIA", nullptr, 0},
     {"VkImageConstraintsInfoFlagBitsFUCHSIA", VkImageConstraintsInfoFlagBitsFUCHSIASets, 5},
+    {"VkFormatFeatureFlagBits2KHR", VkFormatFeatureFlagBits2KHRSets, 34},
     {"VkVideoCapabilitiesFlagBitsKHR", VkVideoCapabilitiesFlagBitsKHRSets, 2},
     {"VkVideoDecodeH264FieldLayoutFlagBitsEXT", VkVideoDecodeH264FieldLayoutFlagBitsEXTSets, 3},
     {"VkVideoEncodeH264CapabilitiesFlagBitsEXT", VkVideoEncodeH264CapabilitiesFlagBitsEXTSets, 11},

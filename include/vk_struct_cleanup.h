@@ -41,10 +41,10 @@ extern "C" {
 
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-static_assert(VK_HEADER_VERSION <= 194, "VK_HEADER_VERSION is from after the supported range.");
+static_assert(VK_HEADER_VERSION <= 195, "VK_HEADER_VERSION is from after the supported range.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-_Static_assert(VK_HEADER_VERSION <= 194, "VK_HEADER_VERSION is from after the supported range.");
+_Static_assert(VK_HEADER_VERSION <= 195, "VK_HEADER_VERSION is from after the supported range.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -3625,6 +3625,48 @@ void cleanup_VkImageConstraintsInfoFUCHSIA(VkImageConstraintsInfoFUCHSIA const *
 #if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
 void cleanup_VkBufferCollectionConstraintsInfoFUCHSIA(
     VkBufferCollectionConstraintsInfoFUCHSIA const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 195 && VK_KHR_maintenance4
+void cleanup_VkDeviceBufferMemoryRequirementsKHR(VkDeviceBufferMemoryRequirementsKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 195 && VK_KHR_maintenance4
+void cleanup_VkDeviceImageMemoryRequirementsKHR(VkDeviceImageMemoryRequirementsKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 195 && VK_KHR_maintenance4
+void cleanup_VkPhysicalDeviceMaintenance4FeaturesKHR(
+    VkPhysicalDeviceMaintenance4FeaturesKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 195 && VK_KHR_maintenance4
+void cleanup_VkPhysicalDeviceMaintenance4PropertiesKHR(
+    VkPhysicalDeviceMaintenance4PropertiesKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 195 && VK_EXT_rgba10x6_formats
+void cleanup_VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT(
+    VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 195 && VK_KHR_format_feature_flags2
+void cleanup_VkFormatProperties3KHR(VkFormatProperties3KHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 195 && VK_EXT_image_drm_format_modifier
+void cleanup_VkDrmFormatModifierPropertiesList2EXT(
+    VkDrmFormatModifierPropertiesList2EXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 195 && VK_EXT_image_drm_format_modifier
+inline void cleanup_VkDrmFormatModifierProperties2EXT(
+    VkDrmFormatModifierProperties2EXT const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 195 && VK_ANDROID_external_memory_android_hardware_buffer
+void cleanup_VkAndroidHardwareBufferFormatProperties2ANDROID(
+    VkAndroidHardwareBufferFormatProperties2ANDROID const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -7467,6 +7509,59 @@ void cleanup_vk_struct(void const *pData) {
   case VK_STRUCTURE_TYPE_BUFFER_COLLECTION_CONSTRAINTS_INFO_FUCHSIA:
     cleanup_VkBufferCollectionConstraintsInfoFUCHSIA(
         (VkBufferCollectionConstraintsInfoFUCHSIA const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 195 && VK_KHR_maintenance4
+  case VK_STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS_KHR:
+    cleanup_VkDeviceBufferMemoryRequirementsKHR((VkDeviceBufferMemoryRequirementsKHR const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 195 && VK_KHR_maintenance4
+  case VK_STRUCTURE_TYPE_DEVICE_IMAGE_MEMORY_REQUIREMENTS_KHR:
+    cleanup_VkDeviceImageMemoryRequirementsKHR((VkDeviceImageMemoryRequirementsKHR const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 195 && VK_KHR_maintenance4
+  case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES_KHR:
+    cleanup_VkPhysicalDeviceMaintenance4FeaturesKHR(
+        (VkPhysicalDeviceMaintenance4FeaturesKHR const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 195 && VK_KHR_maintenance4
+  case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES_KHR:
+    cleanup_VkPhysicalDeviceMaintenance4PropertiesKHR(
+        (VkPhysicalDeviceMaintenance4PropertiesKHR const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 195 && VK_EXT_rgba10x6_formats
+  case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RGBA10X6_FORMATS_FEATURES_EXT:
+    cleanup_VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT(
+        (VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 195 && VK_KHR_format_feature_flags2
+  case VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_3_KHR:
+    cleanup_VkFormatProperties3KHR((VkFormatProperties3KHR const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 195 && VK_EXT_image_drm_format_modifier
+  case VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_2_EXT:
+    cleanup_VkDrmFormatModifierPropertiesList2EXT(
+        (VkDrmFormatModifierPropertiesList2EXT const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 195 && VK_ANDROID_external_memory_android_hardware_buffer
+  case VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_PROPERTIES_2_ANDROID:
+    cleanup_VkAndroidHardwareBufferFormatProperties2ANDROID(
+        (VkAndroidHardwareBufferFormatProperties2ANDROID const *)pData);
     break;
 #endif
 
@@ -15434,6 +15529,105 @@ void cleanup_VkImageConstraintsInfoFUCHSIA(VkImageConstraintsInfoFUCHSIA const *
 #if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
 void cleanup_VkBufferCollectionConstraintsInfoFUCHSIA(
     VkBufferCollectionConstraintsInfoFUCHSIA const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 195 && VK_KHR_maintenance4
+void cleanup_VkDeviceBufferMemoryRequirementsKHR(VkDeviceBufferMemoryRequirementsKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pCreateInfo
+  if (pData->pCreateInfo != NULL)
+    cleanup_VkBufferCreateInfo(pData->pCreateInfo);
+  free((void *)pData->pCreateInfo);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 195 && VK_KHR_maintenance4
+void cleanup_VkDeviceImageMemoryRequirementsKHR(VkDeviceImageMemoryRequirementsKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pCreateInfo
+  if (pData->pCreateInfo != NULL)
+    cleanup_VkImageCreateInfo(pData->pCreateInfo);
+  free((void *)pData->pCreateInfo);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 195 && VK_KHR_maintenance4
+void cleanup_VkPhysicalDeviceMaintenance4FeaturesKHR(
+    VkPhysicalDeviceMaintenance4FeaturesKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 195 && VK_KHR_maintenance4
+void cleanup_VkPhysicalDeviceMaintenance4PropertiesKHR(
+    VkPhysicalDeviceMaintenance4PropertiesKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 195 && VK_EXT_rgba10x6_formats
+void cleanup_VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT(
+    VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 195 && VK_KHR_format_feature_flags2
+void cleanup_VkFormatProperties3KHR(VkFormatProperties3KHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 195 && VK_EXT_image_drm_format_modifier
+void cleanup_VkDrmFormatModifierPropertiesList2EXT(
+    VkDrmFormatModifierPropertiesList2EXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pDrmFormatModifierProperties - drmFormatModifierCount
+  if (pData->pDrmFormatModifierProperties != NULL) {
+    for (uint32_t i = 0; i < pData->drmFormatModifierCount; ++i)
+      cleanup_VkDrmFormatModifierProperties2EXT(&pData->pDrmFormatModifierProperties[i]);
+  }
+  free((void *)pData->pDrmFormatModifierProperties);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 195 && VK_EXT_image_drm_format_modifier
+extern inline void cleanup_VkDrmFormatModifierProperties2EXT(
+    VkDrmFormatModifierProperties2EXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 195 && VK_ANDROID_external_memory_android_hardware_buffer
+void cleanup_VkAndroidHardwareBufferFormatProperties2ANDROID(
+    VkAndroidHardwareBufferFormatProperties2ANDROID const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
