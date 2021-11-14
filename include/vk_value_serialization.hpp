@@ -40,7 +40,7 @@
 #include <string_view>
 
 static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-static_assert(VK_HEADER_VERSION <= 196, "VK_HEADER_VERSION is from after the supported range.");
+static_assert(VK_HEADER_VERSION <= 197, "VK_HEADER_VERSION is from after the supported range.");
 
 /**
  * @brief Macro that automatically stringifies the given Vulkan type for serialization
@@ -205,6 +205,7 @@ constexpr EnumValueSet VkAttachmentStoreOpSets[] = {
     {"DONT_CARE", 1},
     {"NONE_QCOM", 1000301000},
     {"NONE_EXT", 1000301000},
+    {"NONE_KHR", 1000301000},
 };
 
 constexpr EnumValueSet VkImageTypeSets[] = {
@@ -1206,11 +1207,13 @@ constexpr EnumValueSet VkPipelineCreateFlagBitsSets[] = {
     {"RESERVED_19_BIT_KHR", 0x00080000},
     {"RAY_TRACING_SHADER_GROUP_HANDLE_CAPTURE_REPLAY_BIT_KHR", 0x00080000},
     {"RESERVED_BIT_20_NV", 0x00100000},
-    {"RESERVED_21_BIT_AMD", 0x00200000},
-    {"RESERVED_22_BIT_AMD", 0x00400000},
     {"RESERVED_23_BIT_AMD", 0x00800000},
     {"RESERVED_10_BIT_AMD", 0x00000400},
+    {"RESERVED_21_BIT_AMD", 0x00200000},
+    {"RESERVED_22_BIT_AMD", 0x00400000},
     {"RAY_TRACING_ALLOW_MOTION_BIT_NV", 0x00100000},
+    {"VK_PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR", 0x00200000},
+    {"VK_PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT", 0x00400000},
 };
 
 constexpr EnumValueSet VkPipelineShaderStageCreateFlagBitsSets[] = {
@@ -2468,18 +2471,6 @@ constexpr EnumValueSet VkFormatFeatureFlagBits2KHRSets[] = {
     {"VIDEO_ENCODE_DPB", 0x10000000},
 };
 
-constexpr EnumValueSet VkVideoEncodeH265CapabilityFlagBitsEXTSets[] = {
-    {"WEIGHTED_BI_PRED_IMPLICIT", 0x00000001},
-    {"TRANSFORM_8X8", 0x00000002},
-    {"CHROMA_QP_OFFSET", 0x00000004},
-    {"SECOND_CHROMA_QP_OFFSET", 0x00000008},
-    {"DEBLOCKING_FILTER_DISABLED", 0x00000010},
-    {"DEBLOCKING_FILTER_ENABLED", 0x00000020},
-    {"DEBLOCKING_FILTER_PARTIAL", 0x00000040},
-    {"MULTIPLE_SLICE_PER_FRAME", 0x00000080},
-    {"EVENLY_DISTRIBUTED_SLICE_SIZE", 0x00000100},
-};
-
 constexpr EnumValueSet VkVideoEncodeH265InputModeFlagBitsEXTSets[] = {
     {"FRAME", 0x00000001},
     {"SLICE", 0x00000002},
@@ -2497,6 +2488,24 @@ constexpr EnumValueSet VkVideoEncodeH265CtbSizeFlagBitsEXTSets[] = {
     {"16", 0x00000002},
     {"32", 0x00000004},
     {"64", 0x00000008},
+};
+
+constexpr EnumValueSet VkRenderingFlagBitsKHRSets[] = {
+    {"CONTENTS_SECONDARY_COMMAND_BUFFERS", 0x00000001},
+    {"SUSPENDING", 0x00000002},
+    {"RESUMING", 0x00000004},
+};
+
+constexpr EnumValueSet VkVideoEncodeH265CapabilityFlagBitsEXTSets[] = {
+    {"WEIGHTED_BI_PRED_IMPLICIT", 0x00000001},
+    {"TRANSFORM_8X8", 0x00000002},
+    {"CHROMA_QP_OFFSET", 0x00000004},
+    {"SECOND_CHROMA_QP_OFFSET", 0x00000008},
+    {"DEBLOCKING_FILTER_DISABLED", 0x00000010},
+    {"DEBLOCKING_FILTER_ENABLED", 0x00000020},
+    {"DEBLOCKING_FILTER_PARTIAL", 0x00000040},
+    {"MULTIPLE_SLICE_PER_FRAME", 0x00000080},
+    {"EVENLY_DISTRIBUTED_SLICE_SIZE", 0x00000100},
 };
 
 constexpr EnumValueSet VkVideoCapabilitiesFlagBitsKHRSets[] = {
@@ -2670,10 +2679,10 @@ struct EnumType {
   uint32_t count;
 };
 
-constexpr std::array<EnumType, 236> enumTypes = {{
+constexpr std::array<EnumType, 237> enumTypes = {{
     {"VkImageLayout", VkImageLayoutSets, 34},
     {"VkAttachmentLoadOp", VkAttachmentLoadOpSets, 4},
-    {"VkAttachmentStoreOp", VkAttachmentStoreOpSets, 4},
+    {"VkAttachmentStoreOp", VkAttachmentStoreOpSets, 5},
     {"VkImageType", VkImageTypeSets, 3},
     {"VkImageTiling", VkImageTilingSets, 3},
     {"VkImageViewType", VkImageViewTypeSets, 7},
@@ -2721,7 +2730,7 @@ constexpr std::array<EnumType, 236> enumTypes = {{
     {"VkImageCreateFlagBits", VkImageCreateFlagBitsSets, 27},
     {"VkImageViewCreateFlagBits", VkImageViewCreateFlagBitsSets, 3},
     {"VkSamplerCreateFlagBits", VkSamplerCreateFlagBitsSets, 4},
-    {"VkPipelineCreateFlagBits", VkPipelineCreateFlagBitsSets, 43},
+    {"VkPipelineCreateFlagBits", VkPipelineCreateFlagBitsSets, 45},
     {"VkPipelineShaderStageCreateFlagBits", VkPipelineShaderStageCreateFlagBitsSets, 4},
     {"VkColorComponentFlagBits", VkColorComponentFlagBitsSets, 4},
     {"VkFenceCreateFlagBits", VkFenceCreateFlagBitsSets, 1},
@@ -2878,10 +2887,11 @@ constexpr std::array<EnumType, 236> enumTypes = {{
     {"VkImageFormatConstraintsFlagBitsFUCHSIA", nullptr, 0},
     {"VkImageConstraintsInfoFlagBitsFUCHSIA", VkImageConstraintsInfoFlagBitsFUCHSIASets, 5},
     {"VkFormatFeatureFlagBits2KHR", VkFormatFeatureFlagBits2KHRSets, 34},
-    {"VkVideoEncodeH265CapabilityFlagBitsEXT", VkVideoEncodeH265CapabilityFlagBitsEXTSets, 9},
     {"VkVideoEncodeH265InputModeFlagBitsEXT", VkVideoEncodeH265InputModeFlagBitsEXTSets, 3},
     {"VkVideoEncodeH265OutputModeFlagBitsEXT", VkVideoEncodeH265OutputModeFlagBitsEXTSets, 3},
     {"VkVideoEncodeH265CtbSizeFlagBitsEXT", VkVideoEncodeH265CtbSizeFlagBitsEXTSets, 4},
+    {"VkRenderingFlagBitsKHR", VkRenderingFlagBitsKHRSets, 3},
+    {"VkVideoEncodeH265CapabilityFlagBitsEXT", VkVideoEncodeH265CapabilityFlagBitsEXTSets, 9},
     {"VkVideoCapabilitiesFlagBitsKHR", VkVideoCapabilitiesFlagBitsKHRSets, 2},
     {"VkVideoDecodeH264FieldLayoutFlagBitsEXT", VkVideoDecodeH264FieldLayoutFlagBitsEXTSets, 3},
     {"VkVideoEncodeH264CapabilitiesFlagBitsEXT", VkVideoEncodeH264CapabilitiesFlagBitsEXTSets, 11},
