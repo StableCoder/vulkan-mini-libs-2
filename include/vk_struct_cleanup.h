@@ -41,10 +41,10 @@ extern "C" {
 
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-static_assert(VK_HEADER_VERSION <= 198, "VK_HEADER_VERSION is from after the supported range.");
+static_assert(VK_HEADER_VERSION <= 199, "VK_HEADER_VERSION is from after the supported range.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-_Static_assert(VK_HEADER_VERSION <= 198, "VK_HEADER_VERSION is from after the supported range.");
+_Static_assert(VK_HEADER_VERSION <= 199, "VK_HEADER_VERSION is from after the supported range.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -3765,6 +3765,15 @@ inline void cleanup_VkAttachmentSampleCountInfoNV(VkAttachmentSampleCountInfoNV 
 
 #if VK_HEADER_VERSION >= 197 && VK_KHR_dynamic_rendering
 void cleanup_VkMultiviewPerViewAttributesInfoNVX(VkMultiviewPerViewAttributesInfoNVX const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 199 && VK_EXT_image_view_min_lod
+void cleanup_VkPhysicalDeviceImageViewMinLodFeaturesEXT(
+    VkPhysicalDeviceImageViewMinLodFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 199 && VK_EXT_image_view_min_lod
+void cleanup_VkImageViewMinLodCreateInfoEXT(VkImageViewMinLodCreateInfoEXT const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -7796,6 +7805,19 @@ void cleanup_vk_struct(void const *pData) {
 #if VK_HEADER_VERSION >= 197 && VK_KHR_dynamic_rendering
   case VK_STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX:
     cleanup_VkMultiviewPerViewAttributesInfoNVX((VkMultiviewPerViewAttributesInfoNVX const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 199 && VK_EXT_image_view_min_lod
+  case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_VIEW_MIN_LOD_FEATURES_EXT:
+    cleanup_VkPhysicalDeviceImageViewMinLodFeaturesEXT(
+        (VkPhysicalDeviceImageViewMinLodFeaturesEXT const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 199 && VK_EXT_image_view_min_lod
+  case VK_STRUCTURE_TYPE_IMAGE_VIEW_MIN_LOD_CREATE_INFO_EXT:
+    cleanup_VkImageViewMinLodCreateInfoEXT((VkImageViewMinLodCreateInfoEXT const *)pData);
     break;
 #endif
 
@@ -16157,6 +16179,25 @@ extern inline void cleanup_VkAttachmentSampleCountInfoNV(
 
 #if VK_HEADER_VERSION >= 197 && VK_KHR_dynamic_rendering
 void cleanup_VkMultiviewPerViewAttributesInfoNVX(VkMultiviewPerViewAttributesInfoNVX const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 199 && VK_EXT_image_view_min_lod
+void cleanup_VkPhysicalDeviceImageViewMinLodFeaturesEXT(
+    VkPhysicalDeviceImageViewMinLodFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 199 && VK_EXT_image_view_min_lod
+void cleanup_VkImageViewMinLodCreateInfoEXT(VkImageViewMinLodCreateInfoEXT const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

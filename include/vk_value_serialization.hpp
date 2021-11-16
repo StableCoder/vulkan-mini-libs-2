@@ -40,7 +40,7 @@
 #include <string_view>
 
 static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-static_assert(VK_HEADER_VERSION <= 198, "VK_HEADER_VERSION is from after the supported range.");
+static_assert(VK_HEADER_VERSION <= 199, "VK_HEADER_VERSION is from after the supported range.");
 
 /**
  * @brief Macro that automatically stringifies the given Vulkan type for serialization
@@ -1930,6 +1930,7 @@ constexpr EnumValueSet VkDriverIdSets[] = {
     {"MESA_TURNIP", 18},
     {"MESA_V3DV", 19},
     {"MESA_PANVK", 20},
+    {"SAMSUNG_PROPRIETARY", 21},
 };
 
 constexpr EnumValueSet VkConditionalRenderingFlagBitsEXTSets[] = {
@@ -2247,6 +2248,7 @@ constexpr EnumValueSet VkAccessFlagBits2KHRSets[] = {
     {"RESERVED_39_BIT_HUAWEI", 0x8000000000},
     {"INVOCATION_MASK_READ_BIT_HUAWEI", 0x8000000000},
     {"RESERVED_387", 0x10000000000},
+    {"RESERVED_41_BIT_AMD", 0x20000000000},
 };
 
 constexpr EnumValueSet VkPipelineStageFlagBits2KHRSets[] = {
@@ -2812,7 +2814,7 @@ constexpr std::array<EnumType, 237> enumTypes = {{
     {"VkConservativeRasterizationModeEXT", VkConservativeRasterizationModeEXTSets, 3},
     {"VkDescriptorBindingFlagBits", VkDescriptorBindingFlagBitsSets, 9},
     {"VkVendorId", VkVendorIdSets, 6},
-    {"VkDriverId", VkDriverIdSets, 32},
+    {"VkDriverId", VkDriverIdSets, 33},
     {"VkConditionalRenderingFlagBitsEXT", VkConditionalRenderingFlagBitsEXTSets, 1},
     {"VkResolveModeFlagBits", VkResolveModeFlagBitsSets, 10},
     {"VkShadingRatePaletteEntryNV", VkShadingRatePaletteEntryNVSets, 12},
@@ -2859,7 +2861,7 @@ constexpr std::array<EnumType, 237> enumTypes = {{
     {"VkFragmentShadingRateCombinerOpKHR", VkFragmentShadingRateCombinerOpKHRSets, 5},
     {"VkFragmentShadingRateNV", VkFragmentShadingRateNVSets, 12},
     {"VkFragmentShadingRateTypeNV", VkFragmentShadingRateTypeNVSets, 2},
-    {"VkAccessFlagBits2KHR", VkAccessFlagBits2KHRSets, 46},
+    {"VkAccessFlagBits2KHR", VkAccessFlagBits2KHRSets, 47},
     {"VkPipelineStageFlagBits2KHR", VkPipelineStageFlagBits2KHRSets, 46},
     {"VkSubmitFlagBitsKHR", VkSubmitFlagBitsKHRSets, 1},
     {"VkEventCreateFlagBits", VkEventCreateFlagBitsSets, 1},
