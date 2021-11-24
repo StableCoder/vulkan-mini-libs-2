@@ -40,7 +40,7 @@
 #include <string_view>
 
 static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-static_assert(VK_HEADER_VERSION <= 199, "VK_HEADER_VERSION is from after the supported range.");
+static_assert(VK_HEADER_VERSION <= 200, "VK_HEADER_VERSION is from after the supported range.");
 
 /**
  * @brief Macro that automatically stringifies the given Vulkan type for serialization
@@ -1214,6 +1214,8 @@ constexpr EnumValueSet VkPipelineCreateFlagBitsSets[] = {
     {"RAY_TRACING_ALLOW_MOTION_BIT_NV", 0x00100000},
     {"VK_PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR", 0x00200000},
     {"VK_PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT", 0x00400000},
+    {"RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR", 0x00200000},
+    {"RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT", 0x00400000},
 };
 
 constexpr EnumValueSet VkPipelineShaderStageCreateFlagBitsSets[] = {
@@ -1786,9 +1788,15 @@ constexpr EnumValueSet VkDiscardRectangleModeEXTSets[] = {
 };
 
 constexpr EnumValueSet VkSubpassDescriptionFlagBitsSets[] = {
-    {"PER_VIEW_ATTRIBUTES_BIT_NVX", 0x00000001}, {"PER_VIEW_POSITION_X_ONLY_BIT_NVX", 0x00000002},
-    {"RESERVED_2_BIT_QCOM", 0x00000004},         {"RESERVED_3_BIT_QCOM", 0x00000008},
-    {"FRAGMENT_REGION_BIT_QCOM", 0x00000004},    {"SHADER_RESOLVE_BIT_QCOM", 0x00000008},
+    {"PER_VIEW_ATTRIBUTES_BIT_NVX", 0x00000001},
+    {"PER_VIEW_POSITION_X_ONLY_BIT_NVX", 0x00000002},
+    {"RESERVED_2_BIT_QCOM", 0x00000004},
+    {"RESERVED_3_BIT_QCOM", 0x00000008},
+    {"FRAGMENT_REGION_BIT_QCOM", 0x00000004},
+    {"SHADER_RESOLVE_BIT_QCOM", 0x00000008},
+    {"RASTERIZATION_ORDER_ATTACHMENT_COLOR_ACCESS_BIT_ARM", 0x00000010},
+    {"RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_BIT_ARM", 0x00000020},
+    {"RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_BIT_ARM", 0x00000040},
 };
 
 constexpr EnumValueSet VkPointClippingBehaviorSets[] = {
@@ -2324,6 +2332,15 @@ constexpr EnumValueSet VkAccelerationStructureMotionInstanceTypeNVSets[] = {
     {"SRT_MOTION", 2},
 };
 
+constexpr EnumValueSet VkPipelineColorBlendStateCreateFlagBitsSets[] = {
+    {"RASTERIZATION_ORDER_ATTACHMENT_ACCESS_BIT_ARM", 0x00000001},
+};
+
+constexpr EnumValueSet VkPipelineDepthStencilStateCreateFlagBitsSets[] = {
+    {"RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_BIT_ARM", 0x00000001},
+    {"RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_BIT_ARM", 0x00000002},
+};
+
 constexpr EnumValueSet VkVideoCodecOperationFlagBitsKHRSets[] = {
     {"INVALID", 0},
     {"ENCODE_H264_BIT_EXT", 0x00010000},
@@ -2681,7 +2698,7 @@ struct EnumType {
   uint32_t count;
 };
 
-constexpr std::array<EnumType, 237> enumTypes = {{
+constexpr std::array<EnumType, 239> enumTypes = {{
     {"VkImageLayout", VkImageLayoutSets, 34},
     {"VkAttachmentLoadOp", VkAttachmentLoadOpSets, 4},
     {"VkAttachmentStoreOp", VkAttachmentStoreOpSets, 5},
@@ -2732,7 +2749,7 @@ constexpr std::array<EnumType, 237> enumTypes = {{
     {"VkImageCreateFlagBits", VkImageCreateFlagBitsSets, 27},
     {"VkImageViewCreateFlagBits", VkImageViewCreateFlagBitsSets, 3},
     {"VkSamplerCreateFlagBits", VkSamplerCreateFlagBitsSets, 4},
-    {"VkPipelineCreateFlagBits", VkPipelineCreateFlagBitsSets, 45},
+    {"VkPipelineCreateFlagBits", VkPipelineCreateFlagBitsSets, 47},
     {"VkPipelineShaderStageCreateFlagBits", VkPipelineShaderStageCreateFlagBitsSets, 4},
     {"VkColorComponentFlagBits", VkColorComponentFlagBitsSets, 4},
     {"VkFenceCreateFlagBits", VkFenceCreateFlagBitsSets, 1},
@@ -2796,7 +2813,7 @@ constexpr std::array<EnumType, 237> enumTypes = {{
     {"VkSwapchainCreateFlagBitsKHR", VkSwapchainCreateFlagBitsKHRSets, 3},
     {"VkViewportCoordinateSwizzleNV", VkViewportCoordinateSwizzleNVSets, 8},
     {"VkDiscardRectangleModeEXT", VkDiscardRectangleModeEXTSets, 2},
-    {"VkSubpassDescriptionFlagBits", VkSubpassDescriptionFlagBitsSets, 6},
+    {"VkSubpassDescriptionFlagBits", VkSubpassDescriptionFlagBitsSets, 9},
     {"VkPointClippingBehavior", VkPointClippingBehaviorSets, 4},
     {"VkSamplerReductionMode", VkSamplerReductionModeSets, 6},
     {"VkTessellationDomainOrigin", VkTessellationDomainOriginSets, 4},
@@ -2869,6 +2886,8 @@ constexpr std::array<EnumType, 237> enumTypes = {{
     {"VkProvokingVertexModeEXT", VkProvokingVertexModeEXTSets, 2},
     {"VkAccelerationStructureMotionInstanceTypeNV", VkAccelerationStructureMotionInstanceTypeNVSets,
      3},
+    {"VkPipelineColorBlendStateCreateFlagBits", VkPipelineColorBlendStateCreateFlagBitsSets, 1},
+    {"VkPipelineDepthStencilStateCreateFlagBits", VkPipelineDepthStencilStateCreateFlagBitsSets, 2},
     {"VkVideoCodecOperationFlagBitsKHR", VkVideoCodecOperationFlagBitsKHRSets, 5},
     {"VkVideoChromaSubsamplingFlagBitsKHR", VkVideoChromaSubsamplingFlagBitsKHRSets, 5},
     {"VkVideoComponentBitDepthFlagBitsKHR", VkVideoComponentBitDepthFlagBitsKHRSets, 4},

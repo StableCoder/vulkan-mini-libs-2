@@ -41,10 +41,10 @@ extern "C" {
 
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-static_assert(VK_HEADER_VERSION <= 199, "VK_HEADER_VERSION is from after the supported range.");
+static_assert(VK_HEADER_VERSION <= 200, "VK_HEADER_VERSION is from after the supported range.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-_Static_assert(VK_HEADER_VERSION <= 199, "VK_HEADER_VERSION is from after the supported range.");
+_Static_assert(VK_HEADER_VERSION <= 200, "VK_HEADER_VERSION is from after the supported range.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -3774,6 +3774,21 @@ void cleanup_VkPhysicalDeviceImageViewMinLodFeaturesEXT(
 
 #if VK_HEADER_VERSION >= 199 && VK_EXT_image_view_min_lod
 void cleanup_VkImageViewMinLodCreateInfoEXT(VkImageViewMinLodCreateInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 200 && VK_EXT_depth_clip_control
+void cleanup_VkPhysicalDeviceDepthClipControlFeaturesEXT(
+    VkPhysicalDeviceDepthClipControlFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 200 && VK_EXT_depth_clip_control
+void cleanup_VkPipelineViewportDepthClipControlCreateInfoEXT(
+    VkPipelineViewportDepthClipControlCreateInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 200 && VK_ARM_rasterization_order_attachment_access
+void cleanup_VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM(
+    VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -7818,6 +7833,27 @@ void cleanup_vk_struct(void const *pData) {
 #if VK_HEADER_VERSION >= 199 && VK_EXT_image_view_min_lod
   case VK_STRUCTURE_TYPE_IMAGE_VIEW_MIN_LOD_CREATE_INFO_EXT:
     cleanup_VkImageViewMinLodCreateInfoEXT((VkImageViewMinLodCreateInfoEXT const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 200 && VK_EXT_depth_clip_control
+  case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_CONTROL_FEATURES_EXT:
+    cleanup_VkPhysicalDeviceDepthClipControlFeaturesEXT(
+        (VkPhysicalDeviceDepthClipControlFeaturesEXT const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 200 && VK_EXT_depth_clip_control
+  case VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_DEPTH_CLIP_CONTROL_CREATE_INFO_EXT:
+    cleanup_VkPipelineViewportDepthClipControlCreateInfoEXT(
+        (VkPipelineViewportDepthClipControlCreateInfoEXT const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 200 && VK_ARM_rasterization_order_attachment_access
+  case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_FEATURES_ARM:
+    cleanup_VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM(
+        (VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM const *)pData);
     break;
 #endif
 
@@ -16198,6 +16234,36 @@ void cleanup_VkPhysicalDeviceImageViewMinLodFeaturesEXT(
 
 #if VK_HEADER_VERSION >= 199 && VK_EXT_image_view_min_lod
 void cleanup_VkImageViewMinLodCreateInfoEXT(VkImageViewMinLodCreateInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 200 && VK_EXT_depth_clip_control
+void cleanup_VkPhysicalDeviceDepthClipControlFeaturesEXT(
+    VkPhysicalDeviceDepthClipControlFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 200 && VK_EXT_depth_clip_control
+void cleanup_VkPipelineViewportDepthClipControlCreateInfoEXT(
+    VkPipelineViewportDepthClipControlCreateInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 200 && VK_ARM_rasterization_order_attachment_access
+void cleanup_VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM(
+    VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
