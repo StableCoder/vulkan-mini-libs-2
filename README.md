@@ -7,7 +7,7 @@ A set of small header-only libraries that are of limited scope each to perform a
 
 Compared to the previous version of these libraries which generated header versions for each Vulkan header version, this one remains backwards and forwards compatible, serving a given whole range of header versions (typically v1.0.72 - current) through the use of Vulkan definitions
 
-# Vulkan Value Serialization
+# Vulkan Value Serialization (C++)
 
 This program builds header files for use in C++17 or newer. It
 contains all Vulkan enum types/flags/values of the indicated Vulkan header spec
@@ -37,20 +37,42 @@ the `_BIT` suffix.
 
 ## Usage
 
-On *ONE* compilation unit, include the definition of `#define VK_VALUE_SERIALIZATION_CONFIG_MAIN` so that the definitions are compiled somewhere following the one definition rule (ODR).
+On *ONE* compilation unit, include the definition of `#define VK_VALUE_SERIALIZATION_CONFIG_MAIN` before the header is included so that the definitions are compiled somewhere following the one definition rule (ODR).
 
-# Vulkan Error Code
+# Vulkan Result to String (C)
+
+C-compatible header file with a single function, which will convert a VkResult to the corresponding string representation, or as close as possible in the case with shared values.
+
+## Usage
+
+On *ONE* compilation unit, include the definition of `#define VK_RESULT_TO_STRING_CONFIG_MAIN` before the header is included so that the definitions are compiled somewhere following the one definition rule (ODR).
+
+Then simply call the `char const *vkResultToString(VkResult)` function:
+```cpp
+#define VK_RESULT_TO_STRING_CONFIG_MAIN
+#include "vk_result_to_string.h"
+#include <iostream>
+
+int main(int, char **) {
+  char const* resStr = vkResultToString(VK_ERROR_DEVICE_LOST);
+  std::cout << resStr << std::endl;
+}
+```
+
+# Vulkan Error Code (C++)
 
 Header file for C++. Contains the implementation details that allow the use of VkResult values with std::error_code and std::error_category.
 
 ## Usage
 
-On *ONE* compilation unit, include the definition of `#define VK_ERROR_CODE_CONFIG_MAIN` so that the definitions are compiled somewhere following the one definition rule (ODR).
+On *ONE* compilation unit, include the definition of `#define VK_ERROR_CODE_CONFIG_MAIN` **AND** ensure that `#define VK_RESULT_TO_STRING_CONFIG_MAIN` is defined somewhere before the header is included, not necessarily in the same compilation unit, so that the definitions are compiled somewhere following the one definition rule (ODR).
 
 Then, one can implicitly convert VkResult to std::error_code:
 ```cpp
-#include <vulkan/vulkan.h>
+#define VK_RESULT_TO_STRING_CONFIG_MAIN
+#define VK_ERROR_CODE_CONFIG_MAIN
 #include "vk_error_code.hpp"
+#include <iostream>
 
 int main(int, char **) {
   std::error_code ec = (VkResult)VK_ERROR_DEVICE_LOST;
@@ -59,7 +81,7 @@ int main(int, char **) {
 }
 ```
 
-# Vulkan Struct Cleanup
+# Vulkan Struct Cleanup (C)
 
 C11-compatible C header that has all available structs in the generated range, and can safely free memory held by the given struct. This operates on the principle that *all* data that the struct points to externally is *owned* by the struct and it's children, and can be safely freed.
 

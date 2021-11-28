@@ -46,12 +46,21 @@ def main(argv):
         outFile.write(fd.read())
         outFile.write('\n')
 
-    outFile.write("""#ifndef VK_ERROR_CODE_HPP
-#define VK_ERROR_CODE_HPP
+    outFile.write("""#ifndef VK_RESULT_TO_STRING_H
+#define VK_RESULT_TO_STRING_H
+
+/*  USAGE
+    To use, include this header where the declarations for the boolean checks are required.
+
+    On *ONE* compilation unit, include the definition of `#define VK_RESULT_TO_STRING_CONFIG_MAIN`
+    so that the definitions are compiled somewhere following the one definition rule.
+*/
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #include <vulkan/vulkan.h>
-
-#include <system_error>
 
 """)
 
@@ -62,36 +71,12 @@ def main(argv):
                         ", \"VK_HEADER_VERSION is from after the supported range.\");\n"])
 
     outFile.write("""
-/*  USAGE
-    To use, include this header where the declarations for the boolean checks are required.
+// This is effectively a cheap approximation of OpenXR's useful `xrResultToString` function but for Vulkan
+char const* vkResultToString(VkResult res);
 
-    On *ONE* compilation unit, include the definition of `#define VK_ERROR_CODE_CONFIG_MAIN`
-    so that the definitions are compiled somewhere following the one definition rule.
-*/
+#ifdef VK_RESULT_TO_STRING_CONFIG_MAIN
 
-namespace std {
-template <>
-struct is_error_code_enum<VkResult> : true_type {};
-} // namespace std
-
-std::error_code make_error_code(VkResult);
-
-#ifdef VK_ERROR_CODE_CONFIG_MAIN
-
-namespace {
-
-struct VulkanErrCategory : std::error_category {
-  const char *name() const noexcept override;
-  std::string message(int ev) const override;
-};
-
-const char *VulkanErrCategory::name() const noexcept {
-  return "VkResult";
-}
-
-std::string VulkanErrCategory::message(int ev) const {
-  VkResult const vkRes = static_cast<VkResult>(ev);
-
+char const* vkResultToString(VkResult vkRes) {
   // Check in descending order to get the 'latest' version of the error code text available.
   // Also, because codes have been re-used over time, can't use a switch and have to do this large set of ifs.
   // Luckily this *should* be a relatively rare call.
@@ -149,16 +134,13 @@ std::string VulkanErrCategory::message(int ev) const {
     return "(unrecognized negative VkResult value)";
 }
 
-const VulkanErrCategory vulkanErrCategory{};
+#endif // VK_RESULT_TO_STRING_CONFIG_MAIN
 
-} // namespace
-
-std::error_code make_error_code(VkResult e) {
-  return {static_cast<int>(e), vulkanErrCategory};
+#ifdef __cplusplus
 }
+#endif
 
-#endif // VK_ERROR_CODE_CONFIG_MAIN
-#endif // VK_ERROR_CODE_HPP
+#endif // VK_RESULT_TO_STRING_H
 """)
 
 
