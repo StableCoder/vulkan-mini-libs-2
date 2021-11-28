@@ -1,7 +1,20 @@
-# Vulkan Mini Libs 2
+# Vulkan Mini Libs 2 <!-- omit in toc -->
 [![pipeline status](https://git.stabletec.com/utilities/vulkan-mini-libs-2/badges/main/pipeline.svg)](https://git.stabletec.com/utilities/vulkan-mini-libs-2/commits/main)
 [![coverage report](https://git.stabletec.com/utilities/vulkan-mini-libs-2/badges/main/coverage.svg)](https://git.stabletec.com/utilities/vulkan-mini-libs-2/commits/main)
 [![license](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://git.stabletec.com/utilities/vulkan-mini-libs-2/blob/main/LICENSE)
+
+- [Vulkan Value Serialization (C++)](#vulkan-value-serialization-c)
+  - [Usage](#usage)
+- [Vulkan Result to String (C)](#vulkan-result-to-string-c)
+  - [Usage](#usage-1)
+- [Vulkan Error Code (C++)](#vulkan-error-code-c)
+  - [Usage](#usage-2)
+- [Vulkan Struct Cleanup (C)](#vulkan-struct-cleanup-c)
+  - [Usage](#usage-3)
+- [Generating Header Mini-Libs](#generating-header-mini-libs)
+  - [Possible Arguments](#possible-arguments)
+    - [-s, --start <INT>](#-s---start-int)
+    - [-e, --end <INT>](#-e---end-int)
 
 A set of small header-only libraries that are of limited scope each to perform a very specific task.
 
