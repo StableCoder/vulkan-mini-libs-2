@@ -91,11 +91,15 @@ const char *VulkanErrCategory::name() const noexcept {
 
 std::string VulkanErrCategory::message(int ev) const {
   VkResult const vkRes = static_cast<VkResult>(ev);
+
+  // Check in descending order to get the 'latest' version of the error code text available.
+  // Also, because codes have been re-used over time, can't use a switch and have to do this large set of ifs.
+  // Luckily this *should* be a relatively rare call.
 """)
 
     # Content
-    currentVersion = firstVersion
-    while currentVersion <= lastVersion:
+    currentVersion = lastVersion
+    while currentVersion >= firstVersion:
         for enum in dataRoot.findall('enums/VkResult/'):
             if int(enum.get('first')) != currentVersion:
                 continue
@@ -135,7 +139,7 @@ std::string VulkanErrCategory::message(int ev) const {
 
             if guarded:
                 outFile.write('#endif\n')
-        currentVersion += 1
+        currentVersion -= 1
 
     # Footer
     outFile.write("""

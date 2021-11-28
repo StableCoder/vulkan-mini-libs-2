@@ -60,6 +60,70 @@ const char *VulkanErrCategory::name() const noexcept { return "VkResult"; }
 
 std::string VulkanErrCategory::message(int ev) const {
   VkResult const vkRes = static_cast<VkResult>(ev);
+
+  // Check in descending order to get the 'latest' version of the error code text available.
+  // Also, because codes have been re-used over time, can't use a switch and have to do this large
+  // set of ifs. Luckily this *should* be a relatively rare call.
+#if VK_HEADER_VERSION >= 136 && VK_EXT_pipeline_creation_cache_control
+  if (vkRes == VK_PIPELINE_COMPILE_REQUIRED_EXT)
+    return "VK_PIPELINE_COMPILE_REQUIRED_EXT";
+#endif
+#if VK_HEADER_VERSION >= 135 && VK_KHR_deferred_host_operations
+  if (vkRes == VK_THREAD_IDLE_KHR)
+    return "VK_THREAD_IDLE_KHR";
+#endif
+#if VK_HEADER_VERSION >= 135 && VK_KHR_deferred_host_operations
+  if (vkRes == VK_THREAD_DONE_KHR)
+    return "VK_THREAD_DONE_KHR";
+#endif
+#if VK_HEADER_VERSION >= 135 && VK_KHR_deferred_host_operations
+  if (vkRes == VK_OPERATION_DEFERRED_KHR)
+    return "VK_OPERATION_DEFERRED_KHR";
+#endif
+#if VK_HEADER_VERSION >= 135 && VK_KHR_deferred_host_operations
+  if (vkRes == VK_OPERATION_NOT_DEFERRED_KHR)
+    return "VK_OPERATION_NOT_DEFERRED_KHR";
+#endif
+#if VK_HEADER_VERSION >= 135 && VK_EXT_pipeline_creation_cache_control
+  if (vkRes == VK_ERROR_PIPELINE_COMPILE_REQUIRED_EXT)
+    return "VK_ERROR_PIPELINE_COMPILE_REQUIRED_EXT";
+#endif
+#if VK_HEADER_VERSION >= 135 && VK_HEADER_VERSION <= 161 && VK_KHR_ray_tracing
+  if (vkRes == VK_ERROR_INCOMPATIBLE_VERSION_KHR)
+    return "VK_ERROR_INCOMPATIBLE_VERSION_KHR";
+#endif
+#if VK_HEADER_VERSION >= 131
+  if (vkRes == VK_ERROR_UNKNOWN)
+    return "VK_ERROR_UNKNOWN";
+#endif
+#if VK_HEADER_VERSION >= 131
+  if (vkRes == VK_ERROR_FRAGMENTATION)
+    return "VK_ERROR_FRAGMENTATION";
+#endif
+#if VK_HEADER_VERSION >= 131
+  if (vkRes == VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS)
+    return "VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS";
+#endif
+#if VK_HEADER_VERSION >= 129 && VK_KHR_buffer_device_address
+  if (vkRes == VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS_KHR)
+    return "VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS_KHR";
+#endif
+#if VK_HEADER_VERSION >= 128 && VK_HEADER_VERSION <= 134 && VK_EXT_extension_298
+  if (vkRes == VK_RESULT_EXT_298_RESERVED_VALUE_0_EXT)
+    return "VK_RESULT_EXT_298_RESERVED_VALUE_0_EXT";
+#endif
+#if VK_HEADER_VERSION >= 104 && VK_EXT_full_screen_exclusive
+  if (vkRes == VK_ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT)
+    return "VK_ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT";
+#endif
+#if VK_HEADER_VERSION >= 97 && VK_EXT_buffer_device_address
+  if (vkRes == VK_ERROR_INVALID_DEVICE_ADDRESS_EXT)
+    return "VK_ERROR_INVALID_DEVICE_ADDRESS_EXT";
+#endif
+#if VK_HEADER_VERSION >= 86 && VK_EXT_image_drm_format_modifier
+  if (vkRes == VK_ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT)
+    return "VK_ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT";
+#endif
   if (vkRes == VK_SUCCESS)
     return "VK_SUCCESS";
   if (vkRes == VK_NOT_READY)
@@ -143,66 +207,6 @@ std::string VulkanErrCategory::message(int ev) const {
 #if VK_EXT_global_priority
   if (vkRes == VK_ERROR_NOT_PERMITTED_EXT)
     return "VK_ERROR_NOT_PERMITTED_EXT";
-#endif
-#if VK_HEADER_VERSION >= 86 && VK_EXT_image_drm_format_modifier
-  if (vkRes == VK_ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT)
-    return "VK_ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT";
-#endif
-#if VK_HEADER_VERSION >= 97 && VK_EXT_buffer_device_address
-  if (vkRes == VK_ERROR_INVALID_DEVICE_ADDRESS_EXT)
-    return "VK_ERROR_INVALID_DEVICE_ADDRESS_EXT";
-#endif
-#if VK_HEADER_VERSION >= 104 && VK_EXT_full_screen_exclusive
-  if (vkRes == VK_ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT)
-    return "VK_ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT";
-#endif
-#if VK_HEADER_VERSION >= 128 && VK_HEADER_VERSION <= 134 && VK_EXT_extension_298
-  if (vkRes == VK_RESULT_EXT_298_RESERVED_VALUE_0_EXT)
-    return "VK_RESULT_EXT_298_RESERVED_VALUE_0_EXT";
-#endif
-#if VK_HEADER_VERSION >= 129 && VK_KHR_buffer_device_address
-  if (vkRes == VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS_KHR)
-    return "VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS_KHR";
-#endif
-#if VK_HEADER_VERSION >= 131
-  if (vkRes == VK_ERROR_UNKNOWN)
-    return "VK_ERROR_UNKNOWN";
-#endif
-#if VK_HEADER_VERSION >= 131
-  if (vkRes == VK_ERROR_FRAGMENTATION)
-    return "VK_ERROR_FRAGMENTATION";
-#endif
-#if VK_HEADER_VERSION >= 131
-  if (vkRes == VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS)
-    return "VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS";
-#endif
-#if VK_HEADER_VERSION >= 135 && VK_KHR_deferred_host_operations
-  if (vkRes == VK_THREAD_IDLE_KHR)
-    return "VK_THREAD_IDLE_KHR";
-#endif
-#if VK_HEADER_VERSION >= 135 && VK_KHR_deferred_host_operations
-  if (vkRes == VK_THREAD_DONE_KHR)
-    return "VK_THREAD_DONE_KHR";
-#endif
-#if VK_HEADER_VERSION >= 135 && VK_KHR_deferred_host_operations
-  if (vkRes == VK_OPERATION_DEFERRED_KHR)
-    return "VK_OPERATION_DEFERRED_KHR";
-#endif
-#if VK_HEADER_VERSION >= 135 && VK_KHR_deferred_host_operations
-  if (vkRes == VK_OPERATION_NOT_DEFERRED_KHR)
-    return "VK_OPERATION_NOT_DEFERRED_KHR";
-#endif
-#if VK_HEADER_VERSION >= 135 && VK_EXT_pipeline_creation_cache_control
-  if (vkRes == VK_ERROR_PIPELINE_COMPILE_REQUIRED_EXT)
-    return "VK_ERROR_PIPELINE_COMPILE_REQUIRED_EXT";
-#endif
-#if VK_HEADER_VERSION >= 135 && VK_HEADER_VERSION <= 161 && VK_KHR_ray_tracing
-  if (vkRes == VK_ERROR_INCOMPATIBLE_VERSION_KHR)
-    return "VK_ERROR_INCOMPATIBLE_VERSION_KHR";
-#endif
-#if VK_HEADER_VERSION >= 136 && VK_EXT_pipeline_creation_cache_control
-  if (vkRes == VK_PIPELINE_COMPILE_REQUIRED_EXT)
-    return "VK_PIPELINE_COMPILE_REQUIRED_EXT";
 #endif
 
   if (vkRes > 0)
