@@ -5,6 +5,9 @@ include_directories(../include)
 add_executable(example_error_code error_code.cpp)
 target_link_libraries(example_error_code PRIVATE Vulkan::Vulkan)
 
+add_executable(example_result_to_string result_to_string.cpp)
+target_link_libraries(example_result_to_string PRIVATE Vulkan::Vulkan)
+
 add_executable(example_string_parsing string_parsing.cpp)
 target_link_libraries(example_string_parsing PRIVATE Vulkan::Vulkan)
 
