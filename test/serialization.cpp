@@ -45,6 +45,11 @@ TEST_CASE("Serialize: Enum") {
     CHECK(retVal == cDummyStr);
   }
 
+  SECTION("Failure case where a zero value is given to a type that can't be empty") {
+    CHECK_FALSE(vk_serialize("VkPipelineCacheHeaderVersion", 0, &retVal));
+    CHECK(retVal == cDummyStr);
+  }
+
   SECTION("Success cases") {
     CHECK(vk_serialize("VkImageType", VK_IMAGE_TYPE_3D, &retVal));
     CHECK(retVal == "3D");
@@ -70,6 +75,17 @@ TEST_CASE("Serialize: Bitmask") {
   SECTION("Failure case where a garbage non-existant bit is given") {
     CHECK_FALSE(vk_serialize("VkCullModeFlagBits", VK_CULL_MODE_BACK_BIT | 0x777, &retVal));
     CHECK(retVal == cDummyStr);
+  }
+
+  SECTION("Failure case where a zero value is given to a type that can't be empty") {
+    CHECK_FALSE(vk_serialize("VkSampleCountFlagBits", 0, &retVal));
+    CHECK(retVal == cDummyStr);
+  }
+
+  SECTION(
+      "Success case where a zero-value is allowed since there was a time when no flags existed") {
+    CHECK(vk_serialize("VkPipelineDepthStencilStateCreateFlagBits", 0, &retVal));
+    CHECK(retVal == "");
   }
 
   SECTION("Success case where there's extra vendor bits on the type name (such "

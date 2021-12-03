@@ -41,13 +41,19 @@ TEST_CASE("Parsing: Failure Cases") {
     CHECK_FALSE(vk_parse("VkImageType", "2D | 3D", &dummy));
     CHECK(dummy == cDummyNum);
   }
+  SECTION("Parsing an bitmask type with a blank value that doesn't allow empty values fails") {
+    vk_parse("VkSampleCountFlagBits", "", &dummy);
+    CHECK_FALSE(vk_parse("VkSampleCountFlagBits", "", &dummy));
+    CHECK(dummy == cDummyNum);
+  }
   SECTION("Parsing with an empty type fails") { CHECK_FALSE(vk_parse("", "2D", &dummy)); }
 }
 
 TEST_CASE("Parsing: Odd success cases") {
   uint32_t retVal = cDummyNum;
-  SECTION("Parsing with an empty string succeeds, returns 0") {
-    CHECK(vk_parse("VkImageType", "", &retVal));
+
+  SECTION("Parsing a type that allows null with an empty string succeeds, returns 0") {
+    CHECK(vk_parse("VkPipelineDepthStencilStateCreateFlagBits", "", &retVal));
     CHECK(retVal == 0);
   }
 }
@@ -101,6 +107,20 @@ TEST_CASE("Parsing: Checking enum conversions from strings to the values from th
 
     CHECK(vk_parse("VkPresentModeKHR", "IMMEDIATE", &retVal));
     CHECK(retVal == VK_PRESENT_MODE_IMMEDIATE_KHR);
+  }
+
+  SECTION("With replaced enum sets through promotion") {
+    CHECK(vk_parse("VkExternalMemoryFeatureFlagBits", "EXPORTABLE_BIT_KHR", &retVal));
+    CHECK(retVal == VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT);
+
+    CHECK(vk_parse("VkExternalMemoryFeatureFlagBits", "EXPORTABLE", &retVal));
+    CHECK(retVal == VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT);
+
+    CHECK(vk_parse("VkExternalMemoryFeatureFlagBitsNV", "EXPORTABLE_BIT_KHR", &retVal));
+    CHECK(retVal == VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT);
+
+    CHECK(vk_parse("VkExternalMemoryFeatureFlagBitsNV", "EXPORTABLE", &retVal));
+    CHECK(retVal == VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT);
   }
 }
 

@@ -278,6 +278,18 @@ def main(argv):
     for extension in vkRoot.findall('extensions/extension'):
         processExtensionEnums(extension, enumData, vkVersion)
 
+    # Process Types
+    for typeData in vkRoot.findall('types/type'):
+        typeCategory = typeData.get('category')
+        typeName = typeData.get('name')
+        if typeCategory == 'enum':
+            enum = enumData.find(typeName)
+            if enum is None:
+                enum = ET.SubElement(enumData, typeName, {
+                    'first': vkVersion, 'last': vkVersion})
+            else:
+                enum.set('first', vkVersion)
+
     # Process Structs
     if dataRoot.find('structs') is None:
         ET.SubElement(dataRoot, 'structs')
