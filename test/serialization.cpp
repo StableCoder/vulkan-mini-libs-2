@@ -97,7 +97,7 @@ TEST_CASE("Serialize: Bitmask") {
 
   SECTION("Successfully returns an empty string when the given type has no "
           "actual flags") {
-    CHECK(vk_serialize("VkAcquireProfilingLockFlagBits", 0, &retVal));
+    CHECK(vk_serialize("VkAcquireProfilingLockFlagBitsKHR", 0, &retVal));
     CHECK(retVal == "");
 
     CHECK(vk_serialize("VkShaderCorePropertiesFlagBitsAMD", 0, &retVal));

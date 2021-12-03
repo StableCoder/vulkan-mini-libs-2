@@ -140,7 +140,6 @@ bool vk_parse(std::string_view vkType, std::string vkString, T *pValue) {
 #include <algorithm>
 #include <array>
 #include <cstring>
-#include <tuple>
 
 namespace {
 
@@ -3043,7 +3042,10 @@ std::string_view stripBit(std::string_view view) {
   return view;
 }
 
-std::tuple<EnumValueSet const *, EnumValueSet const *, bool> getEnumType(std::string_view vkType) {
+bool getEnumType(std::string_view vkType,
+                 EnumValueSet const **ppStart,
+                 EnumValueSet const **ppEnd,
+                 bool *pAllowEmpty) {
   // Check for a conversion from Flags -> FlagBits
   std::string localString;
   if (vkType.rfind("Flags") != std::string::npos) {
@@ -3056,9 +3058,11 @@ std::tuple<EnumValueSet const *, EnumValueSet const *, bool> getEnumType(std::st
   // Try the original name
   for (auto const &it : enumTypes) {
     if (vkType == std::string_view{it.name}) {
-      if (it.data == nullptr)
-        return std::make_tuple(nullptr, nullptr, true);
-      return std::make_tuple(it.data, it.data + it.count, it.allowEmpty);
+      *ppStart = it.data;
+      *ppEnd = it.data + it.count;
+      *pAllowEmpty = it.allowEmpty;
+
+      return true;
     }
   }
 
@@ -3066,13 +3070,15 @@ std::tuple<EnumValueSet const *, EnumValueSet const *, bool> getEnumType(std::st
   vkType = stripVendor(vkType);
   for (auto const &it : enumTypes) {
     if (vkType == std::string_view{it.name}) {
-      if (it.data == nullptr)
-        return std::make_tuple(nullptr, nullptr, true);
-      return std::make_tuple(it.data, it.data + it.count, it.allowEmpty);
+      *ppStart = it.data;
+      *ppEnd = it.data + it.count;
+      *pAllowEmpty = it.allowEmpty;
+
+      return true;
     }
   }
 
-  return std::make_tuple(nullptr, nullptr, true);
+  return false;
 }
 
 /**
@@ -3184,8 +3190,11 @@ std::string formatString(std::string str) {
   return str;
 }
 
-bool serializeBitmask(std::string_view vkType, uint64_t vkValue, std::string *pString) {
-  auto [end, start, allowEmpty] = getEnumType(vkType);
+bool serializeBitmask(EnumValueSet const *end,
+                      EnumValueSet const *start,
+                      bool allowEmpty,
+                      uint64_t vkValue,
+                      std::string *pString) {
   --end;
   --start;
 
@@ -3221,9 +3230,10 @@ bool serializeBitmask(std::string_view vkType, uint64_t vkValue, std::string *pS
   return true;
 }
 
-bool serializeEnum(std::string_view vkType, uint64_t vkValue, std::string *pString) {
-  auto [start, end, allowEmpty] = getEnumType(vkType);
-
+bool serializeEnum(EnumValueSet const *start,
+                   EnumValueSet const *end,
+                   uint64_t vkValue,
+                   std::string *pString) {
   while (start != end) {
     if (start->value == vkValue) {
       *pString = start->name;
@@ -3292,11 +3302,17 @@ bool vk_serialize(std::string_view vkType, uint64_t vkValue, std::string *pStrin
     return false;
   }
 
-  if (vkType.find("Flags") != std::string::npos || vkType.find("FlagBits") != std::string::npos) {
-    return serializeBitmask(vkType, vkValue, pString);
+  EnumValueSet const *start, *end;
+  bool allowEmpty;
+  if (!getEnumType(vkType, &start, &end, &allowEmpty)) {
+    return false;
   }
 
-  return serializeEnum(vkType, vkValue, pString);
+  if (vkType.find("Flags") != std::string::npos || vkType.find("FlagBits") != std::string::npos) {
+    return serializeBitmask(start, end, allowEmpty, vkValue, pString);
+  }
+
+  return serializeEnum(start, end, vkValue, pString);
 }
 
 bool vk_serialize(std::string_view vkType, uint32_t vkValue, std::string *pString) {
@@ -3308,8 +3324,11 @@ bool vk_parse(std::string_view vkType, std::string vkString, uint64_t *pValue) {
     return false;
   }
 
-  auto [start, end, allowEmpty] = getEnumType(vkType);
-  std::string prefix = processEnumPrefix(stripVendor(vkType));
+  EnumValueSet const *start, *end;
+  bool allowEmpty;
+  if (!getEnumType(vkType, &start, &end, &allowEmpty)) {
+    return false;
+  }
 
   if (vkString.empty()) {
     if (allowEmpty) {
@@ -3319,6 +3338,8 @@ bool vk_parse(std::string_view vkType, std::string vkString, uint64_t *pValue) {
       return false;
     }
   }
+
+  std::string prefix = processEnumPrefix(stripVendor(vkType));
 
   if (vkType.find("Flags") != std::string::npos || vkType.find("FlagBits") != std::string::npos) {
     return parseBitmask(vkString, start, end, prefix, pValue);
