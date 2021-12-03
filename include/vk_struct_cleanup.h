@@ -41,10 +41,10 @@ extern "C" {
 
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-static_assert(VK_HEADER_VERSION <= 200, "VK_HEADER_VERSION is from after the supported range.");
+static_assert(VK_HEADER_VERSION <= 201, "VK_HEADER_VERSION is from after the supported range.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-_Static_assert(VK_HEADER_VERSION <= 200, "VK_HEADER_VERSION is from after the supported range.");
+_Static_assert(VK_HEADER_VERSION <= 201, "VK_HEADER_VERSION is from after the supported range.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -3789,6 +3789,45 @@ void cleanup_VkPipelineViewportDepthClipControlCreateInfoEXT(
 #if VK_HEADER_VERSION >= 200 && VK_ARM_rasterization_order_attachment_access
 void cleanup_VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM(
     VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 201 && VK_KHR_video_encode_queue
+void cleanup_VkVideoEncodeRateControlLayerInfoKHR(
+    VkVideoEncodeRateControlLayerInfoKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 201 && VK_EXT_video_encode_h264
+void cleanup_VkVideoEncodeH264RateControlInfoEXT(VkVideoEncodeH264RateControlInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 201 && VK_EXT_video_encode_h264
+inline void cleanup_VkVideoEncodeH264QpEXT(VkVideoEncodeH264QpEXT const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 201 && VK_EXT_video_encode_h264
+inline void cleanup_VkVideoEncodeH264FrameSizeEXT(VkVideoEncodeH264FrameSizeEXT const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 201 && VK_EXT_video_encode_h264
+void cleanup_VkVideoEncodeH264RateControlLayerInfoEXT(
+    VkVideoEncodeH264RateControlLayerInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 201 && VK_EXT_video_encode_h265
+void cleanup_VkVideoEncodeH265RateControlInfoEXT(VkVideoEncodeH265RateControlInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 201 && VK_EXT_video_encode_h265
+inline void cleanup_VkVideoEncodeH265QpEXT(VkVideoEncodeH265QpEXT const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 201 && VK_EXT_video_encode_h265
+inline void cleanup_VkVideoEncodeH265FrameSizeEXT(VkVideoEncodeH265FrameSizeEXT const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 201 && VK_EXT_video_encode_h265
+void cleanup_VkVideoEncodeH265RateControlLayerInfoEXT(
+    VkVideoEncodeH265RateControlLayerInfoEXT const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -7854,6 +7893,39 @@ void cleanup_vk_struct(void const *pData) {
   case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_FEATURES_ARM:
     cleanup_VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM(
         (VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 201 && VK_KHR_video_encode_queue
+  case VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR:
+    cleanup_VkVideoEncodeRateControlLayerInfoKHR(
+        (VkVideoEncodeRateControlLayerInfoKHR const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 201 && VK_EXT_video_encode_h264
+  case VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_INFO_EXT:
+    cleanup_VkVideoEncodeH264RateControlInfoEXT((VkVideoEncodeH264RateControlInfoEXT const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 201 && VK_EXT_video_encode_h264
+  case VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_EXT:
+    cleanup_VkVideoEncodeH264RateControlLayerInfoEXT(
+        (VkVideoEncodeH264RateControlLayerInfoEXT const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 201 && VK_EXT_video_encode_h265
+  case VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_INFO_EXT:
+    cleanup_VkVideoEncodeH265RateControlInfoEXT((VkVideoEncodeH265RateControlInfoEXT const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 201 && VK_EXT_video_encode_h265
+  case VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_LAYER_INFO_EXT:
+    cleanup_VkVideoEncodeH265RateControlLayerInfoEXT(
+        (VkVideoEncodeH265RateControlLayerInfoEXT const *)pData);
     break;
 #endif
 
@@ -15194,6 +15266,13 @@ void cleanup_VkVideoEncodeRateControlInfoKHR(VkVideoEncodeRateControlInfoKHR con
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
+
+  // pLayerConfigs - layerCount
+  if (pData->pLayerConfigs != NULL) {
+    for (uint32_t i = 0; i < pData->layerCount; ++i)
+      cleanup_VkVideoEncodeRateControlLayerInfoKHR(&pData->pLayerConfigs[i]);
+  }
+  free((void *)pData->pLayerConfigs);
 }
 #endif
 
@@ -16264,6 +16343,72 @@ void cleanup_VkPipelineViewportDepthClipControlCreateInfoEXT(
 #if VK_HEADER_VERSION >= 200 && VK_ARM_rasterization_order_attachment_access
 void cleanup_VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM(
     VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 201 && VK_KHR_video_encode_queue
+void cleanup_VkVideoEncodeRateControlLayerInfoKHR(
+    VkVideoEncodeRateControlLayerInfoKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 201 && VK_EXT_video_encode_h264
+void cleanup_VkVideoEncodeH264RateControlInfoEXT(VkVideoEncodeH264RateControlInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 201 && VK_EXT_video_encode_h264
+extern inline void cleanup_VkVideoEncodeH264QpEXT(VkVideoEncodeH264QpEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 201 && VK_EXT_video_encode_h264
+extern inline void cleanup_VkVideoEncodeH264FrameSizeEXT(
+    VkVideoEncodeH264FrameSizeEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 201 && VK_EXT_video_encode_h264
+void cleanup_VkVideoEncodeH264RateControlLayerInfoEXT(
+    VkVideoEncodeH264RateControlLayerInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 201 && VK_EXT_video_encode_h265
+void cleanup_VkVideoEncodeH265RateControlInfoEXT(VkVideoEncodeH265RateControlInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 201 && VK_EXT_video_encode_h265
+extern inline void cleanup_VkVideoEncodeH265QpEXT(VkVideoEncodeH265QpEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 201 && VK_EXT_video_encode_h265
+extern inline void cleanup_VkVideoEncodeH265FrameSizeEXT(
+    VkVideoEncodeH265FrameSizeEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 201 && VK_EXT_video_encode_h265
+void cleanup_VkVideoEncodeH265RateControlLayerInfoEXT(
+    VkVideoEncodeH265RateControlLayerInfoEXT const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

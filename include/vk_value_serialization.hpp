@@ -40,7 +40,7 @@
 #include <string_view>
 
 static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-static_assert(VK_HEADER_VERSION <= 200, "VK_HEADER_VERSION is from after the supported range.");
+static_assert(VK_HEADER_VERSION <= 201, "VK_HEADER_VERSION is from after the supported range.");
 
 /**
  * @brief Macro that automatically stringifies the given Vulkan type for serialization
@@ -2408,6 +2408,7 @@ constexpr EnumValueSet VkVideoEncodeFlagBitsKHRSets[] = {
 constexpr EnumValueSet VkVideoEncodeRateControlFlagBitsKHRSets[] = {
     {"DEFAULT", 0},
     {"RESET", 0x00000001},
+    {"RESERVED_0", 0x00000001},
 };
 
 constexpr EnumValueSet VkVideoEncodeRateControlModeFlagBitsKHRSets[] = {
@@ -2428,6 +2429,7 @@ constexpr EnumValueSet VkVideoEncodeH264CapabilityFlagBitsEXTSets[] = {
     {"DEBLOCKING_FILTER_PARTIAL", 0x00000100},
     {"MULTIPLE_SLICE_PER_FRAME", 0x00000200},
     {"EVENLY_DISTRIBUTED_SLICE_SIZE", 0x00000400},
+    {"OPTIONAL_RC_EXTENSION_STRUCT", 0x00000800},
 };
 
 constexpr EnumValueSet VkVideoEncodeH264InputModeFlagBitsEXTSets[] = {
@@ -2445,6 +2447,12 @@ constexpr EnumValueSet VkVideoEncodeH264OutputModeFlagBitsEXTSets[] = {
 constexpr EnumValueSet VkVideoEncodeH264CreateFlagBitsEXTSets[] = {
     {"DEFAULT", 0},
     {"RESERVED_0", 0x00000001},
+};
+
+constexpr EnumValueSet VkVideoEncodeH264RateControlStructureFlagBitsEXTSets[] = {
+    {"UNKNOWN", 0},
+    {"FLAT", 0x00000001},
+    {"DYADIC", 0x00000002},
 };
 
 constexpr EnumValueSet VkImageConstraintsInfoFlagBitsFUCHSIASets[] = {
@@ -2513,6 +2521,12 @@ constexpr EnumValueSet VkRenderingFlagBitsKHRSets[] = {
     {"CONTENTS_SECONDARY_COMMAND_BUFFERS", 0x00000001},
     {"SUSPENDING", 0x00000002},
     {"RESUMING", 0x00000004},
+};
+
+constexpr EnumValueSet VkVideoEncodeH265RateControlStructureFlagBitsEXTSets[] = {
+    {"UNKNOWN", 0},
+    {"FLAT", 0x00000001},
+    {"DYADIC", 0x00000002},
 };
 
 constexpr EnumValueSet VkVideoEncodeH265CapabilityFlagBitsEXTSets[] = {
@@ -2698,7 +2712,7 @@ struct EnumType {
   uint32_t count;
 };
 
-constexpr std::array<EnumType, 239> enumTypes = {{
+constexpr std::array<EnumType, 241> enumTypes = {{
     {"VkImageLayout", VkImageLayoutSets, 34},
     {"VkAttachmentLoadOp", VkAttachmentLoadOpSets, 4},
     {"VkAttachmentStoreOp", VkAttachmentStoreOpSets, 5},
@@ -2899,12 +2913,14 @@ constexpr std::array<EnumType, 239> enumTypes = {{
     {"VkQueryResultStatusKHR", VkQueryResultStatusKHRSets, 3},
     {"VkVideoDecodeFlagBitsKHR", VkVideoDecodeFlagBitsKHRSets, 2},
     {"VkVideoEncodeFlagBitsKHR", VkVideoEncodeFlagBitsKHRSets, 2},
-    {"VkVideoEncodeRateControlFlagBitsKHR", VkVideoEncodeRateControlFlagBitsKHRSets, 2},
+    {"VkVideoEncodeRateControlFlagBitsKHR", VkVideoEncodeRateControlFlagBitsKHRSets, 3},
     {"VkVideoEncodeRateControlModeFlagBitsKHR", VkVideoEncodeRateControlModeFlagBitsKHRSets, 3},
-    {"VkVideoEncodeH264CapabilityFlagBitsEXT", VkVideoEncodeH264CapabilityFlagBitsEXTSets, 11},
+    {"VkVideoEncodeH264CapabilityFlagBitsEXT", VkVideoEncodeH264CapabilityFlagBitsEXTSets, 12},
     {"VkVideoEncodeH264InputModeFlagBitsEXT", VkVideoEncodeH264InputModeFlagBitsEXTSets, 3},
     {"VkVideoEncodeH264OutputModeFlagBitsEXT", VkVideoEncodeH264OutputModeFlagBitsEXTSets, 3},
     {"VkVideoEncodeH264CreateFlagBitsEXT", VkVideoEncodeH264CreateFlagBitsEXTSets, 2},
+    {"VkVideoEncodeH264RateControlStructureFlagBitsEXT",
+     VkVideoEncodeH264RateControlStructureFlagBitsEXTSets, 3},
     {"VkImageFormatConstraintsFlagBitsFUCHSIA", nullptr, 0},
     {"VkImageConstraintsInfoFlagBitsFUCHSIA", VkImageConstraintsInfoFlagBitsFUCHSIASets, 5},
     {"VkFormatFeatureFlagBits2KHR", VkFormatFeatureFlagBits2KHRSets, 34},
@@ -2912,6 +2928,8 @@ constexpr std::array<EnumType, 239> enumTypes = {{
     {"VkVideoEncodeH265OutputModeFlagBitsEXT", VkVideoEncodeH265OutputModeFlagBitsEXTSets, 3},
     {"VkVideoEncodeH265CtbSizeFlagBitsEXT", VkVideoEncodeH265CtbSizeFlagBitsEXTSets, 4},
     {"VkRenderingFlagBitsKHR", VkRenderingFlagBitsKHRSets, 3},
+    {"VkVideoEncodeH265RateControlStructureFlagBitsEXT",
+     VkVideoEncodeH265RateControlStructureFlagBitsEXTSets, 3},
     {"VkVideoEncodeH265CapabilityFlagBitsEXT", VkVideoEncodeH265CapabilityFlagBitsEXTSets, 9},
     {"VkVideoCapabilitiesFlagBitsKHR", VkVideoCapabilitiesFlagBitsKHRSets, 2},
     {"VkVideoDecodeH264FieldLayoutFlagBitsEXT", VkVideoDecodeH264FieldLayoutFlagBitsEXTSets, 3},
