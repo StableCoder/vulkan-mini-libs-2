@@ -40,7 +40,7 @@
 #include <string_view>
 
 static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-static_assert(VK_HEADER_VERSION <= 201, "VK_HEADER_VERSION is from after the supported range.");
+static_assert(VK_HEADER_VERSION <= 202, "VK_HEADER_VERSION is from after the supported range.");
 
 /**
  * @brief Macro that automatically stringifies the given Vulkan type for serialization
@@ -1334,6 +1334,7 @@ constexpr EnumValueSet VkImageAspectFlagBitsSets[] = {
     {"MEMORY_PLANE_1_BIT_EXT", 0x00000100},
     {"MEMORY_PLANE_2_BIT_EXT", 0x00000200},
     {"MEMORY_PLANE_3_BIT_EXT", 0x00000400},
+    {"NONE_KHR", 0},
 };
 
 constexpr EnumValueSet VkSparseImageFormatFlagBitsSets[] = {
@@ -2773,7 +2774,7 @@ constexpr std::array<EnumType, 269> enumTypes = {{
     {"VkQueryResultFlagBits", VkQueryResultFlagBitsSets, 5, false},
     {"VkCommandBufferUsageFlagBits", VkCommandBufferUsageFlagBitsSets, 3, false},
     {"VkQueryPipelineStatisticFlagBits", VkQueryPipelineStatisticFlagBitsSets, 11, false},
-    {"VkImageAspectFlagBits", VkImageAspectFlagBitsSets, 14, false},
+    {"VkImageAspectFlagBits", VkImageAspectFlagBitsSets, 15, false},
     {"VkSparseImageFormatFlagBits", VkSparseImageFormatFlagBitsSets, 3, false},
     {"VkSparseMemoryBindFlagBits", VkSparseMemoryBindFlagBitsSets, 1, false},
     {"VkPipelineStageFlagBits", VkPipelineStageFlagBitsSets, 39, false},
