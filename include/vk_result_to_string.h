@@ -40,7 +40,7 @@ extern "C" {
 #include <vulkan/vulkan.h>
 
 static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-static_assert(VK_HEADER_VERSION <= 202, "VK_HEADER_VERSION is from after the supported range.");
+static_assert(VK_HEADER_VERSION <= 203, "VK_HEADER_VERSION is from after the supported range.");
 
 // This is effectively a cheap approximation of OpenXR's useful `xrResultToString` function but for
 // Vulkan

@@ -41,10 +41,10 @@ extern "C" {
 
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-static_assert(VK_HEADER_VERSION <= 202, "VK_HEADER_VERSION is from after the supported range.");
+static_assert(VK_HEADER_VERSION <= 203, "VK_HEADER_VERSION is from after the supported range.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-_Static_assert(VK_HEADER_VERSION <= 202, "VK_HEADER_VERSION is from after the supported range.");
+_Static_assert(VK_HEADER_VERSION <= 203, "VK_HEADER_VERSION is from after the supported range.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -3828,6 +3828,31 @@ inline void cleanup_VkVideoEncodeH265FrameSizeEXT(VkVideoEncodeH265FrameSizeEXT 
 #if VK_HEADER_VERSION >= 201 && VK_EXT_video_encode_h265
 void cleanup_VkVideoEncodeH265RateControlLayerInfoEXT(
     VkVideoEncodeH265RateControlLayerInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 203 && VK_QCOM_fragment_density_map_offset
+void cleanup_VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM(
+    VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 203 && VK_QCOM_fragment_density_map_offset
+void cleanup_VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM(
+    VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 203 && VK_QCOM_fragment_density_map_offset
+void cleanup_VkSubpassFragmentDensityMapOffsetEndInfoQCOM(
+    VkSubpassFragmentDensityMapOffsetEndInfoQCOM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 203 && VK_KHR_video_queue
+void cleanup_VkQueueFamilyQueryResultStatusProperties2KHR(
+    VkQueueFamilyQueryResultStatusProperties2KHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 203 && VK_NV_linear_color_attachment
+void cleanup_VkPhysicalDeviceLinearColorAttachmentFeaturesNV(
+    VkPhysicalDeviceLinearColorAttachmentFeaturesNV const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -7926,6 +7951,41 @@ void cleanup_vk_struct(void const *pData) {
   case VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_LAYER_INFO_EXT:
     cleanup_VkVideoEncodeH265RateControlLayerInfoEXT(
         (VkVideoEncodeH265RateControlLayerInfoEXT const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 203 && VK_QCOM_fragment_density_map_offset
+  case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_FEATURES_QCOM:
+    cleanup_VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM(
+        (VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 203 && VK_QCOM_fragment_density_map_offset
+  case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_PROPERTIES_QCOM:
+    cleanup_VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM(
+        (VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 203 && VK_QCOM_fragment_density_map_offset
+  case VK_STRUCTURE_TYPE_SUBPASS_FRAGMENT_DENSITY_MAP_OFFSET_END_INFO_QCOM:
+    cleanup_VkSubpassFragmentDensityMapOffsetEndInfoQCOM(
+        (VkSubpassFragmentDensityMapOffsetEndInfoQCOM const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 203 && VK_KHR_video_queue
+  case VK_STRUCTURE_TYPE_QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_2_KHR:
+    cleanup_VkQueueFamilyQueryResultStatusProperties2KHR(
+        (VkQueueFamilyQueryResultStatusProperties2KHR const *)pData);
+    break;
+#endif
+
+#if VK_HEADER_VERSION >= 203 && VK_NV_linear_color_attachment
+  case VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV:
+    cleanup_VkPhysicalDeviceLinearColorAttachmentFeaturesNV(
+        (VkPhysicalDeviceLinearColorAttachmentFeaturesNV const *)pData);
     break;
 #endif
 
@@ -16409,6 +16469,63 @@ extern inline void cleanup_VkVideoEncodeH265FrameSizeEXT(
 #if VK_HEADER_VERSION >= 201 && VK_EXT_video_encode_h265
 void cleanup_VkVideoEncodeH265RateControlLayerInfoEXT(
     VkVideoEncodeH265RateControlLayerInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 203 && VK_QCOM_fragment_density_map_offset
+void cleanup_VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM(
+    VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 203 && VK_QCOM_fragment_density_map_offset
+void cleanup_VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM(
+    VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 203 && VK_QCOM_fragment_density_map_offset
+void cleanup_VkSubpassFragmentDensityMapOffsetEndInfoQCOM(
+    VkSubpassFragmentDensityMapOffsetEndInfoQCOM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pFragmentDensityOffsets - fragmentDensityOffsetCount
+  if (pData->pFragmentDensityOffsets != NULL) {
+    for (uint32_t i = 0; i < pData->fragmentDensityOffsetCount; ++i)
+      cleanup_VkOffset2D(&pData->pFragmentDensityOffsets[i]);
+  }
+  free((void *)pData->pFragmentDensityOffsets);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 203 && VK_KHR_video_queue
+void cleanup_VkQueueFamilyQueryResultStatusProperties2KHR(
+    VkQueueFamilyQueryResultStatusProperties2KHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 203 && VK_NV_linear_color_attachment
+void cleanup_VkPhysicalDeviceLinearColorAttachmentFeaturesNV(
+    VkPhysicalDeviceLinearColorAttachmentFeaturesNV const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
