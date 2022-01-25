@@ -40,7 +40,7 @@
 #include <string_view>
 
 static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-static_assert(VK_HEADER_VERSION <= 203, "VK_HEADER_VERSION is from after the supported range.");
+static_assert(VK_HEADER_VERSION <= 204, "VK_HEADER_VERSION is from after the supported range.");
 
 /**
  * @brief Macro that automatically stringifies the given Vulkan type for serialization
@@ -190,6 +190,8 @@ constexpr EnumValueSet VkImageLayoutSets[] = {
     {"VIDEO_ENCODE_DST_KHR", 1000299000},
     {"VIDEO_ENCODE_SRC_KHR", 1000299001},
     {"VIDEO_ENCODE_DPB_KHR", 1000299002},
+    {"READ_ONLY_OPTIMAL", 1000314000},
+    {"ATTACHMENT_OPTIMAL", 1000314001},
 };
 
 constexpr EnumValueSet VkAttachmentLoadOpSets[] = {
@@ -205,6 +207,7 @@ constexpr EnumValueSet VkAttachmentStoreOpSets[] = {
     {"NONE_QCOM", 1000301000},
     {"NONE_EXT", 1000301000},
     {"NONE_KHR", 1000301000},
+    {"NONE", 1000301000},
 };
 
 constexpr EnumValueSet VkImageTypeSets[] = {
@@ -250,6 +253,7 @@ constexpr EnumValueSet VkDescriptorTypeSets[] = {
     {"ACCELERATION_STRUCTURE_NV", 1000165000},
     {"ACCELERATION_STRUCTURE_KHR", 1000150000},
     {"MUTABLE_VALVE", 1000351000},
+    {"INLINE_UNIFORM_BLOCK", 1000138000},
 };
 
 constexpr EnumValueSet VkQueryTypeSets[] = {
@@ -294,6 +298,7 @@ constexpr EnumValueSet VkPipelineCacheCreateFlagBitsSets[] = {
     {"RESERVED_2_BIT_EXT", 0x00000004},
     {"RESERVED_1_BIT_KHR", 0x00000002},
     {"RESERVED_2_BIT_KHR", 0x00000004},
+    {"EXTERNALLY_SYNCHRONIZED", 0x00000001},
 };
 
 constexpr EnumValueSet VkPrimitiveTopologySets[] = {
@@ -798,6 +803,26 @@ constexpr EnumValueSet VkFormatSets[] = {
     {"G10X6_B10X6R10X6_2PLANE_444_UNORM_3PACK16_EXT", 1000330001},
     {"G12X4_B12X4R12X4_2PLANE_444_UNORM_3PACK16_EXT", 1000330002},
     {"G16_B16R16_2PLANE_444_UNORM_EXT", 1000330003},
+    {"G8_B8R8_2PLANE_444_UNORM", 1000330000},
+    {"G10X6_B10X6R10X6_2PLANE_444_UNORM_3PACK16", 1000330001},
+    {"G12X4_B12X4R12X4_2PLANE_444_UNORM_3PACK16", 1000330002},
+    {"G16_B16R16_2PLANE_444_UNORM", 1000330003},
+    {"A4R4G4B4_UNORM_PACK16", 1000340000},
+    {"A4B4G4R4_UNORM_PACK16", 1000340001},
+    {"ASTC_4x4_SFLOAT_BLOCK", 1000066000},
+    {"ASTC_5x4_SFLOAT_BLOCK", 1000066001},
+    {"ASTC_5x5_SFLOAT_BLOCK", 1000066002},
+    {"ASTC_6x5_SFLOAT_BLOCK", 1000066003},
+    {"ASTC_6x6_SFLOAT_BLOCK", 1000066004},
+    {"ASTC_8x5_SFLOAT_BLOCK", 1000066005},
+    {"ASTC_8x6_SFLOAT_BLOCK", 1000066006},
+    {"ASTC_8x8_SFLOAT_BLOCK", 1000066007},
+    {"ASTC_10x5_SFLOAT_BLOCK", 1000066008},
+    {"ASTC_10x6_SFLOAT_BLOCK", 1000066009},
+    {"ASTC_10x8_SFLOAT_BLOCK", 1000066010},
+    {"ASTC_10x10_SFLOAT_BLOCK", 1000066011},
+    {"ASTC_12x10_SFLOAT_BLOCK", 1000066012},
+    {"ASTC_12x12_SFLOAT_BLOCK", 1000066013},
 };
 
 constexpr EnumValueSet VkSubpassContentsSets[] = {
@@ -843,6 +868,21 @@ constexpr EnumValueSet VkDynamicStateSets[] = {
     {"DEPTH_BIAS_ENABLE_EXT", 1000377002},
     {"LOGIC_OP_EXT", 1000377003},
     {"PRIMITIVE_RESTART_ENABLE_EXT", 1000377004},
+    {"CULL_MODE", 1000267000},
+    {"FRONT_FACE", 1000267001},
+    {"PRIMITIVE_TOPOLOGY", 1000267002},
+    {"VIEWPORT_WITH_COUNT", 1000267003},
+    {"SCISSOR_WITH_COUNT", 1000267004},
+    {"VERTEX_INPUT_BINDING_STRIDE", 1000267005},
+    {"DEPTH_TEST_ENABLE", 1000267006},
+    {"DEPTH_WRITE_ENABLE", 1000267007},
+    {"DEPTH_COMPARE_OP", 1000267008},
+    {"DEPTH_BOUNDS_TEST_ENABLE", 1000267009},
+    {"STENCIL_TEST_ENABLE", 1000267010},
+    {"STENCIL_OP", 1000267011},
+    {"RASTERIZER_DISCARD_ENABLE", 1000377001},
+    {"DEPTH_BIAS_ENABLE", 1000377002},
+    {"PRIMITIVE_RESTART_ENABLE", 1000377004},
 };
 
 constexpr EnumValueSet VkDescriptorUpdateTemplateTypeSets[] = {
@@ -903,6 +943,7 @@ constexpr EnumValueSet VkObjectTypeSets[] = {
     {"CU_MODULE_NVX", 1000029000},
     {"CU_FUNCTION_NVX", 1000029001},
     {"BUFFER_COLLECTION_FUCHSIA", 1000366000},
+    {"PRIVATE_DATA_SLOT", 1000295000},
 };
 
 constexpr EnumValueSet VkQueueFlagBitsSets[] = {
@@ -1001,6 +1042,7 @@ constexpr EnumValueSet VkAccessFlagBitsSets[] = {
     {"COMMAND_PREPROCESS_WRITE_BIT_NV", 0x00040000},
     {"FRAGMENT_SHADING_RATE_ATTACHMENT_READ_BIT_KHR", 0x00800000},
     {"NONE_KHR", 0},
+    {"NONE", 0},
 };
 
 constexpr EnumValueSet VkBufferUsageFlagBitsSets[] = {
@@ -1221,6 +1263,8 @@ constexpr EnumValueSet VkPipelineCreateFlagBitsSets[] = {
     {"VK_PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT", 0x00400000},
     {"RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR", 0x00200000},
     {"RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT", 0x00400000},
+    {"FAIL_ON_PIPELINE_COMPILE_REQUIRED", 0x00000100},
+    {"EARLY_RETURN_ON_FAILURE", 0x00000200},
 };
 
 constexpr EnumValueSet VkPipelineShaderStageCreateFlagBitsSets[] = {
@@ -1228,6 +1272,8 @@ constexpr EnumValueSet VkPipelineShaderStageCreateFlagBitsSets[] = {
     {"REQUIRE_FULL_SUBGROUPS_BIT_EXT", 0x00000002},
     {"RESERVED_2_BIT_NV", 0x00000004},
     {"RESERVED_3_BIT_KHR", 0x00000008},
+    {"ALLOW_VARYING_SUBGROUP_SIZE", 0x00000001},
+    {"REQUIRE_FULL_SUBGROUPS", 0x00000002},
 };
 
 constexpr EnumValueSet VkColorComponentFlagBitsSets[] = {
@@ -1393,6 +1439,7 @@ constexpr EnumValueSet VkPipelineStageFlagBitsSets[] = {
     {"COMMAND_PREPROCESS_BIT_NV", 0x00020000},
     {"FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR", 0x00400000},
     {"NONE_KHR", 0},
+    {"NONE", 0},
 };
 
 constexpr EnumValueSet VkCommandPoolCreateFlagBitsSets[] = {
@@ -1873,11 +1920,9 @@ constexpr EnumValueSet VkShaderInfoTypeAMDSets[] = {
     {"DISASSEMBLY", 2},
 };
 
-constexpr EnumValueSet VkQueueGlobalPriorityEXTSets[] = {
-    {"LOW", 128},
-    {"MEDIUM", 256},
-    {"HIGH", 512},
-    {"REALTIME", 1024},
+constexpr EnumValueSet VkQueueGlobalPriorityKHRSets[] = {
+    {"LOW", 128},     {"MEDIUM", 256},     {"HIGH", 512},     {"REALTIME", 1024},
+    {"LOW_EXT", 128}, {"MEDIUM_EXT", 256}, {"HIGH_EXT", 512}, {"REALTIME_EXT", 1024},
 };
 
 constexpr EnumValueSet VkDebugUtilsMessageSeverityFlagBitsEXTSets[] = {
@@ -1946,6 +1991,7 @@ constexpr EnumValueSet VkDriverIdSets[] = {
     {"MESA_V3DV", 19},
     {"MESA_PANVK", 20},
     {"SAMSUNG_PROPRIETARY", 21},
+    {"MESA_VENUS", 22},
 };
 
 constexpr EnumValueSet VkConditionalRenderingFlagBitsEXTSets[] = {
@@ -2104,10 +2150,13 @@ constexpr EnumValueSet VkDeviceDiagnosticsConfigFlagBitsNVSets[] = {
     {"ENABLE_AUTOMATIC_CHECKPOINTS", 0x00000004},
 };
 
-constexpr EnumValueSet VkPipelineCreationFeedbackFlagBitsEXTSets[] = {
+constexpr EnumValueSet VkPipelineCreationFeedbackFlagBitsSets[] = {
     {"VALID", 0x00000001},
+    {"VALID_BIT_EXT", 0x00000001},
     {"APPLICATION_PIPELINE_CACHE_HIT", 0x00000002},
+    {"APPLICATION_PIPELINE_CACHE_HIT_BIT_EXT", 0x00000002},
     {"BASE_PIPELINE_ACCELERATION", 0x00000004},
+    {"BASE_PIPELINE_ACCELERATION_BIT_EXT", 0x00000004},
 };
 
 constexpr EnumValueSet VkFullScreenExclusiveEXTSets[] = {
@@ -2188,14 +2237,19 @@ constexpr EnumValueSet VkShaderModuleCreateFlagBitsSets[] = {
     {"RESERVED_0_BIT_NV", 0x00000001},
 };
 
-constexpr EnumValueSet VkToolPurposeFlagBitsEXTSets[] = {
+constexpr EnumValueSet VkToolPurposeFlagBitsSets[] = {
     {"VALIDATION", 0x00000001},
+    {"VALIDATION_BIT_EXT", 0x00000001},
     {"PROFILING", 0x00000002},
+    {"PROFILING_BIT_EXT", 0x00000002},
     {"TRACING", 0x00000004},
+    {"TRACING_BIT_EXT", 0x00000004},
     {"ADDITIONAL_FEATURES", 0x00000008},
+    {"ADDITIONAL_FEATURES_BIT_EXT", 0x00000008},
     {"MODIFYING_FEATURES", 0x00000010},
-    {"DEBUG_REPORTING", 0x00000020},
-    {"DEBUG_MARKERS", 0x00000040},
+    {"MODIFYING_FEATURES_BIT_EXT", 0x00000010},
+    {"DEBUG_REPORTING_BIT_EXT", 0x00000020},
+    {"DEBUG_MARKERS_BIT_EXT", 0x00000040},
 };
 
 constexpr EnumValueSet VkFragmentShadingRateCombinerOpKHRSets[] = {
@@ -2216,111 +2270,152 @@ constexpr EnumValueSet VkFragmentShadingRateTypeNVSets[] = {
     {"ENUMS", 1},
 };
 
-constexpr EnumValueSet VkAccessFlagBits2KHRSets[] = {
+constexpr EnumValueSet VkAccessFlagBits2Sets[] = {
     {"NONE", 0},
+    {"NONE_KHR", 0},
     {"INDIRECT_COMMAND_READ", 0x00000001},
+    {"INDIRECT_COMMAND_READ_BIT_KHR", 0x00000001},
     {"INDEX_READ", 0x00000002},
+    {"INDEX_READ_BIT_KHR", 0x00000002},
     {"VERTEX_ATTRIBUTE_READ", 0x00000004},
+    {"VERTEX_ATTRIBUTE_READ_BIT_KHR", 0x00000004},
     {"UNIFORM_READ", 0x00000008},
+    {"UNIFORM_READ_BIT_KHR", 0x00000008},
     {"INPUT_ATTACHMENT_READ", 0x00000010},
+    {"INPUT_ATTACHMENT_READ_BIT_KHR", 0x00000010},
     {"SHADER_READ", 0x00000020},
+    {"SHADER_READ_BIT_KHR", 0x00000020},
     {"SHADER_WRITE", 0x00000040},
+    {"SHADER_WRITE_BIT_KHR", 0x00000040},
     {"COLOR_ATTACHMENT_READ", 0x00000080},
+    {"COLOR_ATTACHMENT_READ_BIT_KHR", 0x00000080},
     {"COLOR_ATTACHMENT_WRITE", 0x00000100},
+    {"COLOR_ATTACHMENT_WRITE_BIT_KHR", 0x00000100},
     {"DEPTH_STENCIL_ATTACHMENT_READ", 0x00000200},
+    {"DEPTH_STENCIL_ATTACHMENT_READ_BIT_KHR", 0x00000200},
     {"DEPTH_STENCIL_ATTACHMENT_WRITE", 0x00000400},
+    {"DEPTH_STENCIL_ATTACHMENT_WRITE_BIT_KHR", 0x00000400},
     {"TRANSFER_READ", 0x00000800},
+    {"TRANSFER_READ_BIT_KHR", 0x00000800},
     {"TRANSFER_WRITE", 0x00001000},
+    {"TRANSFER_WRITE_BIT_KHR", 0x00001000},
     {"HOST_READ", 0x00002000},
+    {"HOST_READ_BIT_KHR", 0x00002000},
     {"HOST_WRITE", 0x00004000},
+    {"HOST_WRITE_BIT_KHR", 0x00004000},
     {"MEMORY_READ", 0x00008000},
+    {"MEMORY_READ_BIT_KHR", 0x00008000},
     {"MEMORY_WRITE", 0x00010000},
+    {"MEMORY_WRITE_BIT_KHR", 0x00010000},
     {"SHADER_SAMPLED_READ", 0x100000000},
+    {"SHADER_SAMPLED_READ_BIT_KHR", 0x100000000},
     {"SHADER_STORAGE_READ", 0x200000000},
+    {"SHADER_STORAGE_READ_BIT_KHR", 0x200000000},
     {"SHADER_STORAGE_WRITE", 0x400000000},
+    {"SHADER_STORAGE_WRITE_BIT_KHR", 0x400000000},
+    {"VIDEO_DECODE_READ_BIT_KHR", 0x800000000},
+    {"VIDEO_DECODE_WRITE_BIT_KHR", 0x1000000000},
+    {"VIDEO_ENCODE_READ_BIT_KHR", 0x2000000000},
+    {"VIDEO_ENCODE_WRITE_BIT_KHR", 0x4000000000},
     {"TRANSFORM_FEEDBACK_WRITE_BIT_EXT", 0x02000000},
     {"TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT", 0x04000000},
     {"TRANSFORM_FEEDBACK_COUNTER_WRITE_BIT_EXT", 0x08000000},
     {"CONDITIONAL_RENDERING_READ_BIT_EXT", 0x00100000},
     {"COMMAND_PREPROCESS_READ_BIT_NV", 0x00020000},
     {"COMMAND_PREPROCESS_WRITE_BIT_NV", 0x00040000},
-    {"FRAGMENT_SHADING_RATE_ATTACHMENT_READ", 0x00800000},
+    {"FRAGMENT_SHADING_RATE_ATTACHMENT_READ_BIT_KHR", 0x00800000},
     {"SHADING_RATE_IMAGE_READ_BIT_NV", 0x00800000},
-    {"ACCELERATION_STRUCTURE_READ", 0x00200000},
-    {"ACCELERATION_STRUCTURE_WRITE", 0x00400000},
+    {"ACCELERATION_STRUCTURE_READ_BIT_KHR", 0x00200000},
+    {"ACCELERATION_STRUCTURE_WRITE_BIT_KHR", 0x00400000},
     {"ACCELERATION_STRUCTURE_READ_BIT_NV", 0x00200000},
     {"ACCELERATION_STRUCTURE_WRITE_BIT_NV", 0x00400000},
     {"FRAGMENT_DENSITY_MAP_READ_BIT_EXT", 0x01000000},
     {"COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT", 0x00080000},
-    {"RESERVED_READ_35", 0x800000000},
-    {"RESERVED_WRITE_36", 0x1000000000},
-    {"RESERVED_READ_37", 0x2000000000},
-    {"RESERVED_WRITE_38", 0x4000000000},
-    {"VIDEO_DECODE_READ", 0x800000000},
-    {"VIDEO_DECODE_WRITE", 0x1000000000},
-    {"VIDEO_ENCODE_READ", 0x2000000000},
-    {"VIDEO_ENCODE_WRITE", 0x4000000000},
-    {"RESERVED_39_BIT_HUAWEI", 0x8000000000},
-    {"INVOCATION_MASK_READ_BIT_HUAWEI", 0x8000000000},
-    {"RESERVED_387", 0x10000000000},
     {"RESERVED_41_BIT_AMD", 0x20000000000},
+    {"INVOCATION_MASK_READ_BIT_HUAWEI", 0x8000000000},
+    {"RESERVED_387_BIT_KHR", 0x10000000000},
 };
 
-constexpr EnumValueSet VkPipelineStageFlagBits2KHRSets[] = {
+constexpr EnumValueSet VkPipelineStageFlagBits2Sets[] = {
     {"NONE", 0},
+    {"NONE_KHR", 0},
     {"TOP_OF_PIPE", 0x00000001},
+    {"TOP_OF_PIPE_BIT_KHR", 0x00000001},
     {"DRAW_INDIRECT", 0x00000002},
+    {"DRAW_INDIRECT_BIT_KHR", 0x00000002},
     {"VERTEX_INPUT", 0x00000004},
+    {"VERTEX_INPUT_BIT_KHR", 0x00000004},
     {"VERTEX_SHADER", 0x00000008},
+    {"VERTEX_SHADER_BIT_KHR", 0x00000008},
     {"TESSELLATION_CONTROL_SHADER", 0x00000010},
+    {"TESSELLATION_CONTROL_SHADER_BIT_KHR", 0x00000010},
     {"TESSELLATION_EVALUATION_SHADER", 0x00000020},
+    {"TESSELLATION_EVALUATION_SHADER_BIT_KHR", 0x00000020},
     {"GEOMETRY_SHADER", 0x00000040},
+    {"GEOMETRY_SHADER_BIT_KHR", 0x00000040},
     {"FRAGMENT_SHADER", 0x00000080},
+    {"FRAGMENT_SHADER_BIT_KHR", 0x00000080},
     {"EARLY_FRAGMENT_TESTS", 0x00000100},
+    {"EARLY_FRAGMENT_TESTS_BIT_KHR", 0x00000100},
     {"LATE_FRAGMENT_TESTS", 0x00000200},
+    {"LATE_FRAGMENT_TESTS_BIT_KHR", 0x00000200},
     {"COLOR_ATTACHMENT_OUTPUT", 0x00000400},
+    {"COLOR_ATTACHMENT_OUTPUT_BIT_KHR", 0x00000400},
     {"COMPUTE_SHADER", 0x00000800},
+    {"COMPUTE_SHADER_BIT_KHR", 0x00000800},
     {"ALL_TRANSFER", 0x00001000},
+    {"ALL_TRANSFER_BIT_KHR", 0x00001000},
     {"TRANSFER", 0x00001000},
+    {"TRANSFER_BIT_KHR", 0x00001000},
     {"BOTTOM_OF_PIPE", 0x00002000},
+    {"BOTTOM_OF_PIPE_BIT_KHR", 0x00002000},
     {"HOST", 0x00004000},
+    {"HOST_BIT_KHR", 0x00004000},
     {"ALL_GRAPHICS", 0x00008000},
+    {"ALL_GRAPHICS_BIT_KHR", 0x00008000},
     {"ALL_COMMANDS", 0x00010000},
+    {"ALL_COMMANDS_BIT_KHR", 0x00010000},
     {"COPY", 0x100000000},
+    {"COPY_BIT_KHR", 0x100000000},
     {"RESOLVE", 0x200000000},
+    {"RESOLVE_BIT_KHR", 0x200000000},
     {"BLIT", 0x400000000},
+    {"BLIT_BIT_KHR", 0x400000000},
     {"CLEAR", 0x800000000},
+    {"CLEAR_BIT_KHR", 0x800000000},
     {"INDEX_INPUT", 0x1000000000},
+    {"INDEX_INPUT_BIT_KHR", 0x1000000000},
     {"VERTEX_ATTRIBUTE_INPUT", 0x2000000000},
+    {"VERTEX_ATTRIBUTE_INPUT_BIT_KHR", 0x2000000000},
     {"PRE_RASTERIZATION_SHADERS", 0x4000000000},
+    {"PRE_RASTERIZATION_SHADERS_BIT_KHR", 0x4000000000},
+    {"VIDEO_DECODE_BIT_KHR", 0x04000000},
+    {"VIDEO_ENCODE_BIT_KHR", 0x08000000},
     {"TRANSFORM_FEEDBACK_BIT_EXT", 0x01000000},
     {"CONDITIONAL_RENDERING_BIT_EXT", 0x00040000},
     {"COMMAND_PREPROCESS_BIT_NV", 0x00020000},
-    {"FRAGMENT_SHADING_RATE_ATTACHMENT", 0x00400000},
+    {"FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR", 0x00400000},
     {"SHADING_RATE_IMAGE_BIT_NV", 0x00400000},
-    {"ACCELERATION_STRUCTURE_BUILD", 0x02000000},
-    {"RAY_TRACING_SHADER", 0x00200000},
+    {"ACCELERATION_STRUCTURE_BUILD_BIT_KHR", 0x02000000},
+    {"RAY_TRACING_SHADER_BIT_KHR", 0x00200000},
     {"RAY_TRACING_SHADER_BIT_NV", 0x00200000},
     {"ACCELERATION_STRUCTURE_BUILD_BIT_NV", 0x02000000},
     {"FRAGMENT_DENSITY_PROCESS_BIT_EXT", 0x00800000},
     {"TASK_SHADER_BIT_NV", 0x00080000},
     {"MESH_SHADER_BIT_NV", 0x00100000},
-    {"RESERVED_26", 0x04000000},
-    {"RESERVED_27", 0x08000000},
-    {"VIDEO_DECODE", 0x04000000},
-    {"VIDEO_ENCODE", 0x08000000},
-    {"RESERVED_40_BIT_HUAWEI", 0x10000000000},
     {"SUBPASS_SHADING_BIT_HUAWEI", 0x8000000000},
     {"INVOCATION_MASK_BIT_HUAWEI", 0x10000000000},
-    {"RESERVED_387", 0x10000000},
+    {"RESERVED_387_BIT_KHR", 0x10000000},
 };
 
-constexpr EnumValueSet VkSubmitFlagBitsKHRSets[] = {
+constexpr EnumValueSet VkSubmitFlagBitsSets[] = {
     {"PROTECTED", 0x00000001},
+    {"PROTECTED_BIT_KHR", 0x00000001},
 };
 
 constexpr EnumValueSet VkEventCreateFlagBitsSets[] = {
     {"DEVICE_ONLY_BIT_KHR", 0x00000001},
+    {"DEVICE_ONLY", 0x00000001},
 };
 
 constexpr EnumValueSet VkPipelineLayoutCreateFlagBitsSets[] = {
@@ -2468,46 +2563,82 @@ constexpr EnumValueSet VkImageConstraintsInfoFlagBitsFUCHSIASets[] = {
     {"PROTECTED_OPTIONAL", 0x00000010},
 };
 
-constexpr EnumValueSet VkFormatFeatureFlagBits2KHRSets[] = {
+constexpr EnumValueSet VkFormatFeatureFlagBits2Sets[] = {
     {"SAMPLED_IMAGE", 0x00000001},
+    {"SAMPLED_IMAGE_BIT_KHR", 0x00000001},
     {"STORAGE_IMAGE", 0x00000002},
+    {"STORAGE_IMAGE_BIT_KHR", 0x00000002},
     {"STORAGE_IMAGE_ATOMIC", 0x00000004},
+    {"STORAGE_IMAGE_ATOMIC_BIT_KHR", 0x00000004},
     {"UNIFORM_TEXEL_BUFFER", 0x00000008},
+    {"UNIFORM_TEXEL_BUFFER_BIT_KHR", 0x00000008},
     {"STORAGE_TEXEL_BUFFER", 0x00000010},
+    {"STORAGE_TEXEL_BUFFER_BIT_KHR", 0x00000010},
     {"STORAGE_TEXEL_BUFFER_ATOMIC", 0x00000020},
+    {"STORAGE_TEXEL_BUFFER_ATOMIC_BIT_KHR", 0x00000020},
     {"VERTEX_BUFFER", 0x00000040},
+    {"VERTEX_BUFFER_BIT_KHR", 0x00000040},
     {"COLOR_ATTACHMENT", 0x00000080},
+    {"COLOR_ATTACHMENT_BIT_KHR", 0x00000080},
     {"COLOR_ATTACHMENT_BLEND", 0x00000100},
+    {"COLOR_ATTACHMENT_BLEND_BIT_KHR", 0x00000100},
     {"DEPTH_STENCIL_ATTACHMENT", 0x00000200},
+    {"DEPTH_STENCIL_ATTACHMENT_BIT_KHR", 0x00000200},
     {"BLIT_SRC", 0x00000400},
+    {"BLIT_SRC_BIT_KHR", 0x00000400},
     {"BLIT_DST", 0x00000800},
+    {"BLIT_DST_BIT_KHR", 0x00000800},
     {"SAMPLED_IMAGE_FILTER_LINEAR", 0x00001000},
+    {"SAMPLED_IMAGE_FILTER_LINEAR_BIT_KHR", 0x00001000},
+    {"SAMPLED_IMAGE_FILTER_CUBIC", 0x00002000},
     {"SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT", 0x00002000},
     {"TRANSFER_SRC", 0x00004000},
+    {"TRANSFER_SRC_BIT_KHR", 0x00004000},
     {"TRANSFER_DST", 0x00008000},
+    {"TRANSFER_DST_BIT_KHR", 0x00008000},
     {"SAMPLED_IMAGE_FILTER_MINMAX", 0x00010000},
+    {"SAMPLED_IMAGE_FILTER_MINMAX_BIT_KHR", 0x00010000},
     {"MIDPOINT_CHROMA_SAMPLES", 0x00020000},
+    {"MIDPOINT_CHROMA_SAMPLES_BIT_KHR", 0x00020000},
     {"SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER", 0x00040000},
+    {"SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER_BIT_KHR", 0x00040000},
     {"SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER", 0x00080000},
+    {"SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER_BIT_KHR", 0x00080000},
     {"SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT", 0x00100000},
+    {"SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_BIT_KHR", 0x00100000},
     {"SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE", 0x00200000},
+    {"SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE_BIT_KHR", 0x00200000},
     {"DISJOINT", 0x00400000},
+    {"DISJOINT_BIT_KHR", 0x00400000},
     {"COSITED_CHROMA_SAMPLES", 0x00800000},
+    {"COSITED_CHROMA_SAMPLES_BIT_KHR", 0x00800000},
     {"STORAGE_READ_WITHOUT_FORMAT", 0x80000000},
+    {"STORAGE_READ_WITHOUT_FORMAT_BIT_KHR", 0x80000000},
     {"STORAGE_WRITE_WITHOUT_FORMAT", 0x100000000},
+    {"STORAGE_WRITE_WITHOUT_FORMAT_BIT_KHR", 0x100000000},
     {"SAMPLED_IMAGE_DEPTH_COMPARISON", 0x200000000},
-    {"VIDEO_DECODE_OUTPUT", 0x02000000},
-    {"VIDEO_DECODE_DPB", 0x04000000},
-    {"ACCELERATION_STRUCTURE_VERTEX_BUFFER", 0x20000000},
+    {"SAMPLED_IMAGE_DEPTH_COMPARISON_BIT_KHR", 0x200000000},
+    {"VIDEO_DECODE_OUTPUT_BIT_KHR", 0x02000000},
+    {"VIDEO_DECODE_DPB_BIT_KHR", 0x04000000},
+    {"ACCELERATION_STRUCTURE_VERTEX_BUFFER_BIT_KHR", 0x20000000},
     {"FRAGMENT_DENSITY_MAP_BIT_EXT", 0x01000000},
-    {"FRAGMENT_SHADING_RATE_ATTACHMENT", 0x40000000},
-    {"VIDEO_ENCODE_INPUT", 0x08000000},
-    {"VIDEO_ENCODE_DPB", 0x10000000},
+    {"FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR", 0x40000000},
+    {"VIDEO_ENCODE_INPUT_BIT_KHR", 0x08000000},
+    {"VIDEO_ENCODE_DPB_BIT_KHR", 0x10000000},
     {"LINEAR_COLOR_ATTACHMENT_BIT_NV", 0x4000000000},
     {"RESERVED_34_BIT_QCOM", 0x400000000},
     {"RESERVED_35_BIT_QCOM", 0x800000000},
     {"RESERVED_36_BIT_QCOM", 0x1000000000},
     {"RESERVED_37_BIT_QCOM", 0x2000000000},
+};
+
+constexpr EnumValueSet VkRenderingFlagBitsSets[] = {
+    {"CONTENTS_SECONDARY_COMMAND_BUFFERS", 0x00000001},
+    {"CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT_KHR", 0x00000001},
+    {"SUSPENDING", 0x00000002},
+    {"SUSPENDING_BIT_KHR", 0x00000002},
+    {"RESUMING", 0x00000004},
+    {"RESUMING_BIT_KHR", 0x00000004},
 };
 
 constexpr EnumValueSet VkVideoEncodeH265InputModeFlagBitsEXTSets[] = {
@@ -2529,16 +2660,17 @@ constexpr EnumValueSet VkVideoEncodeH265CtbSizeFlagBitsEXTSets[] = {
     {"64", 0x00000008},
 };
 
-constexpr EnumValueSet VkRenderingFlagBitsKHRSets[] = {
-    {"CONTENTS_SECONDARY_COMMAND_BUFFERS", 0x00000001},
-    {"SUSPENDING", 0x00000002},
-    {"RESUMING", 0x00000004},
-};
-
 constexpr EnumValueSet VkVideoEncodeH265RateControlStructureFlagBitsEXTSets[] = {
     {"UNKNOWN", 0},
     {"FLAT", 0x00000001},
     {"DYADIC", 0x00000002},
+};
+
+constexpr EnumValueSet VkQueueGlobalPriorityEXTSets[] = {
+    {"LOW", 128},
+    {"MEDIUM", 256},
+    {"HIGH", 512},
+    {"REALTIME", 1024},
 };
 
 constexpr EnumValueSet VkResolveModeFlagBitsKHRSets[] = {
@@ -2597,8 +2729,171 @@ constexpr EnumValueSet VkRayTracingShaderGroupTypeNVSets[] = {
     {"PROCEDURAL_HIT_GROUP", 2},
 };
 
+constexpr EnumValueSet VkPipelineCreationFeedbackFlagBitsEXTSets[] = {
+    {"VALID", 0x00000001},
+    {"APPLICATION_PIPELINE_CACHE_HIT", 0x00000002},
+    {"BASE_PIPELINE_ACCELERATION", 0x00000004},
+};
+
 constexpr EnumValueSet VkSemaphoreWaitFlagBitsKHRSets[] = {
     {"ANY", 0x00000001},
+};
+
+constexpr EnumValueSet VkToolPurposeFlagBitsEXTSets[] = {
+    {"VALIDATION", 0x00000001},
+    {"PROFILING", 0x00000002},
+    {"TRACING", 0x00000004},
+    {"ADDITIONAL_FEATURES", 0x00000008},
+    {"MODIFYING_FEATURES", 0x00000010},
+    {"DEBUG_REPORTING", 0x00000020},
+    {"DEBUG_MARKERS", 0x00000040},
+};
+
+constexpr EnumValueSet VkAccessFlagBits2KHRSets[] = {
+    {"NONE", 0},
+    {"INDIRECT_COMMAND_READ", 0x00000001},
+    {"INDEX_READ", 0x00000002},
+    {"VERTEX_ATTRIBUTE_READ", 0x00000004},
+    {"UNIFORM_READ", 0x00000008},
+    {"INPUT_ATTACHMENT_READ", 0x00000010},
+    {"SHADER_READ", 0x00000020},
+    {"SHADER_WRITE", 0x00000040},
+    {"COLOR_ATTACHMENT_READ", 0x00000080},
+    {"COLOR_ATTACHMENT_WRITE", 0x00000100},
+    {"DEPTH_STENCIL_ATTACHMENT_READ", 0x00000200},
+    {"DEPTH_STENCIL_ATTACHMENT_WRITE", 0x00000400},
+    {"TRANSFER_READ", 0x00000800},
+    {"TRANSFER_WRITE", 0x00001000},
+    {"HOST_READ", 0x00002000},
+    {"HOST_WRITE", 0x00004000},
+    {"MEMORY_READ", 0x00008000},
+    {"MEMORY_WRITE", 0x00010000},
+    {"SHADER_SAMPLED_READ", 0x100000000},
+    {"SHADER_STORAGE_READ", 0x200000000},
+    {"SHADER_STORAGE_WRITE", 0x400000000},
+    {"TRANSFORM_FEEDBACK_WRITE_BIT_EXT", 0x02000000},
+    {"TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT", 0x04000000},
+    {"TRANSFORM_FEEDBACK_COUNTER_WRITE_BIT_EXT", 0x08000000},
+    {"CONDITIONAL_RENDERING_READ_BIT_EXT", 0x00100000},
+    {"COMMAND_PREPROCESS_READ_BIT_NV", 0x00020000},
+    {"COMMAND_PREPROCESS_WRITE_BIT_NV", 0x00040000},
+    {"FRAGMENT_SHADING_RATE_ATTACHMENT_READ", 0x00800000},
+    {"SHADING_RATE_IMAGE_READ_BIT_NV", 0x00800000},
+    {"ACCELERATION_STRUCTURE_READ", 0x00200000},
+    {"ACCELERATION_STRUCTURE_WRITE", 0x00400000},
+    {"ACCELERATION_STRUCTURE_READ_BIT_NV", 0x00200000},
+    {"ACCELERATION_STRUCTURE_WRITE_BIT_NV", 0x00400000},
+    {"FRAGMENT_DENSITY_MAP_READ_BIT_EXT", 0x01000000},
+    {"COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT", 0x00080000},
+    {"RESERVED_READ_35", 0x800000000},
+    {"RESERVED_WRITE_36", 0x1000000000},
+    {"RESERVED_READ_37", 0x2000000000},
+    {"RESERVED_WRITE_38", 0x4000000000},
+    {"VIDEO_DECODE_READ", 0x800000000},
+    {"VIDEO_DECODE_WRITE", 0x1000000000},
+    {"VIDEO_ENCODE_READ", 0x2000000000},
+    {"VIDEO_ENCODE_WRITE", 0x4000000000},
+    {"RESERVED_39_BIT_HUAWEI", 0x8000000000},
+    {"INVOCATION_MASK_READ_BIT_HUAWEI", 0x8000000000},
+    {"RESERVED_387", 0x10000000000},
+    {"RESERVED_41_BIT_AMD", 0x20000000000},
+};
+
+constexpr EnumValueSet VkPipelineStageFlagBits2KHRSets[] = {
+    {"NONE", 0},
+    {"TOP_OF_PIPE", 0x00000001},
+    {"DRAW_INDIRECT", 0x00000002},
+    {"VERTEX_INPUT", 0x00000004},
+    {"VERTEX_SHADER", 0x00000008},
+    {"TESSELLATION_CONTROL_SHADER", 0x00000010},
+    {"TESSELLATION_EVALUATION_SHADER", 0x00000020},
+    {"GEOMETRY_SHADER", 0x00000040},
+    {"FRAGMENT_SHADER", 0x00000080},
+    {"EARLY_FRAGMENT_TESTS", 0x00000100},
+    {"LATE_FRAGMENT_TESTS", 0x00000200},
+    {"COLOR_ATTACHMENT_OUTPUT", 0x00000400},
+    {"COMPUTE_SHADER", 0x00000800},
+    {"ALL_TRANSFER", 0x00001000},
+    {"TRANSFER", 0x00001000},
+    {"BOTTOM_OF_PIPE", 0x00002000},
+    {"HOST", 0x00004000},
+    {"ALL_GRAPHICS", 0x00008000},
+    {"ALL_COMMANDS", 0x00010000},
+    {"COPY", 0x100000000},
+    {"RESOLVE", 0x200000000},
+    {"BLIT", 0x400000000},
+    {"CLEAR", 0x800000000},
+    {"INDEX_INPUT", 0x1000000000},
+    {"VERTEX_ATTRIBUTE_INPUT", 0x2000000000},
+    {"PRE_RASTERIZATION_SHADERS", 0x4000000000},
+    {"TRANSFORM_FEEDBACK_BIT_EXT", 0x01000000},
+    {"CONDITIONAL_RENDERING_BIT_EXT", 0x00040000},
+    {"COMMAND_PREPROCESS_BIT_NV", 0x00020000},
+    {"FRAGMENT_SHADING_RATE_ATTACHMENT", 0x00400000},
+    {"SHADING_RATE_IMAGE_BIT_NV", 0x00400000},
+    {"ACCELERATION_STRUCTURE_BUILD", 0x02000000},
+    {"RAY_TRACING_SHADER", 0x00200000},
+    {"RAY_TRACING_SHADER_BIT_NV", 0x00200000},
+    {"ACCELERATION_STRUCTURE_BUILD_BIT_NV", 0x02000000},
+    {"FRAGMENT_DENSITY_PROCESS_BIT_EXT", 0x00800000},
+    {"TASK_SHADER_BIT_NV", 0x00080000},
+    {"MESH_SHADER_BIT_NV", 0x00100000},
+    {"RESERVED_26", 0x04000000},
+    {"RESERVED_27", 0x08000000},
+    {"VIDEO_DECODE", 0x04000000},
+    {"VIDEO_ENCODE", 0x08000000},
+    {"RESERVED_40_BIT_HUAWEI", 0x10000000000},
+    {"SUBPASS_SHADING_BIT_HUAWEI", 0x8000000000},
+    {"INVOCATION_MASK_BIT_HUAWEI", 0x10000000000},
+    {"RESERVED_387", 0x10000000},
+};
+
+constexpr EnumValueSet VkFormatFeatureFlagBits2KHRSets[] = {
+    {"SAMPLED_IMAGE", 0x00000001},
+    {"STORAGE_IMAGE", 0x00000002},
+    {"STORAGE_IMAGE_ATOMIC", 0x00000004},
+    {"UNIFORM_TEXEL_BUFFER", 0x00000008},
+    {"STORAGE_TEXEL_BUFFER", 0x00000010},
+    {"STORAGE_TEXEL_BUFFER_ATOMIC", 0x00000020},
+    {"VERTEX_BUFFER", 0x00000040},
+    {"COLOR_ATTACHMENT", 0x00000080},
+    {"COLOR_ATTACHMENT_BLEND", 0x00000100},
+    {"DEPTH_STENCIL_ATTACHMENT", 0x00000200},
+    {"BLIT_SRC", 0x00000400},
+    {"BLIT_DST", 0x00000800},
+    {"SAMPLED_IMAGE_FILTER_LINEAR", 0x00001000},
+    {"SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT", 0x00002000},
+    {"TRANSFER_SRC", 0x00004000},
+    {"TRANSFER_DST", 0x00008000},
+    {"SAMPLED_IMAGE_FILTER_MINMAX", 0x00010000},
+    {"MIDPOINT_CHROMA_SAMPLES", 0x00020000},
+    {"SAMPLED_IMAGE_YCBCR_CONVERSION_LINEAR_FILTER", 0x00040000},
+    {"SAMPLED_IMAGE_YCBCR_CONVERSION_SEPARATE_RECONSTRUCTION_FILTER", 0x00080000},
+    {"SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT", 0x00100000},
+    {"SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE", 0x00200000},
+    {"DISJOINT", 0x00400000},
+    {"COSITED_CHROMA_SAMPLES", 0x00800000},
+    {"STORAGE_READ_WITHOUT_FORMAT", 0x80000000},
+    {"STORAGE_WRITE_WITHOUT_FORMAT", 0x100000000},
+    {"SAMPLED_IMAGE_DEPTH_COMPARISON", 0x200000000},
+    {"VIDEO_DECODE_OUTPUT", 0x02000000},
+    {"VIDEO_DECODE_DPB", 0x04000000},
+    {"ACCELERATION_STRUCTURE_VERTEX_BUFFER", 0x20000000},
+    {"FRAGMENT_DENSITY_MAP_BIT_EXT", 0x01000000},
+    {"FRAGMENT_SHADING_RATE_ATTACHMENT", 0x40000000},
+    {"VIDEO_ENCODE_INPUT", 0x08000000},
+    {"VIDEO_ENCODE_DPB", 0x10000000},
+    {"LINEAR_COLOR_ATTACHMENT_BIT_NV", 0x4000000000},
+    {"RESERVED_34_BIT_QCOM", 0x400000000},
+    {"RESERVED_35_BIT_QCOM", 0x800000000},
+    {"RESERVED_36_BIT_QCOM", 0x1000000000},
+    {"RESERVED_37_BIT_QCOM", 0x2000000000},
+};
+
+constexpr EnumValueSet VkRenderingFlagBitsKHRSets[] = {
+    {"CONTENTS_SECONDARY_COMMAND_BUFFERS", 0x00000001},
+    {"SUSPENDING", 0x00000002},
+    {"RESUMING", 0x00000004},
 };
 
 constexpr EnumValueSet VkSamplerReductionModeEXTSets[] = {
@@ -2611,6 +2906,10 @@ constexpr EnumValueSet VkShaderFloatControlsIndependenceKHRSets[] = {
     {"32_BIT_ONLY", 0},
     {"ALL", 1},
     {"NONE", 2},
+};
+
+constexpr EnumValueSet VkSubmitFlagBitsKHRSets[] = {
+    {"PROTECTED", 0x00000001},
 };
 
 constexpr EnumValueSet VkDriverIdKHRSets[] = {
@@ -2725,21 +3024,21 @@ struct EnumType {
   bool allowEmpty;
 };
 
-constexpr std::array<EnumType, 269> enumTypes = {{
-    {"VkImageLayout", VkImageLayoutSets, 34, false},
+constexpr std::array<EnumType, 278> enumTypes = {{
+    {"VkImageLayout", VkImageLayoutSets, 36, false},
     {"VkAttachmentLoadOp", VkAttachmentLoadOpSets, 4, false},
-    {"VkAttachmentStoreOp", VkAttachmentStoreOpSets, 5, false},
+    {"VkAttachmentStoreOp", VkAttachmentStoreOpSets, 6, false},
     {"VkImageType", VkImageTypeSets, 3, false},
     {"VkImageTiling", VkImageTilingSets, 3, false},
     {"VkImageViewType", VkImageViewTypeSets, 7, false},
     {"VkCommandBufferLevel", VkCommandBufferLevelSets, 2, false},
     {"VkComponentSwizzle", VkComponentSwizzleSets, 7, false},
-    {"VkDescriptorType", VkDescriptorTypeSets, 16, false},
+    {"VkDescriptorType", VkDescriptorTypeSets, 17, false},
     {"VkQueryType", VkQueryTypeSets, 14, false},
     {"VkBorderColor", VkBorderColorSets, 8, false},
     {"VkPipelineBindPoint", VkPipelineBindPointSets, 6, false},
     {"VkPipelineCacheHeaderVersion", VkPipelineCacheHeaderVersionSets, 1, false},
-    {"VkPipelineCacheCreateFlagBits", VkPipelineCacheCreateFlagBitsSets, 5, true},
+    {"VkPipelineCacheCreateFlagBits", VkPipelineCacheCreateFlagBitsSets, 6, true},
     {"VkPrimitiveTopology", VkPrimitiveTopologySets, 11, false},
     {"VkSharingMode", VkSharingModeSets, 2, false},
     {"VkIndexType", VkIndexTypeSets, 5, false},
@@ -2757,18 +3056,18 @@ constexpr std::array<EnumType, 269> enumTypes = {{
     {"VkSystemAllocationScope", VkSystemAllocationScopeSets, 5, false},
     {"VkPhysicalDeviceType", VkPhysicalDeviceTypeSets, 5, false},
     {"VkVertexInputRate", VkVertexInputRateSets, 2, false},
-    {"VkFormat", VkFormatSets, 311, false},
+    {"VkFormat", VkFormatSets, 331, false},
     {"VkSubpassContents", VkSubpassContentsSets, 2, false},
-    {"VkDynamicState", VkDynamicStateSets, 37, false},
+    {"VkDynamicState", VkDynamicStateSets, 52, false},
     {"VkDescriptorUpdateTemplateType", VkDescriptorUpdateTemplateTypeSets, 3, false},
-    {"VkObjectType", VkObjectTypeSets, 51, false},
+    {"VkObjectType", VkObjectTypeSets, 52, false},
     {"VkQueueFlagBits", VkQueueFlagBitsSets, 10, false},
     {"VkCullModeFlagBits", VkCullModeFlagBitsSets, 4, false},
     {"VkRenderPassCreateFlagBits", VkRenderPassCreateFlagBitsSets, 3, true},
     {"VkDeviceQueueCreateFlagBits", VkDeviceQueueCreateFlagBitsSets, 2, false},
     {"VkMemoryPropertyFlagBits", VkMemoryPropertyFlagBitsSets, 10, false},
     {"VkMemoryHeapFlagBits", VkMemoryHeapFlagBitsSets, 4, false},
-    {"VkAccessFlagBits", VkAccessFlagBitsSets, 44, false},
+    {"VkAccessFlagBits", VkAccessFlagBitsSets, 45, false},
     {"VkBufferUsageFlagBits", VkBufferUsageFlagBitsSets, 35, false},
     {"VkBufferCreateFlagBits", VkBufferCreateFlagBitsSets, 9, false},
     {"VkShaderStageFlagBits", VkShaderStageFlagBitsSets, 37, false},
@@ -2776,8 +3075,8 @@ constexpr std::array<EnumType, 269> enumTypes = {{
     {"VkImageCreateFlagBits", VkImageCreateFlagBitsSets, 28, false},
     {"VkImageViewCreateFlagBits", VkImageViewCreateFlagBitsSets, 3, false},
     {"VkSamplerCreateFlagBits", VkSamplerCreateFlagBitsSets, 5, true},
-    {"VkPipelineCreateFlagBits", VkPipelineCreateFlagBitsSets, 47, false},
-    {"VkPipelineShaderStageCreateFlagBits", VkPipelineShaderStageCreateFlagBitsSets, 4, true},
+    {"VkPipelineCreateFlagBits", VkPipelineCreateFlagBitsSets, 49, false},
+    {"VkPipelineShaderStageCreateFlagBits", VkPipelineShaderStageCreateFlagBitsSets, 6, true},
     {"VkColorComponentFlagBits", VkColorComponentFlagBitsSets, 4, false},
     {"VkFenceCreateFlagBits", VkFenceCreateFlagBitsSets, 1, false},
     {"VkSemaphoreCreateFlagBits", nullptr, 0, true},
@@ -2789,7 +3088,7 @@ constexpr std::array<EnumType, 269> enumTypes = {{
     {"VkImageAspectFlagBits", VkImageAspectFlagBitsSets, 15, false},
     {"VkSparseImageFormatFlagBits", VkSparseImageFormatFlagBitsSets, 3, false},
     {"VkSparseMemoryBindFlagBits", VkSparseMemoryBindFlagBitsSets, 1, false},
-    {"VkPipelineStageFlagBits", VkPipelineStageFlagBitsSets, 39, false},
+    {"VkPipelineStageFlagBits", VkPipelineStageFlagBitsSets, 40, false},
     {"VkCommandPoolCreateFlagBits", VkCommandPoolCreateFlagBitsSets, 3, false},
     {"VkCommandPoolResetFlagBits", VkCommandPoolResetFlagBitsSets, 2, false},
     {"VkCommandBufferResetFlagBits", VkCommandBufferResetFlagBitsSets, 1, false},
@@ -2821,7 +3120,7 @@ constexpr std::array<EnumType, 269> enumTypes = {{
      false},
     {"VkIndirectStateFlagBitsNV", VkIndirectStateFlagBitsNVSets, 1, false},
     {"VkIndirectCommandsTokenTypeNV", VkIndirectCommandsTokenTypeNVSets, 8, false},
-    {"VkPrivateDataSlotCreateFlagBitsEXT", nullptr, 0, true},
+    {"VkPrivateDataSlotCreateFlagBits", nullptr, 0, true},
     {"VkDescriptorSetLayoutCreateFlagBits", VkDescriptorSetLayoutCreateFlagBitsSets, 7, false},
     {"VkExternalMemoryHandleTypeFlagBits", VkExternalMemoryHandleTypeFlagBitsSets, 22, false},
     {"VkExternalMemoryFeatureFlagBits", VkExternalMemoryFeatureFlagBitsSets, 6, false},
@@ -2853,14 +3152,14 @@ constexpr std::array<EnumType, 269> enumTypes = {{
     {"VkCoverageReductionModeNV", VkCoverageReductionModeNVSets, 2, false},
     {"VkValidationCacheHeaderVersionEXT", VkValidationCacheHeaderVersionEXTSets, 1, false},
     {"VkShaderInfoTypeAMD", VkShaderInfoTypeAMDSets, 3, false},
-    {"VkQueueGlobalPriorityEXT", VkQueueGlobalPriorityEXTSets, 4, false},
+    {"VkQueueGlobalPriorityKHR", VkQueueGlobalPriorityKHRSets, 8, false},
     {"VkDebugUtilsMessageSeverityFlagBitsEXT", VkDebugUtilsMessageSeverityFlagBitsEXTSets, 4,
      false},
     {"VkDebugUtilsMessageTypeFlagBitsEXT", VkDebugUtilsMessageTypeFlagBitsEXTSets, 3, false},
     {"VkConservativeRasterizationModeEXT", VkConservativeRasterizationModeEXTSets, 3, false},
     {"VkDescriptorBindingFlagBits", VkDescriptorBindingFlagBitsSets, 9, false},
     {"VkVendorId", VkVendorIdSets, 6, false},
-    {"VkDriverId", VkDriverIdSets, 33, false},
+    {"VkDriverId", VkDriverIdSets, 34, false},
     {"VkConditionalRenderingFlagBitsEXT", VkConditionalRenderingFlagBitsEXTSets, 1, false},
     {"VkResolveModeFlagBits", VkResolveModeFlagBitsSets, 10, false},
     {"VkShadingRatePaletteEntryNV", VkShadingRatePaletteEntryNVSets, 12, false},
@@ -2887,7 +3186,7 @@ constexpr std::array<EnumType, 269> enumTypes = {{
     {"VkScopeNV", VkScopeNVSets, 4, false},
     {"VkComponentTypeNV", VkComponentTypeNVSets, 11, false},
     {"VkDeviceDiagnosticsConfigFlagBitsNV", VkDeviceDiagnosticsConfigFlagBitsNVSets, 3, false},
-    {"VkPipelineCreationFeedbackFlagBitsEXT", VkPipelineCreationFeedbackFlagBitsEXTSets, 3, false},
+    {"VkPipelineCreationFeedbackFlagBits", VkPipelineCreationFeedbackFlagBitsSets, 6, false},
     {"VkFullScreenExclusiveEXT", VkFullScreenExclusiveEXTSets, 4, false},
     {"VkPerformanceCounterScopeKHR", VkPerformanceCounterScopeKHRSets, 6, false},
     {"VkPerformanceCounterUnitKHR", VkPerformanceCounterUnitKHRSets, 11, false},
@@ -2907,14 +3206,14 @@ constexpr std::array<EnumType, 269> enumTypes = {{
     {"VkLineRasterizationModeEXT", VkLineRasterizationModeEXTSets, 4, false},
     {"VkShaderModuleCreateFlagBits", VkShaderModuleCreateFlagBitsSets, 1, false},
     {"VkPipelineCompilerControlFlagBitsAMD", nullptr, 0, true},
-    {"VkToolPurposeFlagBitsEXT", VkToolPurposeFlagBitsEXTSets, 7, false},
+    {"VkToolPurposeFlagBits", VkToolPurposeFlagBitsSets, 12, false},
     {"VkFragmentShadingRateCombinerOpKHR", VkFragmentShadingRateCombinerOpKHRSets, 5, false},
     {"VkFragmentShadingRateNV", VkFragmentShadingRateNVSets, 12, false},
     {"VkFragmentShadingRateTypeNV", VkFragmentShadingRateTypeNVSets, 2, false},
-    {"VkAccessFlagBits2KHR", VkAccessFlagBits2KHRSets, 47, false},
-    {"VkPipelineStageFlagBits2KHR", VkPipelineStageFlagBits2KHRSets, 46, false},
-    {"VkSubmitFlagBitsKHR", VkSubmitFlagBitsKHRSets, 1, false},
-    {"VkEventCreateFlagBits", VkEventCreateFlagBitsSets, 1, false},
+    {"VkAccessFlagBits2", VkAccessFlagBits2Sets, 63, false},
+    {"VkPipelineStageFlagBits2", VkPipelineStageFlagBits2Sets, 69, false},
+    {"VkSubmitFlagBits", VkSubmitFlagBitsSets, 2, false},
+    {"VkEventCreateFlagBits", VkEventCreateFlagBitsSets, 2, false},
     {"VkPipelineLayoutCreateFlagBits", VkPipelineLayoutCreateFlagBitsSets, 2, true},
     {"VkProvokingVertexModeEXT", VkProvokingVertexModeEXTSets, 2, false},
     {"VkAccelerationStructureMotionInstanceTypeNV", VkAccelerationStructureMotionInstanceTypeNVSets,
@@ -2948,20 +3247,22 @@ constexpr std::array<EnumType, 269> enumTypes = {{
      VkVideoEncodeH264RateControlStructureFlagBitsEXTSets, 3, false},
     {"VkImageFormatConstraintsFlagBitsFUCHSIA", nullptr, 0, true},
     {"VkImageConstraintsInfoFlagBitsFUCHSIA", VkImageConstraintsInfoFlagBitsFUCHSIASets, 5, false},
-    {"VkFormatFeatureFlagBits2KHR", VkFormatFeatureFlagBits2KHRSets, 39, false},
+    {"VkFormatFeatureFlagBits2", VkFormatFeatureFlagBits2Sets, 66, false},
+    {"VkRenderingFlagBits", VkRenderingFlagBitsSets, 6, false},
     {"VkVideoEncodeH265InputModeFlagBitsEXT", VkVideoEncodeH265InputModeFlagBitsEXTSets, 3, false},
     {"VkVideoEncodeH265OutputModeFlagBitsEXT", VkVideoEncodeH265OutputModeFlagBitsEXTSets, 3,
      false},
     {"VkVideoEncodeH265CtbSizeFlagBitsEXT", VkVideoEncodeH265CtbSizeFlagBitsEXTSets, 4, false},
-    {"VkRenderingFlagBitsKHR", VkRenderingFlagBitsKHRSets, 3, false},
     {"VkVideoEncodeH265RateControlStructureFlagBitsEXT",
      VkVideoEncodeH265RateControlStructureFlagBitsEXTSets, 3, false},
     {"VkQueryPoolCreateFlagBits", nullptr, 0, true},
     {"VkInstanceCreateFlagBits", nullptr, 0, true},
     {"VkDeviceCreateFlagBits", nullptr, 0, true},
     {"VkStructureType", nullptr, 0, true},
+    {"VkPrivateDataSlotCreateFlagBitsEXT", nullptr, 0, true},
     {"VkDescriptorUpdateTemplateTypeKHR", nullptr, 0, true},
     {"VkPointClippingBehaviorKHR", nullptr, 0, true},
+    {"VkQueueGlobalPriorityEXT", VkQueueGlobalPriorityEXTSets, 4, false},
     {"VkResolveModeFlagBitsKHR", VkResolveModeFlagBitsKHRSets, 5, false},
     {"VkDescriptorBindingFlagBitsEXT", VkDescriptorBindingFlagBitsEXTSets, 4, false},
     {"VkSemaphoreTypeKHR", VkSemaphoreTypeKHRSets, 2, false},
@@ -2973,7 +3274,13 @@ constexpr std::array<EnumType, 269> enumTypes = {{
     {"VkAccelerationStructureTypeNV", VkAccelerationStructureTypeNVSets, 2, false},
     {"VkGeometryTypeNV", VkGeometryTypeNVSets, 2, false},
     {"VkRayTracingShaderGroupTypeNV", VkRayTracingShaderGroupTypeNVSets, 3, false},
+    {"VkPipelineCreationFeedbackFlagBitsEXT", VkPipelineCreationFeedbackFlagBitsEXTSets, 3, false},
     {"VkSemaphoreWaitFlagBitsKHR", VkSemaphoreWaitFlagBitsKHRSets, 1, false},
+    {"VkToolPurposeFlagBitsEXT", VkToolPurposeFlagBitsEXTSets, 7, false},
+    {"VkAccessFlagBits2KHR", VkAccessFlagBits2KHRSets, 47, false},
+    {"VkPipelineStageFlagBits2KHR", VkPipelineStageFlagBits2KHRSets, 46, false},
+    {"VkFormatFeatureFlagBits2KHR", VkFormatFeatureFlagBits2KHRSets, 39, false},
+    {"VkRenderingFlagBitsKHR", VkRenderingFlagBitsKHRSets, 3, false},
     {"VkExternalMemoryHandleTypeFlagBitsKHR", nullptr, 0, true},
     {"VkExternalMemoryFeatureFlagBitsKHR", nullptr, 0, true},
     {"VkExternalSemaphoreHandleTypeFlagBitsKHR", nullptr, 0, true},
@@ -2990,6 +3297,7 @@ constexpr std::array<EnumType, 269> enumTypes = {{
     {"VkChromaLocationKHR", nullptr, 0, true},
     {"VkSamplerReductionModeEXT", VkSamplerReductionModeEXTSets, 3, false},
     {"VkShaderFloatControlsIndependenceKHR", VkShaderFloatControlsIndependenceKHRSets, 3, false},
+    {"VkSubmitFlagBitsKHR", VkSubmitFlagBitsKHRSets, 1, false},
     {"VkDriverIdKHR", VkDriverIdKHRSets, 13, false},
     {"VkVideoEncodeH265CapabilityFlagBitsEXT", VkVideoEncodeH265CapabilityFlagBitsEXTSets, 9,
      false},

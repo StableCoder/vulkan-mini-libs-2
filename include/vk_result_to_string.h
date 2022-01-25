@@ -40,7 +40,7 @@ extern "C" {
 #include <vulkan/vulkan.h>
 
 static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-static_assert(VK_HEADER_VERSION <= 203, "VK_HEADER_VERSION is from after the supported range.");
+static_assert(VK_HEADER_VERSION <= 204, "VK_HEADER_VERSION is from after the supported range.");
 
 // This is effectively a cheap approximation of OpenXR's useful `xrResultToString` function but for
 // Vulkan
@@ -52,6 +52,14 @@ char const *vkResultToString(VkResult vkRes) {
   // Check in descending order to get the 'latest' version of the error code text available.
   // Also, because codes have been re-used over time, can't use a switch and have to do this large
   // set of ifs. Luckily this *should* be a relatively rare call.
+#if VK_HEADER_VERSION >= 204
+  if (vkRes == VK_PIPELINE_COMPILE_REQUIRED)
+    return "VK_PIPELINE_COMPILE_REQUIRED";
+#endif
+#if VK_HEADER_VERSION >= 204 && VK_KHR_global_priority
+  if (vkRes == VK_ERROR_NOT_PERMITTED_KHR)
+    return "VK_ERROR_NOT_PERMITTED_KHR";
+#endif
 #if VK_HEADER_VERSION >= 136 && VK_EXT_pipeline_creation_cache_control
   if (vkRes == VK_PIPELINE_COMPILE_REQUIRED_EXT)
     return "VK_PIPELINE_COMPILE_REQUIRED_EXT";
