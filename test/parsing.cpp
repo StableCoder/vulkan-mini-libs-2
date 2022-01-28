@@ -239,6 +239,12 @@ TEST_CASE("Parsing: Checking bitmask conversions from string to bitmask values")
       CHECK(vk_parse("VkDebugReportFlagsEXT", "VK_DEBUG_REPORT_ERROR", &retVal));
       CHECK(retVal == VK_DEBUG_REPORT_ERROR_BIT_EXT);
 
+      CHECK(vk_parse(
+          "VkPipelineColorBlendStateCreateFlags",
+          "VK_PIPELINE_COLOR_BLEND_STATE_CREATE_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_BIT_ARM",
+          &retVal));
+      CHECK(retVal == 0x00000001);
+
       CHECK(vk_parse("VkDebugReportFlagsEXT",
                      "VK_DEBUG_REPORT_DEBUG_BIT | VK_DEBUG_REPORT_ERROR_BIT", &retVal));
       CHECK(retVal == (VK_DEBUG_REPORT_DEBUG_BIT_EXT | VK_DEBUG_REPORT_ERROR_BIT_EXT));

@@ -424,32 +424,44 @@ bool findValue(std::string_view findValue,
                uint64_t *pValue,
                EnumValueSet const *start,
                EnumValueSet const *end) {
-    // Remove the vendor tag suffix if it's on the value
-    findValue = stripVendor(findValue);
-    if (findValue[findValue.size() - 1] == '_')
-        findValue = findValue.substr(0, findValue.size() - 1);
-
-    // Remove '_BIT' if it's there
-    findValue = stripBit(findValue);
-
-    // Iterate until we find the value
-    while (start != end) {
-        if (findValue == start->name) {
-            *pValue |= start->value;
-            return true;
-        }
-
-        std::string prefixedName{prefix};
-        prefixedName += start->name;
-        if (findValue == prefixedName) {
-            *pValue |= start->value;
-            return true;
-        }
-
-        ++start;
+  // Try the initial value
+  for (auto const *pStart = start; pStart != end; ++pStart) {
+    if (findValue == pStart->name) {
+      *pValue |= pStart->value;
+      return true;
     }
 
-    return false;
+    std::string prefixedName{prefix};
+    prefixedName += pStart->name;
+    if (findValue == prefixedName) {
+      *pValue |= pStart->value;
+      return true;
+    }
+  }
+
+  // Remove the vendor tag suffix if it's on the value
+  findValue = stripVendor(findValue);
+  if (findValue[findValue.size() - 1] == '_')
+    findValue = findValue.substr(0, findValue.size() - 1);
+
+  // Remove '_BIT' if it's there
+  findValue = stripBit(findValue);
+
+  for (auto const *pStart = start; pStart != end; ++pStart) {
+    if (findValue == pStart->name) {
+      *pValue |= pStart->value;
+      return true;
+    }
+
+    std::string prefixedName{prefix};
+    prefixedName += pStart->name;
+    if (findValue == prefixedName) {
+      *pValue |= pStart->value;
+      return true;
+    }
+  }
+
+  return false;
 }
 
 /**
