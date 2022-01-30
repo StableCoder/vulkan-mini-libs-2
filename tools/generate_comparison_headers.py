@@ -182,6 +182,7 @@ extern "C" {
 
         # First, rule out the basic types (no pointers/sType/arrays)
         started = False
+        membersNode = struct.find('members')
         members = struct.findall('members/')
         for member in members:
             memberName = member.tag
@@ -197,19 +198,21 @@ extern "C" {
 
             if not started:
                 outFile.write('\n  if (\n')
-                started = True
-            else:
-                outFile.write(' ||\n')
 
+            guardedMember = guardStruct(member, membersNode.get(
+                'first'), membersNode.get('last'), outFile)
             memberStruct = dataRoot.findall('structs/{}/'.format(memberType))
             if memberStruct:
                 outFile.writelines(
-                    ['  (compare_', memberType, '(&s1->', memberName, ', &s2->', memberName, '))'])
+                    ['(compare_', memberType, '(&s1->', memberName, ', &s2->', memberName, ')) ||\n'])
             else:
                 outFile.writelines(
-                    ['  (s1->', memberName, ' != s2->', memberName, ')'])
+                    ['(s1->', memberName, ' != s2->', memberName, ') ||\n'])
+            if guardedMember:
+                outFile.write('#endif\n')
+            started = True
         if started:
-            outFile.write(')\n    return false;\n\n')
+            outFile.write('false)\n    return false;\n\n')
 
         # Now for local arrays
         for member in members:

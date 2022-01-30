@@ -152,47 +152,96 @@ def processStruct(structNode, structData, vkVersion):
     if category is None or category != 'struct':
         return
     structName = structNode.get('name')
+    alias = structNode.get('alias')
 
     struct = structData.find(structName)
     if struct is None:
         struct = ET.SubElement(structData, structName, {
                                'first': vkVersion, 'last': vkVersion})
-        members = ET.SubElement(struct, 'members')
         ET.SubElement(struct, 'platforms')
 
-        # Only need to process the members the first time it appears, as they don't change through time
-        for member in structNode.findall('./member'):
-            nameNode = member.find('name')
-            node = ET.SubElement(members, nameNode.text)
-            if not member.get('values') is None:
-                value = ET.SubElement(node, 'value')
-                value.text = member.get('values')
-            if not member.get('altlen') is None:
-                node.set('len', member.get('altlen'))
-            elif not member.get('len') is None:
-                node.set('len', member.get('len'))
-            if not member.find('enum') is None:
-                node.set('suffix', '[' + member.find('enum').text + ']')
+        if alias:
+            struct.set('alias', alias)
+        if len(structNode.findall('./member')) != 0:
+            members = ET.SubElement(struct, 'members', {
+                'first': vkVersion, 'last': vkVersion})
+            for member in structNode.findall('./member'):
+                nameNode = member.find('name')
+                node = ET.SubElement(members, nameNode.text, {
+                    'first': vkVersion, 'last': vkVersion})
+                if not member.get('values') is None:
+                    value = ET.SubElement(node, 'value')
+                    value.text = member.get('values')
+                if not member.get('altlen') is None:
+                    node.set('len', member.get('altlen'))
+                elif not member.get('len') is None:
+                    node.set('len', member.get('len'))
+                if not member.find('enum') is None:
+                    node.set('suffix', '[' + member.find('enum').text + ']')
 
-            # Type Info
-            type = ET.SubElement(node, 'type')
-            type.text = member.find('type').text
-            # Type Suffix
-            typeSuffix = ''
-            if not member.text is None:
-                typeSuffix += member.text
-            if not member.find('type').tail is None:
-                typeSuffix += member.find('type').tail
-            typeSuffix = typeSuffix.strip()
-            if typeSuffix != '':
-                type.set('suffix', typeSuffix)
+                # Type Info
+                type = ET.SubElement(node, 'type')
+                type.text = member.find('type').text
+                # Type Suffix
+                typeSuffix = ''
+                if not member.text is None:
+                    typeSuffix += member.text
+                if not member.find('type').tail is None:
+                    typeSuffix += member.find('type').tail
+                typeSuffix = typeSuffix.strip()
+                if typeSuffix != '':
+                    type.set('suffix', typeSuffix)
 
-            # Array Stuff
-            if not nameNode.tail is None and nameNode.tail != '[':
-                node.set('suffix', nameNode.tail)
+                # Array Stuff
+                if not nameNode.tail is None and nameNode.tail != '[':
+                    node.set('suffix', nameNode.tail)
 
     else:
         struct.set('first', vkVersion)
+
+        if len(structNode.findall('./member')) != 0:
+            members = struct.find('members')
+            if members:
+                members.set('first', vkVersion)
+            else:
+                members = ET.SubElement(struct, 'members', {
+                    'first': vkVersion, 'last': vkVersion})
+
+            for member in structNode.findall('./member'):
+                nameNode = member.find('name')
+                node = members.find(nameNode.text)
+                if node:
+                    node.set('first', vkVersion)
+                    continue
+
+                node = ET.SubElement(members, nameNode.text, {
+                    'first': vkVersion, 'last': vkVersion})
+                if not member.get('values') is None:
+                    value = ET.SubElement(node, 'value')
+                    value.text = member.get('values')
+                if not member.get('altlen') is None:
+                    node.set('len', member.get('altlen'))
+                elif not member.get('len') is None:
+                    node.set('len', member.get('len'))
+                if not member.find('enum') is None:
+                    node.set('suffix', '[' + member.find('enum').text + ']')
+
+                # Type Info
+                type = ET.SubElement(node, 'type')
+                type.text = member.find('type').text
+                # Type Suffix
+                typeSuffix = ''
+                if not member.text is None:
+                    typeSuffix += member.text
+                if not member.find('type').tail is None:
+                    typeSuffix += member.find('type').tail
+                typeSuffix = typeSuffix.strip()
+                if typeSuffix != '':
+                    type.set('suffix', typeSuffix)
+
+                # Array Stuff
+                if not nameNode.tail is None and nameNode.tail != '[':
+                    node.set('suffix', nameNode.tail)
 
 
 def processFeatureStruct(featureName, featureType, structData, vkVersion):

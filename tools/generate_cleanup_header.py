@@ -212,9 +212,8 @@ extern "C" {
     outFile.write("""
 void cleanup_vk_struct(void const* pData) {
     VkBaseInStructure const* pTemp = (VkBaseInStructure const*)pData;
-
-    switch(pTemp->sType) {""")
-
+""")
+    first = True
     currentVersion = int(firstVersion)
     while currentVersion <= int(lastVersion):
         for struct in structs:
@@ -230,17 +229,20 @@ void cleanup_vk_struct(void const* pData) {
 
             outFile.write('\n')
             guarded = guardStruct(struct, firstVersion, lastVersion, outFile)
-            outFile.writelines(['    case ', sTypeValue.text, ':\n'])
+            if first:
+                first = False
+                outFile.write('    ')
+            else:
+                outFile.write('    else ')
+            outFile.writelines(
+                ['if (pTemp->sType ==', sTypeValue.text, ') {\n'])
             outFile.writelines(['        cleanup_', struct.tag,
                                 '((', struct.tag, ' const*)pData);\n'])
-            outFile.write('        break;\n')
+            outFile.write('        return;\n    }')
             if guarded:
                 outFile.write('#endif\n')
         currentVersion += 1
 
-    outFile.write('\n    default:\n')
-    outFile.write('        break;\n')
-    outFile.write('    }\n')
     outFile.write('}\n')
 
     # Dynamic Definitions
@@ -266,13 +268,17 @@ void cleanup_vk_struct(void const* pData) {
                 outFile.writelines(
                     ['void cleanup_', name, '(', name, ' const* pData){'])
 
+                membersNode = struct.find('members')
                 for member in members:
                     typeName = member.find('type').text
                     typeNode = dataRoot.find('structs/' + typeName)
+                    outFile.write('\n')
 
+                    guardedMember = guardStruct(
+                        member, membersNode.get('first'), membersNode.get('last'), outFile)
                     if member.get('len') is None:
                         # Single member, no iteration or counting business here
-                        outFile.writelines(['\n    // ', member.tag, '\n'])
+                        outFile.writelines(['    // ', member.tag, '\n'])
                         if member.tag == 'pNext':
                             outFile.write('    if (pData->pNext != NULL)\n')
                             outFile.write(
@@ -289,9 +295,11 @@ void cleanup_vk_struct(void const* pData) {
                     else:
                         # Multiple member or levels of indirection
                         outFile.writelines(
-                            ['\n    // ', member.tag, ' - ', member.get('len'), '\n'])
+                            ['    // ', member.tag, ' - ', member.get('len'), '\n'])
                         processMultiMember(member, '', dataRoot,
                                            member.get('len').split(','), 'ijklmn', outFile)
+                    if guardedMember:
+                        outFile.write('#endif\n')
                 outFile.write('}\n')
 
             if guarded:
