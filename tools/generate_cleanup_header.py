@@ -229,11 +229,6 @@ void cleanup_vk_struct(void const* pData) {
 
             outFile.write('\n')
             guarded = guardStruct(struct, firstVersion, lastVersion, outFile)
-            if first:
-                first = False
-                outFile.write('    ')
-            else:
-                outFile.write('    else ')
             outFile.writelines(
                 ['if (pTemp->sType ==', sTypeValue.text, ') {\n'])
             outFile.writelines(['        cleanup_', struct.tag,

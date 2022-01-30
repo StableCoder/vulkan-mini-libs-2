@@ -4103,246 +4103,291 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_APPLICATION_INFO) {
     cleanup_VkApplicationInfo((VkApplicationInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO) {
     cleanup_VkDeviceQueueCreateInfo((VkDeviceQueueCreateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO) {
     cleanup_VkDeviceCreateInfo((VkDeviceCreateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO) {
     cleanup_VkInstanceCreateInfo((VkInstanceCreateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO) {
     cleanup_VkMemoryAllocateInfo((VkMemoryAllocateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MAPPED_MEMORY_RANGE) {
     cleanup_VkMappedMemoryRange((VkMappedMemoryRange const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET) {
     cleanup_VkWriteDescriptorSet((VkWriteDescriptorSet const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_COPY_DESCRIPTOR_SET) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_COPY_DESCRIPTOR_SET) {
     cleanup_VkCopyDescriptorSet((VkCopyDescriptorSet const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO) {
     cleanup_VkBufferCreateInfo((VkBufferCreateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_VIEW_CREATE_INFO) {
     cleanup_VkBufferViewCreateInfo((VkBufferViewCreateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_BARRIER) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_BARRIER) {
     cleanup_VkMemoryBarrier((VkMemoryBarrier const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER) {
     cleanup_VkBufferMemoryBarrier((VkBufferMemoryBarrier const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER) {
     cleanup_VkImageMemoryBarrier((VkImageMemoryBarrier const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO) {
     cleanup_VkImageCreateInfo((VkImageCreateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO) {
     cleanup_VkImageViewCreateInfo((VkImageViewCreateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_BIND_SPARSE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BIND_SPARSE_INFO) {
     cleanup_VkBindSparseInfo((VkBindSparseInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO) {
     cleanup_VkShaderModuleCreateInfo((VkShaderModuleCreateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_CREATE_INFO) {
     cleanup_VkDescriptorSetLayoutCreateInfo((VkDescriptorSetLayoutCreateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO) {
     cleanup_VkDescriptorPoolCreateInfo((VkDescriptorPoolCreateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DESCRIPTOR_SET_ALLOCATE_INFO) {
     cleanup_VkDescriptorSetAllocateInfo((VkDescriptorSetAllocateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO) {
     cleanup_VkPipelineShaderStageCreateInfo((VkPipelineShaderStageCreateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO) {
     cleanup_VkComputePipelineCreateInfo((VkComputePipelineCreateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO) {
     cleanup_VkPipelineVertexInputStateCreateInfo(
         (VkPipelineVertexInputStateCreateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO) {
     cleanup_VkPipelineInputAssemblyStateCreateInfo(
         (VkPipelineInputAssemblyStateCreateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_STATE_CREATE_INFO) {
     cleanup_VkPipelineTessellationStateCreateInfo(
         (VkPipelineTessellationStateCreateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO) {
     cleanup_VkPipelineViewportStateCreateInfo((VkPipelineViewportStateCreateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO) {
     cleanup_VkPipelineRasterizationStateCreateInfo(
         (VkPipelineRasterizationStateCreateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_MULTISAMPLE_STATE_CREATE_INFO) {
     cleanup_VkPipelineMultisampleStateCreateInfo(
         (VkPipelineMultisampleStateCreateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO) {
     cleanup_VkPipelineColorBlendStateCreateInfo((VkPipelineColorBlendStateCreateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO) {
     cleanup_VkPipelineDynamicStateCreateInfo((VkPipelineDynamicStateCreateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO) {
     cleanup_VkPipelineDepthStencilStateCreateInfo(
         (VkPipelineDepthStencilStateCreateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO) {
     cleanup_VkGraphicsPipelineCreateInfo((VkGraphicsPipelineCreateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_CACHE_CREATE_INFO) {
     cleanup_VkPipelineCacheCreateInfo((VkPipelineCacheCreateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO) {
     cleanup_VkPipelineLayoutCreateInfo((VkPipelineLayoutCreateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO) {
     cleanup_VkSamplerCreateInfo((VkSamplerCreateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO) {
     cleanup_VkCommandPoolCreateInfo((VkCommandPoolCreateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO) {
     cleanup_VkCommandBufferAllocateInfo((VkCommandBufferAllocateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_INFO) {
     cleanup_VkCommandBufferInheritanceInfo((VkCommandBufferInheritanceInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO) {
     cleanup_VkCommandBufferBeginInfo((VkCommandBufferBeginInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO) {
     cleanup_VkRenderPassBeginInfo((VkRenderPassBeginInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO) {
     cleanup_VkRenderPassCreateInfo((VkRenderPassCreateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_EVENT_CREATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_EVENT_CREATE_INFO) {
     cleanup_VkEventCreateInfo((VkEventCreateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_FENCE_CREATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_FENCE_CREATE_INFO) {
     cleanup_VkFenceCreateInfo((VkFenceCreateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO) {
     cleanup_VkSemaphoreCreateInfo((VkSemaphoreCreateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO) {
     cleanup_VkQueryPoolCreateInfo((VkQueryPoolCreateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO) {
     cleanup_VkFramebufferCreateInfo((VkFramebufferCreateInfo const *)pData);
     return;
-  } else if (pTemp->sType == VK_STRUCTURE_TYPE_SUBMIT_INFO) {
+  }
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SUBMIT_INFO) {
     cleanup_VkSubmitInfo((VkSubmitInfo const *)pData);
     return;
   }
 
 #if VK_KHR_display
-  else if (pTemp->sType == VK_STRUCTURE_TYPE_DISPLAY_MODE_CREATE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DISPLAY_MODE_CREATE_INFO_KHR) {
     cleanup_VkDisplayModeCreateInfoKHR((VkDisplayModeCreateInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_KHR_display
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DISPLAY_SURFACE_CREATE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DISPLAY_SURFACE_CREATE_INFO_KHR) {
     cleanup_VkDisplaySurfaceCreateInfoKHR((VkDisplaySurfaceCreateInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_KHR_display_swapchain
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DISPLAY_PRESENT_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DISPLAY_PRESENT_INFO_KHR) {
     cleanup_VkDisplayPresentInfoKHR((VkDisplayPresentInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_KHR_android_surface
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ANDROID_SURFACE_CREATE_INFO_KHR) {
     cleanup_VkAndroidSurfaceCreateInfoKHR((VkAndroidSurfaceCreateInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_NN_vi_surface
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VI_SURFACE_CREATE_INFO_NN) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VI_SURFACE_CREATE_INFO_NN) {
     cleanup_VkViSurfaceCreateInfoNN((VkViSurfaceCreateInfoNN const *)pData);
     return;
   }
 #endif
 
 #if VK_KHR_wayland_surface
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_WAYLAND_SURFACE_CREATE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_WAYLAND_SURFACE_CREATE_INFO_KHR) {
     cleanup_VkWaylandSurfaceCreateInfoKHR((VkWaylandSurfaceCreateInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_KHR_win32_surface
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR) {
     cleanup_VkWin32SurfaceCreateInfoKHR((VkWin32SurfaceCreateInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_KHR_xlib_surface
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_XLIB_SURFACE_CREATE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_XLIB_SURFACE_CREATE_INFO_KHR) {
     cleanup_VkXlibSurfaceCreateInfoKHR((VkXlibSurfaceCreateInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_KHR_xcb_surface
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_XCB_SURFACE_CREATE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_XCB_SURFACE_CREATE_INFO_KHR) {
     cleanup_VkXcbSurfaceCreateInfoKHR((VkXcbSurfaceCreateInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_KHR_swapchain
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR) {
     cleanup_VkSwapchainCreateInfoKHR((VkSwapchainCreateInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_KHR_swapchain
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PRESENT_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PRESENT_INFO_KHR) {
     cleanup_VkPresentInfoKHR((VkPresentInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_EXT_debug_report
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEBUG_REPORT_CALLBACK_CREATE_INFO_EXT) {
     cleanup_VkDebugReportCallbackCreateInfoEXT((VkDebugReportCallbackCreateInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_EXT_validation_flags
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VALIDATION_FLAGS_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VALIDATION_FLAGS_EXT) {
     cleanup_VkValidationFlagsEXT((VkValidationFlagsEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_AMD_rasterization_order
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_RASTERIZATION_ORDER_AMD) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_RASTERIZATION_ORDER_AMD) {
     cleanup_VkPipelineRasterizationStateRasterizationOrderAMD(
         (VkPipelineRasterizationStateRasterizationOrderAMD const *)pData);
     return;
@@ -4350,28 +4395,28 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_EXT_debug_marker
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_NAME_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_NAME_INFO_EXT) {
     cleanup_VkDebugMarkerObjectNameInfoEXT((VkDebugMarkerObjectNameInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_EXT_debug_marker
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEBUG_MARKER_OBJECT_TAG_INFO_EXT) {
     cleanup_VkDebugMarkerObjectTagInfoEXT((VkDebugMarkerObjectTagInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_EXT_debug_marker
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEBUG_MARKER_MARKER_INFO_EXT) {
     cleanup_VkDebugMarkerMarkerInfoEXT((VkDebugMarkerMarkerInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_NV_dedicated_allocation
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_IMAGE_CREATE_INFO_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_IMAGE_CREATE_INFO_NV) {
     cleanup_VkDedicatedAllocationImageCreateInfoNV(
         (VkDedicatedAllocationImageCreateInfoNV const *)pData);
     return;
@@ -4379,7 +4424,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_NV_dedicated_allocation
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_BUFFER_CREATE_INFO_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_BUFFER_CREATE_INFO_NV) {
     cleanup_VkDedicatedAllocationBufferCreateInfoNV(
         (VkDedicatedAllocationBufferCreateInfoNV const *)pData);
     return;
@@ -4387,7 +4432,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_NV_dedicated_allocation
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_MEMORY_ALLOCATE_INFO_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEDICATED_ALLOCATION_MEMORY_ALLOCATE_INFO_NV) {
     cleanup_VkDedicatedAllocationMemoryAllocateInfoNV(
         (VkDedicatedAllocationMemoryAllocateInfoNV const *)pData);
     return;
@@ -4395,35 +4440,35 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_NV_external_memory
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO_NV) {
     cleanup_VkExternalMemoryImageCreateInfoNV((VkExternalMemoryImageCreateInfoNV const *)pData);
     return;
   }
 #endif
 
 #if VK_NV_external_memory
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO_NV) {
     cleanup_VkExportMemoryAllocateInfoNV((VkExportMemoryAllocateInfoNV const *)pData);
     return;
   }
 #endif
 
 #if VK_NV_external_memory_win32
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_NV) {
     cleanup_VkImportMemoryWin32HandleInfoNV((VkImportMemoryWin32HandleInfoNV const *)pData);
     return;
   }
 #endif
 
 #if VK_NV_external_memory_win32
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_NV) {
     cleanup_VkExportMemoryWin32HandleInfoNV((VkExportMemoryWin32HandleInfoNV const *)pData);
     return;
   }
 #endif
 
 #if VK_NV_win32_keyed_mutex
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_NV) {
     cleanup_VkWin32KeyedMutexAcquireReleaseInfoNV(
         (VkWin32KeyedMutexAcquireReleaseInfoNV const *)pData);
     return;
@@ -4431,63 +4476,63 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2) {
     cleanup_VkPhysicalDeviceFeatures2((VkPhysicalDeviceFeatures2 const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROPERTIES_2) {
     cleanup_VkPhysicalDeviceProperties2((VkPhysicalDeviceProperties2 const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_2) {
     cleanup_VkFormatProperties2((VkFormatProperties2 const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2) {
     cleanup_VkImageFormatProperties2((VkImageFormatProperties2 const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_FORMAT_INFO_2) {
     cleanup_VkPhysicalDeviceImageFormatInfo2((VkPhysicalDeviceImageFormatInfo2 const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_QUEUE_FAMILY_PROPERTIES_2) {
     cleanup_VkQueueFamilyProperties2((VkQueueFamilyProperties2 const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PROPERTIES_2) {
     cleanup_VkPhysicalDeviceMemoryProperties2((VkPhysicalDeviceMemoryProperties2 const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SPARSE_IMAGE_FORMAT_PROPERTIES_2) {
     cleanup_VkSparseImageFormatProperties2((VkSparseImageFormatProperties2 const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SPARSE_IMAGE_FORMAT_INFO_2) {
     cleanup_VkPhysicalDeviceSparseImageFormatInfo2(
         (VkPhysicalDeviceSparseImageFormatInfo2 const *)pData);
     return;
@@ -4495,7 +4540,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_KHR_push_descriptor
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR) {
     cleanup_VkPhysicalDevicePushDescriptorPropertiesKHR(
         (VkPhysicalDevicePushDescriptorPropertiesKHR const *)pData);
     return;
@@ -4503,14 +4548,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_KHR_incremental_present
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PRESENT_REGIONS_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PRESENT_REGIONS_KHR) {
     cleanup_VkPresentRegionsKHR((VkPresentRegionsKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTER_FEATURES) {
     cleanup_VkPhysicalDeviceVariablePointerFeatures(
         (VkPhysicalDeviceVariablePointerFeatures const *)pData);
     return;
@@ -4518,7 +4563,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_IMAGE_FORMAT_INFO) {
     cleanup_VkPhysicalDeviceExternalImageFormatInfo(
         (VkPhysicalDeviceExternalImageFormatInfo const *)pData);
     return;
@@ -4526,105 +4571,105 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_EXTERNAL_IMAGE_FORMAT_PROPERTIES) {
     cleanup_VkExternalImageFormatProperties((VkExternalImageFormatProperties const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_BUFFER_INFO) {
     cleanup_VkPhysicalDeviceExternalBufferInfo((VkPhysicalDeviceExternalBufferInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_EXTERNAL_BUFFER_PROPERTIES) {
     cleanup_VkExternalBufferProperties((VkExternalBufferProperties const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ID_PROPERTIES) {
     cleanup_VkPhysicalDeviceIDProperties((VkPhysicalDeviceIDProperties const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO) {
     cleanup_VkExternalMemoryImageCreateInfo((VkExternalMemoryImageCreateInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_BUFFER_CREATE_INFO) {
     cleanup_VkExternalMemoryBufferCreateInfo((VkExternalMemoryBufferCreateInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_EXPORT_MEMORY_ALLOCATE_INFO) {
     cleanup_VkExportMemoryAllocateInfo((VkExportMemoryAllocateInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_KHR_external_memory_win32
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMPORT_MEMORY_WIN32_HANDLE_INFO_KHR) {
     cleanup_VkImportMemoryWin32HandleInfoKHR((VkImportMemoryWin32HandleInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_KHR_external_memory_win32
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_EXPORT_MEMORY_WIN32_HANDLE_INFO_KHR) {
     cleanup_VkExportMemoryWin32HandleInfoKHR((VkExportMemoryWin32HandleInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_KHR_external_memory_win32
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_WIN32_HANDLE_PROPERTIES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_WIN32_HANDLE_PROPERTIES_KHR) {
     cleanup_VkMemoryWin32HandlePropertiesKHR((VkMemoryWin32HandlePropertiesKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_KHR_external_memory_win32
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_GET_WIN32_HANDLE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_GET_WIN32_HANDLE_INFO_KHR) {
     cleanup_VkMemoryGetWin32HandleInfoKHR((VkMemoryGetWin32HandleInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_KHR_external_memory_fd
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR) {
     cleanup_VkImportMemoryFdInfoKHR((VkImportMemoryFdInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_KHR_external_memory_fd
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_FD_PROPERTIES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_FD_PROPERTIES_KHR) {
     cleanup_VkMemoryFdPropertiesKHR((VkMemoryFdPropertiesKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_KHR_external_memory_fd
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_GET_FD_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_GET_FD_INFO_KHR) {
     cleanup_VkMemoryGetFdInfoKHR((VkMemoryGetFdInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_KHR_win32_keyed_mutex
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_WIN32_KEYED_MUTEX_ACQUIRE_RELEASE_INFO_KHR) {
     cleanup_VkWin32KeyedMutexAcquireReleaseInfoKHR(
         (VkWin32KeyedMutexAcquireReleaseInfoKHR const *)pData);
     return;
@@ -4632,7 +4677,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_SEMAPHORE_INFO) {
     cleanup_VkPhysicalDeviceExternalSemaphoreInfo(
         (VkPhysicalDeviceExternalSemaphoreInfo const *)pData);
     return;
@@ -4640,294 +4685,294 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_EXTERNAL_SEMAPHORE_PROPERTIES) {
     cleanup_VkExternalSemaphoreProperties((VkExternalSemaphoreProperties const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_CREATE_INFO) {
     cleanup_VkExportSemaphoreCreateInfo((VkExportSemaphoreCreateInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_KHR_external_semaphore_win32
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR) {
     cleanup_VkImportSemaphoreWin32HandleInfoKHR((VkImportSemaphoreWin32HandleInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_KHR_external_semaphore_win32
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_EXPORT_SEMAPHORE_WIN32_HANDLE_INFO_KHR) {
     cleanup_VkExportSemaphoreWin32HandleInfoKHR((VkExportSemaphoreWin32HandleInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_KHR_external_semaphore_win32
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_D3D12_FENCE_SUBMIT_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_D3D12_FENCE_SUBMIT_INFO_KHR) {
     cleanup_VkD3D12FenceSubmitInfoKHR((VkD3D12FenceSubmitInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_KHR_external_semaphore_win32
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SEMAPHORE_GET_WIN32_HANDLE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SEMAPHORE_GET_WIN32_HANDLE_INFO_KHR) {
     cleanup_VkSemaphoreGetWin32HandleInfoKHR((VkSemaphoreGetWin32HandleInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_KHR_external_semaphore_fd
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_FD_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_FD_INFO_KHR) {
     cleanup_VkImportSemaphoreFdInfoKHR((VkImportSemaphoreFdInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_KHR_external_semaphore_fd
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SEMAPHORE_GET_FD_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SEMAPHORE_GET_FD_INFO_KHR) {
     cleanup_VkSemaphoreGetFdInfoKHR((VkSemaphoreGetFdInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FENCE_INFO) {
     cleanup_VkPhysicalDeviceExternalFenceInfo((VkPhysicalDeviceExternalFenceInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_EXTERNAL_FENCE_PROPERTIES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_EXTERNAL_FENCE_PROPERTIES) {
     cleanup_VkExternalFenceProperties((VkExternalFenceProperties const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_EXPORT_FENCE_CREATE_INFO) {
     cleanup_VkExportFenceCreateInfo((VkExportFenceCreateInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_KHR_external_fence_win32
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMPORT_FENCE_WIN32_HANDLE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMPORT_FENCE_WIN32_HANDLE_INFO_KHR) {
     cleanup_VkImportFenceWin32HandleInfoKHR((VkImportFenceWin32HandleInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_KHR_external_fence_win32
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_EXPORT_FENCE_WIN32_HANDLE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_EXPORT_FENCE_WIN32_HANDLE_INFO_KHR) {
     cleanup_VkExportFenceWin32HandleInfoKHR((VkExportFenceWin32HandleInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_KHR_external_fence_win32
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_FENCE_GET_WIN32_HANDLE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_FENCE_GET_WIN32_HANDLE_INFO_KHR) {
     cleanup_VkFenceGetWin32HandleInfoKHR((VkFenceGetWin32HandleInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_KHR_external_fence_fd
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMPORT_FENCE_FD_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMPORT_FENCE_FD_INFO_KHR) {
     cleanup_VkImportFenceFdInfoKHR((VkImportFenceFdInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_KHR_external_fence_fd
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_FENCE_GET_FD_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_FENCE_GET_FD_INFO_KHR) {
     cleanup_VkFenceGetFdInfoKHR((VkFenceGetFdInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_FEATURES) {
     cleanup_VkPhysicalDeviceMultiviewFeatures((VkPhysicalDeviceMultiviewFeatures const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PROPERTIES) {
     cleanup_VkPhysicalDeviceMultiviewProperties((VkPhysicalDeviceMultiviewProperties const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RENDER_PASS_MULTIVIEW_CREATE_INFO) {
     cleanup_VkRenderPassMultiviewCreateInfo((VkRenderPassMultiviewCreateInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_EXT_display_surface_counter
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_EXT) {
     cleanup_VkSurfaceCapabilities2EXT((VkSurfaceCapabilities2EXT const *)pData);
     return;
   }
 #endif
 
 #if VK_EXT_display_control
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DISPLAY_POWER_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DISPLAY_POWER_INFO_EXT) {
     cleanup_VkDisplayPowerInfoEXT((VkDisplayPowerInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_EXT_display_control
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_EVENT_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_EVENT_INFO_EXT) {
     cleanup_VkDeviceEventInfoEXT((VkDeviceEventInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_EXT_display_control
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DISPLAY_EVENT_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DISPLAY_EVENT_INFO_EXT) {
     cleanup_VkDisplayEventInfoEXT((VkDisplayEventInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_EXT_display_control
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SWAPCHAIN_COUNTER_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SWAPCHAIN_COUNTER_CREATE_INFO_EXT) {
     cleanup_VkSwapchainCounterCreateInfoEXT((VkSwapchainCounterCreateInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GROUP_PROPERTIES) {
     cleanup_VkPhysicalDeviceGroupProperties((VkPhysicalDeviceGroupProperties const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_FLAGS_INFO) {
     cleanup_VkMemoryAllocateFlagsInfo((VkMemoryAllocateFlagsInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_INFO) {
     cleanup_VkBindBufferMemoryInfo((VkBindBufferMemoryInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BIND_BUFFER_MEMORY_DEVICE_GROUP_INFO) {
     cleanup_VkBindBufferMemoryDeviceGroupInfo((VkBindBufferMemoryDeviceGroupInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO) {
     cleanup_VkBindImageMemoryInfo((VkBindImageMemoryInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_DEVICE_GROUP_INFO) {
     cleanup_VkBindImageMemoryDeviceGroupInfo((VkBindImageMemoryDeviceGroupInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_GROUP_RENDER_PASS_BEGIN_INFO) {
     cleanup_VkDeviceGroupRenderPassBeginInfo((VkDeviceGroupRenderPassBeginInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_GROUP_COMMAND_BUFFER_BEGIN_INFO) {
     cleanup_VkDeviceGroupCommandBufferBeginInfo((VkDeviceGroupCommandBufferBeginInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_GROUP_SUBMIT_INFO) {
     cleanup_VkDeviceGroupSubmitInfo((VkDeviceGroupSubmitInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_GROUP_BIND_SPARSE_INFO) {
     cleanup_VkDeviceGroupBindSparseInfo((VkDeviceGroupBindSparseInfo const *)pData);
     return;
   }
 #endif
 
 #if (VK_KHR_swapchain || VK_KHR_device_group)
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_CAPABILITIES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_CAPABILITIES_KHR) {
     cleanup_VkDeviceGroupPresentCapabilitiesKHR((VkDeviceGroupPresentCapabilitiesKHR const *)pData);
     return;
   }
 #endif
 
 #if (VK_KHR_swapchain || VK_KHR_device_group)
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHR) {
     cleanup_VkImageSwapchainCreateInfoKHR((VkImageSwapchainCreateInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if (VK_KHR_swapchain || VK_KHR_device_group)
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_SWAPCHAIN_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_SWAPCHAIN_INFO_KHR) {
     cleanup_VkBindImageMemorySwapchainInfoKHR((VkBindImageMemorySwapchainInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if (VK_KHR_swapchain || VK_KHR_device_group)
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR) {
     cleanup_VkAcquireNextImageInfoKHR((VkAcquireNextImageInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if (VK_KHR_swapchain || VK_KHR_device_group)
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHR) {
     cleanup_VkDeviceGroupPresentInfoKHR((VkDeviceGroupPresentInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_GROUP_DEVICE_CREATE_INFO) {
     cleanup_VkDeviceGroupDeviceCreateInfo((VkDeviceGroupDeviceCreateInfo const *)pData);
     return;
   }
 #endif
 
 #if (VK_KHR_swapchain || VK_KHR_device_group)
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_GROUP_SWAPCHAIN_CREATE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_GROUP_SWAPCHAIN_CREATE_INFO_KHR) {
     cleanup_VkDeviceGroupSwapchainCreateInfoKHR((VkDeviceGroupSwapchainCreateInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DESCRIPTOR_UPDATE_TEMPLATE_CREATE_INFO) {
     cleanup_VkDescriptorUpdateTemplateCreateInfo(
         (VkDescriptorUpdateTemplateCreateInfo const *)pData);
     return;
@@ -4935,35 +4980,35 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_EXT_hdr_metadata
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_HDR_METADATA_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_HDR_METADATA_EXT) {
     cleanup_VkHdrMetadataEXT((VkHdrMetadataEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_GOOGLE_display_timing
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PRESENT_TIMES_INFO_GOOGLE) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PRESENT_TIMES_INFO_GOOGLE) {
     cleanup_VkPresentTimesInfoGOOGLE((VkPresentTimesInfoGOOGLE const *)pData);
     return;
   }
 #endif
 
 #if VK_MVK_ios_surface
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IOS_SURFACE_CREATE_INFO_MVK) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IOS_SURFACE_CREATE_INFO_MVK) {
     cleanup_VkIOSSurfaceCreateInfoMVK((VkIOSSurfaceCreateInfoMVK const *)pData);
     return;
   }
 #endif
 
 #if VK_MVK_macos_surface
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_MACOS_SURFACE_CREATE_INFO_MVK) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MACOS_SURFACE_CREATE_INFO_MVK) {
     cleanup_VkMacOSSurfaceCreateInfoMVK((VkMacOSSurfaceCreateInfoMVK const *)pData);
     return;
   }
 #endif
 
 #if VK_NV_clip_space_w_scaling
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_W_SCALING_STATE_CREATE_INFO_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_W_SCALING_STATE_CREATE_INFO_NV) {
     cleanup_VkPipelineViewportWScalingStateCreateInfoNV(
         (VkPipelineViewportWScalingStateCreateInfoNV const *)pData);
     return;
@@ -4971,7 +5016,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_NV_viewport_swizzle
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SWIZZLE_STATE_CREATE_INFO_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SWIZZLE_STATE_CREATE_INFO_NV) {
     cleanup_VkPipelineViewportSwizzleStateCreateInfoNV(
         (VkPipelineViewportSwizzleStateCreateInfoNV const *)pData);
     return;
@@ -4979,7 +5024,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_EXT_discard_rectangles
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISCARD_RECTANGLE_PROPERTIES_EXT) {
     cleanup_VkPhysicalDeviceDiscardRectanglePropertiesEXT(
         (VkPhysicalDeviceDiscardRectanglePropertiesEXT const *)pData);
     return;
@@ -4987,7 +5032,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_EXT_discard_rectangles
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_DISCARD_RECTANGLE_STATE_CREATE_INFO_EXT) {
     cleanup_VkPipelineDiscardRectangleStateCreateInfoEXT(
         (VkPipelineDiscardRectangleStateCreateInfoEXT const *)pData);
     return;
@@ -4995,8 +5040,8 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_NVX_multiview_per_view_attributes
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_ATTRIBUTES_PROPERTIES_NVX) {
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_ATTRIBUTES_PROPERTIES_NVX) {
     cleanup_VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX(
         (VkPhysicalDeviceMultiviewPerViewAttributesPropertiesNVX const *)pData);
     return;
@@ -5004,7 +5049,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RENDER_PASS_INPUT_ATTACHMENT_ASPECT_CREATE_INFO) {
     cleanup_VkRenderPassInputAttachmentAspectCreateInfo(
         (VkRenderPassInputAttachmentAspectCreateInfo const *)pData);
     return;
@@ -5012,28 +5057,28 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_KHR_get_surface_capabilities2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SURFACE_INFO_2_KHR) {
     cleanup_VkPhysicalDeviceSurfaceInfo2KHR((VkPhysicalDeviceSurfaceInfo2KHR const *)pData);
     return;
   }
 #endif
 
 #if VK_KHR_get_surface_capabilities2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_KHR) {
     cleanup_VkSurfaceCapabilities2KHR((VkSurfaceCapabilities2KHR const *)pData);
     return;
   }
 #endif
 
 #if VK_KHR_get_surface_capabilities2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SURFACE_FORMAT_2_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SURFACE_FORMAT_2_KHR) {
     cleanup_VkSurfaceFormat2KHR((VkSurfaceFormat2KHR const *)pData);
     return;
   }
 #endif
 
 #if VK_KHR_shared_presentable_image
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SHARED_PRESENT_SURFACE_CAPABILITIES_KHR) {
     cleanup_VkSharedPresentSurfaceCapabilitiesKHR(
         (VkSharedPresentSurfaceCapabilitiesKHR const *)pData);
     return;
@@ -5041,7 +5086,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES) {
     cleanup_VkPhysicalDevice16BitStorageFeatures(
         (VkPhysicalDevice16BitStorageFeatures const *)pData);
     return;
@@ -5049,28 +5094,28 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_PROPERTIES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_PROPERTIES) {
     cleanup_VkPhysicalDeviceSubgroupProperties((VkPhysicalDeviceSubgroupProperties const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_MEMORY_REQUIREMENTS_INFO_2) {
     cleanup_VkBufferMemoryRequirementsInfo2((VkBufferMemoryRequirementsInfo2 const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2) {
     cleanup_VkImageMemoryRequirementsInfo2((VkImageMemoryRequirementsInfo2 const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_SPARSE_MEMORY_REQUIREMENTS_INFO_2) {
     cleanup_VkImageSparseMemoryRequirementsInfo2(
         (VkImageSparseMemoryRequirementsInfo2 const *)pData);
     return;
@@ -5078,21 +5123,21 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2) {
     cleanup_VkMemoryRequirements2((VkMemoryRequirements2 const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SPARSE_IMAGE_MEMORY_REQUIREMENTS_2) {
     cleanup_VkSparseImageMemoryRequirements2((VkSparseImageMemoryRequirements2 const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_POINT_CLIPPING_PROPERTIES) {
     cleanup_VkPhysicalDevicePointClippingProperties(
         (VkPhysicalDevicePointClippingProperties const *)pData);
     return;
@@ -5100,29 +5145,28 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS) {
     cleanup_VkMemoryDedicatedRequirements((VkMemoryDedicatedRequirements const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO) {
     cleanup_VkMemoryDedicatedAllocateInfo((VkMemoryDedicatedAllocateInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_VIEW_USAGE_CREATE_INFO) {
     cleanup_VkImageViewUsageCreateInfo((VkImageViewUsageCreateInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_TESSELLATION_DOMAIN_ORIGIN_STATE_CREATE_INFO) {
     cleanup_VkPipelineTessellationDomainOriginStateCreateInfo(
         (VkPipelineTessellationDomainOriginStateCreateInfo const *)pData);
     return;
@@ -5130,36 +5174,35 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_INFO) {
     cleanup_VkSamplerYcbcrConversionInfo((VkSamplerYcbcrConversionInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_CREATE_INFO) {
     cleanup_VkSamplerYcbcrConversionCreateInfo((VkSamplerYcbcrConversionCreateInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_BIND_IMAGE_PLANE_MEMORY_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BIND_IMAGE_PLANE_MEMORY_INFO) {
     cleanup_VkBindImagePlaneMemoryInfo((VkBindImagePlaneMemoryInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO) {
     cleanup_VkImagePlaneMemoryRequirementsInfo((VkImagePlaneMemoryRequirementsInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_YCBCR_CONVERSION_FEATURES) {
     cleanup_VkPhysicalDeviceSamplerYcbcrConversionFeatures(
         (VkPhysicalDeviceSamplerYcbcrConversionFeatures const *)pData);
     return;
@@ -5167,7 +5210,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_IMAGE_FORMAT_PROPERTIES) {
     cleanup_VkSamplerYcbcrConversionImageFormatProperties(
         (VkSamplerYcbcrConversionImageFormatProperties const *)pData);
     return;
@@ -5175,7 +5218,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_AMD_texture_gather_bias_lod
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_TEXTURE_LOD_GATHER_FORMAT_PROPERTIES_AMD) {
     cleanup_VkTextureLODGatherFormatPropertiesAMD(
         (VkTextureLODGatherFormatPropertiesAMD const *)pData);
     return;
@@ -5183,14 +5226,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PROTECTED_SUBMIT_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PROTECTED_SUBMIT_INFO) {
     cleanup_VkProtectedSubmitInfo((VkProtectedSubmitInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_FEATURES) {
     cleanup_VkPhysicalDeviceProtectedMemoryFeatures(
         (VkPhysicalDeviceProtectedMemoryFeatures const *)pData);
     return;
@@ -5198,7 +5241,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_PROPERTIES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROTECTED_MEMORY_PROPERTIES) {
     cleanup_VkPhysicalDeviceProtectedMemoryProperties(
         (VkPhysicalDeviceProtectedMemoryProperties const *)pData);
     return;
@@ -5206,14 +5249,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_QUEUE_INFO_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_QUEUE_INFO_2) {
     cleanup_VkDeviceQueueInfo2((VkDeviceQueueInfo2 const *)pData);
     return;
   }
 #endif
 
 #if VK_NV_fragment_coverage_to_color
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_TO_COLOR_STATE_CREATE_INFO_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_TO_COLOR_STATE_CREATE_INFO_NV) {
     cleanup_VkPipelineCoverageToColorStateCreateInfoNV(
         (VkPipelineCoverageToColorStateCreateInfoNV const *)pData);
     return;
@@ -5221,8 +5264,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_EXT_sampler_filter_minmax
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES_EXT) {
     cleanup_VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT(
         (VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT const *)pData);
     return;
@@ -5230,14 +5272,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_EXT_sample_locations
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SAMPLE_LOCATIONS_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SAMPLE_LOCATIONS_INFO_EXT) {
     cleanup_VkSampleLocationsInfoEXT((VkSampleLocationsInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_EXT_sample_locations
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RENDER_PASS_SAMPLE_LOCATIONS_BEGIN_INFO_EXT) {
     cleanup_VkRenderPassSampleLocationsBeginInfoEXT(
         (VkRenderPassSampleLocationsBeginInfoEXT const *)pData);
     return;
@@ -5245,7 +5287,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_EXT_sample_locations
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_SAMPLE_LOCATIONS_STATE_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_SAMPLE_LOCATIONS_STATE_CREATE_INFO_EXT) {
     cleanup_VkPipelineSampleLocationsStateCreateInfoEXT(
         (VkPipelineSampleLocationsStateCreateInfoEXT const *)pData);
     return;
@@ -5253,7 +5295,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_EXT_sample_locations
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLE_LOCATIONS_PROPERTIES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLE_LOCATIONS_PROPERTIES_EXT) {
     cleanup_VkPhysicalDeviceSampleLocationsPropertiesEXT(
         (VkPhysicalDeviceSampleLocationsPropertiesEXT const *)pData);
     return;
@@ -5261,22 +5303,21 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_EXT_sample_locations
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_MULTISAMPLE_PROPERTIES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MULTISAMPLE_PROPERTIES_EXT) {
     cleanup_VkMultisamplePropertiesEXT((VkMultisamplePropertiesEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_EXT_sampler_filter_minmax
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO_EXT) {
     cleanup_VkSamplerReductionModeCreateInfoEXT((VkSamplerReductionModeCreateInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_EXT_blend_operation_advanced
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT(
         (VkPhysicalDeviceBlendOperationAdvancedFeaturesEXT const *)pData);
     return;
@@ -5284,8 +5325,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_EXT_blend_operation_advanced
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BLEND_OPERATION_ADVANCED_PROPERTIES_EXT) {
     cleanup_VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT(
         (VkPhysicalDeviceBlendOperationAdvancedPropertiesEXT const *)pData);
     return;
@@ -5293,8 +5333,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_EXT_blend_operation_advanced
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_ADVANCED_STATE_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_ADVANCED_STATE_CREATE_INFO_EXT) {
     cleanup_VkPipelineColorBlendAdvancedStateCreateInfoEXT(
         (VkPipelineColorBlendAdvancedStateCreateInfoEXT const *)pData);
     return;
@@ -5302,8 +5341,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_NV_framebuffer_mixed_samples
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_MODULATION_STATE_CREATE_INFO_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_MODULATION_STATE_CREATE_INFO_NV) {
     cleanup_VkPipelineCoverageModulationStateCreateInfoNV(
         (VkPipelineCoverageModulationStateCreateInfoNV const *)pData);
     return;
@@ -5311,21 +5349,21 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_KHR_image_format_list
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO_KHR) {
     cleanup_VkImageFormatListCreateInfoKHR((VkImageFormatListCreateInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_EXT_validation_cache
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VALIDATION_CACHE_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VALIDATION_CACHE_CREATE_INFO_EXT) {
     cleanup_VkValidationCacheCreateInfoEXT((VkValidationCacheCreateInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_EXT_validation_cache
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SHADER_MODULE_VALIDATION_CACHE_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SHADER_MODULE_VALIDATION_CACHE_CREATE_INFO_EXT) {
     cleanup_VkShaderModuleValidationCacheCreateInfoEXT(
         (VkShaderModuleValidationCacheCreateInfoEXT const *)pData);
     return;
@@ -5333,7 +5371,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_3_PROPERTIES) {
     cleanup_VkPhysicalDeviceMaintenance3Properties(
         (VkPhysicalDeviceMaintenance3Properties const *)pData);
     return;
@@ -5341,14 +5379,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_SUPPORT) {
     cleanup_VkDescriptorSetLayoutSupport((VkDescriptorSetLayoutSupport const *)pData);
     return;
   }
 #endif
 
 #if VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETER_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETER_FEATURES) {
     cleanup_VkPhysicalDeviceShaderDrawParameterFeatures(
         (VkPhysicalDeviceShaderDrawParameterFeatures const *)pData);
     return;
@@ -5356,14 +5394,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_ANDROID_native_buffer
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_NATIVE_BUFFER_ANDROID) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_NATIVE_BUFFER_ANDROID) {
     cleanup_VkNativeBufferANDROID((VkNativeBufferANDROID const *)pData);
     return;
   }
 #endif
 
 #if VK_EXT_global_priority
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_EXT) {
     cleanup_VkDeviceQueueGlobalPriorityCreateInfoEXT(
         (VkDeviceQueueGlobalPriorityCreateInfoEXT const *)pData);
     return;
@@ -5371,35 +5409,35 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_EXT_debug_utils
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT) {
     cleanup_VkDebugUtilsObjectNameInfoEXT((VkDebugUtilsObjectNameInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_EXT_debug_utils
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_TAG_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_TAG_INFO_EXT) {
     cleanup_VkDebugUtilsObjectTagInfoEXT((VkDebugUtilsObjectTagInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_EXT_debug_utils
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEBUG_UTILS_LABEL_EXT) {
     cleanup_VkDebugUtilsLabelEXT((VkDebugUtilsLabelEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_EXT_debug_utils
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT) {
     cleanup_VkDebugUtilsMessengerCreateInfoEXT((VkDebugUtilsMessengerCreateInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_EXT_debug_utils
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT) {
     cleanup_VkDebugUtilsMessengerCallbackDataEXT(
         (VkDebugUtilsMessengerCallbackDataEXT const *)pData);
     return;
@@ -5407,22 +5445,21 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_EXT_external_memory_host
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMPORT_MEMORY_HOST_POINTER_INFO_EXT) {
     cleanup_VkImportMemoryHostPointerInfoEXT((VkImportMemoryHostPointerInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_EXT_external_memory_host
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_HOST_POINTER_PROPERTIES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_HOST_POINTER_PROPERTIES_EXT) {
     cleanup_VkMemoryHostPointerPropertiesEXT((VkMemoryHostPointerPropertiesEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_EXT_external_memory_host
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_HOST_PROPERTIES_EXT) {
     cleanup_VkPhysicalDeviceExternalMemoryHostPropertiesEXT(
         (VkPhysicalDeviceExternalMemoryHostPropertiesEXT const *)pData);
     return;
@@ -5430,8 +5467,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_EXT_conservative_rasterization
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONSERVATIVE_RASTERIZATION_PROPERTIES_EXT) {
     cleanup_VkPhysicalDeviceConservativeRasterizationPropertiesEXT(
         (VkPhysicalDeviceConservativeRasterizationPropertiesEXT const *)pData);
     return;
@@ -5439,7 +5475,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_AMD_shader_core_properties
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_AMD) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_AMD) {
     cleanup_VkPhysicalDeviceShaderCorePropertiesAMD(
         (VkPhysicalDeviceShaderCorePropertiesAMD const *)pData);
     return;
@@ -5447,8 +5483,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_EXT_conservative_rasterization
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_CONSERVATIVE_STATE_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_CONSERVATIVE_STATE_CREATE_INFO_EXT) {
     cleanup_VkPipelineRasterizationConservativeStateCreateInfoEXT(
         (VkPipelineRasterizationConservativeStateCreateInfoEXT const *)pData);
     return;
@@ -5456,7 +5491,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_EXT_descriptor_indexing
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceDescriptorIndexingFeaturesEXT(
         (VkPhysicalDeviceDescriptorIndexingFeaturesEXT const *)pData);
     return;
@@ -5464,8 +5499,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_EXT_descriptor_indexing
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES_EXT) {
     cleanup_VkPhysicalDeviceDescriptorIndexingPropertiesEXT(
         (VkPhysicalDeviceDescriptorIndexingPropertiesEXT const *)pData);
     return;
@@ -5473,8 +5507,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_EXT_descriptor_indexing
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO_EXT) {
     cleanup_VkDescriptorSetLayoutBindingFlagsCreateInfoEXT(
         (VkDescriptorSetLayoutBindingFlagsCreateInfoEXT const *)pData);
     return;
@@ -5482,8 +5515,8 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_EXT_descriptor_indexing
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO_EXT) {
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO_EXT) {
     cleanup_VkDescriptorSetVariableDescriptorCountAllocateInfoEXT(
         (VkDescriptorSetVariableDescriptorCountAllocateInfoEXT const *)pData);
     return;
@@ -5491,8 +5524,8 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_EXT_descriptor_indexing
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT_EXT) {
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT_EXT) {
     cleanup_VkDescriptorSetVariableDescriptorCountLayoutSupportEXT(
         (VkDescriptorSetVariableDescriptorCountLayoutSupportEXT const *)pData);
     return;
@@ -5500,8 +5533,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_EXT_vertex_attribute_divisor
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_EXT) {
     cleanup_VkPipelineVertexInputDivisorStateCreateInfoEXT(
         (VkPipelineVertexInputDivisorStateCreateInfoEXT const *)pData);
     return;
@@ -5509,8 +5541,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_EXT_vertex_attribute_divisor
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT) {
     cleanup_VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT(
         (VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT const *)pData);
     return;
@@ -5518,7 +5549,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_ANDROID_external_memory_android_hardware_buffer
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMPORT_ANDROID_HARDWARE_BUFFER_INFO_ANDROID) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMPORT_ANDROID_HARDWARE_BUFFER_INFO_ANDROID) {
     cleanup_VkImportAndroidHardwareBufferInfoANDROID(
         (VkImportAndroidHardwareBufferInfoANDROID const *)pData);
     return;
@@ -5526,14 +5557,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_ANDROID_external_memory_android_hardware_buffer
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_USAGE_ANDROID) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_USAGE_ANDROID) {
     cleanup_VkAndroidHardwareBufferUsageANDROID((VkAndroidHardwareBufferUsageANDROID const *)pData);
     return;
   }
 #endif
 
 #if VK_ANDROID_external_memory_android_hardware_buffer
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_PROPERTIES_ANDROID) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_PROPERTIES_ANDROID) {
     cleanup_VkAndroidHardwareBufferPropertiesANDROID(
         (VkAndroidHardwareBufferPropertiesANDROID const *)pData);
     return;
@@ -5541,7 +5572,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_ANDROID_external_memory_android_hardware_buffer
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_GET_ANDROID_HARDWARE_BUFFER_INFO_ANDROID) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_GET_ANDROID_HARDWARE_BUFFER_INFO_ANDROID) {
     cleanup_VkMemoryGetAndroidHardwareBufferInfoANDROID(
         (VkMemoryGetAndroidHardwareBufferInfoANDROID const *)pData);
     return;
@@ -5549,8 +5580,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_ANDROID_external_memory_android_hardware_buffer
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_PROPERTIES_ANDROID) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_PROPERTIES_ANDROID) {
     cleanup_VkAndroidHardwareBufferFormatPropertiesANDROID(
         (VkAndroidHardwareBufferFormatPropertiesANDROID const *)pData);
     return;
@@ -5558,14 +5588,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_ANDROID_external_memory_android_hardware_buffer
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID) {
     cleanup_VkExternalFormatANDROID((VkExternalFormatANDROID const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION <= 134 && VK_NVX_device_generated_commands
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_GENERATED_COMMANDS_FEATURES_NVX) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_GENERATED_COMMANDS_FEATURES_NVX) {
     cleanup_VkDeviceGeneratedCommandsFeaturesNVX(
         (VkDeviceGeneratedCommandsFeaturesNVX const *)pData);
     return;
@@ -5573,14 +5603,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION <= 134 && VK_NVX_device_generated_commands
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_GENERATED_COMMANDS_LIMITS_NVX) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_GENERATED_COMMANDS_LIMITS_NVX) {
     cleanup_VkDeviceGeneratedCommandsLimitsNVX((VkDeviceGeneratedCommandsLimitsNVX const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION <= 134 && VK_NVX_device_generated_commands
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_NVX) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_NVX) {
     cleanup_VkIndirectCommandsLayoutCreateInfoNVX(
         (VkIndirectCommandsLayoutCreateInfoNVX const *)pData);
     return;
@@ -5588,127 +5618,126 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION <= 134 && VK_NVX_device_generated_commands
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_CMD_PROCESS_COMMANDS_INFO_NVX) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_CMD_PROCESS_COMMANDS_INFO_NVX) {
     cleanup_VkCmdProcessCommandsInfoNVX((VkCmdProcessCommandsInfoNVX const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION <= 134 && VK_NVX_device_generated_commands
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_CMD_RESERVE_SPACE_FOR_COMMANDS_INFO_NVX) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_CMD_RESERVE_SPACE_FOR_COMMANDS_INFO_NVX) {
     cleanup_VkCmdReserveSpaceForCommandsInfoNVX((VkCmdReserveSpaceForCommandsInfoNVX const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION <= 134 && VK_NVX_device_generated_commands
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_OBJECT_TABLE_CREATE_INFO_NVX) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_OBJECT_TABLE_CREATE_INFO_NVX) {
     cleanup_VkObjectTableCreateInfoNVX((VkObjectTableCreateInfoNVX const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION <= 90 && VK_KHR_mir_surface
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_MIR_SURFACE_CREATE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MIR_SURFACE_CREATE_INFO_KHR) {
     cleanup_VkMirSurfaceCreateInfoKHR((VkMirSurfaceCreateInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 76 && VK_KHR_get_display_properties2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DISPLAY_PROPERTIES_2_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DISPLAY_PROPERTIES_2_KHR) {
     cleanup_VkDisplayProperties2KHR((VkDisplayProperties2KHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 76 && VK_KHR_get_display_properties2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DISPLAY_PLANE_PROPERTIES_2_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DISPLAY_PLANE_PROPERTIES_2_KHR) {
     cleanup_VkDisplayPlaneProperties2KHR((VkDisplayPlaneProperties2KHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 76 && VK_KHR_get_display_properties2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DISPLAY_MODE_PROPERTIES_2_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DISPLAY_MODE_PROPERTIES_2_KHR) {
     cleanup_VkDisplayModeProperties2KHR((VkDisplayModeProperties2KHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 76 && VK_KHR_get_display_properties2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DISPLAY_PLANE_INFO_2_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DISPLAY_PLANE_INFO_2_KHR) {
     cleanup_VkDisplayPlaneInfo2KHR((VkDisplayPlaneInfo2KHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 76 && VK_KHR_get_display_properties2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DISPLAY_PLANE_CAPABILITIES_2_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DISPLAY_PLANE_CAPABILITIES_2_KHR) {
     cleanup_VkDisplayPlaneCapabilities2KHR((VkDisplayPlaneCapabilities2KHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 80 && VK_EXT_conditional_rendering
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_CONDITIONAL_RENDERING_BEGIN_INFO_EXT) {
     cleanup_VkConditionalRenderingBeginInfoEXT((VkConditionalRenderingBeginInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 80 && VK_KHR_create_renderpass2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2_KHR) {
     cleanup_VkAttachmentDescription2KHR((VkAttachmentDescription2KHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 80 && VK_KHR_create_renderpass2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2_KHR) {
     cleanup_VkAttachmentReference2KHR((VkAttachmentReference2KHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 80 && VK_KHR_create_renderpass2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_2_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_2_KHR) {
     cleanup_VkSubpassDescription2KHR((VkSubpassDescription2KHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 80 && VK_KHR_create_renderpass2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2_KHR) {
     cleanup_VkSubpassDependency2KHR((VkSubpassDependency2KHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 80 && VK_KHR_create_renderpass2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2_KHR) {
     cleanup_VkRenderPassCreateInfo2KHR((VkRenderPassCreateInfo2KHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 80 && VK_KHR_create_renderpass2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO_KHR) {
     cleanup_VkSubpassBeginInfoKHR((VkSubpassBeginInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 80 && VK_KHR_create_renderpass2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SUBPASS_END_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SUBPASS_END_INFO_KHR) {
     cleanup_VkSubpassEndInfoKHR((VkSubpassEndInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 80 && VK_EXT_conditional_rendering
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_CONDITIONAL_RENDERING_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_CONDITIONAL_RENDERING_INFO_EXT) {
     cleanup_VkCommandBufferInheritanceConditionalRenderingInfoEXT(
         (VkCommandBufferInheritanceConditionalRenderingInfoEXT const *)pData);
     return;
@@ -5716,7 +5745,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 80 && VK_KHR_8bit_storage
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES_KHR) {
     cleanup_VkPhysicalDevice8BitStorageFeaturesKHR(
         (VkPhysicalDevice8BitStorageFeaturesKHR const *)pData);
     return;
@@ -5724,8 +5753,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 80 && VK_EXT_conditional_rendering
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONDITIONAL_RENDERING_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CONDITIONAL_RENDERING_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceConditionalRenderingFeaturesEXT(
         (VkPhysicalDeviceConditionalRenderingFeaturesEXT const *)pData);
     return;
@@ -5733,22 +5761,21 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 82 && VK_NV_device_diagnostic_checkpoints
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV) {
     cleanup_VkQueueFamilyCheckpointPropertiesNV((VkQueueFamilyCheckpointPropertiesNV const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 82 && VK_NV_device_diagnostic_checkpoints
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_CHECKPOINT_DATA_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_CHECKPOINT_DATA_NV) {
     cleanup_VkCheckpointDataNV((VkCheckpointDataNV const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 84 && VK_EXT_inline_uniform_block
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceInlineUniformBlockFeaturesEXT(
         (VkPhysicalDeviceInlineUniformBlockFeaturesEXT const *)pData);
     return;
@@ -5756,8 +5783,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 84 && VK_EXT_inline_uniform_block
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES_EXT) {
     cleanup_VkPhysicalDeviceInlineUniformBlockPropertiesEXT(
         (VkPhysicalDeviceInlineUniformBlockPropertiesEXT const *)pData);
     return;
@@ -5765,7 +5791,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 84 && VK_EXT_inline_uniform_block
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK_EXT) {
     cleanup_VkWriteDescriptorSetInlineUniformBlockEXT(
         (VkWriteDescriptorSetInlineUniformBlockEXT const *)pData);
     return;
@@ -5773,8 +5799,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 84 && VK_EXT_inline_uniform_block
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO_EXT) {
     cleanup_VkDescriptorPoolInlineUniformBlockCreateInfoEXT(
         (VkDescriptorPoolInlineUniformBlockCreateInfoEXT const *)pData);
     return;
@@ -5782,7 +5807,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 84 && VK_KHR_vulkan_memory_model
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES_KHR) {
     cleanup_VkPhysicalDeviceVulkanMemoryModelFeaturesKHR(
         (VkPhysicalDeviceVulkanMemoryModelFeaturesKHR const *)pData);
     return;
@@ -5790,8 +5815,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 84 && VK_EXT_vertex_attribute_divisor
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT(
         (VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const *)pData);
     return;
@@ -5799,14 +5823,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 84 && VK_EXT_astc_decode_mode
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_VIEW_ASTC_DECODE_MODE_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_VIEW_ASTC_DECODE_MODE_EXT) {
     cleanup_VkImageViewASTCDecodeModeEXT((VkImageViewASTCDecodeModeEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 84 && VK_EXT_astc_decode_mode
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceASTCDecodeFeaturesEXT(
         (VkPhysicalDeviceASTCDecodeFeaturesEXT const *)pData);
     return;
@@ -5814,8 +5838,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 85 && VK_NV_representative_fragment_test
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_REPRESENTATIVE_FRAGMENT_TEST_FEATURES_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_REPRESENTATIVE_FRAGMENT_TEST_FEATURES_NV) {
     cleanup_VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV(
         (VkPhysicalDeviceRepresentativeFragmentTestFeaturesNV const *)pData);
     return;
@@ -5823,8 +5846,8 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 85 && VK_NV_representative_fragment_test
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PIPELINE_REPRESENTATIVE_FRAGMENT_TEST_STATE_CREATE_INFO_NV) {
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PIPELINE_REPRESENTATIVE_FRAGMENT_TEST_STATE_CREATE_INFO_NV) {
     cleanup_VkPipelineRepresentativeFragmentTestStateCreateInfoNV(
         (VkPipelineRepresentativeFragmentTestStateCreateInfoNV const *)pData);
     return;
@@ -5832,7 +5855,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 85 && VK_NV_scissor_exclusive
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXCLUSIVE_SCISSOR_FEATURES_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXCLUSIVE_SCISSOR_FEATURES_NV) {
     cleanup_VkPhysicalDeviceExclusiveScissorFeaturesNV(
         (VkPhysicalDeviceExclusiveScissorFeaturesNV const *)pData);
     return;
@@ -5840,8 +5863,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 85 && VK_NV_scissor_exclusive
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_EXCLUSIVE_SCISSOR_STATE_CREATE_INFO_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_EXCLUSIVE_SCISSOR_STATE_CREATE_INFO_NV) {
     cleanup_VkPipelineViewportExclusiveScissorStateCreateInfoNV(
         (VkPipelineViewportExclusiveScissorStateCreateInfoNV const *)pData);
     return;
@@ -5849,7 +5871,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 85 && VK_NV_corner_sampled_image
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CORNER_SAMPLED_IMAGE_FEATURES_NV) {
     cleanup_VkPhysicalDeviceCornerSampledImageFeaturesNV(
         (VkPhysicalDeviceCornerSampledImageFeaturesNV const *)pData);
     return;
@@ -5857,8 +5879,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 85 && VK_NV_compute_shader_derivatives
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_NV) {
     cleanup_VkPhysicalDeviceComputeShaderDerivativesFeaturesNV(
         (VkPhysicalDeviceComputeShaderDerivativesFeaturesNV const *)pData);
     return;
@@ -5866,8 +5887,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 85 && VK_NV_fragment_shader_barycentric
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_BARYCENTRIC_FEATURES_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_BARYCENTRIC_FEATURES_NV) {
     cleanup_VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV(
         (VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV const *)pData);
     return;
@@ -5875,8 +5895,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 85 && VK_NV_shader_image_footprint
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_FOOTPRINT_FEATURES_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_FOOTPRINT_FEATURES_NV) {
     cleanup_VkPhysicalDeviceShaderImageFootprintFeaturesNV(
         (VkPhysicalDeviceShaderImageFootprintFeaturesNV const *)pData);
     return;
@@ -5884,8 +5903,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 85 && VK_NV_shading_rate_image
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SHADING_RATE_IMAGE_STATE_CREATE_INFO_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_SHADING_RATE_IMAGE_STATE_CREATE_INFO_NV) {
     cleanup_VkPipelineViewportShadingRateImageStateCreateInfoNV(
         (VkPipelineViewportShadingRateImageStateCreateInfoNV const *)pData);
     return;
@@ -5893,7 +5911,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 85 && VK_NV_shading_rate_image
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_FEATURES_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_FEATURES_NV) {
     cleanup_VkPhysicalDeviceShadingRateImageFeaturesNV(
         (VkPhysicalDeviceShadingRateImageFeaturesNV const *)pData);
     return;
@@ -5901,7 +5919,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 85 && VK_NV_shading_rate_image
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_PROPERTIES_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADING_RATE_IMAGE_PROPERTIES_NV) {
     cleanup_VkPhysicalDeviceShadingRateImagePropertiesNV(
         (VkPhysicalDeviceShadingRateImagePropertiesNV const *)pData);
     return;
@@ -5909,8 +5927,8 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 85 && VK_NV_shading_rate_image
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_COARSE_SAMPLE_ORDER_STATE_CREATE_INFO_NV) {
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_COARSE_SAMPLE_ORDER_STATE_CREATE_INFO_NV) {
     cleanup_VkPipelineViewportCoarseSampleOrderStateCreateInfoNV(
         (VkPipelineViewportCoarseSampleOrderStateCreateInfoNV const *)pData);
     return;
@@ -5918,7 +5936,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 85 && VK_NV_mesh_shader
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_NV) {
     cleanup_VkPhysicalDeviceMeshShaderFeaturesNV(
         (VkPhysicalDeviceMeshShaderFeaturesNV const *)pData);
     return;
@@ -5926,7 +5944,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 85 && VK_NV_mesh_shader
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_PROPERTIES_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_PROPERTIES_NV) {
     cleanup_VkPhysicalDeviceMeshShaderPropertiesNV(
         (VkPhysicalDeviceMeshShaderPropertiesNV const *)pData);
     return;
@@ -5934,35 +5952,35 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 85 && VK_HEADER_VERSION <= 90 && VK_NVX_raytracing
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_RAYTRACING_PIPELINE_CREATE_INFO_NVX) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RAYTRACING_PIPELINE_CREATE_INFO_NVX) {
     cleanup_VkRaytracingPipelineCreateInfoNVX((VkRaytracingPipelineCreateInfoNVX const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 85 && VK_HEADER_VERSION <= 90 && VK_NVX_raytracing
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_GEOMETRY_TRIANGLES_NVX) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_GEOMETRY_TRIANGLES_NVX) {
     cleanup_VkGeometryTrianglesNVX((VkGeometryTrianglesNVX const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 85 && VK_HEADER_VERSION <= 90 && VK_NVX_raytracing
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_GEOMETRY_AABB_NVX) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_GEOMETRY_AABB_NVX) {
     cleanup_VkGeometryAABBNVX((VkGeometryAABBNVX const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 85 && VK_HEADER_VERSION <= 90 && VK_NVX_raytracing
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_GEOMETRY_NVX) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_GEOMETRY_NVX) {
     cleanup_VkGeometryNVX((VkGeometryNVX const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 85 && VK_HEADER_VERSION <= 90 && VK_NVX_raytracing
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_NVX) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_NVX) {
     cleanup_VkAccelerationStructureCreateInfoNVX(
         (VkAccelerationStructureCreateInfoNVX const *)pData);
     return;
@@ -5970,7 +5988,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 85 && VK_HEADER_VERSION <= 90 && VK_NVX_raytracing
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_BIND_ACCELERATION_STRUCTURE_MEMORY_INFO_NVX) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BIND_ACCELERATION_STRUCTURE_MEMORY_INFO_NVX) {
     cleanup_VkBindAccelerationStructureMemoryInfoNVX(
         (VkBindAccelerationStructureMemoryInfoNVX const *)pData);
     return;
@@ -5978,7 +5996,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 85 && VK_HEADER_VERSION <= 90 && VK_NVX_raytracing
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DESCRIPTOR_ACCELERATION_STRUCTURE_INFO_NVX) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DESCRIPTOR_ACCELERATION_STRUCTURE_INFO_NVX) {
     cleanup_VkDescriptorAccelerationStructureInfoNVX(
         (VkDescriptorAccelerationStructureInfoNVX const *)pData);
     return;
@@ -5986,8 +6004,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 85 && VK_HEADER_VERSION <= 90 && VK_NVX_raytracing
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_INFO_NVX) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_INFO_NVX) {
     cleanup_VkAccelerationStructureMemoryRequirementsInfoNVX(
         (VkAccelerationStructureMemoryRequirementsInfoNVX const *)pData);
     return;
@@ -5995,7 +6012,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 85 && VK_HEADER_VERSION <= 90 && VK_NVX_raytracing
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAYTRACING_PROPERTIES_NVX) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAYTRACING_PROPERTIES_NVX) {
     cleanup_VkPhysicalDeviceRaytracingPropertiesNVX(
         (VkPhysicalDeviceRaytracingPropertiesNVX const *)pData);
     return;
@@ -6003,14 +6020,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 86 && VK_KHR_driver_properties
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES_KHR) {
     cleanup_VkPhysicalDeviceDriverPropertiesKHR((VkPhysicalDeviceDriverPropertiesKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 86 && VK_KHR_shader_atomic_int64
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES_KHR) {
     cleanup_VkPhysicalDeviceShaderAtomicInt64FeaturesKHR(
         (VkPhysicalDeviceShaderAtomicInt64FeaturesKHR const *)pData);
     return;
@@ -6018,7 +6035,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 86 && VK_EXT_image_drm_format_modifier
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_EXT) {
     cleanup_VkDrmFormatModifierPropertiesListEXT(
         (VkDrmFormatModifierPropertiesListEXT const *)pData);
     return;
@@ -6026,8 +6043,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 86 && VK_EXT_image_drm_format_modifier
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_DRM_FORMAT_MODIFIER_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_DRM_FORMAT_MODIFIER_INFO_EXT) {
     cleanup_VkPhysicalDeviceImageDrmFormatModifierInfoEXT(
         (VkPhysicalDeviceImageDrmFormatModifierInfoEXT const *)pData);
     return;
@@ -6035,7 +6051,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 86 && VK_EXT_image_drm_format_modifier
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_LIST_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_LIST_CREATE_INFO_EXT) {
     cleanup_VkImageDrmFormatModifierListCreateInfoEXT(
         (VkImageDrmFormatModifierListCreateInfoEXT const *)pData);
     return;
@@ -6043,8 +6059,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 86 && VK_EXT_image_drm_format_modifier
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT) {
     cleanup_VkImageDrmFormatModifierExplicitCreateInfoEXT(
         (VkImageDrmFormatModifierExplicitCreateInfoEXT const *)pData);
     return;
@@ -6052,7 +6067,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 86 && VK_EXT_image_drm_format_modifier
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_PROPERTIES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_PROPERTIES_EXT) {
     cleanup_VkImageDrmFormatModifierPropertiesEXT(
         (VkImageDrmFormatModifierPropertiesEXT const *)pData);
     return;
@@ -6060,21 +6075,21 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 87 && VK_FUCHSIA_imagepipe_surface
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGEPIPE_SURFACE_CREATE_INFO_FUCHSIA) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGEPIPE_SURFACE_CREATE_INFO_FUCHSIA) {
     cleanup_VkImagePipeSurfaceCreateInfoFUCHSIA((VkImagePipeSurfaceCreateInfoFUCHSIA const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 88 && VK_EXT_calibrated_timestamps
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_EXT) {
     cleanup_VkCalibratedTimestampInfoEXT((VkCalibratedTimestampInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 88 && VK_EXT_pci_bus_info
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PCI_BUS_INFO_PROPERTIES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PCI_BUS_INFO_PROPERTIES_EXT) {
     cleanup_VkPhysicalDevicePCIBusInfoPropertiesEXT(
         (VkPhysicalDevicePCIBusInfoPropertiesEXT const *)pData);
     return;
@@ -6082,7 +6097,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 88 && VK_EXT_transform_feedback
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceTransformFeedbackFeaturesEXT(
         (VkPhysicalDeviceTransformFeedbackFeaturesEXT const *)pData);
     return;
@@ -6090,8 +6105,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 88 && VK_EXT_transform_feedback
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_PROPERTIES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_PROPERTIES_EXT) {
     cleanup_VkPhysicalDeviceTransformFeedbackPropertiesEXT(
         (VkPhysicalDeviceTransformFeedbackPropertiesEXT const *)pData);
     return;
@@ -6099,8 +6113,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 88 && VK_EXT_transform_feedback
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_STREAM_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_STREAM_CREATE_INFO_EXT) {
     cleanup_VkPipelineRasterizationStateStreamCreateInfoEXT(
         (VkPipelineRasterizationStateStreamCreateInfoEXT const *)pData);
     return;
@@ -6108,56 +6121,56 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 91 && VK_NV_ray_tracing
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_NV) {
     cleanup_VkRayTracingShaderGroupCreateInfoNV((VkRayTracingShaderGroupCreateInfoNV const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 91 && VK_NV_ray_tracing
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CREATE_INFO_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CREATE_INFO_NV) {
     cleanup_VkRayTracingPipelineCreateInfoNV((VkRayTracingPipelineCreateInfoNV const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 91 && VK_NV_ray_tracing
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_GEOMETRY_TRIANGLES_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_GEOMETRY_TRIANGLES_NV) {
     cleanup_VkGeometryTrianglesNV((VkGeometryTrianglesNV const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 91 && VK_NV_ray_tracing
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_GEOMETRY_AABB_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_GEOMETRY_AABB_NV) {
     cleanup_VkGeometryAABBNV((VkGeometryAABBNV const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 91 && VK_NV_ray_tracing
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_GEOMETRY_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_GEOMETRY_NV) {
     cleanup_VkGeometryNV((VkGeometryNV const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 91 && VK_NV_ray_tracing
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_INFO_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_INFO_NV) {
     cleanup_VkAccelerationStructureInfoNV((VkAccelerationStructureInfoNV const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 91 && VK_NV_ray_tracing
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_NV) {
     cleanup_VkAccelerationStructureCreateInfoNV((VkAccelerationStructureCreateInfoNV const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 91 && VK_NV_ray_tracing
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_BIND_ACCELERATION_STRUCTURE_MEMORY_INFO_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BIND_ACCELERATION_STRUCTURE_MEMORY_INFO_NV) {
     cleanup_VkBindAccelerationStructureMemoryInfoNV(
         (VkBindAccelerationStructureMemoryInfoNV const *)pData);
     return;
@@ -6165,7 +6178,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 91 && VK_NV_ray_tracing
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_NV) {
     cleanup_VkWriteDescriptorSetAccelerationStructureNV(
         (VkWriteDescriptorSetAccelerationStructureNV const *)pData);
     return;
@@ -6173,8 +6186,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 91 && VK_NV_ray_tracing
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_INFO_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_INFO_NV) {
     cleanup_VkAccelerationStructureMemoryRequirementsInfoNV(
         (VkAccelerationStructureMemoryRequirementsInfoNV const *)pData);
     return;
@@ -6182,7 +6194,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 91 && VK_NV_ray_tracing
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_NV) {
     cleanup_VkPhysicalDeviceRayTracingPropertiesNV(
         (VkPhysicalDeviceRayTracingPropertiesNV const *)pData);
     return;
@@ -6190,7 +6202,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 91 && VK_AMD_memory_overallocation_behavior
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_MEMORY_OVERALLOCATION_CREATE_INFO_AMD) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_MEMORY_OVERALLOCATION_CREATE_INFO_AMD) {
     cleanup_VkDeviceMemoryOverallocationCreateInfoAMD(
         (VkDeviceMemoryOverallocationCreateInfoAMD const *)pData);
     return;
@@ -6198,14 +6210,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 93 && VK_EXT_separate_stencil_usage
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO_EXT) {
     cleanup_VkImageStencilUsageCreateInfoEXT((VkImageStencilUsageCreateInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 93 && VK_EXT_scalar_block_layout
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceScalarBlockLayoutFeaturesEXT(
         (VkPhysicalDeviceScalarBlockLayoutFeaturesEXT const *)pData);
     return;
@@ -6213,8 +6225,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 94 && VK_EXT_fragment_density_map
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceFragmentDensityMapFeaturesEXT(
         (VkPhysicalDeviceFragmentDensityMapFeaturesEXT const *)pData);
     return;
@@ -6222,8 +6233,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 94 && VK_EXT_fragment_density_map
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_PROPERTIES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_PROPERTIES_EXT) {
     cleanup_VkPhysicalDeviceFragmentDensityMapPropertiesEXT(
         (VkPhysicalDeviceFragmentDensityMapPropertiesEXT const *)pData);
     return;
@@ -6231,7 +6241,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 94 && VK_EXT_fragment_density_map
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_RENDER_PASS_FRAGMENT_DENSITY_MAP_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RENDER_PASS_FRAGMENT_DENSITY_MAP_CREATE_INFO_EXT) {
     cleanup_VkRenderPassFragmentDensityMapCreateInfoEXT(
         (VkRenderPassFragmentDensityMapCreateInfoEXT const *)pData);
     return;
@@ -6239,7 +6249,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 95 && VK_KHR_shader_float16_int8
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT16_INT8_FEATURES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT16_INT8_FEATURES_KHR) {
     cleanup_VkPhysicalDeviceFloat16Int8FeaturesKHR(
         (VkPhysicalDeviceFloat16Int8FeaturesKHR const *)pData);
     return;
@@ -6247,7 +6257,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 95 && VK_KHR_shader_float_controls
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES_KHR) {
     cleanup_VkPhysicalDeviceFloatControlsPropertiesKHR(
         (VkPhysicalDeviceFloatControlsPropertiesKHR const *)pData);
     return;
@@ -6255,15 +6265,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 97 && VK_EXT_validation_features
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VALIDATION_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VALIDATION_FEATURES_EXT) {
     cleanup_VkValidationFeaturesEXT((VkValidationFeaturesEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 97 && VK_KHR_depth_stencil_resolve
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES_KHR) {
     cleanup_VkPhysicalDeviceDepthStencilResolvePropertiesKHR(
         (VkPhysicalDeviceDepthStencilResolvePropertiesKHR const *)pData);
     return;
@@ -6271,7 +6280,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 97 && VK_KHR_depth_stencil_resolve
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE_KHR) {
     cleanup_VkSubpassDescriptionDepthStencilResolveKHR(
         (VkSubpassDescriptionDepthStencilResolveKHR const *)pData);
     return;
@@ -6279,7 +6288,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 97 && VK_EXT_memory_budget
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_BUDGET_PROPERTIES_EXT) {
     cleanup_VkPhysicalDeviceMemoryBudgetPropertiesEXT(
         (VkPhysicalDeviceMemoryBudgetPropertiesEXT const *)pData);
     return;
@@ -6287,7 +6296,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 97 && VK_EXT_memory_priority
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PRIORITY_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MEMORY_PRIORITY_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceMemoryPriorityFeaturesEXT(
         (VkPhysicalDeviceMemoryPriorityFeaturesEXT const *)pData);
     return;
@@ -6295,14 +6304,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 97 && VK_EXT_memory_priority
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_PRIORITY_ALLOCATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_PRIORITY_ALLOCATE_INFO_EXT) {
     cleanup_VkMemoryPriorityAllocateInfoEXT((VkMemoryPriorityAllocateInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 97 && VK_EXT_buffer_device_address
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_ADDRESS_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_ADDRESS_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceBufferAddressFeaturesEXT(
         (VkPhysicalDeviceBufferAddressFeaturesEXT const *)pData);
     return;
@@ -6310,22 +6319,22 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 97 && VK_EXT_buffer_device_address
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO_EXT) {
     cleanup_VkBufferDeviceAddressInfoEXT((VkBufferDeviceAddressInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 97 && VK_EXT_buffer_device_address
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_CREATE_INFO_EXT) {
     cleanup_VkBufferDeviceAddressCreateInfoEXT((VkBufferDeviceAddressCreateInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 99 && VK_NV_dedicated_allocation_image_aliasing
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEDICATED_ALLOCATION_IMAGE_ALIASING_FEATURES_NV) {
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEDICATED_ALLOCATION_IMAGE_ALIASING_FEATURES_NV) {
     cleanup_VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV(
         (VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV const *)pData);
     return;
@@ -6333,7 +6342,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 99 && VK_EXT_filter_cubic
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_VIEW_IMAGE_FORMAT_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_VIEW_IMAGE_FORMAT_INFO_EXT) {
     cleanup_VkPhysicalDeviceImageViewImageFormatInfoEXT(
         (VkPhysicalDeviceImageViewImageFormatInfoEXT const *)pData);
     return;
@@ -6341,8 +6350,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 99 && VK_EXT_filter_cubic
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_FILTER_CUBIC_IMAGE_VIEW_IMAGE_FORMAT_PROPERTIES_EXT) {
     cleanup_VkFilterCubicImageViewImageFormatPropertiesEXT(
         (VkFilterCubicImageViewImageFormatPropertiesEXT const *)pData);
     return;
@@ -6350,7 +6358,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 101 && VK_EXT_depth_clip_enable
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_ENABLE_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_ENABLE_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceDepthClipEnableFeaturesEXT(
         (VkPhysicalDeviceDepthClipEnableFeaturesEXT const *)pData);
     return;
@@ -6358,8 +6366,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 101 && VK_EXT_depth_clip_enable
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_DEPTH_CLIP_STATE_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_DEPTH_CLIP_STATE_CREATE_INFO_EXT) {
     cleanup_VkPipelineRasterizationDepthClipStateCreateInfoEXT(
         (VkPipelineRasterizationDepthClipStateCreateInfoEXT const *)pData);
     return;
@@ -6367,7 +6374,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 101 && VK_NV_cooperative_matrix
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_NV) {
     cleanup_VkPhysicalDeviceCooperativeMatrixFeaturesNV(
         (VkPhysicalDeviceCooperativeMatrixFeaturesNV const *)pData);
     return;
@@ -6375,7 +6382,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 101 && VK_NV_cooperative_matrix
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_NV) {
     cleanup_VkPhysicalDeviceCooperativeMatrixPropertiesNV(
         (VkPhysicalDeviceCooperativeMatrixPropertiesNV const *)pData);
     return;
@@ -6383,21 +6390,21 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 101 && VK_NV_cooperative_matrix
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_COOPERATIVE_MATRIX_PROPERTIES_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_COOPERATIVE_MATRIX_PROPERTIES_NV) {
     cleanup_VkCooperativeMatrixPropertiesNV((VkCooperativeMatrixPropertiesNV const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 102 && VK_EXT_metal_surface
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_METAL_SURFACE_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_METAL_SURFACE_CREATE_INFO_EXT) {
     cleanup_VkMetalSurfaceCreateInfoEXT((VkMetalSurfaceCreateInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 102 && VK_EXT_ycbcr_image_arrays
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_IMAGE_ARRAYS_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_IMAGE_ARRAYS_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceYcbcrImageArraysFeaturesEXT(
         (VkPhysicalDeviceYcbcrImageArraysFeaturesEXT const *)pData);
     return;
@@ -6405,14 +6412,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 102 && VK_NVX_image_view_handle
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_VIEW_HANDLE_INFO_NVX) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_VIEW_HANDLE_INFO_NVX) {
     cleanup_VkImageViewHandleInfoNVX((VkImageViewHandleInfoNVX const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 104 && VK_AMD_display_native_hdr
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DISPLAY_NATIVE_HDR_SURFACE_CAPABILITIES_AMD) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DISPLAY_NATIVE_HDR_SURFACE_CAPABILITIES_AMD) {
     cleanup_VkDisplayNativeHdrSurfaceCapabilitiesAMD(
         (VkDisplayNativeHdrSurfaceCapabilitiesAMD const *)pData);
     return;
@@ -6420,7 +6427,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 104 && VK_AMD_display_native_hdr
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SWAPCHAIN_DISPLAY_NATIVE_HDR_CREATE_INFO_AMD) {
     cleanup_VkSwapchainDisplayNativeHdrCreateInfoAMD(
         (VkSwapchainDisplayNativeHdrCreateInfoAMD const *)pData);
     return;
@@ -6428,7 +6435,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 104 && VK_EXT_host_query_reset
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceHostQueryResetFeaturesEXT(
         (VkPhysicalDeviceHostQueryResetFeaturesEXT const *)pData);
     return;
@@ -6436,14 +6443,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 104 && VK_KHR_surface_protected_capabilities
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SURFACE_PROTECTED_CAPABILITIES_KHR) {
     cleanup_VkSurfaceProtectedCapabilitiesKHR((VkSurfaceProtectedCapabilitiesKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 104 && VK_EXT_pipeline_creation_feedback
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO_EXT) {
     cleanup_VkPipelineCreationFeedbackCreateInfoEXT(
         (VkPipelineCreationFeedbackCreateInfoEXT const *)pData);
     return;
@@ -6451,14 +6458,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 104 && VK_EXT_full_screen_exclusive
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_INFO_EXT) {
     cleanup_VkSurfaceFullScreenExclusiveInfoEXT((VkSurfaceFullScreenExclusiveInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 104 && VK_EXT_full_screen_exclusive
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SURFACE_FULL_SCREEN_EXCLUSIVE_WIN32_INFO_EXT) {
     cleanup_VkSurfaceFullScreenExclusiveWin32InfoEXT(
         (VkSurfaceFullScreenExclusiveWin32InfoEXT const *)pData);
     return;
@@ -6466,7 +6473,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 104 && VK_EXT_full_screen_exclusive
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_FULL_SCREEN_EXCLUSIVE_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_FULL_SCREEN_EXCLUSIVE_EXT) {
     cleanup_VkSurfaceCapabilitiesFullScreenExclusiveEXT(
         (VkSurfaceCapabilitiesFullScreenExclusiveEXT const *)pData);
     return;
@@ -6474,7 +6481,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 105 && VK_GGP_stream_descriptor_surface
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_STREAM_DESCRIPTOR_SURFACE_CREATE_INFO_GGP) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_STREAM_DESCRIPTOR_SURFACE_CREATE_INFO_GGP) {
     cleanup_VkStreamDescriptorSurfaceCreateInfoGGP(
         (VkStreamDescriptorSurfaceCreateInfoGGP const *)pData);
     return;
@@ -6482,14 +6489,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 105 && VK_GGP_frame_token
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PRESENT_FRAME_TOKEN_GGP) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PRESENT_FRAME_TOKEN_GGP) {
     cleanup_VkPresentFrameTokenGGP((VkPresentFrameTokenGGP const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 106 && VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VARIABLE_POINTERS_FEATURES) {
     cleanup_VkPhysicalDeviceVariablePointersFeatures(
         (VkPhysicalDeviceVariablePointersFeatures const *)pData);
     return;
@@ -6497,7 +6504,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 106 && VK_VERSION_1_1
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DRAW_PARAMETERS_FEATURES) {
     cleanup_VkPhysicalDeviceShaderDrawParametersFeatures(
         (VkPhysicalDeviceShaderDrawParametersFeatures const *)pData);
     return;
@@ -6505,8 +6512,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 106 && VK_EXT_buffer_device_address
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceBufferDeviceAddressFeaturesEXT(
         (VkPhysicalDeviceBufferDeviceAddressFeaturesEXT const *)pData);
     return;
@@ -6514,15 +6520,15 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 107 && VK_EXT_headless_surface
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_HEADLESS_SURFACE_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_HEADLESS_SURFACE_CREATE_INFO_EXT) {
     cleanup_VkHeadlessSurfaceCreateInfoEXT((VkHeadlessSurfaceCreateInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 108 && VK_KHR_uniform_buffer_standard_layout
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES_KHR) {
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES_KHR) {
     cleanup_VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR(
         (VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR const *)pData);
     return;
@@ -6530,8 +6536,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 108 && VK_NV_coverage_reduction_mode
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COVERAGE_REDUCTION_MODE_FEATURES_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COVERAGE_REDUCTION_MODE_FEATURES_NV) {
     cleanup_VkPhysicalDeviceCoverageReductionModeFeaturesNV(
         (VkPhysicalDeviceCoverageReductionModeFeaturesNV const *)pData);
     return;
@@ -6539,7 +6544,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 108 && VK_NV_coverage_reduction_mode
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_REDUCTION_STATE_CREATE_INFO_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_COVERAGE_REDUCTION_STATE_CREATE_INFO_NV) {
     cleanup_VkPipelineCoverageReductionStateCreateInfoNV(
         (VkPipelineCoverageReductionStateCreateInfoNV const *)pData);
     return;
@@ -6547,7 +6552,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 108 && VK_NV_coverage_reduction_mode
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_FRAMEBUFFER_MIXED_SAMPLES_COMBINATION_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_FRAMEBUFFER_MIXED_SAMPLES_COMBINATION_NV) {
     cleanup_VkFramebufferMixedSamplesCombinationNV(
         (VkFramebufferMixedSamplesCombinationNV const *)pData);
     return;
@@ -6555,42 +6560,42 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 109 && VK_INTEL_performance_query
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_INITIALIZE_PERFORMANCE_API_INFO_INTEL) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_INITIALIZE_PERFORMANCE_API_INFO_INTEL) {
     cleanup_VkInitializePerformanceApiInfoINTEL((VkInitializePerformanceApiInfoINTEL const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 109 && VK_INTEL_performance_query
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO_INTEL) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_QUERY_POOL_CREATE_INFO_INTEL) {
     cleanup_VkQueryPoolCreateInfoINTEL((VkQueryPoolCreateInfoINTEL const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 109 && VK_INTEL_performance_query
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PERFORMANCE_MARKER_INFO_INTEL) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PERFORMANCE_MARKER_INFO_INTEL) {
     cleanup_VkPerformanceMarkerInfoINTEL((VkPerformanceMarkerInfoINTEL const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 109 && VK_INTEL_performance_query
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PERFORMANCE_STREAM_MARKER_INFO_INTEL) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PERFORMANCE_STREAM_MARKER_INFO_INTEL) {
     cleanup_VkPerformanceStreamMarkerInfoINTEL((VkPerformanceStreamMarkerInfoINTEL const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 109 && VK_INTEL_performance_query
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PERFORMANCE_OVERRIDE_INFO_INTEL) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PERFORMANCE_OVERRIDE_INFO_INTEL) {
     cleanup_VkPerformanceOverrideInfoINTEL((VkPerformanceOverrideInfoINTEL const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 109 && VK_INTEL_performance_query
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PERFORMANCE_CONFIGURATION_ACQUIRE_INFO_INTEL) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PERFORMANCE_CONFIGURATION_ACQUIRE_INFO_INTEL) {
     cleanup_VkPerformanceConfigurationAcquireInfoINTEL(
         (VkPerformanceConfigurationAcquireInfoINTEL const *)pData);
     return;
@@ -6598,8 +6603,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 109 && VK_HEADER_VERSION <= 114 && VK_INTEL_shader_integer_functions2
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_FUNCTIONS2_FEATURES_INTEL) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_FUNCTIONS2_FEATURES_INTEL) {
     cleanup_VkPhysicalDeviceShaderIntegerFunctions2INTEL(
         (VkPhysicalDeviceShaderIntegerFunctions2INTEL const *)pData);
     return;
@@ -6607,7 +6611,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 110 && VK_NV_shader_sm_builtins
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SM_BUILTINS_PROPERTIES_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SM_BUILTINS_PROPERTIES_NV) {
     cleanup_VkPhysicalDeviceShaderSMBuiltinsPropertiesNV(
         (VkPhysicalDeviceShaderSMBuiltinsPropertiesNV const *)pData);
     return;
@@ -6615,7 +6619,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 110 && VK_NV_shader_sm_builtins
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SM_BUILTINS_FEATURES_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SM_BUILTINS_FEATURES_NV) {
     cleanup_VkPhysicalDeviceShaderSMBuiltinsFeaturesNV(
         (VkPhysicalDeviceShaderSMBuiltinsFeaturesNV const *)pData);
     return;
@@ -6623,8 +6627,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 110 && VK_EXT_fragment_shader_interlock
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_INTERLOCK_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_INTERLOCK_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT(
         (VkPhysicalDeviceFragmentShaderInterlockFeaturesEXT const *)pData);
     return;
@@ -6632,8 +6635,8 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 113 && VK_EXT_shader_demote_to_helper_invocation
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT) {
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT(
         (VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT const *)pData);
     return;
@@ -6641,8 +6644,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 113 && VK_EXT_texel_buffer_alignment
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT(
         (VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT const *)pData);
     return;
@@ -6650,8 +6652,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 113 && VK_EXT_texel_buffer_alignment
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES_EXT) {
     cleanup_VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT(
         (VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT const *)pData);
     return;
@@ -6659,8 +6660,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 114 && VK_KHR_imageless_framebuffer
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES_KHR) {
     cleanup_VkPhysicalDeviceImagelessFramebufferFeaturesKHR(
         (VkPhysicalDeviceImagelessFramebufferFeaturesKHR const *)pData);
     return;
@@ -6668,7 +6668,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 114 && VK_KHR_imageless_framebuffer
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO_KHR) {
     cleanup_VkFramebufferAttachmentsCreateInfoKHR(
         (VkFramebufferAttachmentsCreateInfoKHR const *)pData);
     return;
@@ -6676,21 +6676,21 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 114 && VK_KHR_imageless_framebuffer
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO_KHR) {
     cleanup_VkFramebufferAttachmentImageInfoKHR((VkFramebufferAttachmentImageInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 114 && VK_KHR_imageless_framebuffer
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO_KHR) {
     cleanup_VkRenderPassAttachmentBeginInfoKHR((VkRenderPassAttachmentBeginInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 115 && VK_KHR_shader_float16_int8
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES_KHR) {
     cleanup_VkPhysicalDeviceShaderFloat16Int8FeaturesKHR(
         (VkPhysicalDeviceShaderFloat16Int8FeaturesKHR const *)pData);
     return;
@@ -6698,8 +6698,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 115 && VK_INTEL_shader_integer_functions2
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_FUNCTIONS_2_FEATURES_INTEL) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_FUNCTIONS_2_FEATURES_INTEL) {
     cleanup_VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL(
         (VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL const *)pData);
     return;
@@ -6707,8 +6706,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 116 && VK_EXT_subgroup_size_control
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES_EXT) {
     cleanup_VkPhysicalDeviceSubgroupSizeControlPropertiesEXT(
         (VkPhysicalDeviceSubgroupSizeControlPropertiesEXT const *)pData);
     return;
@@ -6716,8 +6714,8 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 116 && VK_EXT_subgroup_size_control
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT) {
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO_EXT) {
     cleanup_VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT(
         (VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT const *)pData);
     return;
@@ -6725,14 +6723,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 117 && VK_ANDROID_native_buffer
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SWAPCHAIN_IMAGE_CREATE_INFO_ANDROID) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SWAPCHAIN_IMAGE_CREATE_INFO_ANDROID) {
     cleanup_VkSwapchainImageCreateInfoANDROID((VkSwapchainImageCreateInfoANDROID const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 117 && VK_ANDROID_native_buffer
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENTATION_PROPERTIES_ANDROID) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENTATION_PROPERTIES_ANDROID) {
     cleanup_VkPhysicalDevicePresentationPropertiesANDROID(
         (VkPhysicalDevicePresentationPropertiesANDROID const *)pData);
     return;
@@ -6740,8 +6738,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 117 && VK_EXT_texture_compression_astc_hdr
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT(
         (VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT const *)pData);
     return;
@@ -6749,7 +6746,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 117 && VK_EXT_index_type_uint8
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceIndexTypeUint8FeaturesEXT(
         (VkPhysicalDeviceIndexTypeUint8FeaturesEXT const *)pData);
     return;
@@ -6757,7 +6754,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 117 && VK_EXT_line_rasterization
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceLineRasterizationFeaturesEXT(
         (VkPhysicalDeviceLineRasterizationFeaturesEXT const *)pData);
     return;
@@ -6765,8 +6762,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 117 && VK_EXT_line_rasterization
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINE_RASTERIZATION_PROPERTIES_EXT) {
     cleanup_VkPhysicalDeviceLineRasterizationPropertiesEXT(
         (VkPhysicalDeviceLineRasterizationPropertiesEXT const *)pData);
     return;
@@ -6774,8 +6770,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 117 && VK_EXT_line_rasterization
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_LINE_STATE_CREATE_INFO_EXT) {
     cleanup_VkPipelineRasterizationLineStateCreateInfoEXT(
         (VkPipelineRasterizationLineStateCreateInfoEXT const *)pData);
     return;
@@ -6783,7 +6778,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 118 && VK_AMD_shader_core_properties2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_2_AMD) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_PROPERTIES_2_AMD) {
     cleanup_VkPhysicalDeviceShaderCoreProperties2AMD(
         (VkPhysicalDeviceShaderCoreProperties2AMD const *)pData);
     return;
@@ -6791,8 +6786,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 118 && VK_EXT_subgroup_size_control
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceSubgroupSizeControlFeaturesEXT(
         (VkPhysicalDeviceSubgroupSizeControlFeaturesEXT const *)pData);
     return;
@@ -6800,7 +6794,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 118 && VK_AMD_pipeline_compiler_control
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_COMPILER_CONTROL_CREATE_INFO_AMD) {
     cleanup_VkPipelineCompilerControlCreateInfoAMD(
         (VkPipelineCompilerControlCreateInfoAMD const *)pData);
     return;
@@ -6808,8 +6802,8 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 119 && VK_KHR_pipeline_executable_properties
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_EXECUTABLE_PROPERTIES_FEATURES_KHR) {
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_EXECUTABLE_PROPERTIES_FEATURES_KHR) {
     cleanup_VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR(
         (VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR const *)pData);
     return;
@@ -6817,35 +6811,35 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 119 && VK_KHR_pipeline_executable_properties
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_INFO_KHR) {
     cleanup_VkPipelineInfoKHR((VkPipelineInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 119 && VK_KHR_pipeline_executable_properties
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_PROPERTIES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_PROPERTIES_KHR) {
     cleanup_VkPipelineExecutablePropertiesKHR((VkPipelineExecutablePropertiesKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 119 && VK_KHR_pipeline_executable_properties
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INFO_KHR) {
     cleanup_VkPipelineExecutableInfoKHR((VkPipelineExecutableInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 119 && VK_KHR_pipeline_executable_properties
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_STATISTIC_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_STATISTIC_KHR) {
     cleanup_VkPipelineExecutableStatisticKHR((VkPipelineExecutableStatisticKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 119 && VK_KHR_pipeline_executable_properties
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_INTERNAL_REPRESENTATION_KHR) {
     cleanup_VkPipelineExecutableInternalRepresentationKHR(
         (VkPipelineExecutableInternalRepresentationKHR const *)pData);
     return;
@@ -6853,7 +6847,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 121 && VK_AMD_device_coherent_memory
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COHERENT_MEMORY_FEATURES_AMD) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COHERENT_MEMORY_FEATURES_AMD) {
     cleanup_VkPhysicalDeviceCoherentMemoryFeaturesAMD(
         (VkPhysicalDeviceCoherentMemoryFeaturesAMD const *)pData);
     return;
@@ -6861,8 +6855,8 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 123 && VK_KHR_shader_subgroup_extended_types
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES_KHR) {
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES_KHR) {
     cleanup_VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR(
         (VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR const *)pData);
     return;
@@ -6870,7 +6864,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 124 && VK_KHR_timeline_semaphore
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES_KHR) {
     cleanup_VkPhysicalDeviceTimelineSemaphoreFeaturesKHR(
         (VkPhysicalDeviceTimelineSemaphoreFeaturesKHR const *)pData);
     return;
@@ -6878,8 +6872,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 124 && VK_KHR_timeline_semaphore
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES_KHR) {
     cleanup_VkPhysicalDeviceTimelineSemaphorePropertiesKHR(
         (VkPhysicalDeviceTimelineSemaphorePropertiesKHR const *)pData);
     return;
@@ -6887,35 +6880,35 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 124 && VK_KHR_timeline_semaphore
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO_KHR) {
     cleanup_VkSemaphoreTypeCreateInfoKHR((VkSemaphoreTypeCreateInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 124 && VK_KHR_timeline_semaphore
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO_KHR) {
     cleanup_VkTimelineSemaphoreSubmitInfoKHR((VkTimelineSemaphoreSubmitInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 124 && VK_KHR_timeline_semaphore
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO_KHR) {
     cleanup_VkSemaphoreWaitInfoKHR((VkSemaphoreWaitInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 124 && VK_KHR_timeline_semaphore
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SEMAPHORE_SIGNAL_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SEMAPHORE_SIGNAL_INFO_KHR) {
     cleanup_VkSemaphoreSignalInfoKHR((VkSemaphoreSignalInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 124 && VK_KHR_shader_clock
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CLOCK_FEATURES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CLOCK_FEATURES_KHR) {
     cleanup_VkPhysicalDeviceShaderClockFeaturesKHR(
         (VkPhysicalDeviceShaderClockFeaturesKHR const *)pData);
     return;
@@ -6923,8 +6916,8 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 127 && VK_KHR_separate_depth_stencil_layouts
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES_KHR) {
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES_KHR) {
     cleanup_VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR(
         (VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR const *)pData);
     return;
@@ -6932,7 +6925,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 127 && VK_KHR_separate_depth_stencil_layouts
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT_KHR) {
     cleanup_VkAttachmentReferenceStencilLayoutKHR(
         (VkAttachmentReferenceStencilLayoutKHR const *)pData);
     return;
@@ -6940,7 +6933,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 127 && VK_KHR_separate_depth_stencil_layouts
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_STENCIL_LAYOUT_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_STENCIL_LAYOUT_KHR) {
     cleanup_VkAttachmentDescriptionStencilLayoutKHR(
         (VkAttachmentDescriptionStencilLayoutKHR const *)pData);
     return;
@@ -6948,7 +6941,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 128 && VK_KHR_performance_query
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_FEATURES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_FEATURES_KHR) {
     cleanup_VkPhysicalDevicePerformanceQueryFeaturesKHR(
         (VkPhysicalDevicePerformanceQueryFeaturesKHR const *)pData);
     return;
@@ -6956,7 +6949,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 128 && VK_KHR_performance_query
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_PROPERTIES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PERFORMANCE_QUERY_PROPERTIES_KHR) {
     cleanup_VkPhysicalDevicePerformanceQueryPropertiesKHR(
         (VkPhysicalDevicePerformanceQueryPropertiesKHR const *)pData);
     return;
@@ -6964,43 +6957,42 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 128 && VK_KHR_performance_query
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_KHR) {
     cleanup_VkPerformanceCounterKHR((VkPerformanceCounterKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 128 && VK_KHR_performance_query
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_DESCRIPTION_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PERFORMANCE_COUNTER_DESCRIPTION_KHR) {
     cleanup_VkPerformanceCounterDescriptionKHR((VkPerformanceCounterDescriptionKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 128 && VK_KHR_performance_query
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_CREATE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_CREATE_INFO_KHR) {
     cleanup_VkQueryPoolPerformanceCreateInfoKHR((VkQueryPoolPerformanceCreateInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 128 && VK_KHR_performance_query
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_ACQUIRE_PROFILING_LOCK_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ACQUIRE_PROFILING_LOCK_INFO_KHR) {
     cleanup_VkAcquireProfilingLockInfoKHR((VkAcquireProfilingLockInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 128 && VK_KHR_performance_query
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PERFORMANCE_QUERY_SUBMIT_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PERFORMANCE_QUERY_SUBMIT_INFO_KHR) {
     cleanup_VkPerformanceQuerySubmitInfoKHR((VkPerformanceQuerySubmitInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 129 && VK_KHR_buffer_device_address
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES_KHR) {
     cleanup_VkPhysicalDeviceBufferDeviceAddressFeaturesKHR(
         (VkPhysicalDeviceBufferDeviceAddressFeaturesKHR const *)pData);
     return;
@@ -7008,14 +7000,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 129 && VK_KHR_buffer_device_address
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO_KHR) {
     cleanup_VkBufferDeviceAddressInfoKHR((VkBufferDeviceAddressInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 129 && VK_KHR_buffer_device_address
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO_KHR) {
     cleanup_VkBufferOpaqueCaptureAddressCreateInfoKHR(
         (VkBufferOpaqueCaptureAddressCreateInfoKHR const *)pData);
     return;
@@ -7023,7 +7015,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 129 && VK_KHR_buffer_device_address
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO_KHR) {
     cleanup_VkMemoryOpaqueCaptureAddressAllocateInfoKHR(
         (VkMemoryOpaqueCaptureAddressAllocateInfoKHR const *)pData);
     return;
@@ -7031,7 +7023,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 129 && VK_KHR_buffer_device_address
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO_KHR) {
     cleanup_VkDeviceMemoryOpaqueCaptureAddressInfoKHR(
         (VkDeviceMemoryOpaqueCaptureAddressInfoKHR const *)pData);
     return;
@@ -7039,22 +7031,21 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 130 && VK_EXT_tooling_info
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES_EXT) {
     cleanup_VkPhysicalDeviceToolPropertiesEXT((VkPhysicalDeviceToolPropertiesEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRIVER_PROPERTIES) {
     cleanup_VkPhysicalDeviceDriverProperties((VkPhysicalDeviceDriverProperties const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_EXTENDED_TYPES_FEATURES) {
     cleanup_VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures(
         (VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures const *)pData);
     return;
@@ -7062,7 +7053,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SAMPLER_FILTER_MINMAX_PROPERTIES) {
     cleanup_VkPhysicalDeviceSamplerFilterMinmaxProperties(
         (VkPhysicalDeviceSamplerFilterMinmaxProperties const *)pData);
     return;
@@ -7070,21 +7061,21 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SAMPLER_REDUCTION_MODE_CREATE_INFO) {
     cleanup_VkSamplerReductionModeCreateInfo((VkSamplerReductionModeCreateInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO) {
     cleanup_VkImageFormatListCreateInfo((VkImageFormatListCreateInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT16_INT8_FEATURES) {
     cleanup_VkPhysicalDeviceShaderFloat16Int8Features(
         (VkPhysicalDeviceShaderFloat16Int8Features const *)pData);
     return;
@@ -7092,7 +7083,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FLOAT_CONTROLS_PROPERTIES) {
     cleanup_VkPhysicalDeviceFloatControlsProperties(
         (VkPhysicalDeviceFloatControlsProperties const *)pData);
     return;
@@ -7100,7 +7091,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HOST_QUERY_RESET_FEATURES) {
     cleanup_VkPhysicalDeviceHostQueryResetFeatures(
         (VkPhysicalDeviceHostQueryResetFeatures const *)pData);
     return;
@@ -7108,7 +7099,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_FEATURES) {
     cleanup_VkPhysicalDeviceDescriptorIndexingFeatures(
         (VkPhysicalDeviceDescriptorIndexingFeatures const *)pData);
     return;
@@ -7116,7 +7107,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_INDEXING_PROPERTIES) {
     cleanup_VkPhysicalDeviceDescriptorIndexingProperties(
         (VkPhysicalDeviceDescriptorIndexingProperties const *)pData);
     return;
@@ -7124,7 +7115,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_BINDING_FLAGS_CREATE_INFO) {
     cleanup_VkDescriptorSetLayoutBindingFlagsCreateInfo(
         (VkDescriptorSetLayoutBindingFlagsCreateInfo const *)pData);
     return;
@@ -7132,8 +7123,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_ALLOCATE_INFO) {
     cleanup_VkDescriptorSetVariableDescriptorCountAllocateInfo(
         (VkDescriptorSetVariableDescriptorCountAllocateInfo const *)pData);
     return;
@@ -7141,8 +7131,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DESCRIPTOR_SET_VARIABLE_DESCRIPTOR_COUNT_LAYOUT_SUPPORT) {
     cleanup_VkDescriptorSetVariableDescriptorCountLayoutSupport(
         (VkDescriptorSetVariableDescriptorCountLayoutSupport const *)pData);
     return;
@@ -7150,56 +7139,56 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_2) {
     cleanup_VkAttachmentDescription2((VkAttachmentDescription2 const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_2) {
     cleanup_VkAttachmentReference2((VkAttachmentReference2 const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_2) {
     cleanup_VkSubpassDescription2((VkSubpassDescription2 const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SUBPASS_DEPENDENCY_2) {
     cleanup_VkSubpassDependency2((VkSubpassDependency2 const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO_2) {
     cleanup_VkRenderPassCreateInfo2((VkRenderPassCreateInfo2 const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SUBPASS_BEGIN_INFO) {
     cleanup_VkSubpassBeginInfo((VkSubpassBeginInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SUBPASS_END_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SUBPASS_END_INFO) {
     cleanup_VkSubpassEndInfo((VkSubpassEndInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_FEATURES) {
     cleanup_VkPhysicalDeviceTimelineSemaphoreFeatures(
         (VkPhysicalDeviceTimelineSemaphoreFeatures const *)pData);
     return;
@@ -7207,7 +7196,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TIMELINE_SEMAPHORE_PROPERTIES) {
     cleanup_VkPhysicalDeviceTimelineSemaphoreProperties(
         (VkPhysicalDeviceTimelineSemaphoreProperties const *)pData);
     return;
@@ -7215,42 +7204,42 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SEMAPHORE_TYPE_CREATE_INFO) {
     cleanup_VkSemaphoreTypeCreateInfo((VkSemaphoreTypeCreateInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO) {
     cleanup_VkTimelineSemaphoreSubmitInfo((VkTimelineSemaphoreSubmitInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SEMAPHORE_WAIT_INFO) {
     cleanup_VkSemaphoreWaitInfo((VkSemaphoreWaitInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SEMAPHORE_SIGNAL_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SEMAPHORE_SIGNAL_INFO) {
     cleanup_VkSemaphoreSignalInfo((VkSemaphoreSignalInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_8BIT_STORAGE_FEATURES) {
     cleanup_VkPhysicalDevice8BitStorageFeatures((VkPhysicalDevice8BitStorageFeatures const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_MEMORY_MODEL_FEATURES) {
     cleanup_VkPhysicalDeviceVulkanMemoryModelFeatures(
         (VkPhysicalDeviceVulkanMemoryModelFeatures const *)pData);
     return;
@@ -7258,7 +7247,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_INT64_FEATURES) {
     cleanup_VkPhysicalDeviceShaderAtomicInt64Features(
         (VkPhysicalDeviceShaderAtomicInt64Features const *)pData);
     return;
@@ -7266,7 +7255,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_STENCIL_RESOLVE_PROPERTIES) {
     cleanup_VkPhysicalDeviceDepthStencilResolveProperties(
         (VkPhysicalDeviceDepthStencilResolveProperties const *)pData);
     return;
@@ -7274,7 +7263,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SUBPASS_DESCRIPTION_DEPTH_STENCIL_RESOLVE) {
     cleanup_VkSubpassDescriptionDepthStencilResolve(
         (VkSubpassDescriptionDepthStencilResolve const *)pData);
     return;
@@ -7282,14 +7271,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_STENCIL_USAGE_CREATE_INFO) {
     cleanup_VkImageStencilUsageCreateInfo((VkImageStencilUsageCreateInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCALAR_BLOCK_LAYOUT_FEATURES) {
     cleanup_VkPhysicalDeviceScalarBlockLayoutFeatures(
         (VkPhysicalDeviceScalarBlockLayoutFeatures const *)pData);
     return;
@@ -7297,8 +7286,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_UNIFORM_BUFFER_STANDARD_LAYOUT_FEATURES) {
     cleanup_VkPhysicalDeviceUniformBufferStandardLayoutFeatures(
         (VkPhysicalDeviceUniformBufferStandardLayoutFeatures const *)pData);
     return;
@@ -7306,7 +7294,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BUFFER_DEVICE_ADDRESS_FEATURES) {
     cleanup_VkPhysicalDeviceBufferDeviceAddressFeatures(
         (VkPhysicalDeviceBufferDeviceAddressFeatures const *)pData);
     return;
@@ -7314,14 +7302,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_DEVICE_ADDRESS_INFO) {
     cleanup_VkBufferDeviceAddressInfo((VkBufferDeviceAddressInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_OPAQUE_CAPTURE_ADDRESS_CREATE_INFO) {
     cleanup_VkBufferOpaqueCaptureAddressCreateInfo(
         (VkBufferOpaqueCaptureAddressCreateInfo const *)pData);
     return;
@@ -7329,7 +7317,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGELESS_FRAMEBUFFER_FEATURES) {
     cleanup_VkPhysicalDeviceImagelessFramebufferFeatures(
         (VkPhysicalDeviceImagelessFramebufferFeatures const *)pData);
     return;
@@ -7337,29 +7325,28 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENTS_CREATE_INFO) {
     cleanup_VkFramebufferAttachmentsCreateInfo((VkFramebufferAttachmentsCreateInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_FRAMEBUFFER_ATTACHMENT_IMAGE_INFO) {
     cleanup_VkFramebufferAttachmentImageInfo((VkFramebufferAttachmentImageInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RENDER_PASS_ATTACHMENT_BEGIN_INFO) {
     cleanup_VkRenderPassAttachmentBeginInfo((VkRenderPassAttachmentBeginInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SEPARATE_DEPTH_STENCIL_LAYOUTS_FEATURES) {
     cleanup_VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures(
         (VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures const *)pData);
     return;
@@ -7367,14 +7354,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ATTACHMENT_REFERENCE_STENCIL_LAYOUT) {
     cleanup_VkAttachmentReferenceStencilLayout((VkAttachmentReferenceStencilLayout const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_STENCIL_LAYOUT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ATTACHMENT_DESCRIPTION_STENCIL_LAYOUT) {
     cleanup_VkAttachmentDescriptionStencilLayout(
         (VkAttachmentDescriptionStencilLayout const *)pData);
     return;
@@ -7382,7 +7369,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_OPAQUE_CAPTURE_ADDRESS_ALLOCATE_INFO) {
     cleanup_VkMemoryOpaqueCaptureAddressAllocateInfo(
         (VkMemoryOpaqueCaptureAddressAllocateInfo const *)pData);
     return;
@@ -7390,7 +7377,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_MEMORY_OPAQUE_CAPTURE_ADDRESS_INFO) {
     cleanup_VkDeviceMemoryOpaqueCaptureAddressInfo(
         (VkDeviceMemoryOpaqueCaptureAddressInfo const *)pData);
     return;
@@ -7398,43 +7385,43 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_1_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_1_FEATURES) {
     cleanup_VkPhysicalDeviceVulkan11Features((VkPhysicalDeviceVulkan11Features const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_1_PROPERTIES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_1_PROPERTIES) {
     cleanup_VkPhysicalDeviceVulkan11Properties((VkPhysicalDeviceVulkan11Properties const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_FEATURES) {
     cleanup_VkPhysicalDeviceVulkan12Features((VkPhysicalDeviceVulkan12Features const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_PROPERTIES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_2_PROPERTIES) {
     cleanup_VkPhysicalDeviceVulkan12Properties((VkPhysicalDeviceVulkan12Properties const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 134 && VK_QCOM_render_pass_transform
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_RENDER_PASS_TRANSFORM_BEGIN_INFO_QCOM) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RENDER_PASS_TRANSFORM_BEGIN_INFO_QCOM) {
     cleanup_VkRenderPassTransformBeginInfoQCOM((VkRenderPassTransformBeginInfoQCOM const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 134 && VK_QCOM_render_pass_transform
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDER_PASS_TRANSFORM_INFO_QCOM) {
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDER_PASS_TRANSFORM_INFO_QCOM) {
     cleanup_VkCommandBufferInheritanceRenderPassTransformInfoQCOM(
         (VkCommandBufferInheritanceRenderPassTransformInfoQCOM const *)pData);
     return;
@@ -7442,8 +7429,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 135 && VK_NV_device_generated_commands
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_NV) {
     cleanup_VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV(
         (VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV const *)pData);
     return;
@@ -7451,8 +7437,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 135 && VK_NV_device_generated_commands
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_NV) {
     cleanup_VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV(
         (VkPhysicalDeviceDeviceGeneratedCommandsPropertiesNV const *)pData);
     return;
@@ -7460,14 +7445,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 135 && VK_NV_device_generated_commands
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_GRAPHICS_SHADER_GROUP_CREATE_INFO_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_GRAPHICS_SHADER_GROUP_CREATE_INFO_NV) {
     cleanup_VkGraphicsShaderGroupCreateInfoNV((VkGraphicsShaderGroupCreateInfoNV const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 135 && VK_NV_device_generated_commands
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_SHADER_GROUPS_CREATE_INFO_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_SHADER_GROUPS_CREATE_INFO_NV) {
     cleanup_VkGraphicsPipelineShaderGroupsCreateInfoNV(
         (VkGraphicsPipelineShaderGroupsCreateInfoNV const *)pData);
     return;
@@ -7475,14 +7460,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 135 && VK_NV_device_generated_commands
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_NV) {
     cleanup_VkIndirectCommandsLayoutTokenNV((VkIndirectCommandsLayoutTokenNV const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 135 && VK_NV_device_generated_commands
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_NV) {
     cleanup_VkIndirectCommandsLayoutCreateInfoNV(
         (VkIndirectCommandsLayoutCreateInfoNV const *)pData);
     return;
@@ -7490,14 +7475,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 135 && VK_NV_device_generated_commands
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_GENERATED_COMMANDS_INFO_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_GENERATED_COMMANDS_INFO_NV) {
     cleanup_VkGeneratedCommandsInfoNV((VkGeneratedCommandsInfoNV const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 135 && VK_NV_device_generated_commands
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_NV) {
     cleanup_VkGeneratedCommandsMemoryRequirementsInfoNV(
         (VkGeneratedCommandsMemoryRequirementsInfoNV const *)pData);
     return;
@@ -7505,7 +7490,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 135 && (VK_KHR_ray_tracing_pipeline || VK_KHR_ray_tracing)
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_KHR) {
     cleanup_VkRayTracingShaderGroupCreateInfoKHR(
         (VkRayTracingShaderGroupCreateInfoKHR const *)pData);
     return;
@@ -7513,14 +7498,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 135 && (VK_KHR_ray_tracing_pipeline || VK_KHR_ray_tracing)
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CREATE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CREATE_INFO_KHR) {
     cleanup_VkRayTracingPipelineCreateInfoKHR((VkRayTracingPipelineCreateInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_KHR) {
     cleanup_VkWriteDescriptorSetAccelerationStructureKHR(
         (VkWriteDescriptorSetAccelerationStructureKHR const *)pData);
     return;
@@ -7528,7 +7513,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 135 && VK_INTEL_performance_query
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_QUERY_CREATE_INFO_INTEL) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_QUERY_POOL_PERFORMANCE_QUERY_CREATE_INFO_INTEL) {
     cleanup_VkQueryPoolPerformanceQueryCreateInfoINTEL(
         (VkQueryPoolPerformanceQueryCreateInfoINTEL const *)pData);
     return;
@@ -7536,8 +7521,8 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 135 && VK_EXT_pipeline_creation_cache_control
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES_EXT) {
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES_EXT) {
     cleanup_VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT(
         (VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT const *)pData);
     return;
@@ -7545,8 +7530,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_TRIANGLES_DATA_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_TRIANGLES_DATA_KHR) {
     cleanup_VkAccelerationStructureGeometryTrianglesDataKHR(
         (VkAccelerationStructureGeometryTrianglesDataKHR const *)pData);
     return;
@@ -7554,7 +7538,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_AABBS_DATA_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_AABBS_DATA_KHR) {
     cleanup_VkAccelerationStructureGeometryAabbsDataKHR(
         (VkAccelerationStructureGeometryAabbsDataKHR const *)pData);
     return;
@@ -7562,8 +7546,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_INSTANCES_DATA_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_INSTANCES_DATA_KHR) {
     cleanup_VkAccelerationStructureGeometryInstancesDataKHR(
         (VkAccelerationStructureGeometryInstancesDataKHR const *)pData);
     return;
@@ -7571,14 +7554,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_KHR) {
     cleanup_VkAccelerationStructureGeometryKHR((VkAccelerationStructureGeometryKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_KHR) {
     cleanup_VkAccelerationStructureCreateInfoKHR(
         (VkAccelerationStructureCreateInfoKHR const *)pData);
     return;
@@ -7586,7 +7569,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_DEVICE_ADDRESS_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_DEVICE_ADDRESS_INFO_KHR) {
     cleanup_VkAccelerationStructureDeviceAddressInfoKHR(
         (VkAccelerationStructureDeviceAddressInfoKHR const *)pData);
     return;
@@ -7594,14 +7577,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_COPY_ACCELERATION_STRUCTURE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_COPY_ACCELERATION_STRUCTURE_INFO_KHR) {
     cleanup_VkCopyAccelerationStructureInfoKHR((VkCopyAccelerationStructureInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_COPY_ACCELERATION_STRUCTURE_TO_MEMORY_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_COPY_ACCELERATION_STRUCTURE_TO_MEMORY_INFO_KHR) {
     cleanup_VkCopyAccelerationStructureToMemoryInfoKHR(
         (VkCopyAccelerationStructureToMemoryInfoKHR const *)pData);
     return;
@@ -7609,7 +7592,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_COPY_MEMORY_TO_ACCELERATION_STRUCTURE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_COPY_MEMORY_TO_ACCELERATION_STRUCTURE_INFO_KHR) {
     cleanup_VkCopyMemoryToAccelerationStructureInfoKHR(
         (VkCopyMemoryToAccelerationStructureInfoKHR const *)pData);
     return;
@@ -7617,7 +7600,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 135 && (VK_KHR_ray_tracing_pipeline || VK_KHR_ray_tracing)
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_INTERFACE_CREATE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_INTERFACE_CREATE_INFO_KHR) {
     cleanup_VkRayTracingPipelineInterfaceCreateInfoKHR(
         (VkRayTracingPipelineInterfaceCreateInfoKHR const *)pData);
     return;
@@ -7625,14 +7608,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 135 && VK_KHR_pipeline_library
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_LIBRARY_CREATE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_LIBRARY_CREATE_INFO_KHR) {
     cleanup_VkPipelineLibraryCreateInfoKHR((VkPipelineLibraryCreateInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 135 && VK_NV_device_diagnostics_config
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DIAGNOSTICS_CONFIG_FEATURES_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DIAGNOSTICS_CONFIG_FEATURES_NV) {
     cleanup_VkPhysicalDeviceDiagnosticsConfigFeaturesNV(
         (VkPhysicalDeviceDiagnosticsConfigFeaturesNV const *)pData);
     return;
@@ -7640,7 +7623,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 135 && VK_NV_device_diagnostics_config
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_DIAGNOSTICS_CONFIG_CREATE_INFO_NV) {
     cleanup_VkDeviceDiagnosticsConfigCreateInfoNV(
         (VkDeviceDiagnosticsConfigCreateInfoNV const *)pData);
     return;
@@ -7648,7 +7631,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 135 && VK_HEADER_VERSION <= 161 && VK_KHR_ray_tracing
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_BIND_ACCELERATION_STRUCTURE_MEMORY_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BIND_ACCELERATION_STRUCTURE_MEMORY_INFO_KHR) {
     cleanup_VkBindAccelerationStructureMemoryInfoKHR(
         (VkBindAccelerationStructureMemoryInfoKHR const *)pData);
     return;
@@ -7656,8 +7639,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 135 && VK_HEADER_VERSION <= 161 && VK_KHR_ray_tracing
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MEMORY_REQUIREMENTS_INFO_KHR) {
     cleanup_VkAccelerationStructureMemoryRequirementsInfoKHR(
         (VkAccelerationStructureMemoryRequirementsInfoKHR const *)pData);
     return;
@@ -7665,7 +7647,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 135 && VK_HEADER_VERSION <= 161 && VK_KHR_ray_tracing
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_FEATURES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_FEATURES_KHR) {
     cleanup_VkPhysicalDeviceRayTracingFeaturesKHR(
         (VkPhysicalDeviceRayTracingFeaturesKHR const *)pData);
     return;
@@ -7673,7 +7655,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 135 && VK_HEADER_VERSION <= 161 && VK_KHR_ray_tracing
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PROPERTIES_KHR) {
     cleanup_VkPhysicalDeviceRayTracingPropertiesKHR(
         (VkPhysicalDeviceRayTracingPropertiesKHR const *)pData);
     return;
@@ -7681,8 +7663,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 135 && VK_HEADER_VERSION <= 161 && VK_KHR_ray_tracing
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_GEOMETRY_TYPE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_GEOMETRY_TYPE_INFO_KHR) {
     cleanup_VkAccelerationStructureCreateGeometryTypeInfoKHR(
         (VkAccelerationStructureCreateGeometryTypeInfoKHR const *)pData);
     return;
@@ -7690,28 +7671,28 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 135 && VK_HEADER_VERSION <= 161 && VK_KHR_ray_tracing
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_VERSION_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_VERSION_KHR) {
     cleanup_VkAccelerationStructureVersionKHR((VkAccelerationStructureVersionKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 135 && VK_HEADER_VERSION <= 161 && VK_KHR_deferred_host_operations
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEFERRED_OPERATION_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEFERRED_OPERATION_INFO_KHR) {
     cleanup_VkDeferredOperationInfoKHR((VkDeferredOperationInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 137 && VK_NVX_image_view_handle
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_VIEW_ADDRESS_PROPERTIES_NVX) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_VIEW_ADDRESS_PROPERTIES_NVX) {
     cleanup_VkImageViewAddressPropertiesNVX((VkImageViewAddressPropertiesNVX const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 139 && VK_EXT_robustness2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceRobustness2FeaturesEXT(
         (VkPhysicalDeviceRobustness2FeaturesEXT const *)pData);
     return;
@@ -7719,7 +7700,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 139 && VK_EXT_robustness2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_PROPERTIES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_PROPERTIES_EXT) {
     cleanup_VkPhysicalDeviceRobustness2PropertiesEXT(
         (VkPhysicalDeviceRobustness2PropertiesEXT const *)pData);
     return;
@@ -7727,21 +7708,21 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 140 && VK_EXT_private_data
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO_EXT) {
     cleanup_VkDevicePrivateDataCreateInfoEXT((VkDevicePrivateDataCreateInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 140 && VK_EXT_private_data
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PRIVATE_DATA_SLOT_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PRIVATE_DATA_SLOT_CREATE_INFO_EXT) {
     cleanup_VkPrivateDataSlotCreateInfoEXT((VkPrivateDataSlotCreateInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 140 && VK_EXT_private_data
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIVATE_DATA_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIVATE_DATA_FEATURES_EXT) {
     cleanup_VkPhysicalDevicePrivateDataFeaturesEXT(
         (VkPhysicalDevicePrivateDataFeaturesEXT const *)pData);
     return;
@@ -7749,7 +7730,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 140 && VK_EXT_custom_border_color
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SAMPLER_CUSTOM_BORDER_COLOR_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SAMPLER_CUSTOM_BORDER_COLOR_CREATE_INFO_EXT) {
     cleanup_VkSamplerCustomBorderColorCreateInfoEXT(
         (VkSamplerCustomBorderColorCreateInfoEXT const *)pData);
     return;
@@ -7757,8 +7738,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 140 && VK_EXT_custom_border_color
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_PROPERTIES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_PROPERTIES_EXT) {
     cleanup_VkPhysicalDeviceCustomBorderColorPropertiesEXT(
         (VkPhysicalDeviceCustomBorderColorPropertiesEXT const *)pData);
     return;
@@ -7766,7 +7746,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 140 && VK_EXT_custom_border_color
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUSTOM_BORDER_COLOR_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceCustomBorderColorFeaturesEXT(
         (VkPhysicalDeviceCustomBorderColorFeaturesEXT const *)pData);
     return;
@@ -7774,8 +7754,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 145 && VK_EXT_extended_dynamic_state
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceExtendedDynamicStateFeaturesEXT(
         (VkPhysicalDeviceExtendedDynamicStateFeaturesEXT const *)pData);
     return;
@@ -7783,15 +7762,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 146 && VK_EXT_directfb_surface
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DIRECTFB_SURFACE_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DIRECTFB_SURFACE_CREATE_INFO_EXT) {
     cleanup_VkDirectFBSurfaceCreateInfoEXT((VkDirectFBSurfaceCreateInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 146 && VK_EXT_fragment_density_map2
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceFragmentDensityMap2FeaturesEXT(
         (VkPhysicalDeviceFragmentDensityMap2FeaturesEXT const *)pData);
     return;
@@ -7799,8 +7777,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 146 && VK_EXT_fragment_density_map2
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_PROPERTIES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_2_PROPERTIES_EXT) {
     cleanup_VkPhysicalDeviceFragmentDensityMap2PropertiesEXT(
         (VkPhysicalDeviceFragmentDensityMap2PropertiesEXT const *)pData);
     return;
@@ -7808,7 +7785,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 148 && VK_EXT_shader_atomic_float
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceShaderAtomicFloatFeaturesEXT(
         (VkPhysicalDeviceShaderAtomicFloatFeaturesEXT const *)pData);
     return;
@@ -7816,7 +7793,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 148 && VK_EXT_image_robustness
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ROBUSTNESS_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ROBUSTNESS_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceImageRobustnessFeaturesEXT(
         (VkPhysicalDeviceImageRobustnessFeaturesEXT const *)pData);
     return;
@@ -7824,7 +7801,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 149 && VK_EXT_4444_formats
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_4444_FORMATS_FEATURES_EXT) {
     cleanup_VkPhysicalDevice4444FormatsFeaturesEXT(
         (VkPhysicalDevice4444FormatsFeaturesEXT const *)pData);
     return;
@@ -7832,7 +7809,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 154 && VK_KHR_portability_subset
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_FEATURES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_FEATURES_KHR) {
     cleanup_VkPhysicalDevicePortabilitySubsetFeaturesKHR(
         (VkPhysicalDevicePortabilitySubsetFeaturesKHR const *)pData);
     return;
@@ -7840,8 +7817,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 154 && VK_KHR_portability_subset
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_PROPERTIES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PORTABILITY_SUBSET_PROPERTIES_KHR) {
     cleanup_VkPhysicalDevicePortabilitySubsetPropertiesKHR(
         (VkPhysicalDevicePortabilitySubsetPropertiesKHR const *)pData);
     return;
@@ -7849,85 +7825,84 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 154 && VK_KHR_copy_commands2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_COPY_2_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_COPY_2_KHR) {
     cleanup_VkBufferCopy2KHR((VkBufferCopy2KHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 154 && VK_KHR_copy_commands2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_COPY_2_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_COPY_2_KHR) {
     cleanup_VkImageCopy2KHR((VkImageCopy2KHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 154 && VK_KHR_copy_commands2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_BLIT_2_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_BLIT_2_KHR) {
     cleanup_VkImageBlit2KHR((VkImageBlit2KHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 154 && VK_KHR_copy_commands2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2_KHR) {
     cleanup_VkBufferImageCopy2KHR((VkBufferImageCopy2KHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 154 && VK_KHR_copy_commands2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_RESOLVE_2_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_RESOLVE_2_KHR) {
     cleanup_VkImageResolve2KHR((VkImageResolve2KHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 154 && VK_KHR_copy_commands2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_COPY_BUFFER_INFO_2_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_COPY_BUFFER_INFO_2_KHR) {
     cleanup_VkCopyBufferInfo2KHR((VkCopyBufferInfo2KHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 154 && VK_KHR_copy_commands2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_COPY_IMAGE_INFO_2_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_COPY_IMAGE_INFO_2_KHR) {
     cleanup_VkCopyImageInfo2KHR((VkCopyImageInfo2KHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 154 && VK_KHR_copy_commands2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_BLIT_IMAGE_INFO_2_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BLIT_IMAGE_INFO_2_KHR) {
     cleanup_VkBlitImageInfo2KHR((VkBlitImageInfo2KHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 154 && VK_KHR_copy_commands2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_COPY_BUFFER_TO_IMAGE_INFO_2_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_COPY_BUFFER_TO_IMAGE_INFO_2_KHR) {
     cleanup_VkCopyBufferToImageInfo2KHR((VkCopyBufferToImageInfo2KHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 154 && VK_KHR_copy_commands2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_COPY_IMAGE_TO_BUFFER_INFO_2_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_COPY_IMAGE_TO_BUFFER_INFO_2_KHR) {
     cleanup_VkCopyImageToBufferInfo2KHR((VkCopyImageToBufferInfo2KHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 154 && VK_KHR_copy_commands2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_RESOLVE_IMAGE_INFO_2_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RESOLVE_IMAGE_INFO_2_KHR) {
     cleanup_VkResolveImageInfo2KHR((VkResolveImageInfo2KHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 155 && VK_EXT_shader_image_atomic_int64
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_ATOMIC_INT64_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_ATOMIC_INT64_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT(
         (VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT const *)pData);
     return;
@@ -7935,8 +7910,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 156 && VK_EXT_device_memory_report
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_MEMORY_REPORT_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_MEMORY_REPORT_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceDeviceMemoryReportFeaturesEXT(
         (VkPhysicalDeviceDeviceMemoryReportFeaturesEXT const *)pData);
     return;
@@ -7944,7 +7918,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 156 && VK_EXT_device_memory_report
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_DEVICE_MEMORY_REPORT_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_DEVICE_MEMORY_REPORT_CREATE_INFO_EXT) {
     cleanup_VkDeviceDeviceMemoryReportCreateInfoEXT(
         (VkDeviceDeviceMemoryReportCreateInfoEXT const *)pData);
     return;
@@ -7952,14 +7926,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 156 && VK_EXT_device_memory_report
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_MEMORY_REPORT_CALLBACK_DATA_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_MEMORY_REPORT_CALLBACK_DATA_EXT) {
     cleanup_VkDeviceMemoryReportCallbackDataEXT((VkDeviceMemoryReportCallbackDataEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 158 && VK_KHR_fragment_shading_rate
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR) {
     cleanup_VkFragmentShadingRateAttachmentInfoKHR(
         (VkFragmentShadingRateAttachmentInfoKHR const *)pData);
     return;
@@ -7967,8 +7941,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 158 && VK_KHR_fragment_shading_rate
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PIPELINE_FRAGMENT_SHADING_RATE_STATE_CREATE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_FRAGMENT_SHADING_RATE_STATE_CREATE_INFO_KHR) {
     cleanup_VkPipelineFragmentShadingRateStateCreateInfoKHR(
         (VkPipelineFragmentShadingRateStateCreateInfoKHR const *)pData);
     return;
@@ -7976,8 +7949,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 158 && VK_KHR_fragment_shading_rate
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_FEATURES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_FEATURES_KHR) {
     cleanup_VkPhysicalDeviceFragmentShadingRateFeaturesKHR(
         (VkPhysicalDeviceFragmentShadingRateFeaturesKHR const *)pData);
     return;
@@ -7985,8 +7957,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 158 && VK_KHR_fragment_shading_rate
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_PROPERTIES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_PROPERTIES_KHR) {
     cleanup_VkPhysicalDeviceFragmentShadingRatePropertiesKHR(
         (VkPhysicalDeviceFragmentShadingRatePropertiesKHR const *)pData);
     return;
@@ -7994,7 +7965,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 158 && VK_KHR_fragment_shading_rate
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_KHR) {
     cleanup_VkPhysicalDeviceFragmentShadingRateKHR(
         (VkPhysicalDeviceFragmentShadingRateKHR const *)pData);
     return;
@@ -8002,8 +7973,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 158 && VK_KHR_shader_terminate_invocation
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TERMINATE_INVOCATION_FEATURES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TERMINATE_INVOCATION_FEATURES_KHR) {
     cleanup_VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR(
         (VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR const *)pData);
     return;
@@ -8011,15 +7981,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 159 && VK_QCOM_rotated_copy_commands
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_COPY_COMMAND_TRANSFORM_INFO_QCOM) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_COPY_COMMAND_TRANSFORM_INFO_QCOM) {
     cleanup_VkCopyCommandTransformInfoQCOM((VkCopyCommandTransformInfoQCOM const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 160 && VK_NV_fragment_shading_rate_enums
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_FEATURES_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_FEATURES_NV) {
     cleanup_VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV(
         (VkPhysicalDeviceFragmentShadingRateEnumsFeaturesNV const *)pData);
     return;
@@ -8027,8 +7996,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 160 && VK_NV_fragment_shading_rate_enums
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_PROPERTIES_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADING_RATE_ENUMS_PROPERTIES_NV) {
     cleanup_VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV(
         (VkPhysicalDeviceFragmentShadingRateEnumsPropertiesNV const *)pData);
     return;
@@ -8036,8 +8004,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 160 && VK_NV_fragment_shading_rate_enums
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PIPELINE_FRAGMENT_SHADING_RATE_ENUM_STATE_CREATE_INFO_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_FRAGMENT_SHADING_RATE_ENUM_STATE_CREATE_INFO_NV) {
     cleanup_VkPipelineFragmentShadingRateEnumStateCreateInfoNV(
         (VkPipelineFragmentShadingRateEnumStateCreateInfoNV const *)pData);
     return;
@@ -8045,8 +8012,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 162 && VK_KHR_acceleration_structure
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_FEATURES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_FEATURES_KHR) {
     cleanup_VkPhysicalDeviceAccelerationStructureFeaturesKHR(
         (VkPhysicalDeviceAccelerationStructureFeaturesKHR const *)pData);
     return;
@@ -8054,8 +8020,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 162 && VK_KHR_ray_tracing_pipeline
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_FEATURES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_FEATURES_KHR) {
     cleanup_VkPhysicalDeviceRayTracingPipelineFeaturesKHR(
         (VkPhysicalDeviceRayTracingPipelineFeaturesKHR const *)pData);
     return;
@@ -8063,15 +8028,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 162 && VK_KHR_ray_query
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_QUERY_FEATURES_KHR) {
     cleanup_VkPhysicalDeviceRayQueryFeaturesKHR((VkPhysicalDeviceRayQueryFeaturesKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 162 && VK_KHR_acceleration_structure
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_PROPERTIES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ACCELERATION_STRUCTURE_PROPERTIES_KHR) {
     cleanup_VkPhysicalDeviceAccelerationStructurePropertiesKHR(
         (VkPhysicalDeviceAccelerationStructurePropertiesKHR const *)pData);
     return;
@@ -8079,8 +8043,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 162 && VK_KHR_ray_tracing_pipeline
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_PROPERTIES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_PIPELINE_PROPERTIES_KHR) {
     cleanup_VkPhysicalDeviceRayTracingPipelinePropertiesKHR(
         (VkPhysicalDeviceRayTracingPipelinePropertiesKHR const *)pData);
     return;
@@ -8088,7 +8051,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 162 && VK_KHR_acceleration_structure
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_VERSION_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_VERSION_INFO_KHR) {
     cleanup_VkAccelerationStructureVersionInfoKHR(
         (VkAccelerationStructureVersionInfoKHR const *)pData);
     return;
@@ -8096,7 +8059,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 162 && VK_KHR_acceleration_structure
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_SIZES_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_SIZES_INFO_KHR) {
     cleanup_VkAccelerationStructureBuildSizesInfoKHR(
         (VkAccelerationStructureBuildSizesInfoKHR const *)pData);
     return;
@@ -8104,8 +8067,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 164 && VK_VALVE_mutable_descriptor_type
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_VALVE) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_VALVE) {
     cleanup_VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE(
         (VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE const *)pData);
     return;
@@ -8113,7 +8075,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 164 && VK_VALVE_mutable_descriptor_type
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_VALVE) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_VALVE) {
     cleanup_VkMutableDescriptorTypeCreateInfoVALVE(
         (VkMutableDescriptorTypeCreateInfoVALVE const *)pData);
     return;
@@ -8121,8 +8083,8 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 168 && VK_KHR_zero_initialize_workgroup_memory
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR) {
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES_KHR) {
     cleanup_VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR(
         (VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR const *)pData);
     return;
@@ -8130,8 +8092,8 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 168 && VK_KHR_workgroup_memory_explicit_layout
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_WORKGROUP_MEMORY_EXPLICIT_LAYOUT_FEATURES_KHR) {
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_WORKGROUP_MEMORY_EXPLICIT_LAYOUT_FEATURES_KHR) {
     cleanup_VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR(
         (VkPhysicalDeviceWorkgroupMemoryExplicitLayoutFeaturesKHR const *)pData);
     return;
@@ -8139,56 +8101,56 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 170 && VK_KHR_synchronization2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_BARRIER_2_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_BARRIER_2_KHR) {
     cleanup_VkMemoryBarrier2KHR((VkMemoryBarrier2KHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 170 && VK_KHR_synchronization2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER_2_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER_2_KHR) {
     cleanup_VkImageMemoryBarrier2KHR((VkImageMemoryBarrier2KHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 170 && VK_KHR_synchronization2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER_2_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER_2_KHR) {
     cleanup_VkBufferMemoryBarrier2KHR((VkBufferMemoryBarrier2KHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 170 && VK_KHR_synchronization2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEPENDENCY_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEPENDENCY_INFO_KHR) {
     cleanup_VkDependencyInfoKHR((VkDependencyInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 170 && VK_KHR_synchronization2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO_KHR) {
     cleanup_VkSemaphoreSubmitInfoKHR((VkSemaphoreSubmitInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 170 && VK_KHR_synchronization2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO_KHR) {
     cleanup_VkCommandBufferSubmitInfoKHR((VkCommandBufferSubmitInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 170 && VK_KHR_synchronization2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SUBMIT_INFO_2_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SUBMIT_INFO_2_KHR) {
     cleanup_VkSubmitInfo2KHR((VkSubmitInfo2KHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 170 && VK_KHR_synchronization2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_2_NV) {
     cleanup_VkQueueFamilyCheckpointProperties2NV(
         (VkQueueFamilyCheckpointProperties2NV const *)pData);
     return;
@@ -8196,14 +8158,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 170 && VK_KHR_synchronization2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_CHECKPOINT_DATA_2_NV) {
     cleanup_VkCheckpointData2NV((VkCheckpointData2NV const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 170 && VK_KHR_synchronization2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES_KHR) {
     cleanup_VkPhysicalDeviceSynchronization2FeaturesKHR(
         (VkPhysicalDeviceSynchronization2FeaturesKHR const *)pData);
     return;
@@ -8211,14 +8173,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 171 && VK_QNX_screen_surface
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SCREEN_SURFACE_CREATE_INFO_QNX) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SCREEN_SURFACE_CREATE_INFO_QNX) {
     cleanup_VkScreenSurfaceCreateInfoQNX((VkScreenSurfaceCreateInfoQNX const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 173 && VK_FUCHSIA_external_memory
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMPORT_MEMORY_ZIRCON_HANDLE_INFO_FUCHSIA) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMPORT_MEMORY_ZIRCON_HANDLE_INFO_FUCHSIA) {
     cleanup_VkImportMemoryZirconHandleInfoFUCHSIA(
         (VkImportMemoryZirconHandleInfoFUCHSIA const *)pData);
     return;
@@ -8226,7 +8188,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 173 && VK_FUCHSIA_external_memory
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_ZIRCON_HANDLE_PROPERTIES_FUCHSIA) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_ZIRCON_HANDLE_PROPERTIES_FUCHSIA) {
     cleanup_VkMemoryZirconHandlePropertiesFUCHSIA(
         (VkMemoryZirconHandlePropertiesFUCHSIA const *)pData);
     return;
@@ -8234,14 +8196,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 173 && VK_FUCHSIA_external_memory
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_GET_ZIRCON_HANDLE_INFO_FUCHSIA) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_GET_ZIRCON_HANDLE_INFO_FUCHSIA) {
     cleanup_VkMemoryGetZirconHandleInfoFUCHSIA((VkMemoryGetZirconHandleInfoFUCHSIA const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 173 && VK_FUCHSIA_external_semaphore
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_ZIRCON_HANDLE_INFO_FUCHSIA) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMPORT_SEMAPHORE_ZIRCON_HANDLE_INFO_FUCHSIA) {
     cleanup_VkImportSemaphoreZirconHandleInfoFUCHSIA(
         (VkImportSemaphoreZirconHandleInfoFUCHSIA const *)pData);
     return;
@@ -8249,7 +8211,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 173 && VK_FUCHSIA_external_semaphore
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SEMAPHORE_GET_ZIRCON_HANDLE_INFO_FUCHSIA) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SEMAPHORE_GET_ZIRCON_HANDLE_INFO_FUCHSIA) {
     cleanup_VkSemaphoreGetZirconHandleInfoFUCHSIA(
         (VkSemaphoreGetZirconHandleInfoFUCHSIA const *)pData);
     return;
@@ -8257,8 +8219,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_EXT_vertex_input_dynamic_state
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_INPUT_DYNAMIC_STATE_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_INPUT_DYNAMIC_STATE_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT(
         (VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT const *)pData);
     return;
@@ -8266,14 +8227,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_EXT_vertex_input_dynamic_state
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT) {
     cleanup_VkVertexInputBindingDescription2EXT((VkVertexInputBindingDescription2EXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_EXT_vertex_input_dynamic_state
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VERTEX_INPUT_ATTRIBUTE_DESCRIPTION_2_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VERTEX_INPUT_ATTRIBUTE_DESCRIPTION_2_EXT) {
     cleanup_VkVertexInputAttributeDescription2EXT(
         (VkVertexInputAttributeDescription2EXT const *)pData);
     return;
@@ -8281,7 +8242,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_EXT_color_write_enable
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COLOR_WRITE_ENABLE_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceColorWriteEnableFeaturesEXT(
         (VkPhysicalDeviceColorWriteEnableFeaturesEXT const *)pData);
     return;
@@ -8289,105 +8250,105 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_EXT_color_write_enable
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_COLOR_WRITE_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_COLOR_WRITE_CREATE_INFO_EXT) {
     cleanup_VkPipelineColorWriteCreateInfoEXT((VkPipelineColorWriteCreateInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_QUEUE_FAMILY_PROPERTIES_2_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_QUEUE_FAMILY_PROPERTIES_2_KHR) {
     cleanup_VkVideoQueueFamilyProperties2KHR((VkVideoQueueFamilyProperties2KHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_PROFILES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_PROFILES_KHR) {
     cleanup_VkVideoProfilesKHR((VkVideoProfilesKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR) {
     cleanup_VkPhysicalDeviceVideoFormatInfoKHR((VkPhysicalDeviceVideoFormatInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_FORMAT_PROPERTIES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_FORMAT_PROPERTIES_KHR) {
     cleanup_VkVideoFormatPropertiesKHR((VkVideoFormatPropertiesKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_PROFILE_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_PROFILE_KHR) {
     cleanup_VkVideoProfileKHR((VkVideoProfileKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_CAPABILITIES_KHR) {
     cleanup_VkVideoCapabilitiesKHR((VkVideoCapabilitiesKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_GET_MEMORY_PROPERTIES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_GET_MEMORY_PROPERTIES_KHR) {
     cleanup_VkVideoGetMemoryPropertiesKHR((VkVideoGetMemoryPropertiesKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_BIND_MEMORY_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_BIND_MEMORY_KHR) {
     cleanup_VkVideoBindMemoryKHR((VkVideoBindMemoryKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_PICTURE_RESOURCE_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_PICTURE_RESOURCE_KHR) {
     cleanup_VkVideoPictureResourceKHR((VkVideoPictureResourceKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_REFERENCE_SLOT_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_REFERENCE_SLOT_KHR) {
     cleanup_VkVideoReferenceSlotKHR((VkVideoReferenceSlotKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_decode_queue
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_INFO_KHR) {
     cleanup_VkVideoDecodeInfoKHR((VkVideoDecodeInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_decode_h264
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_PROFILE_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_PROFILE_EXT) {
     cleanup_VkVideoDecodeH264ProfileEXT((VkVideoDecodeH264ProfileEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_decode_h264
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_CAPABILITIES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_CAPABILITIES_EXT) {
     cleanup_VkVideoDecodeH264CapabilitiesEXT((VkVideoDecodeH264CapabilitiesEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_decode_h264
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_SESSION_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_SESSION_CREATE_INFO_EXT) {
     cleanup_VkVideoDecodeH264SessionCreateInfoEXT(
         (VkVideoDecodeH264SessionCreateInfoEXT const *)pData);
     return;
@@ -8395,8 +8356,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_decode_h264
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_SESSION_PARAMETERS_ADD_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_SESSION_PARAMETERS_ADD_INFO_EXT) {
     cleanup_VkVideoDecodeH264SessionParametersAddInfoEXT(
         (VkVideoDecodeH264SessionParametersAddInfoEXT const *)pData);
     return;
@@ -8404,8 +8364,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_decode_h264
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_SESSION_PARAMETERS_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_SESSION_PARAMETERS_CREATE_INFO_EXT) {
     cleanup_VkVideoDecodeH264SessionParametersCreateInfoEXT(
         (VkVideoDecodeH264SessionParametersCreateInfoEXT const *)pData);
     return;
@@ -8413,42 +8372,42 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_decode_h264
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_PICTURE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_PICTURE_INFO_EXT) {
     cleanup_VkVideoDecodeH264PictureInfoEXT((VkVideoDecodeH264PictureInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_decode_h264
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_DPB_SLOT_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_DPB_SLOT_INFO_EXT) {
     cleanup_VkVideoDecodeH264DpbSlotInfoEXT((VkVideoDecodeH264DpbSlotInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_decode_h264
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_MVC_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_MVC_EXT) {
     cleanup_VkVideoDecodeH264MvcEXT((VkVideoDecodeH264MvcEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_decode_h265
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_PROFILE_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_PROFILE_EXT) {
     cleanup_VkVideoDecodeH265ProfileEXT((VkVideoDecodeH265ProfileEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_decode_h265
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_CAPABILITIES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_CAPABILITIES_EXT) {
     cleanup_VkVideoDecodeH265CapabilitiesEXT((VkVideoDecodeH265CapabilitiesEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_decode_h265
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_CREATE_INFO_EXT) {
     cleanup_VkVideoDecodeH265SessionCreateInfoEXT(
         (VkVideoDecodeH265SessionCreateInfoEXT const *)pData);
     return;
@@ -8456,8 +8415,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_decode_h265
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT) {
     cleanup_VkVideoDecodeH265SessionParametersAddInfoEXT(
         (VkVideoDecodeH265SessionParametersAddInfoEXT const *)pData);
     return;
@@ -8465,8 +8423,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_decode_h265
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_PARAMETERS_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_SESSION_PARAMETERS_CREATE_INFO_EXT) {
     cleanup_VkVideoDecodeH265SessionParametersCreateInfoEXT(
         (VkVideoDecodeH265SessionParametersCreateInfoEXT const *)pData);
     return;
@@ -8474,28 +8431,28 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_decode_h265
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_PICTURE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_PICTURE_INFO_EXT) {
     cleanup_VkVideoDecodeH265PictureInfoEXT((VkVideoDecodeH265PictureInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_decode_h265
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_DPB_SLOT_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_DPB_SLOT_INFO_EXT) {
     cleanup_VkVideoDecodeH265DpbSlotInfoEXT((VkVideoDecodeH265DpbSlotInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_SESSION_CREATE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_SESSION_CREATE_INFO_KHR) {
     cleanup_VkVideoSessionCreateInfoKHR((VkVideoSessionCreateInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_CREATE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_CREATE_INFO_KHR) {
     cleanup_VkVideoSessionParametersCreateInfoKHR(
         (VkVideoSessionParametersCreateInfoKHR const *)pData);
     return;
@@ -8503,7 +8460,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_UPDATE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_SESSION_PARAMETERS_UPDATE_INFO_KHR) {
     cleanup_VkVideoSessionParametersUpdateInfoKHR(
         (VkVideoSessionParametersUpdateInfoKHR const *)pData);
     return;
@@ -8511,49 +8468,49 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_BEGIN_CODING_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_BEGIN_CODING_INFO_KHR) {
     cleanup_VkVideoBeginCodingInfoKHR((VkVideoBeginCodingInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_END_CODING_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_END_CODING_INFO_KHR) {
     cleanup_VkVideoEndCodingInfoKHR((VkVideoEndCodingInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_CODING_CONTROL_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_CODING_CONTROL_INFO_KHR) {
     cleanup_VkVideoCodingControlInfoKHR((VkVideoCodingControlInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_encode_queue
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_INFO_KHR) {
     cleanup_VkVideoEncodeInfoKHR((VkVideoEncodeInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_encode_queue
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_INFO_KHR) {
     cleanup_VkVideoEncodeRateControlInfoKHR((VkVideoEncodeRateControlInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_encode_h264
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_CAPABILITIES_EXT) {
     cleanup_VkVideoEncodeH264CapabilitiesEXT((VkVideoEncodeH264CapabilitiesEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_encode_h264
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_CREATE_INFO_EXT) {
     cleanup_VkVideoEncodeH264SessionCreateInfoEXT(
         (VkVideoEncodeH264SessionCreateInfoEXT const *)pData);
     return;
@@ -8561,8 +8518,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_encode_h264
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_ADD_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_ADD_INFO_EXT) {
     cleanup_VkVideoEncodeH264SessionParametersAddInfoEXT(
         (VkVideoEncodeH264SessionParametersAddInfoEXT const *)pData);
     return;
@@ -8570,8 +8526,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_encode_h264
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_SESSION_PARAMETERS_CREATE_INFO_EXT) {
     cleanup_VkVideoEncodeH264SessionParametersCreateInfoEXT(
         (VkVideoEncodeH264SessionParametersCreateInfoEXT const *)pData);
     return;
@@ -8579,21 +8534,21 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_encode_h264
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_DPB_SLOT_INFO_EXT) {
     cleanup_VkVideoEncodeH264DpbSlotInfoEXT((VkVideoEncodeH264DpbSlotInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_encode_h264
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_VCL_FRAME_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_VCL_FRAME_INFO_EXT) {
     cleanup_VkVideoEncodeH264VclFrameInfoEXT((VkVideoEncodeH264VclFrameInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_encode_h264
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_EMIT_PICTURE_PARAMETERS_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_EMIT_PICTURE_PARAMETERS_EXT) {
     cleanup_VkVideoEncodeH264EmitPictureParametersEXT(
         (VkVideoEncodeH264EmitPictureParametersEXT const *)pData);
     return;
@@ -8601,22 +8556,21 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_encode_h264
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_PROFILE_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_PROFILE_EXT) {
     cleanup_VkVideoEncodeH264ProfileEXT((VkVideoEncodeH264ProfileEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_encode_h264
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_NALU_SLICE_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_NALU_SLICE_EXT) {
     cleanup_VkVideoEncodeH264NaluSliceEXT((VkVideoEncodeH264NaluSliceEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_NV_inherited_viewport_scissor
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INHERITED_VIEWPORT_SCISSOR_FEATURES_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INHERITED_VIEWPORT_SCISSOR_FEATURES_NV) {
     cleanup_VkPhysicalDeviceInheritedViewportScissorFeaturesNV(
         (VkPhysicalDeviceInheritedViewportScissorFeaturesNV const *)pData);
     return;
@@ -8624,8 +8578,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_NV_inherited_viewport_scissor
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_VIEWPORT_SCISSOR_INFO_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_VIEWPORT_SCISSOR_INFO_NV) {
     cleanup_VkCommandBufferInheritanceViewportScissorInfoNV(
         (VkCommandBufferInheritanceViewportScissorInfoNV const *)pData);
     return;
@@ -8633,8 +8586,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_EXT_ycbcr_2plane_444_formats
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_2_PLANE_444_FORMATS_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT(
         (VkPhysicalDeviceYcbcr2Plane444FormatsFeaturesEXT const *)pData);
     return;
@@ -8642,8 +8594,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 176 && VK_EXT_extended_dynamic_state2
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_2_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceExtendedDynamicState2FeaturesEXT(
         (VkPhysicalDeviceExtendedDynamicState2FeaturesEXT const *)pData);
     return;
@@ -8651,7 +8602,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 177 && VK_EXT_provoking_vertex
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceProvokingVertexFeaturesEXT(
         (VkPhysicalDeviceProvokingVertexFeaturesEXT const *)pData);
     return;
@@ -8659,7 +8610,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 177 && VK_EXT_provoking_vertex
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_PROPERTIES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PROVOKING_VERTEX_PROPERTIES_EXT) {
     cleanup_VkPhysicalDeviceProvokingVertexPropertiesEXT(
         (VkPhysicalDeviceProvokingVertexPropertiesEXT const *)pData);
     return;
@@ -8667,8 +8618,8 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 177 && VK_EXT_provoking_vertex
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_PROVOKING_VERTEX_STATE_CREATE_INFO_EXT) {
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_PROVOKING_VERTEX_STATE_CREATE_INFO_EXT) {
     cleanup_VkPipelineRasterizationProvokingVertexStateCreateInfoEXT(
         (VkPipelineRasterizationProvokingVertexStateCreateInfoEXT const *)pData);
     return;
@@ -8676,29 +8627,28 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 178 && VK_NVX_binary_import
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_CU_MODULE_CREATE_INFO_NVX) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_CU_MODULE_CREATE_INFO_NVX) {
     cleanup_VkCuModuleCreateInfoNVX((VkCuModuleCreateInfoNVX const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 178 && VK_NVX_binary_import
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_CU_FUNCTION_CREATE_INFO_NVX) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_CU_FUNCTION_CREATE_INFO_NVX) {
     cleanup_VkCuFunctionCreateInfoNVX((VkCuFunctionCreateInfoNVX const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 178 && VK_NVX_binary_import
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_CU_LAUNCH_INFO_NVX) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_CU_LAUNCH_INFO_NVX) {
     cleanup_VkCuLaunchInfoNVX((VkCuLaunchInfoNVX const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 180 && VK_EXT_global_priority_query
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT(
         (VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT const *)pData);
     return;
@@ -8706,7 +8656,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 180 && VK_EXT_global_priority_query
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_EXT) {
     cleanup_VkQueueFamilyGlobalPriorityPropertiesEXT(
         (VkQueueFamilyGlobalPriorityPropertiesEXT const *)pData);
     return;
@@ -8714,9 +8664,8 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 180 && VK_KHR_shader_subgroup_uniform_control_flow
-      else if (
-          pTemp->sType ==
-          VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR) {
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_SUBGROUP_UNIFORM_CONTROL_FLOW_FEATURES_KHR) {
     cleanup_VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR(
         (VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR const *)pData);
     return;
@@ -8724,7 +8673,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 182 && VK_EXT_multi_draw
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_PROPERTIES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_PROPERTIES_EXT) {
     cleanup_VkPhysicalDeviceMultiDrawPropertiesEXT(
         (VkPhysicalDeviceMultiDrawPropertiesEXT const *)pData);
     return;
@@ -8732,7 +8681,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 182 && VK_EXT_multi_draw
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTI_DRAW_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceMultiDrawFeaturesEXT(
         (VkPhysicalDeviceMultiDrawFeaturesEXT const *)pData);
     return;
@@ -8740,7 +8689,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 182 && VK_HUAWEI_subpass_shading
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SUBPASS_SHADING_PIPELINE_CREATE_INFO_HUAWEI) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SUBPASS_SHADING_PIPELINE_CREATE_INFO_HUAWEI) {
     cleanup_VkSubpassShadingPipelineCreateInfoHUAWEI(
         (VkSubpassShadingPipelineCreateInfoHUAWEI const *)pData);
     return;
@@ -8748,8 +8697,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 182 && VK_HUAWEI_subpass_shading
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_PROPERTIES_HUAWEI) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_PROPERTIES_HUAWEI) {
     cleanup_VkPhysicalDeviceSubpassShadingPropertiesHUAWEI(
         (VkPhysicalDeviceSubpassShadingPropertiesHUAWEI const *)pData);
     return;
@@ -8757,7 +8705,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 182 && VK_HUAWEI_subpass_shading
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_FEATURES_HUAWEI) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBPASS_SHADING_FEATURES_HUAWEI) {
     cleanup_VkPhysicalDeviceSubpassShadingFeaturesHUAWEI(
         (VkPhysicalDeviceSubpassShadingFeaturesHUAWEI const *)pData);
     return;
@@ -8765,15 +8713,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 182 && VK_EXT_physical_device_drm
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRM_PROPERTIES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DRM_PROPERTIES_EXT) {
     cleanup_VkPhysicalDeviceDrmPropertiesEXT((VkPhysicalDeviceDrmPropertiesEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 182 && VK_NV_ray_tracing_motion_blur
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_MOTION_BLUR_FEATURES_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_MOTION_BLUR_FEATURES_NV) {
     cleanup_VkPhysicalDeviceRayTracingMotionBlurFeaturesNV(
         (VkPhysicalDeviceRayTracingMotionBlurFeaturesNV const *)pData);
     return;
@@ -8781,8 +8728,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 182 && VK_NV_ray_tracing_motion_blur
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_MOTION_TRIANGLES_DATA_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_MOTION_TRIANGLES_DATA_NV) {
     cleanup_VkAccelerationStructureGeometryMotionTrianglesDataNV(
         (VkAccelerationStructureGeometryMotionTrianglesDataNV const *)pData);
     return;
@@ -8790,14 +8736,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 182 && VK_NV_ray_tracing_motion_blur
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MOTION_INFO_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_MOTION_INFO_NV) {
     cleanup_VkAccelerationStructureMotionInfoNV((VkAccelerationStructureMotionInfoNV const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 184 && VK_NV_external_memory_rdma
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_RDMA_FEATURES_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_RDMA_FEATURES_NV) {
     cleanup_VkPhysicalDeviceExternalMemoryRDMAFeaturesNV(
         (VkPhysicalDeviceExternalMemoryRDMAFeaturesNV const *)pData);
     return;
@@ -8805,14 +8751,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 184 && VK_NV_external_memory_rdma
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_GET_REMOTE_ADDRESS_INFO_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_GET_REMOTE_ADDRESS_INFO_NV) {
     cleanup_VkMemoryGetRemoteAddressInfoNV((VkMemoryGetRemoteAddressInfoNV const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 185 && VK_KHR_present_id
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_ID_FEATURES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_ID_FEATURES_KHR) {
     cleanup_VkPhysicalDevicePresentIdFeaturesKHR(
         (VkPhysicalDevicePresentIdFeaturesKHR const *)pData);
     return;
@@ -8820,14 +8766,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 185 && VK_KHR_present_id
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PRESENT_ID_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PRESENT_ID_KHR) {
     cleanup_VkPresentIdKHR((VkPresentIdKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 185 && VK_KHR_present_wait
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_WAIT_FEATURES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_WAIT_FEATURES_KHR) {
     cleanup_VkPhysicalDevicePresentWaitFeaturesKHR(
         (VkPhysicalDevicePresentWaitFeaturesKHR const *)pData);
     return;
@@ -8835,8 +8781,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 185 && VK_EXT_shader_atomic_float2
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_2_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT_2_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT(
         (VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT const *)pData);
     return;
@@ -8844,7 +8789,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 185 && VK_HUAWEI_invocation_mask
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INVOCATION_MASK_FEATURES_HUAWEI) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INVOCATION_MASK_FEATURES_HUAWEI) {
     cleanup_VkPhysicalDeviceInvocationMaskFeaturesHUAWEI(
         (VkPhysicalDeviceInvocationMaskFeaturesHUAWEI const *)pData);
     return;
@@ -8852,8 +8797,8 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 190 && VK_EXT_primitive_topology_list_restart
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVE_TOPOLOGY_LIST_RESTART_FEATURES_EXT) {
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVE_TOPOLOGY_LIST_RESTART_FEATURES_EXT) {
     cleanup_VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT(
         (VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT const *)pData);
     return;
@@ -8861,8 +8806,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 190 && VK_KHR_shader_integer_dot_product
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES_KHR) {
     cleanup_VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR(
         (VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR const *)pData);
     return;
@@ -8870,8 +8814,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 190 && VK_KHR_shader_integer_dot_product
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES_KHR) {
     cleanup_VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR(
         (VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR const *)pData);
     return;
@@ -8879,8 +8822,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 191 && VK_EXT_pageable_device_local_memory
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PAGEABLE_DEVICE_LOCAL_MEMORY_FEATURES_EXT) {
     cleanup_VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT(
         (VkPhysicalDevicePageableDeviceLocalMemoryFeaturesEXT const *)pData);
     return;
@@ -8888,7 +8830,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMPORT_MEMORY_BUFFER_COLLECTION_FUCHSIA) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMPORT_MEMORY_BUFFER_COLLECTION_FUCHSIA) {
     cleanup_VkImportMemoryBufferCollectionFUCHSIA(
         (VkImportMemoryBufferCollectionFUCHSIA const *)pData);
     return;
@@ -8896,7 +8838,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_COLLECTION_IMAGE_CREATE_INFO_FUCHSIA) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_COLLECTION_IMAGE_CREATE_INFO_FUCHSIA) {
     cleanup_VkBufferCollectionImageCreateInfoFUCHSIA(
         (VkBufferCollectionImageCreateInfoFUCHSIA const *)pData);
     return;
@@ -8904,7 +8846,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_COLLECTION_BUFFER_CREATE_INFO_FUCHSIA) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_COLLECTION_BUFFER_CREATE_INFO_FUCHSIA) {
     cleanup_VkBufferCollectionBufferCreateInfoFUCHSIA(
         (VkBufferCollectionBufferCreateInfoFUCHSIA const *)pData);
     return;
@@ -8912,49 +8854,49 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_COLLECTION_CREATE_INFO_FUCHSIA) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_COLLECTION_CREATE_INFO_FUCHSIA) {
     cleanup_VkBufferCollectionCreateInfoFUCHSIA((VkBufferCollectionCreateInfoFUCHSIA const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_COLLECTION_PROPERTIES_FUCHSIA) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_COLLECTION_PROPERTIES_FUCHSIA) {
     cleanup_VkBufferCollectionPropertiesFUCHSIA((VkBufferCollectionPropertiesFUCHSIA const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_CONSTRAINTS_INFO_FUCHSIA) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_CONSTRAINTS_INFO_FUCHSIA) {
     cleanup_VkBufferConstraintsInfoFUCHSIA((VkBufferConstraintsInfoFUCHSIA const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SYSMEM_COLOR_SPACE_FUCHSIA) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SYSMEM_COLOR_SPACE_FUCHSIA) {
     cleanup_VkSysmemColorSpaceFUCHSIA((VkSysmemColorSpaceFUCHSIA const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_FORMAT_CONSTRAINTS_INFO_FUCHSIA) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_FORMAT_CONSTRAINTS_INFO_FUCHSIA) {
     cleanup_VkImageFormatConstraintsInfoFUCHSIA((VkImageFormatConstraintsInfoFUCHSIA const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_CONSTRAINTS_INFO_FUCHSIA) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_CONSTRAINTS_INFO_FUCHSIA) {
     cleanup_VkImageConstraintsInfoFUCHSIA((VkImageConstraintsInfoFUCHSIA const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_COLLECTION_CONSTRAINTS_INFO_FUCHSIA) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_COLLECTION_CONSTRAINTS_INFO_FUCHSIA) {
     cleanup_VkBufferCollectionConstraintsInfoFUCHSIA(
         (VkBufferCollectionConstraintsInfoFUCHSIA const *)pData);
     return;
@@ -8962,21 +8904,21 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 195 && VK_KHR_maintenance4
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS_KHR) {
     cleanup_VkDeviceBufferMemoryRequirementsKHR((VkDeviceBufferMemoryRequirementsKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 195 && VK_KHR_maintenance4
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_IMAGE_MEMORY_REQUIREMENTS_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_IMAGE_MEMORY_REQUIREMENTS_KHR) {
     cleanup_VkDeviceImageMemoryRequirementsKHR((VkDeviceImageMemoryRequirementsKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 195 && VK_KHR_maintenance4
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES_KHR) {
     cleanup_VkPhysicalDeviceMaintenance4FeaturesKHR(
         (VkPhysicalDeviceMaintenance4FeaturesKHR const *)pData);
     return;
@@ -8984,7 +8926,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 195 && VK_KHR_maintenance4
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES_KHR) {
     cleanup_VkPhysicalDeviceMaintenance4PropertiesKHR(
         (VkPhysicalDeviceMaintenance4PropertiesKHR const *)pData);
     return;
@@ -8992,7 +8934,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 195 && VK_EXT_rgba10x6_formats
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RGBA10X6_FORMATS_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RGBA10X6_FORMATS_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT(
         (VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT const *)pData);
     return;
@@ -9000,14 +8942,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 195 && VK_KHR_format_feature_flags2
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_3_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_3_KHR) {
     cleanup_VkFormatProperties3KHR((VkFormatProperties3KHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 195 && VK_EXT_image_drm_format_modifier
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_2_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_2_EXT) {
     cleanup_VkDrmFormatModifierPropertiesList2EXT(
         (VkDrmFormatModifierPropertiesList2EXT const *)pData);
     return;
@@ -9015,8 +8957,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 195 && VK_ANDROID_external_memory_android_hardware_buffer
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_PROPERTIES_2_ANDROID) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_PROPERTIES_2_ANDROID) {
     cleanup_VkAndroidHardwareBufferFormatProperties2ANDROID(
         (VkAndroidHardwareBufferFormatProperties2ANDROID const *)pData);
     return;
@@ -9024,8 +8965,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 196 && VK_EXT_border_color_swizzle
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_SAMPLER_BORDER_COLOR_COMPONENT_MAPPING_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SAMPLER_BORDER_COLOR_COMPONENT_MAPPING_CREATE_INFO_EXT) {
     cleanup_VkSamplerBorderColorComponentMappingCreateInfoEXT(
         (VkSamplerBorderColorComponentMappingCreateInfoEXT const *)pData);
     return;
@@ -9033,8 +8973,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 196 && VK_EXT_border_color_swizzle
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BORDER_COLOR_SWIZZLE_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_BORDER_COLOR_SWIZZLE_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceBorderColorSwizzleFeaturesEXT(
         (VkPhysicalDeviceBorderColorSwizzleFeaturesEXT const *)pData);
     return;
@@ -9042,14 +8981,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 196 && VK_EXT_video_encode_h265
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_CAPABILITIES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_CAPABILITIES_EXT) {
     cleanup_VkVideoEncodeH265CapabilitiesEXT((VkVideoEncodeH265CapabilitiesEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 196 && VK_EXT_video_encode_h265
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_CREATE_INFO_EXT) {
     cleanup_VkVideoEncodeH265SessionCreateInfoEXT(
         (VkVideoEncodeH265SessionCreateInfoEXT const *)pData);
     return;
@@ -9057,8 +8996,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 196 && VK_EXT_video_encode_h265
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_ADD_INFO_EXT) {
     cleanup_VkVideoEncodeH265SessionParametersAddInfoEXT(
         (VkVideoEncodeH265SessionParametersAddInfoEXT const *)pData);
     return;
@@ -9066,8 +9004,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 196 && VK_EXT_video_encode_h265
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_SESSION_PARAMETERS_CREATE_INFO_EXT) {
     cleanup_VkVideoEncodeH265SessionParametersCreateInfoEXT(
         (VkVideoEncodeH265SessionParametersCreateInfoEXT const *)pData);
     return;
@@ -9075,14 +9012,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 196 && VK_EXT_video_encode_h265
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_VCL_FRAME_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_VCL_FRAME_INFO_EXT) {
     cleanup_VkVideoEncodeH265VclFrameInfoEXT((VkVideoEncodeH265VclFrameInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 196 && VK_EXT_video_encode_h265
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_EMIT_PICTURE_PARAMETERS_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_EMIT_PICTURE_PARAMETERS_EXT) {
     cleanup_VkVideoEncodeH265EmitPictureParametersEXT(
         (VkVideoEncodeH265EmitPictureParametersEXT const *)pData);
     return;
@@ -9090,57 +9027,56 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 196 && VK_EXT_video_encode_h265
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_EXT) {
     cleanup_VkVideoEncodeH265NaluSliceEXT((VkVideoEncodeH265NaluSliceEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 196 && VK_EXT_video_encode_h265
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_PROFILE_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_PROFILE_EXT) {
     cleanup_VkVideoEncodeH265ProfileEXT((VkVideoEncodeH265ProfileEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 196 && VK_EXT_video_encode_h265
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_DPB_SLOT_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_DPB_SLOT_INFO_EXT) {
     cleanup_VkVideoEncodeH265DpbSlotInfoEXT((VkVideoEncodeH265DpbSlotInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 196 && VK_EXT_video_encode_h265
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_REFERENCE_LISTS_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_REFERENCE_LISTS_EXT) {
     cleanup_VkVideoEncodeH265ReferenceListsEXT((VkVideoEncodeH265ReferenceListsEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 197 && VK_KHR_dynamic_rendering
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_RENDERING_CREATE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_RENDERING_CREATE_INFO_KHR) {
     cleanup_VkPipelineRenderingCreateInfoKHR((VkPipelineRenderingCreateInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 197 && VK_KHR_dynamic_rendering
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_RENDERING_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RENDERING_INFO_KHR) {
     cleanup_VkRenderingInfoKHR((VkRenderingInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 197 && VK_KHR_dynamic_rendering
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_INFO_KHR) {
     cleanup_VkRenderingAttachmentInfoKHR((VkRenderingAttachmentInfoKHR const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 197 && VK_KHR_dynamic_rendering
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_INFO_KHR) {
     cleanup_VkRenderingFragmentShadingRateAttachmentInfoKHR(
         (VkRenderingFragmentShadingRateAttachmentInfoKHR const *)pData);
     return;
@@ -9148,8 +9084,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 197 && VK_KHR_dynamic_rendering
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_INFO_EXT) {
     cleanup_VkRenderingFragmentDensityMapAttachmentInfoEXT(
         (VkRenderingFragmentDensityMapAttachmentInfoEXT const *)pData);
     return;
@@ -9157,7 +9092,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 197 && VK_KHR_dynamic_rendering
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_FEATURES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_FEATURES_KHR) {
     cleanup_VkPhysicalDeviceDynamicRenderingFeaturesKHR(
         (VkPhysicalDeviceDynamicRenderingFeaturesKHR const *)pData);
     return;
@@ -9165,7 +9100,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 197 && VK_KHR_dynamic_rendering
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO_KHR) {
     cleanup_VkCommandBufferInheritanceRenderingInfoKHR(
         (VkCommandBufferInheritanceRenderingInfoKHR const *)pData);
     return;
@@ -9173,21 +9108,21 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 197 && VK_KHR_dynamic_rendering
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ATTACHMENT_SAMPLE_COUNT_INFO_AMD) {
     cleanup_VkAttachmentSampleCountInfoAMD((VkAttachmentSampleCountInfoAMD const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 197 && VK_KHR_dynamic_rendering
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MULTIVIEW_PER_VIEW_ATTRIBUTES_INFO_NVX) {
     cleanup_VkMultiviewPerViewAttributesInfoNVX((VkMultiviewPerViewAttributesInfoNVX const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 199 && VK_EXT_image_view_min_lod
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_VIEW_MIN_LOD_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_VIEW_MIN_LOD_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceImageViewMinLodFeaturesEXT(
         (VkPhysicalDeviceImageViewMinLodFeaturesEXT const *)pData);
     return;
@@ -9195,14 +9130,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 199 && VK_EXT_image_view_min_lod
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_VIEW_MIN_LOD_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_VIEW_MIN_LOD_CREATE_INFO_EXT) {
     cleanup_VkImageViewMinLodCreateInfoEXT((VkImageViewMinLodCreateInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 200 && VK_EXT_depth_clip_control
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_CONTROL_FEATURES_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLIP_CONTROL_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceDepthClipControlFeaturesEXT(
         (VkPhysicalDeviceDepthClipControlFeaturesEXT const *)pData);
     return;
@@ -9210,8 +9145,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 200 && VK_EXT_depth_clip_control
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_DEPTH_CLIP_CONTROL_CREATE_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_DEPTH_CLIP_CONTROL_CREATE_INFO_EXT) {
     cleanup_VkPipelineViewportDepthClipControlCreateInfoEXT(
         (VkPipelineViewportDepthClipControlCreateInfoEXT const *)pData);
     return;
@@ -9219,9 +9153,8 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 200 && VK_ARM_rasterization_order_attachment_access
-      else if (
-          pTemp->sType ==
-          VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_FEATURES_ARM) {
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_FEATURES_ARM) {
     cleanup_VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM(
         (VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM const *)pData);
     return;
@@ -9229,7 +9162,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 201 && VK_KHR_video_encode_queue
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_RATE_CONTROL_LAYER_INFO_KHR) {
     cleanup_VkVideoEncodeRateControlLayerInfoKHR(
         (VkVideoEncodeRateControlLayerInfoKHR const *)pData);
     return;
@@ -9237,14 +9170,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 201 && VK_EXT_video_encode_h264
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_INFO_EXT) {
     cleanup_VkVideoEncodeH264RateControlInfoEXT((VkVideoEncodeH264RateControlInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 201 && VK_EXT_video_encode_h264
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_RATE_CONTROL_LAYER_INFO_EXT) {
     cleanup_VkVideoEncodeH264RateControlLayerInfoEXT(
         (VkVideoEncodeH264RateControlLayerInfoEXT const *)pData);
     return;
@@ -9252,14 +9185,14 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 201 && VK_EXT_video_encode_h265
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_INFO_EXT) {
     cleanup_VkVideoEncodeH265RateControlInfoEXT((VkVideoEncodeH265RateControlInfoEXT const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 201 && VK_EXT_video_encode_h265
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_LAYER_INFO_EXT) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_RATE_CONTROL_LAYER_INFO_EXT) {
     cleanup_VkVideoEncodeH265RateControlLayerInfoEXT(
         (VkVideoEncodeH265RateControlLayerInfoEXT const *)pData);
     return;
@@ -9267,8 +9200,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 203 && VK_QCOM_fragment_density_map_offset
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_FEATURES_QCOM) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_FEATURES_QCOM) {
     cleanup_VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM(
         (VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM const *)pData);
     return;
@@ -9276,8 +9208,8 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 203 && VK_QCOM_fragment_density_map_offset
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_PROPERTIES_QCOM) {
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_PROPERTIES_QCOM) {
     cleanup_VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM(
         (VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM const *)pData);
     return;
@@ -9285,8 +9217,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 203 && VK_QCOM_fragment_density_map_offset
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_SUBPASS_FRAGMENT_DENSITY_MAP_OFFSET_END_INFO_QCOM) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SUBPASS_FRAGMENT_DENSITY_MAP_OFFSET_END_INFO_QCOM) {
     cleanup_VkSubpassFragmentDensityMapOffsetEndInfoQCOM(
         (VkSubpassFragmentDensityMapOffsetEndInfoQCOM const *)pData);
     return;
@@ -9294,8 +9225,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 203 && VK_KHR_video_queue
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_2_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_QUEUE_FAMILY_QUERY_RESULT_STATUS_PROPERTIES_2_KHR) {
     cleanup_VkQueueFamilyQueryResultStatusProperties2KHR(
         (VkQueueFamilyQueryResultStatusProperties2KHR const *)pData);
     return;
@@ -9303,8 +9233,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 203 && VK_NV_linear_color_attachment
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV) {
     cleanup_VkPhysicalDeviceLinearColorAttachmentFeaturesNV(
         (VkPhysicalDeviceLinearColorAttachmentFeaturesNV const *)pData);
     return;
@@ -9312,42 +9241,42 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_PRIVATE_DATA_CREATE_INFO) {
     cleanup_VkDevicePrivateDataCreateInfo((VkDevicePrivateDataCreateInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PRIVATE_DATA_SLOT_CREATE_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PRIVATE_DATA_SLOT_CREATE_INFO) {
     cleanup_VkPrivateDataSlotCreateInfo((VkPrivateDataSlotCreateInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIVATE_DATA_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIVATE_DATA_FEATURES) {
     cleanup_VkPhysicalDevicePrivateDataFeatures((VkPhysicalDevicePrivateDataFeatures const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_BUFFER_MEMORY_REQUIREMENTS) {
     cleanup_VkDeviceBufferMemoryRequirements((VkDeviceBufferMemoryRequirements const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_IMAGE_MEMORY_REQUIREMENTS) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_IMAGE_MEMORY_REQUIREMENTS) {
     cleanup_VkDeviceImageMemoryRequirements((VkDeviceImageMemoryRequirements const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_FEATURES) {
     cleanup_VkPhysicalDeviceInlineUniformBlockFeatures(
         (VkPhysicalDeviceInlineUniformBlockFeatures const *)pData);
     return;
@@ -9355,7 +9284,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INLINE_UNIFORM_BLOCK_PROPERTIES) {
     cleanup_VkPhysicalDeviceInlineUniformBlockProperties(
         (VkPhysicalDeviceInlineUniformBlockProperties const *)pData);
     return;
@@ -9363,7 +9292,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_INLINE_UNIFORM_BLOCK) {
     cleanup_VkWriteDescriptorSetInlineUniformBlock(
         (VkWriteDescriptorSetInlineUniformBlock const *)pData);
     return;
@@ -9371,7 +9300,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_INLINE_UNIFORM_BLOCK_CREATE_INFO) {
     cleanup_VkDescriptorPoolInlineUniformBlockCreateInfo(
         (VkDescriptorPoolInlineUniformBlockCreateInfo const *)pData);
     return;
@@ -9379,7 +9308,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_FEATURES) {
     cleanup_VkPhysicalDeviceMaintenance4Features(
         (VkPhysicalDeviceMaintenance4Features const *)pData);
     return;
@@ -9387,7 +9316,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_4_PROPERTIES) {
     cleanup_VkPhysicalDeviceMaintenance4Properties(
         (VkPhysicalDeviceMaintenance4Properties const *)pData);
     return;
@@ -9395,7 +9324,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_KHR_global_priority
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_QUEUE_GLOBAL_PRIORITY_CREATE_INFO_KHR) {
     cleanup_VkDeviceQueueGlobalPriorityCreateInfoKHR(
         (VkDeviceQueueGlobalPriorityCreateInfoKHR const *)pData);
     return;
@@ -9403,8 +9332,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_KHR_global_priority
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_GLOBAL_PRIORITY_QUERY_FEATURES_KHR) {
     cleanup_VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR(
         (VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR const *)pData);
     return;
@@ -9412,7 +9340,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_KHR_global_priority
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_KHR) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_QUEUE_FAMILY_GLOBAL_PRIORITY_PROPERTIES_KHR) {
     cleanup_VkQueueFamilyGlobalPriorityPropertiesKHR(
         (VkQueueFamilyGlobalPriorityPropertiesKHR const *)pData);
     return;
@@ -9420,8 +9348,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_HDR_FEATURES) {
     cleanup_VkPhysicalDeviceTextureCompressionASTCHDRFeatures(
         (VkPhysicalDeviceTextureCompressionASTCHDRFeatures const *)pData);
     return;
@@ -9429,7 +9356,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_CREATION_FEEDBACK_CREATE_INFO) {
     cleanup_VkPipelineCreationFeedbackCreateInfo(
         (VkPipelineCreationFeedbackCreateInfo const *)pData);
     return;
@@ -9437,8 +9364,8 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES) {
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_DEMOTE_TO_HELPER_INVOCATION_FEATURES) {
     cleanup_VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures(
         (VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures const *)pData);
     return;
@@ -9446,8 +9373,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES) {
     cleanup_VkPhysicalDeviceTexelBufferAlignmentProperties(
         (VkPhysicalDeviceTexelBufferAlignmentProperties const *)pData);
     return;
@@ -9455,7 +9381,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_FEATURES) {
     cleanup_VkPhysicalDeviceSubgroupSizeControlFeatures(
         (VkPhysicalDeviceSubgroupSizeControlFeatures const *)pData);
     return;
@@ -9463,7 +9389,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SUBGROUP_SIZE_CONTROL_PROPERTIES) {
     cleanup_VkPhysicalDeviceSubgroupSizeControlProperties(
         (VkPhysicalDeviceSubgroupSizeControlProperties const *)pData);
     return;
@@ -9471,8 +9397,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_REQUIRED_SUBGROUP_SIZE_CREATE_INFO) {
     cleanup_VkPipelineShaderStageRequiredSubgroupSizeCreateInfo(
         (VkPipelineShaderStageRequiredSubgroupSizeCreateInfo const *)pData);
     return;
@@ -9480,8 +9405,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_CREATION_CACHE_CONTROL_FEATURES) {
     cleanup_VkPhysicalDevicePipelineCreationCacheControlFeatures(
         (VkPhysicalDevicePipelineCreationCacheControlFeatures const *)pData);
     return;
@@ -9489,29 +9413,28 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_3_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_3_FEATURES) {
     cleanup_VkPhysicalDeviceVulkan13Features((VkPhysicalDeviceVulkan13Features const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_3_PROPERTIES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VULKAN_1_3_PROPERTIES) {
     cleanup_VkPhysicalDeviceVulkan13Properties((VkPhysicalDeviceVulkan13Properties const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TOOL_PROPERTIES) {
     cleanup_VkPhysicalDeviceToolProperties((VkPhysicalDeviceToolProperties const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_WORKGROUP_MEMORY_FEATURES) {
     cleanup_VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures(
         (VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures const *)pData);
     return;
@@ -9519,7 +9442,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ROBUSTNESS_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_ROBUSTNESS_FEATURES) {
     cleanup_VkPhysicalDeviceImageRobustnessFeatures(
         (VkPhysicalDeviceImageRobustnessFeatures const *)pData);
     return;
@@ -9527,85 +9450,84 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_COPY_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_COPY_2) {
     cleanup_VkBufferCopy2((VkBufferCopy2 const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_COPY_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_COPY_2) {
     cleanup_VkImageCopy2((VkImageCopy2 const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_BLIT_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_BLIT_2) {
     cleanup_VkImageBlit2((VkImageBlit2 const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_IMAGE_COPY_2) {
     cleanup_VkBufferImageCopy2((VkBufferImageCopy2 const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_RESOLVE_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_RESOLVE_2) {
     cleanup_VkImageResolve2((VkImageResolve2 const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_COPY_BUFFER_INFO_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_COPY_BUFFER_INFO_2) {
     cleanup_VkCopyBufferInfo2((VkCopyBufferInfo2 const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_COPY_IMAGE_INFO_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_COPY_IMAGE_INFO_2) {
     cleanup_VkCopyImageInfo2((VkCopyImageInfo2 const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_BLIT_IMAGE_INFO_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BLIT_IMAGE_INFO_2) {
     cleanup_VkBlitImageInfo2((VkBlitImageInfo2 const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_COPY_BUFFER_TO_IMAGE_INFO_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_COPY_BUFFER_TO_IMAGE_INFO_2) {
     cleanup_VkCopyBufferToImageInfo2((VkCopyBufferToImageInfo2 const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_COPY_IMAGE_TO_BUFFER_INFO_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_COPY_IMAGE_TO_BUFFER_INFO_2) {
     cleanup_VkCopyImageToBufferInfo2((VkCopyImageToBufferInfo2 const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_RESOLVE_IMAGE_INFO_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RESOLVE_IMAGE_INFO_2) {
     cleanup_VkResolveImageInfo2((VkResolveImageInfo2 const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TERMINATE_INVOCATION_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TERMINATE_INVOCATION_FEATURES) {
     cleanup_VkPhysicalDeviceShaderTerminateInvocationFeatures(
         (VkPhysicalDeviceShaderTerminateInvocationFeatures const *)pData);
     return;
@@ -9613,56 +9535,56 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_BARRIER_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_BARRIER_2) {
     cleanup_VkMemoryBarrier2((VkMemoryBarrier2 const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER_2) {
     cleanup_VkImageMemoryBarrier2((VkImageMemoryBarrier2 const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_MEMORY_BARRIER_2) {
     cleanup_VkBufferMemoryBarrier2((VkBufferMemoryBarrier2 const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_DEPENDENCY_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEPENDENCY_INFO) {
     cleanup_VkDependencyInfo((VkDependencyInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SEMAPHORE_SUBMIT_INFO) {
     cleanup_VkSemaphoreSubmitInfo((VkSemaphoreSubmitInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_COMMAND_BUFFER_SUBMIT_INFO) {
     cleanup_VkCommandBufferSubmitInfo((VkCommandBufferSubmitInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_SUBMIT_INFO_2) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SUBMIT_INFO_2) {
     cleanup_VkSubmitInfo2((VkSubmitInfo2 const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SYNCHRONIZATION_2_FEATURES) {
     cleanup_VkPhysicalDeviceSynchronization2Features(
         (VkPhysicalDeviceSynchronization2Features const *)pData);
     return;
@@ -9670,8 +9592,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_FEATURES) {
     cleanup_VkPhysicalDeviceShaderIntegerDotProductFeatures(
         (VkPhysicalDeviceShaderIntegerDotProductFeatures const *)pData);
     return;
@@ -9679,8 +9600,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType ==
-               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_INTEGER_DOT_PRODUCT_PROPERTIES) {
     cleanup_VkPhysicalDeviceShaderIntegerDotProductProperties(
         (VkPhysicalDeviceShaderIntegerDotProductProperties const *)pData);
     return;
@@ -9688,35 +9608,35 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_3) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_FORMAT_PROPERTIES_3) {
     cleanup_VkFormatProperties3((VkFormatProperties3 const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_RENDERING_CREATE_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_RENDERING_CREATE_INFO) {
     cleanup_VkPipelineRenderingCreateInfo((VkPipelineRenderingCreateInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_RENDERING_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RENDERING_INFO) {
     cleanup_VkRenderingInfo((VkRenderingInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RENDERING_ATTACHMENT_INFO) {
     cleanup_VkRenderingAttachmentInfo((VkRenderingAttachmentInfo const *)pData);
     return;
   }
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_FEATURES) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_FEATURES) {
     cleanup_VkPhysicalDeviceDynamicRenderingFeatures(
         (VkPhysicalDeviceDynamicRenderingFeatures const *)pData);
     return;
@@ -9724,7 +9644,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
-      else if (pTemp->sType == VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO) {
+  if (pTemp->sType == VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO) {
     cleanup_VkCommandBufferInheritanceRenderingInfo(
         (VkCommandBufferInheritanceRenderingInfo const *)pData);
     return;
