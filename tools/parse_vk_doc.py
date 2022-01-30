@@ -195,17 +195,21 @@ def processStruct(structNode, structData, vkVersion):
         struct.set('first', vkVersion)
 
 
-def processFeatureStruct(featureName, featureType, structData):
+def processFeatureStruct(featureName, featureType, structData, vkVersion):
     name = featureType.get('name')
 
     struct = structData.find(name)
     if not struct is None:
         platforms = struct.find('platforms')
-        if platforms.find(featureName) is None:
-            ET.SubElement(platforms, featureName)
+        platform = platforms.find(featureName)
+        if platform is None:
+            ET.SubElement(platforms, featureName, {
+                'first': vkVersion, 'last': vkVersion})
+        else:
+            platform.set('first', vkVersion)
 
 
-def processExtensionStruct(extension, structData):
+def processExtensionStruct(extension, structData, vkVersion):
     extName = extension.get('name')
 
     for type in extension.findall('require/type'):
@@ -213,8 +217,12 @@ def processExtensionStruct(extension, structData):
         struct = structData.find(typeName)
         if not struct is None:
             platforms = struct.find('platforms')
-            if platforms.find(extName) is None:
-                ET.SubElement(platforms, extName)
+            platform = platforms.find(extName)
+            if platform is None:
+                ET.SubElement(platforms, extName, {
+                    'first': vkVersion, 'last': vkVersion})
+            else:
+                platform.set('first', vkVersion)
 
 
 def main(argv):
@@ -304,10 +312,11 @@ def main(argv):
         if featureName == 'VK_VERSION_1_0':
             continue
         for featureType in feature.findall('require/type'):
-            processFeatureStruct(featureName, featureType, structData)
+            processFeatureStruct(featureName, featureType,
+                                 structData, vkVersion)
 
     for extension in vkRoot.findall('extensions/extension'):
-        processExtensionStruct(extension, structData)
+        processExtensionStruct(extension, structData, vkVersion)
 
     # Output XML
     tree = ET.ElementTree(dataRoot)

@@ -2,6 +2,7 @@
 
 import sys
 import getopt
+import yaml
 import xml.etree.ElementTree as ET
 
 
@@ -23,13 +24,26 @@ def guardStruct(struct, firstVersion, lastVersion, outFile):
             outFile.writelines(
                 ['#if VK_HEADER_VERSION <= ', struct.get('last')])
     # Guard check for platforms
-    for platform in struct.findall('platforms/'):
+    platforms = struct.findall('platforms/')
+    if platforms:
         if guarded:
             # If already started, append to it
-            outFile.writelines([' && ', platform.tag])
+            outFile.write(' && ')
         else:
             guarded = True
-            outFile.writelines(['#if ', platform.tag])
+            outFile.write('\n#if ')
+
+        if len(platforms) > 1:
+            outFile.write('(')
+        platformed = False
+        for platform in platforms:
+            if platformed:
+                outFile.write(' || {}'.format(platform.tag))
+            else:
+                platformed = True
+                outFile.write(platform.tag)
+        if len(platforms) > 1:
+            outFile.write(')')
 
     if guarded:
         outFile.write('\n')
@@ -76,21 +90,27 @@ def processMultiMember(member, suffix, dataRoot, lenSplit, availableVars, outFil
 
 def main(argv):
     inputFile = ''
+    yamlFile = ''
     outputFile = ''
 
     try:
-        opts, args = getopt.getopt(argv, 'i:o:', [])
+        opts, args = getopt.getopt(argv, 'i:y:o:', [])
     except getopt.GetoptError:
         print('Error parsing options')
         sys.exit(1)
     for opt, arg in opts:
         if opt == '-i':
             inputFile = arg
+        elif opt == '-y':
+            yamlFile = arg
         elif opt == '-o':
             outputFile = arg
 
     if(inputFile == ''):
         print("Error: No Vulkan XML file specified")
+        sys.exit(1)
+    if(yamlFile == ''):
+        print("Error: No Yaml exclude file specified")
         sys.exit(1)
     if(outputFile == ''):
         print("Error: No output file specified")
@@ -101,6 +121,13 @@ def main(argv):
         dataRoot = dataXml.getroot()
     except:
         print("Error: Could not open input file: ", inputFile)
+        sys.exit(1)
+
+    try:
+        with open(yamlFile, 'r') as file:
+            yamlData = yaml.safe_load(file)
+    except:
+        print("Error: Could not open Yaml file: ", yamlFile)
         sys.exit(1)
 
     # Get first/last versions
@@ -155,9 +182,10 @@ extern "C" {
         for struct in structs:
             if struct.get('first') != str(currentVersion):
                 continue
-
             name = struct.tag
             if name == 'VkBaseOutStructure' or name == 'VkBaseInStructure':
+                continue
+            if name in yamlData:
                 continue
             outFile.write('\n')
             guarded = guardStruct(struct, firstVersion, lastVersion, outFile)
@@ -192,6 +220,8 @@ void cleanup_vk_struct(void const* pData) {
         for struct in structs:
             if struct.get('first') != str(currentVersion):
                 continue
+            if struct.tag in yamlData:
+                continue
 
             sTypeValue = struct.find('members/sType/value')
             # Only deal with structs that have defined sType
@@ -222,6 +252,8 @@ void cleanup_vk_struct(void const* pData) {
 
             name = struct.tag
             if name == 'VkBaseOutStructure' or name == 'VkBaseInStructure':
+                continue
+            if name in yamlData:
                 continue
             members = getExternalDataMembers(struct.findall('members/'))
 

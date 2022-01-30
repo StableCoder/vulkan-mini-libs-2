@@ -64,7 +64,7 @@ popd >/dev/null
 # Generate headers
 ./generate_serialization_header.py -i .gen_cache.xml -o ../include/vk_value_serialization.hpp
 ./generate_result_string_header.py -i .gen_cache.xml -o ../include/vk_result_to_string.h
-./generate_cleanup_header.py -i .gen_cache.xml -o ../include/vk_struct_cleanup.h
+./generate_cleanup_header.py -i .gen_cache.xml -y ../data/cleanup_excludes.yaml -o ../include/vk_struct_cleanup.h
 
 # Format headers
 clang-format -i ../include/*.h

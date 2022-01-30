@@ -559,8 +559,8 @@ inline void cleanup_VkExternalBufferPropertiesKHR(VkExternalBufferPropertiesKHR 
 void cleanup_VkPhysicalDeviceIDProperties(VkPhysicalDeviceIDProperties const *pData);
 #endif
 
-#if VK_KHR_external_memory_capabilities && VK_KHR_external_semaphore_capabilities &&               \
-    VK_KHR_external_fence_capabilities
+#if (VK_KHR_external_memory_capabilities || VK_KHR_external_semaphore_capabilities ||              \
+     VK_KHR_external_fence_capabilities)
 inline void cleanup_VkPhysicalDeviceIDPropertiesKHR(VkPhysicalDeviceIDPropertiesKHR const *pData) {}
 #endif
 
@@ -851,23 +851,23 @@ void cleanup_VkDeviceGroupBindSparseInfo(VkDeviceGroupBindSparseInfo const *pDat
 inline void cleanup_VkDeviceGroupBindSparseInfoKHR(VkDeviceGroupBindSparseInfoKHR const *pData) {}
 #endif
 
-#if VK_KHR_swapchain && VK_KHR_device_group
+#if (VK_KHR_swapchain || VK_KHR_device_group)
 void cleanup_VkDeviceGroupPresentCapabilitiesKHR(VkDeviceGroupPresentCapabilitiesKHR const *pData);
 #endif
 
-#if VK_KHR_swapchain && VK_KHR_device_group
+#if (VK_KHR_swapchain || VK_KHR_device_group)
 void cleanup_VkImageSwapchainCreateInfoKHR(VkImageSwapchainCreateInfoKHR const *pData);
 #endif
 
-#if VK_KHR_swapchain && VK_KHR_device_group
+#if (VK_KHR_swapchain || VK_KHR_device_group)
 void cleanup_VkBindImageMemorySwapchainInfoKHR(VkBindImageMemorySwapchainInfoKHR const *pData);
 #endif
 
-#if VK_KHR_swapchain && VK_KHR_device_group
+#if (VK_KHR_swapchain || VK_KHR_device_group)
 void cleanup_VkAcquireNextImageInfoKHR(VkAcquireNextImageInfoKHR const *pData);
 #endif
 
-#if VK_KHR_swapchain && VK_KHR_device_group
+#if (VK_KHR_swapchain || VK_KHR_device_group)
 void cleanup_VkDeviceGroupPresentInfoKHR(VkDeviceGroupPresentInfoKHR const *pData);
 #endif
 
@@ -880,7 +880,7 @@ inline void cleanup_VkDeviceGroupDeviceCreateInfoKHR(
     VkDeviceGroupDeviceCreateInfoKHR const *pData) {}
 #endif
 
-#if VK_KHR_swapchain && VK_KHR_device_group
+#if (VK_KHR_swapchain || VK_KHR_device_group)
 void cleanup_VkDeviceGroupSwapchainCreateInfoKHR(VkDeviceGroupSwapchainCreateInfoKHR const *pData);
 #endif
 
@@ -1051,7 +1051,7 @@ inline void cleanup_VkImageSparseMemoryRequirementsInfo2KHR(
 void cleanup_VkMemoryRequirements2(VkMemoryRequirements2 const *pData);
 #endif
 
-#if VK_KHR_get_memory_requirements2 && VK_NV_ray_tracing && VK_VERSION_1_1 && VK_NVX_raytracing
+#if (VK_KHR_get_memory_requirements2 || VK_NV_ray_tracing || VK_VERSION_1_1 || VK_NVX_raytracing)
 inline void cleanup_VkMemoryRequirements2KHR(VkMemoryRequirements2KHR const *pData) {}
 #endif
 
@@ -2690,21 +2690,21 @@ void cleanup_VkGeneratedCommandsMemoryRequirementsInfoNV(
     VkGeneratedCommandsMemoryRequirementsInfoNV const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_ray_tracing_pipeline && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_ray_tracing_pipeline || VK_KHR_ray_tracing)
 void cleanup_VkRayTracingShaderGroupCreateInfoKHR(
     VkRayTracingShaderGroupCreateInfoKHR const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_ray_tracing_pipeline && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_ray_tracing_pipeline || VK_KHR_ray_tracing)
 void cleanup_VkRayTracingPipelineCreateInfoKHR(VkRayTracingPipelineCreateInfoKHR const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
 void cleanup_VkWriteDescriptorSetAccelerationStructureKHR(
     VkWriteDescriptorSetAccelerationStructureKHR const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_ray_tracing_pipeline && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_ray_tracing_pipeline || VK_KHR_ray_tracing)
 inline void cleanup_VkTraceRaysIndirectCommandKHR(VkTraceRaysIndirectCommandKHR const *pData) {}
 #endif
 
@@ -2718,36 +2718,31 @@ inline void cleanup_VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT(
     VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT const *pData) {}
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
 void cleanup_VkAccelerationStructureGeometryTrianglesDataKHR(
     VkAccelerationStructureGeometryTrianglesDataKHR const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
 void cleanup_VkAccelerationStructureGeometryAabbsDataKHR(
     VkAccelerationStructureGeometryAabbsDataKHR const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
 void cleanup_VkAccelerationStructureGeometryInstancesDataKHR(
     VkAccelerationStructureGeometryInstancesDataKHR const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
 void cleanup_VkAccelerationStructureGeometryKHR(VkAccelerationStructureGeometryKHR const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
-void cleanup_VkAccelerationStructureBuildGeometryInfoKHR(
-    VkAccelerationStructureBuildGeometryInfoKHR const *pData);
-#endif
-
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
 void cleanup_VkAccelerationStructureCreateInfoKHR(
     VkAccelerationStructureCreateInfoKHR const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
 inline void cleanup_VkAabbPositionsKHR(VkAabbPositionsKHR const *pData) {}
 #endif
 
@@ -2755,7 +2750,7 @@ inline void cleanup_VkAabbPositionsKHR(VkAabbPositionsKHR const *pData) {}
 inline void cleanup_VkAabbPositionsNV(VkAabbPositionsNV const *pData) {}
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
 inline void cleanup_VkTransformMatrixKHR(VkTransformMatrixKHR const *pData) {}
 #endif
 
@@ -2763,7 +2758,7 @@ inline void cleanup_VkTransformMatrixKHR(VkTransformMatrixKHR const *pData) {}
 inline void cleanup_VkTransformMatrixNV(VkTransformMatrixNV const *pData) {}
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
 inline void cleanup_VkAccelerationStructureInstanceKHR(
     VkAccelerationStructureInstanceKHR const *pData) {}
 #endif
@@ -2773,26 +2768,26 @@ inline void cleanup_VkAccelerationStructureInstanceNV(
     VkAccelerationStructureInstanceNV const *pData) {}
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
 void cleanup_VkAccelerationStructureDeviceAddressInfoKHR(
     VkAccelerationStructureDeviceAddressInfoKHR const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
 void cleanup_VkCopyAccelerationStructureInfoKHR(VkCopyAccelerationStructureInfoKHR const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
 void cleanup_VkCopyAccelerationStructureToMemoryInfoKHR(
     VkCopyAccelerationStructureToMemoryInfoKHR const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
 void cleanup_VkCopyMemoryToAccelerationStructureInfoKHR(
     VkCopyMemoryToAccelerationStructureInfoKHR const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_ray_tracing_pipeline && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_ray_tracing_pipeline || VK_KHR_ray_tracing)
 void cleanup_VkRayTracingPipelineInterfaceCreateInfoKHR(
     VkRayTracingPipelineInterfaceCreateInfoKHR const *pData);
 #endif
@@ -4843,31 +4838,31 @@ void cleanup_vk_struct(void const *pData) {
     break;
 #endif
 
-#if VK_KHR_swapchain && VK_KHR_device_group
+#if (VK_KHR_swapchain || VK_KHR_device_group)
   case VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_CAPABILITIES_KHR:
     cleanup_VkDeviceGroupPresentCapabilitiesKHR((VkDeviceGroupPresentCapabilitiesKHR const *)pData);
     break;
 #endif
 
-#if VK_KHR_swapchain && VK_KHR_device_group
+#if (VK_KHR_swapchain || VK_KHR_device_group)
   case VK_STRUCTURE_TYPE_IMAGE_SWAPCHAIN_CREATE_INFO_KHR:
     cleanup_VkImageSwapchainCreateInfoKHR((VkImageSwapchainCreateInfoKHR const *)pData);
     break;
 #endif
 
-#if VK_KHR_swapchain && VK_KHR_device_group
+#if (VK_KHR_swapchain || VK_KHR_device_group)
   case VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_SWAPCHAIN_INFO_KHR:
     cleanup_VkBindImageMemorySwapchainInfoKHR((VkBindImageMemorySwapchainInfoKHR const *)pData);
     break;
 #endif
 
-#if VK_KHR_swapchain && VK_KHR_device_group
+#if (VK_KHR_swapchain || VK_KHR_device_group)
   case VK_STRUCTURE_TYPE_ACQUIRE_NEXT_IMAGE_INFO_KHR:
     cleanup_VkAcquireNextImageInfoKHR((VkAcquireNextImageInfoKHR const *)pData);
     break;
 #endif
 
-#if VK_KHR_swapchain && VK_KHR_device_group
+#if (VK_KHR_swapchain || VK_KHR_device_group)
   case VK_STRUCTURE_TYPE_DEVICE_GROUP_PRESENT_INFO_KHR:
     cleanup_VkDeviceGroupPresentInfoKHR((VkDeviceGroupPresentInfoKHR const *)pData);
     break;
@@ -4879,7 +4874,7 @@ void cleanup_vk_struct(void const *pData) {
     break;
 #endif
 
-#if VK_KHR_swapchain && VK_KHR_device_group
+#if (VK_KHR_swapchain || VK_KHR_device_group)
   case VK_STRUCTURE_TYPE_DEVICE_GROUP_SWAPCHAIN_CREATE_INFO_KHR:
     cleanup_VkDeviceGroupSwapchainCreateInfoKHR((VkDeviceGroupSwapchainCreateInfoKHR const *)pData);
     break;
@@ -6633,20 +6628,20 @@ void cleanup_vk_struct(void const *pData) {
     break;
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_ray_tracing_pipeline && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_ray_tracing_pipeline || VK_KHR_ray_tracing)
   case VK_STRUCTURE_TYPE_RAY_TRACING_SHADER_GROUP_CREATE_INFO_KHR:
     cleanup_VkRayTracingShaderGroupCreateInfoKHR(
         (VkRayTracingShaderGroupCreateInfoKHR const *)pData);
     break;
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_ray_tracing_pipeline && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_ray_tracing_pipeline || VK_KHR_ray_tracing)
   case VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CREATE_INFO_KHR:
     cleanup_VkRayTracingPipelineCreateInfoKHR((VkRayTracingPipelineCreateInfoKHR const *)pData);
     break;
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
   case VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_ACCELERATION_STRUCTURE_KHR:
     cleanup_VkWriteDescriptorSetAccelerationStructureKHR(
         (VkWriteDescriptorSetAccelerationStructureKHR const *)pData);
@@ -6660,75 +6655,68 @@ void cleanup_vk_struct(void const *pData) {
     break;
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
   case VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_TRIANGLES_DATA_KHR:
     cleanup_VkAccelerationStructureGeometryTrianglesDataKHR(
         (VkAccelerationStructureGeometryTrianglesDataKHR const *)pData);
     break;
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
   case VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_AABBS_DATA_KHR:
     cleanup_VkAccelerationStructureGeometryAabbsDataKHR(
         (VkAccelerationStructureGeometryAabbsDataKHR const *)pData);
     break;
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
   case VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_INSTANCES_DATA_KHR:
     cleanup_VkAccelerationStructureGeometryInstancesDataKHR(
         (VkAccelerationStructureGeometryInstancesDataKHR const *)pData);
     break;
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
   case VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_KHR:
     cleanup_VkAccelerationStructureGeometryKHR((VkAccelerationStructureGeometryKHR const *)pData);
     break;
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
-  case VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_BUILD_GEOMETRY_INFO_KHR:
-    cleanup_VkAccelerationStructureBuildGeometryInfoKHR(
-        (VkAccelerationStructureBuildGeometryInfoKHR const *)pData);
-    break;
-#endif
-
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
   case VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CREATE_INFO_KHR:
     cleanup_VkAccelerationStructureCreateInfoKHR(
         (VkAccelerationStructureCreateInfoKHR const *)pData);
     break;
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
   case VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_DEVICE_ADDRESS_INFO_KHR:
     cleanup_VkAccelerationStructureDeviceAddressInfoKHR(
         (VkAccelerationStructureDeviceAddressInfoKHR const *)pData);
     break;
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
   case VK_STRUCTURE_TYPE_COPY_ACCELERATION_STRUCTURE_INFO_KHR:
     cleanup_VkCopyAccelerationStructureInfoKHR((VkCopyAccelerationStructureInfoKHR const *)pData);
     break;
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
   case VK_STRUCTURE_TYPE_COPY_ACCELERATION_STRUCTURE_TO_MEMORY_INFO_KHR:
     cleanup_VkCopyAccelerationStructureToMemoryInfoKHR(
         (VkCopyAccelerationStructureToMemoryInfoKHR const *)pData);
     break;
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
   case VK_STRUCTURE_TYPE_COPY_MEMORY_TO_ACCELERATION_STRUCTURE_INFO_KHR:
     cleanup_VkCopyMemoryToAccelerationStructureInfoKHR(
         (VkCopyMemoryToAccelerationStructureInfoKHR const *)pData);
     break;
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_ray_tracing_pipeline && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_ray_tracing_pipeline || VK_KHR_ray_tracing)
   case VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_INTERFACE_CREATE_INFO_KHR:
     cleanup_VkRayTracingPipelineInterfaceCreateInfoKHR(
         (VkRayTracingPipelineInterfaceCreateInfoKHR const *)pData);
@@ -9643,8 +9631,8 @@ void cleanup_VkPhysicalDeviceIDProperties(VkPhysicalDeviceIDProperties const *pD
 }
 #endif
 
-#if VK_KHR_external_memory_capabilities && VK_KHR_external_semaphore_capabilities &&               \
-    VK_KHR_external_fence_capabilities
+#if (VK_KHR_external_memory_capabilities || VK_KHR_external_semaphore_capabilities ||              \
+     VK_KHR_external_fence_capabilities)
 extern inline void cleanup_VkPhysicalDeviceIDPropertiesKHR(
     VkPhysicalDeviceIDPropertiesKHR const *pData);
 #endif
@@ -10237,7 +10225,7 @@ extern inline void cleanup_VkDeviceGroupBindSparseInfoKHR(
     VkDeviceGroupBindSparseInfoKHR const *pData);
 #endif
 
-#if VK_KHR_swapchain && VK_KHR_device_group
+#if (VK_KHR_swapchain || VK_KHR_device_group)
 void cleanup_VkDeviceGroupPresentCapabilitiesKHR(VkDeviceGroupPresentCapabilitiesKHR const *pData) {
   // pNext
   if (pData->pNext != NULL)
@@ -10246,7 +10234,7 @@ void cleanup_VkDeviceGroupPresentCapabilitiesKHR(VkDeviceGroupPresentCapabilitie
 }
 #endif
 
-#if VK_KHR_swapchain && VK_KHR_device_group
+#if (VK_KHR_swapchain || VK_KHR_device_group)
 void cleanup_VkImageSwapchainCreateInfoKHR(VkImageSwapchainCreateInfoKHR const *pData) {
   // pNext
   if (pData->pNext != NULL)
@@ -10255,7 +10243,7 @@ void cleanup_VkImageSwapchainCreateInfoKHR(VkImageSwapchainCreateInfoKHR const *
 }
 #endif
 
-#if VK_KHR_swapchain && VK_KHR_device_group
+#if (VK_KHR_swapchain || VK_KHR_device_group)
 void cleanup_VkBindImageMemorySwapchainInfoKHR(VkBindImageMemorySwapchainInfoKHR const *pData) {
   // pNext
   if (pData->pNext != NULL)
@@ -10264,7 +10252,7 @@ void cleanup_VkBindImageMemorySwapchainInfoKHR(VkBindImageMemorySwapchainInfoKHR
 }
 #endif
 
-#if VK_KHR_swapchain && VK_KHR_device_group
+#if (VK_KHR_swapchain || VK_KHR_device_group)
 void cleanup_VkAcquireNextImageInfoKHR(VkAcquireNextImageInfoKHR const *pData) {
   // pNext
   if (pData->pNext != NULL)
@@ -10273,7 +10261,7 @@ void cleanup_VkAcquireNextImageInfoKHR(VkAcquireNextImageInfoKHR const *pData) {
 }
 #endif
 
-#if VK_KHR_swapchain && VK_KHR_device_group
+#if (VK_KHR_swapchain || VK_KHR_device_group)
 void cleanup_VkDeviceGroupPresentInfoKHR(VkDeviceGroupPresentInfoKHR const *pData) {
   // pNext
   if (pData->pNext != NULL)
@@ -10302,7 +10290,7 @@ extern inline void cleanup_VkDeviceGroupDeviceCreateInfoKHR(
     VkDeviceGroupDeviceCreateInfoKHR const *pData);
 #endif
 
-#if VK_KHR_swapchain && VK_KHR_device_group
+#if (VK_KHR_swapchain || VK_KHR_device_group)
 void cleanup_VkDeviceGroupSwapchainCreateInfoKHR(VkDeviceGroupSwapchainCreateInfoKHR const *pData) {
   // pNext
   if (pData->pNext != NULL)
@@ -10633,7 +10621,7 @@ void cleanup_VkMemoryRequirements2(VkMemoryRequirements2 const *pData) {
 }
 #endif
 
-#if VK_KHR_get_memory_requirements2 && VK_NV_ray_tracing && VK_VERSION_1_1 && VK_NVX_raytracing
+#if (VK_KHR_get_memory_requirements2 || VK_NV_ray_tracing || VK_VERSION_1_1 || VK_NVX_raytracing)
 extern inline void cleanup_VkMemoryRequirements2KHR(VkMemoryRequirements2KHR const *pData);
 #endif
 
@@ -13880,7 +13868,7 @@ void cleanup_VkGeneratedCommandsMemoryRequirementsInfoNV(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_ray_tracing_pipeline && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_ray_tracing_pipeline || VK_KHR_ray_tracing)
 void cleanup_VkRayTracingShaderGroupCreateInfoKHR(
     VkRayTracingShaderGroupCreateInfoKHR const *pData) {
   // pNext
@@ -13893,7 +13881,7 @@ void cleanup_VkRayTracingShaderGroupCreateInfoKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_ray_tracing_pipeline && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_ray_tracing_pipeline || VK_KHR_ray_tracing)
 void cleanup_VkRayTracingPipelineCreateInfoKHR(VkRayTracingPipelineCreateInfoKHR const *pData) {
   // pNext
   if (pData->pNext != NULL)
@@ -13931,7 +13919,7 @@ void cleanup_VkRayTracingPipelineCreateInfoKHR(VkRayTracingPipelineCreateInfoKHR
 }
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
 void cleanup_VkWriteDescriptorSetAccelerationStructureKHR(
     VkWriteDescriptorSetAccelerationStructureKHR const *pData) {
   // pNext
@@ -13944,7 +13932,7 @@ void cleanup_VkWriteDescriptorSetAccelerationStructureKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_ray_tracing_pipeline && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_ray_tracing_pipeline || VK_KHR_ray_tracing)
 extern inline void cleanup_VkTraceRaysIndirectCommandKHR(
     VkTraceRaysIndirectCommandKHR const *pData);
 #endif
@@ -13964,7 +13952,7 @@ extern inline void cleanup_VkPhysicalDevicePipelineCreationCacheControlFeaturesE
     VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
 void cleanup_VkAccelerationStructureGeometryTrianglesDataKHR(
     VkAccelerationStructureGeometryTrianglesDataKHR const *pData) {
   // pNext
@@ -13974,7 +13962,7 @@ void cleanup_VkAccelerationStructureGeometryTrianglesDataKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
 void cleanup_VkAccelerationStructureGeometryAabbsDataKHR(
     VkAccelerationStructureGeometryAabbsDataKHR const *pData) {
   // pNext
@@ -13984,7 +13972,7 @@ void cleanup_VkAccelerationStructureGeometryAabbsDataKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
 void cleanup_VkAccelerationStructureGeometryInstancesDataKHR(
     VkAccelerationStructureGeometryInstancesDataKHR const *pData) {
   // pNext
@@ -13994,7 +13982,7 @@ void cleanup_VkAccelerationStructureGeometryInstancesDataKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
 void cleanup_VkAccelerationStructureGeometryKHR(VkAccelerationStructureGeometryKHR const *pData) {
   // pNext
   if (pData->pNext != NULL)
@@ -14003,34 +13991,7 @@ void cleanup_VkAccelerationStructureGeometryKHR(VkAccelerationStructureGeometryK
 }
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
-void cleanup_VkAccelerationStructureBuildGeometryInfoKHR(
-    VkAccelerationStructureBuildGeometryInfoKHR const *pData) {
-  // pNext
-  if (pData->pNext != NULL)
-    cleanup_vk_struct(pData->pNext);
-  free((void *)pData->pNext);
-
-  // pGeometries - geometryCount
-  if (pData->pGeometries != NULL) {
-    for (uint32_t i = 0; i < pData->geometryCount; ++i)
-      cleanup_VkAccelerationStructureGeometryKHR(&pData->pGeometries[i]);
-  }
-  free((void *)pData->pGeometries);
-
-  // ppGeometries - geometryCount,1
-  for (uint32_t i = 0; i < pData->geometryCount; ++i) {
-    if (pData->ppGeometries[i] != NULL) {
-      for (uint32_t j = 0; j < pData->1 [i]; ++j)
-        cleanup_VkAccelerationStructureGeometryKHR(&pData->ppGeometries[i][j]);
-    }
-    free((void *)pData->ppGeometries[i]);
-  }
-  free((void *)pData->ppGeometries);
-}
-#endif
-
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
 void cleanup_VkAccelerationStructureCreateInfoKHR(
     VkAccelerationStructureCreateInfoKHR const *pData) {
   // pNext
@@ -14040,7 +14001,7 @@ void cleanup_VkAccelerationStructureCreateInfoKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
 extern inline void cleanup_VkAabbPositionsKHR(VkAabbPositionsKHR const *pData);
 #endif
 
@@ -14048,7 +14009,7 @@ extern inline void cleanup_VkAabbPositionsKHR(VkAabbPositionsKHR const *pData);
 extern inline void cleanup_VkAabbPositionsNV(VkAabbPositionsNV const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
 extern inline void cleanup_VkTransformMatrixKHR(VkTransformMatrixKHR const *pData);
 #endif
 
@@ -14056,7 +14017,7 @@ extern inline void cleanup_VkTransformMatrixKHR(VkTransformMatrixKHR const *pDat
 extern inline void cleanup_VkTransformMatrixNV(VkTransformMatrixNV const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
 extern inline void cleanup_VkAccelerationStructureInstanceKHR(
     VkAccelerationStructureInstanceKHR const *pData);
 #endif
@@ -14066,7 +14027,7 @@ extern inline void cleanup_VkAccelerationStructureInstanceNV(
     VkAccelerationStructureInstanceNV const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
 void cleanup_VkAccelerationStructureDeviceAddressInfoKHR(
     VkAccelerationStructureDeviceAddressInfoKHR const *pData) {
   // pNext
@@ -14076,7 +14037,7 @@ void cleanup_VkAccelerationStructureDeviceAddressInfoKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
 void cleanup_VkCopyAccelerationStructureInfoKHR(VkCopyAccelerationStructureInfoKHR const *pData) {
   // pNext
   if (pData->pNext != NULL)
@@ -14085,7 +14046,7 @@ void cleanup_VkCopyAccelerationStructureInfoKHR(VkCopyAccelerationStructureInfoK
 }
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
 void cleanup_VkCopyAccelerationStructureToMemoryInfoKHR(
     VkCopyAccelerationStructureToMemoryInfoKHR const *pData) {
   // pNext
@@ -14095,7 +14056,7 @@ void cleanup_VkCopyAccelerationStructureToMemoryInfoKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_acceleration_structure && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
 void cleanup_VkCopyMemoryToAccelerationStructureInfoKHR(
     VkCopyMemoryToAccelerationStructureInfoKHR const *pData) {
   // pNext
@@ -14105,7 +14066,7 @@ void cleanup_VkCopyMemoryToAccelerationStructureInfoKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 135 && VK_KHR_ray_tracing_pipeline && VK_KHR_ray_tracing
+#if VK_HEADER_VERSION >= 135 && (VK_KHR_ray_tracing_pipeline || VK_KHR_ray_tracing)
 void cleanup_VkRayTracingPipelineInterfaceCreateInfoKHR(
     VkRayTracingPipelineInterfaceCreateInfoKHR const *pData) {
   // pNext
