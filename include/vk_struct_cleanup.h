@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2021 George Cave - gcave@stablecoder.ca
+    Copyright (C) 2021-2022 George Cave - gcave@stablecoder.ca
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
