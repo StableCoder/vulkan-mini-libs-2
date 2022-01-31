@@ -68,5 +68,8 @@ popd >/dev/null
 ./generate_comparison_headers.py -i .gen_cache.xml -y ../data/compare_excludes.yaml -o ../include/vk_struct_compare.h
 
 # Format headers
-clang-format -i ../include/*.h
-clang-format -i ../include/*.hpp
+cd ../include
+clang-format -i *.h
+clang-format -i *.hpp
+clang-format -i *.h
+clang-format -i *.hpp
