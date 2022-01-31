@@ -4811,15 +4811,15 @@ bool compare_VkViewport(VkViewport const *s1, VkViewport const *s2) {
 }
 
 bool compare_VkRect2D(VkRect2D const *s1, VkRect2D const *s2) {
-  if ((compare_VkOffset2D(&s1->offset, &s2->offset)) ||
-      (compare_VkExtent2D(&s1->extent, &s2->extent)) || false)
+  if (!compare_VkOffset2D(&s1->offset, &s2->offset) ||
+      !compare_VkExtent2D(&s1->extent, &s2->extent) || false)
     return false;
 
   return true;
 }
 
 bool compare_VkClearRect(VkClearRect const *s1, VkClearRect const *s2) {
-  if ((compare_VkRect2D(&s1->rect, &s2->rect)) || (s1->baseArrayLayer != s2->baseArrayLayer) ||
+  if (!compare_VkRect2D(&s1->rect, &s2->rect) || (s1->baseArrayLayer != s2->baseArrayLayer) ||
       (s1->layerCount != s2->layerCount) || false)
     return false;
 
@@ -4838,8 +4838,8 @@ bool compare_VkPhysicalDeviceProperties(VkPhysicalDeviceProperties const *s1,
   if ((s1->apiVersion != s2->apiVersion) || (s1->driverVersion != s2->driverVersion) ||
       (s1->vendorID != s2->vendorID) || (s1->deviceID != s2->deviceID) ||
       (s1->deviceType != s2->deviceType) ||
-      (compare_VkPhysicalDeviceLimits(&s1->limits, &s2->limits)) ||
-      (compare_VkPhysicalDeviceSparseProperties(&s1->sparseProperties, &s2->sparseProperties)) ||
+      !compare_VkPhysicalDeviceLimits(&s1->limits, &s2->limits) ||
+      !compare_VkPhysicalDeviceSparseProperties(&s1->sparseProperties, &s2->sparseProperties) ||
       false)
     return false;
 
@@ -4933,7 +4933,7 @@ bool compare_VkQueueFamilyProperties(VkQueueFamilyProperties const *s1,
                                      VkQueueFamilyProperties const *s2) {
   if ((s1->queueFlags != s2->queueFlags) || (s1->queueCount != s2->queueCount) ||
       (s1->timestampValidBits != s2->timestampValidBits) ||
-      (compare_VkExtent3D(&s1->minImageTransferGranularity, &s2->minImageTransferGranularity)) ||
+      !compare_VkExtent3D(&s1->minImageTransferGranularity, &s2->minImageTransferGranularity) ||
       false)
     return false;
 
@@ -4977,7 +4977,7 @@ bool compare_VkMemoryRequirements(VkMemoryRequirements const *s1, VkMemoryRequir
 bool compare_VkSparseImageFormatProperties(VkSparseImageFormatProperties const *s1,
                                            VkSparseImageFormatProperties const *s2) {
   if ((s1->aspectMask != s2->aspectMask) ||
-      (compare_VkExtent3D(&s1->imageGranularity, &s2->imageGranularity)) ||
+      !compare_VkExtent3D(&s1->imageGranularity, &s2->imageGranularity) ||
       (s1->flags != s2->flags) || false)
     return false;
 
@@ -4986,7 +4986,7 @@ bool compare_VkSparseImageFormatProperties(VkSparseImageFormatProperties const *
 
 bool compare_VkSparseImageMemoryRequirements(VkSparseImageMemoryRequirements const *s1,
                                              VkSparseImageMemoryRequirements const *s2) {
-  if ((compare_VkSparseImageFormatProperties(&s1->formatProperties, &s2->formatProperties)) ||
+  if (!compare_VkSparseImageFormatProperties(&s1->formatProperties, &s2->formatProperties) ||
       (s1->imageMipTailFirstLod != s2->imageMipTailFirstLod) ||
       (s1->imageMipTailSize != s2->imageMipTailSize) ||
       (s1->imageMipTailOffset != s2->imageMipTailOffset) ||
@@ -5028,7 +5028,7 @@ bool compare_VkFormatProperties(VkFormatProperties const *s1, VkFormatProperties
 
 bool compare_VkImageFormatProperties(VkImageFormatProperties const *s1,
                                      VkImageFormatProperties const *s2) {
-  if ((compare_VkExtent3D(&s1->maxExtent, &s2->maxExtent)) ||
+  if (!compare_VkExtent3D(&s1->maxExtent, &s2->maxExtent) ||
       (s1->maxMipLevels != s2->maxMipLevels) || (s1->maxArrayLayers != s2->maxArrayLayers) ||
       (s1->sampleCounts != s2->sampleCounts) || (s1->maxResourceSize != s2->maxResourceSize) ||
       false)
@@ -5142,7 +5142,7 @@ bool compare_VkImageMemoryBarrier(VkImageMemoryBarrier const *s1, VkImageMemoryB
       (s1->oldLayout != s2->oldLayout) || (s1->newLayout != s2->newLayout) ||
       (s1->srcQueueFamilyIndex != s2->srcQueueFamilyIndex) ||
       (s1->dstQueueFamilyIndex != s2->dstQueueFamilyIndex) || (s1->image != s2->image) ||
-      (compare_VkImageSubresourceRange(&s1->subresourceRange, &s2->subresourceRange)) || false)
+      !compare_VkImageSubresourceRange(&s1->subresourceRange, &s2->subresourceRange) || false)
     return false;
 
   return true;
@@ -5150,7 +5150,7 @@ bool compare_VkImageMemoryBarrier(VkImageMemoryBarrier const *s1, VkImageMemoryB
 
 bool compare_VkImageCreateInfo(VkImageCreateInfo const *s1, VkImageCreateInfo const *s2) {
   if ((s1->flags != s2->flags) || (s1->imageType != s2->imageType) || (s1->format != s2->format) ||
-      (compare_VkExtent3D(&s1->extent, &s2->extent)) || (s1->mipLevels != s2->mipLevels) ||
+      !compare_VkExtent3D(&s1->extent, &s2->extent) || (s1->mipLevels != s2->mipLevels) ||
       (s1->arrayLayers != s2->arrayLayers) || (s1->samples != s2->samples) ||
       (s1->tiling != s2->tiling) || (s1->usage != s2->usage) ||
       (s1->sharingMode != s2->sharingMode) ||
@@ -5172,9 +5172,8 @@ bool compare_VkSubresourceLayout(VkSubresourceLayout const *s1, VkSubresourceLay
 bool compare_VkImageViewCreateInfo(VkImageViewCreateInfo const *s1,
                                    VkImageViewCreateInfo const *s2) {
   if ((s1->flags != s2->flags) || (s1->image != s2->image) || (s1->viewType != s2->viewType) ||
-      (s1->format != s2->format) ||
-      (compare_VkComponentMapping(&s1->components, &s2->components)) ||
-      (compare_VkImageSubresourceRange(&s1->subresourceRange, &s2->subresourceRange)) || false)
+      (s1->format != s2->format) || !compare_VkComponentMapping(&s1->components, &s2->components) ||
+      !compare_VkImageSubresourceRange(&s1->subresourceRange, &s2->subresourceRange) || false)
     return false;
 
   return true;
@@ -5199,9 +5198,9 @@ bool compare_VkSparseMemoryBind(VkSparseMemoryBind const *s1, VkSparseMemoryBind
 
 bool compare_VkSparseImageMemoryBind(VkSparseImageMemoryBind const *s1,
                                      VkSparseImageMemoryBind const *s2) {
-  if ((compare_VkImageSubresource(&s1->subresource, &s2->subresource)) ||
-      (compare_VkOffset3D(&s1->offset, &s2->offset)) ||
-      (compare_VkExtent3D(&s1->extent, &s2->extent)) || (s1->memory != s2->memory) ||
+  if (!compare_VkImageSubresource(&s1->subresource, &s2->subresource) ||
+      !compare_VkOffset3D(&s1->offset, &s2->offset) ||
+      !compare_VkExtent3D(&s1->extent, &s2->extent) || (s1->memory != s2->memory) ||
       (s1->memoryOffset != s2->memoryOffset) || (s1->flags != s2->flags) || false)
     return false;
 
@@ -5244,19 +5243,19 @@ bool compare_VkBindSparseInfo(VkBindSparseInfo const *s1, VkBindSparseInfo const
 }
 
 bool compare_VkImageCopy(VkImageCopy const *s1, VkImageCopy const *s2) {
-  if ((compare_VkImageSubresourceLayers(&s1->srcSubresource, &s2->srcSubresource)) ||
-      (compare_VkOffset3D(&s1->srcOffset, &s2->srcOffset)) ||
-      (compare_VkImageSubresourceLayers(&s1->dstSubresource, &s2->dstSubresource)) ||
-      (compare_VkOffset3D(&s1->dstOffset, &s2->dstOffset)) ||
-      (compare_VkExtent3D(&s1->extent, &s2->extent)) || false)
+  if (!compare_VkImageSubresourceLayers(&s1->srcSubresource, &s2->srcSubresource) ||
+      !compare_VkOffset3D(&s1->srcOffset, &s2->srcOffset) ||
+      !compare_VkImageSubresourceLayers(&s1->dstSubresource, &s2->dstSubresource) ||
+      !compare_VkOffset3D(&s1->dstOffset, &s2->dstOffset) ||
+      !compare_VkExtent3D(&s1->extent, &s2->extent) || false)
     return false;
 
   return true;
 }
 
 bool compare_VkImageBlit(VkImageBlit const *s1, VkImageBlit const *s2) {
-  if ((compare_VkImageSubresourceLayers(&s1->srcSubresource, &s2->srcSubresource)) ||
-      (compare_VkImageSubresourceLayers(&s1->dstSubresource, &s2->dstSubresource)) || false)
+  if (!compare_VkImageSubresourceLayers(&s1->srcSubresource, &s2->srcSubresource) ||
+      !compare_VkImageSubresourceLayers(&s1->dstSubresource, &s2->dstSubresource) || false)
     return false;
 
   for (uint32_t i = 0; i < 2; ++i) {
@@ -5274,20 +5273,20 @@ bool compare_VkImageBlit(VkImageBlit const *s1, VkImageBlit const *s2) {
 bool compare_VkBufferImageCopy(VkBufferImageCopy const *s1, VkBufferImageCopy const *s2) {
   if ((s1->bufferOffset != s2->bufferOffset) || (s1->bufferRowLength != s2->bufferRowLength) ||
       (s1->bufferImageHeight != s2->bufferImageHeight) ||
-      (compare_VkImageSubresourceLayers(&s1->imageSubresource, &s2->imageSubresource)) ||
-      (compare_VkOffset3D(&s1->imageOffset, &s2->imageOffset)) ||
-      (compare_VkExtent3D(&s1->imageExtent, &s2->imageExtent)) || false)
+      !compare_VkImageSubresourceLayers(&s1->imageSubresource, &s2->imageSubresource) ||
+      !compare_VkOffset3D(&s1->imageOffset, &s2->imageOffset) ||
+      !compare_VkExtent3D(&s1->imageExtent, &s2->imageExtent) || false)
     return false;
 
   return true;
 }
 
 bool compare_VkImageResolve(VkImageResolve const *s1, VkImageResolve const *s2) {
-  if ((compare_VkImageSubresourceLayers(&s1->srcSubresource, &s2->srcSubresource)) ||
-      (compare_VkOffset3D(&s1->srcOffset, &s2->srcOffset)) ||
-      (compare_VkImageSubresourceLayers(&s1->dstSubresource, &s2->dstSubresource)) ||
-      (compare_VkOffset3D(&s1->dstOffset, &s2->dstOffset)) ||
-      (compare_VkExtent3D(&s1->extent, &s2->extent)) || false)
+  if (!compare_VkImageSubresourceLayers(&s1->srcSubresource, &s2->srcSubresource) ||
+      !compare_VkOffset3D(&s1->srcOffset, &s2->srcOffset) ||
+      !compare_VkImageSubresourceLayers(&s1->dstSubresource, &s2->dstSubresource) ||
+      !compare_VkOffset3D(&s1->dstOffset, &s2->dstOffset) ||
+      !compare_VkExtent3D(&s1->extent, &s2->extent) || false)
     return false;
 
   return true;
@@ -5370,7 +5369,7 @@ bool compare_VkPipelineShaderStageCreateInfo(VkPipelineShaderStageCreateInfo con
 bool compare_VkComputePipelineCreateInfo(VkComputePipelineCreateInfo const *s1,
                                          VkComputePipelineCreateInfo const *s2) {
   if ((s1->flags != s2->flags) ||
-      (compare_VkPipelineShaderStageCreateInfo(&s1->stage, &s2->stage)) ||
+      !compare_VkPipelineShaderStageCreateInfo(&s1->stage, &s2->stage) ||
       (s1->layout != s2->layout) || (s1->basePipelineHandle != s2->basePipelineHandle) ||
       (s1->basePipelineIndex != s2->basePipelineIndex) || false)
     return false;
@@ -5516,8 +5515,8 @@ bool compare_VkPipelineDepthStencilStateCreateInfo(
       (s1->depthCompareOp != s2->depthCompareOp) ||
       (s1->depthBoundsTestEnable != s2->depthBoundsTestEnable) ||
       (s1->stencilTestEnable != s2->stencilTestEnable) ||
-      (compare_VkStencilOpState(&s1->front, &s2->front)) ||
-      (compare_VkStencilOpState(&s1->back, &s2->back)) ||
+      !compare_VkStencilOpState(&s1->front, &s2->front) ||
+      !compare_VkStencilOpState(&s1->back, &s2->back) ||
       (s1->minDepthBounds != s2->minDepthBounds) || (s1->maxDepthBounds != s2->maxDepthBounds) ||
       false)
     return false;
@@ -5632,7 +5631,7 @@ bool compare_VkCommandBufferBeginInfo(VkCommandBufferBeginInfo const *s1,
 bool compare_VkRenderPassBeginInfo(VkRenderPassBeginInfo const *s1,
                                    VkRenderPassBeginInfo const *s2) {
   if ((s1->renderPass != s2->renderPass) || (s1->framebuffer != s2->framebuffer) ||
-      (compare_VkRect2D(&s1->renderArea, &s2->renderArea)) ||
+      !compare_VkRect2D(&s1->renderArea, &s2->renderArea) ||
       (s1->clearValueCount != s2->clearValueCount) || false)
     return false;
 
@@ -6005,8 +6004,8 @@ bool compare_VkSubmitInfo(VkSubmitInfo const *s1, VkSubmitInfo const *s2) {
 bool compare_VkDisplayPropertiesKHR(VkDisplayPropertiesKHR const *s1,
                                     VkDisplayPropertiesKHR const *s2) {
   if ((s1->display != s2->display) ||
-      (compare_VkExtent2D(&s1->physicalDimensions, &s2->physicalDimensions)) ||
-      (compare_VkExtent2D(&s1->physicalResolution, &s2->physicalResolution)) ||
+      !compare_VkExtent2D(&s1->physicalDimensions, &s2->physicalDimensions) ||
+      !compare_VkExtent2D(&s1->physicalResolution, &s2->physicalResolution) ||
       (s1->supportedTransforms != s2->supportedTransforms) ||
       (s1->planeReorderPossible != s2->planeReorderPossible) ||
       (s1->persistentContent != s2->persistentContent) || false)
@@ -6030,7 +6029,7 @@ bool compare_VkDisplayPlanePropertiesKHR(VkDisplayPlanePropertiesKHR const *s1,
 #if VK_KHR_display
 bool compare_VkDisplayModeParametersKHR(VkDisplayModeParametersKHR const *s1,
                                         VkDisplayModeParametersKHR const *s2) {
-  if ((compare_VkExtent2D(&s1->visibleRegion, &s2->visibleRegion)) ||
+  if (!compare_VkExtent2D(&s1->visibleRegion, &s2->visibleRegion) ||
       (s1->refreshRate != s2->refreshRate) || false)
     return false;
 
@@ -6042,7 +6041,7 @@ bool compare_VkDisplayModeParametersKHR(VkDisplayModeParametersKHR const *s1,
 bool compare_VkDisplayModePropertiesKHR(VkDisplayModePropertiesKHR const *s1,
                                         VkDisplayModePropertiesKHR const *s2) {
   if ((s1->displayMode != s2->displayMode) ||
-      (compare_VkDisplayModeParametersKHR(&s1->parameters, &s2->parameters)) || false)
+      !compare_VkDisplayModeParametersKHR(&s1->parameters, &s2->parameters) || false)
     return false;
 
   return true;
@@ -6053,7 +6052,7 @@ bool compare_VkDisplayModePropertiesKHR(VkDisplayModePropertiesKHR const *s1,
 bool compare_VkDisplayModeCreateInfoKHR(VkDisplayModeCreateInfoKHR const *s1,
                                         VkDisplayModeCreateInfoKHR const *s2) {
   if ((s1->flags != s2->flags) ||
-      (compare_VkDisplayModeParametersKHR(&s1->parameters, &s2->parameters)) || false)
+      !compare_VkDisplayModeParametersKHR(&s1->parameters, &s2->parameters) || false)
     return false;
 
   return true;
@@ -6064,14 +6063,14 @@ bool compare_VkDisplayModeCreateInfoKHR(VkDisplayModeCreateInfoKHR const *s1,
 bool compare_VkDisplayPlaneCapabilitiesKHR(VkDisplayPlaneCapabilitiesKHR const *s1,
                                            VkDisplayPlaneCapabilitiesKHR const *s2) {
   if ((s1->supportedAlpha != s2->supportedAlpha) ||
-      (compare_VkOffset2D(&s1->minSrcPosition, &s2->minSrcPosition)) ||
-      (compare_VkOffset2D(&s1->maxSrcPosition, &s2->maxSrcPosition)) ||
-      (compare_VkExtent2D(&s1->minSrcExtent, &s2->minSrcExtent)) ||
-      (compare_VkExtent2D(&s1->maxSrcExtent, &s2->maxSrcExtent)) ||
-      (compare_VkOffset2D(&s1->minDstPosition, &s2->minDstPosition)) ||
-      (compare_VkOffset2D(&s1->maxDstPosition, &s2->maxDstPosition)) ||
-      (compare_VkExtent2D(&s1->minDstExtent, &s2->minDstExtent)) ||
-      (compare_VkExtent2D(&s1->maxDstExtent, &s2->maxDstExtent)) || false)
+      !compare_VkOffset2D(&s1->minSrcPosition, &s2->minSrcPosition) ||
+      !compare_VkOffset2D(&s1->maxSrcPosition, &s2->maxSrcPosition) ||
+      !compare_VkExtent2D(&s1->minSrcExtent, &s2->minSrcExtent) ||
+      !compare_VkExtent2D(&s1->maxSrcExtent, &s2->maxSrcExtent) ||
+      !compare_VkOffset2D(&s1->minDstPosition, &s2->minDstPosition) ||
+      !compare_VkOffset2D(&s1->maxDstPosition, &s2->maxDstPosition) ||
+      !compare_VkExtent2D(&s1->minDstExtent, &s2->minDstExtent) ||
+      !compare_VkExtent2D(&s1->maxDstExtent, &s2->maxDstExtent) || false)
     return false;
 
   return true;
@@ -6084,8 +6083,8 @@ bool compare_VkDisplaySurfaceCreateInfoKHR(VkDisplaySurfaceCreateInfoKHR const *
   if ((s1->flags != s2->flags) || (s1->displayMode != s2->displayMode) ||
       (s1->planeIndex != s2->planeIndex) || (s1->planeStackIndex != s2->planeStackIndex) ||
       (s1->transform != s2->transform) || (s1->globalAlpha != s2->globalAlpha) ||
-      (s1->alphaMode != s2->alphaMode) ||
-      (compare_VkExtent2D(&s1->imageExtent, &s2->imageExtent)) || false)
+      (s1->alphaMode != s2->alphaMode) || !compare_VkExtent2D(&s1->imageExtent, &s2->imageExtent) ||
+      false)
     return false;
 
   return true;
@@ -6095,8 +6094,8 @@ bool compare_VkDisplaySurfaceCreateInfoKHR(VkDisplaySurfaceCreateInfoKHR const *
 #if VK_KHR_display_swapchain
 bool compare_VkDisplayPresentInfoKHR(VkDisplayPresentInfoKHR const *s1,
                                      VkDisplayPresentInfoKHR const *s2) {
-  if ((compare_VkRect2D(&s1->srcRect, &s2->srcRect)) ||
-      (compare_VkRect2D(&s1->dstRect, &s2->dstRect)) || (s1->persistent != s2->persistent) || false)
+  if (!compare_VkRect2D(&s1->srcRect, &s2->srcRect) ||
+      !compare_VkRect2D(&s1->dstRect, &s2->dstRect) || (s1->persistent != s2->persistent) || false)
     return false;
 
   return true;
@@ -6107,9 +6106,9 @@ bool compare_VkDisplayPresentInfoKHR(VkDisplayPresentInfoKHR const *s1,
 bool compare_VkSurfaceCapabilitiesKHR(VkSurfaceCapabilitiesKHR const *s1,
                                       VkSurfaceCapabilitiesKHR const *s2) {
   if ((s1->minImageCount != s2->minImageCount) || (s1->maxImageCount != s2->maxImageCount) ||
-      (compare_VkExtent2D(&s1->currentExtent, &s2->currentExtent)) ||
-      (compare_VkExtent2D(&s1->minImageExtent, &s2->minImageExtent)) ||
-      (compare_VkExtent2D(&s1->maxImageExtent, &s2->maxImageExtent)) ||
+      !compare_VkExtent2D(&s1->currentExtent, &s2->currentExtent) ||
+      !compare_VkExtent2D(&s1->minImageExtent, &s2->minImageExtent) ||
+      !compare_VkExtent2D(&s1->maxImageExtent, &s2->maxImageExtent) ||
       (s1->maxImageArrayLayers != s2->maxImageArrayLayers) ||
       (s1->supportedTransforms != s2->supportedTransforms) ||
       (s1->currentTransform != s2->currentTransform) ||
@@ -6238,7 +6237,7 @@ bool compare_VkSwapchainCreateInfoKHR(VkSwapchainCreateInfoKHR const *s1,
   if ((s1->flags != s2->flags) || (s1->surface != s2->surface) ||
       (s1->minImageCount != s2->minImageCount) || (s1->imageFormat != s2->imageFormat) ||
       (s1->imageColorSpace != s2->imageColorSpace) ||
-      (compare_VkExtent2D(&s1->imageExtent, &s2->imageExtent)) ||
+      !compare_VkExtent2D(&s1->imageExtent, &s2->imageExtent) ||
       (s1->imageArrayLayers != s2->imageArrayLayers) || (s1->imageUsage != s2->imageUsage) ||
       (s1->imageSharingMode != s2->imageSharingMode) ||
       (s1->queueFamilyIndexCount != s2->queueFamilyIndexCount) ||
@@ -6371,7 +6370,7 @@ bool compare_VkDedicatedAllocationMemoryAllocateInfoNV(
 #if VK_NV_external_memory_capabilities
 bool compare_VkExternalImageFormatPropertiesNV(VkExternalImageFormatPropertiesNV const *s1,
                                                VkExternalImageFormatPropertiesNV const *s2) {
-  if ((compare_VkImageFormatProperties(&s1->imageFormatProperties, &s2->imageFormatProperties)) ||
+  if (!compare_VkImageFormatProperties(&s1->imageFormatProperties, &s2->imageFormatProperties) ||
       (s1->externalMemoryFeatures != s2->externalMemoryFeatures) ||
       (s1->exportFromImportedHandleTypes != s2->exportFromImportedHandleTypes) ||
       (s1->compatibleHandleTypes != s2->compatibleHandleTypes) || false)
@@ -6673,7 +6672,7 @@ bool compare_VkGeneratedCommandsMemoryRequirementsInfoNV(
 #if VK_VERSION_1_1
 bool compare_VkPhysicalDeviceFeatures2(VkPhysicalDeviceFeatures2 const *s1,
                                        VkPhysicalDeviceFeatures2 const *s2) {
-  if ((compare_VkPhysicalDeviceFeatures(&s1->features, &s2->features)) || false)
+  if (!compare_VkPhysicalDeviceFeatures(&s1->features, &s2->features) || false)
     return false;
 
   return true;
@@ -6690,7 +6689,7 @@ bool compare_VkPhysicalDeviceFeatures2KHR(VkPhysicalDeviceFeatures2KHR const *s1
 #if VK_VERSION_1_1
 bool compare_VkPhysicalDeviceProperties2(VkPhysicalDeviceProperties2 const *s1,
                                          VkPhysicalDeviceProperties2 const *s2) {
-  if ((compare_VkPhysicalDeviceProperties(&s1->properties, &s2->properties)) || false)
+  if (!compare_VkPhysicalDeviceProperties(&s1->properties, &s2->properties) || false)
     return false;
 
   return true;
@@ -6706,7 +6705,7 @@ bool compare_VkPhysicalDeviceProperties2KHR(VkPhysicalDeviceProperties2KHR const
 
 #if VK_VERSION_1_1
 bool compare_VkFormatProperties2(VkFormatProperties2 const *s1, VkFormatProperties2 const *s2) {
-  if ((compare_VkFormatProperties(&s1->formatProperties, &s2->formatProperties)) || false)
+  if (!compare_VkFormatProperties(&s1->formatProperties, &s2->formatProperties) || false)
     return false;
 
   return true;
@@ -6723,7 +6722,7 @@ bool compare_VkFormatProperties2KHR(VkFormatProperties2KHR const *s1,
 #if VK_VERSION_1_1
 bool compare_VkImageFormatProperties2(VkImageFormatProperties2 const *s1,
                                       VkImageFormatProperties2 const *s2) {
-  if ((compare_VkImageFormatProperties(&s1->imageFormatProperties, &s2->imageFormatProperties)) ||
+  if (!compare_VkImageFormatProperties(&s1->imageFormatProperties, &s2->imageFormatProperties) ||
       false)
     return false;
 
@@ -6759,7 +6758,7 @@ bool compare_VkPhysicalDeviceImageFormatInfo2KHR(VkPhysicalDeviceImageFormatInfo
 #if VK_VERSION_1_1
 bool compare_VkQueueFamilyProperties2(VkQueueFamilyProperties2 const *s1,
                                       VkQueueFamilyProperties2 const *s2) {
-  if ((compare_VkQueueFamilyProperties(&s1->queueFamilyProperties, &s2->queueFamilyProperties)) ||
+  if (!compare_VkQueueFamilyProperties(&s1->queueFamilyProperties, &s2->queueFamilyProperties) ||
       false)
     return false;
 
@@ -6777,7 +6776,7 @@ bool compare_VkQueueFamilyProperties2KHR(VkQueueFamilyProperties2KHR const *s1,
 #if VK_VERSION_1_1
 bool compare_VkPhysicalDeviceMemoryProperties2(VkPhysicalDeviceMemoryProperties2 const *s1,
                                                VkPhysicalDeviceMemoryProperties2 const *s2) {
-  if ((compare_VkPhysicalDeviceMemoryProperties(&s1->memoryProperties, &s2->memoryProperties)) ||
+  if (!compare_VkPhysicalDeviceMemoryProperties(&s1->memoryProperties, &s2->memoryProperties) ||
       false)
     return false;
 
@@ -6795,7 +6794,7 @@ bool compare_VkPhysicalDeviceMemoryProperties2KHR(VkPhysicalDeviceMemoryProperti
 #if VK_VERSION_1_1
 bool compare_VkSparseImageFormatProperties2(VkSparseImageFormatProperties2 const *s1,
                                             VkSparseImageFormatProperties2 const *s2) {
-  if ((compare_VkSparseImageFormatProperties(&s1->properties, &s2->properties)) || false)
+  if (!compare_VkSparseImageFormatProperties(&s1->properties, &s2->properties) || false)
     return false;
 
   return true;
@@ -6865,7 +6864,7 @@ bool compare_VkConformanceVersionKHR(VkConformanceVersionKHR const *s1,
 bool compare_VkPhysicalDeviceDriverProperties(VkPhysicalDeviceDriverProperties const *s1,
                                               VkPhysicalDeviceDriverProperties const *s2) {
   if ((s1->driverID != s2->driverID) ||
-      (compare_VkConformanceVersion(&s1->conformanceVersion, &s2->conformanceVersion)) || false)
+      !compare_VkConformanceVersion(&s1->conformanceVersion, &s2->conformanceVersion) || false)
     return false;
 
   for (uint32_t i = 0; i < VK_MAX_DRIVER_NAME_SIZE; ++i) {
@@ -6885,7 +6884,7 @@ bool compare_VkPhysicalDeviceDriverProperties(VkPhysicalDeviceDriverProperties c
 bool compare_VkPhysicalDeviceDriverPropertiesKHR(VkPhysicalDeviceDriverPropertiesKHR const *s1,
                                                  VkPhysicalDeviceDriverPropertiesKHR const *s2) {
   if ((s1->driverID != s2->driverID) ||
-      (compare_VkConformanceVersionKHR(&s1->conformanceVersion, &s2->conformanceVersion)) || false)
+      !compare_VkConformanceVersionKHR(&s1->conformanceVersion, &s2->conformanceVersion) || false)
     return false;
 
   for (uint32_t i = 0; i < VK_MAX_DRIVER_NAME_SIZE_KHR; ++i) {
@@ -6921,8 +6920,8 @@ bool compare_VkPresentRegionKHR(VkPresentRegionKHR const *s1, VkPresentRegionKHR
 
 #if VK_KHR_incremental_present
 bool compare_VkRectLayerKHR(VkRectLayerKHR const *s1, VkRectLayerKHR const *s2) {
-  if ((compare_VkOffset2D(&s1->offset, &s2->offset)) ||
-      (compare_VkExtent2D(&s1->extent, &s2->extent)) || (s1->layer != s2->layer) || false)
+  if (!compare_VkOffset2D(&s1->offset, &s2->offset) ||
+      !compare_VkExtent2D(&s1->extent, &s2->extent) || (s1->layer != s2->layer) || false)
     return false;
 
   return true;
@@ -7010,8 +7009,8 @@ bool compare_VkPhysicalDeviceExternalImageFormatInfoKHR(
 #if VK_VERSION_1_1
 bool compare_VkExternalImageFormatProperties(VkExternalImageFormatProperties const *s1,
                                              VkExternalImageFormatProperties const *s2) {
-  if ((compare_VkExternalMemoryProperties(&s1->externalMemoryProperties,
-                                          &s2->externalMemoryProperties)) ||
+  if (!compare_VkExternalMemoryProperties(&s1->externalMemoryProperties,
+                                          &s2->externalMemoryProperties) ||
       false)
     return false;
 
@@ -7048,8 +7047,8 @@ bool compare_VkPhysicalDeviceExternalBufferInfoKHR(
 #if VK_VERSION_1_1
 bool compare_VkExternalBufferProperties(VkExternalBufferProperties const *s1,
                                         VkExternalBufferProperties const *s2) {
-  if ((compare_VkExternalMemoryProperties(&s1->externalMemoryProperties,
-                                          &s2->externalMemoryProperties)) ||
+  if (!compare_VkExternalMemoryProperties(&s1->externalMemoryProperties,
+                                          &s2->externalMemoryProperties) ||
       false)
     return false;
 
@@ -7566,9 +7565,9 @@ bool compare_VkRenderPassMultiviewCreateInfoKHR(VkRenderPassMultiviewCreateInfoK
 bool compare_VkSurfaceCapabilities2EXT(VkSurfaceCapabilities2EXT const *s1,
                                        VkSurfaceCapabilities2EXT const *s2) {
   if ((s1->minImageCount != s2->minImageCount) || (s1->maxImageCount != s2->maxImageCount) ||
-      (compare_VkExtent2D(&s1->currentExtent, &s2->currentExtent)) ||
-      (compare_VkExtent2D(&s1->minImageExtent, &s2->minImageExtent)) ||
-      (compare_VkExtent2D(&s1->maxImageExtent, &s2->maxImageExtent)) ||
+      !compare_VkExtent2D(&s1->currentExtent, &s2->currentExtent) ||
+      !compare_VkExtent2D(&s1->minImageExtent, &s2->minImageExtent) ||
+      !compare_VkExtent2D(&s1->maxImageExtent, &s2->maxImageExtent) ||
       (s1->maxImageArrayLayers != s2->maxImageArrayLayers) ||
       (s1->supportedTransforms != s2->supportedTransforms) ||
       (s1->currentTransform != s2->currentTransform) ||
@@ -7971,10 +7970,10 @@ bool compare_VkPhysicalDevicePresentWaitFeaturesKHR(
 
 #if VK_EXT_hdr_metadata
 bool compare_VkHdrMetadataEXT(VkHdrMetadataEXT const *s1, VkHdrMetadataEXT const *s2) {
-  if ((compare_VkXYColorEXT(&s1->displayPrimaryRed, &s2->displayPrimaryRed)) ||
-      (compare_VkXYColorEXT(&s1->displayPrimaryGreen, &s2->displayPrimaryGreen)) ||
-      (compare_VkXYColorEXT(&s1->displayPrimaryBlue, &s2->displayPrimaryBlue)) ||
-      (compare_VkXYColorEXT(&s1->whitePoint, &s2->whitePoint)) ||
+  if (!compare_VkXYColorEXT(&s1->displayPrimaryRed, &s2->displayPrimaryRed) ||
+      !compare_VkXYColorEXT(&s1->displayPrimaryGreen, &s2->displayPrimaryGreen) ||
+      !compare_VkXYColorEXT(&s1->displayPrimaryBlue, &s2->displayPrimaryBlue) ||
+      !compare_VkXYColorEXT(&s1->whitePoint, &s2->whitePoint) ||
       (s1->maxLuminance != s2->maxLuminance) || (s1->minLuminance != s2->minLuminance) ||
       (s1->maxContentLightLevel != s2->maxContentLightLevel) ||
       (s1->maxFrameAverageLightLevel != s2->maxFrameAverageLightLevel) || false)
@@ -8204,7 +8203,7 @@ bool compare_VkPhysicalDeviceSurfaceInfo2KHR(VkPhysicalDeviceSurfaceInfo2KHR con
 #if VK_KHR_get_surface_capabilities2
 bool compare_VkSurfaceCapabilities2KHR(VkSurfaceCapabilities2KHR const *s1,
                                        VkSurfaceCapabilities2KHR const *s2) {
-  if ((compare_VkSurfaceCapabilitiesKHR(&s1->surfaceCapabilities, &s2->surfaceCapabilities)) ||
+  if (!compare_VkSurfaceCapabilitiesKHR(&s1->surfaceCapabilities, &s2->surfaceCapabilities) ||
       false)
     return false;
 
@@ -8214,7 +8213,7 @@ bool compare_VkSurfaceCapabilities2KHR(VkSurfaceCapabilities2KHR const *s1,
 
 #if VK_KHR_get_surface_capabilities2
 bool compare_VkSurfaceFormat2KHR(VkSurfaceFormat2KHR const *s1, VkSurfaceFormat2KHR const *s2) {
-  if ((compare_VkSurfaceFormatKHR(&s1->surfaceFormat, &s2->surfaceFormat)) || false)
+  if (!compare_VkSurfaceFormatKHR(&s1->surfaceFormat, &s2->surfaceFormat) || false)
     return false;
 
   return true;
@@ -8224,7 +8223,7 @@ bool compare_VkSurfaceFormat2KHR(VkSurfaceFormat2KHR const *s1, VkSurfaceFormat2
 #if VK_HEADER_VERSION >= 76 && VK_KHR_get_display_properties2
 bool compare_VkDisplayProperties2KHR(VkDisplayProperties2KHR const *s1,
                                      VkDisplayProperties2KHR const *s2) {
-  if ((compare_VkDisplayPropertiesKHR(&s1->displayProperties, &s2->displayProperties)) || false)
+  if (!compare_VkDisplayPropertiesKHR(&s1->displayProperties, &s2->displayProperties) || false)
     return false;
 
   return true;
@@ -8234,8 +8233,8 @@ bool compare_VkDisplayProperties2KHR(VkDisplayProperties2KHR const *s1,
 #if VK_HEADER_VERSION >= 76 && VK_KHR_get_display_properties2
 bool compare_VkDisplayPlaneProperties2KHR(VkDisplayPlaneProperties2KHR const *s1,
                                           VkDisplayPlaneProperties2KHR const *s2) {
-  if ((compare_VkDisplayPlanePropertiesKHR(&s1->displayPlaneProperties,
-                                           &s2->displayPlaneProperties)) ||
+  if (!compare_VkDisplayPlanePropertiesKHR(&s1->displayPlaneProperties,
+                                           &s2->displayPlaneProperties) ||
       false)
     return false;
 
@@ -8246,8 +8245,7 @@ bool compare_VkDisplayPlaneProperties2KHR(VkDisplayPlaneProperties2KHR const *s1
 #if VK_HEADER_VERSION >= 76 && VK_KHR_get_display_properties2
 bool compare_VkDisplayModeProperties2KHR(VkDisplayModeProperties2KHR const *s1,
                                          VkDisplayModeProperties2KHR const *s2) {
-  if ((compare_VkDisplayModePropertiesKHR(&s1->displayModeProperties,
-                                          &s2->displayModeProperties)) ||
+  if (!compare_VkDisplayModePropertiesKHR(&s1->displayModeProperties, &s2->displayModeProperties) ||
       false)
     return false;
 
@@ -8268,7 +8266,7 @@ bool compare_VkDisplayPlaneInfo2KHR(VkDisplayPlaneInfo2KHR const *s1,
 #if VK_HEADER_VERSION >= 76 && VK_KHR_get_display_properties2
 bool compare_VkDisplayPlaneCapabilities2KHR(VkDisplayPlaneCapabilities2KHR const *s1,
                                             VkDisplayPlaneCapabilities2KHR const *s2) {
-  if ((compare_VkDisplayPlaneCapabilitiesKHR(&s1->capabilities, &s2->capabilities)) || false)
+  if (!compare_VkDisplayPlaneCapabilitiesKHR(&s1->capabilities, &s2->capabilities) || false)
     return false;
 
   return true;
@@ -8430,7 +8428,7 @@ bool compare_VkDeviceImageMemoryRequirementsKHR(VkDeviceImageMemoryRequirementsK
 #if VK_VERSION_1_1
 bool compare_VkMemoryRequirements2(VkMemoryRequirements2 const *s1,
                                    VkMemoryRequirements2 const *s2) {
-  if ((compare_VkMemoryRequirements(&s1->memoryRequirements, &s2->memoryRequirements)) || false)
+  if (!compare_VkMemoryRequirements(&s1->memoryRequirements, &s2->memoryRequirements) || false)
     return false;
 
   return true;
@@ -8447,7 +8445,7 @@ bool compare_VkMemoryRequirements2KHR(VkMemoryRequirements2KHR const *s1,
 #if VK_VERSION_1_1
 bool compare_VkSparseImageMemoryRequirements2(VkSparseImageMemoryRequirements2 const *s1,
                                               VkSparseImageMemoryRequirements2 const *s2) {
-  if ((compare_VkSparseImageMemoryRequirements(&s1->memoryRequirements, &s2->memoryRequirements)) ||
+  if (!compare_VkSparseImageMemoryRequirements(&s1->memoryRequirements, &s2->memoryRequirements) ||
       false)
     return false;
 
@@ -8574,7 +8572,7 @@ bool compare_VkSamplerYcbcrConversionCreateInfo(VkSamplerYcbcrConversionCreateIn
                                                 VkSamplerYcbcrConversionCreateInfo const *s2) {
   if ((s1->format != s2->format) || (s1->ycbcrModel != s2->ycbcrModel) ||
       (s1->ycbcrRange != s2->ycbcrRange) ||
-      (compare_VkComponentMapping(&s1->components, &s2->components)) ||
+      !compare_VkComponentMapping(&s1->components, &s2->components) ||
       (s1->xChromaOffset != s2->xChromaOffset) || (s1->yChromaOffset != s2->yChromaOffset) ||
       (s1->chromaFilter != s2->chromaFilter) ||
       (s1->forceExplicitReconstruction != s2->forceExplicitReconstruction) || false)
@@ -8777,7 +8775,7 @@ bool compare_VkSampleLocationEXT(VkSampleLocationEXT const *s1, VkSampleLocation
 bool compare_VkSampleLocationsInfoEXT(VkSampleLocationsInfoEXT const *s1,
                                       VkSampleLocationsInfoEXT const *s2) {
   if ((s1->sampleLocationsPerPixel != s2->sampleLocationsPerPixel) ||
-      (compare_VkExtent2D(&s1->sampleLocationGridSize, &s2->sampleLocationGridSize)) ||
+      !compare_VkExtent2D(&s1->sampleLocationGridSize, &s2->sampleLocationGridSize) ||
       (s1->sampleLocationsCount != s2->sampleLocationsCount) || false)
     return false;
 
@@ -8789,7 +8787,7 @@ bool compare_VkSampleLocationsInfoEXT(VkSampleLocationsInfoEXT const *s1,
 bool compare_VkAttachmentSampleLocationsEXT(VkAttachmentSampleLocationsEXT const *s1,
                                             VkAttachmentSampleLocationsEXT const *s2) {
   if ((s1->attachmentIndex != s2->attachmentIndex) ||
-      (compare_VkSampleLocationsInfoEXT(&s1->sampleLocationsInfo, &s2->sampleLocationsInfo)) ||
+      !compare_VkSampleLocationsInfoEXT(&s1->sampleLocationsInfo, &s2->sampleLocationsInfo) ||
       false)
     return false;
 
@@ -8801,7 +8799,7 @@ bool compare_VkAttachmentSampleLocationsEXT(VkAttachmentSampleLocationsEXT const
 bool compare_VkSubpassSampleLocationsEXT(VkSubpassSampleLocationsEXT const *s1,
                                          VkSubpassSampleLocationsEXT const *s2) {
   if ((s1->subpassIndex != s2->subpassIndex) ||
-      (compare_VkSampleLocationsInfoEXT(&s1->sampleLocationsInfo, &s2->sampleLocationsInfo)) ||
+      !compare_VkSampleLocationsInfoEXT(&s1->sampleLocationsInfo, &s2->sampleLocationsInfo) ||
       false)
     return false;
 
@@ -8826,7 +8824,7 @@ bool compare_VkPipelineSampleLocationsStateCreateInfoEXT(
     VkPipelineSampleLocationsStateCreateInfoEXT const *s1,
     VkPipelineSampleLocationsStateCreateInfoEXT const *s2) {
   if ((s1->sampleLocationsEnable != s2->sampleLocationsEnable) ||
-      (compare_VkSampleLocationsInfoEXT(&s1->sampleLocationsInfo, &s2->sampleLocationsInfo)) ||
+      !compare_VkSampleLocationsInfoEXT(&s1->sampleLocationsInfo, &s2->sampleLocationsInfo) ||
       false)
     return false;
 
@@ -8839,7 +8837,7 @@ bool compare_VkPhysicalDeviceSampleLocationsPropertiesEXT(
     VkPhysicalDeviceSampleLocationsPropertiesEXT const *s1,
     VkPhysicalDeviceSampleLocationsPropertiesEXT const *s2) {
   if ((s1->sampleLocationSampleCounts != s2->sampleLocationSampleCounts) ||
-      (compare_VkExtent2D(&s1->maxSampleLocationGridSize, &s2->maxSampleLocationGridSize)) ||
+      !compare_VkExtent2D(&s1->maxSampleLocationGridSize, &s2->maxSampleLocationGridSize) ||
       (s1->sampleLocationSubPixelBits != s2->sampleLocationSubPixelBits) ||
       (s1->variableSampleLocations != s2->variableSampleLocations) || false)
     return false;
@@ -8856,7 +8854,7 @@ bool compare_VkPhysicalDeviceSampleLocationsPropertiesEXT(
 #if VK_EXT_sample_locations
 bool compare_VkMultisamplePropertiesEXT(VkMultisamplePropertiesEXT const *s1,
                                         VkMultisamplePropertiesEXT const *s2) {
-  if ((compare_VkExtent2D(&s1->maxSampleLocationGridSize, &s2->maxSampleLocationGridSize)) || false)
+  if (!compare_VkExtent2D(&s1->maxSampleLocationGridSize, &s2->maxSampleLocationGridSize) || false)
     return false;
 
   return true;
@@ -9335,7 +9333,7 @@ bool compare_VkNativeBufferANDROID(VkNativeBufferANDROID const *s1,
                                    VkNativeBufferANDROID const *s2) {
   if ((s1->stride != s2->stride) || (s1->format != s2->format) || (s1->usage != s2->usage) ||
 #if VK_HEADER_VERSION >= 117
-      (compare_VkNativeBufferUsage2ANDROID(&s1->usage2, &s2->usage2)) ||
+      !compare_VkNativeBufferUsage2ANDROID(&s1->usage2, &s2->usage2) ||
 #endif
       false)
     return false;
@@ -9382,7 +9380,7 @@ bool compare_VkShaderResourceUsageAMD(VkShaderResourceUsageAMD const *s1,
 bool compare_VkShaderStatisticsInfoAMD(VkShaderStatisticsInfoAMD const *s1,
                                        VkShaderStatisticsInfoAMD const *s2) {
   if ((s1->shaderStageMask != s2->shaderStageMask) ||
-      (compare_VkShaderResourceUsageAMD(&s1->resourceUsage, &s2->resourceUsage)) ||
+      !compare_VkShaderResourceUsageAMD(&s1->resourceUsage, &s2->resourceUsage) ||
       (s1->numPhysicalVgprs != s2->numPhysicalVgprs) ||
       (s1->numPhysicalSgprs != s2->numPhysicalSgprs) ||
       (s1->numAvailableVgprs != s2->numAvailableVgprs) ||
@@ -10317,8 +10315,8 @@ bool compare_VkAndroidHardwareBufferFormatPropertiesANDROID(
     VkAndroidHardwareBufferFormatPropertiesANDROID const *s2) {
   if ((s1->format != s2->format) || (s1->externalFormat != s2->externalFormat) ||
       (s1->formatFeatures != s2->formatFeatures) ||
-      (compare_VkComponentMapping(&s1->samplerYcbcrConversionComponents,
-                                  &s2->samplerYcbcrConversionComponents)) ||
+      !compare_VkComponentMapping(&s1->samplerYcbcrConversionComponents,
+                                  &s2->samplerYcbcrConversionComponents) ||
       (s1->suggestedYcbcrModel != s2->suggestedYcbcrModel) ||
       (s1->suggestedYcbcrRange != s2->suggestedYcbcrRange) ||
       (s1->suggestedXChromaOffset != s2->suggestedXChromaOffset) ||
@@ -10774,7 +10772,7 @@ bool compare_VkPhysicalDeviceShadingRateImageFeaturesNV(
 bool compare_VkPhysicalDeviceShadingRateImagePropertiesNV(
     VkPhysicalDeviceShadingRateImagePropertiesNV const *s1,
     VkPhysicalDeviceShadingRateImagePropertiesNV const *s2) {
-  if ((compare_VkExtent2D(&s1->shadingRateTexelSize, &s2->shadingRateTexelSize)) ||
+  if (!compare_VkExtent2D(&s1->shadingRateTexelSize, &s2->shadingRateTexelSize) ||
       (s1->shadingRatePaletteSize != s2->shadingRatePaletteSize) ||
       (s1->shadingRateMaxCoarseSamples != s2->shadingRateMaxCoarseSamples) || false)
     return false;
@@ -10929,7 +10927,7 @@ bool compare_VkRayTracingPipelineCreateInfoKHR(VkRayTracingPipelineCreateInfoKHR
       (s1->maxRecursionDepth != s2->maxRecursionDepth) ||
 #endif
 #if VK_HEADER_VERSION <= 161
-      (compare_VkPipelineLibraryCreateInfoKHR(&s1->libraries, &s2->libraries)) ||
+      !compare_VkPipelineLibraryCreateInfoKHR(&s1->libraries, &s2->libraries) ||
 #endif
       false)
     return false;
@@ -10965,8 +10963,8 @@ bool compare_VkGeometryAABBNV(VkGeometryAABBNV const *s1, VkGeometryAABBNV const
 
 #if VK_HEADER_VERSION >= 91 && VK_NV_ray_tracing
 bool compare_VkGeometryDataNV(VkGeometryDataNV const *s1, VkGeometryDataNV const *s2) {
-  if ((compare_VkGeometryTrianglesNV(&s1->triangles, &s2->triangles)) ||
-      (compare_VkGeometryAABBNV(&s1->aabbs, &s2->aabbs)) || false)
+  if (!compare_VkGeometryTrianglesNV(&s1->triangles, &s2->triangles) ||
+      !compare_VkGeometryAABBNV(&s1->aabbs, &s2->aabbs) || false)
     return false;
 
   return true;
@@ -10976,7 +10974,7 @@ bool compare_VkGeometryDataNV(VkGeometryDataNV const *s1, VkGeometryDataNV const
 #if VK_HEADER_VERSION >= 91 && VK_NV_ray_tracing
 bool compare_VkGeometryNV(VkGeometryNV const *s1, VkGeometryNV const *s2) {
   if ((s1->geometryType != s2->geometryType) ||
-      (compare_VkGeometryDataNV(&s1->geometry, &s2->geometry)) || (s1->flags != s2->flags) || false)
+      !compare_VkGeometryDataNV(&s1->geometry, &s2->geometry) || (s1->flags != s2->flags) || false)
     return false;
 
   return true;
@@ -10998,7 +10996,7 @@ bool compare_VkAccelerationStructureInfoNV(VkAccelerationStructureInfoNV const *
 bool compare_VkAccelerationStructureCreateInfoNV(VkAccelerationStructureCreateInfoNV const *s1,
                                                  VkAccelerationStructureCreateInfoNV const *s2) {
   if ((s1->compactedSize != s2->compactedSize) ||
-      (compare_VkAccelerationStructureInfoNV(&s1->info, &s2->info)) || false)
+      !compare_VkAccelerationStructureInfoNV(&s1->info, &s2->info) || false)
     return false;
 
   return true;
@@ -11321,8 +11319,8 @@ bool compare_VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM(
 bool compare_VkPhysicalDeviceFragmentDensityMapPropertiesEXT(
     VkPhysicalDeviceFragmentDensityMapPropertiesEXT const *s1,
     VkPhysicalDeviceFragmentDensityMapPropertiesEXT const *s2) {
-  if ((compare_VkExtent2D(&s1->minFragmentDensityTexelSize, &s2->minFragmentDensityTexelSize)) ||
-      (compare_VkExtent2D(&s1->maxFragmentDensityTexelSize, &s2->maxFragmentDensityTexelSize)) ||
+  if (!compare_VkExtent2D(&s1->minFragmentDensityTexelSize, &s2->minFragmentDensityTexelSize) ||
+      !compare_VkExtent2D(&s1->maxFragmentDensityTexelSize, &s2->maxFragmentDensityTexelSize) ||
       (s1->fragmentDensityInvocations != s2->fragmentDensityInvocations) || false)
     return false;
 
@@ -11349,8 +11347,8 @@ bool compare_VkPhysicalDeviceFragmentDensityMap2PropertiesEXT(
 bool compare_VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM(
     VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM const *s1,
     VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM const *s2) {
-  if ((compare_VkExtent2D(&s1->fragmentDensityOffsetGranularity,
-                          &s2->fragmentDensityOffsetGranularity)) ||
+  if (!compare_VkExtent2D(&s1->fragmentDensityOffsetGranularity,
+                          &s2->fragmentDensityOffsetGranularity) ||
       false)
     return false;
 
@@ -11362,8 +11360,8 @@ bool compare_VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM(
 bool compare_VkRenderPassFragmentDensityMapCreateInfoEXT(
     VkRenderPassFragmentDensityMapCreateInfoEXT const *s1,
     VkRenderPassFragmentDensityMapCreateInfoEXT const *s2) {
-  if ((compare_VkAttachmentReference(&s1->fragmentDensityMapAttachment,
-                                     &s2->fragmentDensityMapAttachment)) ||
+  if (!compare_VkAttachmentReference(&s1->fragmentDensityMapAttachment,
+                                     &s2->fragmentDensityMapAttachment) ||
       false)
     return false;
 
@@ -12731,7 +12729,7 @@ bool compare_VkPhysicalDeviceVulkan12Features(VkPhysicalDeviceVulkan12Features c
 bool compare_VkPhysicalDeviceVulkan12Properties(VkPhysicalDeviceVulkan12Properties const *s1,
                                                 VkPhysicalDeviceVulkan12Properties const *s2) {
   if ((s1->driverID != s2->driverID) ||
-      (compare_VkConformanceVersion(&s1->conformanceVersion, &s2->conformanceVersion)) ||
+      !compare_VkConformanceVersion(&s1->conformanceVersion, &s2->conformanceVersion) ||
       (s1->denormBehaviorIndependence != s2->denormBehaviorIndependence) ||
       (s1->roundingModeIndependence != s2->roundingModeIndependence) ||
       (s1->shaderSignedZeroInfNanPreserveFloat16 != s2->shaderSignedZeroInfNanPreserveFloat16) ||
@@ -13031,7 +13029,7 @@ bool compare_VkPhysicalDeviceCustomBorderColorFeaturesEXT(
 bool compare_VkSamplerBorderColorComponentMappingCreateInfoEXT(
     VkSamplerBorderColorComponentMappingCreateInfoEXT const *s1,
     VkSamplerBorderColorComponentMappingCreateInfoEXT const *s2) {
-  if ((compare_VkComponentMapping(&s1->components, &s2->components)) || (s1->srgb != s2->srgb) ||
+  if (!compare_VkComponentMapping(&s1->components, &s2->components) || (s1->srgb != s2->srgb) ||
       false)
     return false;
 
@@ -13132,7 +13130,7 @@ bool compare_VkTransformMatrixNV(VkTransformMatrixNV const *s1, VkTransformMatri
 #if VK_HEADER_VERSION >= 135 && (VK_KHR_acceleration_structure || VK_KHR_ray_tracing)
 bool compare_VkAccelerationStructureInstanceKHR(VkAccelerationStructureInstanceKHR const *s1,
                                                 VkAccelerationStructureInstanceKHR const *s2) {
-  if ((compare_VkTransformMatrixKHR(&s1->transform, &s2->transform)) ||
+  if (!compare_VkTransformMatrixKHR(&s1->transform, &s2->transform) ||
       (s1->instanceCustomIndex != s2->instanceCustomIndex) || (s1->mask != s2->mask) ||
       (s1->instanceShaderBindingTableRecordOffset != s2->instanceShaderBindingTableRecordOffset) ||
       (s1->flags != s2->flags) ||
@@ -13266,7 +13264,7 @@ bool compare_VkCopyCommandTransformInfoQCOM(VkCopyCommandTransformInfoQCOM const
 bool compare_VkCommandBufferInheritanceRenderPassTransformInfoQCOM(
     VkCommandBufferInheritanceRenderPassTransformInfoQCOM const *s1,
     VkCommandBufferInheritanceRenderPassTransformInfoQCOM const *s2) {
-  if ((s1->transform != s2->transform) || (compare_VkRect2D(&s1->renderArea, &s2->renderArea)) ||
+  if ((s1->transform != s2->transform) || !compare_VkRect2D(&s1->renderArea, &s2->renderArea) ||
       false)
     return false;
 
@@ -13477,11 +13475,11 @@ bool compare_VkBufferCopy2KHR(VkBufferCopy2KHR const *s1, VkBufferCopy2KHR const
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
 bool compare_VkImageCopy2(VkImageCopy2 const *s1, VkImageCopy2 const *s2) {
-  if ((compare_VkImageSubresourceLayers(&s1->srcSubresource, &s2->srcSubresource)) ||
-      (compare_VkOffset3D(&s1->srcOffset, &s2->srcOffset)) ||
-      (compare_VkImageSubresourceLayers(&s1->dstSubresource, &s2->dstSubresource)) ||
-      (compare_VkOffset3D(&s1->dstOffset, &s2->dstOffset)) ||
-      (compare_VkExtent3D(&s1->extent, &s2->extent)) || false)
+  if (!compare_VkImageSubresourceLayers(&s1->srcSubresource, &s2->srcSubresource) ||
+      !compare_VkOffset3D(&s1->srcOffset, &s2->srcOffset) ||
+      !compare_VkImageSubresourceLayers(&s1->dstSubresource, &s2->dstSubresource) ||
+      !compare_VkOffset3D(&s1->dstOffset, &s2->dstOffset) ||
+      !compare_VkExtent3D(&s1->extent, &s2->extent) || false)
     return false;
 
   return true;
@@ -13490,11 +13488,11 @@ bool compare_VkImageCopy2(VkImageCopy2 const *s1, VkImageCopy2 const *s2) {
 
 #if VK_HEADER_VERSION >= 154 && VK_KHR_copy_commands2
 bool compare_VkImageCopy2KHR(VkImageCopy2KHR const *s1, VkImageCopy2KHR const *s2) {
-  if ((compare_VkImageSubresourceLayers(&s1->srcSubresource, &s2->srcSubresource)) ||
-      (compare_VkOffset3D(&s1->srcOffset, &s2->srcOffset)) ||
-      (compare_VkImageSubresourceLayers(&s1->dstSubresource, &s2->dstSubresource)) ||
-      (compare_VkOffset3D(&s1->dstOffset, &s2->dstOffset)) ||
-      (compare_VkExtent3D(&s1->extent, &s2->extent)) || false)
+  if (!compare_VkImageSubresourceLayers(&s1->srcSubresource, &s2->srcSubresource) ||
+      !compare_VkOffset3D(&s1->srcOffset, &s2->srcOffset) ||
+      !compare_VkImageSubresourceLayers(&s1->dstSubresource, &s2->dstSubresource) ||
+      !compare_VkOffset3D(&s1->dstOffset, &s2->dstOffset) ||
+      !compare_VkExtent3D(&s1->extent, &s2->extent) || false)
     return false;
 
   return true;
@@ -13503,8 +13501,8 @@ bool compare_VkImageCopy2KHR(VkImageCopy2KHR const *s1, VkImageCopy2KHR const *s
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
 bool compare_VkImageBlit2(VkImageBlit2 const *s1, VkImageBlit2 const *s2) {
-  if ((compare_VkImageSubresourceLayers(&s1->srcSubresource, &s2->srcSubresource)) ||
-      (compare_VkImageSubresourceLayers(&s1->dstSubresource, &s2->dstSubresource)) || false)
+  if (!compare_VkImageSubresourceLayers(&s1->srcSubresource, &s2->srcSubresource) ||
+      !compare_VkImageSubresourceLayers(&s1->dstSubresource, &s2->dstSubresource) || false)
     return false;
 
   for (uint32_t i = 0; i < 2; ++i) {
@@ -13522,8 +13520,8 @@ bool compare_VkImageBlit2(VkImageBlit2 const *s1, VkImageBlit2 const *s2) {
 
 #if VK_HEADER_VERSION >= 154 && VK_KHR_copy_commands2
 bool compare_VkImageBlit2KHR(VkImageBlit2KHR const *s1, VkImageBlit2KHR const *s2) {
-  if ((compare_VkImageSubresourceLayers(&s1->srcSubresource, &s2->srcSubresource)) ||
-      (compare_VkImageSubresourceLayers(&s1->dstSubresource, &s2->dstSubresource)) || false)
+  if (!compare_VkImageSubresourceLayers(&s1->srcSubresource, &s2->srcSubresource) ||
+      !compare_VkImageSubresourceLayers(&s1->dstSubresource, &s2->dstSubresource) || false)
     return false;
 
   for (uint32_t i = 0; i < 2; ++i) {
@@ -13543,9 +13541,9 @@ bool compare_VkImageBlit2KHR(VkImageBlit2KHR const *s1, VkImageBlit2KHR const *s
 bool compare_VkBufferImageCopy2(VkBufferImageCopy2 const *s1, VkBufferImageCopy2 const *s2) {
   if ((s1->bufferOffset != s2->bufferOffset) || (s1->bufferRowLength != s2->bufferRowLength) ||
       (s1->bufferImageHeight != s2->bufferImageHeight) ||
-      (compare_VkImageSubresourceLayers(&s1->imageSubresource, &s2->imageSubresource)) ||
-      (compare_VkOffset3D(&s1->imageOffset, &s2->imageOffset)) ||
-      (compare_VkExtent3D(&s1->imageExtent, &s2->imageExtent)) || false)
+      !compare_VkImageSubresourceLayers(&s1->imageSubresource, &s2->imageSubresource) ||
+      !compare_VkOffset3D(&s1->imageOffset, &s2->imageOffset) ||
+      !compare_VkExtent3D(&s1->imageExtent, &s2->imageExtent) || false)
     return false;
 
   return true;
@@ -13557,9 +13555,9 @@ bool compare_VkBufferImageCopy2KHR(VkBufferImageCopy2KHR const *s1,
                                    VkBufferImageCopy2KHR const *s2) {
   if ((s1->bufferOffset != s2->bufferOffset) || (s1->bufferRowLength != s2->bufferRowLength) ||
       (s1->bufferImageHeight != s2->bufferImageHeight) ||
-      (compare_VkImageSubresourceLayers(&s1->imageSubresource, &s2->imageSubresource)) ||
-      (compare_VkOffset3D(&s1->imageOffset, &s2->imageOffset)) ||
-      (compare_VkExtent3D(&s1->imageExtent, &s2->imageExtent)) || false)
+      !compare_VkImageSubresourceLayers(&s1->imageSubresource, &s2->imageSubresource) ||
+      !compare_VkOffset3D(&s1->imageOffset, &s2->imageOffset) ||
+      !compare_VkExtent3D(&s1->imageExtent, &s2->imageExtent) || false)
     return false;
 
   return true;
@@ -13568,11 +13566,11 @@ bool compare_VkBufferImageCopy2KHR(VkBufferImageCopy2KHR const *s1,
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
 bool compare_VkImageResolve2(VkImageResolve2 const *s1, VkImageResolve2 const *s2) {
-  if ((compare_VkImageSubresourceLayers(&s1->srcSubresource, &s2->srcSubresource)) ||
-      (compare_VkOffset3D(&s1->srcOffset, &s2->srcOffset)) ||
-      (compare_VkImageSubresourceLayers(&s1->dstSubresource, &s2->dstSubresource)) ||
-      (compare_VkOffset3D(&s1->dstOffset, &s2->dstOffset)) ||
-      (compare_VkExtent3D(&s1->extent, &s2->extent)) || false)
+  if (!compare_VkImageSubresourceLayers(&s1->srcSubresource, &s2->srcSubresource) ||
+      !compare_VkOffset3D(&s1->srcOffset, &s2->srcOffset) ||
+      !compare_VkImageSubresourceLayers(&s1->dstSubresource, &s2->dstSubresource) ||
+      !compare_VkOffset3D(&s1->dstOffset, &s2->dstOffset) ||
+      !compare_VkExtent3D(&s1->extent, &s2->extent) || false)
     return false;
 
   return true;
@@ -13581,11 +13579,11 @@ bool compare_VkImageResolve2(VkImageResolve2 const *s1, VkImageResolve2 const *s
 
 #if VK_HEADER_VERSION >= 154 && VK_KHR_copy_commands2
 bool compare_VkImageResolve2KHR(VkImageResolve2KHR const *s1, VkImageResolve2KHR const *s2) {
-  if ((compare_VkImageSubresourceLayers(&s1->srcSubresource, &s2->srcSubresource)) ||
-      (compare_VkOffset3D(&s1->srcOffset, &s2->srcOffset)) ||
-      (compare_VkImageSubresourceLayers(&s1->dstSubresource, &s2->dstSubresource)) ||
-      (compare_VkOffset3D(&s1->dstOffset, &s2->dstOffset)) ||
-      (compare_VkExtent3D(&s1->extent, &s2->extent)) || false)
+  if (!compare_VkImageSubresourceLayers(&s1->srcSubresource, &s2->srcSubresource) ||
+      !compare_VkOffset3D(&s1->srcOffset, &s2->srcOffset) ||
+      !compare_VkImageSubresourceLayers(&s1->dstSubresource, &s2->dstSubresource) ||
+      !compare_VkOffset3D(&s1->dstOffset, &s2->dstOffset) ||
+      !compare_VkExtent3D(&s1->extent, &s2->extent) || false)
     return false;
 
   return true;
@@ -13739,8 +13737,8 @@ bool compare_VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT(
 bool compare_VkFragmentShadingRateAttachmentInfoKHR(
     VkFragmentShadingRateAttachmentInfoKHR const *s1,
     VkFragmentShadingRateAttachmentInfoKHR const *s2) {
-  if ((compare_VkExtent2D(&s1->shadingRateAttachmentTexelSize,
-                          &s2->shadingRateAttachmentTexelSize)) ||
+  if (!compare_VkExtent2D(&s1->shadingRateAttachmentTexelSize,
+                          &s2->shadingRateAttachmentTexelSize) ||
       false)
     return false;
 
@@ -13752,7 +13750,7 @@ bool compare_VkFragmentShadingRateAttachmentInfoKHR(
 bool compare_VkPipelineFragmentShadingRateStateCreateInfoKHR(
     VkPipelineFragmentShadingRateStateCreateInfoKHR const *s1,
     VkPipelineFragmentShadingRateStateCreateInfoKHR const *s2) {
-  if ((compare_VkExtent2D(&s1->fragmentSize, &s2->fragmentSize)) || false)
+  if (!compare_VkExtent2D(&s1->fragmentSize, &s2->fragmentSize) || false)
     return false;
 
   for (uint32_t i = 0; i < 2; ++i) {
@@ -13781,10 +13779,10 @@ bool compare_VkPhysicalDeviceFragmentShadingRateFeaturesKHR(
 bool compare_VkPhysicalDeviceFragmentShadingRatePropertiesKHR(
     VkPhysicalDeviceFragmentShadingRatePropertiesKHR const *s1,
     VkPhysicalDeviceFragmentShadingRatePropertiesKHR const *s2) {
-  if ((compare_VkExtent2D(&s1->minFragmentShadingRateAttachmentTexelSize,
-                          &s2->minFragmentShadingRateAttachmentTexelSize)) ||
-      (compare_VkExtent2D(&s1->maxFragmentShadingRateAttachmentTexelSize,
-                          &s2->maxFragmentShadingRateAttachmentTexelSize)) ||
+  if (!compare_VkExtent2D(&s1->minFragmentShadingRateAttachmentTexelSize,
+                          &s2->minFragmentShadingRateAttachmentTexelSize) ||
+      !compare_VkExtent2D(&s1->maxFragmentShadingRateAttachmentTexelSize,
+                          &s2->maxFragmentShadingRateAttachmentTexelSize) ||
       (s1->maxFragmentShadingRateAttachmentTexelSizeAspectRatio !=
        s2->maxFragmentShadingRateAttachmentTexelSizeAspectRatio) ||
       (s1->primitiveFragmentShadingRateWithMultipleViewports !=
@@ -13792,7 +13790,7 @@ bool compare_VkPhysicalDeviceFragmentShadingRatePropertiesKHR(
       (s1->layeredShadingRateAttachments != s2->layeredShadingRateAttachments) ||
       (s1->fragmentShadingRateNonTrivialCombinerOps !=
        s2->fragmentShadingRateNonTrivialCombinerOps) ||
-      (compare_VkExtent2D(&s1->maxFragmentSize, &s2->maxFragmentSize)) ||
+      !compare_VkExtent2D(&s1->maxFragmentSize, &s2->maxFragmentSize) ||
       (s1->maxFragmentSizeAspectRatio != s2->maxFragmentSizeAspectRatio) ||
       (s1->maxFragmentShadingRateCoverageSamples != s2->maxFragmentShadingRateCoverageSamples) ||
       (s1->maxFragmentShadingRateRasterizationSamples !=
@@ -13822,7 +13820,7 @@ bool compare_VkPhysicalDeviceFragmentShadingRateKHR(
     VkPhysicalDeviceFragmentShadingRateKHR const *s1,
     VkPhysicalDeviceFragmentShadingRateKHR const *s2) {
   if ((s1->sampleCounts != s2->sampleCounts) ||
-      (compare_VkExtent2D(&s1->fragmentSize, &s2->fragmentSize)) || false)
+      !compare_VkExtent2D(&s1->fragmentSize, &s2->fragmentSize) || false)
     return false;
 
   return true;
@@ -14053,7 +14051,7 @@ bool compare_VkImageMemoryBarrier2(VkImageMemoryBarrier2 const *s1,
       (s1->oldLayout != s2->oldLayout) || (s1->newLayout != s2->newLayout) ||
       (s1->srcQueueFamilyIndex != s2->srcQueueFamilyIndex) ||
       (s1->dstQueueFamilyIndex != s2->dstQueueFamilyIndex) || (s1->image != s2->image) ||
-      (compare_VkImageSubresourceRange(&s1->subresourceRange, &s2->subresourceRange)) || false)
+      !compare_VkImageSubresourceRange(&s1->subresourceRange, &s2->subresourceRange) || false)
     return false;
 
   return true;
@@ -14068,7 +14066,7 @@ bool compare_VkImageMemoryBarrier2KHR(VkImageMemoryBarrier2KHR const *s1,
       (s1->oldLayout != s2->oldLayout) || (s1->newLayout != s2->newLayout) ||
       (s1->srcQueueFamilyIndex != s2->srcQueueFamilyIndex) ||
       (s1->dstQueueFamilyIndex != s2->dstQueueFamilyIndex) || (s1->image != s2->image) ||
-      (compare_VkImageSubresourceRange(&s1->subresourceRange, &s2->subresourceRange)) || false)
+      !compare_VkImageSubresourceRange(&s1->subresourceRange, &s2->subresourceRange) || false)
     return false;
 
   return true;
@@ -14299,10 +14297,9 @@ bool compare_VkVideoCapabilitiesKHR(VkVideoCapabilitiesKHR const *s1,
   if ((s1->capabilityFlags != s2->capabilityFlags) ||
       (s1->minBitstreamBufferOffsetAlignment != s2->minBitstreamBufferOffsetAlignment) ||
       (s1->minBitstreamBufferSizeAlignment != s2->minBitstreamBufferSizeAlignment) ||
-      (compare_VkExtent2D(&s1->videoPictureExtentGranularity,
-                          &s2->videoPictureExtentGranularity)) ||
-      (compare_VkExtent2D(&s1->minExtent, &s2->minExtent)) ||
-      (compare_VkExtent2D(&s1->maxExtent, &s2->maxExtent)) ||
+      !compare_VkExtent2D(&s1->videoPictureExtentGranularity, &s2->videoPictureExtentGranularity) ||
+      !compare_VkExtent2D(&s1->minExtent, &s2->minExtent) ||
+      !compare_VkExtent2D(&s1->maxExtent, &s2->maxExtent) ||
       (s1->maxReferencePicturesSlotsCount != s2->maxReferencePicturesSlotsCount) ||
       (s1->maxReferencePicturesActiveCount != s2->maxReferencePicturesActiveCount) || false)
     return false;
@@ -14334,8 +14331,8 @@ bool compare_VkVideoBindMemoryKHR(VkVideoBindMemoryKHR const *s1, VkVideoBindMem
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
 bool compare_VkVideoPictureResourceKHR(VkVideoPictureResourceKHR const *s1,
                                        VkVideoPictureResourceKHR const *s2) {
-  if ((compare_VkOffset2D(&s1->codedOffset, &s2->codedOffset)) ||
-      (compare_VkExtent2D(&s1->codedExtent, &s2->codedExtent)) ||
+  if (!compare_VkOffset2D(&s1->codedOffset, &s2->codedOffset) ||
+      !compare_VkExtent2D(&s1->codedExtent, &s2->codedExtent) ||
       (s1->baseArrayLayer != s2->baseArrayLayer) ||
       (s1->imageViewBinding != s2->imageViewBinding) || false)
     return false;
@@ -14356,11 +14353,10 @@ bool compare_VkVideoReferenceSlotKHR(VkVideoReferenceSlotKHR const *s1,
 
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_decode_queue
 bool compare_VkVideoDecodeInfoKHR(VkVideoDecodeInfoKHR const *s1, VkVideoDecodeInfoKHR const *s2) {
-  if ((s1->flags != s2->flags) || (compare_VkOffset2D(&s1->codedOffset, &s2->codedOffset)) ||
-      (compare_VkExtent2D(&s1->codedExtent, &s2->codedExtent)) ||
-      (s1->srcBuffer != s2->srcBuffer) || (s1->srcBufferOffset != s2->srcBufferOffset) ||
-      (s1->srcBufferRange != s2->srcBufferRange) ||
-      (compare_VkVideoPictureResourceKHR(&s1->dstPictureResource, &s2->dstPictureResource)) ||
+  if ((s1->flags != s2->flags) || !compare_VkOffset2D(&s1->codedOffset, &s2->codedOffset) ||
+      !compare_VkExtent2D(&s1->codedExtent, &s2->codedExtent) || (s1->srcBuffer != s2->srcBuffer) ||
+      (s1->srcBufferOffset != s2->srcBufferOffset) || (s1->srcBufferRange != s2->srcBufferRange) ||
+      !compare_VkVideoPictureResourceKHR(&s1->dstPictureResource, &s2->dstPictureResource) ||
       (s1->referenceSlotCount != s2->referenceSlotCount) || false)
     return false;
 
@@ -14389,8 +14385,8 @@ bool compare_VkVideoDecodeH264ProfileEXT(VkVideoDecodeH264ProfileEXT const *s1,
 bool compare_VkVideoDecodeH264CapabilitiesEXT(VkVideoDecodeH264CapabilitiesEXT const *s1,
                                               VkVideoDecodeH264CapabilitiesEXT const *s2) {
   if ((s1->maxLevel != s2->maxLevel) ||
-      (compare_VkOffset2D(&s1->fieldOffsetGranularity, &s2->fieldOffsetGranularity)) ||
-      (compare_VkExtensionProperties(&s1->stdExtensionVersion, &s2->stdExtensionVersion)) || false)
+      !compare_VkOffset2D(&s1->fieldOffsetGranularity, &s2->fieldOffsetGranularity) ||
+      !compare_VkExtensionProperties(&s1->stdExtensionVersion, &s2->stdExtensionVersion) || false)
     return false;
 
   return true;
@@ -14469,7 +14465,7 @@ bool compare_VkVideoDecodeH265ProfileEXT(VkVideoDecodeH265ProfileEXT const *s1,
 bool compare_VkVideoDecodeH265CapabilitiesEXT(VkVideoDecodeH265CapabilitiesEXT const *s1,
                                               VkVideoDecodeH265CapabilitiesEXT const *s2) {
   if ((s1->maxLevel != s2->maxLevel) ||
-      (compare_VkExtensionProperties(&s1->stdExtensionVersion, &s2->stdExtensionVersion)) || false)
+      !compare_VkExtensionProperties(&s1->stdExtensionVersion, &s2->stdExtensionVersion) || false)
     return false;
 
   return true;
@@ -14532,7 +14528,7 @@ bool compare_VkVideoSessionCreateInfoKHR(VkVideoSessionCreateInfoKHR const *s1,
                                          VkVideoSessionCreateInfoKHR const *s2) {
   if ((s1->queueFamilyIndex != s2->queueFamilyIndex) || (s1->flags != s2->flags) ||
       (s1->pictureFormat != s2->pictureFormat) ||
-      (compare_VkExtent2D(&s1->maxCodedExtent, &s2->maxCodedExtent)) ||
+      !compare_VkExtent2D(&s1->maxCodedExtent, &s2->maxCodedExtent) ||
       (s1->referencePicturesFormat != s2->referencePicturesFormat) ||
       (s1->maxReferencePicturesSlotsCount != s2->maxReferencePicturesSlotsCount) ||
       (s1->maxReferencePicturesActiveCount != s2->maxReferencePicturesActiveCount) || false)
@@ -14601,11 +14597,11 @@ bool compare_VkVideoCodingControlInfoKHR(VkVideoCodingControlInfoKHR const *s1,
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_encode_queue
 bool compare_VkVideoEncodeInfoKHR(VkVideoEncodeInfoKHR const *s1, VkVideoEncodeInfoKHR const *s2) {
   if ((s1->flags != s2->flags) || (s1->qualityLevel != s2->qualityLevel) ||
-      (compare_VkExtent2D(&s1->codedExtent, &s2->codedExtent)) ||
+      !compare_VkExtent2D(&s1->codedExtent, &s2->codedExtent) ||
       (s1->dstBitstreamBuffer != s2->dstBitstreamBuffer) ||
       (s1->dstBitstreamBufferOffset != s2->dstBitstreamBufferOffset) ||
       (s1->dstBitstreamBufferMaxRange != s2->dstBitstreamBufferMaxRange) ||
-      (compare_VkVideoPictureResourceKHR(&s1->srcPictureResource, &s2->srcPictureResource)) ||
+      !compare_VkVideoPictureResourceKHR(&s1->srcPictureResource, &s2->srcPictureResource) ||
       (s1->referenceSlotCount != s2->referenceSlotCount) ||
 #if VK_HEADER_VERSION >= 201
       (s1->precedingExternallyEncodedBytes != s2->precedingExternallyEncodedBytes) ||
@@ -14665,14 +14661,14 @@ bool compare_VkVideoEncodeH264CapabilitiesEXT(VkVideoEncodeH264CapabilitiesEXT c
                                               VkVideoEncodeH264CapabilitiesEXT const *s2) {
   if ((s1->flags != s2->flags) || (s1->inputModeFlags != s2->inputModeFlags) ||
       (s1->outputModeFlags != s2->outputModeFlags) ||
-      (compare_VkExtent2D(&s1->minPictureSizeInMbs, &s2->minPictureSizeInMbs)) ||
-      (compare_VkExtent2D(&s1->maxPictureSizeInMbs, &s2->maxPictureSizeInMbs)) ||
-      (compare_VkExtent2D(&s1->inputImageDataAlignment, &s2->inputImageDataAlignment)) ||
+      !compare_VkExtent2D(&s1->minPictureSizeInMbs, &s2->minPictureSizeInMbs) ||
+      !compare_VkExtent2D(&s1->maxPictureSizeInMbs, &s2->maxPictureSizeInMbs) ||
+      !compare_VkExtent2D(&s1->inputImageDataAlignment, &s2->inputImageDataAlignment) ||
       (s1->maxNumL0ReferenceForP != s2->maxNumL0ReferenceForP) ||
       (s1->maxNumL0ReferenceForB != s2->maxNumL0ReferenceForB) ||
       (s1->maxNumL1Reference != s2->maxNumL1Reference) ||
       (s1->qualityLevelCount != s2->qualityLevelCount) ||
-      (compare_VkExtensionProperties(&s1->stdExtensionVersion, &s2->stdExtensionVersion)) || false)
+      !compare_VkExtensionProperties(&s1->stdExtensionVersion, &s2->stdExtensionVersion) || false)
     return false;
 
   return true;
@@ -14684,7 +14680,7 @@ bool compare_VkVideoEncodeH264SessionCreateInfoEXT(
     VkVideoEncodeH264SessionCreateInfoEXT const *s1,
     VkVideoEncodeH264SessionCreateInfoEXT const *s2) {
   if ((s1->flags != s2->flags) ||
-      (compare_VkExtent2D(&s1->maxPictureSizeInMbs, &s2->maxPictureSizeInMbs)) || false)
+      !compare_VkExtent2D(&s1->maxPictureSizeInMbs, &s2->maxPictureSizeInMbs) || false)
     return false;
 
   return true;
@@ -14822,11 +14818,11 @@ bool compare_VkVideoEncodeH264RateControlLayerInfoEXT(
     VkVideoEncodeH264RateControlLayerInfoEXT const *s1,
     VkVideoEncodeH264RateControlLayerInfoEXT const *s2) {
   if ((s1->temporalLayerId != s2->temporalLayerId) || (s1->useInitialRcQp != s2->useInitialRcQp) ||
-      (compare_VkVideoEncodeH264QpEXT(&s1->initialRcQp, &s2->initialRcQp)) ||
-      (s1->useMinQp != s2->useMinQp) || (compare_VkVideoEncodeH264QpEXT(&s1->minQp, &s2->minQp)) ||
-      (s1->useMaxQp != s2->useMaxQp) || (compare_VkVideoEncodeH264QpEXT(&s1->maxQp, &s2->maxQp)) ||
+      !compare_VkVideoEncodeH264QpEXT(&s1->initialRcQp, &s2->initialRcQp) ||
+      (s1->useMinQp != s2->useMinQp) || !compare_VkVideoEncodeH264QpEXT(&s1->minQp, &s2->minQp) ||
+      (s1->useMaxQp != s2->useMaxQp) || !compare_VkVideoEncodeH264QpEXT(&s1->maxQp, &s2->maxQp) ||
       (s1->useMaxFrameSize != s2->useMaxFrameSize) ||
-      (compare_VkVideoEncodeH264FrameSizeEXT(&s1->maxFrameSize, &s2->maxFrameSize)) || false)
+      !compare_VkVideoEncodeH264FrameSizeEXT(&s1->maxFrameSize, &s2->maxFrameSize) || false)
     return false;
 
   return true;
@@ -14838,13 +14834,13 @@ bool compare_VkVideoEncodeH265CapabilitiesEXT(VkVideoEncodeH265CapabilitiesEXT c
                                               VkVideoEncodeH265CapabilitiesEXT const *s2) {
   if ((s1->flags != s2->flags) || (s1->inputModeFlags != s2->inputModeFlags) ||
       (s1->outputModeFlags != s2->outputModeFlags) || (s1->ctbSizes != s2->ctbSizes) ||
-      (compare_VkExtent2D(&s1->inputImageDataAlignment, &s2->inputImageDataAlignment)) ||
+      !compare_VkExtent2D(&s1->inputImageDataAlignment, &s2->inputImageDataAlignment) ||
       (s1->maxNumL0ReferenceForP != s2->maxNumL0ReferenceForP) ||
       (s1->maxNumL0ReferenceForB != s2->maxNumL0ReferenceForB) ||
       (s1->maxNumL1Reference != s2->maxNumL1Reference) ||
       (s1->maxNumSubLayers != s2->maxNumSubLayers) ||
       (s1->qualityLevelCount != s2->qualityLevelCount) ||
-      (compare_VkExtensionProperties(&s1->stdExtensionVersion, &s2->stdExtensionVersion)) || false)
+      !compare_VkExtensionProperties(&s1->stdExtensionVersion, &s2->stdExtensionVersion) || false)
     return false;
 
   return true;
@@ -14961,11 +14957,11 @@ bool compare_VkVideoEncodeH265RateControlLayerInfoEXT(
     VkVideoEncodeH265RateControlLayerInfoEXT const *s1,
     VkVideoEncodeH265RateControlLayerInfoEXT const *s2) {
   if ((s1->temporalId != s2->temporalId) || (s1->useInitialRcQp != s2->useInitialRcQp) ||
-      (compare_VkVideoEncodeH265QpEXT(&s1->initialRcQp, &s2->initialRcQp)) ||
-      (s1->useMinQp != s2->useMinQp) || (compare_VkVideoEncodeH265QpEXT(&s1->minQp, &s2->minQp)) ||
-      (s1->useMaxQp != s2->useMaxQp) || (compare_VkVideoEncodeH265QpEXT(&s1->maxQp, &s2->maxQp)) ||
+      !compare_VkVideoEncodeH265QpEXT(&s1->initialRcQp, &s2->initialRcQp) ||
+      (s1->useMinQp != s2->useMinQp) || !compare_VkVideoEncodeH265QpEXT(&s1->minQp, &s2->minQp) ||
+      (s1->useMaxQp != s2->useMaxQp) || !compare_VkVideoEncodeH265QpEXT(&s1->maxQp, &s2->maxQp) ||
       (s1->useMaxFrameSize != s2->useMaxFrameSize) ||
-      (compare_VkVideoEncodeH265FrameSizeEXT(&s1->maxFrameSize, &s2->maxFrameSize)) || false)
+      !compare_VkVideoEncodeH265FrameSizeEXT(&s1->maxFrameSize, &s2->maxFrameSize) || false)
     return false;
 
   return true;
@@ -15323,8 +15319,8 @@ bool compare_VkSRTDataNV(VkSRTDataNV const *s1, VkSRTDataNV const *s2) {
 bool compare_VkAccelerationStructureSRTMotionInstanceNV(
     VkAccelerationStructureSRTMotionInstanceNV const *s1,
     VkAccelerationStructureSRTMotionInstanceNV const *s2) {
-  if ((compare_VkSRTDataNV(&s1->transformT0, &s2->transformT0)) ||
-      (compare_VkSRTDataNV(&s1->transformT1, &s2->transformT1)) ||
+  if (!compare_VkSRTDataNV(&s1->transformT0, &s2->transformT0) ||
+      !compare_VkSRTDataNV(&s1->transformT1, &s2->transformT1) ||
       (s1->instanceCustomIndex != s2->instanceCustomIndex) || (s1->mask != s2->mask) ||
       (s1->instanceShaderBindingTableRecordOffset != s2->instanceShaderBindingTableRecordOffset) ||
       (s1->flags != s2->flags) ||
@@ -15339,8 +15335,8 @@ bool compare_VkAccelerationStructureSRTMotionInstanceNV(
 bool compare_VkAccelerationStructureMatrixMotionInstanceNV(
     VkAccelerationStructureMatrixMotionInstanceNV const *s1,
     VkAccelerationStructureMatrixMotionInstanceNV const *s2) {
-  if ((compare_VkTransformMatrixKHR(&s1->transformT0, &s2->transformT0)) ||
-      (compare_VkTransformMatrixKHR(&s1->transformT1, &s2->transformT1)) ||
+  if (!compare_VkTransformMatrixKHR(&s1->transformT0, &s2->transformT0) ||
+      !compare_VkTransformMatrixKHR(&s1->transformT1, &s2->transformT1) ||
       (s1->instanceCustomIndex != s2->instanceCustomIndex) || (s1->mask != s2->mask) ||
       (s1->instanceShaderBindingTableRecordOffset != s2->instanceShaderBindingTableRecordOffset) ||
       (s1->flags != s2->flags) ||
@@ -15411,9 +15407,9 @@ bool compare_VkBufferCollectionPropertiesFUCHSIA(VkBufferCollectionPropertiesFUC
       (s1->createInfoIndex != s2->createInfoIndex) ||
       (s1->sysmemPixelFormat != s2->sysmemPixelFormat) ||
       (s1->formatFeatures != s2->formatFeatures) ||
-      (compare_VkSysmemColorSpaceFUCHSIA(&s1->sysmemColorSpaceIndex, &s2->sysmemColorSpaceIndex)) ||
-      (compare_VkComponentMapping(&s1->samplerYcbcrConversionComponents,
-                                  &s2->samplerYcbcrConversionComponents)) ||
+      !compare_VkSysmemColorSpaceFUCHSIA(&s1->sysmemColorSpaceIndex, &s2->sysmemColorSpaceIndex) ||
+      !compare_VkComponentMapping(&s1->samplerYcbcrConversionComponents,
+                                  &s2->samplerYcbcrConversionComponents) ||
       (s1->suggestedYcbcrModel != s2->suggestedYcbcrModel) ||
       (s1->suggestedYcbcrRange != s2->suggestedYcbcrRange) ||
       (s1->suggestedXChromaOffset != s2->suggestedXChromaOffset) ||
@@ -15427,10 +15423,10 @@ bool compare_VkBufferCollectionPropertiesFUCHSIA(VkBufferCollectionPropertiesFUC
 #if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
 bool compare_VkBufferConstraintsInfoFUCHSIA(VkBufferConstraintsInfoFUCHSIA const *s1,
                                             VkBufferConstraintsInfoFUCHSIA const *s2) {
-  if ((compare_VkBufferCreateInfo(&s1->createInfo, &s2->createInfo)) ||
+  if (!compare_VkBufferCreateInfo(&s1->createInfo, &s2->createInfo) ||
       (s1->requiredFormatFeatures != s2->requiredFormatFeatures) ||
-      (compare_VkBufferCollectionConstraintsInfoFUCHSIA(&s1->bufferCollectionConstraints,
-                                                        &s2->bufferCollectionConstraints)) ||
+      !compare_VkBufferCollectionConstraintsInfoFUCHSIA(&s1->bufferCollectionConstraints,
+                                                        &s2->bufferCollectionConstraints) ||
       false)
     return false;
 
@@ -15451,7 +15447,7 @@ bool compare_VkSysmemColorSpaceFUCHSIA(VkSysmemColorSpaceFUCHSIA const *s1,
 #if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
 bool compare_VkImageFormatConstraintsInfoFUCHSIA(VkImageFormatConstraintsInfoFUCHSIA const *s1,
                                                  VkImageFormatConstraintsInfoFUCHSIA const *s2) {
-  if ((compare_VkImageCreateInfo(&s1->imageCreateInfo, &s2->imageCreateInfo)) ||
+  if (!compare_VkImageCreateInfo(&s1->imageCreateInfo, &s2->imageCreateInfo) ||
       (s1->requiredFormatFeatures != s2->requiredFormatFeatures) || (s1->flags != s2->flags) ||
       (s1->sysmemPixelFormat != s2->sysmemPixelFormat) ||
       (s1->colorSpaceCount != s2->colorSpaceCount) || false)
@@ -15465,8 +15461,8 @@ bool compare_VkImageFormatConstraintsInfoFUCHSIA(VkImageFormatConstraintsInfoFUC
 bool compare_VkImageConstraintsInfoFUCHSIA(VkImageConstraintsInfoFUCHSIA const *s1,
                                            VkImageConstraintsInfoFUCHSIA const *s2) {
   if ((s1->formatConstraintsCount != s2->formatConstraintsCount) ||
-      (compare_VkBufferCollectionConstraintsInfoFUCHSIA(&s1->bufferCollectionConstraints,
-                                                        &s2->bufferCollectionConstraints)) ||
+      !compare_VkBufferCollectionConstraintsInfoFUCHSIA(&s1->bufferCollectionConstraints,
+                                                        &s2->bufferCollectionConstraints) ||
       (s1->flags != s2->flags) || false)
     return false;
 
@@ -15551,8 +15547,8 @@ bool compare_VkAndroidHardwareBufferFormatProperties2ANDROID(
     VkAndroidHardwareBufferFormatProperties2ANDROID const *s2) {
   if ((s1->format != s2->format) || (s1->externalFormat != s2->externalFormat) ||
       (s1->formatFeatures != s2->formatFeatures) ||
-      (compare_VkComponentMapping(&s1->samplerYcbcrConversionComponents,
-                                  &s2->samplerYcbcrConversionComponents)) ||
+      !compare_VkComponentMapping(&s1->samplerYcbcrConversionComponents,
+                                  &s2->samplerYcbcrConversionComponents) ||
       (s1->suggestedYcbcrModel != s2->suggestedYcbcrModel) ||
       (s1->suggestedYcbcrRange != s2->suggestedYcbcrRange) ||
       (s1->suggestedXChromaOffset != s2->suggestedXChromaOffset) ||
@@ -15589,7 +15585,7 @@ bool compare_VkPipelineRenderingCreateInfoKHR(VkPipelineRenderingCreateInfoKHR c
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
 bool compare_VkRenderingInfo(VkRenderingInfo const *s1, VkRenderingInfo const *s2) {
-  if ((s1->flags != s2->flags) || (compare_VkRect2D(&s1->renderArea, &s2->renderArea)) ||
+  if ((s1->flags != s2->flags) || !compare_VkRect2D(&s1->renderArea, &s2->renderArea) ||
       (s1->layerCount != s2->layerCount) || (s1->viewMask != s2->viewMask) ||
       (s1->colorAttachmentCount != s2->colorAttachmentCount) || false)
     return false;
@@ -15600,7 +15596,7 @@ bool compare_VkRenderingInfo(VkRenderingInfo const *s1, VkRenderingInfo const *s
 
 #if VK_HEADER_VERSION >= 197 && VK_KHR_dynamic_rendering
 bool compare_VkRenderingInfoKHR(VkRenderingInfoKHR const *s1, VkRenderingInfoKHR const *s2) {
-  if ((s1->flags != s2->flags) || (compare_VkRect2D(&s1->renderArea, &s2->renderArea)) ||
+  if ((s1->flags != s2->flags) || !compare_VkRect2D(&s1->renderArea, &s2->renderArea) ||
       (s1->layerCount != s2->layerCount) || (s1->viewMask != s2->viewMask) ||
       (s1->colorAttachmentCount != s2->colorAttachmentCount) || false)
     return false;
@@ -15614,8 +15610,8 @@ bool compare_VkRenderingFragmentShadingRateAttachmentInfoKHR(
     VkRenderingFragmentShadingRateAttachmentInfoKHR const *s1,
     VkRenderingFragmentShadingRateAttachmentInfoKHR const *s2) {
   if ((s1->imageView != s2->imageView) || (s1->imageLayout != s2->imageLayout) ||
-      (compare_VkExtent2D(&s1->shadingRateAttachmentTexelSize,
-                          &s2->shadingRateAttachmentTexelSize)) ||
+      !compare_VkExtent2D(&s1->shadingRateAttachmentTexelSize,
+                          &s2->shadingRateAttachmentTexelSize) ||
       false)
     return false;
 
@@ -16115,8 +16111,8 @@ bool compare_VkGeometryAABBNVX(VkGeometryAABBNVX const *s1, VkGeometryAABBNVX co
 
 #if VK_HEADER_VERSION >= 85 && VK_HEADER_VERSION <= 90 && VK_NVX_raytracing
 bool compare_VkGeometryDataNVX(VkGeometryDataNVX const *s1, VkGeometryDataNVX const *s2) {
-  if ((compare_VkGeometryTrianglesNVX(&s1->triangles, &s2->triangles)) ||
-      (compare_VkGeometryAABBNVX(&s1->aabbs, &s2->aabbs)) || false)
+  if (!compare_VkGeometryTrianglesNVX(&s1->triangles, &s2->triangles) ||
+      !compare_VkGeometryAABBNVX(&s1->aabbs, &s2->aabbs) || false)
     return false;
 
   return true;
@@ -16126,8 +16122,7 @@ bool compare_VkGeometryDataNVX(VkGeometryDataNVX const *s1, VkGeometryDataNVX co
 #if VK_HEADER_VERSION >= 85 && VK_HEADER_VERSION <= 90 && VK_NVX_raytracing
 bool compare_VkGeometryNVX(VkGeometryNVX const *s1, VkGeometryNVX const *s2) {
   if ((s1->geometryType != s2->geometryType) ||
-      (compare_VkGeometryDataNVX(&s1->geometry, &s2->geometry)) || (s1->flags != s2->flags) ||
-      false)
+      !compare_VkGeometryDataNVX(&s1->geometry, &s2->geometry) || (s1->flags != s2->flags) || false)
     return false;
 
   return true;

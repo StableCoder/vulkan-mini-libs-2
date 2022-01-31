@@ -204,7 +204,7 @@ extern "C" {
             memberStruct = dataRoot.findall('structs/{}/'.format(memberType))
             if memberStruct:
                 outFile.writelines(
-                    ['(compare_', memberType, '(&s1->', memberName, ', &s2->', memberName, ')) ||\n'])
+                    ['!compare_', memberType, '(&s1->', memberName, ', &s2->', memberName, ') ||\n'])
             else:
                 outFile.writelines(
                     ['(s1->', memberName, ' != s2->', memberName, ') ||\n'])
