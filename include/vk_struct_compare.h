@@ -49,10 +49,10 @@ extern "C" {
 
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-static_assert(VK_HEADER_VERSION <= 204, "VK_HEADER_VERSION is from after the supported range.");
+static_assert(VK_HEADER_VERSION <= 205, "VK_HEADER_VERSION is from after the supported range.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-_Static_assert(VK_HEADER_VERSION <= 204, "VK_HEADER_VERSION is from after the supported range.");
+_Static_assert(VK_HEADER_VERSION <= 205, "VK_HEADER_VERSION is from after the supported range.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -4261,9 +4261,9 @@ bool compare_VkVideoEncodeH265EmitPictureParametersEXT(
     VkVideoEncodeH265EmitPictureParametersEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 196 && VK_EXT_video_encode_h265
-bool compare_VkVideoEncodeH265NaluSliceEXT(VkVideoEncodeH265NaluSliceEXT const *s1,
-                                           VkVideoEncodeH265NaluSliceEXT const *s2);
+#if VK_HEADER_VERSION >= 205 && VK_EXT_video_encode_h265
+bool compare_VkVideoEncodeH265NaluSliceSegmentEXT(VkVideoEncodeH265NaluSliceSegmentEXT const *s1,
+                                                  VkVideoEncodeH265NaluSliceSegmentEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 201 && VK_EXT_video_encode_h265
@@ -4587,6 +4587,11 @@ bool compare_VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM(
 bool compare_VkPhysicalDeviceLinearColorAttachmentFeaturesNV(
     VkPhysicalDeviceLinearColorAttachmentFeaturesNV const *s1,
     VkPhysicalDeviceLinearColorAttachmentFeaturesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 196 && VK_HEADER_VERSION <= 204 && VK_EXT_video_encode_h265
+bool compare_VkVideoEncodeH265NaluSliceEXT(VkVideoEncodeH265NaluSliceEXT const *s1,
+                                           VkVideoEncodeH265NaluSliceEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 135 && VK_HEADER_VERSION <= 161 && VK_KHR_ray_tracing
@@ -14885,7 +14890,14 @@ bool compare_VkVideoEncodeH265SessionParametersCreateInfoEXT(
 #if VK_HEADER_VERSION >= 196 && VK_EXT_video_encode_h265
 bool compare_VkVideoEncodeH265VclFrameInfoEXT(VkVideoEncodeH265VclFrameInfoEXT const *s1,
                                               VkVideoEncodeH265VclFrameInfoEXT const *s2) {
-  if ((s1->naluSliceEntryCount != s2->naluSliceEntryCount) || false)
+  if (
+#if VK_HEADER_VERSION >= 205
+      (s1->naluSliceSegmentEntryCount != s2->naluSliceSegmentEntryCount) ||
+#endif
+#if VK_HEADER_VERSION <= 204
+      (s1->naluSliceEntryCount != s2->naluSliceEntryCount) ||
+#endif
+      false)
     return false;
 
   return true;
@@ -14905,9 +14917,9 @@ bool compare_VkVideoEncodeH265EmitPictureParametersEXT(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 196 && VK_EXT_video_encode_h265
-bool compare_VkVideoEncodeH265NaluSliceEXT(VkVideoEncodeH265NaluSliceEXT const *s1,
-                                           VkVideoEncodeH265NaluSliceEXT const *s2) {
+#if VK_HEADER_VERSION >= 205 && VK_EXT_video_encode_h265
+bool compare_VkVideoEncodeH265NaluSliceSegmentEXT(VkVideoEncodeH265NaluSliceSegmentEXT const *s1,
+                                                  VkVideoEncodeH265NaluSliceSegmentEXT const *s2) {
   if ((s1->ctbCount != s2->ctbCount) || false)
     return false;
 
@@ -15754,6 +15766,16 @@ bool compare_VkPhysicalDeviceLinearColorAttachmentFeaturesNV(
     VkPhysicalDeviceLinearColorAttachmentFeaturesNV const *s1,
     VkPhysicalDeviceLinearColorAttachmentFeaturesNV const *s2) {
   if ((s1->linearColorAttachment != s2->linearColorAttachment) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 196 && VK_HEADER_VERSION <= 204 && VK_EXT_video_encode_h265
+bool compare_VkVideoEncodeH265NaluSliceEXT(VkVideoEncodeH265NaluSliceEXT const *s1,
+                                           VkVideoEncodeH265NaluSliceEXT const *s2) {
+  if ((s1->ctbCount != s2->ctbCount) || false)
     return false;
 
   return true;

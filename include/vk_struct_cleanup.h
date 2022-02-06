@@ -41,10 +41,10 @@ extern "C" {
 
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-static_assert(VK_HEADER_VERSION <= 204, "VK_HEADER_VERSION is from after the supported range.");
+static_assert(VK_HEADER_VERSION <= 205, "VK_HEADER_VERSION is from after the supported range.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-_Static_assert(VK_HEADER_VERSION <= 204, "VK_HEADER_VERSION is from after the supported range.");
+_Static_assert(VK_HEADER_VERSION <= 205, "VK_HEADER_VERSION is from after the supported range.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -3697,10 +3697,6 @@ void cleanup_VkVideoEncodeH265EmitPictureParametersEXT(
 #endif
 
 #if VK_HEADER_VERSION >= 196 && VK_EXT_video_encode_h265
-void cleanup_VkVideoEncodeH265NaluSliceEXT(VkVideoEncodeH265NaluSliceEXT const *pData);
-#endif
-
-#if VK_HEADER_VERSION >= 196 && VK_EXT_video_encode_h265
 void cleanup_VkVideoEncodeH265ProfileEXT(VkVideoEncodeH265ProfileEXT const *pData);
 #endif
 
@@ -3710,6 +3706,10 @@ void cleanup_VkVideoEncodeH265DpbSlotInfoEXT(VkVideoEncodeH265DpbSlotInfoEXT con
 
 #if VK_HEADER_VERSION >= 196 && VK_EXT_video_encode_h265
 void cleanup_VkVideoEncodeH265ReferenceListsEXT(VkVideoEncodeH265ReferenceListsEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 196 && VK_HEADER_VERSION <= 204 && VK_EXT_video_encode_h265
+void cleanup_VkVideoEncodeH265NaluSliceEXT(VkVideoEncodeH265NaluSliceEXT const *pData);
 #endif
 
 #if VK_HEADER_VERSION >= 197 && VK_KHR_dynamic_rendering
@@ -4091,6 +4091,11 @@ void cleanup_VkPhysicalDeviceDynamicRenderingFeatures(
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
 void cleanup_VkCommandBufferInheritanceRenderingInfo(
     VkCommandBufferInheritanceRenderingInfo const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 205 && VK_EXT_video_encode_h265
+void cleanup_VkVideoEncodeH265NaluSliceSegmentEXT(
+    VkVideoEncodeH265NaluSliceSegmentEXT const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -9027,13 +9032,6 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 196 && VK_EXT_video_encode_h265
-  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_EXT) {
-    cleanup_VkVideoEncodeH265NaluSliceEXT((VkVideoEncodeH265NaluSliceEXT const *)pData);
-    return;
-  }
-#endif
-
-#if VK_HEADER_VERSION >= 196 && VK_EXT_video_encode_h265
   if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_PROFILE_EXT) {
     cleanup_VkVideoEncodeH265ProfileEXT((VkVideoEncodeH265ProfileEXT const *)pData);
     return;
@@ -9050,6 +9048,13 @@ void cleanup_vk_struct(void const *pData) {
 #if VK_HEADER_VERSION >= 196 && VK_EXT_video_encode_h265
   if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_REFERENCE_LISTS_EXT) {
     cleanup_VkVideoEncodeH265ReferenceListsEXT((VkVideoEncodeH265ReferenceListsEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 196 && VK_HEADER_VERSION <= 204 && VK_EXT_video_encode_h265
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_EXT) {
+    cleanup_VkVideoEncodeH265NaluSliceEXT((VkVideoEncodeH265NaluSliceEXT const *)pData);
     return;
   }
 #endif
@@ -9647,6 +9652,14 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_COMMAND_BUFFER_INHERITANCE_RENDERING_INFO) {
     cleanup_VkCommandBufferInheritanceRenderingInfo(
         (VkCommandBufferInheritanceRenderingInfo const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 205 && VK_EXT_video_encode_h265
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_NALU_SLICE_SEGMENT_EXT) {
+    cleanup_VkVideoEncodeH265NaluSliceSegmentEXT(
+        (VkVideoEncodeH265NaluSliceSegmentEXT const *)pData);
     return;
   }
 #endif
@@ -17927,9 +17940,11 @@ void cleanup_VkImageFormatConstraintsInfoFUCHSIA(VkImageFormatConstraintsInfoFUC
     cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
-  // pColorSpaces
-  if (pData->pColorSpaces != NULL)
-    cleanup_VkSysmemColorSpaceFUCHSIA(pData->pColorSpaces);
+  // pColorSpaces - colorSpaceCount
+  if (pData->pColorSpaces != NULL) {
+    for (uint32_t i = 0; i < pData->colorSpaceCount; ++i)
+      cleanup_VkSysmemColorSpaceFUCHSIA(&pData->pColorSpaces[i]);
+  }
   free((void *)pData->pColorSpaces);
 }
 #endif
@@ -18149,15 +18164,26 @@ void cleanup_VkVideoEncodeH265VclFrameInfoEXT(VkVideoEncodeH265VclFrameInfoEXT c
     cleanup_VkVideoEncodeH265ReferenceListsEXT(pData->pReferenceFinalLists);
   free((void *)pData->pReferenceFinalLists);
 
+#if VK_HEADER_VERSION >= 205
+  // pNaluSliceSegmentEntries - naluSliceSegmentEntryCount
+  if (pData->pNaluSliceSegmentEntries != NULL) {
+    for (uint32_t i = 0; i < pData->naluSliceSegmentEntryCount; ++i)
+      cleanup_VkVideoEncodeH265NaluSliceSegmentEXT(&pData->pNaluSliceSegmentEntries[i]);
+  }
+  free((void *)pData->pNaluSliceSegmentEntries);
+#endif
+
+  // pCurrentPictureInfo
+  free((void *)pData->pCurrentPictureInfo);
+
+#if VK_HEADER_VERSION <= 204
   // pNaluSliceEntries - naluSliceEntryCount
   if (pData->pNaluSliceEntries != NULL) {
     for (uint32_t i = 0; i < pData->naluSliceEntryCount; ++i)
       cleanup_VkVideoEncodeH265NaluSliceEXT(&pData->pNaluSliceEntries[i]);
   }
   free((void *)pData->pNaluSliceEntries);
-
-  // pCurrentPictureInfo
-  free((void *)pData->pCurrentPictureInfo);
+#endif
 }
 #endif
 
@@ -18171,23 +18197,6 @@ void cleanup_VkVideoEncodeH265EmitPictureParametersEXT(
 
   // ppsIdEntries - ppsIdEntryCount
   free((void *)pData->ppsIdEntries);
-}
-#endif
-
-#if VK_HEADER_VERSION >= 196 && VK_EXT_video_encode_h265
-void cleanup_VkVideoEncodeH265NaluSliceEXT(VkVideoEncodeH265NaluSliceEXT const *pData) {
-  // pNext
-  if (pData->pNext != NULL)
-    cleanup_vk_struct(pData->pNext);
-  free((void *)pData->pNext);
-
-  // pReferenceFinalLists
-  if (pData->pReferenceFinalLists != NULL)
-    cleanup_VkVideoEncodeH265ReferenceListsEXT(pData->pReferenceFinalLists);
-  free((void *)pData->pReferenceFinalLists);
-
-  // pSliceHeaderStd
-  free((void *)pData->pSliceHeaderStd);
 }
 #endif
 
@@ -18235,6 +18244,23 @@ void cleanup_VkVideoEncodeH265ReferenceListsEXT(VkVideoEncodeH265ReferenceListsE
 
   // pReferenceModifications
   free((void *)pData->pReferenceModifications);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 196 && VK_HEADER_VERSION <= 204 && VK_EXT_video_encode_h265
+void cleanup_VkVideoEncodeH265NaluSliceEXT(VkVideoEncodeH265NaluSliceEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pReferenceFinalLists
+  if (pData->pReferenceFinalLists != NULL)
+    cleanup_VkVideoEncodeH265ReferenceListsEXT(pData->pReferenceFinalLists);
+  free((void *)pData->pReferenceFinalLists);
+
+  // pSliceHeaderStd
+  free((void *)pData->pSliceHeaderStd);
 }
 #endif
 
@@ -19179,6 +19205,24 @@ void cleanup_VkCommandBufferInheritanceRenderingInfo(
 
   // pColorAttachmentFormats - colorAttachmentCount
   free((void *)pData->pColorAttachmentFormats);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 205 && VK_EXT_video_encode_h265
+void cleanup_VkVideoEncodeH265NaluSliceSegmentEXT(
+    VkVideoEncodeH265NaluSliceSegmentEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pReferenceFinalLists
+  if (pData->pReferenceFinalLists != NULL)
+    cleanup_VkVideoEncodeH265ReferenceListsEXT(pData->pReferenceFinalLists);
+  free((void *)pData->pReferenceFinalLists);
+
+  // pSliceSegmentHeaderStd
+  free((void *)pData->pSliceSegmentHeaderStd);
 }
 #endif
 
