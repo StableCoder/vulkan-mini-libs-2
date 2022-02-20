@@ -40,7 +40,7 @@
 #include <string_view>
 
 static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-static_assert(VK_HEADER_VERSION <= 205, "VK_HEADER_VERSION is from after the supported range.");
+static_assert(VK_HEADER_VERSION <= 206, "VK_HEADER_VERSION is from after the supported range.");
 
 /**
  * @brief Macro that automatically stringifies the given Vulkan type for serialization
@@ -2509,6 +2509,11 @@ constexpr EnumValueSet VkVideoEncodeFlagBitsKHRSets[] = {
     {"RESERVED_0", 0x00000001},
 };
 
+constexpr EnumValueSet VkVideoEncodeCapabilityFlagBitsKHRSets[] = {
+    {"DEFAULT", 0},
+    {"PRECEDING_EXTERNALLY_ENCODED_BYTES", 0x00000001},
+};
+
 constexpr EnumValueSet VkVideoEncodeRateControlFlagBitsKHRSets[] = {
     {"DEFAULT", 0},
     {"RESET", 0x00000001},
@@ -2522,18 +2527,32 @@ constexpr EnumValueSet VkVideoEncodeRateControlModeFlagBitsKHRSets[] = {
 };
 
 constexpr EnumValueSet VkVideoEncodeH264CapabilityFlagBitsEXTSets[] = {
-    {"CABAC", 0x00000001},
-    {"CAVLC", 0x00000002},
+    {"CHROMA_QP_OFFSET", 0x00000020},
+    {"SECOND_CHROMA_QP_OFFSET", 0x00000040},
+    {"TRANSFORM_8X8", 0x00001000},
+    {"CABAC", 0x00002000},
+    {"CAVLC", 0x00004000},
+    {"DEBLOCKING_FILTER_DISABLED", 0x00008000},
+    {"DEBLOCKING_FILTER_ENABLED", 0x00010000},
+    {"DEBLOCKING_FILTER_PARTIAL", 0x00020000},
+    {"MULTIPLE_SLICE_PER_FRAME", 0x00080000},
     {"WEIGHTED_BI_PRED_IMPLICIT", 0x00000004},
-    {"TRANSFORM_8X8", 0x00000008},
-    {"CHROMA_QP_OFFSET", 0x00000010},
-    {"SECOND_CHROMA_QP_OFFSET", 0x00000020},
-    {"DEBLOCKING_FILTER_DISABLED", 0x00000040},
-    {"DEBLOCKING_FILTER_ENABLED", 0x00000080},
-    {"DEBLOCKING_FILTER_PARTIAL", 0x00000100},
-    {"MULTIPLE_SLICE_PER_FRAME", 0x00000200},
     {"EVENLY_DISTRIBUTED_SLICE_SIZE", 0x00000400},
     {"OPTIONAL_RC_EXTENSION_STRUCT", 0x00000800},
+    {"DIRECT_8X8_INFERENCE", 0x00000001},
+    {"SEPARATE_COLOUR_PLANE", 0x00000002},
+    {"QPPRIME_Y_ZERO_TRANSFORM_BYPASS", 0x00000004},
+    {"SCALING_LISTS", 0x00000008},
+    {"HRD_COMPLIANCE", 0x00000010},
+    {"PIC_INIT_QP_MINUS26", 0x00000080},
+    {"WEIGHTED_PRED", 0x00000100},
+    {"WEIGHTED_BIPRED_EXPLICIT", 0x00000200},
+    {"WEIGHTED_BIPRED_IMPLICIT", 0x00000400},
+    {"WEIGHTED_PRED_NO_TABLE", 0x00000800},
+    {"DISABLE_DIRECT_SPATIAL_MV_PRED", 0x00040000},
+    {"SLICE_MB_COUNT", 0x00100000},
+    {"ROW_UNALIGNED_SLICE", 0x00200000},
+    {"DIFFERENT_SLICE_TYPE", 0x00400000},
 };
 
 constexpr EnumValueSet VkVideoEncodeH264InputModeFlagBitsEXTSets[] = {
@@ -2643,6 +2662,42 @@ constexpr EnumValueSet VkRenderingFlagBitsSets[] = {
     {"RESUMING_BIT_KHR", 0x00000004},
 };
 
+constexpr EnumValueSet VkVideoEncodeH265CapabilityFlagBitsEXTSets[] = {
+    {"WEIGHTED_BI_PRED_IMPLICIT", 0x00000001},
+    {"TRANSFORM_8X8", 0x00000002},
+    {"CHROMA_QP_OFFSET", 0x00000004},
+    {"SECOND_CHROMA_QP_OFFSET", 0x00000008},
+    {"DEBLOCKING_FILTER_DISABLED", 0x00000010},
+    {"DEBLOCKING_FILTER_ENABLED", 0x00000020},
+    {"DEBLOCKING_FILTER_PARTIAL", 0x00000040},
+    {"MULTIPLE_SLICE_PER_FRAME", 0x00000080},
+    {"EVENLY_DISTRIBUTED_SLICE_SIZE", 0x00000100},
+    {"SEPARATE_COLOUR_PLANE", 0x00000001},
+    {"SCALING_LISTS", 0x00000002},
+    {"SAMPLE_ADAPTIVE_OFFSET_ENABLED", 0x00000004},
+    {"PCM_ENABLE", 0x00000008},
+    {"SPS_TEMPORAL_MVP_ENABLED", 0x00000010},
+    {"HRD_COMPLIANCE", 0x00000020},
+    {"INIT_QP_MINUS26", 0x00000040},
+    {"LOG2_PARALLEL_MERGE_LEVEL_MINUS2", 0x00000080},
+    {"SIGN_DATA_HIDING_ENABLED", 0x00000100},
+    {"TRANSFORM_SKIP_ENABLED", 0x00000200},
+    {"PPS_SLICE_CHROMA_QP_OFFSETS_PRESENT", 0x00000400},
+    {"WEIGHTED_PRED", 0x00000800},
+    {"WEIGHTED_BIPRED", 0x00001000},
+    {"WEIGHTED_PRED_NO_TABLE", 0x00002000},
+    {"TRANSQUANT_BYPASS_ENABLED", 0x00004000},
+    {"ENTROPY_CODING_SYNC_ENABLED", 0x00008000},
+    {"DEBLOCKING_FILTER_OVERRIDE_ENABLED", 0x00010000},
+    {"MULTIPLE_TILE_PER_FRAME", 0x00020000},
+    {"MULTIPLE_SLICE_PER_TILE", 0x00040000},
+    {"MULTIPLE_TILE_PER_SLICE", 0x00080000},
+    {"SLICE_SEGMENT_CTB_COUNT", 0x00100000},
+    {"ROW_UNALIGNED_SLICE_SEGMENT", 0x00200000},
+    {"DEPENDENT_SLICE_SEGMENT", 0x00400000},
+    {"DIFFERENT_SLICE_TYPE", 0x00800000},
+};
+
 constexpr EnumValueSet VkVideoEncodeH265InputModeFlagBitsEXTSets[] = {
     {"FRAME", 0x00000001},
     {"NON_VCL", 0x00000004},
@@ -2657,17 +2712,24 @@ constexpr EnumValueSet VkVideoEncodeH265OutputModeFlagBitsEXTSets[] = {
     {"SLICE_SEGMENT", 0x00000002},
 };
 
-constexpr EnumValueSet VkVideoEncodeH265CtbSizeFlagBitsEXTSets[] = {
-    {"8", 0x00000001},
-    {"16", 0x00000002},
-    {"32", 0x00000004},
-    {"64", 0x00000008},
-};
-
 constexpr EnumValueSet VkVideoEncodeH265RateControlStructureFlagBitsEXTSets[] = {
     {"UNKNOWN", 0},
     {"FLAT", 0x00000001},
     {"DYADIC", 0x00000002},
+};
+
+constexpr EnumValueSet VkVideoEncodeH265CtbSizeFlagBitsEXTSets[] = {
+    {"16", 0x00000001},
+    {"32", 0x00000002},
+    {"64", 0x00000004},
+    {"8", 0x00000001},
+};
+
+constexpr EnumValueSet VkVideoEncodeH265TransformBlockSizeFlagBitsEXTSets[] = {
+    {"4", 0x00000001},
+    {"8", 0x00000002},
+    {"16", 0x00000004},
+    {"32", 0x00000008},
 };
 
 constexpr EnumValueSet VkQueueGlobalPriorityEXTSets[] = {
@@ -2924,18 +2986,6 @@ constexpr EnumValueSet VkDriverIdKHRSets[] = {
     {"BROADCOM_PROPRIETARY", 12},
 };
 
-constexpr EnumValueSet VkVideoEncodeH265CapabilityFlagBitsEXTSets[] = {
-    {"WEIGHTED_BI_PRED_IMPLICIT", 0x00000001},
-    {"TRANSFORM_8X8", 0x00000002},
-    {"CHROMA_QP_OFFSET", 0x00000004},
-    {"SECOND_CHROMA_QP_OFFSET", 0x00000008},
-    {"DEBLOCKING_FILTER_DISABLED", 0x00000010},
-    {"DEBLOCKING_FILTER_ENABLED", 0x00000020},
-    {"DEBLOCKING_FILTER_PARTIAL", 0x00000040},
-    {"MULTIPLE_SLICE_PER_FRAME", 0x00000080},
-    {"EVENLY_DISTRIBUTED_SLICE_SIZE", 0x00000100},
-};
-
 constexpr EnumValueSet VkVideoCapabilitiesFlagBitsKHRSets[] = {
     {"PROTECTED_CONTENT", 0x00000001},
     {"SEPARATE_REFERENCE_IMAGES", 0x00000002},
@@ -3028,7 +3078,7 @@ struct EnumType {
   bool allowEmpty;
 };
 
-constexpr std::array<EnumType, 278> enumTypes = {{
+constexpr std::array<EnumType, 280> enumTypes = {{
     {"VkImageLayout", VkImageLayoutSets, 36, false},
     {"VkAttachmentLoadOp", VkAttachmentLoadOpSets, 4, false},
     {"VkAttachmentStoreOp", VkAttachmentStoreOpSets, 6, false},
@@ -3238,10 +3288,11 @@ constexpr std::array<EnumType, 278> enumTypes = {{
     {"VkQueryResultStatusKHR", VkQueryResultStatusKHRSets, 3, false},
     {"VkVideoDecodeFlagBitsKHR", VkVideoDecodeFlagBitsKHRSets, 2, false},
     {"VkVideoEncodeFlagBitsKHR", VkVideoEncodeFlagBitsKHRSets, 2, false},
+    {"VkVideoEncodeCapabilityFlagBitsKHR", VkVideoEncodeCapabilityFlagBitsKHRSets, 2, false},
     {"VkVideoEncodeRateControlFlagBitsKHR", VkVideoEncodeRateControlFlagBitsKHRSets, 3, false},
     {"VkVideoEncodeRateControlModeFlagBitsKHR", VkVideoEncodeRateControlModeFlagBitsKHRSets, 3,
      false},
-    {"VkVideoEncodeH264CapabilityFlagBitsEXT", VkVideoEncodeH264CapabilityFlagBitsEXTSets, 12,
+    {"VkVideoEncodeH264CapabilityFlagBitsEXT", VkVideoEncodeH264CapabilityFlagBitsEXTSets, 26,
      false},
     {"VkVideoEncodeH264InputModeFlagBitsEXT", VkVideoEncodeH264InputModeFlagBitsEXTSets, 3, false},
     {"VkVideoEncodeH264OutputModeFlagBitsEXT", VkVideoEncodeH264OutputModeFlagBitsEXTSets, 3,
@@ -3253,12 +3304,16 @@ constexpr std::array<EnumType, 278> enumTypes = {{
     {"VkImageConstraintsInfoFlagBitsFUCHSIA", VkImageConstraintsInfoFlagBitsFUCHSIASets, 5, false},
     {"VkFormatFeatureFlagBits2", VkFormatFeatureFlagBits2Sets, 66, false},
     {"VkRenderingFlagBits", VkRenderingFlagBitsSets, 6, false},
+    {"VkVideoEncodeH265CapabilityFlagBitsEXT", VkVideoEncodeH265CapabilityFlagBitsEXTSets, 33,
+     false},
     {"VkVideoEncodeH265InputModeFlagBitsEXT", VkVideoEncodeH265InputModeFlagBitsEXTSets, 4, false},
     {"VkVideoEncodeH265OutputModeFlagBitsEXT", VkVideoEncodeH265OutputModeFlagBitsEXTSets, 4,
      false},
-    {"VkVideoEncodeH265CtbSizeFlagBitsEXT", VkVideoEncodeH265CtbSizeFlagBitsEXTSets, 4, false},
     {"VkVideoEncodeH265RateControlStructureFlagBitsEXT",
      VkVideoEncodeH265RateControlStructureFlagBitsEXTSets, 3, false},
+    {"VkVideoEncodeH265CtbSizeFlagBitsEXT", VkVideoEncodeH265CtbSizeFlagBitsEXTSets, 4, false},
+    {"VkVideoEncodeH265TransformBlockSizeFlagBitsEXT",
+     VkVideoEncodeH265TransformBlockSizeFlagBitsEXTSets, 4, false},
     {"VkQueryPoolCreateFlagBits", nullptr, 0, true},
     {"VkInstanceCreateFlagBits", nullptr, 0, true},
     {"VkDeviceCreateFlagBits", nullptr, 0, true},
@@ -3303,8 +3358,6 @@ constexpr std::array<EnumType, 278> enumTypes = {{
     {"VkShaderFloatControlsIndependenceKHR", VkShaderFloatControlsIndependenceKHRSets, 3, false},
     {"VkSubmitFlagBitsKHR", VkSubmitFlagBitsKHRSets, 1, false},
     {"VkDriverIdKHR", VkDriverIdKHRSets, 13, false},
-    {"VkVideoEncodeH265CapabilityFlagBitsEXT", VkVideoEncodeH265CapabilityFlagBitsEXTSets, 9,
-     false},
     {"VkVideoCapabilitiesFlagBitsKHR", VkVideoCapabilitiesFlagBitsKHRSets, 2, false},
     {"VkVideoDecodeH264FieldLayoutFlagBitsEXT", VkVideoDecodeH264FieldLayoutFlagBitsEXTSets, 3,
      false},
