@@ -40,7 +40,7 @@
 #include <string_view>
 
 static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-static_assert(VK_HEADER_VERSION <= 206, "VK_HEADER_VERSION is from after the supported range.");
+static_assert(VK_HEADER_VERSION <= 207, "VK_HEADER_VERSION is from after the supported range.");
 
 /**
  * @brief Macro that automatically stringifies the given Vulkan type for serialization
@@ -143,11 +143,12 @@ bool vk_parse(std::string_view vkType, std::string vkString, T *pValue) {
 
 namespace {
 
-constexpr std::array<std::string_view, 35> vendors = {{
-    "IMG",    "AMD",     "AMDX",  "ARM",     "FSL",       "BRCM",    "NXP",   "NV",     "NVX",
-    "VIV",    "VSI",     "KDAB",  "ANDROID", "CHROMIUM",  "FUCHSIA", "GGP",   "GOOGLE", "QCOM",
-    "LUNARG", "SAMSUNG", "SEC",   "TIZEN",   "RENDERDOC", "NN",      "MVK",   "KHR",    "KHX",
-    "EXT",    "MESA",    "INTEL", "HUAWEI",  "VALVE",     "QNX",     "JUICE", "FB",
+constexpr std::array<std::string_view, 37> vendors = {{
+    "IMG",    "AMD",  "AMDX",   "ARM",  "FSL",        "BRCM",     "NXP",     "NV",
+    "NVX",    "VIV",  "VSI",    "KDAB", "ANDROID",    "CHROMIUM", "FUCHSIA", "GGP",
+    "GOOGLE", "QCOM", "LUNARG", "NZXT", "SAMSUNG",    "SEC",      "TIZEN",   "RENDERDOC",
+    "NN",     "MVK",  "KHR",    "KHX",  "EXT",        "MESA",     "INTEL",   "HUAWEI",
+    "VALVE",  "QNX",  "JUICE",  "FB",   "RASTERGRID",
 }};
 
 struct EnumValueSet {
@@ -1168,6 +1169,7 @@ constexpr EnumValueSet VkImageUsageFlagBitsSets[] = {
     {"INVOCATION_MASK_BIT_HUAWEI", 0x00040000},
     {"RESERVED_20_BIT_QCOM", 0x00100000},
     {"RESERVED_21_BIT_QCOM", 0x00200000},
+    {"RESERVED_22_BIT_EXT", 0x00400000},
 };
 
 constexpr EnumValueSet VkImageCreateFlagBitsSets[] = {
@@ -1199,6 +1201,7 @@ constexpr EnumValueSet VkImageCreateFlagBitsSets[] = {
     {"RESERVED_16_BIT_AMD", 0x00010000},
     {"RESERVED_394_BIT_EXT", 0x00020000},
     {"FRAGMENT_DENSITY_MAP_OFFSET_BIT_QCOM", 0x00008000},
+    {"RESERVED_18_BIT_EXT", 0x00040000},
 };
 
 constexpr EnumValueSet VkImageViewCreateFlagBitsSets[] = {
@@ -2499,6 +2502,12 @@ constexpr EnumValueSet VkQueryResultStatusKHRSets[] = {
     {"COMPLETE", 1},
 };
 
+constexpr EnumValueSet VkVideoDecodeCapabilityFlagBitsKHRSets[] = {
+    {"DEFAULT", 0},
+    {"DPB_AND_OUTPUT_COINCIDE", 0x00000001},
+    {"DPB_AND_OUTPUT_DISTINCT", 0x00000002},
+};
+
 constexpr EnumValueSet VkVideoDecodeFlagBitsKHRSets[] = {
     {"DEFAULT", 0},
     {"RESERVED_0", 0x00000001},
@@ -3078,7 +3087,7 @@ struct EnumType {
   bool allowEmpty;
 };
 
-constexpr std::array<EnumType, 280> enumTypes = {{
+constexpr std::array<EnumType, 281> enumTypes = {{
     {"VkImageLayout", VkImageLayoutSets, 36, false},
     {"VkAttachmentLoadOp", VkAttachmentLoadOpSets, 4, false},
     {"VkAttachmentStoreOp", VkAttachmentStoreOpSets, 6, false},
@@ -3125,8 +3134,8 @@ constexpr std::array<EnumType, 280> enumTypes = {{
     {"VkBufferUsageFlagBits", VkBufferUsageFlagBitsSets, 35, false},
     {"VkBufferCreateFlagBits", VkBufferCreateFlagBitsSets, 9, false},
     {"VkShaderStageFlagBits", VkShaderStageFlagBitsSets, 37, false},
-    {"VkImageUsageFlagBits", VkImageUsageFlagBitsSets, 32, false},
-    {"VkImageCreateFlagBits", VkImageCreateFlagBitsSets, 28, false},
+    {"VkImageUsageFlagBits", VkImageUsageFlagBitsSets, 33, false},
+    {"VkImageCreateFlagBits", VkImageCreateFlagBitsSets, 29, false},
     {"VkImageViewCreateFlagBits", VkImageViewCreateFlagBitsSets, 4, false},
     {"VkSamplerCreateFlagBits", VkSamplerCreateFlagBitsSets, 5, true},
     {"VkPipelineCreateFlagBits", VkPipelineCreateFlagBitsSets, 49, false},
@@ -3286,6 +3295,7 @@ constexpr std::array<EnumType, 280> enumTypes = {{
      false},
     {"VkVideoCodingControlFlagBitsKHR", VkVideoCodingControlFlagBitsKHRSets, 2, false},
     {"VkQueryResultStatusKHR", VkQueryResultStatusKHRSets, 3, false},
+    {"VkVideoDecodeCapabilityFlagBitsKHR", VkVideoDecodeCapabilityFlagBitsKHRSets, 3, false},
     {"VkVideoDecodeFlagBitsKHR", VkVideoDecodeFlagBitsKHRSets, 2, false},
     {"VkVideoEncodeFlagBitsKHR", VkVideoEncodeFlagBitsKHRSets, 2, false},
     {"VkVideoEncodeCapabilityFlagBitsKHR", VkVideoEncodeCapabilityFlagBitsKHRSets, 2, false},

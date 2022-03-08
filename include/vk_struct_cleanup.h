@@ -41,10 +41,10 @@ extern "C" {
 
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-static_assert(VK_HEADER_VERSION <= 206, "VK_HEADER_VERSION is from after the supported range.");
+static_assert(VK_HEADER_VERSION <= 207, "VK_HEADER_VERSION is from after the supported range.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-_Static_assert(VK_HEADER_VERSION <= 206, "VK_HEADER_VERSION is from after the supported range.");
+_Static_assert(VK_HEADER_VERSION <= 207, "VK_HEADER_VERSION is from after the supported range.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -4104,6 +4104,25 @@ void cleanup_VkVideoEncodeCapabilitiesKHR(VkVideoEncodeCapabilitiesKHR const *pD
 
 #if VK_HEADER_VERSION >= 206 && VK_EXT_video_encode_h264
 void cleanup_VkVideoEncodeH264ReferenceListsEXT(VkVideoEncodeH264ReferenceListsEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 207 && VK_KHR_video_decode_queue
+void cleanup_VkVideoDecodeCapabilitiesKHR(VkVideoDecodeCapabilitiesKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 207 && VK_VALVE_descriptor_set_host_mapping
+void cleanup_VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE(
+    VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 207 && VK_VALVE_descriptor_set_host_mapping
+void cleanup_VkDescriptorSetBindingReferenceVALVE(
+    VkDescriptorSetBindingReferenceVALVE const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 207 && VK_VALVE_descriptor_set_host_mapping
+void cleanup_VkDescriptorSetLayoutHostMappingInfoVALVE(
+    VkDescriptorSetLayoutHostMappingInfoVALVE const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -9682,6 +9701,38 @@ void cleanup_vk_struct(void const *pData) {
 #if VK_HEADER_VERSION >= 206 && VK_EXT_video_encode_h264
   if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H264_REFERENCE_LISTS_EXT) {
     cleanup_VkVideoEncodeH264ReferenceListsEXT((VkVideoEncodeH264ReferenceListsEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 207 && VK_KHR_video_decode_queue
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_CAPABILITIES_KHR) {
+    cleanup_VkVideoDecodeCapabilitiesKHR((VkVideoDecodeCapabilitiesKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 207 && VK_VALVE_descriptor_set_host_mapping
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_SET_HOST_MAPPING_FEATURES_VALVE) {
+    cleanup_VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE(
+        (VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 207 && VK_VALVE_descriptor_set_host_mapping
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DESCRIPTOR_SET_BINDING_REFERENCE_VALVE) {
+    cleanup_VkDescriptorSetBindingReferenceVALVE(
+        (VkDescriptorSetBindingReferenceVALVE const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 207 && VK_VALVE_descriptor_set_host_mapping
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DESCRIPTOR_SET_LAYOUT_HOST_MAPPING_INFO_VALVE) {
+    cleanup_VkDescriptorSetLayoutHostMappingInfoVALVE(
+        (VkDescriptorSetLayoutHostMappingInfoVALVE const *)pData);
     return;
   }
 #endif
@@ -16948,9 +16999,11 @@ void cleanup_VkVideoProfilesKHR(VkVideoProfilesKHR const *pData) {
     cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
-  // pProfiles
-  if (pData->pProfiles != NULL)
-    cleanup_VkVideoProfileKHR(pData->pProfiles);
+  // pProfiles - profileCount
+  if (pData->pProfiles != NULL) {
+    for (uint32_t i = 0; i < pData->profileCount; ++i)
+      cleanup_VkVideoProfileKHR(&pData->pProfiles[i]);
+  }
   free((void *)pData->pProfiles);
 }
 #endif
@@ -19307,6 +19360,45 @@ void cleanup_VkVideoEncodeH264ReferenceListsEXT(VkVideoEncodeH264ReferenceListsE
 
   // pMemMgmtCtrlOperations
   free((void *)pData->pMemMgmtCtrlOperations);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 207 && VK_KHR_video_decode_queue
+void cleanup_VkVideoDecodeCapabilitiesKHR(VkVideoDecodeCapabilitiesKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 207 && VK_VALVE_descriptor_set_host_mapping
+void cleanup_VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE(
+    VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 207 && VK_VALVE_descriptor_set_host_mapping
+void cleanup_VkDescriptorSetBindingReferenceVALVE(
+    VkDescriptorSetBindingReferenceVALVE const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 207 && VK_VALVE_descriptor_set_host_mapping
+void cleanup_VkDescriptorSetLayoutHostMappingInfoVALVE(
+    VkDescriptorSetLayoutHostMappingInfoVALVE const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
 }
 #endif
 

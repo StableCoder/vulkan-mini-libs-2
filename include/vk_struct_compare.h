@@ -49,10 +49,10 @@ extern "C" {
 
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-static_assert(VK_HEADER_VERSION <= 206, "VK_HEADER_VERSION is from after the supported range.");
+static_assert(VK_HEADER_VERSION <= 207, "VK_HEADER_VERSION is from after the supported range.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-_Static_assert(VK_HEADER_VERSION <= 206, "VK_HEADER_VERSION is from after the supported range.");
+_Static_assert(VK_HEADER_VERSION <= 207, "VK_HEADER_VERSION is from after the supported range.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -4032,6 +4032,11 @@ bool compare_VkVideoReferenceSlotKHR(VkVideoReferenceSlotKHR const *s1,
                                      VkVideoReferenceSlotKHR const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 207 && VK_KHR_video_decode_queue
+bool compare_VkVideoDecodeCapabilitiesKHR(VkVideoDecodeCapabilitiesKHR const *s1,
+                                          VkVideoDecodeCapabilitiesKHR const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_decode_queue
 bool compare_VkVideoDecodeInfoKHR(VkVideoDecodeInfoKHR const *s1, VkVideoDecodeInfoKHR const *s2);
 #endif
@@ -4597,6 +4602,23 @@ bool compare_VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM(
 bool compare_VkPhysicalDeviceLinearColorAttachmentFeaturesNV(
     VkPhysicalDeviceLinearColorAttachmentFeaturesNV const *s1,
     VkPhysicalDeviceLinearColorAttachmentFeaturesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 207 && VK_VALVE_descriptor_set_host_mapping
+bool compare_VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE(
+    VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE const *s1,
+    VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 207 && VK_VALVE_descriptor_set_host_mapping
+bool compare_VkDescriptorSetBindingReferenceVALVE(VkDescriptorSetBindingReferenceVALVE const *s1,
+                                                  VkDescriptorSetBindingReferenceVALVE const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 207 && VK_VALVE_descriptor_set_host_mapping
+bool compare_VkDescriptorSetLayoutHostMappingInfoVALVE(
+    VkDescriptorSetLayoutHostMappingInfoVALVE const *s1,
+    VkDescriptorSetLayoutHostMappingInfoVALVE const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 196 && VK_HEADER_VERSION <= 204 && VK_EXT_video_encode_h265
@@ -14366,6 +14388,16 @@ bool compare_VkVideoReferenceSlotKHR(VkVideoReferenceSlotKHR const *s1,
 }
 #endif
 
+#if VK_HEADER_VERSION >= 207 && VK_KHR_video_decode_queue
+bool compare_VkVideoDecodeCapabilitiesKHR(VkVideoDecodeCapabilitiesKHR const *s1,
+                                          VkVideoDecodeCapabilitiesKHR const *s2) {
+  if ((s1->flags != s2->flags) || false)
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_decode_queue
 bool compare_VkVideoDecodeInfoKHR(VkVideoDecodeInfoKHR const *s1, VkVideoDecodeInfoKHR const *s2) {
   if ((s1->flags != s2->flags) || !compare_VkOffset2D(&s1->codedOffset, &s2->codedOffset) ||
@@ -15910,6 +15942,39 @@ bool compare_VkPhysicalDeviceLinearColorAttachmentFeaturesNV(
     VkPhysicalDeviceLinearColorAttachmentFeaturesNV const *s1,
     VkPhysicalDeviceLinearColorAttachmentFeaturesNV const *s2) {
   if ((s1->linearColorAttachment != s2->linearColorAttachment) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 207 && VK_VALVE_descriptor_set_host_mapping
+bool compare_VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE(
+    VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE const *s1,
+    VkPhysicalDeviceDescriptorSetHostMappingFeaturesVALVE const *s2) {
+  if ((s1->descriptorSetHostMapping != s2->descriptorSetHostMapping) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 207 && VK_VALVE_descriptor_set_host_mapping
+bool compare_VkDescriptorSetBindingReferenceVALVE(VkDescriptorSetBindingReferenceVALVE const *s1,
+                                                  VkDescriptorSetBindingReferenceVALVE const *s2) {
+  if ((s1->descriptorSetLayout != s2->descriptorSetLayout) || (s1->binding != s2->binding) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 207 && VK_VALVE_descriptor_set_host_mapping
+bool compare_VkDescriptorSetLayoutHostMappingInfoVALVE(
+    VkDescriptorSetLayoutHostMappingInfoVALVE const *s1,
+    VkDescriptorSetLayoutHostMappingInfoVALVE const *s2) {
+  if ((s1->descriptorOffset != s2->descriptorOffset) ||
+      (s1->descriptorSize != s2->descriptorSize) || false)
     return false;
 
   return true;
