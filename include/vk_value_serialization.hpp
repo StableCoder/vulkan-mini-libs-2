@@ -40,7 +40,7 @@
 #include <string_view>
 
 static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-static_assert(VK_HEADER_VERSION <= 207, "VK_HEADER_VERSION is from after the supported range.");
+static_assert(VK_HEADER_VERSION <= 208, "VK_HEADER_VERSION is from after the supported range.");
 
 /**
  * @brief Macro that automatically stringifies the given Vulkan type for serialization
@@ -2741,6 +2741,10 @@ constexpr EnumValueSet VkVideoEncodeH265TransformBlockSizeFlagBitsEXTSets[] = {
     {"32", 0x00000008},
 };
 
+constexpr EnumValueSet VkInstanceCreateFlagBitsSets[] = {
+    {"ENUMERATE_PORTABILITY_BIT_KHR", 0x00000001},
+};
+
 constexpr EnumValueSet VkQueueGlobalPriorityEXTSets[] = {
     {"LOW", 128},
     {"MEDIUM", 256},
@@ -3324,8 +3328,8 @@ constexpr std::array<EnumType, 281> enumTypes = {{
     {"VkVideoEncodeH265CtbSizeFlagBitsEXT", VkVideoEncodeH265CtbSizeFlagBitsEXTSets, 4, false},
     {"VkVideoEncodeH265TransformBlockSizeFlagBitsEXT",
      VkVideoEncodeH265TransformBlockSizeFlagBitsEXTSets, 4, false},
+    {"VkInstanceCreateFlagBits", VkInstanceCreateFlagBitsSets, 1, true},
     {"VkQueryPoolCreateFlagBits", nullptr, 0, true},
-    {"VkInstanceCreateFlagBits", nullptr, 0, true},
     {"VkDeviceCreateFlagBits", nullptr, 0, true},
     {"VkStructureType", nullptr, 0, true},
     {"VkPrivateDataSlotCreateFlagBitsEXT", nullptr, 0, true},
