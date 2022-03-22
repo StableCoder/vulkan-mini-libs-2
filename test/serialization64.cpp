@@ -39,29 +39,29 @@ TEST_CASE("Serialize64: Serializing one of the few 64-bit flag types, VkAccessFl
 
   SECTION("Successfully returns an when the bitflag has a zero-value enum") {
     CHECK(vk_serialize("VkAccessFlagBits2KHR", 0, &retVal));
-    CHECK(retVal == "NONE_KHR");
+    CHECK(retVal == "NONE");
   }
 
   SECTION("Regular success cases") {
     SECTION("FlagBits") {
       CHECK(vk_serialize("VkAccessFlagBits2KHR", VK_ACCESS_2_INDEX_READ_BIT_KHR, &retVal));
-      CHECK(retVal == "INDEX_READ_BIT_KHR");
+      CHECK(retVal == "INDEX_READ");
 
       CHECK(vk_serialize("VkAccessFlagBits2KHR",
                          VK_ACCESS_2_INDEX_READ_BIT_KHR |
                              VK_ACCESS_2_ACCELERATION_STRUCTURE_WRITE_BIT_NV,
                          &retVal));
-      CHECK(retVal == "ACCELERATION_STRUCTURE_WRITE_BIT_NV | INDEX_READ_BIT_KHR");
+      CHECK(retVal == "ACCELERATION_STRUCTURE_WRITE_BIT_KHR | INDEX_READ");
     }
     SECTION("Flags") {
       CHECK(vk_serialize("VkAccessFlags2KHR", VK_ACCESS_2_INDEX_READ_BIT_KHR, &retVal));
-      CHECK(retVal == "INDEX_READ_BIT_KHR");
+      CHECK(retVal == "INDEX_READ");
 
       CHECK(vk_serialize("VkAccessFlags2KHR",
                          VK_ACCESS_2_INDEX_READ_BIT_KHR |
                              VK_ACCESS_2_ACCELERATION_STRUCTURE_WRITE_BIT_NV,
                          &retVal));
-      CHECK(retVal == "ACCELERATION_STRUCTURE_WRITE_BIT_NV | INDEX_READ_BIT_KHR");
+      CHECK(retVal == "ACCELERATION_STRUCTURE_WRITE_BIT_KHR | INDEX_READ");
     }
   }
 }

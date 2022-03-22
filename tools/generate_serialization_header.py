@@ -84,9 +84,16 @@ def processEnums(outFile, enums, vendors, first, last):
                 if valueStr.endswith('_BIT'):
                     valueStr = valueStr[:-4]
 
+                # Name
                 outFile.write(valueStr)
                 outFile.write("\", ")
+                # Value
                 processEnumValue(outFile, enum, value)
+                # Alias
+                if value.get('alias'):
+                    outFile.write(', true')
+                else:
+                    outFile.write(', false')
 
                 outFile.write("},\n")
             current += 1
@@ -268,6 +275,7 @@ bool vk_parse(std::string_view vkType, std::string vkString, T *pValue) {
     outFile.write("\nstruct EnumValueSet {\n")
     outFile.write("  std::string_view name;\n")
     outFile.write("  int64_t value;\n")
+    outFile.write("  bool alias;\n")
     outFile.write("};\n")
 
     # Enums
@@ -522,7 +530,7 @@ bool serializeBitmask(EnumValueSet const *end,
         if(vkValue == 0 && !retStr.empty()) {
             break;
         }
-        if ((start->value & vkValue) == start->value) {
+        if (!start->alias && (start->value & vkValue) == start->value) {
             // Found a compatible bit mask, add it
             if (!retStr.empty()) {
                 retStr += " | ";
@@ -548,7 +556,7 @@ bool serializeEnum(EnumValueSet const *start,
                    uint64_t vkValue,
                    std::string *pString) {
   while (start != end) {
-    if (start->value == vkValue) {
+    if (!start->alias && start->value == vkValue) {
       *pString = start->name;
       return true;
     }
