@@ -6,10 +6,10 @@ import xml.etree.ElementTree as ET
 
 
 def processVendors(outFile, vendors):
-    outFile.writelines(["\nconstexpr std::array<std::string_view, ", str(
-        len(vendors)), "> vendors = {{\n"])
+    outFile.write(
+        '\nconstexpr std::array<std::string_view, {}> vendors = {{{{\n'.format(len(vendors)))
     for vendor in vendors:
-        outFile.writelines(['  \"', vendor.tag, '\",\n'])
+        outFile.write('  "{}",\n'.format(vendor.tag))
     outFile.write('}};\n')
 
 
@@ -19,8 +19,8 @@ def processEnumValue(outFile, enum, value):
         outFile.write(value.get('value'))
     elif not value.get('bitpos') is None:
         # Bitflag
-        outFile.writelines(
-            ['0x', format(1 << int(value.get('bitpos')), '08X')])
+        outFile.write('0x{}'.format(
+            format(1 << int(value.get('bitpos')), '08X')))
     elif not value.get('alias') is None:
         processEnumValue(outFile, enum, enum.find(value.get('alias')))
 
@@ -34,8 +34,8 @@ def processEnums(outFile, enums, vendors, first, last):
         if len(enum.findall('./')) == 0:
             continue
 
-        outFile.writelines(
-            ['\nconstexpr EnumValueSet ', enum.tag, 'Sets[] = {\n'])
+        outFile.write(
+            '\nconstexpr EnumValueSet {}Sets[] = {{\n'.format(enum.tag))
 
         # Determine how much to chop off the front
         strName = enum.tag
@@ -151,10 +151,10 @@ def main(argv):
 """)
 
     # Static Asserts
-    outFile.writelines(["\nstatic_assert(VK_HEADER_VERSION >= ", str(
-        firstVersion), ", \"VK_HEADER_VERSION is from before the supported range.\");\n"])
-    outFile.writelines(["static_assert(VK_HEADER_VERSION <= ", str(
-        lastVersion), ", \"VK_HEADER_VERSION is from after the supported range.\");\n"])
+    outFile.write(
+        '\nstatic_assert(VK_HEADER_VERSION >= {}, "VK_HEADER_VERSION is from before the supported range.");\n'.format(firstVersion))
+    outFile.write(
+        'static_assert(VK_HEADER_VERSION <= {}, "VK_HEADER_VERSION is from after the supported range.");\n'.format(lastVersion))
 
     # Function Declarataions
     outFile.write("""
@@ -289,23 +289,22 @@ bool vk_parse(std::string_view vkType, std::string vkString, T *pValue) {
             continue
         usefulEnumCount += 1
 
-    outFile.writelines(["\nconstexpr std::array<EnumType, ", str(
-        usefulEnumCount), "> enumTypes = {{\n"])  # -1 for not doing VkResult
+    outFile.write('\nconstexpr std::array<EnumType, {}> enumTypes = {{{{\n'.format(
+        usefulEnumCount))  # -1 for not doing VkResult
     for enum in enums:
         if enum.tag == 'VkResult' or enum.get('alias'):
             continue
 
         valueCount = len(enum.findall('./'))
         if valueCount == 0:
-            outFile.writelines(
-                ["  {\"", str(enum.tag), "\", nullptr, 0, true},\n"])
+            outFile.write('  {{"{}", nullptr, 0, true}},\n'.format(enum.tag))
         else:
             allowEmpty = "true"
             for enumVal in enum.findall('./'):
                 if enumVal.get('first') == enum.get('first'):
                     allowEmpty = "false"
-            outFile.writelines(["  {\"", str(enum.tag), "\", ", str(
-                enum.tag), "Sets, ", str(valueCount), ", ", allowEmpty, "},\n"])
+            outFile.write('  {{"{0}", {0}Sets, {1}, {2}}},\n'.format(
+                enum.tag, valueCount, allowEmpty))
     outFile.write('}};\n')
 
     # Function definitions
