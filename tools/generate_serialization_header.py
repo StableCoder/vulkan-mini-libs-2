@@ -283,10 +283,16 @@ bool vk_parse(std::string_view vkType, std::string vkString, T *pValue) {
     outFile.write("};\n")
 
     # Enum Pointer Array
-    outFile.writelines(["\nconstexpr std::array<EnumType, ", str(
-        len(enums)-1), "> enumTypes = {{\n"])  # -1 for not doing VkResult
+    usefulEnumCount = 0
     for enum in enums:
-        if enum.tag == 'VkResult':
+        if enum.tag == 'VkResult' or enum.get('alias'):
+            continue
+        usefulEnumCount += 1
+
+    outFile.writelines(["\nconstexpr std::array<EnumType, ", str(
+        usefulEnumCount), "> enumTypes = {{\n"])  # -1 for not doing VkResult
+    for enum in enums:
+        if enum.tag == 'VkResult' or enum.get('alias'):
             continue
 
         valueCount = len(enum.findall('./'))
