@@ -4,10 +4,12 @@ set -e
 # Variables
 START=72 # Prior to v72, vk.xml was not published, so that's the default minimum.
 END=
+SKIP_PARSE=0
 
 help_blurb() {
     echo " -s, --start <INT> The starting version of Vulkan to generate for (default: 72)"
     echo " -e, --end <INT>   The ending version of Vulkan to generate for (default: none)"
+    echo " --skip-parse      Skips generating new XML cache, just generated files"
 }
 
 # Command-line parsing
@@ -25,6 +27,10 @@ while [[ $# -gt 0 ]]; do
         shift
         shift
         ;;
+    --skip-parse)
+        SKIP_PARSE=1
+        shift
+        ;;
     -h | --help)
         help_blurb
         exit 0
@@ -32,34 +38,36 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-# Remove any previously generated data for a clean slate
-if [ -f .gen_cache.xml ]; then
-    rm .gen_cache.xml
-fi
-
-# Clone/update the Vulkan-Docs repository
-if ! [ -d Vulkan-Docs ]; then
-    git clone https://github.com/KhronosGroup/Vulkan-Docs
-fi
-pushd Vulkan-Docs >/dev/null
-git fetch -p
-
-# Collect the per-version XML data
-FIRST=1
-for TAG in $(git tag | grep -e "^v[0-9]*\.[0-9]*\.[0-9]*$" | sort -t '.' -k3nr); do
-    EXTRA_OPTS=
-    VER=$(echo $TAG | cut -d'.' -f3)
-    if [[ $VER -lt $START ]]; then
-        continue
-    elif [ "$END" != "" ] && [[ $VER -gt $END ]]; then
-        continue
+if [ $SKIP_PARSE -eq 0 ]; then
+    # Remove any previously generated data for a clean slate
+    if [ -f .gen_cache.xml ]; then
+        rm .gen_cache.xml
     fi
-    git checkout $TAG
 
-    ../parse_vk_doc.py -i xml/vk.xml -w ../.gen_cache.xml
-    FIRST=0
-done
-popd >/dev/null
+    # Clone/update the Vulkan-Docs repository
+    if ! [ -d Vulkan-Docs ]; then
+        git clone https://github.com/KhronosGroup/Vulkan-Docs
+    fi
+    pushd Vulkan-Docs >/dev/null
+    git fetch -p
+
+    # Collect the per-version XML data
+    FIRST=1
+    for TAG in $(git tag | grep -e "^v[0-9]*\.[0-9]*\.[0-9]*$" | sort -t '.' -k3nr); do
+        EXTRA_OPTS=
+        VER=$(echo $TAG | cut -d'.' -f3)
+        if [[ $VER -lt $START ]]; then
+            continue
+        elif [ "$END" != "" ] && [[ $VER -gt $END ]]; then
+            continue
+        fi
+        git checkout $TAG
+
+        ../parse_vk_doc.py -i xml/vk.xml -w ../.gen_cache.xml
+        FIRST=0
+    done
+    popd >/dev/null
+fi
 
 # Generate headers
 ./generate_serialization_header.py -i .gen_cache.xml -o ../include/vk_value_serialization.hpp
