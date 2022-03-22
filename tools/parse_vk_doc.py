@@ -38,11 +38,9 @@ def processEnum(inEnum, outEnum, vkVersion):
 
     # Add or edit
     enum = outEnum.find(enumName)
-    if enum is None:
-        enum = ET.SubElement(outEnum, enumName,  {
-                             'first': vkVersion, 'last': vkVersion})
-    else:
-        enum.set('first', vkVersion)
+    if enum.get('alias'):
+        # Skip renamed/aliased enums
+        return
 
     for value in inEnum.findall('enum'):
         valName = value.get('name')
@@ -72,11 +70,9 @@ def processFeatureEnum(featureEnum, outEnum, vkVersion):
 
     # Get the enum
     enum = outEnum.find(extends)
-    if enum is None:
-        enum = ET.SubElement(outEnum, extends, {
-            'first': vkVersion, 'last': vkVersion})
-    else:
-        enum.set('first', vkVersion)
+    if enum.get('alias'):
+        # Skip renamed/aliased enums
+        return
 
     # Value
     value = enum.find(valName)
@@ -113,11 +109,9 @@ def processExtensionEnums(extension, outEnum, vkVersion):
 
         # Enum
         enum = outEnum.find(extends)
-        if enum is None:
-            enum = ET.SubElement(outEnum, extends, {
-                                 'first': vkVersion, 'last': vkVersion})
-        else:
-            enum.set('first', vkVersion)
+        if enum.get('alias'):
+            # Skip renamed/aliased enums
+            continue
 
         # Value
         value = enum.find(valName)
@@ -327,6 +321,30 @@ def main(argv):
         ET.SubElement(dataRoot, 'enums')
     enumData = dataRoot.find('enums')
 
+    for typeData in vkRoot.findall('types/type'):
+        typeCategory = typeData.get('category')
+        if typeCategory == 'enum' or typeCategory == 'bitmask':
+            name = typeData.get('name')
+            if name:
+                enum = enumData.find(name)
+                if enum is None:
+                    if typeData.get('alias'):
+                        enum = ET.SubElement(enumData, name, {
+                            'first': vkVersion, 'last': vkVersion, 'alias': typeData.get('alias')})
+                    else:
+                        enum = ET.SubElement(enumData, name, {
+                            'first': vkVersion, 'last': vkVersion})
+                else:
+                    enum.set('first', vkVersion)
+            else:
+                name = typeData.find('name').text
+                enum = enumData.find(name)
+                if enum is None:
+                    enum = ET.SubElement(enumData, name, {
+                        'first': vkVersion, 'last': vkVersion})
+                else:
+                    enum.set('first', vkVersion)
+
     for enum in vkRoot.findall('enums'):
         processEnum(enum, enumData, vkVersion)
 
@@ -334,18 +352,6 @@ def main(argv):
         processFeatureEnum(feature, enumData, vkVersion)
     for extension in vkRoot.findall('extensions/extension'):
         processExtensionEnums(extension, enumData, vkVersion)
-
-    # Process Types
-    for typeData in vkRoot.findall('types/type'):
-        typeCategory = typeData.get('category')
-        typeName = typeData.get('name')
-        if typeCategory == 'enum':
-            enum = enumData.find(typeName)
-            if enum is None:
-                enum = ET.SubElement(enumData, typeName, {
-                    'first': vkVersion, 'last': vkVersion})
-            else:
-                enum.set('first', vkVersion)
 
     # Process Structs
     if dataRoot.find('structs') is None:
