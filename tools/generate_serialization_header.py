@@ -52,8 +52,8 @@ def processEnums(outFile, enums, vendors, first, last):
             typeDigit = strName[-1]
             strName = strName[:-1]
 
-        if strName.endswith('FlagBits'):
-            strName = strName[:-8]
+        if strName.endswith('Flags'):
+            strName = strName[:-5]
 
         # Construct most likely enum prefix
         mainPrefix = ''
@@ -355,12 +355,12 @@ bool getEnumType(std::string_view vkType,
                  EnumValueSet const **ppStart,
                  EnumValueSet const **ppEnd,
                  bool *pAllowEmpty) {
-  // Check for a conversion from Flags -> FlagBits
+  // Check for a conversion from FlagBits -> Flags
   std::string localString;
-  if (vkType.rfind("Flags") != std::string::npos) {
-    localString = vkType;
-    auto it = localString.rfind("Flags");
-    localString = localString.replace(it, strlen("Flags"), "FlagBits");
+  if (vkType.rfind("FlagBits") != std::string::npos) {
+    localString = std::string{vkType};
+    auto it = localString.rfind("FlagBits");
+    localString = localString.replace(it, strlen("FlagBits"), "Flags");
     vkType = localString;
   }
 

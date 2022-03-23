@@ -32,7 +32,7 @@ def processEnum(inEnum, outEnum, vkVersion):
     if inEnum.get('type') is None:
         return
     # Skip certain named enums
-    enumName = inEnum.get('name')
+    enumName = inEnum.get('name').replace('FlagBits', 'Flags')
     if enumName == 'API Constants' or enumName == 'VkStructureType':
         return
 
@@ -70,7 +70,7 @@ def processFeatureEnum(featureEnum, outEnum, vkVersion):
         return
 
     # Get the enum
-    enum = outEnum.find(extends)
+    enum = outEnum.find(extends.replace('FlagBits', 'Flags'))
     if enum.get('alias'):
         # Skip renamed/aliased enums
         return
@@ -110,7 +110,7 @@ def processExtensionEnums(extension, outEnum, vkVersion):
             continue
 
         # Enum
-        enum = outEnum.find(extends)
+        enum = outEnum.find(extends.replace('FlagBits', 'Flags'))
         if enum.get('alias'):
             # Skip renamed/aliased enums
             continue
@@ -338,6 +338,8 @@ def main(argv):
         if typeCategory == 'enum' or typeCategory == 'bitmask':
             name = typeData.get('name')
             if name:
+                if 'FlagBits' in name:
+                    continue
                 enum = enumData.find(name)
                 if enum is None:
                     if typeData.get('alias'):
@@ -352,6 +354,9 @@ def main(argv):
                     enum.set('first', vkVersion)
             else:
                 name = typeData.find('name').text
+                if 'FlagBits' in name:
+                    continue
+
                 enum = enumData.find(name)
                 if enum is None:
                     enum = ET.SubElement(enumData, name, {
