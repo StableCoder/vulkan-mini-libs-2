@@ -85,7 +85,7 @@ char const* vkResultToString(VkResult vkRes) {
     # Content
     currentVersion = lastVersion
     while currentVersion >= firstVersion:
-        for enum in dataRoot.findall('enums/VkResult/'):
+        for enum in dataRoot.findall('enums/VkResult/values/'):
             if int(enum.get('first')) != currentVersion:
                 continue
 

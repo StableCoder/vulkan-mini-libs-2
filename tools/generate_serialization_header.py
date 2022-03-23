@@ -22,7 +22,8 @@ def processEnumValue(outFile, enum, value):
         outFile.write('0x{}'.format(
             format(1 << int(value.get('bitpos')), '08X')))
     elif not value.get('alias') is None:
-        processEnumValue(outFile, enum, enum.find(value.get('alias')))
+        processEnumValue(outFile, enum, enum.find(
+            './values/{}'.format(value.get('alias'))))
 
 
 def processEnums(outFile, enums, vendors, first, last):
@@ -31,7 +32,7 @@ def processEnums(outFile, enums, vendors, first, last):
         if enum.tag == 'VkResult':
             continue
         # Skip if there's no values, MSVC can't do zero-sized arrays
-        if len(enum.findall('./')) == 0:
+        if len(enum.findall('./values/')) == 0:
             continue
 
         outFile.write(
@@ -71,7 +72,7 @@ def processEnums(outFile, enums, vendors, first, last):
 
         current = first
         while current <= last:
-            for value in enum.findall('./'):
+            for value in enum.findall('./values/'):
                 if int(value.get('first')) != current:
                     continue
                 outFile.write("  {\"")
@@ -303,12 +304,12 @@ bool vk_parse(std::string_view vkType, std::string vkString, T *pValue) {
         if enum.tag == 'VkResult' or enum.get('alias'):
             continue
 
-        valueCount = len(enum.findall('./'))
+        valueCount = len(enum.findall('./values/'))
         if valueCount == 0:
             outFile.write('  {{"{}", nullptr, 0, true}},\n'.format(enum.tag))
         else:
             allowEmpty = "true"
-            for enumVal in enum.findall('./'):
+            for enumVal in enum.findall('./values/'):
                 if enumVal.get('first') == enum.get('first'):
                     allowEmpty = "false"
             outFile.write('  {{"{0}", {0}Sets, {1}, {2}}},\n'.format(

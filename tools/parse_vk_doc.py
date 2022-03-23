@@ -42,12 +42,13 @@ def processEnum(inEnum, outEnum, vkVersion):
         # Skip renamed/aliased enums
         return
 
+    enumValues = enum.find('values')
     for value in inEnum.findall('enum'):
         valName = value.get('name')
-        enumVal = enum.find(valName)
+        enumVal = enumValues.find(valName)
         if enumVal is None:
             enumVal = ET.SubElement(
-                enum, valName, {'first': vkVersion, 'last': vkVersion})
+                enumValues, valName, {'first': vkVersion, 'last': vkVersion})
             ET.SubElement(enumVal, 'platforms')
             if not value.get('value') is None:
                 enumVal.set('value', value.get('value'))
@@ -75,10 +76,11 @@ def processFeatureEnum(featureEnum, outEnum, vkVersion):
         return
 
     # Value
-    value = enum.find(valName)
+    enumValues = enum.find('values')
+    value = enumValues.find(valName)
     if value is None:
         value = ET.SubElement(
-            enum, valName, {'first': vkVersion, 'last': vkVersion})
+            enumValues, valName, {'first': vkVersion, 'last': vkVersion})
         ET.SubElement(value, 'platforms')
         if not featureEnum.get('offset') is None:
             extNum = int(featureEnum.get('extnumber'))
@@ -114,10 +116,11 @@ def processExtensionEnums(extension, outEnum, vkVersion):
             continue
 
         # Value
-        value = enum.find(valName)
+        enumValues = enum.find('values')
+        value = enumValues.find(valName)
         if value is None:
             value = ET.SubElement(
-                enum, valName, {'first': vkVersion, 'last': vkVersion})
+                enumValues, valName, {'first': vkVersion, 'last': vkVersion})
             ET.SubElement(value, 'platforms')
             if not extEnum.get('offset') is None:
                 tempExtNum = extNum
@@ -334,6 +337,8 @@ def main(argv):
                     else:
                         enum = ET.SubElement(enumData, name, {
                             'first': vkVersion, 'last': vkVersion})
+                    ET.SubElement(enum, 'values', {})
+                    ET.SubElement(enum, 'platforms', {})
                 else:
                     enum.set('first', vkVersion)
             else:
@@ -342,6 +347,8 @@ def main(argv):
                 if enum is None:
                     enum = ET.SubElement(enumData, name, {
                         'first': vkVersion, 'last': vkVersion})
+                    ET.SubElement(enum, 'values', {})
+                    ET.SubElement(enum, 'platforms', {})
                 else:
                     enum.set('first', vkVersion)
 
