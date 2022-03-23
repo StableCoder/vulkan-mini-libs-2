@@ -143,6 +143,15 @@ def processExtensionEnums(extension, outEnum, vkVersion):
         if value.find('platforms/' + extName) is None:
             ET.SubElement(value.find('platforms'), extName)
 
+    for extType in extension.findall('require/type'):
+        typeName = extType.get('name')
+        enum = outEnum.find(typeName)
+        if enum is None:
+            continue
+
+        if enum.find('platforms/' + extName) is None:
+            ET.SubElement(enum.find('platforms'), extName)
+
 
 def processStruct(structNode, structData, vkVersion):
     category = structNode.get('category')
