@@ -40,7 +40,7 @@
 #include <string_view>
 
 static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-static_assert(VK_HEADER_VERSION <= 208, "VK_HEADER_VERSION is from after the supported range.");
+static_assert(VK_HEADER_VERSION <= 209, "VK_HEADER_VERSION is from after the supported range.");
 
 /**
  * @brief Macro that automatically stringifies the given Vulkan type for serialization
@@ -1064,6 +1064,7 @@ constexpr EnumValueSet VkFormatFeatureFlags2Sets[] = {
     {"RESERVED_35_BIT_QCOM", 0x800000000, false},
     {"RESERVED_36_BIT_QCOM", 0x1000000000, false},
     {"RESERVED_37_BIT_QCOM", 0x2000000000, false},
+    {"RESERVED_39_BIT_EXT", 0x8000000000, false},
 };
 
 constexpr EnumValueSet VkRenderingFlagsSets[] = {
@@ -1433,11 +1434,6 @@ constexpr EnumValueSet VkVideoEncodeH264OutputModeFlagsEXTSets[] = {
     {"FRAME", 0x00000001, false},
     {"SLICE", 0x00000002, false},
     {"NON_VCL", 0x00000004, false},
-};
-
-constexpr EnumValueSet VkVideoEncodeH264CreateFlagsEXTSets[] = {
-    {"DEFAULT", 0, false},
-    {"RESERVED_0", 0x00000001, false},
 };
 
 constexpr EnumValueSet VkVideoEncodeH264RateControlStructureFlagsEXTSets[] = {
@@ -2797,6 +2793,11 @@ constexpr EnumValueSet VkAccelerationStructureMotionInstanceTypeNVSets[] = {
     {"SRT_MOTION", 2, false},
 };
 
+constexpr EnumValueSet VkVideoEncodeH264CreateFlagsEXTSets[] = {
+    {"DEFAULT", 0, false},
+    {"RESERVED_0", 0x00000001, false},
+};
+
 constexpr EnumValueSet VkVideoCapabilitiesFlagsKHRSets[] = {
     {"PROTECTED_CONTENT", 0x00000001, false},
     {"SEPARATE_REFERENCE_IMAGES", 0x00000002, false},
@@ -2970,7 +2971,7 @@ constexpr std::array<EnumType, 282> enumTypes = {{
     {"VkPipelineStageFlags2", VkPipelineStageFlags2Sets, 69, false},
     {"VkAccelerationStructureMotionInfoFlagsNV", nullptr, 0, true},
     {"VkAccelerationStructureMotionInstanceFlagsNV", nullptr, 0, true},
-    {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Sets, 66, false},
+    {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Sets, 67, false},
     {"VkRenderingFlags", VkRenderingFlagsSets, 6, false},
     {"VkCompositeAlphaFlagsKHR", VkCompositeAlphaFlagsKHRSets, 4, false},
     {"VkDisplayPlaneAlphaFlagsKHR", VkDisplayPlaneAlphaFlagsKHRSets, 4, false},
@@ -3041,8 +3042,6 @@ constexpr std::array<EnumType, 282> enumTypes = {{
     {"VkVideoDecodeFlagsKHR", VkVideoDecodeFlagsKHRSets, 2, false},
     {"VkVideoDecodeH264PictureLayoutFlagsEXT", VkVideoDecodeH264PictureLayoutFlagsEXTSets, 3,
      false},
-    {"VkVideoDecodeH264CreateFlagsEXT", nullptr, 0, true},
-    {"VkVideoDecodeH265CreateFlagsEXT", nullptr, 0, true},
     {"VkVideoEncodeFlagsKHR", VkVideoEncodeFlagsKHRSets, 2, false},
     {"VkVideoEncodeCapabilityFlagsKHR", VkVideoEncodeCapabilityFlagsKHRSets, 2, false},
     {"VkVideoEncodeRateControlFlagsKHR", VkVideoEncodeRateControlFlagsKHRSets, 3, false},
@@ -3052,13 +3051,11 @@ constexpr std::array<EnumType, 282> enumTypes = {{
     {"VkVideoEncodeH264CapabilityFlagsEXT", VkVideoEncodeH264CapabilityFlagsEXTSets, 26, false},
     {"VkVideoEncodeH264InputModeFlagsEXT", VkVideoEncodeH264InputModeFlagsEXTSets, 3, false},
     {"VkVideoEncodeH264OutputModeFlagsEXT", VkVideoEncodeH264OutputModeFlagsEXTSets, 3, false},
-    {"VkVideoEncodeH264CreateFlagsEXT", VkVideoEncodeH264CreateFlagsEXTSets, 2, false},
     {"VkVideoEncodeH264RateControlStructureFlagsEXT",
      VkVideoEncodeH264RateControlStructureFlagsEXTSets, 3, false},
     {"VkVideoEncodeH265CapabilityFlagsEXT", VkVideoEncodeH265CapabilityFlagsEXTSets, 33, false},
     {"VkVideoEncodeH265InputModeFlagsEXT", VkVideoEncodeH265InputModeFlagsEXTSets, 4, false},
     {"VkVideoEncodeH265OutputModeFlagsEXT", VkVideoEncodeH265OutputModeFlagsEXTSets, 4, false},
-    {"VkVideoEncodeH265CreateFlagsEXT", nullptr, 0, true},
     {"VkVideoEncodeH265RateControlStructureFlagsEXT",
      VkVideoEncodeH265RateControlStructureFlagsEXTSets, 3, false},
     {"VkVideoEncodeH265CtbSizeFlagsEXT", VkVideoEncodeH265CtbSizeFlagsEXTSets, 4, false},
@@ -3167,6 +3164,10 @@ constexpr std::array<EnumType, 282> enumTypes = {{
     {"VkQueryResultStatusKHR", VkQueryResultStatusKHRSets, 3, false},
     {"VkAccelerationStructureMotionInstanceTypeNV", VkAccelerationStructureMotionInstanceTypeNVSets,
      3, false},
+    {"VkVideoDecodeH264CreateFlagsEXT", nullptr, 0, true},
+    {"VkVideoDecodeH265CreateFlagsEXT", nullptr, 0, true},
+    {"VkVideoEncodeH264CreateFlagsEXT", VkVideoEncodeH264CreateFlagsEXTSets, 2, false},
+    {"VkVideoEncodeH265CreateFlagsEXT", nullptr, 0, true},
     {"VkVideoCapabilitiesFlagsKHR", VkVideoCapabilitiesFlagsKHRSets, 2, false},
     {"VkVideoDecodeH264FieldLayoutFlagsEXT", VkVideoDecodeH264FieldLayoutFlagsEXTSets, 3, false},
     {"VkVideoEncodeH264CapabilitiesFlagsEXT", VkVideoEncodeH264CapabilitiesFlagsEXTSets, 11, false},
