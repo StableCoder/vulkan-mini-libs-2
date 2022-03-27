@@ -93,34 +93,32 @@ char const* vkResultToString(VkResult vkRes) {
             # Guard check for first version
             if int(enum.get('first')) != firstVersion:
                 guarded = True
-                outFile.writelines(
-                    ['#if VK_HEADER_VERSION >= ', enum.get('first')])
+                outFile.write(
+                    '#if VK_HEADER_VERSION >= {}'.format(enum.get('first')))
             # Guard check for last version
             if int(enum.get('last')) != lastVersion:
                 if guarded:
                     # If already started, append to it
-                    outFile.writelines(
-                        [' && VK_HEADER_VERSION <= ', enum.get('last')])
+                    outFile.write(
+                        ' && VK_HEADER_VERSION <= {}'.format(enum.get('last')))
                 else:
                     guarded = True
-                    outFile.writelines(
-                        ['#if VK_HEADER_VERSION <= ', enum.get('last')])
+                    outFile.write(
+                        '#if VK_HEADER_VERSION <= {}'.format(enum.get('last')))
             # Guard check for platforms
             for platform in enum.findall('platforms/'):
                 if guarded:
                     # If already started, append to it
-                    outFile.writelines(
-                        [' && ', platform.tag])
+                    outFile.write(' && {}'.format(platform.tag))
                 else:
                     guarded = True
-                    outFile.writelines(
-                        ['#if ', platform.tag])
+                    outFile.write('#if {}'.format(platform.tag))
 
             if guarded:
                 outFile.write('\n')
 
-            outFile.writelines(['  if (vkRes == ', enum.tag, ')\n'])
-            outFile.writelines(['    return \"', enum.tag, '\";\n'])
+            outFile.write('  if (vkRes == {})\n'.format(enum.tag))
+            outFile.write('    return \"{}\";\n'.format(enum.tag))
 
             if guarded:
                 outFile.write('#endif\n')

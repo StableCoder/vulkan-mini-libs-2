@@ -11,18 +11,18 @@ def guardStruct(struct, firstVersion, lastVersion, outFile):
     # Guard check for first version
     if struct.get('first') != firstVersion:
         guarded = True
-        outFile.writelines(
-            ['#if VK_HEADER_VERSION >= ', struct.get('first')])
+        outFile.write('#if VK_HEADER_VERSION >= {}'.format(
+            struct.get('first')))
     # Guard check for last version
     if struct.get('last') != lastVersion:
         if guarded:
             # If already started, append to it
-            outFile.writelines(
-                [' && VK_HEADER_VERSION <= ', struct.get('last')])
+            outFile.write(
+                ' && VK_HEADER_VERSION <= {}'.format(struct.get('last')))
         else:
             guarded = True
-            outFile.writelines(
-                ['#if VK_HEADER_VERSION <= ', struct.get('last')])
+            outFile.write(
+                '#if VK_HEADER_VERSION <= {}'.format(struct.get('last')))
     # Guard check for platforms
     platforms = struct.findall('platforms/')
     if platforms:
@@ -70,22 +70,22 @@ def processMultiMember(member, suffix, dataRoot, lenSplit, availableVars, outFil
     typeNode = dataRoot.find('structs/' + typeName)
 
     if len(lenSplit) > 1:
-        outFile.writelines(['    for(uint32_t ', curVar, ' = 0; ',
-                           curVar, ' < pData->', count, suffix, '; ++', curVar, ') {\n'])
+        outFile.write(
+            '    for(uint32_t {0} = 0; {0} < pData->{1}{2}; ++{0}) {{\n'.format(curVar, count, suffix))
         processMultiMember(member, '[' + curVar + ']', dataRoot,
                            lenSplit[1:], availableVars[1:], outFile)
         outFile.write('    }\n')
     else:
         if not typeNode is None:
             # A Vulkan struct, cleanup first
-            outFile.writelines(
-                ['    if (pData->', member.tag, suffix, ' != NULL) {\n'])
-            outFile.writelines(['    for(uint32_t ', curVar, ' = 0; ',
-                               curVar, ' < pData->', count, suffix, '; ++', curVar, ')\n'])
-            outFile.writelines(['            cleanup_', typeName,
-                               '(&pData->', member.tag, suffix, '[', curVar, ']);\n'])
+            outFile.write(
+                '    if (pData->{}{} != NULL) {{\n'.format(member.tag, suffix))
+            outFile.write(
+                '    for(uint32_t {0} = 0; {0} < pData->{1}{2}; ++{0})\n'.format(curVar, count, suffix))
+            outFile.write(
+                '            cleanup_{}(&pData->{}{}[{}]);\n'.format(typeName, member.tag, suffix, curVar))
             outFile.write('    }\n')
-    outFile.writelines(['    free((void*)pData->', member.tag, suffix, ');\n'])
+    outFile.write('    free((void*)pData->{}{});\n'.format(member.tag, suffix))
 
 
 def main(argv):
@@ -162,15 +162,15 @@ extern "C" {
 
     # static_asserts
     outFile.write('\n#ifdef __cplusplus\n')
-    outFile.writelines(["static_assert(VK_HEADER_VERSION >= ", firstVersion,
-                        ", \"VK_HEADER_VERSION is from before the supported range.\");\n"])
-    outFile.writelines(["static_assert(VK_HEADER_VERSION <= ", lastVersion,
-                        ", \"VK_HEADER_VERSION is from after the supported range.\");\n"])
+    outFile.write(
+        "static_assert(VK_HEADER_VERSION >= {}, \"VK_HEADER_VERSION is from before the supported range.\");\n".format(firstVersion))
+    outFile.write(
+        "static_assert(VK_HEADER_VERSION <= {}, \"VK_HEADER_VERSION is from after the supported range.\");\n".format(lastVersion))
     outFile.write('#else\n')
-    outFile.writelines(["_Static_assert(VK_HEADER_VERSION >= ", firstVersion,
-                        ", \"VK_HEADER_VERSION is from before the supported range.\");\n"])
-    outFile.writelines(["_Static_assert(VK_HEADER_VERSION <= ", lastVersion,
-                        ", \"VK_HEADER_VERSION is from after the supported range.\");\n"])
+    outFile.write(
+        "_Static_assert(VK_HEADER_VERSION >= {}, \"VK_HEADER_VERSION is from before the supported range.\");\n".format(firstVersion))
+    outFile.write(
+        "_Static_assert(VK_HEADER_VERSION <= {}, \"VK_HEADER_VERSION is from after the supported range.\");\n".format(lastVersion))
     outFile.write('#endif\n')
 
     # Generic struct catchall
@@ -192,11 +192,11 @@ extern "C" {
             members = getExternalDataMembers(struct.findall('members/'))
             # If there's not pointer members to delete, leave an empty inlinable function instead
             if len(members) == 0:
-                outFile.writelines(
-                    ['inline void cleanup_', name, '(', name, ' const* pData) {}\n'])
+                outFile.write(
+                    'inline void cleanup_{0}({0} const* pData) {{}}\n'.format(name))
             else:
-                outFile.writelines(
-                    ['void cleanup_', name, '(', name, ' const* pData);\n'])
+                outFile.write(
+                    'void cleanup_{0}({0} const* pData);\n'.format(name))
             if guarded:
                 outFile.write('#endif\n')
         currentVersion += 1
@@ -205,7 +205,7 @@ extern "C" {
     outFile.write("""
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
 
-# include <stdlib.h>
+#include <stdlib.h>
 """)
 
     # Definitions
@@ -229,10 +229,10 @@ void cleanup_vk_struct(void const* pData) {
 
             outFile.write('\n')
             guarded = guardStruct(struct, firstVersion, lastVersion, outFile)
-            outFile.writelines(
-                ['if (pTemp->sType ==', sTypeValue.text, ') {\n'])
-            outFile.writelines(['        cleanup_', struct.tag,
-                                '((', struct.tag, ' const*)pData);\n'])
+            outFile.write(
+                'if (pTemp->sType =={}) {{\n'.format(sTypeValue.text))
+            outFile.write(
+                '        cleanup_{0}(({0} const*)pData);\n'.format(struct.tag))
             outFile.write('        return;\n    }')
             if guarded:
                 outFile.write('#endif\n')
@@ -257,11 +257,11 @@ void cleanup_vk_struct(void const* pData) {
             outFile.write('\n')
             guarded = guardStruct(struct, firstVersion, lastVersion, outFile)
             if len(members) == 0:
-                outFile.writelines(
-                    ['extern inline void cleanup_', name, '(', name, ' const* pData);\n'])
+                outFile.write(
+                    'extern inline void cleanup_{0}({0} const* pData);\n'.format(name))
             else:
-                outFile.writelines(
-                    ['void cleanup_', name, '(', name, ' const* pData){'])
+                outFile.write(
+                    'void cleanup_{0}({0} const* pData) {{'.format(name))
 
                 membersNode = struct.find('members')
                 for member in members:
@@ -273,24 +273,24 @@ void cleanup_vk_struct(void const* pData) {
                         member, membersNode.get('first'), membersNode.get('last'), outFile)
                     if member.get('len') is None:
                         # Single member, no iteration or counting business here
-                        outFile.writelines(['    // ', member.tag, '\n'])
+                        outFile.write('    // {}\n'.format(member.tag))
                         if member.tag == 'pNext':
                             outFile.write('    if (pData->pNext != NULL)\n')
                             outFile.write(
                                 '        cleanup_vk_struct(pData->pNext);\n')
                         elif not typeNode is None:
                             # A Vulkan struct, cleanup first
-                            outFile.writelines(
-                                ['    if (pData->', member.tag, ' != NULL)\n'])
-                            outFile.writelines(
-                                ['        cleanup_', typeName, '(pData->', member.tag, ');\n'])
-                        outFile.writelines(
-                            ['    free((void *)pData->', member.tag, ');\n'])
+                            outFile.write(
+                                '    if (pData->{0} != NULL)\n'.format(member.tag))
+                            outFile.write(
+                                '        cleanup_{0}(pData->{1});\n'.format(typeName, member.tag))
+                        outFile.write(
+                            '    free((void *)pData->{0});\n'.format(member.tag))
 
                     else:
                         # Multiple member or levels of indirection
-                        outFile.writelines(
-                            ['    // ', member.tag, ' - ', member.get('len'), '\n'])
+                        outFile.write(
+                            '    // {0} - {1}\n'.format(member.tag, member.get('len')))
                         processMultiMember(member, '', dataRoot,
                                            member.get('len').split(','), 'ijklmn', outFile)
                     if guardedMember:

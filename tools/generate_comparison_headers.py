@@ -11,18 +11,18 @@ def guardStruct(struct, firstVersion, lastVersion, outFile):
     # Guard check for first version
     if struct.get('first') != firstVersion:
         guarded = True
-        outFile.writelines(
-            ['#if VK_HEADER_VERSION >= ', struct.get('first')])
+        outFile.write('#if VK_HEADER_VERSION >= {}'.format(
+            struct.get('first')))
     # Guard check for last version
     if struct.get('last') != lastVersion:
         if guarded:
             # If already started, append to it
-            outFile.writelines(
-                [' && VK_HEADER_VERSION <= ', struct.get('last')])
+            outFile.write(
+                ' && VK_HEADER_VERSION <= {}'.format(struct.get('last')))
         else:
             guarded = True
-            outFile.writelines(
-                ['#if VK_HEADER_VERSION <= ', struct.get('last')])
+            outFile.write(
+                '#if VK_HEADER_VERSION <= {}'.format(struct.get('last')))
     # Guard check for platforms
     platforms = struct.findall('platforms/')
     if platforms:
@@ -134,15 +134,15 @@ extern "C" {
 
     # static_asserts
     outFile.write('\n#ifdef __cplusplus\n')
-    outFile.writelines(["static_assert(VK_HEADER_VERSION >= ", firstVersion,
-                        ", \"VK_HEADER_VERSION is from before the supported range.\");\n"])
-    outFile.writelines(["static_assert(VK_HEADER_VERSION <= ", lastVersion,
-                        ", \"VK_HEADER_VERSION is from after the supported range.\");\n"])
+    outFile.write(
+        "static_assert(VK_HEADER_VERSION >= {}, \"VK_HEADER_VERSION is from before the supported range.\");\n".format(firstVersion))
+    outFile.write(
+        "static_assert(VK_HEADER_VERSION <= {}, \"VK_HEADER_VERSION is from after the supported range.\");\n".format(lastVersion))
     outFile.write('#else\n')
-    outFile.writelines(["_Static_assert(VK_HEADER_VERSION >= ", firstVersion,
-                        ", \"VK_HEADER_VERSION is from before the supported range.\");\n"])
-    outFile.writelines(["_Static_assert(VK_HEADER_VERSION <= ", lastVersion,
-                        ", \"VK_HEADER_VERSION is from after the supported range.\");\n"])
+    outFile.write(
+        "_Static_assert(VK_HEADER_VERSION >= {}, \"VK_HEADER_VERSION is from before the supported range.\");\n".format(firstVersion))
+    outFile.write(
+        "_Static_assert(VK_HEADER_VERSION <= {}, \"VK_HEADER_VERSION is from after the supported range.\");\n".format(lastVersion))
     outFile.write('#endif\n')
 
     # Per-struct function declarations
@@ -157,8 +157,8 @@ extern "C" {
         outFile.write('\n')
 
         guarded = guardStruct(struct, firstVersion, lastVersion, outFile)
-        outFile.writelines(['bool compare_', structName, '(', structName,
-                           ' const *s1, ', structName, ' const* s2);\n'])
+        outFile.write(
+            'bool compare_{0}({0} const *s1, {0} const* s2);\n'.format(structName))
         if guarded:
             outFile.write("#endif\n")
 
@@ -177,8 +177,8 @@ extern "C" {
         outFile.write('\n')
 
         guarded = guardStruct(struct, firstVersion, lastVersion, outFile)
-        outFile.writelines(['bool compare_', structName, '(', structName,
-                           ' const *s1, ', structName, ' const* s2) {'])
+        outFile.write(
+            'bool compare_{0}({0} const *s1, {0} const* s2) {{'.format(structName))
 
         # First, rule out the basic types (no pointers/sType/arrays)
         started = False
@@ -203,11 +203,10 @@ extern "C" {
                 'first'), membersNode.get('last'), outFile)
             memberStruct = dataRoot.findall('structs/{}/'.format(memberType))
             if memberStruct:
-                outFile.writelines(
-                    ['!compare_', memberType, '(&s1->', memberName, ', &s2->', memberName, ') ||\n'])
+                outFile.write(
+                    '!compare_{0}(&s1->{1}, &s2->{1}) ||\n'.format(memberType, memberName))
             else:
-                outFile.writelines(
-                    ['(s1->', memberName, ' != s2->', memberName, ') ||\n'])
+                outFile.write('(s1->{0} != s2->{0}) ||\n'.format(memberName))
             if guardedMember:
                 outFile.write('#endif\n')
             started = True
@@ -226,17 +225,17 @@ extern "C" {
             # For cases where the array is multi-dimensional
             memberSuffix = memberSuffix.replace('][', '*')
 
-            outFile.writelines(
-                ['  for (uint32_t i = 0; i < ', memberSuffix[1:-1], '; ++i) {\n'])
+            outFile.write(
+                '  for (uint32_t i = 0; i < {}; ++i) {{\n'.format(memberSuffix[1:-1]))
 
             if dataRoot.findall('structs/{}/'.format(memberType)):
-                outFile.writelines(
-                    ['    if(compare_', memberType, '(&s1->', memberName, '[i], &s2->', memberName, '[i]))\n'])
+                outFile.write(
+                    '    if(compare_{0}(&s1->{1}[i], &s2->{1}[i]))\n'.format(memberType, memberName))
             else:
-                outFile.writelines(
-                    ['    if(s1->', memberName, '[i] != s2->', memberName, '[i])\n'])
-            outFile.writelines(['      return false;\n'])
-            outFile.writelines(['  }\n'])
+                outFile.write(
+                    '    if(s1->{0}[i] != s2->{0}[i])\n'.format(memberName))
+            outFile.write('      return false;\n')
+            outFile.write('  }\n')
 
         outFile.write('\n  return true;\n')
         outFile.write('}\n')
