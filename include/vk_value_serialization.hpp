@@ -29,9 +29,10 @@
 /*  USAGE:
     To use, include this header where the declarations for the boolean checks are required.
 
-    On *ONE* compilation unit, include the definition of `#define
-   VK_VALUE_SERIALIZATION_CONFIG_MAIN` so that the definitions are compiled somewhere following the
-   one definition rule.
+    On *ONE* compilation unit, include the definition of:
+    #define VK_VALUE_SERIALIZATION_CONFIG_MAIN
+
+    so that the definitions are compiled somewhere following the one definition rule.
 */
 
 #include <vulkan/vulkan.h>

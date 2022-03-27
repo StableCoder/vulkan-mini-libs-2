@@ -113,8 +113,9 @@ def main(argv):
 /*  USAGE:
     To use, include this header where the declarations for the boolean checks are required.
 
-    #define VK_STRUCT_COMPARE_CONFIG_MAIN`
-    On *ONE* compilation unit, include the definition of `
+    On *ONE* compilation unit, include the definition of:
+    #define VK_STRUCT_COMPARE_CONFIG_MAIN
+
     so that the definitions are compiled somewhere following the one definition rule.
 */
 
