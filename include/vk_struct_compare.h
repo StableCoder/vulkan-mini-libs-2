@@ -50,10 +50,10 @@ extern "C" {
 
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-static_assert(VK_HEADER_VERSION <= 209, "VK_HEADER_VERSION is from after the supported range.");
+static_assert(VK_HEADER_VERSION <= 210, "VK_HEADER_VERSION is from after the supported range.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-_Static_assert(VK_HEADER_VERSION <= 209, "VK_HEADER_VERSION is from after the supported range.");
+_Static_assert(VK_HEADER_VERSION <= 210, "VK_HEADER_VERSION is from after the supported range.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -3980,6 +3980,12 @@ bool compare_VkPhysicalDeviceSynchronization2FeaturesKHR(
     VkPhysicalDeviceSynchronization2FeaturesKHR const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 210 && VK_EXT_primitives_generated_query
+bool compare_VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT(
+    VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT const *s1,
+    VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
 bool compare_VkVideoQueueFamilyProperties2KHR(VkVideoQueueFamilyProperties2KHR const *s1,
                                               VkVideoQueueFamilyProperties2KHR const *s2);
@@ -4583,6 +4589,24 @@ bool compare_VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM(
 bool compare_VkPhysicalDeviceLinearColorAttachmentFeaturesNV(
     VkPhysicalDeviceLinearColorAttachmentFeaturesNV const *s1,
     VkPhysicalDeviceLinearColorAttachmentFeaturesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 210 && VK_EXT_graphics_pipeline_library
+bool compare_VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT(
+    VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT const *s1,
+    VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 210 && VK_EXT_graphics_pipeline_library
+bool compare_VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT(
+    VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT const *s1,
+    VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 210 && VK_EXT_graphics_pipeline_library
+bool compare_VkGraphicsPipelineLibraryCreateInfoEXT(
+    VkGraphicsPipelineLibraryCreateInfoEXT const *s1,
+    VkGraphicsPipelineLibraryCreateInfoEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 207 && VK_VALVE_descriptor_set_host_mapping
@@ -14268,6 +14292,22 @@ bool compare_VkPhysicalDeviceSynchronization2FeaturesKHR(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 210 && VK_EXT_primitives_generated_query
+bool compare_VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT(
+    VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT const *s1,
+    VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT const *s2) {
+  if ((s1->primitivesGeneratedQuery != s2->primitivesGeneratedQuery) ||
+      (s1->primitivesGeneratedQueryWithRasterizerDiscard !=
+       s2->primitivesGeneratedQueryWithRasterizerDiscard) ||
+      (s1->primitivesGeneratedQueryWithNonZeroStreams !=
+       s2->primitivesGeneratedQueryWithNonZeroStreams) ||
+      false)
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
 bool compare_VkVideoQueueFamilyProperties2KHR(VkVideoQueueFamilyProperties2KHR const *s1,
                                               VkVideoQueueFamilyProperties2KHR const *s2) {
@@ -15920,6 +15960,42 @@ bool compare_VkPhysicalDeviceLinearColorAttachmentFeaturesNV(
     VkPhysicalDeviceLinearColorAttachmentFeaturesNV const *s1,
     VkPhysicalDeviceLinearColorAttachmentFeaturesNV const *s2) {
   if ((s1->linearColorAttachment != s2->linearColorAttachment) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 210 && VK_EXT_graphics_pipeline_library
+bool compare_VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT(
+    VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT const *s1,
+    VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT const *s2) {
+  if ((s1->graphicsPipelineLibrary != s2->graphicsPipelineLibrary) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 210 && VK_EXT_graphics_pipeline_library
+bool compare_VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT(
+    VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT const *s1,
+    VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT const *s2) {
+  if ((s1->graphicsPipelineLibraryFastLinking != s2->graphicsPipelineLibraryFastLinking) ||
+      (s1->graphicsPipelineLibraryIndependentInterpolationDecoration !=
+       s2->graphicsPipelineLibraryIndependentInterpolationDecoration) ||
+      false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 210 && VK_EXT_graphics_pipeline_library
+bool compare_VkGraphicsPipelineLibraryCreateInfoEXT(
+    VkGraphicsPipelineLibraryCreateInfoEXT const *s1,
+    VkGraphicsPipelineLibraryCreateInfoEXT const *s2) {
+  if ((s1->flags != s2->flags) || false)
     return false;
 
   return true;

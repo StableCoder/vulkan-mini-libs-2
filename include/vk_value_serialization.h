@@ -44,10 +44,10 @@ extern "C" {
 
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-static_assert(VK_HEADER_VERSION <= 209, "VK_HEADER_VERSION is from after the supported range.");
+static_assert(VK_HEADER_VERSION <= 210, "VK_HEADER_VERSION is from after the supported range.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72, "VK_HEADER_VERSION is from before the supported range.");
-_Static_assert(VK_HEADER_VERSION <= 209, "VK_HEADER_VERSION is from after the supported range.");
+_Static_assert(VK_HEADER_VERSION <= 210, "VK_HEADER_VERSION is from after the supported range.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -203,6 +203,7 @@ EnumValueSet const VkSamplerCreateFlagsSets[] = {
 EnumValueSet const VkPipelineLayoutCreateFlagsSets[] = {
     {"RESERVED_0_BIT_AMD", 0x00000001, false},
     {"RESERVED_1_BIT_AMD", 0x00000002, false},
+    {"INDEPENDENT_SETS_BIT_EXT", 0x00000002, false},
 };
 
 EnumValueSet const VkPipelineCacheCreateFlagsSets[] = {
@@ -262,6 +263,7 @@ EnumValueSet const VkQueueFlagsSets[] = {
     {"VIDEO_DECODE_BIT_KHR", 0x00000020, false},
     {"VIDEO_ENCODE_BIT_KHR", 0x00000040, false},
     {"RESERVED_7_BIT_QCOM", 0x00000080, false},
+    {"RESERVED_8_BIT_NV", 0x00000100, false},
 };
 
 EnumValueSet const VkMemoryPropertyFlagsSets[] = {
@@ -549,6 +551,8 @@ EnumValueSet const VkPipelineCreateFlagsSets[] = {
     {"RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT", 0x00400000, false},
     {"FAIL_ON_PIPELINE_COMPILE_REQUIRED", 0x00000100, false},
     {"EARLY_RETURN_ON_FAILURE", 0x00000200, false},
+    {"RETAIN_LINK_TIME_OPTIMIZATION_INFO_BIT_EXT", 0x00800000, false},
+    {"LINK_TIME_OPTIMIZATION_BIT_EXT", 0x00000400, false},
 };
 
 EnumValueSet const VkColorComponentFlagsSets[] = {
@@ -946,6 +950,8 @@ EnumValueSet const VkAccessFlags2Sets[] = {
     {"RESERVED_41_BIT_AMD", 0x20000000000, false},
     {"INVOCATION_MASK_READ_BIT_HUAWEI", 0x8000000000, false},
     {"RESERVED_387_BIT_KHR", 0x10000000000, false},
+    {"RESERVED_42_BIT_NV", 0x40000000000, false},
+    {"RESERVED_43_BIT_NV", 0x80000000000, false},
 };
 
 EnumValueSet const VkPipelineStageFlags2Sets[] = {
@@ -1018,6 +1024,7 @@ EnumValueSet const VkPipelineStageFlags2Sets[] = {
     {"SUBPASS_SHADING_BIT_HUAWEI", 0x8000000000, false},
     {"INVOCATION_MASK_BIT_HUAWEI", 0x10000000000, false},
     {"RESERVED_387_BIT_KHR", 0x10000000, false},
+    {"RESERVED_29_BIT_NV", 0x20000000, false},
 };
 
 EnumValueSet const VkFormatFeatureFlags2Sets[] = {
@@ -1089,6 +1096,10 @@ EnumValueSet const VkFormatFeatureFlags2Sets[] = {
     {"RESERVED_36_BIT_QCOM", 0x1000000000, false},
     {"RESERVED_37_BIT_QCOM", 0x2000000000, false},
     {"RESERVED_39_BIT_EXT", 0x8000000000, false},
+    {"RESERVED_40_BIT_NV", 0x10000000000, false},
+    {"RESERVED_41_BIT_NV", 0x20000000000, false},
+    {"RESERVED_42_BIT_NV", 0x40000000000, false},
+    {"RESERVED_43_BIT_NV", 0x80000000000, false},
 };
 
 EnumValueSet const VkRenderingFlagsSets[] = {
@@ -1336,6 +1347,13 @@ EnumValueSet const VkImageConstraintsInfoFlagsFUCHSIASets[] = {
     {"CPU_READ_RARELY", 0x00000001, false},    {"CPU_READ_OFTEN", 0x00000002, false},
     {"CPU_WRITE_RARELY", 0x00000004, false},   {"CPU_WRITE_OFTEN", 0x00000008, false},
     {"PROTECTED_OPTIONAL", 0x00000010, false},
+};
+
+EnumValueSet const VkGraphicsPipelineLibraryFlagsEXTSets[] = {
+    {"VERTEX_INPUT_INTERFACE", 0x00000001, false},
+    {"PRE_RASTERIZATION_SHADERS", 0x00000002, false},
+    {"FRAGMENT_SHADER", 0x00000004, false},
+    {"FRAGMENT_OUTPUT_INTERFACE", 0x00000008, false},
 };
 
 EnumValueSet const VkVideoCodecOperationFlagsKHRSets[] = {
@@ -2213,6 +2231,7 @@ EnumValueSet const VkQueryTypeSets[] = {
     {"ACCELERATION_STRUCTURE_SERIALIZATION_SIZE_KHR", 1000150001, false},
     {"RESULT_STATUS_ONLY_KHR", 1000023000, false},
     {"VIDEO_ENCODE_BITSTREAM_BUFFER_RANGE_KHR", 1000299000, false},
+    {"PRIMITIVES_GENERATED_EXT", 1000382000, false},
 };
 
 EnumValueSet const VkSubpassContentsSets[] = {
@@ -2916,12 +2935,12 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[282] = {
+EnumType const cEnumTypes[283] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2, true},
     {"VkQueryPoolCreateFlags", NULL, 0, true},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 3, true},
     {"VkSamplerCreateFlags", VkSamplerCreateFlagsSets, 5, true},
-    {"VkPipelineLayoutCreateFlags", VkPipelineLayoutCreateFlagsSets, 2, true},
+    {"VkPipelineLayoutCreateFlags", VkPipelineLayoutCreateFlagsSets, 3, true},
     {"VkPipelineCacheCreateFlags", VkPipelineCacheCreateFlagsSets, 6, true},
     {"VkPipelineDepthStencilStateCreateFlags", VkPipelineDepthStencilStateCreateFlagsSets, 2, true},
     {"VkPipelineDynamicStateCreateFlags", NULL, 0, true},
@@ -2938,7 +2957,7 @@ EnumType const cEnumTypes[282] = {
     {"VkInstanceCreateFlags", VkInstanceCreateFlagsSets, 1, true},
     {"VkDeviceCreateFlags", NULL, 0, true},
     {"VkDeviceQueueCreateFlags", VkDeviceQueueCreateFlagsSets, 2, false},
-    {"VkQueueFlags", VkQueueFlagsSets, 10, false},
+    {"VkQueueFlags", VkQueueFlagsSets, 11, false},
     {"VkMemoryPropertyFlags", VkMemoryPropertyFlagsSets, 10, false},
     {"VkMemoryHeapFlags", VkMemoryHeapFlagsSets, 4, false},
     {"VkAccessFlags", VkAccessFlagsSets, 45, false},
@@ -2948,7 +2967,7 @@ EnumType const cEnumTypes[282] = {
     {"VkImageUsageFlags", VkImageUsageFlagsSets, 33, false},
     {"VkImageCreateFlags", VkImageCreateFlagsSets, 29, false},
     {"VkImageViewCreateFlags", VkImageViewCreateFlagsSets, 4, true},
-    {"VkPipelineCreateFlags", VkPipelineCreateFlagsSets, 49, false},
+    {"VkPipelineCreateFlags", VkPipelineCreateFlagsSets, 51, false},
     {"VkColorComponentFlags", VkColorComponentFlagsSets, 4, false},
     {"VkFenceCreateFlags", VkFenceCreateFlagsSets, 1, false},
     {"VkSemaphoreCreateFlags", NULL, 0, true},
@@ -2992,11 +3011,11 @@ EnumType const cEnumTypes[282] = {
     {"VkPipelineCompilerControlFlagsAMD", NULL, 0, true},
     {"VkShaderCorePropertiesFlagsAMD", NULL, 0, true},
     {"VkDeviceDiagnosticsConfigFlagsNV", VkDeviceDiagnosticsConfigFlagsNVSets, 3, false},
-    {"VkAccessFlags2", VkAccessFlags2Sets, 63, false},
-    {"VkPipelineStageFlags2", VkPipelineStageFlags2Sets, 69, false},
+    {"VkAccessFlags2", VkAccessFlags2Sets, 65, false},
+    {"VkPipelineStageFlags2", VkPipelineStageFlags2Sets, 70, false},
     {"VkAccelerationStructureMotionInfoFlagsNV", NULL, 0, true},
     {"VkAccelerationStructureMotionInstanceFlagsNV", NULL, 0, true},
-    {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Sets, 67, false},
+    {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Sets, 71, false},
     {"VkRenderingFlags", VkRenderingFlagsSets, 6, false},
     {"VkCompositeAlphaFlagsKHR", VkCompositeAlphaFlagsKHRSets, 4, false},
     {"VkDisplayPlaneAlphaFlagsKHR", VkDisplayPlaneAlphaFlagsKHRSets, 4, false},
@@ -3056,6 +3075,7 @@ EnumType const cEnumTypes[282] = {
     {"VkSubmitFlags", VkSubmitFlagsSets, 2, false},
     {"VkImageFormatConstraintsFlagsFUCHSIA", NULL, 0, true},
     {"VkImageConstraintsInfoFlagsFUCHSIA", VkImageConstraintsInfoFlagsFUCHSIASets, 5, false},
+    {"VkGraphicsPipelineLibraryFlagsEXT", VkGraphicsPipelineLibraryFlagsEXTSets, 4, false},
     {"VkVideoCodecOperationFlagsKHR", VkVideoCodecOperationFlagsKHRSets, 5, false},
     {"VkVideoCapabilityFlagsKHR", VkVideoCapabilityFlagsKHRSets, 2, false},
     {"VkVideoSessionCreateFlagsKHR", VkVideoSessionCreateFlagsKHRSets, 2, false},
@@ -3110,7 +3130,7 @@ EnumType const cEnumTypes[282] = {
     {"VkPhysicalDeviceType", VkPhysicalDeviceTypeSets, 5, false},
     {"VkPipelineBindPoint", VkPipelineBindPointSets, 6, false},
     {"VkPrimitiveTopology", VkPrimitiveTopologySets, 11, false},
-    {"VkQueryType", VkQueryTypeSets, 14, false},
+    {"VkQueryType", VkQueryTypeSets, 15, false},
     {"VkSubpassContents", VkSubpassContentsSets, 2, false},
     {"VkStencilOp", VkStencilOpSets, 8, false},
     {"VkStructureType", NULL, 0, true},
