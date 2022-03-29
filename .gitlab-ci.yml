@@ -22,7 +22,7 @@ variables:
 
 .platform_windows_template: &platform_windows_template
   stage: Platform Tests
-  image: stabletec/build-foe:windows
+  image: docker.io/stabletec/build-foe:windows
   tags:
     - docker-windows
     - amd64
@@ -45,49 +45,49 @@ variables:
     - ctest
 
 Arch/GCC:
-  image: stabletec/build-foe:arch
+  image: docker.io/stabletec/build-foe:arch
   variables:
     CC: gcc
     CXX: g++
   <<: *platform_unix_template
 
 Arch/Clang:
-  image: stabletec/build-foe:arch
+  image: docker.io/stabletec/build-foe:arch
   variables:
     CC: clang
     CXX: clang++
   <<: *platform_unix_template
 
 Fedora/GCC:
-  image: stabletec/build-foe:fedora
+  image: docker.io/stabletec/build-foe:fedora
   variables:
     CC: gcc
     CXX: g++
   <<: *platform_unix_template
 
 Fedora/Clang:
-  image: stabletec/build-foe:fedora
+  image: docker.io/stabletec/build-foe:fedora
   variables:
     CC: clang
     CXX: clang++
   <<: *platform_unix_template
 
 Ubuntu/GCC:
-  image: stabletec/build-foe:ubuntu
+  image: docker.io/stabletec/build-foe:ubuntu
   variables:
     CC: gcc
     CXX: g++
   <<: *platform_unix_template
 
 Ubuntu/Clang:
-  image: stabletec/build-foe:ubuntu
+  image: docker.io/stabletec/build-foe:ubuntu
   variables:
     CC: clang
     CXX: clang++
   <<: *platform_unix_template
 
 Debian 10/GCC (Old v97):
-  image: stabletec/build-core:debian-10
+  image: docker.io/stabletec/build-core:debian-10
   variables:
     CC: gcc
     CXX: g++
@@ -102,7 +102,7 @@ Debian 10/GCC (Old v97):
     - ctest
 
 Debian 10/Clang (Old v97):
-  image: stabletec/build-core:debian-10
+  image: docker.io/stabletec/build-core:debian-10
   variables:
     CC: clang
     CXX: clang++
@@ -134,7 +134,7 @@ macOS/Clang (amd64):
 # Analysis
 Code Coverage:
   stage: Analysis
-  image: stabletec/build-foe:arch
+  image: docker.io/stabletec/build-foe:arch
   tags:
     - docker-linux
   dependencies: []
@@ -155,7 +155,7 @@ Code Coverage:
 
 .analysis_template: &analysis_template
   stage: Analysis
-  image: stabletec/build-foe:arch
+  image: docker.io/stabletec/build-foe:arch
   tags:
     - docker-linux
   dependencies: []
