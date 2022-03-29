@@ -26,9 +26,19 @@ TEST_CASE("Parsing: Failure Cases") {
   uint64_t dummy = cDummyNum;
 
   SECTION("Garbage type fails") {
+    CHECK(vk_parse(nullptr, "2D", &dummy) == STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND);
+    CHECK(dummy == cDummyNum);
+
+    CHECK(vk_parse("", "2D", &dummy) == STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND);
+    CHECK(dummy == cDummyNum);
+
+    CHECK(vk_parse("AMDX", "2D", &dummy) == STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND);
+    CHECK(dummy == cDummyNum);
+
     CHECK(vk_parse("VkGarbagio", "2D", &dummy) ==
           STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND);
     CHECK(dummy == cDummyNum);
+
     CHECK(vk_parse("VkGarbagioFlags", "2D", &dummy) ==
           STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND);
     CHECK(dummy == cDummyNum);
@@ -327,8 +337,14 @@ TEST_CASE("Parsing: Checking bitmask conversions from string to bitmask values")
   }
 
   SECTION("With mixed short/full strings (64-bit)") {
-    uint64_t retVal;
+    uint64_t retVal = 0;
+
     SECTION("FlagBits") {
+      CHECK(vk_parse("VkPipelineStageFlagBits2",
+                     "INVOCATION_MASK_BIT_HUAWEI | VK_PIPELINE_STAGE_2_TOP_OF_PIPE_BIT",
+                     &retVal) == STEC_VK_SERIALIZATION_RESULT_SUCCESS);
+      CHECK(retVal == (0x10000000000ULL | 0x00000001ULL));
+
       CHECK(vk_parse64("VkPipelineStageFlagBits2",
                        "INVOCATION_MASK_BIT_HUAWEI | VK_PIPELINE_STAGE_2_TOP_OF_PIPE_BIT",
                        &retVal) == STEC_VK_SERIALIZATION_RESULT_SUCCESS);
@@ -340,6 +356,11 @@ TEST_CASE("Parsing: Checking bitmask conversions from string to bitmask values")
       CHECK(retVal == (0x10000000000ULL | 0x00000001ULL));
     }
     SECTION("Flags") {
+      CHECK(vk_parse("VkPipelineStageFlags2",
+                     "INVOCATION_MASK_BIT_HUAWEI | VK_PIPELINE_STAGE_2_TOP_OF_PIPE_BIT",
+                     &retVal) == STEC_VK_SERIALIZATION_RESULT_SUCCESS);
+      CHECK(retVal == (0x10000000000ULL | 0x00000001ULL));
+
       CHECK(vk_parse64("VkPipelineStageFlags2",
                        "INVOCATION_MASK_BIT_HUAWEI | VK_PIPELINE_STAGE_2_TOP_OF_PIPE_BIT",
                        &retVal) == STEC_VK_SERIALIZATION_RESULT_SUCCESS);

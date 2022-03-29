@@ -21,6 +21,7 @@
 #include <string>
 #include <string_view>
 
+#include <cstring>
 #include <string>
 #include <string_view>
 
@@ -41,7 +42,19 @@ TEST_CASE("Serialize: Enum") {
   std::string retVal = cDummyStr;
 
   SECTION("Failure case where a bad type is given") {
+    CHECK(vk_serialize(nullptr, VK_IMAGE_TYPE_3D, &retVal) ==
+          STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND);
+    CHECK(retVal == cDummyStr);
+
+    CHECK(vk_serialize("", VK_IMAGE_TYPE_3D, &retVal) ==
+          STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND);
+    CHECK(retVal == cDummyStr);
+
     CHECK(vk_serialize("VkGarbagio", VK_IMAGE_TYPE_3D, &retVal) ==
+          STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND);
+    CHECK(retVal == cDummyStr);
+
+    CHECK(vk_serialize("AMDX", VK_IMAGE_TYPE_3D, &retVal) ==
           STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND);
     CHECK(retVal == cDummyStr);
   }
@@ -185,4 +198,71 @@ TEST_CASE("Serialize: Bitmask") {
     }
   }
 #endif
+
+  SECTION("Passing in a string of varying sizes for serialization") {
+    char testStr[20];
+    memset(testStr, 0, 20);
+
+    SECTION("Passing in more than required returns success and the serialized length of 13") {
+      uint32_t serializedLength = 20;
+      CHECK(vk_serialize32("VkDebugReportFlagsEXT",
+                           VK_DEBUG_REPORT_DEBUG_BIT_EXT | VK_DEBUG_REPORT_ERROR_BIT_EXT,
+                           &serializedLength, testStr) == STEC_VK_SERIALIZATION_RESULT_SUCCESS);
+      CHECK(serializedLength == 13);
+      CHECK(std::string_view{testStr, serializedLength} == "DEBUG | ERROR");
+    }
+    SECTION(
+        "Passing in more the precisely required returns success and the serialized length of 13") {
+      uint32_t serializedLength = 13;
+      CHECK(vk_serialize32("VkDebugReportFlagsEXT",
+                           VK_DEBUG_REPORT_DEBUG_BIT_EXT | VK_DEBUG_REPORT_ERROR_BIT_EXT,
+                           &serializedLength, testStr) == STEC_VK_SERIALIZATION_RESULT_SUCCESS);
+      CHECK(serializedLength == 13);
+      CHECK(std::string_view{testStr, serializedLength} == "DEBUG | ERROR");
+    }
+    SECTION("Passing in just under the rrequired returns incomplete data") {
+      uint32_t serializedLength = 8;
+      CHECK(vk_serialize32("VkDebugReportFlagsEXT",
+                           VK_DEBUG_REPORT_DEBUG_BIT_EXT | VK_DEBUG_REPORT_ERROR_BIT_EXT,
+                           &serializedLength,
+                           testStr) == STEC_VK_SERIALIZATION_RESULT_ERROR_INCOMPLETE);
+      CHECK(serializedLength == 8);
+      CHECK(std::string_view{testStr, serializedLength} == "DEBUG | ");
+    }
+    SECTION("Passing in just under the rrequired returns incomplete data") {
+      uint32_t serializedLength = 6;
+      CHECK(vk_serialize32("VkDebugReportFlagsEXT",
+                           VK_DEBUG_REPORT_DEBUG_BIT_EXT | VK_DEBUG_REPORT_ERROR_BIT_EXT,
+                           &serializedLength,
+                           testStr) == STEC_VK_SERIALIZATION_RESULT_ERROR_INCOMPLETE);
+      CHECK(serializedLength == 6);
+      CHECK(std::string_view{testStr, serializedLength} == "DEBUG ");
+    }
+    SECTION("Passing in just under the rrequired returns incomplete data") {
+      uint32_t serializedLength = 5;
+      CHECK(vk_serialize32("VkDebugReportFlagsEXT",
+                           VK_DEBUG_REPORT_DEBUG_BIT_EXT | VK_DEBUG_REPORT_ERROR_BIT_EXT,
+                           &serializedLength,
+                           testStr) == STEC_VK_SERIALIZATION_RESULT_ERROR_INCOMPLETE);
+      CHECK(serializedLength == 5);
+      CHECK(std::string_view{testStr, serializedLength} == "DEBUG");
+    }
+    SECTION("Passing in a zero-sized length returns incomplete and no written data") {
+      uint32_t serializedLength = 0;
+      CHECK(vk_serialize32("VkDebugReportFlagsEXT",
+                           VK_DEBUG_REPORT_DEBUG_BIT_EXT | VK_DEBUG_REPORT_ERROR_BIT_EXT,
+                           &serializedLength,
+                           testStr) == STEC_VK_SERIALIZATION_RESULT_ERROR_INCOMPLETE);
+      CHECK(serializedLength == 0);
+      CHECK(testStr[0] == '\0');
+    }
+
+    SECTION("Check for enum") {
+      uint32_t serializedLength = 1;
+      CHECK(vk_serialize32("VkImageType", VK_IMAGE_TYPE_3D, &serializedLength, testStr) ==
+            STEC_VK_SERIALIZATION_RESULT_ERROR_INCOMPLETE);
+      CHECK(serializedLength == 1);
+      CHECK(std::string_view{testStr, serializedLength} == "3");
+    }
+  }
 }
