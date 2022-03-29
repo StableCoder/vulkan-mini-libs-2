@@ -325,4 +325,30 @@ TEST_CASE("Parsing: Checking bitmask conversions from string to bitmask values")
       CHECK(retVal == (VK_DEBUG_REPORT_DEBUG_BIT_EXT | VK_DEBUG_REPORT_ERROR_BIT_EXT));
     }
   }
+
+  SECTION("With mixed short/full strings (64-bit)") {
+    uint64_t retVal;
+    SECTION("FlagBits") {
+      CHECK(vk_parse64("VkPipelineStageFlagBits2",
+                       "INVOCATION_MASK_BIT_HUAWEI | VK_PIPELINE_STAGE_2_TOP_OF_PIPE_BIT",
+                       &retVal) == STEC_VK_SERIALIZATION_RESULT_SUCCESS);
+      CHECK(retVal == (0x10000000000ULL | 0x00000001ULL));
+
+      CHECK(vk_parse64("VkPipelineStageFlagBits2",
+                       "VK_PIPELINE_STAGE_2_TOP_OF_PIPE_BIT | INVOCATION_MASK_BIT_HUAWEI",
+                       &retVal) == STEC_VK_SERIALIZATION_RESULT_SUCCESS);
+      CHECK(retVal == (0x10000000000ULL | 0x00000001ULL));
+    }
+    SECTION("Flags") {
+      CHECK(vk_parse64("VkPipelineStageFlags2",
+                       "INVOCATION_MASK_BIT_HUAWEI | VK_PIPELINE_STAGE_2_TOP_OF_PIPE_BIT",
+                       &retVal) == STEC_VK_SERIALIZATION_RESULT_SUCCESS);
+      CHECK(retVal == (0x10000000000ULL | 0x00000001ULL));
+
+      CHECK(vk_parse64("VkPipelineStageFlags2",
+                       "VK_PIPELINE_STAGE_2_TOP_OF_PIPE_BIT | INVOCATION_MASK_BIT_HUAWEI",
+                       &retVal) == STEC_VK_SERIALIZATION_RESULT_SUCCESS);
+      CHECK(retVal == (0x10000000000ULL | 0x00000001ULL));
+    }
+  }
 }
