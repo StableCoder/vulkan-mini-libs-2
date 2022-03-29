@@ -8,6 +8,9 @@ find_package(Vulkan REQUIRED)
 include_directories(../include)
 link_libraries(catch Vulkan::Vulkan)
 
+# Compilation Test
+add_library(compilation_test STATIC c_compilation.c cpp_compilation.cpp)
+
 # Error Code
 add_executable(VkErrorCodeTests error_code.cpp)
 target_code_coverage(VkErrorCodeTests EXCLUDE ".*/test/.*")

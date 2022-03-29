@@ -15,9 +15,11 @@
 */
 
 #include <catch.hpp>
+#include <vk_value_serialization.hpp>
 #include <vulkan/vulkan.h>
 
-#include "vk_value_serialization.hpp"
+#include <string>
+#include <string_view>
 
 namespace {
 std::string cDummyStr = "AAABBBCCC";

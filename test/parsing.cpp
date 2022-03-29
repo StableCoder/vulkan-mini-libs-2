@@ -18,7 +18,7 @@
 #include <vulkan/vulkan.h>
 
 #define VK_VALUE_SERIALIZATION_CONFIG_MAIN
-#include "vk_value_serialization.hpp"
+#include <vk_value_serialization.hpp>
 
 constexpr uint64_t cDummyNum = 999999;
 

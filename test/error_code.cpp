@@ -19,7 +19,7 @@
 
 #define VK_RESULT_TO_STRING_CONFIG_MAIN
 #define VK_ERROR_CODE_CONFIG_MAIN
-#include "vk_error_code.hpp"
+#include <vk_error_code.hpp>
 
 TEST_CASE("Success Case") {
   std::error_code test = VK_SUCCESS;
