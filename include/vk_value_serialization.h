@@ -3330,31 +3330,27 @@ bool getEnumType(char const *pVkType,
  */
 char const *generateEnumPrefix(char const *pTypeName, size_t nameLength) {
   // Flag Bits
-  size_t const flagBitsSize = strlen("FlagBits");
-  if (nameLength > flagBitsSize) {
-    if (strncmp(pTypeName + nameLength - flagBitsSize, "FlagBits", flagBitsSize) == 0) {
-      nameLength -= flagBitsSize;
-    }
-  }
+  char const *pFlags = strstr(pTypeName, "Flags");
   // Flags
-  size_t const flagsSize = strlen("Flags");
-  if (nameLength > flagsSize) {
-    if (strncmp(pTypeName + nameLength - flagsSize, "Flags", flagsSize) == 0) {
-      nameLength -= flagsSize;
-    }
-  }
+  char const *pFlagBits = strstr(pTypeName, "FlagBits");
 
   char *pPrefixStr = (char *)malloc(nameLength * 2);
   char *pDst = pPrefixStr;
-  for (char const *ch = pTypeName; ch != pTypeName + nameLength; ++ch) {
-    if (ch == pTypeName) {
+  for (char const *ch = pTypeName; ch < pTypeName + nameLength;) {
+    if (ch == pFlags) {
+      ch += strlen("Flags");
+    } else if (ch == pFlagBits) {
+      ch += strlen("FlagBits");
+    } else if (ch == pTypeName) {
       *pDst++ = toupper(*ch);
-
-    } else if (isupper(*ch)) {
+      ++ch;
+    } else if (isupper(*ch) || isdigit(*ch)) {
       *pDst++ = '_';
       *pDst++ = *ch;
+      ++ch;
     } else {
       *pDst++ = toupper(*ch);
+      ++ch;
     }
   }
   *pDst++ = '_';
