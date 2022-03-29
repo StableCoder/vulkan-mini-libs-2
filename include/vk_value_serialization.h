@@ -3539,14 +3539,15 @@ STecVkSerializationResult serializeBitmask(EnumValueSet const *pSearchStart,
 
   if (!incomplete && (vkValue != 0 || (serializedLength == 0 && !allowEmpty))) {
     // Failed to find a valid bitmask for the value
+    free(pTempStr);
     return STEC_VK_SERIALIZATION_RESULT_ERROR_VALUE_NOT_FOUND;
   }
 
   *pSerializedLength = serializedLength;
   if (pSerialized != NULL && serializedLength > 0) {
     memcpy(pSerialized, pTempStr, serializedLength);
-    free(pTempStr);
   }
+  free(pTempStr);
   if (incomplete) {
     return STEC_VK_SERIALIZATION_RESULT_ERROR_INCOMPLETE;
   }
