@@ -7,10 +7,11 @@ import xml.etree.ElementTree as ET
 
 def processVendors(outFile, vendors):
     outFile.write(
-        '\nconstexpr std::array<std::string_view, {}> vendors = {{{{\n'.format(len(vendors)))
+        '#define cVendorCount sizeof(cVendorList) / sizeof(char const*)')
+    outFile.write('\nchar const *cVendorList[{}] = {{\n'.format(len(vendors)))
     for vendor in vendors:
         outFile.write('  "{}",\n'.format(vendor.tag))
-    outFile.write('}};\n')
+    outFile.write('};\n')
 
 
 def processEnumValue(outFile, enum, value):
@@ -36,7 +37,7 @@ def processEnums(outFile, enums, vendors, first, last):
             continue
 
         outFile.write(
-            '\nconstexpr EnumValueSet {}Sets[] = {{\n'.format(enum.tag))
+            '\nEnumValueSet const {}Sets[] = {{\n'.format(enum.tag))
 
         # Determine how much to chop off the front
         strName = enum.tag
@@ -142,8 +143,8 @@ def main(argv):
         outFile.write('\n')
 
      #
-    outFile.write("""#ifndef VK_VALUE_SERIALIZATION_HPP
-#define VK_VALUE_SERIALIZATION_HPP
+    outFile.write("""#ifndef VK_VALUE_SERIALIZATION_H
+#define VK_VALUE_SERIALIZATION_H
 
 /*  USAGE:
     To use, include this header where the declarations for the boolean checks are required.
@@ -151,147 +152,164 @@ def main(argv):
     On *ONE* compilation unit, include the definition of:
     #define VK_VALUE_SERIALIZATION_CONFIG_MAIN
    
-    so that the definitions are compiled somewhere following the one definition rule.
+    so that the definitions are compiled somewhere following the one definition rule, either from
+    this header *OR* the vk_value_serialization.hpp header.
 */
 
-#include <vulkan/vulkan.h>
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-#include <string>
-#include <string_view>
+#include <vulkan/vulkan.h>
 """)
 
     # Static Asserts
+    outFile.write('\n#ifdef __cplusplus\n')
     outFile.write(
-        '\nstatic_assert(VK_HEADER_VERSION >= {}, "VK_HEADER_VERSION is from before the supported range.");\n'.format(firstVersion))
+        "static_assert(VK_HEADER_VERSION >= {}, \"VK_HEADER_VERSION is from before the supported range.\");\n".format(firstVersion))
     outFile.write(
-        'static_assert(VK_HEADER_VERSION <= {}, "VK_HEADER_VERSION is from after the supported range.");\n'.format(lastVersion))
+        "static_assert(VK_HEADER_VERSION <= {}, \"VK_HEADER_VERSION is from after the supported range.\");\n".format(lastVersion))
+    outFile.write('#else\n')
+    outFile.write(
+        "_Static_assert(VK_HEADER_VERSION >= {}, \"VK_HEADER_VERSION is from before the supported range.\");\n".format(firstVersion))
+    outFile.write(
+        "_Static_assert(VK_HEADER_VERSION <= {}, \"VK_HEADER_VERSION is from after the supported range.\");\n".format(lastVersion))
+    outFile.write('#endif\n')
 
     # Function Declarataions
     outFile.write("""
-/**
- * @brief Macro that automatically stringifies the given Vulkan type for serialization
- * @param VKTYPE Actual Vulkan type
- * @param VALUE Value to be serialized
- * @param STRPTR Pointer to the string to store the serialization in. Only modified if true is
- * returned.
- * @return True if serialization was successful. False otherwise.
- */
-#define VK_SERIALIZE(VKTYPE, VALUE, STRPTR) vk_serialize<VKTYPE>(#VKTYPE, VALUE, STRPTR)
 
-/**
- * @brief Macro that automatically stringifies the given Vulkan type for parsing
- * @param VKTYPE Actual Vulkan type
- * @param STRING String to be parsed
- * @param VALPTR Pointer to the value to store the parsed value in. Only modified if true is
- * returned.
- * @return True if serialization was successful. False otherwise.
- */
-#define VK_PARSE(VKTYPE, STRING, VALPTR) vk_parse<VKTYPE>(#VKTYPE, STRING, VALPTR)
+typedef enum STecVkSerializationResult {
+    STEC_VK_SERIALIZATION_RESULT_SUCCESS = 0,
+    STEC_VK_SERIALIZATION_RESULT_ERROR_INCOMPLETE,
+    STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND,
+    STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_HAS_NO_EMPTY_VALUE,
+    STEC_VK_SERIALIZATION_RESULT_ERROR_VALUE_NOT_FOUND,
+} STecVkSerializationResult;
 
 /**
  * @brief Serializes a Vulkan enumerator/flag type (32-bit)
- * @param vkType Name of the Vulkan enumerator/flag type
- * @param vkValue Value being serialized
- * @param pString Pointer to a string that will be modified with the serialized value. Only modified
- * if true is returned.
- * @return True the value was successfully serialized. False otherwise.
+ * @param pVkType is a pointer to the string name of the Vulkan enumerator/flag type
+ * @param vkValue is the numeric value being serialized
+ * @param pSerializedLength is a pointer to an integer related to the size of pSerialized, as
+ * described below.
+ * @param pSerialized is either NULL or a pointer to an character array.
+ * @note pSerialized is only written to if STEC_VK_SERIALIZATION_RESULT_SUCCESS or
+ * STEC_VK_SERIALIZATION_RESULT_ERROR_INCOMPLETE is returned.
+ *
+ * If pSerialized is NULL, then the size required to return all layer names is returned in
+ * pSerializedLength. Otherwise, pSerializedLength must point to a variable set by the user to the
+ * size of the pSerialized array, and on return the variable is overwritten with the characters
+ * actually written to pSerialized. If pSerializedLength is less than the total size required to
+ * return all, at most pSerializedLength is written, and
+ * STEC_VK_SERIALIZATION_RESULT_ERROR_INCOMPLETE will be returned instead of
+ * STEC_VK_SERIALIZATION_RESULT_SUCCESS, to indicate that not all names were returned.
+ *
+ * If the Vulkan type could not be determined or found, then
+ * STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND is returned.
+ *
+ * If the value given in vkValue is 0 and the corresponding Vulkan type doesn't have an equivalent
+ * 0-value that can be serialized, then STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_HAS_NO_EMPTY_VALUE
+ * is returned. If Any other given vkValue or bitmask cannot be translated fully, then
+ * STEC_VK_SERIALIZATION_RESULT_ERROR_VALUE_NOT_FOUND is returned.
  */
-bool vk_serialize(std::string_view vkType, uint32_t vkValue, std::string *pString);
-
-/**
- * @brief Parses a Vulkan enumerator/flag serialized string (32-bit)
- * @param vkType Name of the Vulkan enumerator/flag type
- * @param vkString String being parsed
- * @param pValue Pointer to a value that will be modified with the parsed value. Only modified if
- * true is returned.
- * @return True the value was successfully serialized. False otherwise.
- */
-bool vk_parse(std::string_view vkType, std::string vkString, uint32_t *pValue);
-
+STecVkSerializationResult vk_serialize32(char const *pVkType, uint32_t vkValue, uint32_t *pSerializedLength, char* pSerialized);
 
 /**
  * @brief Serializes a Vulkan enumerator/flag type (64-bit)
- * @param vkType Name of the Vulkan enumerator/flag type
- * @param vkValue Value being serialized
- * @param pString Pointer to a string that will be modified with the serialized value. Only modified
- * if true is returned.
- * @return True the value was successfully serialized. False otherwise.
+ * @param pVkType is a pointer to the string name of the Vulkan enumerator/flag type
+ * @param vkValue is the numeric value being serialized
+ * @param pSerializedLength is a pointer to an integer related to the size of pSerialized, as
+ * described below.
+ * @param pSerialized is either NULL or a pointer to an character array.
+ * @note pSerialized is only written to if STEC_VK_SERIALIZATION_RESULT_SUCCESS or
+ * STEC_VK_SERIALIZATION_RESULT_ERROR_INCOMPLETE is returned.
+ *
+ * If pSerialized is NULL, then the size required to return all layer names is returned in
+ * pSerializedLength. Otherwise, pSerializedLength must point to a variable set by the user to the
+ * size of the pSerialized array, and on return the variable is overwritten with the characters
+ * actually written to pSerialized. If pSerializedLength is less than the total size required to
+ * return all, at most pSerializedLength is written, and
+ * STEC_VK_SERIALIZATION_RESULT_ERROR_INCOMPLETE will be returned instead of
+ * STEC_VK_SERIALIZATION_RESULT_SUCCESS, to indicate that not all names were returned.
+ *
+ * If the Vulkan type could not be determined or found, then
+ * STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND is returned.
+ *
+ * If the value given in vkValue is 0 and the corresponding Vulkan type doesn't have an equivalent
+ * 0-value that can be serialized, then STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_HAS_NO_EMPTY_VALUE
+ * is returned. If Any other given vkValue or bitmask cannot be translated fully, then
+ * STEC_VK_SERIALIZATION_RESULT_ERROR_VALUE_NOT_FOUND is returned.
  */
-bool vk_serialize(std::string_view vkType, uint64_t vkValue, std::string *pString);
+STecVkSerializationResult vk_serialize64(char const *pVkType, uint64_t vkValue, uint32_t *pSerializedLength, char* pSerialized);
+
+/**
+ * @brief Parses a Vulkan enumerator/flag serialized string (32-bit)
+ * @param pVkType is a pointer to the string name of the Vulkan enumerator/flag type
+ * @param pVkString is a pointer to the string being parsed
+ * @param pParsedValue is a pointer to a value that will be modified with the parsed value. Only
+ * modified if STEC_VK_SERIALIZATION_RESULT_SUCCESS is returned.
+ *
+ * This attempts to parse the given Vulkan string, according to the values available for the Vulkan
+ * type, and updates the return parsed value upon STEC_VK_SERIALIZATION_RESULT_SUCCESS.
+ *
+ * If the type cannot be determined or found, STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND is
+ * returned.
+ *
+ * If a particular token in the parsing string cannot be determined or found, then
+ * STEC_VK_SERIALIZATION_RESULT_ERROR_VALUE_NOT_FOUND is returned.
+ */
+STecVkSerializationResult vk_parse32(char const *pVkType, char const *pVkString, uint32_t *pParsedValue);
 
 /**
  * @brief Parses a Vulkan enumerator/flag serialized string (64-bit)
- * @param vkType Name of the Vulkan enumerator/flag type
- * @param vkString String being parsed
- * @param pValue Pointer to a value that will be modified with the parsed value. Only modified if
- * true is returned.
- * @return True the value was successfully serialized. False otherwise.
+ * @param pVkType is a pointer to the string name of the Vulkan enumerator/flag type
+ * @param pVkString is a pointer to the string being parsed
+ * @param pParsedValue is a pointer to a value that will be modified with the parsed value. Only
+ * modified if STEC_VK_SERIALIZATION_RESULT_SUCCESS is returned.
+ *
+ * This attempts to parse the given Vulkan string, according to the values available for the Vulkan
+ * type, and updates the return parsed value upon STEC_VK_SERIALIZATION_RESULT_SUCCESS.
+ *
+ * If the type cannot be determined or found, STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND is
+ * returned.
+ *
+ * If a particular token in the parsing string cannot be determined or found, then
+ * STEC_VK_SERIALIZATION_RESULT_ERROR_VALUE_NOT_FOUND is returned.
  */
-bool vk_parse(std::string_view vkType, std::string vkString, uint64_t *pValue);
+STecVkSerializationResult vk_parse64(char const* pVkType, char const *pVkString, uint64_t *pParsedValue);
 
-/**
- * @brief Serializes a Vulkan enumerator/flag type
- * @tparam Vulkan type being serialized
- * @param vkType Name of the Vulkan enumerator/flag type
- * @param vkValue Value being serialized
- * @param pString Pointer to a string that will be modified with the serialized value. Only modified
- * if true is returned.
- * @return True the value was successfully serialized. False otherwise.
- */
-template <typename T>
-bool vk_serialize(std::string_view vkType, T vkValue, std::string *pString) {
-    return vk_serialize(vkType, static_cast<uint32_t>(vkValue), pString);
-}
-
-/**
- * @brief Parses a Vulkan enumerator/flag serialized string
- * @tparam Vulkan type being parsed
- * @param vkType Name of the Vulkan enumerator/flag type
- * @param vkString String being parsed
- * @param pValue Pointer to a value that will be modified with the parsed value. Only modified if
- * true is returned.
- * @return True the value was successfully serialized. False otherwise.
- */
-template <typename T>
-bool vk_parse(std::string_view vkType, std::string vkString, T *pValue) {
-    uint32_t retVal = 0;
-    auto found = vk_parse(vkType, vkString, &retVal);
-    if (found) {
-        *pValue = static_cast<T>(retVal);
-    }
-    return found;
-} 
 """)
 
     # Definition Start
     outFile.write("\n#ifdef VK_VALUE_SERIALIZATION_CONFIG_MAIN\n")
-    outFile.write("\n#include <algorithm>\n")
-    outFile.write("#include <array>\n")
-    outFile.write("#include <cstring>\n")
-    outFile.write("\nnamespace {\n")
+    outFile.write("#include <assert.h>\n")
+    outFile.write("#include <ctype.h>\n")
+    outFile.write("#include <stdlib.h>\n")
+    outFile.write("#include <string.h>\n\n")
 
     # Vendors
     vendors = dataRoot.findall('vendors/')
     processVendors(outFile, vendors)
 
     # EnumSet Declaration
-    outFile.write("\nstruct EnumValueSet {\n")
-    outFile.write("  std::string_view name;\n")
+    outFile.write("\ntypedef struct EnumValueSet {\n")
+    outFile.write("  char const *name;\n")
     outFile.write("  int64_t value;\n")
     outFile.write("  bool alias;\n")
-    outFile.write("};\n")
+    outFile.write("} EnumValueSet;\n")
 
     # Enums
     enums = dataRoot.findall('enums/')
     processEnums(outFile, enums, vendors, firstVersion, lastVersion)
 
     # Enum Type Declaration
-    outFile.write("\nstruct EnumType {\n")
-    outFile.write("  std::string_view name;\n")
+    outFile.write("\ntypedef struct EnumType {\n")
+    outFile.write("  char const *name;\n")
     outFile.write("  EnumValueSet const* data;\n")
     outFile.write("  uint32_t count;\n")
     outFile.write("  bool allowEmpty;\n")
-    outFile.write("};\n")
+    outFile.write("} EnumType;\n")
 
     # Enum Pointer Array
     usefulEnumCount = 0
@@ -300,7 +318,9 @@ bool vk_parse(std::string_view vkType, std::string vkString, T *pValue) {
             continue
         usefulEnumCount += 1
 
-    outFile.write('\nconstexpr std::array<EnumType, {}> enumTypes = {{{{\n'.format(
+    outFile.write(
+        '\n#define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)\n')
+    outFile.write('EnumType const cEnumTypes[{}] = {{\n'.format(
         usefulEnumCount))  # -1 for not doing VkResult
     for enum in enums:
         if enum.tag == 'VkResult' or enum.get('alias'):
@@ -308,7 +328,7 @@ bool vk_parse(std::string_view vkType, std::string vkString, T *pValue) {
 
         valueCount = len(enum.findall('./values/'))
         if valueCount == 0:
-            outFile.write('  {{"{}", nullptr, 0, true}},\n'.format(enum.tag))
+            outFile.write('  {{"{}", NULL, 0, true}},\n'.format(enum.tag))
         else:
             allowEmpty = "true"
             for enumVal in enum.findall('./values/'):
@@ -316,74 +336,108 @@ bool vk_parse(std::string_view vkType, std::string vkString, T *pValue) {
                     allowEmpty = "false"
             outFile.write('  {{"{0}", {0}Sets, {1}, {2}}},\n'.format(
                 enum.tag, valueCount, allowEmpty))
-    outFile.write('}};\n')
+    outFile.write('};\n')
 
     # Function definitions
     outFile.write("""
 /**
  * @brief Removes a vendor tag from the end of the given string view
- * @param view String view to remove the vendor tag from
- * @return A string_view without the vendor tag, if it was suffixed
+ * @param str string to chop the vendor tag from
+ * @param size is the current length of the string being used
+ * @return Length of the string without the vendor tag, if it was suffixed, otherwise the size
+ * originally passed in.
  */
-std::string_view stripVendor(std::string_view view) {
-    for (auto const &it : vendors) {
-        // Don't strip if it's all that's left
-        if (view == it)
-            break;
+size_t stripVendor(char const *str, size_t len) {
+  for (size_t i = 0; i < cVendorCount; ++i) {
+    char const *it = cVendorList[i];
+    if (strlen(it) > len)
+      continue;
 
-        if (strncmp(view.data() + view.size() - it.size(), it.data(), it.size()) == 0) {
-            view = view.substr(0, view.size() - it.size());
-            break;
-        }
+    // Don't strip if it's all that's left
+    if (len == strlen(it) && strncmp(str, it, len) == 0)
+      break;
+
+    if (strncmp(str + len - strlen(it), it, strlen(it)) == 0) {
+      len -= strlen(it);
+      break;
     }
+  }
 
-    return view;
+  return len;
 }
 
 /**
  * @brief Strips '_BIT' from the end of a string, if there
+ * @param str string to chop the vendor tag from
+ * @param size is the current length of the string being used
+ * @return Length of the string without the '_BIT'' tag, if it was suffixed, otherwise the size
+ * originally passed in.
  */
-std::string_view stripBit(std::string_view view) {
-    if (view.size() > strlen("_BIT")) {
-        if (view.substr(view.size() - strlen("_BIT")) == "_BIT") {
-            return view.substr(0, view.size() - strlen("_BIT"));
-        }
+size_t stripBit(char const *str, size_t len) {
+  if (len > strlen("_BIT")) {
+    if (strncmp(str + len - strlen("_BIT"), "_BIT", strlen("_BIT")) == 0) {
+      len -= strlen("_BIT");
     }
+  }
 
-    return view;
+  return len;
 }
 
-bool getEnumType(std::string_view vkType,
+/**
+ * @brief Iterates through and finds the corresponding type's EnumValueSet
+ * @param pVkType is a pointer to the string name of the Vulkan type
+ * @param ppStart is a double-pointer that will point to the start of any found set
+ * @param ppEnd is a double-pointer that will point to the end of any found set
+ * @param pAllowEmpty is a pointer to a boolean to represent whether the given type allows empty
+ * values
+ * @return True if a matching type value set is found, false otherwise.
+ *
+ * This iterates through the big cEnumTypes array, attempting to find a matching type and returning
+ * data about it.
+ */
+bool getEnumType(char const *pVkType,
                  EnumValueSet const **ppStart,
                  EnumValueSet const **ppEnd,
                  bool *pAllowEmpty) {
   // Check for a conversion from FlagBits -> Flags
-  std::string localString;
-  if (vkType.rfind("FlagBits") != std::string::npos) {
-    localString = std::string{vkType};
-    auto it = localString.rfind("FlagBits");
-    localString = localString.replace(it, strlen("FlagBits"), "Flags");
-    vkType = localString;
+  char localStr[64];
+  size_t localLen = strlen(pVkType);
+  memcpy(localStr, pVkType, localLen);
+  localStr[localLen] = '\\0';
+
+  {
+    char const *const pSubStrStart = strstr(pVkType, "FlagBits");
+    if (pSubStrStart != NULL) {
+      size_t const subStrStartCount = pSubStrStart - pVkType;
+      memcpy(localStr + subStrStartCount, "Flags", strlen("Flags")); // Replacement Data
+      memcpy(localStr + subStrStartCount + strlen("Flags"),
+             pVkType + subStrStartCount + strlen("FlagBits"),
+             localLen - subStrStartCount - strlen("FlagBits")); // Trailing Data
+      localLen = localLen - strlen("FlagBits") + strlen("Flags");
+      localStr[localLen] = '\\0';
+    }
   }
 
-  // Try the original name
-  for (auto const &it : enumTypes) {
-    if (vkType == std::string_view{it.name}) {
-      *ppStart = it.data;
-      *ppEnd = it.data + it.count;
-      *pAllowEmpty = it.allowEmpty;
+  // Try the original name (with flagbits -> flags)
+  for (size_t i = 0; i < cEnumTypeCount; ++i) {
+    EnumType const *it = &cEnumTypes[i];
+    if (strcmp(localStr, it->name) == 0) {
+      *ppStart = it->data;
+      *ppEnd = it->data + it->count;
+      *pAllowEmpty = it->allowEmpty;
 
       return true;
     }
   }
 
   // Try a vendor-stripped name
-  vkType = stripVendor(vkType);
-  for (auto const &it : enumTypes) {
-    if (vkType == std::string_view{it.name}) {
-      *ppStart = it.data;
-      *ppEnd = it.data + it.count;
-      *pAllowEmpty = it.allowEmpty;
+  localStr[stripVendor(localStr, localLen)] = '\\0';
+  for (size_t i = 0; i < cEnumTypeCount; ++i) {
+    EnumType const *it = &cEnumTypes[i];
+    if (strcmp(localStr, it->name) == 0) {
+      *ppStart = it->data;
+      *ppEnd = it->data + it->count;
+      *pAllowEmpty = it->allowEmpty;
 
       return true;
     }
@@ -394,85 +448,98 @@ bool getEnumType(std::string_view vkType,
 
 /**
  * @brief Converts a Vulkan Flag typename into the prefix that is used for it's enums
- * @param typeName Name of the type to generate the Vk enum prefix for
- * @return Generated prefix string
+ * @param pTypeName is the type to generate the Vulkan enum prefix for
+ * @param nameLength is the length of the type name
+ * @return Generated prefix string, the ownership of which passes to the caller
  *
  * Any capitalized letters except for the first has an underscore inserted before it, an underscore
  * is added to the end, and all characters are converted to upper case.
  *
  * It also removed the 'Flags' or 'FlagBits' suffixes.
  */
-std::string processEnumPrefix(std::string_view typeName) {
-    // Flag Bits
-    std::size_t flagBitsSize = strlen("FlagBits");
-    if (typeName.size() > flagBitsSize) {
-        if (strncmp(typeName.data() + typeName.size() - flagBitsSize, "FlagBits", flagBitsSize) ==
-            0) {
-            typeName = typeName.substr(0, typeName.size() - strlen("FlagBits"));
-        }
+char const *generateEnumPrefix(char const *pTypeName, size_t nameLength) {
+  // Flag Bits
+  size_t const flagBitsSize = strlen("FlagBits");
+  if (nameLength > flagBitsSize) {
+    if (strncmp(pTypeName + nameLength - flagBitsSize, "FlagBits", flagBitsSize) == 0) {
+      nameLength -= flagBitsSize;
     }
-    // Flags
-    std::size_t flagsSize = strlen("Flags");
-    if (typeName.size() > flagsSize) {
-        if (strncmp(typeName.data() + typeName.size() - flagsSize, "Flags", flagsSize) == 0) {
-            typeName = typeName.substr(0, typeName.size() - strlen("Flags"));
-        }
+  }
+  // Flags
+  size_t const flagsSize = strlen("Flags");
+  if (nameLength > flagsSize) {
+    if (strncmp(pTypeName + nameLength - flagsSize, "Flags", flagsSize) == 0) {
+      nameLength -= flagsSize;
     }
+  }
 
-    std::string retStr;
-    for (auto it = typeName.begin(); it != typeName.end(); ++it) {
-        if (it == typeName.begin()) {
-            retStr += ::toupper(*it);
-        } else if (::isupper(*it)) {
-            retStr += '_';
-            retStr += *it;
-        } else {
-            retStr += toupper(*it);
-        }
-    }
-    retStr += '_';
+  char *pPrefixStr = (char *)malloc(nameLength * 2);
+  char *pDst = pPrefixStr;
+  for (char const *ch = pTypeName; ch != pTypeName + nameLength; ++ch) {
+    if (ch == pTypeName) {
+      *pDst++ = toupper(*ch);
 
-    return retStr;
+    } else if (isupper(*ch)) {
+      *pDst++ = '_';
+      *pDst++ = *ch;
+    } else {
+      *pDst++ = toupper(*ch);
+    }
+  }
+  *pDst++ = '_';
+  *pDst = '\\0';
+  assert(pDst < pPrefixStr + (nameLength * 2));
+
+  return pPrefixStr;
 }
 
-bool findValue(std::string_view findValue,
-               std::string_view prefix,
-               uint64_t *pValue,
-               EnumValueSet const *start,
-               EnumValueSet const *end) {
-  // Try the initial value
-  for (auto const *pStart = start; pStart != end; ++pStart) {
-    if (findValue == pStart->name) {
-      *pValue |= pStart->value;
-      return true;
-    }
+/**
+ * @brief Finds the corresponding value for the given string
+ * @param pValueStr is a pointer to the string representing the value
+ * @param valueLength is the length of the pValueStr string
+ * @param pPrefixStr is a pointer to a pre-determined prefix string that the value may have
+ * @param prefixLength is the length of the pPrefixStr string
+ * @param pSearchStart is a pointer to the start of the value set to search
+ * @param pSearchEnd is a pointer to the end of the value set to search
+ * @param pParsedValue is a pointer that will be updated with any found matching value
+ * @return True if a matching value was found and pParsedValue updated. False otherwise.
+ *
+ * Using the given Vulkan token string, this function will attempt to find a matching value in the
+ * given search set.
+ */
+bool parseValue(char const *pValueStr,
+                size_t valueLength,
+                char const *pPrefixStr,
+                size_t prefixLength,
+                EnumValueSet const *pSearchStart,
+                EnumValueSet const *pSearchEnd,
+                uint64_t *pParsedValue) {
+  // Check if there's a matching prefix
+  if (valueLength >= prefixLength && strncmp(pValueStr, pPrefixStr, prefixLength) == 0) {
+    // There is, limit the searching scope to the part *after* the prefix
+    pValueStr += prefixLength;
+    valueLength -= prefixLength;
+  }
 
-    std::string prefixedName{prefix};
-    prefixedName += pStart->name;
-    if (findValue == prefixedName) {
-      *pValue |= pStart->value;
+  // Try the initial value
+  for (EnumValueSet const *pStart = pSearchStart; pStart != pSearchEnd; ++pStart) {
+    if (valueLength == strlen(pStart->name) && strncmp(pValueStr, pStart->name, valueLength) == 0) {
+      *pParsedValue |= pStart->value;
       return true;
     }
   }
 
   // Remove the vendor tag suffix if it's on the value
-  findValue = stripVendor(findValue);
-  if (findValue[findValue.size() - 1] == '_')
-    findValue = findValue.substr(0, findValue.size() - 1);
+  valueLength = stripVendor(pValueStr, valueLength);
+  if (valueLength > 0 && pValueStr[valueLength - 1] == '_')
+    --valueLength;
 
   // Remove '_BIT' if it's there
-  findValue = stripBit(findValue);
+  valueLength = stripBit(pValueStr, valueLength);
 
-  for (auto const *pStart = start; pStart != end; ++pStart) {
-    if (findValue == pStart->name) {
-      *pValue |= pStart->value;
-      return true;
-    }
-
-    std::string prefixedName{prefix};
-    prefixedName += pStart->name;
-    if (findValue == prefixedName) {
-      *pValue |= pStart->value;
+  for (EnumValueSet const *pStart = pSearchStart; pStart != pSearchEnd; ++pStart) {
+    if (valueLength == strlen(pStart->name) && strncmp(pValueStr, pStart->name, valueLength) == 0) {
+      *pParsedValue |= pStart->value;
       return true;
     }
   }
@@ -482,209 +549,319 @@ bool findValue(std::string_view findValue,
 
 /**
  * @brief Takes a given string and formats it for use with parsing
- * @param str The string to format
- * @return Formatted string
+ * @param ppStart is a double-pointer to the start of the string, which can be moved
+ * @param pEnd is a pointer to the current end of the string
+ * @return Pointer to the new end of the formatted string
  *
  * First, any non alphanumeric characters are trimmed from both ends of the string.
  * After than, any spaces are replaced with underscores, and finally all the characters are
  * capitalized. This will generate the string closest to the original ones found in the XML spec.
  */
-std::string formatString(std::string str) {
-    // Trim left
-    std::size_t cutOffset = 0;
-    for (auto c : str) {
-        if (::isalnum(c))
+char *formatString(char **ppStart, char *pEnd) {
+  // Trim left
+  size_t cutOffset = 0;
+  for (; *ppStart != pEnd;) {
+    if (isalnum(**ppStart))
+      break;
+    else
+      ++(*ppStart);
+  }
+
+  // Trim right
+  char *pNewEnd = *ppStart;
+  cutOffset = 0;
+  for (char *ch = *ppStart; ch < pEnd; ++ch) {
+    if (isalnum(*ch))
+      pNewEnd = ch + 1;
+  }
+
+  for (char *ch = *ppStart; ch < pNewEnd; ++ch) {
+    if (*ch == ' ')
+      *ch = '_';
+    else
+      *ch = toupper(*ch);
+  }
+
+  return pNewEnd;
+}
+
+// Returns the smallest of two values
+uint32_t serializeMin(uint32_t lhs, uint32_t rhs) {
+  if (lhs < rhs) {
+    return lhs;
+  }
+  return rhs;
+}
+
+STecVkSerializationResult serializeBitmask(EnumValueSet const *pSearchStart,
+                                           EnumValueSet const *pSearchEnd,
+                                           bool allowEmpty,
+                                           uint64_t vkValue,
+                                           uint32_t *pSerializedLength,
+                                           char *pSerialized) {
+  if (pSearchStart == pSearchEnd) {
+    // If this is a non-existing bitmask, then return an empty string
+    *pSerializedLength = 0;
+    return STEC_VK_SERIALIZATION_RESULT_SUCCESS;
+  }
+
+  // As we want to search in reverse order (to possible catch values that encompass multiple bits)
+  // we decrement both items here, so the 'end' is at a valid value and 'start' is now one 'beyond
+  // the end'
+  EnumValueSet const* pSwap = pSearchStart;
+  pSearchStart = pSearchEnd - 1;
+  pSearchEnd = pSwap - 1;
+
+  // Number of characters serialized so far
+  uint32_t serializedLength = 0;
+  // Will turn true if there isn't enough space in the destination string to fully serialize all the
+  // values
+  bool incomplete = false;
+  // Will host the temporary internal string, so we don't overwrite data in the destination string
+  // unless we're successfully returning
+  char *pTempStr = NULL;
+
+  if (pSerialized != NULL) {
+    // We'll only bother with the internal string if we can outputt string data
+    pTempStr = (char *)malloc(*pSerializedLength);
+  }
+  char *pSrcStr = pTempStr;
+
+  while (pSearchStart != pSearchEnd) {
+    if (vkValue == 0 && serializedLength > 0) {
+      // No more non-zero values to serialize, and we've serialized something,
+      // so we can skip any possible zero-values
+      break;
+    }
+
+    if (!pSearchStart->alias && (pSearchStart->value & vkValue) == pSearchStart->value) {
+      // Found a compatible bit mask, add it
+      if (serializedLength > 0) {
+        if (pTempStr == NULL) {
+          serializedLength += 3;
+        } else {
+          uint32_t toCopy = serializeMin(*pSerializedLength - serializedLength, 3);
+          memcpy(pSrcStr, " | ", toCopy);
+          pSrcStr += toCopy;
+          serializedLength += toCopy;
+          if (toCopy != 3) {
+            incomplete = true;
             break;
-        else
-            ++cutOffset;
-    }
-    str = str.substr(cutOffset);
-
-    // Trim right
-    cutOffset = 0;
-    for (std::size_t i = 0; i < str.size(); ++i) {
-        if (::isalnum(str[i]))
-            cutOffset = i + 1;
-    }
-    str = str.substr(0, cutOffset);
-
-    std::replace(str.begin(), str.end(), ' ', '_');
-    std::for_each(str.begin(), str.end(), [](char &c) { c = ::toupper(c); });
-
-    return str;
-}
-
-bool serializeBitmask(EnumValueSet const *end,
-                      EnumValueSet const *start,
-                      bool allowEmpty,
-                      uint64_t vkValue,
-                      std::string *pString) {
-  --end;
-  --start;
-
-    if(start == end) {
-        // If this is a non-existing bitmask, then return an empty string
-        *pString = {};
-        return true;
-    }
-
-    std::string retStr;
-    while (start != end) {
-        if(vkValue == 0 && !retStr.empty()) {
-            break;
+          }
         }
-        if (!start->alias && (start->value & vkValue) == start->value) {
-            // Found a compatible bit mask, add it
-            if (!retStr.empty()) {
-                retStr += " | ";
-            }
-            retStr += start->name;
-            vkValue = vkValue ^ start->value;
+      }
+
+      if (pSrcStr == NULL) {
+        serializedLength += strlen(pSearchStart->name);
+      } else {
+        uint32_t toCopy = serializeMin(*pSerializedLength - serializedLength, strlen(pSearchStart->name));
+        memcpy(pSrcStr, pSearchStart->name, toCopy);
+        pSrcStr += toCopy;
+        serializedLength += toCopy;
+        if (toCopy != strlen(pSearchStart->name)) {
+          incomplete = true;
+          break;
         }
-
-        --start;
+      }
+      vkValue = vkValue ^ pSearchStart->value;
     }
 
-    if (vkValue != 0 || (retStr.empty() && !allowEmpty)) {
-        // Failed to find a valid bitmask for the value
-        return false;
-    }
+    --pSearchStart;
+  }
 
-    *pString = retStr;
-    return true;
+  if (!incomplete && (vkValue != 0 || (serializedLength == 0 && !allowEmpty))) {
+    // Failed to find a valid bitmask for the value
+    return STEC_VK_SERIALIZATION_RESULT_ERROR_VALUE_NOT_FOUND;
+  }
+
+  *pSerializedLength = serializedLength;
+  if (pSerialized != NULL && serializedLength > 0) {
+    memcpy(pSerialized, pTempStr, serializedLength);
+    free(pTempStr);
+  }
+  if (incomplete) {
+    return STEC_VK_SERIALIZATION_RESULT_ERROR_INCOMPLETE;
+  }
+  return STEC_VK_SERIALIZATION_RESULT_SUCCESS;
 }
 
-bool serializeEnum(EnumValueSet const *start,
-                   EnumValueSet const *end,
-                   uint64_t vkValue,
-                   std::string *pString) {
-  while (start != end) {
-    if (!start->alias && start->value == vkValue) {
-      *pString = start->name;
-      return true;
+STecVkSerializationResult serializeEnum(EnumValueSet const *pSearchStart,
+                                        EnumValueSet const *pSearchEnd,
+                                        uint64_t vkValue,
+                                        uint32_t *pSerializedLength,
+                                        char *pSerialized) {
+  while (pSearchStart != pSearchEnd) {
+    if (!pSearchStart->alias && pSearchStart->value == vkValue) {
+      uint32_t const sourceLength = strlen(pSearchStart->name);
+      if (pSerialized != NULL) {
+        if (*pSerializedLength < sourceLength) {
+          memcpy(pSerialized, pSearchStart->name, *pSerializedLength);
+          return STEC_VK_SERIALIZATION_RESULT_ERROR_INCOMPLETE;
+        } else {
+          // Copy full value
+          memcpy(pSerialized, pSearchStart->name, sourceLength);
+        }
+      }
+      // In all success cases, set the length of the value string, either for how much is needed or
+      // was copied.
+      *pSerializedLength = sourceLength;
+
+      return STEC_VK_SERIALIZATION_RESULT_SUCCESS;
     }
 
-        ++start;
-    }
+    ++pSearchStart;
+  }
 
-    return false;
+  return STEC_VK_SERIALIZATION_RESULT_ERROR_VALUE_NOT_FOUND;
 }
 
-bool parseBitmask(std::string_view vkString,
-                  EnumValueSet const *start,
-                  EnumValueSet const *end,
-                  std::string_view prefix,
-                  uint64_t *pValue) {
+STecVkSerializationResult parseBitmask(char *pVkString,
+                                       EnumValueSet const *pSearchStart,
+                                       EnumValueSet const *pSearchEnd,
+                                       char const *pPrefixStr,
+                                       size_t prefixLength,
+                                       uint64_t *pParsedValue) {
   uint64_t retVal = 0;
+  char *const strEnd = pVkString + strlen(pVkString);
 
-  auto startCh = vkString.begin();
-  auto endCh = startCh;
-  for (; endCh != vkString.end(); ++endCh) {
+  char *startCh = pVkString;
+  char *endCh = pVkString;
+  for (; endCh != strEnd; ++endCh) {
     if (*endCh == '|') {
-      std::string token(startCh, endCh);
-      token = formatString(token);
+      char *pNewEndCh = formatString(&startCh, endCh);
 
-      bool foundVal = findValue(token, prefix, &retVal, start, end);
+      bool foundVal =
+          parseValue(startCh, pNewEndCh - startCh, pPrefixStr, prefixLength, pSearchStart, pSearchEnd, &retVal);
       if (!foundVal)
-        return false;
+        return STEC_VK_SERIALIZATION_RESULT_ERROR_VALUE_NOT_FOUND;
 
       startCh = endCh + 1;
     }
   }
   if (startCh != endCh) {
-    std::string token(startCh, endCh);
-    token = formatString(token);
+    char *pNewEndCh = formatString(&startCh, endCh);
 
-    bool foundVal = findValue(token, prefix, &retVal, start, end);
+    bool foundVal =
+        parseValue(startCh, pNewEndCh - startCh, pPrefixStr, prefixLength, pSearchStart, pSearchEnd, &retVal);
     if (!foundVal)
-      return false;
+      return STEC_VK_SERIALIZATION_RESULT_ERROR_VALUE_NOT_FOUND;
   }
 
-  *pValue = retVal;
-  return true;
+  *pParsedValue = retVal;
+  return STEC_VK_SERIALIZATION_RESULT_SUCCESS;
 }
 
-bool parseEnum(std::string_view vkString,
-               EnumValueSet const *start,
-               EnumValueSet const *end,
-               std::string_view prefix,
-               uint64_t *pValue) {
+STecVkSerializationResult parseEnum(char *pVkString,
+                                    EnumValueSet const *pSearchStart,
+                                    EnumValueSet const *pSearchEnd,
+                                    char const *pPrefixStr,
+                                    size_t prefixLength,
+                                    uint64_t *pParsedValue) {
   uint64_t retVal = 0;
 
-  std::string token = formatString(std::string{vkString});
-  bool found = findValue(token, prefix, &retVal, start, end);
+  char *pStrEnd = formatString(&pVkString, pVkString + strlen(pVkString));
+  bool found =
+      parseValue(pVkString, pStrEnd - pVkString, pPrefixStr, prefixLength, pSearchStart, pSearchEnd, &retVal);
   if (found) {
-    *pValue = retVal;
+    *pParsedValue = retVal;
+    return STEC_VK_SERIALIZATION_RESULT_SUCCESS;
   }
-  return found;
+
+  return STEC_VK_SERIALIZATION_RESULT_ERROR_VALUE_NOT_FOUND;
 }
 
-} // namespace
+STecVkSerializationResult vk_serialize32(char const *pVkType,
+                                         uint32_t vkValue,
+                                         uint32_t *pSerializedLength,
+                                         char *pSerialized) {
+  return vk_serialize64(pVkType, (uint64_t)vkValue, pSerializedLength, pSerialized);
+}
 
-bool vk_serialize(std::string_view vkType, uint64_t vkValue, std::string *pString) {
-    if (vkType.empty()) {
-        return false;
-    }
+STecVkSerializationResult vk_serialize64(char const *pVkType,
+                                         uint64_t vkValue,
+                                         uint32_t *pSerializedLength,
+                                         char *pSerialized) {
+  if (pVkType == NULL || strlen(pVkType) == 0) {
+    return STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND;
+  }
 
-  EnumValueSet const *start, *end;
+  EnumValueSet const *pSearchStart, *pSearchEnd;
   bool allowEmpty;
-  if (!getEnumType(vkType, &start, &end, &allowEmpty)) {
-    return false;
+  if (!getEnumType(pVkType, &pSearchStart, &pSearchEnd, &allowEmpty)) {
+    return STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND;
   }
 
-  if (vkType.find("Flags") != std::string::npos || vkType.find("FlagBits") != std::string::npos) {
-    return serializeBitmask(start, end, allowEmpty, vkValue, pString);
+  if (strstr(pVkType, "Flags") != NULL || strstr(pVkType, "FlagBits") != NULL) {
+    return serializeBitmask(pSearchStart, pSearchEnd, allowEmpty, vkValue, pSerializedLength, pSerialized);
   }
 
-  return serializeEnum(start, end, vkValue, pString);
+  return serializeEnum(pSearchStart, pSearchEnd, vkValue, pSerializedLength, pSerialized);
 }
 
-bool vk_serialize(std::string_view vkType, uint32_t vkValue, std::string *pString) {
-  return vk_serialize(vkType, static_cast<uint64_t>(vkValue), pString);
+STecVkSerializationResult vk_parse32(char const *pVkType,
+                                     char const *pVkString,
+                                     uint32_t *pParsedValue) {
+  uint64_t tempValue;
+  STecVkSerializationResult result = vk_parse64(pVkType, pVkString, &tempValue);
+  if (result == STEC_VK_SERIALIZATION_RESULT_SUCCESS) {
+    *pParsedValue = (uint32_t)tempValue;
+  }
+  return result;
 }
 
-bool vk_parse(std::string_view vkType, std::string vkString, uint64_t *pValue) {
-  if (vkType.empty()) {
-    return false;
+STecVkSerializationResult vk_parse64(char const *pVkType,
+                                     char const *pVkString,
+                                     uint64_t *pParsedValue) {
+  if (pVkType == NULL || strlen(pVkType) == 0) {
+    return STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND;
   }
 
-  EnumValueSet const *start, *end;
+  EnumValueSet const *pSearchStart, *pSearchEnd;
   bool allowEmpty;
-  if (!getEnumType(vkType, &start, &end, &allowEmpty)) {
-    return false;
+  if (!getEnumType(pVkType, &pSearchStart, &pSearchEnd, &allowEmpty)) {
+    return STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND;
   }
 
-  if (vkString.empty()) {
+  size_t const strLength = strlen(pVkString);
+  if (strLength == 0) {
     if (allowEmpty) {
-      *pValue = 0;
-      return true;
+      *pParsedValue = 0;
+      return STEC_VK_SERIALIZATION_RESULT_SUCCESS;
     } else {
-      return false;
+      return STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_HAS_NO_EMPTY_VALUE;
     }
   }
 
-  std::string prefix = processEnumPrefix(stripVendor(vkType));
+  char *mutableStr = (char *)malloc(strLength + 1);
+  memcpy(mutableStr, pVkString, strLength);
+  mutableStr[strLength] = '\\0';
 
-  if (vkType.find("Flags") != std::string::npos || vkType.find("FlagBits") != std::string::npos) {
-    return parseBitmask(vkString, start, end, prefix, pValue);
+  char const *prefixStr = generateEnumPrefix(pVkType, stripVendor(pVkType, strlen(pVkType)));
+
+  STecVkSerializationResult result;
+  if (strstr(pVkType, "Flags") != NULL || strstr(pVkType, "FlagBits") != NULL) {
+    result = parseBitmask(mutableStr, pSearchStart, pSearchEnd, prefixStr, strlen(prefixStr), pParsedValue);
+  } else {
+    result = parseEnum(mutableStr, pSearchStart, pSearchEnd, prefixStr, strlen(prefixStr), pParsedValue);
   }
 
-  return parseEnum(vkString, start, end, prefix, pValue);
-}
+  free((void *)prefixStr);
+  free(mutableStr);
 
-bool vk_parse(std::string_view vkType, std::string vkString, uint32_t *pValue) {
-    uint64_t tempValue;
-    if (vk_parse(vkType, vkString, &tempValue)) {
-        *pValue = static_cast<uint32_t>(tempValue);
-        return true;
-    }
-    return false;
+  return result;
 }
 """)
 
     # endif
-    outFile.write("\n#endif // VK_VALUE_SERIALIZATION_CONFIG_MAIN\n")
-    outFile.write("#endif // VK_VALUE_SERIALIZATION_HPP\n")
+    outFile.write("""
+#endif // VK_VALUE_SERIALIZATION_CONFIG_MAIN
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // VK_VALUE_SERIALIZATION_H
+""")
     outFile.close()
 
 

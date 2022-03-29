@@ -16,6 +16,3 @@
 
 #define VK_ERROR_CODE_CONFIG_MAIN
 #include "vk_error_code.hpp"
-
-#define VK_VALUE_SERIALIZATION_CONFIG_MAIN
-#include "vk_value_serialization.hpp"

@@ -70,7 +70,7 @@ if [ $SKIP_PARSE -eq 0 ]; then
 fi
 
 # Generate headers
-./generate_serialization_header.py -i .gen_cache.xml -o ../include/vk_value_serialization.hpp
+./generate_serialization_header.py -i .gen_cache.xml -o ../include/vk_value_serialization.h
 ./generate_result_string_header.py -i .gen_cache.xml -o ../include/vk_result_to_string.h
 ./generate_cleanup_header.py -i .gen_cache.xml -y ../data/cleanup_excludes.yaml -o ../include/vk_struct_cleanup.h
 ./generate_comparison_headers.py -i .gen_cache.xml -y ../data/compare_excludes.yaml -o ../include/vk_struct_compare.h

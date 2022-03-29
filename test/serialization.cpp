@@ -21,6 +21,9 @@
 #include <string>
 #include <string_view>
 
+#include <string>
+#include <string_view>
+
 namespace {
 std::string cDummyStr = "AAABBBCCC";
 }
@@ -28,9 +31,9 @@ std::string cDummyStr = "AAABBBCCC";
 TEST_CASE("Serialize: Failure cases") {
   std::string dummyStr = cDummyStr;
 
-  CHECK_FALSE(vk_serialize("", 0, &dummyStr));
+  CHECK(vk_serialize("", 0, &dummyStr) == STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND);
   CHECK(dummyStr == cDummyStr);
-  CHECK_FALSE(vk_serialize("", 0, &dummyStr));
+  CHECK(vk_serialize("", 0, &dummyStr) == STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND);
   CHECK(dummyStr == cDummyStr);
 }
 
@@ -38,30 +41,36 @@ TEST_CASE("Serialize: Enum") {
   std::string retVal = cDummyStr;
 
   SECTION("Failure case where a bad type is given") {
-    CHECK_FALSE(vk_serialize("VkGarbagio", VK_IMAGE_TYPE_3D, &retVal));
+    CHECK(vk_serialize("VkGarbagio", VK_IMAGE_TYPE_3D, &retVal) ==
+          STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND);
     CHECK(retVal == cDummyStr);
   }
 
   SECTION("Failure case where bad enum given") {
-    CHECK_FALSE(vk_serialize("VkImageType", -1U, &retVal));
+    CHECK(vk_serialize("VkImageType", -1U, &retVal) ==
+          STEC_VK_SERIALIZATION_RESULT_ERROR_VALUE_NOT_FOUND);
     CHECK(retVal == cDummyStr);
   }
 
   SECTION("Failure case where a zero value is given to a type that can't be empty") {
-    CHECK_FALSE(vk_serialize("VkPipelineCacheHeaderVersion", 0, &retVal));
+    CHECK(vk_serialize("VkPipelineCacheHeaderVersion", 0, &retVal) ==
+          STEC_VK_SERIALIZATION_RESULT_ERROR_VALUE_NOT_FOUND);
     CHECK(retVal == cDummyStr);
   }
 
   SECTION("Success cases") {
-    CHECK(vk_serialize("VkImageType", VK_IMAGE_TYPE_3D, &retVal));
+    CHECK(vk_serialize("VkImageType", VK_IMAGE_TYPE_3D, &retVal) ==
+          STEC_VK_SERIALIZATION_RESULT_SUCCESS);
     CHECK(retVal == "3D");
 
-    CHECK(vk_serialize("VkImageType", VK_IMAGE_TYPE_2D, &retVal));
+    CHECK(vk_serialize("VkImageType", VK_IMAGE_TYPE_2D, &retVal) ==
+          STEC_VK_SERIALIZATION_RESULT_SUCCESS);
     CHECK(retVal == "2D");
   }
 
   SECTION("Vendor Tag Success") {
-    CHECK(vk_serialize("VkPresentModeKHR", VK_PRESENT_MODE_IMMEDIATE_KHR, &retVal));
+    CHECK(vk_serialize("VkPresentModeKHR", VK_PRESENT_MODE_IMMEDIATE_KHR, &retVal) ==
+          STEC_VK_SERIALIZATION_RESULT_SUCCESS);
     CHECK(retVal == "IMMEDIATE");
   }
 }
@@ -70,69 +79,80 @@ TEST_CASE("Serialize: Bitmask") {
   std::string retVal = cDummyStr;
 
   SECTION("Failure case where a bad type is given") {
-    CHECK_FALSE(vk_serialize("VkGarbagio", VK_CULL_MODE_BACK_BIT, &retVal));
+    CHECK(vk_serialize("VkGarbagio", VK_CULL_MODE_BACK_BIT, &retVal) ==
+          STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND);
     CHECK(retVal == cDummyStr);
   }
 
   SECTION("Failure case where a garbage non-existant bit is given") {
-    CHECK_FALSE(vk_serialize("VkCullModeFlagBits", VK_CULL_MODE_BACK_BIT | 0x777, &retVal));
+    CHECK(vk_serialize("VkCullModeFlagBits", VK_CULL_MODE_BACK_BIT | 0x777, &retVal) ==
+          STEC_VK_SERIALIZATION_RESULT_ERROR_VALUE_NOT_FOUND);
     CHECK(retVal == cDummyStr);
   }
 
   SECTION("Failure case where a zero value is given to a type that can't be empty") {
-    CHECK_FALSE(vk_serialize("VkSampleCountFlagBits", 0, &retVal));
+    CHECK(vk_serialize("VkSampleCountFlagBits", 0, &retVal) ==
+          STEC_VK_SERIALIZATION_RESULT_ERROR_VALUE_NOT_FOUND);
     CHECK(retVal == cDummyStr);
   }
 
   SECTION(
       "Success case where a zero-value is allowed since there was a time when no flags existed") {
-    CHECK(vk_serialize("VkPipelineDepthStencilStateCreateFlagBits", 0, &retVal));
+    CHECK(vk_serialize("VkPipelineDepthStencilStateCreateFlagBits", 0, &retVal) ==
+          STEC_VK_SERIALIZATION_RESULT_SUCCESS);
     CHECK(retVal == "");
   }
 
   SECTION("Success case where there's extra vendor bits on the type name (such "
           "as after a "
           "promoted extension)") {
-    CHECK(vk_serialize("VkCullModeFlagBitsVIV", VK_CULL_MODE_BACK_BIT, &retVal));
+    CHECK(vk_serialize("VkCullModeFlagBitsVIV", VK_CULL_MODE_BACK_BIT, &retVal) ==
+          STEC_VK_SERIALIZATION_RESULT_SUCCESS);
     CHECK(retVal == "BACK");
   }
 
   SECTION("Successfully returns an empty string when the given type has no "
           "actual flags") {
-    CHECK(vk_serialize("VkAcquireProfilingLockFlagBitsKHR", 0, &retVal));
+    CHECK(vk_serialize("VkAcquireProfilingLockFlagBitsKHR", 0, &retVal) ==
+          STEC_VK_SERIALIZATION_RESULT_SUCCESS);
     CHECK(retVal == "");
 
-    CHECK(vk_serialize("VkShaderCorePropertiesFlagBitsAMD", 0, &retVal));
+    CHECK(vk_serialize("VkShaderCorePropertiesFlagBitsAMD", 0, &retVal) ==
+          STEC_VK_SERIALIZATION_RESULT_SUCCESS);
     CHECK(retVal == "");
   }
 
   SECTION("Successfully returns an when the bitflag has a zero-value enum") {
-    CHECK(vk_serialize("VkCullModeFlagBits", 0, &retVal));
+    CHECK(vk_serialize("VkCullModeFlagBits", 0, &retVal) == STEC_VK_SERIALIZATION_RESULT_SUCCESS);
     CHECK(retVal == "NONE");
   }
 
   SECTION("Fails to serialize when given a zero-value to a type that has enums "
-          "but NOT a zero "
-          "value") {
-    CHECK_FALSE(vk_serialize("VkShaderStageFlagBits", 0, &retVal));
+          "but NOT a zero value") {
+    CHECK(vk_serialize("VkShaderStageFlagBits", 0, &retVal) ==
+          STEC_VK_SERIALIZATION_RESULT_ERROR_VALUE_NOT_FOUND);
     CHECK(retVal == cDummyStr);
   }
 
   SECTION("Regular success cases") {
     SECTION("FlagBits") {
-      CHECK(vk_serialize("VkDebugReportFlagBitsEXT", VK_DEBUG_REPORT_ERROR_BIT_EXT, &retVal));
+      CHECK(vk_serialize("VkDebugReportFlagBitsEXT", VK_DEBUG_REPORT_ERROR_BIT_EXT, &retVal) ==
+            STEC_VK_SERIALIZATION_RESULT_SUCCESS);
       CHECK(retVal == "ERROR");
 
       CHECK(vk_serialize("VkDebugReportFlagBitsEXT",
-                         VK_DEBUG_REPORT_DEBUG_BIT_EXT | VK_DEBUG_REPORT_ERROR_BIT_EXT, &retVal));
+                         VK_DEBUG_REPORT_DEBUG_BIT_EXT | VK_DEBUG_REPORT_ERROR_BIT_EXT,
+                         &retVal) == STEC_VK_SERIALIZATION_RESULT_SUCCESS);
       CHECK(retVal == "DEBUG | ERROR");
     }
     SECTION("Flags") {
-      CHECK(vk_serialize("VkDebugReportFlagsEXT", VK_DEBUG_REPORT_ERROR_BIT_EXT, &retVal));
+      CHECK(vk_serialize("VkDebugReportFlagsEXT", VK_DEBUG_REPORT_ERROR_BIT_EXT, &retVal) ==
+            STEC_VK_SERIALIZATION_RESULT_SUCCESS);
       CHECK(retVal == "ERROR");
 
       CHECK(vk_serialize("VkDebugReportFlagsEXT",
-                         VK_DEBUG_REPORT_DEBUG_BIT_EXT | VK_DEBUG_REPORT_ERROR_BIT_EXT, &retVal));
+                         VK_DEBUG_REPORT_DEBUG_BIT_EXT | VK_DEBUG_REPORT_ERROR_BIT_EXT,
+                         &retVal) == STEC_VK_SERIALIZATION_RESULT_SUCCESS);
       CHECK(retVal == "DEBUG | ERROR");
     }
   }
@@ -140,12 +160,12 @@ TEST_CASE("Serialize: Bitmask") {
   SECTION("Combined bitmask will use larger items first") {
     SECTION("FlagBits") {
       CHECK(vk_serialize("VkCullModeFlagBits", VK_CULL_MODE_BACK_BIT | VK_CULL_MODE_FRONT_BIT,
-                         &retVal));
+                         &retVal) == STEC_VK_SERIALIZATION_RESULT_SUCCESS);
       CHECK(retVal == "FRONT_AND_BACK");
     }
     SECTION("Flags") {
-      CHECK(
-          vk_serialize("VkCullModeFlags", VK_CULL_MODE_BACK_BIT | VK_CULL_MODE_FRONT_BIT, &retVal));
+      CHECK(vk_serialize("VkCullModeFlags", VK_CULL_MODE_BACK_BIT | VK_CULL_MODE_FRONT_BIT,
+                         &retVal) == STEC_VK_SERIALIZATION_RESULT_SUCCESS);
       CHECK(retVal == "FRONT_AND_BACK");
     }
   }
@@ -155,12 +175,12 @@ TEST_CASE("Serialize: Bitmask") {
           "real names instead") {
     SECTION("FlagBits") {
       CHECK(vk_serialize("VkRenderPassCreateFlagBits", VK_RENDER_PASS_CREATE_TRANSFORM_BIT_QCOM,
-                         &retVal));
+                         &retVal) == STEC_VK_SERIALIZATION_RESULT_SUCCESS);
       CHECK(retVal == "TRANSFORM_BIT_QCOM");
     }
     SECTION("Flags") {
       CHECK(vk_serialize("VkRenderPassCreateFlags", VK_RENDER_PASS_CREATE_TRANSFORM_BIT_QCOM,
-                         &retVal));
+                         &retVal) == STEC_VK_SERIALIZATION_RESULT_SUCCESS);
       CHECK(retVal == "TRANSFORM_BIT_QCOM");
     }
   }
