@@ -9,7 +9,7 @@ SKIP_PARSE=0
 help_blurb() {
     echo " -s, --start <INT> The starting version of Vulkan to generate for (default: 72)"
     echo " -e, --end <INT>   The ending version of Vulkan to generate for (default: none)"
-    echo " --skip-parse      Skips generating new XML cache, just generated files"
+    echo " --skip-parse      Skips generating new XML cache, just generate header files"
 }
 
 # Command-line parsing

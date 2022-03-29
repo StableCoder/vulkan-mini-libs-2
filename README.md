@@ -3,28 +3,35 @@
 [![coverage report](https://git.stabletec.com/utilities/vulkan-mini-libs-2/badges/main/coverage.svg)](https://git.stabletec.com/utilities/vulkan-mini-libs-2/commits/main)
 [![license](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://git.stabletec.com/utilities/vulkan-mini-libs-2/blob/main/LICENSE)
 
-- [Vulkan Value Serialization (C++)](#vulkan-value-serialization-c)
+- [Vulkan Value Serialization (C/C++)](#vulkan-value-serialization-cc)
   - [Usage](#usage)
+    - [C](#c)
+    - [C++](#c-1)
+  - [Serialization](#serialization)
+    - [Usage](#usage-1)
+  - [Parsing](#parsing)
+    - [Usage](#usage-2)
 - [Vulkan Result to String (C)](#vulkan-result-to-string-c)
-  - [Usage](#usage-1)
-- [Vulkan Error Code (C++)](#vulkan-error-code-c)
-  - [Usage](#usage-2)
-- [Vulkan Struct Cleanup (C)](#vulkan-struct-cleanup-c)
   - [Usage](#usage-3)
+- [Vulkan Error Code (C++)](#vulkan-error-code-c)
+  - [Usage](#usage-4)
+- [Vulkan Struct Cleanup (C)](#vulkan-struct-cleanup-c)
+  - [Usage](#usage-5)
 - [Generating Header Mini-Libs](#generating-header-mini-libs)
   - [Possible Arguments](#possible-arguments)
     - [-s, --start <INT>](#-s---start-int)
     - [-e, --end <INT>](#-e---end-int)
+    - [--skip-parse](#--skip-parse)
 
 A set of small header-only libraries that are of limited scope each to perform a very specific task.
 
 Compared to the previous version of these libraries which generated header versions for each Vulkan header version, this one remains backwards and forwards compatible, serving a given whole range of header versions (typically v1.0.72 - current) through the use of Vulkan definitions
 
-# Vulkan Value Serialization (C++)
+# Vulkan Value Serialization (C/C++)
 
-This program builds header files for use in C++17 or newer. It
+This program builds header files for use in C11/C++17 or newer. It
 contains all Vulkan enum types/flags/values of the indicated Vulkan header spec
-version, and can convert to/from strings representing those values. 
+version range, and can convert to/from strings representing those values. 
 
 Supports both plain enums and the bitmasks.
 
@@ -51,6 +58,125 @@ the `_BIT` suffix.
 ## Usage
 
 On *ONE* compilation unit, include the definition of `#define VK_VALUE_SERIALIZATION_CONFIG_MAIN` before the header is included so that the definitions are compiled somewhere following the one definition rule (ODR).
+
+### C
+
+For C, there are the simple functions for parsing and serializing:
+- vk_parse32
+- vk_parse64
+- vk_serialize32
+- vk_serialize64
+```c
+#define VK_VALUE_SERIALIZATION_CONFIG_MAIN
+#include <vk_value_serialization.h>
+```
+
+### C++
+
+Using the HPP header in C++ also grants the use of a few templated functions and macros to make usage just a tad easier, no longer having to deal with the casting to uint types, and can be included similarly, and does include the original C functions as well:
+```c
+#define VK_VALUE_SERIALIZATION_CONFIG_MAIN
+#include <vk_value_serialization.hpp>
+```
+## Serialization
+
+```c
+/**
+ * @brief Serializes a Vulkan enumerator/flag type (32-bit)
+ * @param pVkType is a pointer to the string name of the Vulkan enumerator/flag type
+ * @param vkValue is the numeric value being serialized
+ * @param pSerializedLength is a pointer to an integer related to the size of pSerialized, as
+ * described below.
+ * @param pSerialized is either NULL or a pointer to an character array.
+ * @note pSerialized is only written to if STEC_VK_SERIALIZATION_RESULT_SUCCESS or
+ * STEC_VK_SERIALIZATION_RESULT_ERROR_INCOMPLETE is returned.
+ *
+ * If pSerialized is NULL, then the size required to return all layer names is returned in
+ * pSerializedLength. Otherwise, pSerializedLength must point to a variable set by the user to the
+ * size of the pSerialized array, and on return the variable is overwritten with the characters
+ * actually written to pSerialized. If pSerializedLength is less than the total size required to
+ * return all, at most pSerializedLength is written, and
+ * STEC_VK_SERIALIZATION_RESULT_ERROR_INCOMPLETE will be returned instead of
+ * STEC_VK_SERIALIZATION_RESULT_SUCCESS, to indicate that not all names were returned.
+ *
+ * If the Vulkan type could not be determined or found, then
+ * STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND is returned.
+ *
+ * If the value given in vkValue is 0 and the corresponding Vulkan type doesn't have an equivalent
+ * 0-value that can be serialized, then STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_HAS_NO_EMPTY_VALUE
+ * is returned. If Any other given vkValue or bitmask cannot be translated fully, then
+ * STEC_VK_SERIALIZATION_RESULT_ERROR_VALUE_NOT_FOUND is returned.
+ */
+STecVkSerializationResult vk_serialize32(char const *pVkType,
+                                         uint32_t vkValue,
+                                         uint32_t *pSerializedLength,
+                                         char *pSerialized);
+```
+
+### Usage
+
+```c
+char testStr[20];
+uint32_t serializedLength = 20;
+STecVkSerializationResult result;
+result = vk_serialize32("VkDebugReportFlagsEXT",
+                        VK_DEBUG_REPORT_DEBUG_BIT_EXT | VK_DEBUG_REPORT_ERROR_BIT_EXT,
+                        &serializedLength, testStr);
+  // result is STEC_VK_SERIALIZATION_RESULT_SUCCESS
+  // testStr's first 13 characters is now "DEBUG | ERROR"
+  // serializedLength is now 13
+```
+
+```c
+char testStr[20];
+uint32_t serializedLength = 8;
+STecVkSerializationResult result;
+result = vk_serialize32("VkDebugReportFlagsEXT",
+                        VK_DEBUG_REPORT_DEBUG_BIT_EXT | VK_DEBUG_REPORT_ERROR_BIT_EXT,
+                        &serializedLength, testStr);
+  // result is STEC_VK_SERIALIZATION_RESULT_ERROR_INCOMPLETE
+  // testStr's first 8 characters is now "DEBUG | "
+  // serializedLength is now 8
+```
+
+## Parsing
+
+```c
+/**
+ * @brief Parses a Vulkan enumerator/flag serialized string (32-bit)
+ * @param pVkType is a pointer to the string name of the Vulkan enumerator/flag type
+ * @param pVkString is a pointer to the string being parsed
+ * @param pParsedValue is a pointer to a value that will be modified with the parsed value. Only
+ * modified if STEC_VK_SERIALIZATION_RESULT_SUCCESS is returned.
+ *
+ * This attempts to parse the given Vulkan string, according to the values available for the Vulkan
+ * type, and updates the return parsed value upon STEC_VK_SERIALIZATION_RESULT_SUCCESS.
+ *
+ * If the type cannot be determined or found, STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND is
+ * returned.
+ *
+ * If a particular token in the parsing string cannot be determined or found, then
+ * STEC_VK_SERIALIZATION_RESULT_ERROR_VALUE_NOT_FOUND is returned.
+ */
+STecVkSerializationResult vk_parse32(char const *pVkType,
+                                     char const *pVkString,
+                                     uint32_t *pParsedValue);
+```
+
+### Usage
+
+```c
+VkImageLayout parsedLayout;
+STecVkSerializationResult result;
+result = vk_parse32("VkImageLayout", "TRANSFER_DST_OPTIMAL", (uint32_t *)&parsedLayout);
+  // parsedLayout is now VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL
+
+VkPipelineStageFlags2 parsedStagsFlags;
+result = vk_parse64("VkPipelineStageFlagBits2",
+           "INVOCATION_MASK_BIT_HUAWEI | VK_PIPELINE_STAGE_2_TOP_OF_PIPE_BIT",
+           (uint64_t *)&parsedStagsFlags);
+  // parsedStagsFlags is now VK_PIPELINE_STAGE_2_TOP_OF_PIPE_BIT | VK_PIPELINE_STAGE_2_INVOCATION_MASK_BIT_HUAWEI
+```
 
 # Vulkan Result to String (C)
 
@@ -123,3 +249,6 @@ NOTE: Minimal version is 72, as that is when the XML was first published.
 
 ### -e, --end <INT>
 The ending version of Vulkan to generate for (default: none)
+
+### --skip-parse
+Skips parsing the Vulkan XML doc and re-generating the cache file. Use this if the cache has been previously generated and you're just re-generating the headers from that cache.
