@@ -67,10 +67,17 @@ extern "C" {
 """)
 
     # Static asserts
-    outFile.writelines(["static_assert(VK_HEADER_VERSION >= ", str(firstVersion),
-                        ", \"VK_HEADER_VERSION is from before the supported range.\");\n"])
-    outFile.writelines(["static_assert(VK_HEADER_VERSION <= ", str(lastVersion),
-                        ", \"VK_HEADER_VERSION is from after the supported range.\");\n"])
+    outFile.write('\n#ifdef __cplusplus\n')
+    outFile.write(
+        "static_assert(VK_HEADER_VERSION >= {}, \"VK_HEADER_VERSION is from before the supported range.\");\n".format(firstVersion))
+    outFile.write(
+        "static_assert(VK_HEADER_VERSION <= {}, \"VK_HEADER_VERSION is from after the supported range.\");\n".format(lastVersion))
+    outFile.write('#else\n')
+    outFile.write(
+        "_Static_assert(VK_HEADER_VERSION >= {}, \"VK_HEADER_VERSION is from before the supported range.\");\n".format(firstVersion))
+    outFile.write(
+        "_Static_assert(VK_HEADER_VERSION <= {}, \"VK_HEADER_VERSION is from after the supported range.\");\n".format(lastVersion))
+    outFile.write('#endif\n')
 
     outFile.write("""
 // This is effectively a cheap approximation of OpenXR's useful `xrResultToString` function but for Vulkan
