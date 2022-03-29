@@ -1,5 +1,6 @@
 include(prepare_catch.cmake)
 include(code-coverage.cmake)
+include(sanitizers.cmake)
 
 add_code_coverage_all_targets(EXCLUDE ".*/test/.*")
 

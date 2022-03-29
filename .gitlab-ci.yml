@@ -152,3 +152,36 @@ Code Coverage:
     paths: 
       - build/ccov
     expire_in: 1 day
+
+.analysis_template: &analysis_template
+  stage: Analysis
+  image: stabletec/build-foe:arch
+  tags:
+    - docker-linux
+  dependencies: []
+  script:
+    - mkdir build && cd build
+    - cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=ON ${CMAKE_OPTIONS}
+    - ninja
+    - ninja test
+
+AddressSanitizer:
+  variables:
+    CC: clang
+    CXX: clang++
+    CMAKE_OPTIONS: -DUSE_SANITIZER=Address
+  <<: *analysis_template
+
+LeakSanitizer:
+  variables:
+    CC: clang
+    CXX: clang++
+    CMAKE_OPTIONS: -DUSE_SANITIZER=Leak
+  <<: *analysis_template
+
+UndefinedSanitizer:
+  variables:
+    CC: clang
+    CXX: clang++
+    CMAKE_OPTIONS: -DUSE_SANITIZER=Undefined
+  <<: *analysis_template
