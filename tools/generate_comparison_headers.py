@@ -136,14 +136,14 @@ extern "C" {
     # static_asserts
     outFile.write('\n#ifdef __cplusplus\n')
     outFile.write(
-        "static_assert(VK_HEADER_VERSION >= {}, \"VK_HEADER_VERSION is from before the supported range.\");\n".format(firstVersion))
+        "static_assert(VK_HEADER_VERSION >= {0}, \"VK_HEADER_VERSION is from before the minimum supported version of v{0}.\");\n".format(firstVersion))
     outFile.write(
-        "static_assert(VK_HEADER_VERSION <= {}, \"VK_HEADER_VERSION is from after the supported range.\");\n".format(lastVersion))
+        "static_assert(VK_HEADER_VERSION <= {0}, \"VK_HEADER_VERSION is from after the maximum supported version of v{0}.\");\n".format(lastVersion))
     outFile.write('#else\n')
     outFile.write(
-        "_Static_assert(VK_HEADER_VERSION >= {}, \"VK_HEADER_VERSION is from before the supported range.\");\n".format(firstVersion))
+        "_Static_assert(VK_HEADER_VERSION >= {0}, \"VK_HEADER_VERSION is from before the minimum supported version of v{0}.\");\n".format(firstVersion))
     outFile.write(
-        "_Static_assert(VK_HEADER_VERSION <= {}, \"VK_HEADER_VERSION is from after the supported range.\");\n".format(lastVersion))
+        "_Static_assert(VK_HEADER_VERSION <= {0}, \"VK_HEADER_VERSION is from after the maximum supported version of v{0}.\");\n".format(lastVersion))
     outFile.write('#endif\n')
 
     # Per-struct function declarations
