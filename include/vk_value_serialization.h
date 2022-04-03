@@ -2939,7 +2939,7 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[283] = {
+EnumType const cEnumTypes[282] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2, true},
     {"VkQueryPoolCreateFlags", NULL, 0, true},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 3, true},
@@ -3137,7 +3137,6 @@ EnumType const cEnumTypes[283] = {
     {"VkQueryType", VkQueryTypeSets, 15, false},
     {"VkSubpassContents", VkSubpassContentsSets, 2, false},
     {"VkStencilOp", VkStencilOpSets, 8, false},
-    {"VkStructureType", NULL, 0, true},
     {"VkSystemAllocationScope", VkSystemAllocationScopeSets, 5, false},
     {"VkInternalAllocationType", VkInternalAllocationTypeSets, 1, false},
     {"VkSamplerAddressMode", VkSamplerAddressModeSets, 6, false},

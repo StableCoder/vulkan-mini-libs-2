@@ -338,7 +338,7 @@ def main(argv):
         if typeCategory == 'enum' or typeCategory == 'bitmask':
             name = typeData.get('name')
             if name:
-                if 'FlagBits' in name:
+                if 'FlagBits' in name or name == 'VkStructureType':
                     continue
                 enum = enumData.find(name)
                 if enum is None:
