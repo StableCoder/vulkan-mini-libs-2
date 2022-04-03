@@ -56,9 +56,8 @@ TEST_CASE("Parsing: Failure Cases") {
           STEC_VK_SERIALIZATION_RESULT_ERROR_VALUE_NOT_FOUND);
     CHECK(dummy == cDummyNum);
   }
-  SECTION("Parsing an bitmask type with a blank value that doesn't allow empty values fails") {
-    vk_parse("VkSampleCountFlagBits", "", &dummy);
-    CHECK(vk_parse("VkSampleCountFlagBits", "", &dummy) ==
+  SECTION("Parsing an enum type with a blank value that doesn't allow empty values fails") {
+    CHECK(vk_parse("VkImageType", "", &dummy) ==
           STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_HAS_NO_EMPTY_VALUE);
     CHECK(dummy == cDummyNum);
   }

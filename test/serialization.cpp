@@ -103,12 +103,6 @@ TEST_CASE("Serialize: Bitmask") {
     CHECK(retVal == cDummyStr);
   }
 
-  SECTION("Failure case where a zero value is given to a type that can't be empty") {
-    CHECK(vk_serialize("VkSampleCountFlagBits", 0, &retVal) ==
-          STEC_VK_SERIALIZATION_RESULT_ERROR_VALUE_NOT_FOUND);
-    CHECK(retVal == cDummyStr);
-  }
-
   SECTION(
       "Success case where a zero-value is allowed since there was a time when no flags existed") {
     CHECK(vk_serialize("VkPipelineDepthStencilStateCreateFlagBits", 0, &retVal) ==
@@ -138,13 +132,6 @@ TEST_CASE("Serialize: Bitmask") {
   SECTION("Successfully returns an when the bitflag has a zero-value enum") {
     CHECK(vk_serialize("VkCullModeFlagBits", 0, &retVal) == STEC_VK_SERIALIZATION_RESULT_SUCCESS);
     CHECK(retVal == "NONE");
-  }
-
-  SECTION("Fails to serialize when given a zero-value to a type that has enums "
-          "but NOT a zero value") {
-    CHECK(vk_serialize("VkShaderStageFlagBits", 0, &retVal) ==
-          STEC_VK_SERIALIZATION_RESULT_ERROR_VALUE_NOT_FOUND);
-    CHECK(retVal == cDummyStr);
   }
 
   SECTION("Regular success cases") {

@@ -285,6 +285,7 @@ STecVkSerializationResult vk_parse64(char const* pVkType, char const *pVkString,
     outFile.write("\n#ifdef VK_VALUE_SERIALIZATION_CONFIG_MAIN\n")
     outFile.write("#include <assert.h>\n")
     outFile.write("#include <ctype.h>\n")
+    outFile.write("#include <stdbool.h>")
     outFile.write("#include <stdlib.h>\n")
     outFile.write("#include <string.h>\n\n")
 
@@ -308,7 +309,6 @@ STecVkSerializationResult vk_parse64(char const* pVkType, char const *pVkString,
     outFile.write("  char const *name;\n")
     outFile.write("  EnumValueSet const* data;\n")
     outFile.write("  uint32_t count;\n")
-    outFile.write("  bool allowEmpty;\n")
     outFile.write("} EnumType;\n")
 
     # Enum Pointer Array
@@ -328,14 +328,10 @@ STecVkSerializationResult vk_parse64(char const* pVkType, char const *pVkString,
 
         valueCount = len(enum.findall('./values/'))
         if valueCount == 0:
-            outFile.write('  {{"{}", NULL, 0, true}},\n'.format(enum.tag))
+            outFile.write('  {{"{}", NULL, 0}},\n'.format(enum.tag))
         else:
-            allowEmpty = "true"
-            for enumVal in enum.findall('./values/'):
-                if enumVal.get('first') == enum.get('first'):
-                    allowEmpty = "false"
-            outFile.write('  {{"{0}", {0}Sets, {1}, {2}}},\n'.format(
-                enum.tag, valueCount, allowEmpty))
+            outFile.write('  {{"{0}", {0}Sets, {1}}},\n'.format(
+                enum.tag, valueCount))
     outFile.write('};\n')
 
     # Function definitions
@@ -388,7 +384,6 @@ size_t stripBit(char const *str, size_t len) {
  * @param pVkType is a pointer to the string name of the Vulkan type
  * @param ppStart is a double-pointer that will point to the start of any found set
  * @param ppEnd is a double-pointer that will point to the end of any found set
- * @param pAllowEmpty is a pointer to a boolean to represent whether the given type allows empty
  * values
  * @return True if a matching type value set is found, false otherwise.
  *
@@ -397,8 +392,7 @@ size_t stripBit(char const *str, size_t len) {
  */
 bool getEnumType(char const *pVkType,
                  EnumValueSet const **ppStart,
-                 EnumValueSet const **ppEnd,
-                 bool *pAllowEmpty) {
+                 EnumValueSet const **ppEnd) {
   // Check for a conversion from FlagBits -> Flags
   char localStr[64];
   size_t localLen = strlen(pVkType);
@@ -424,7 +418,6 @@ bool getEnumType(char const *pVkType,
     if (strcmp(localStr, it->name) == 0) {
       *ppStart = it->data;
       *ppEnd = it->data + it->count;
-      *pAllowEmpty = it->allowEmpty;
 
       return true;
     }
@@ -437,7 +430,6 @@ bool getEnumType(char const *pVkType,
     if (strcmp(localStr, it->name) == 0) {
       *ppStart = it->data;
       *ppEnd = it->data + it->count;
-      *pAllowEmpty = it->allowEmpty;
 
       return true;
     }
@@ -591,7 +583,6 @@ uint32_t serializeMin(uint32_t lhs, uint32_t rhs) {
 
 STecVkSerializationResult serializeBitmask(EnumValueSet const *pSearchStart,
                                            EnumValueSet const *pSearchEnd,
-                                           bool allowEmpty,
                                            uint64_t vkValue,
                                            uint32_t *pSerializedLength,
                                            char *pSerialized) {
@@ -665,7 +656,7 @@ STecVkSerializationResult serializeBitmask(EnumValueSet const *pSearchStart,
     --pSearchStart;
   }
 
-  if (!incomplete && (vkValue != 0 || (serializedLength == 0 && !allowEmpty))) {
+  if (!incomplete && vkValue != 0) {
     // Failed to find a valid bitmask for the value
     free(pTempStr);
     return STEC_VK_SERIALIZATION_RESULT_ERROR_VALUE_NOT_FOUND;
@@ -783,13 +774,12 @@ STecVkSerializationResult vk_serialize64(char const *pVkType,
   }
 
   EnumValueSet const *pSearchStart, *pSearchEnd;
-  bool allowEmpty;
-  if (!getEnumType(pVkType, &pSearchStart, &pSearchEnd, &allowEmpty)) {
+  if (!getEnumType(pVkType, &pSearchStart, &pSearchEnd)) {
     return STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND;
   }
 
   if (strstr(pVkType, "Flags") != NULL || strstr(pVkType, "FlagBits") != NULL) {
-    return serializeBitmask(pSearchStart, pSearchEnd, allowEmpty, vkValue, pSerializedLength, pSerialized);
+    return serializeBitmask(pSearchStart, pSearchEnd, vkValue, pSerializedLength, pSerialized);
   }
 
   return serializeEnum(pSearchStart, pSearchEnd, vkValue, pSerializedLength, pSerialized);
@@ -814,14 +804,14 @@ STecVkSerializationResult vk_parse64(char const *pVkType,
   }
 
   EnumValueSet const *pSearchStart, *pSearchEnd;
-  bool allowEmpty;
-  if (!getEnumType(pVkType, &pSearchStart, &pSearchEnd, &allowEmpty)) {
+  if (!getEnumType(pVkType, &pSearchStart, &pSearchEnd)) {
     return STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND;
   }
 
   size_t const strLength = strlen(pVkString);
   if (strLength == 0) {
-    if (allowEmpty) {
+    // Only bitmasks can have empty values, all enum types must have *something*
+    if (strstr(pVkType, "Flags") != NULL || strstr(pVkType, "FlagBits") != NULL) {
       *pParsedValue = 0;
       return STEC_VK_SERIALIZATION_RESULT_SUCCESS;
     } else {
