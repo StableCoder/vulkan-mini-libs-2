@@ -51,13 +51,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 210,
-              "VK_HEADER_VERSION is from after the maximum supported version of v210.");
+static_assert(VK_HEADER_VERSION <= 211,
+              "VK_HEADER_VERSION is from after the maximum supported version of v211.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 210,
-               "VK_HEADER_VERSION is from after the maximum supported version of v210.");
+_Static_assert(VK_HEADER_VERSION <= 211,
+               "VK_HEADER_VERSION is from after the maximum supported version of v211.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -3835,6 +3835,12 @@ bool compare_VkPipelineFragmentShadingRateEnumStateCreateInfoNV(
 bool compare_VkAccelerationStructureBuildSizesInfoKHR(
     VkAccelerationStructureBuildSizesInfoKHR const *s1,
     VkAccelerationStructureBuildSizesInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 211 && VK_EXT_image_2d_view_of_3d
+bool compare_VkPhysicalDeviceImage2DViewOf3DFeaturesEXT(
+    VkPhysicalDeviceImage2DViewOf3DFeaturesEXT const *s1,
+    VkPhysicalDeviceImage2DViewOf3DFeaturesEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 164 && VK_VALVE_mutable_descriptor_type
@@ -13969,6 +13975,18 @@ bool compare_VkAccelerationStructureBuildSizesInfoKHR(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 211 && VK_EXT_image_2d_view_of_3d
+bool compare_VkPhysicalDeviceImage2DViewOf3DFeaturesEXT(
+    VkPhysicalDeviceImage2DViewOf3DFeaturesEXT const *s1,
+    VkPhysicalDeviceImage2DViewOf3DFeaturesEXT const *s2) {
+  if ((s1->image2DViewOf3D != s2->image2DViewOf3D) ||
+      (s1->sampler2DViewOf3D != s2->sampler2DViewOf3D) || false)
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 164 && VK_VALVE_mutable_descriptor_type
 bool compare_VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE(
     VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE const *s1,
@@ -14449,11 +14467,17 @@ bool compare_VkVideoDecodeCapabilitiesKHR(VkVideoDecodeCapabilitiesKHR const *s1
 
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_decode_queue
 bool compare_VkVideoDecodeInfoKHR(VkVideoDecodeInfoKHR const *s1, VkVideoDecodeInfoKHR const *s2) {
-  if ((s1->flags != s2->flags) || !compare_VkOffset2D(&s1->codedOffset, &s2->codedOffset) ||
-      !compare_VkExtent2D(&s1->codedExtent, &s2->codedExtent) || (s1->srcBuffer != s2->srcBuffer) ||
+  if ((s1->flags != s2->flags) || (s1->srcBuffer != s2->srcBuffer) ||
       (s1->srcBufferOffset != s2->srcBufferOffset) || (s1->srcBufferRange != s2->srcBufferRange) ||
       !compare_VkVideoPictureResourceKHR(&s1->dstPictureResource, &s2->dstPictureResource) ||
-      (s1->referenceSlotCount != s2->referenceSlotCount) || false)
+      (s1->referenceSlotCount != s2->referenceSlotCount) ||
+#if VK_HEADER_VERSION <= 210
+      !compare_VkOffset2D(&s1->codedOffset, &s2->codedOffset) ||
+#endif
+#if VK_HEADER_VERSION <= 210
+      !compare_VkExtent2D(&s1->codedExtent, &s2->codedExtent) ||
+#endif
+      false)
     return false;
 
   return true;
@@ -14685,7 +14709,6 @@ bool compare_VkVideoCodingControlInfoKHR(VkVideoCodingControlInfoKHR const *s1,
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_encode_queue
 bool compare_VkVideoEncodeInfoKHR(VkVideoEncodeInfoKHR const *s1, VkVideoEncodeInfoKHR const *s2) {
   if ((s1->flags != s2->flags) || (s1->qualityLevel != s2->qualityLevel) ||
-      !compare_VkExtent2D(&s1->codedExtent, &s2->codedExtent) ||
       (s1->dstBitstreamBuffer != s2->dstBitstreamBuffer) ||
       (s1->dstBitstreamBufferOffset != s2->dstBitstreamBufferOffset) ||
       (s1->dstBitstreamBufferMaxRange != s2->dstBitstreamBufferMaxRange) ||
@@ -14693,6 +14716,9 @@ bool compare_VkVideoEncodeInfoKHR(VkVideoEncodeInfoKHR const *s1, VkVideoEncodeI
       (s1->referenceSlotCount != s2->referenceSlotCount) ||
 #if VK_HEADER_VERSION >= 201
       (s1->precedingExternallyEncodedBytes != s2->precedingExternallyEncodedBytes) ||
+#endif
+#if VK_HEADER_VERSION <= 210
+      !compare_VkExtent2D(&s1->codedExtent, &s2->codedExtent) ||
 #endif
       false)
     return false;

@@ -285,7 +285,7 @@ STecVkSerializationResult vk_parse64(char const* pVkType, char const *pVkString,
     outFile.write("\n#ifdef VK_VALUE_SERIALIZATION_CONFIG_MAIN\n")
     outFile.write("#include <assert.h>\n")
     outFile.write("#include <ctype.h>\n")
-    outFile.write("#include <stdbool.h>")
+    outFile.write("#include <stdbool.h>\n")
     outFile.write("#include <stdlib.h>\n")
     outFile.write("#include <string.h>\n\n")
 

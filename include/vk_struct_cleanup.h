@@ -44,13 +44,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 210,
-              "VK_HEADER_VERSION is from after the maximum supported version of v210.");
+static_assert(VK_HEADER_VERSION <= 211,
+              "VK_HEADER_VERSION is from after the maximum supported version of v211.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 210,
-               "VK_HEADER_VERSION is from after the maximum supported version of v210.");
+_Static_assert(VK_HEADER_VERSION <= 211,
+               "VK_HEADER_VERSION is from after the maximum supported version of v211.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -4149,6 +4149,11 @@ void cleanup_VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT(
 #if VK_HEADER_VERSION >= 210 && VK_EXT_graphics_pipeline_library
 void cleanup_VkGraphicsPipelineLibraryCreateInfoEXT(
     VkGraphicsPipelineLibraryCreateInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 211 && VK_EXT_image_2d_view_of_3d
+void cleanup_VkPhysicalDeviceImage2DViewOf3DFeaturesEXT(
+    VkPhysicalDeviceImage2DViewOf3DFeaturesEXT const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -9791,6 +9796,14 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_LIBRARY_CREATE_INFO_EXT) {
     cleanup_VkGraphicsPipelineLibraryCreateInfoEXT(
         (VkGraphicsPipelineLibraryCreateInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 211 && VK_EXT_image_2d_view_of_3d
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_2D_VIEW_OF_3D_FEATURES_EXT) {
+    cleanup_VkPhysicalDeviceImage2DViewOf3DFeaturesEXT(
+        (VkPhysicalDeviceImage2DViewOf3DFeaturesEXT const *)pData);
     return;
   }
 #endif
@@ -19505,6 +19518,16 @@ void cleanup_VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT(
 #if VK_HEADER_VERSION >= 210 && VK_EXT_graphics_pipeline_library
 void cleanup_VkGraphicsPipelineLibraryCreateInfoEXT(
     VkGraphicsPipelineLibraryCreateInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 211 && VK_EXT_image_2d_view_of_3d
+void cleanup_VkPhysicalDeviceImage2DViewOf3DFeaturesEXT(
+    VkPhysicalDeviceImage2DViewOf3DFeaturesEXT const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
