@@ -45,13 +45,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 212,
-              "VK_HEADER_VERSION is from after the maximum supported version of v212.");
+static_assert(VK_HEADER_VERSION <= 213,
+              "VK_HEADER_VERSION is from after the maximum supported version of v213.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 212,
-               "VK_HEADER_VERSION is from after the maximum supported version of v212.");
+_Static_assert(VK_HEADER_VERSION <= 213,
+               "VK_HEADER_VERSION is from after the maximum supported version of v213.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -970,6 +970,7 @@ EnumValueSet const VkAccessFlags2Sets[] = {
     {"RESERVED_43_BIT_NV", 0x80000000000, false},
     {"RESERVED_44_BIT_NV", 0x100000000000, false},
     {"RESERVED_45_BIT_NV", 0x200000000000, false},
+    {"SHADER_BINDING_TABLE_READ_BIT_KHR", 0x10000000000, false},
 };
 
 EnumValueSet const VkPipelineStageFlags2Sets[] = {
@@ -1044,6 +1045,7 @@ EnumValueSet const VkPipelineStageFlags2Sets[] = {
     {"RESERVED_387_BIT_KHR", 0x10000000, false},
     {"RESERVED_29_BIT_NV", 0x20000000, false},
     {"RESERVED_30_BIT_NV", 0x40000000, false},
+    {"ACCELERATION_STRUCTURE_COPY_BIT_KHR", 0x10000000, false},
 };
 
 EnumValueSet const VkFormatFeatureFlags2Sets[] = {
@@ -1374,6 +1376,25 @@ EnumValueSet const VkGraphicsPipelineLibraryFlagsEXTSets[] = {
     {"PRE_RASTERIZATION_SHADERS", 0x00000002, false},
     {"FRAGMENT_SHADER", 0x00000004, false},
     {"FRAGMENT_OUTPUT_INTERFACE", 0x00000008, false},
+};
+
+EnumValueSet const VkImageCompressionFlagsEXTSets[] = {
+    {"DEFAULT", 0, false},
+    {"FIXED_RATE_DEFAULT", 0x00000001, false},
+    {"FIXED_RATE_EXPLICIT", 0x00000002, false},
+    {"DISABLED", 0x00000004, false},
+};
+
+EnumValueSet const VkImageCompressionFixedRateFlagsEXTSets[] = {
+    {"NONE", 0, false},           {"1BPC", 0x00000001, false},  {"2BPC", 0x00000002, false},
+    {"3BPC", 0x00000004, false},  {"4BPC", 0x00000008, false},  {"5BPC", 0x00000010, false},
+    {"6BPC", 0x00000020, false},  {"7BPC", 0x00000040, false},  {"8BPC", 0x00000080, false},
+    {"9BPC", 0x00000100, false},  {"10BPC", 0x00000200, false}, {"11BPC", 0x00000400, false},
+    {"12BPC", 0x00000800, false}, {"13BPC", 0x00001000, false}, {"14BPC", 0x00002000, false},
+    {"15BPC", 0x00004000, false}, {"16BPC", 0x00008000, false}, {"17BPC", 0x00010000, false},
+    {"18BPC", 0x00020000, false}, {"19BPC", 0x00040000, false}, {"20BPC", 0x00080000, false},
+    {"21BPC", 0x00100000, false}, {"22BPC", 0x00200000, false}, {"23BPC", 0x00400000, false},
+    {"24BPC", 0x00800000, false},
 };
 
 EnumValueSet const VkVideoCodecOperationFlagsKHRSets[] = {
@@ -2257,6 +2278,8 @@ EnumValueSet const VkQueryTypeSets[] = {
     {"RESULT_STATUS_ONLY_KHR", 1000023000, false},
     {"VIDEO_ENCODE_BITSTREAM_BUFFER_RANGE_KHR", 1000299000, false},
     {"PRIMITIVES_GENERATED_EXT", 1000382000, false},
+    {"ACCELERATION_STRUCTURE_SERIALIZATION_BOTTOM_LEVEL_POINTERS_KHR", 1000386000, false},
+    {"ACCELERATION_STRUCTURE_SIZE_KHR", 1000386001, false},
 };
 
 EnumValueSet const VkSubpassContentsSets[] = {
@@ -2585,6 +2608,23 @@ EnumValueSet const VkFragmentShadingRateNVSets[] = {
 EnumValueSet const VkFragmentShadingRateTypeNVSets[] = {
     {"FRAGMENT_SIZE", 0, false},
     {"ENUMS", 1, false},
+};
+
+EnumValueSet const VkSubpassMergeStatusEXTSets[] = {
+    {"MERGED", 0, false},
+    {"DISALLOWED", 1, false},
+    {"NOT_MERGED_SIDE_EFFECTS", 2, false},
+    {"NOT_MERGED_SAMPLES_MISMATCH", 3, false},
+    {"NOT_MERGED_VIEWS_MISMATCH", 4, false},
+    {"NOT_MERGED_ALIASING", 5, false},
+    {"NOT_MERGED_DEPENDENCIES", 6, false},
+    {"NOT_MERGED_INCOMPATIBLE_INPUT_ATTACHMENT", 7, false},
+    {"NOT_MERGED_TOO_MANY_ATTACHMENTS", 8, false},
+    {"NOT_MERGED_INSUFFICIENT_STORAGE", 9, false},
+    {"NOT_MERGED_DEPTH_STENCIL_COUNT", 10, false},
+    {"NOT_MERGED_RESOLVE_ATTACHMENT_REUSE", 11, false},
+    {"NOT_MERGED_SINGLE_SUBPASS", 12, false},
+    {"NOT_MERGED_UNSPECIFIED", 13, false},
 };
 
 EnumValueSet const VkProvokingVertexModeEXTSets[] = {
@@ -2959,7 +2999,7 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[282] = {
+EnumType const cEnumTypes[285] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", NULL, 0},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 3},
@@ -3034,8 +3074,8 @@ EnumType const cEnumTypes[282] = {
     {"VkPipelineCompilerControlFlagsAMD", NULL, 0},
     {"VkShaderCorePropertiesFlagsAMD", NULL, 0},
     {"VkDeviceDiagnosticsConfigFlagsNV", VkDeviceDiagnosticsConfigFlagsNVSets, 3},
-    {"VkAccessFlags2", VkAccessFlags2Sets, 67},
-    {"VkPipelineStageFlags2", VkPipelineStageFlags2Sets, 71},
+    {"VkAccessFlags2", VkAccessFlags2Sets, 68},
+    {"VkPipelineStageFlags2", VkPipelineStageFlags2Sets, 72},
     {"VkAccelerationStructureMotionInfoFlagsNV", NULL, 0},
     {"VkAccelerationStructureMotionInstanceFlagsNV", NULL, 0},
     {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Sets, 71},
@@ -3099,6 +3139,8 @@ EnumType const cEnumTypes[282] = {
     {"VkImageFormatConstraintsFlagsFUCHSIA", NULL, 0},
     {"VkImageConstraintsInfoFlagsFUCHSIA", VkImageConstraintsInfoFlagsFUCHSIASets, 5},
     {"VkGraphicsPipelineLibraryFlagsEXT", VkGraphicsPipelineLibraryFlagsEXTSets, 4},
+    {"VkImageCompressionFlagsEXT", VkImageCompressionFlagsEXTSets, 4},
+    {"VkImageCompressionFixedRateFlagsEXT", VkImageCompressionFixedRateFlagsEXTSets, 25},
     {"VkVideoCodecOperationFlagsKHR", VkVideoCodecOperationFlagsKHRSets, 5},
     {"VkVideoCapabilityFlagsKHR", VkVideoCapabilityFlagsKHRSets, 2},
     {"VkVideoSessionCreateFlagsKHR", VkVideoSessionCreateFlagsKHRSets, 2},
@@ -3152,7 +3194,7 @@ EnumType const cEnumTypes[282] = {
     {"VkPhysicalDeviceType", VkPhysicalDeviceTypeSets, 5},
     {"VkPipelineBindPoint", VkPipelineBindPointSets, 6},
     {"VkPrimitiveTopology", VkPrimitiveTopologySets, 11},
-    {"VkQueryType", VkQueryTypeSets, 15},
+    {"VkQueryType", VkQueryTypeSets, 17},
     {"VkSubpassContents", VkSubpassContentsSets, 2},
     {"VkStencilOp", VkStencilOpSets, 8},
     {"VkSystemAllocationScope", VkSystemAllocationScopeSets, 5},
@@ -3199,6 +3241,7 @@ EnumType const cEnumTypes[282] = {
     {"VkLineRasterizationModeEXT", VkLineRasterizationModeEXTSets, 4},
     {"VkFragmentShadingRateNV", VkFragmentShadingRateNVSets, 12},
     {"VkFragmentShadingRateTypeNV", VkFragmentShadingRateTypeNVSets, 2},
+    {"VkSubpassMergeStatusEXT", VkSubpassMergeStatusEXTSets, 14},
     {"VkProvokingVertexModeEXT", VkProvokingVertexModeEXTSets, 2},
     {"VkColorSpaceKHR", VkColorSpaceKHRSets, 18},
     {"VkPresentModeKHR", VkPresentModeKHRSets, 6},

@@ -44,13 +44,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 212,
-              "VK_HEADER_VERSION is from after the maximum supported version of v212.");
+static_assert(VK_HEADER_VERSION <= 213,
+              "VK_HEADER_VERSION is from after the maximum supported version of v213.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 212,
-               "VK_HEADER_VERSION is from after the maximum supported version of v212.");
+_Static_assert(VK_HEADER_VERSION <= 213,
+               "VK_HEADER_VERSION is from after the maximum supported version of v213.");
 #endif
 
 // This is effectively a cheap approximation of OpenXR's useful `xrResultToString` function but for
@@ -63,6 +63,10 @@ char const *vkResultToString(VkResult vkRes) {
   // Check in descending order to get the 'latest' version of the error code text available.
   // Also, because codes have been re-used over time, can't use a switch and have to do this large
   // set of ifs. Luckily this *should* be a relatively rare call.
+#if VK_HEADER_VERSION >= 213 && VK_EXT_image_compression_control
+  if (vkRes == VK_ERROR_COMPRESSION_EXHAUSTED_EXT)
+    return "VK_ERROR_COMPRESSION_EXHAUSTED_EXT";
+#endif
 #if VK_HEADER_VERSION >= 204
   if (vkRes == VK_PIPELINE_COMPILE_REQUIRED)
     return "VK_PIPELINE_COMPILE_REQUIRED";
