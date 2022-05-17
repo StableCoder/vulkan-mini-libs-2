@@ -44,13 +44,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 213,
-              "VK_HEADER_VERSION is from after the maximum supported version of v213.");
+static_assert(VK_HEADER_VERSION <= 214,
+              "VK_HEADER_VERSION is from after the maximum supported version of v214.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 213,
-               "VK_HEADER_VERSION is from after the maximum supported version of v213.");
+_Static_assert(VK_HEADER_VERSION <= 214,
+               "VK_HEADER_VERSION is from after the maximum supported version of v214.");
 #endif
 
 // This is effectively a cheap approximation of OpenXR's useful `xrResultToString` function but for

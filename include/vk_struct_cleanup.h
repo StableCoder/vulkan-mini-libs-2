@@ -44,13 +44,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 213,
-              "VK_HEADER_VERSION is from after the maximum supported version of v213.");
+static_assert(VK_HEADER_VERSION <= 214,
+              "VK_HEADER_VERSION is from after the maximum supported version of v214.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 213,
-               "VK_HEADER_VERSION is from after the maximum supported version of v213.");
+_Static_assert(VK_HEADER_VERSION <= 214,
+               "VK_HEADER_VERSION is from after the maximum supported version of v214.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -4219,6 +4219,11 @@ void cleanup_VkPipelinePropertiesIdentifierEXT(VkPipelinePropertiesIdentifierEXT
 #if VK_HEADER_VERSION >= 213 && VK_EXT_pipeline_properties
 void cleanup_VkPhysicalDevicePipelinePropertiesFeaturesEXT(
     VkPhysicalDevicePipelinePropertiesFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 214 && VK_AMD_shader_early_and_late_fragment_tests
+void cleanup_VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT(
+    VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -9966,6 +9971,15 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_PROPERTIES_FEATURES_EXT) {
     cleanup_VkPhysicalDevicePipelinePropertiesFeaturesEXT(
         (VkPhysicalDevicePipelinePropertiesFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 214 && VK_AMD_shader_early_and_late_fragment_tests
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_FEATURES_EXT) {
+    cleanup_VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT(
+        (VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT const *)pData);
     return;
   }
 #endif
@@ -19824,6 +19838,16 @@ void cleanup_VkPipelinePropertiesIdentifierEXT(VkPipelinePropertiesIdentifierEXT
 #if VK_HEADER_VERSION >= 213 && VK_EXT_pipeline_properties
 void cleanup_VkPhysicalDevicePipelinePropertiesFeaturesEXT(
     VkPhysicalDevicePipelinePropertiesFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 214 && VK_AMD_shader_early_and_late_fragment_tests
+void cleanup_VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT(
+    VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

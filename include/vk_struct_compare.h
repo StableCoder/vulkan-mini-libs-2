@@ -51,13 +51,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 213,
-              "VK_HEADER_VERSION is from after the maximum supported version of v213.");
+static_assert(VK_HEADER_VERSION <= 214,
+              "VK_HEADER_VERSION is from after the maximum supported version of v214.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 213,
-               "VK_HEADER_VERSION is from after the maximum supported version of v213.");
+_Static_assert(VK_HEADER_VERSION <= 214,
+               "VK_HEADER_VERSION is from after the maximum supported version of v214.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -4713,6 +4713,12 @@ bool compare_VkPipelinePropertiesIdentifierEXT(VkPipelinePropertiesIdentifierEXT
 bool compare_VkPhysicalDevicePipelinePropertiesFeaturesEXT(
     VkPhysicalDevicePipelinePropertiesFeaturesEXT const *s1,
     VkPhysicalDevicePipelinePropertiesFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 214 && VK_AMD_shader_early_and_late_fragment_tests
+bool compare_VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT(
+    VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT const *s1,
+    VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_HEADER_VERSION <= 208 && VK_EXT_video_decode_h264
@@ -16312,6 +16318,17 @@ bool compare_VkPhysicalDevicePipelinePropertiesFeaturesEXT(
     VkPhysicalDevicePipelinePropertiesFeaturesEXT const *s1,
     VkPhysicalDevicePipelinePropertiesFeaturesEXT const *s2) {
   if ((s1->pipelinePropertiesIdentifier != s2->pipelinePropertiesIdentifier) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 214 && VK_AMD_shader_early_and_late_fragment_tests
+bool compare_VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT(
+    VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT const *s1,
+    VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT const *s2) {
+  if ((s1->shaderEarlyAndLateFragmentTests != s2->shaderEarlyAndLateFragmentTests) || false)
     return false;
 
   return true;

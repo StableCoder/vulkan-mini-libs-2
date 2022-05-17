@@ -45,13 +45,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 213,
-              "VK_HEADER_VERSION is from after the maximum supported version of v213.");
+static_assert(VK_HEADER_VERSION <= 214,
+              "VK_HEADER_VERSION is from after the maximum supported version of v214.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 213,
-               "VK_HEADER_VERSION is from after the maximum supported version of v213.");
+_Static_assert(VK_HEADER_VERSION <= 214,
+               "VK_HEADER_VERSION is from after the maximum supported version of v214.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -564,6 +564,7 @@ EnumValueSet const VkPipelineCreateFlagsSets[] = {
     {"RESERVED_24_BIT_NV", 0x01000000, false},
     {"RESERVED_25_BIT_EXT", 0x02000000, false},
     {"RESERVED_26_BIT_EXT", 0x04000000, false},
+    {"RESERVED_27_BIT_EXT", 0x08000000, false},
 };
 
 EnumValueSet const VkColorComponentFlagsSets[] = {
@@ -806,7 +807,7 @@ EnumValueSet const VkDescriptorPoolCreateFlagsSets[] = {
 EnumValueSet const VkDependencyFlagsSets[] = {
     {"BY_REGION", 0x00000001, false},           {"DEVICE_GROUP", 0x00000004, false},
     {"VIEW_LOCAL", 0x00000002, false},          {"VIEW_LOCAL_BIT_KHR", 0x00000002, true},
-    {"DEVICE_GROUP_BIT_KHR", 0x00000004, true},
+    {"DEVICE_GROUP_BIT_KHR", 0x00000004, true}, {"RESERVED_3_BIT_EXT", 0x00000008, false},
 };
 
 EnumValueSet const VkSubgroupFeatureFlagsSets[] = {
@@ -900,6 +901,7 @@ EnumValueSet const VkDeviceDiagnosticsConfigFlagsNVSets[] = {
     {"ENABLE_SHADER_DEBUG_INFO", 0x00000001, false},
     {"ENABLE_RESOURCE_TRACKING", 0x00000002, false},
     {"ENABLE_AUTOMATIC_CHECKPOINTS", 0x00000004, false},
+    {"ENABLE_SHADER_ERROR_REPORTING", 0x00000008, false},
 };
 
 EnumValueSet const VkAccessFlags2Sets[] = {
@@ -3031,7 +3033,7 @@ EnumType const cEnumTypes[285] = {
     {"VkImageUsageFlags", VkImageUsageFlagsSets, 33},
     {"VkImageCreateFlags", VkImageCreateFlagsSets, 30},
     {"VkImageViewCreateFlags", VkImageViewCreateFlagsSets, 4},
-    {"VkPipelineCreateFlags", VkPipelineCreateFlagsSets, 54},
+    {"VkPipelineCreateFlags", VkPipelineCreateFlagsSets, 55},
     {"VkColorComponentFlags", VkColorComponentFlagsSets, 4},
     {"VkFenceCreateFlags", VkFenceCreateFlagsSets, 1},
     {"VkSemaphoreCreateFlags", NULL, 0},
@@ -3057,7 +3059,7 @@ EnumType const cEnumTypes[285] = {
     {"VkCullModeFlags", VkCullModeFlagsSets, 4},
     {"VkDescriptorPoolCreateFlags", VkDescriptorPoolCreateFlagsSets, 5},
     {"VkDescriptorPoolResetFlags", NULL, 0},
-    {"VkDependencyFlags", VkDependencyFlagsSets, 5},
+    {"VkDependencyFlags", VkDependencyFlagsSets, 6},
     {"VkSubgroupFeatureFlags", VkSubgroupFeatureFlagsSets, 9},
     {"VkIndirectCommandsLayoutUsageFlagsNV", VkIndirectCommandsLayoutUsageFlagsNVSets, 3},
     {"VkIndirectStateFlagsNV", VkIndirectStateFlagsNVSets, 1},
@@ -3073,7 +3075,7 @@ EnumType const cEnumTypes[285] = {
     {"VkSemaphoreWaitFlags", VkSemaphoreWaitFlagsSets, 2},
     {"VkPipelineCompilerControlFlagsAMD", NULL, 0},
     {"VkShaderCorePropertiesFlagsAMD", NULL, 0},
-    {"VkDeviceDiagnosticsConfigFlagsNV", VkDeviceDiagnosticsConfigFlagsNVSets, 3},
+    {"VkDeviceDiagnosticsConfigFlagsNV", VkDeviceDiagnosticsConfigFlagsNVSets, 4},
     {"VkAccessFlags2", VkAccessFlags2Sets, 68},
     {"VkPipelineStageFlags2", VkPipelineStageFlags2Sets, 72},
     {"VkAccelerationStructureMotionInfoFlagsNV", NULL, 0},
