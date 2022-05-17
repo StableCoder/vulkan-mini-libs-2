@@ -1,15 +1,19 @@
-#!/usr/bin/env sh
+#!/bin/bash
 set -e
+
+MDIR="$(dirname "$(dirname "$(readlink -e "${BASH_SOURCE[0]}")")")"
 
 # Variables
 START=72 # Prior to v72, vk.xml was not published, so that's the default minimum.
 END=
+OUTPUT="${MDIR}/include"
 SKIP_PARSE=0
 
 help_blurb() {
-    echo " -s, --start <INT> The starting version of Vulkan to generate for (default: 72)"
-    echo " -e, --end <INT>   The ending version of Vulkan to generate for (default: none)"
-    echo " --skip-parse      Skips generating new XML cache, just generate header files"
+    echo " -s, --start <INT>  The starting version of Vulkan to generate for (default: 72)"
+    echo " -e, --end <INT>    The ending version of Vulkan to generate for (default: none)"
+    echo " -o, --output <DIR> The directory in which to generate header files (default: <repo>/include)"
+    echo " --skip-parse       Skips generating new XML cache, just generate header files"
 }
 
 # Command-line parsing
@@ -27,6 +31,10 @@ while [[ $# -gt 0 ]]; do
         shift
         shift
         ;;
+    -o | --output)
+        OUTPUT="$(readlink -e "$2")"
+        shift 2
+        ;;
     --skip-parse)
         SKIP_PARSE=1
         shift
@@ -37,6 +45,8 @@ while [[ $# -gt 0 ]]; do
         ;;
     esac
 done
+
+cd "${MDIR}/tools"
 
 if [ $SKIP_PARSE -eq 0 ]; then
     # Remove any previously generated data for a clean slate
@@ -70,13 +80,13 @@ if [ $SKIP_PARSE -eq 0 ]; then
 fi
 
 # Generate headers
-./generate_serialization_header.py -i .gen_cache.xml -o ../include/vk_value_serialization.h
-./generate_result_string_header.py -i .gen_cache.xml -o ../include/vk_result_to_string.h
-./generate_cleanup_header.py -i .gen_cache.xml -y ../data/cleanup_excludes.yaml -o ../include/vk_struct_cleanup.h
-./generate_comparison_headers.py -i .gen_cache.xml -y ../data/compare_excludes.yaml -o ../include/vk_struct_compare.h
+./generate_serialization_header.py -i .gen_cache.xml                                  -o "${OUTPUT}/vk_value_serialization.h"
+./generate_result_string_header.py -i .gen_cache.xml                                  -o "${OUTPUT}/vk_result_to_string.h"
+./generate_cleanup_header.py       -i .gen_cache.xml -y ../data/cleanup_excludes.yaml -o "${OUTPUT}/vk_struct_cleanup.h"
+./generate_comparison_headers.py   -i .gen_cache.xml -y ../data/compare_excludes.yaml -o "${OUTPUT}/vk_struct_compare.h"
 
 # Format headers
-cd ../include
+cd "${OUTPUT}"
 clang-format -i *.h
 clang-format -i *.hpp
 clang-format -i *.h
