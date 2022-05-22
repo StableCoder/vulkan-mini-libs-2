@@ -73,7 +73,7 @@ if [ $SKIP_PARSE -eq 0 ]; then
         fi
         git checkout $TAG
 
-        ../parse_vk_doc.py -i xml/vk.xml -w ../.gen_cache.xml
+        ../parse_xml.py -i xml/vk.xml -w ../.gen_cache.xml
         FIRST=0
     done
     popd >/dev/null

@@ -17,17 +17,17 @@ def findVersion(rootNode):
     return ''
 
 
-def processVendors(inVendor, outVendors, vkVersion):
+def processVendors(inVendor, outVendors, apiVersion):
     name = inVendor.get('name')
     vendor = outVendors.find(name)
     if vendor is None:
         vendor = ET.SubElement(
-            outVendors, name, {'first': vkVersion, 'last': vkVersion})
+            outVendors, name, {'first': apiVersion, 'last': apiVersion})
     else:
-        vendor.set('first', vkVersion)
+        vendor.set('first', apiVersion)
 
 
-def processEnum(inEnum, outEnum, vkVersion):
+def processEnum(inEnum, outEnum, apiVersion):
     # If the enum has no type, just return
     if inEnum.get('type') is None:
         return
@@ -48,7 +48,7 @@ def processEnum(inEnum, outEnum, vkVersion):
         enumVal = enumValues.find(valName)
         if enumVal is None:
             enumVal = ET.SubElement(
-                enumValues, valName, {'first': vkVersion, 'last': vkVersion})
+                enumValues, valName, {'first': apiVersion, 'last': apiVersion})
             ET.SubElement(enumVal, 'platforms')
             if not value.get('value') is None:
                 enumVal.set('value', value.get('value'))
@@ -60,10 +60,10 @@ def processEnum(inEnum, outEnum, vkVersion):
                 print("Could not determine enum value for ", valName)
                 sys.exit(1)
         else:
-            enumVal.set('first', vkVersion)
+            enumVal.set('first', apiVersion)
 
 
-def processFeatureEnum(featureEnum, outEnum, vkVersion):
+def processFeatureEnum(featureEnum, outEnum, apiVersion):
     extends = featureEnum.get('extends')
     valName = featureEnum.get('name')
     if extends is None or extends == 'VkStructureType':
@@ -80,7 +80,7 @@ def processFeatureEnum(featureEnum, outEnum, vkVersion):
     value = enumValues.find(valName)
     if value is None:
         value = ET.SubElement(
-            enumValues, valName, {'first': vkVersion, 'last': vkVersion})
+            enumValues, valName, {'first': apiVersion, 'last': apiVersion})
         ET.SubElement(value, 'platforms')
         if not featureEnum.get('offset') is None:
             extNum = int(featureEnum.get('extnumber'))
@@ -100,10 +100,10 @@ def processFeatureEnum(featureEnum, outEnum, vkVersion):
             print("Could not determine enum value for ", valName)
             sys.exit(1)
     else:
-        value.set('first', vkVersion)
+        value.set('first', apiVersion)
 
 
-def processExtensionEnums(extension, outEnum, vkVersion):
+def processExtensionEnums(extension, outEnum, apiVersion):
     extName = extension.get('name')
     extNum = int(extension.get('number'))
 
@@ -124,7 +124,7 @@ def processExtensionEnums(extension, outEnum, vkVersion):
         value = enumValues.find(valName)
         if value is None:
             value = ET.SubElement(
-                enumValues, valName, {'first': vkVersion, 'last': vkVersion})
+                enumValues, valName, {'first': apiVersion, 'last': apiVersion})
             ET.SubElement(value, 'platforms')
             if not extEnum.get('offset') is None:
                 tempExtNum = extNum
@@ -146,7 +146,7 @@ def processExtensionEnums(extension, outEnum, vkVersion):
                 print("Could not determine enum value for ", valName)
                 sys.exit(1)
         else:
-            value.set('first', vkVersion)
+            value.set('first', apiVersion)
 
         if value.find('platforms/' + extName) is None:
             ET.SubElement(value.find('platforms'), extName)
@@ -161,7 +161,7 @@ def processExtensionEnums(extension, outEnum, vkVersion):
             ET.SubElement(enum.find('platforms'), extName)
 
 
-def processStruct(structNode, structData, vkVersion):
+def processStruct(structNode, structData, apiVersion):
     category = structNode.get('category')
     if category is None or category != 'struct':
         return
@@ -171,18 +171,18 @@ def processStruct(structNode, structData, vkVersion):
     struct = structData.find(structName)
     if struct is None:
         struct = ET.SubElement(structData, structName, {
-                               'first': vkVersion, 'last': vkVersion})
+                               'first': apiVersion, 'last': apiVersion})
         ET.SubElement(struct, 'platforms')
 
         if alias:
             struct.set('alias', alias)
         if len(structNode.findall('./member')) != 0:
             members = ET.SubElement(struct, 'members', {
-                'first': vkVersion, 'last': vkVersion})
+                'first': apiVersion, 'last': apiVersion})
             for member in structNode.findall('./member'):
                 nameNode = member.find('name')
                 node = ET.SubElement(members, nameNode.text, {
-                    'first': vkVersion, 'last': vkVersion})
+                    'first': apiVersion, 'last': apiVersion})
                 if not member.get('values') is None:
                     value = ET.SubElement(node, 'value')
                     value.text = member.get('values')
@@ -211,25 +211,25 @@ def processStruct(structNode, structData, vkVersion):
                     node.set('suffix', nameNode.tail)
 
     else:
-        struct.set('first', vkVersion)
+        struct.set('first', apiVersion)
 
         if len(structNode.findall('./member')) != 0:
             members = struct.find('members')
             if members:
-                members.set('first', vkVersion)
+                members.set('first', apiVersion)
             else:
                 members = ET.SubElement(struct, 'members', {
-                    'first': vkVersion, 'last': vkVersion})
+                    'first': apiVersion, 'last': apiVersion})
 
             for member in structNode.findall('./member'):
                 nameNode = member.find('name')
                 node = members.find(nameNode.text)
                 if node:
-                    node.set('first', vkVersion)
+                    node.set('first', apiVersion)
                     continue
 
                 node = ET.SubElement(members, nameNode.text, {
-                    'first': vkVersion, 'last': vkVersion})
+                    'first': apiVersion, 'last': apiVersion})
                 if not member.get('values') is None:
                     value = ET.SubElement(node, 'value')
                     value.text = member.get('values')
@@ -258,7 +258,7 @@ def processStruct(structNode, structData, vkVersion):
                     node.set('suffix', nameNode.tail)
 
 
-def processFeatureStruct(featureName, featureType, structData, vkVersion):
+def processFeatureStruct(featureName, featureType, structData, apiVersion):
     name = featureType.get('name')
 
     struct = structData.find(name)
@@ -267,12 +267,12 @@ def processFeatureStruct(featureName, featureType, structData, vkVersion):
         platform = platforms.find(featureName)
         if platform is None:
             ET.SubElement(platforms, featureName, {
-                'first': vkVersion, 'last': vkVersion})
+                'first': apiVersion, 'last': apiVersion})
         else:
-            platform.set('first', vkVersion)
+            platform.set('first', apiVersion)
 
 
-def processExtensionStruct(extension, structData, vkVersion):
+def processExtensionStruct(extension, structData, apiVersion):
     extName = extension.get('name')
 
     for type in extension.findall('require/type'):
@@ -283,14 +283,15 @@ def processExtensionStruct(extension, structData, vkVersion):
             platform = platforms.find(extName)
             if platform is None:
                 ET.SubElement(platforms, extName, {
-                    'first': vkVersion, 'last': vkVersion})
+                    'first': apiVersion, 'last': apiVersion})
             else:
-                platform.set('first', vkVersion)
+                platform.set('first', apiVersion)
 
 
 def main(argv):
     inputFile = ''
     workingFile = ''
+    apiVersion = ''
 
     try:
         opts, args = getopt.getopt(argv, 'i:w:a', [])
@@ -304,7 +305,7 @@ def main(argv):
             workingFile = arg
 
     if(inputFile == ''):
-        print("Error: No Vulkan XML file specified")
+        print("Error: No XML file specified")
         sys.exit(1)
     if(workingFile == ''):
         print("Error: No working file specified")
@@ -318,15 +319,15 @@ def main(argv):
     vkXml = ET.parse(inputFile)
     vkRoot = vkXml.getroot()
 
-    # Find current version
-    vkVersion = findVersion(vkRoot)
-    if vkVersion == '':
-        print("Error: Failed to determine Vulkan Header Version")
+    # Version
+    apiVersion = findVersion(vkRoot)
+    if apiVersion == '':
+        print("Error: Failed to determine API version")
         sys.exit(1)
 
-    dataRoot.set('first', vkVersion)
+    dataRoot.set('first', apiVersion)
     if dataRoot.get('last') is None:
-        dataRoot.set('last', vkVersion)
+        dataRoot.set('last', apiVersion)
 
     # Process Vendors
     if dataRoot.find('vendors') is None:
@@ -334,7 +335,7 @@ def main(argv):
     vendorData = dataRoot.find('vendors')
 
     for vendor in vkRoot.findall('./tags/tag'):
-        processVendors(vendor, vendorData, vkVersion)
+        processVendors(vendor, vendorData, apiVersion)
 
     # Process Enums
     if dataRoot.find('enums') is None:
@@ -352,14 +353,14 @@ def main(argv):
                 if enum is None:
                     if typeData.get('alias'):
                         enum = ET.SubElement(enumData, name, {
-                            'first': vkVersion, 'last': vkVersion, 'alias': typeData.get('alias')})
+                            'first': apiVersion, 'last': apiVersion, 'alias': typeData.get('alias')})
                     else:
                         enum = ET.SubElement(enumData, name, {
-                            'first': vkVersion, 'last': vkVersion})
+                            'first': apiVersion, 'last': apiVersion})
                     ET.SubElement(enum, 'values', {})
                     ET.SubElement(enum, 'platforms', {})
                 else:
-                    enum.set('first', vkVersion)
+                    enum.set('first', apiVersion)
             else:
                 name = typeData.find('name').text
                 if 'FlagBits' in name:
@@ -368,19 +369,19 @@ def main(argv):
                 enum = enumData.find(name)
                 if enum is None:
                     enum = ET.SubElement(enumData, name, {
-                        'first': vkVersion, 'last': vkVersion})
+                        'first': apiVersion, 'last': apiVersion})
                     ET.SubElement(enum, 'values', {})
                     ET.SubElement(enum, 'platforms', {})
                 else:
-                    enum.set('first', vkVersion)
+                    enum.set('first', apiVersion)
 
     for enum in vkRoot.findall('enums'):
-        processEnum(enum, enumData, vkVersion)
+        processEnum(enum, enumData, apiVersion)
 
     for feature in vkRoot.findall('feature/require/enum'):
-        processFeatureEnum(feature, enumData, vkVersion)
+        processFeatureEnum(feature, enumData, apiVersion)
     for extension in vkRoot.findall('extensions/extension'):
-        processExtensionEnums(extension, enumData, vkVersion)
+        processExtensionEnums(extension, enumData, apiVersion)
 
     # Process Structs
     if dataRoot.find('structs') is None:
@@ -388,7 +389,7 @@ def main(argv):
     structData = dataRoot.find('structs')
 
     for struct in vkRoot.findall('types/type'):
-        processStruct(struct, structData, vkVersion)
+        processStruct(struct, structData, apiVersion)
 
     for feature in vkRoot.findall('feature'):
         featureName = feature.get('name')
@@ -397,10 +398,10 @@ def main(argv):
             continue
         for featureType in feature.findall('require/type'):
             processFeatureStruct(featureName, featureType,
-                                 structData, vkVersion)
+                                 structData, apiVersion)
 
     for extension in vkRoot.findall('extensions/extension'):
-        processExtensionStruct(extension, structData, vkVersion)
+        processExtensionStruct(extension, structData, apiVersion)
 
     # Output XML
     tree = ET.ElementTree(dataRoot)
