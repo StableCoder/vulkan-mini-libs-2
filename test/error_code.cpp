@@ -39,6 +39,8 @@ TEST_CASE("Success Case") {
     CHECK(test.value() == X);                                                                      \
     CHECK(test.category().name() == std::string{"VkResult"});                                      \
     CHECK(test.message() == std::string{#X});                                                      \
+    CHECK(std::string{VkResult_to_string(X)} == std::string{#X});                                  \
+    CHECK(std::string{vkResultToString(X)} == std::string{#X});                                    \
   }
 
 TEST_CASE("Specific positive-value cases") {
@@ -56,8 +58,11 @@ TEST_CASE("Unknown positive error cases") {
     REQUIRE(test);
     REQUIRE(test.value() == static_cast<VkResult>(i));
 
-    REQUIRE(test.category().name() == std::string{"VkResult"});
-    REQUIRE(test.message() == std::string{"(unrecognized positive VkResult value)"});
+    CHECK(test.category().name() == std::string{"VkResult"});
+    CHECK(test.message() == std::string{"(unrecognized positive VkResult value)"});
+    CHECK(VkResult_to_string(static_cast<VkResult>(i)) == NULL);
+    CHECK(std::string{vkResultToString(static_cast<VkResult>(i))} ==
+          std::string{"(unrecognized positive VkResult value)"});
   }
 }
 
@@ -85,5 +90,8 @@ TEST_CASE("Unknown negative error cases") {
 
     REQUIRE(test.category().name() == std::string{"VkResult"});
     REQUIRE(test.message() == std::string{"(unrecognized negative VkResult value)"});
+    CHECK(VkResult_to_string(static_cast<VkResult>(i)) == NULL);
+    CHECK(std::string{vkResultToString(static_cast<VkResult>(i))} ==
+          std::string{"(unrecognized negative VkResult value)"});
   }
 }

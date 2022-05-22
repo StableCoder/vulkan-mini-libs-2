@@ -53,174 +53,186 @@ _Static_assert(VK_HEADER_VERSION <= 214,
                "VK_HEADER_VERSION is from after the maximum supported version of v214.");
 #endif
 
-// This is effectively a cheap approximation of OpenXR's useful `xrResultToString` function but for
-// Vulkan
-char const *vkResultToString(VkResult res);
+/// Returns a string representing the given VkResult parameter. If there is no known representation,
+/// returns NULL.
+char const *VkResult_to_string(VkResult result);
+
+/// Similar to VkResult_to_string, except in the case where it is an unknown value, returns a string
+/// stating '(unrecognized positive/negative VkResult value)', thus never returning NULL.
+char const *vkResultToString(VkResult result);
 
 #ifdef VK_RESULT_TO_STRING_CONFIG_MAIN
 
-char const *vkResultToString(VkResult vkRes) {
+char const *VkResult_to_string(VkResult result) {
   // Check in descending order to get the 'latest' version of the error code text available.
   // Also, because codes have been re-used over time, can't use a switch and have to do this large
   // set of ifs. Luckily this *should* be a relatively rare call.
 #if VK_HEADER_VERSION >= 213 && VK_EXT_image_compression_control
-  if (vkRes == VK_ERROR_COMPRESSION_EXHAUSTED_EXT)
+  if (result == VK_ERROR_COMPRESSION_EXHAUSTED_EXT)
     return "VK_ERROR_COMPRESSION_EXHAUSTED_EXT";
 #endif
 #if VK_HEADER_VERSION >= 204
-  if (vkRes == VK_PIPELINE_COMPILE_REQUIRED)
+  if (result == VK_PIPELINE_COMPILE_REQUIRED)
     return "VK_PIPELINE_COMPILE_REQUIRED";
 #endif
 #if VK_HEADER_VERSION >= 204 && VK_KHR_global_priority
-  if (vkRes == VK_ERROR_NOT_PERMITTED_KHR)
+  if (result == VK_ERROR_NOT_PERMITTED_KHR)
     return "VK_ERROR_NOT_PERMITTED_KHR";
 #endif
 #if VK_HEADER_VERSION >= 136 && VK_EXT_pipeline_creation_cache_control
-  if (vkRes == VK_PIPELINE_COMPILE_REQUIRED_EXT)
+  if (result == VK_PIPELINE_COMPILE_REQUIRED_EXT)
     return "VK_PIPELINE_COMPILE_REQUIRED_EXT";
 #endif
 #if VK_HEADER_VERSION >= 135 && VK_KHR_deferred_host_operations
-  if (vkRes == VK_THREAD_IDLE_KHR)
+  if (result == VK_THREAD_IDLE_KHR)
     return "VK_THREAD_IDLE_KHR";
 #endif
 #if VK_HEADER_VERSION >= 135 && VK_KHR_deferred_host_operations
-  if (vkRes == VK_THREAD_DONE_KHR)
+  if (result == VK_THREAD_DONE_KHR)
     return "VK_THREAD_DONE_KHR";
 #endif
 #if VK_HEADER_VERSION >= 135 && VK_KHR_deferred_host_operations
-  if (vkRes == VK_OPERATION_DEFERRED_KHR)
+  if (result == VK_OPERATION_DEFERRED_KHR)
     return "VK_OPERATION_DEFERRED_KHR";
 #endif
 #if VK_HEADER_VERSION >= 135 && VK_KHR_deferred_host_operations
-  if (vkRes == VK_OPERATION_NOT_DEFERRED_KHR)
+  if (result == VK_OPERATION_NOT_DEFERRED_KHR)
     return "VK_OPERATION_NOT_DEFERRED_KHR";
 #endif
 #if VK_HEADER_VERSION >= 135 && VK_EXT_pipeline_creation_cache_control
-  if (vkRes == VK_ERROR_PIPELINE_COMPILE_REQUIRED_EXT)
+  if (result == VK_ERROR_PIPELINE_COMPILE_REQUIRED_EXT)
     return "VK_ERROR_PIPELINE_COMPILE_REQUIRED_EXT";
 #endif
 #if VK_HEADER_VERSION >= 135 && VK_HEADER_VERSION <= 161 && VK_KHR_ray_tracing
-  if (vkRes == VK_ERROR_INCOMPATIBLE_VERSION_KHR)
+  if (result == VK_ERROR_INCOMPATIBLE_VERSION_KHR)
     return "VK_ERROR_INCOMPATIBLE_VERSION_KHR";
 #endif
 #if VK_HEADER_VERSION >= 131
-  if (vkRes == VK_ERROR_UNKNOWN)
+  if (result == VK_ERROR_UNKNOWN)
     return "VK_ERROR_UNKNOWN";
 #endif
 #if VK_HEADER_VERSION >= 131
-  if (vkRes == VK_ERROR_FRAGMENTATION)
+  if (result == VK_ERROR_FRAGMENTATION)
     return "VK_ERROR_FRAGMENTATION";
 #endif
 #if VK_HEADER_VERSION >= 131
-  if (vkRes == VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS)
+  if (result == VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS)
     return "VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS";
 #endif
 #if VK_HEADER_VERSION >= 129 && VK_KHR_buffer_device_address
-  if (vkRes == VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS_KHR)
+  if (result == VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS_KHR)
     return "VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS_KHR";
 #endif
 #if VK_HEADER_VERSION >= 128 && VK_HEADER_VERSION <= 134 && VK_EXT_extension_298
-  if (vkRes == VK_RESULT_EXT_298_RESERVED_VALUE_0_EXT)
+  if (result == VK_RESULT_EXT_298_RESERVED_VALUE_0_EXT)
     return "VK_RESULT_EXT_298_RESERVED_VALUE_0_EXT";
 #endif
 #if VK_HEADER_VERSION >= 104 && VK_EXT_full_screen_exclusive
-  if (vkRes == VK_ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT)
+  if (result == VK_ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT)
     return "VK_ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT";
 #endif
 #if VK_HEADER_VERSION >= 97 && VK_EXT_buffer_device_address
-  if (vkRes == VK_ERROR_INVALID_DEVICE_ADDRESS_EXT)
+  if (result == VK_ERROR_INVALID_DEVICE_ADDRESS_EXT)
     return "VK_ERROR_INVALID_DEVICE_ADDRESS_EXT";
 #endif
 #if VK_HEADER_VERSION >= 86 && VK_EXT_image_drm_format_modifier
-  if (vkRes == VK_ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT)
+  if (result == VK_ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT)
     return "VK_ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT";
 #endif
-  if (vkRes == VK_SUCCESS)
+  if (result == VK_SUCCESS)
     return "VK_SUCCESS";
-  if (vkRes == VK_NOT_READY)
+  if (result == VK_NOT_READY)
     return "VK_NOT_READY";
-  if (vkRes == VK_TIMEOUT)
+  if (result == VK_TIMEOUT)
     return "VK_TIMEOUT";
-  if (vkRes == VK_EVENT_SET)
+  if (result == VK_EVENT_SET)
     return "VK_EVENT_SET";
-  if (vkRes == VK_EVENT_RESET)
+  if (result == VK_EVENT_RESET)
     return "VK_EVENT_RESET";
-  if (vkRes == VK_INCOMPLETE)
+  if (result == VK_INCOMPLETE)
     return "VK_INCOMPLETE";
-  if (vkRes == VK_ERROR_OUT_OF_HOST_MEMORY)
+  if (result == VK_ERROR_OUT_OF_HOST_MEMORY)
     return "VK_ERROR_OUT_OF_HOST_MEMORY";
-  if (vkRes == VK_ERROR_OUT_OF_DEVICE_MEMORY)
+  if (result == VK_ERROR_OUT_OF_DEVICE_MEMORY)
     return "VK_ERROR_OUT_OF_DEVICE_MEMORY";
-  if (vkRes == VK_ERROR_INITIALIZATION_FAILED)
+  if (result == VK_ERROR_INITIALIZATION_FAILED)
     return "VK_ERROR_INITIALIZATION_FAILED";
-  if (vkRes == VK_ERROR_DEVICE_LOST)
+  if (result == VK_ERROR_DEVICE_LOST)
     return "VK_ERROR_DEVICE_LOST";
-  if (vkRes == VK_ERROR_MEMORY_MAP_FAILED)
+  if (result == VK_ERROR_MEMORY_MAP_FAILED)
     return "VK_ERROR_MEMORY_MAP_FAILED";
-  if (vkRes == VK_ERROR_LAYER_NOT_PRESENT)
+  if (result == VK_ERROR_LAYER_NOT_PRESENT)
     return "VK_ERROR_LAYER_NOT_PRESENT";
-  if (vkRes == VK_ERROR_EXTENSION_NOT_PRESENT)
+  if (result == VK_ERROR_EXTENSION_NOT_PRESENT)
     return "VK_ERROR_EXTENSION_NOT_PRESENT";
-  if (vkRes == VK_ERROR_FEATURE_NOT_PRESENT)
+  if (result == VK_ERROR_FEATURE_NOT_PRESENT)
     return "VK_ERROR_FEATURE_NOT_PRESENT";
-  if (vkRes == VK_ERROR_INCOMPATIBLE_DRIVER)
+  if (result == VK_ERROR_INCOMPATIBLE_DRIVER)
     return "VK_ERROR_INCOMPATIBLE_DRIVER";
-  if (vkRes == VK_ERROR_TOO_MANY_OBJECTS)
+  if (result == VK_ERROR_TOO_MANY_OBJECTS)
     return "VK_ERROR_TOO_MANY_OBJECTS";
-  if (vkRes == VK_ERROR_FORMAT_NOT_SUPPORTED)
+  if (result == VK_ERROR_FORMAT_NOT_SUPPORTED)
     return "VK_ERROR_FORMAT_NOT_SUPPORTED";
-  if (vkRes == VK_ERROR_FRAGMENTED_POOL)
+  if (result == VK_ERROR_FRAGMENTED_POOL)
     return "VK_ERROR_FRAGMENTED_POOL";
-  if (vkRes == VK_ERROR_OUT_OF_POOL_MEMORY)
+  if (result == VK_ERROR_OUT_OF_POOL_MEMORY)
     return "VK_ERROR_OUT_OF_POOL_MEMORY";
-  if (vkRes == VK_ERROR_INVALID_EXTERNAL_HANDLE)
+  if (result == VK_ERROR_INVALID_EXTERNAL_HANDLE)
     return "VK_ERROR_INVALID_EXTERNAL_HANDLE";
 #if VK_KHR_surface
-  if (vkRes == VK_ERROR_SURFACE_LOST_KHR)
+  if (result == VK_ERROR_SURFACE_LOST_KHR)
     return "VK_ERROR_SURFACE_LOST_KHR";
 #endif
 #if VK_KHR_surface
-  if (vkRes == VK_ERROR_NATIVE_WINDOW_IN_USE_KHR)
+  if (result == VK_ERROR_NATIVE_WINDOW_IN_USE_KHR)
     return "VK_ERROR_NATIVE_WINDOW_IN_USE_KHR";
 #endif
 #if VK_KHR_swapchain
-  if (vkRes == VK_SUBOPTIMAL_KHR)
+  if (result == VK_SUBOPTIMAL_KHR)
     return "VK_SUBOPTIMAL_KHR";
 #endif
 #if VK_KHR_swapchain
-  if (vkRes == VK_ERROR_OUT_OF_DATE_KHR)
+  if (result == VK_ERROR_OUT_OF_DATE_KHR)
     return "VK_ERROR_OUT_OF_DATE_KHR";
 #endif
 #if VK_KHR_display_swapchain
-  if (vkRes == VK_ERROR_INCOMPATIBLE_DISPLAY_KHR)
+  if (result == VK_ERROR_INCOMPATIBLE_DISPLAY_KHR)
     return "VK_ERROR_INCOMPATIBLE_DISPLAY_KHR";
 #endif
 #if VK_EXT_debug_report
-  if (vkRes == VK_ERROR_VALIDATION_FAILED_EXT)
+  if (result == VK_ERROR_VALIDATION_FAILED_EXT)
     return "VK_ERROR_VALIDATION_FAILED_EXT";
 #endif
 #if VK_NV_glsl_shader
-  if (vkRes == VK_ERROR_INVALID_SHADER_NV)
+  if (result == VK_ERROR_INVALID_SHADER_NV)
     return "VK_ERROR_INVALID_SHADER_NV";
 #endif
 #if VK_KHR_maintenance1
-  if (vkRes == VK_ERROR_OUT_OF_POOL_MEMORY_KHR)
+  if (result == VK_ERROR_OUT_OF_POOL_MEMORY_KHR)
     return "VK_ERROR_OUT_OF_POOL_MEMORY_KHR";
 #endif
 #if VK_KHR_external_memory
-  if (vkRes == VK_ERROR_INVALID_EXTERNAL_HANDLE_KHR)
+  if (result == VK_ERROR_INVALID_EXTERNAL_HANDLE_KHR)
     return "VK_ERROR_INVALID_EXTERNAL_HANDLE_KHR";
 #endif
 #if VK_EXT_descriptor_indexing
-  if (vkRes == VK_ERROR_FRAGMENTATION_EXT)
+  if (result == VK_ERROR_FRAGMENTATION_EXT)
     return "VK_ERROR_FRAGMENTATION_EXT";
 #endif
 #if VK_EXT_global_priority
-  if (vkRes == VK_ERROR_NOT_PERMITTED_EXT)
+  if (result == VK_ERROR_NOT_PERMITTED_EXT)
     return "VK_ERROR_NOT_PERMITTED_EXT";
 #endif
 
-  if (vkRes > 0)
+  return NULL;
+}
+
+char const *vkResultToString(VkResult result) {
+  char const *pResultString = VkResult_to_string(result);
+  if (pResultString != NULL)
+    return pResultString;
+
+  if (result > 0)
     return "(unrecognized positive VkResult value)";
   else
     return "(unrecognized negative VkResult value)";

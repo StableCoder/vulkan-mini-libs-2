@@ -80,12 +80,17 @@ extern "C" {
     outFile.write('#endif\n')
 
     outFile.write("""
-// This is effectively a cheap approximation of OpenXR's useful `xrResultToString` function but for Vulkan
-char const* vkResultToString(VkResult res);
+/// Returns a string representing the given VkResult parameter. If there is no known representation,
+/// returns NULL.
+char const *VkResult_to_string(VkResult result);
+
+/// Similar to VkResult_to_string, except in the case where it is an unknown value, returns a string
+/// stating '(unrecognized positive/negative VkResult value)', thus never returning NULL.
+char const *vkResultToString(VkResult result);
 
 #ifdef VK_RESULT_TO_STRING_CONFIG_MAIN
 
-char const* vkResultToString(VkResult vkRes) {
+char const* VkResult_to_string(VkResult result) {
   // Check in descending order to get the 'latest' version of the error code text available.
   // Also, because codes have been re-used over time, can't use a switch and have to do this large set of ifs.
   // Luckily this *should* be a relatively rare call.
@@ -126,7 +131,7 @@ char const* vkResultToString(VkResult vkRes) {
             if guarded:
                 outFile.write('\n')
 
-            outFile.write('  if (vkRes == {})\n'.format(enum.tag))
+            outFile.write('  if (result == {})\n'.format(enum.tag))
             outFile.write('    return \"{}\";\n'.format(enum.tag))
 
             if guarded:
@@ -135,7 +140,15 @@ char const* vkResultToString(VkResult vkRes) {
 
     # Footer
     outFile.write("""
-  if (vkRes > 0)
+  return NULL;
+}
+
+char const* vkResultToString(VkResult result) {
+  char const* pResultString = VkResult_to_string(result);
+  if(pResultString != NULL)
+    return pResultString;
+
+  if (result > 0)
     return "(unrecognized positive VkResult value)";
   else
     return "(unrecognized negative VkResult value)";
