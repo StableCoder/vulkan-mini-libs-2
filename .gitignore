@@ -4,5 +4,6 @@
 auto-gen/
 build/
 Vulkan-Docs/
+OpenXR-Docs/
 compile_commands.json
 *.xml

@@ -3,10 +3,11 @@
 from os.path import exists
 import sys
 import getopt
+import re
 import xml.etree.ElementTree as ET
 
 
-def findVersion(rootNode):
+def findVkVersion(rootNode):
     for type in rootNode.findall('./types/type'):
         category = type.get('category')
         if category is not None and category == 'define':
@@ -15,6 +16,17 @@ def findVersion(rootNode):
                     return str(int(name.tail))
 
     return ''
+
+
+def findXrVersion(rootNode):
+    for type in rootNode.findall('./types/type'):
+        category = type.get('category')
+        if category is not None and category == 'define':
+            for name in type.findall('name'):
+                if name.text == 'XR_CURRENT_API_VERSION':
+                    verNumbers = type.find('type').tail
+                    parsedNumbers = re.findall(r'\d+', verNumbers)
+                    return parsedNumbers[2]
 
 
 def processVendors(inVendor, outVendors, apiVersion):
@@ -292,9 +304,10 @@ def main(argv):
     inputFile = ''
     workingFile = ''
     apiVersion = ''
+    apiType = ''
 
     try:
-        opts, args = getopt.getopt(argv, 'i:w:a', [])
+        opts, args = getopt.getopt(argv, 'i:w:t:a', [])
     except getopt.GetoptError:
         print('Error parsing options')
         sys.exit(1)
@@ -303,12 +316,17 @@ def main(argv):
             inputFile = arg
         elif opt == '-w':
             workingFile = arg
+        elif opt == '-t':
+            apiType = arg
 
     if(inputFile == ''):
         print("Error: No XML file specified")
         sys.exit(1)
     if(workingFile == ''):
         print("Error: No working file specified")
+        sys.exit(1)
+    if apiType == '':
+        print("Error: No API type specified")
         sys.exit(1)
 
     dataRoot = ET.Element('root')
@@ -320,7 +338,10 @@ def main(argv):
     vkRoot = vkXml.getroot()
 
     # Version
-    apiVersion = findVersion(vkRoot)
+    if apiType == 'Vulkan':
+        apiVersion = findVkVersion(vkRoot)
+    elif apiType == 'OpenXR':
+        apiVersion = findXrVersion(vkRoot)
     if apiVersion == '':
         print("Error: Failed to determine API version")
         sys.exit(1)
