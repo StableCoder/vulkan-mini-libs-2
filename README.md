@@ -1,32 +1,20 @@
-# Vulkan Mini Libs 2 <!-- omit in toc -->
+# Vulkan (and OpenXR) Mini Libs 2  <!-- omit in toc -->
 [![pipeline status](https://git.stabletec.com/utilities/vulkan-mini-libs-2/badges/main/pipeline.svg)](https://git.stabletec.com/utilities/vulkan-mini-libs-2/commits/main)
 [![coverage report](https://git.stabletec.com/utilities/vulkan-mini-libs-2/badges/main/coverage.svg)](https://git.stabletec.com/utilities/vulkan-mini-libs-2/commits/main)
 [![license](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://git.stabletec.com/utilities/vulkan-mini-libs-2/blob/main/LICENSE)
 
 - [Vulkan Value Serialization (C/C++)](#vulkan-value-serialization-cc)
-  - [Usage](#usage)
-    - [C](#c)
-    - [C++](#c-1)
   - [Serialization](#serialization)
-    - [Usage](#usage-1)
   - [Parsing](#parsing)
-    - [Usage](#usage-2)
 - [Vulkan Result to String (C)](#vulkan-result-to-string-c)
-  - [Usage](#usage-3)
+- [OpenXR Result to String (C)](#openxr-result-to-string-c)
 - [Vulkan Error Code (C++)](#vulkan-error-code-c)
-  - [Usage](#usage-4)
 - [Vulkan Struct Cleanup (C)](#vulkan-struct-cleanup-c)
-  - [Usage](#usage-5)
-- [Generating Header Mini-Libs](#generating-header-mini-libs)
-  - [Possible Arguments](#possible-arguments)
-    - [-s, --start \<INT\>](#-s---start-int)
-    - [-e, --end \<INT\>](#-e---end-int)
-    - [-o, --output \<DIR\>](#-o---output-dir)
-    - [--skip-parse](#--skip-parse)
+- [Generating fresh Mini-Libs](#generating-fresh-mini-libs)
 
 A set of small header-only libraries that are of limited scope each to perform a very specific task.
 
-Compared to the previous version of these libraries which generated header versions for each Vulkan header version, this one remains backwards and forwards compatible, serving a given whole range of header versions (typically v1.0.72 - current) through the use of Vulkan definitions
+Compared to the previous version of these libraries which generated header versions for each Vulkan header version, this one remains backwards and forwards compatible, serving a given whole range of header versions (typically v1.0.72 - current for Vulkan, all of OpenXR) through the use of the provided XML registry specficiations.
 
 # Vulkan Value Serialization (C/C++)
 
@@ -56,11 +44,11 @@ leading to incompatability issues. For example, the flag for VkToolPurposeFlagBi
 be read similarly, with the above rules applicable for parsing. Also removed often is
 the `_BIT` suffix.
 
-## Usage
+## Usage <!-- omit in toc -->
 
 On *ONE* compilation unit, include the definition of `#define VK_VALUE_SERIALIZATION_CONFIG_MAIN` before the header is included so that the definitions are compiled somewhere following the one definition rule (ODR).
 
-### C
+### C <!-- omit in toc -->
 
 For C, there are the simple functions for parsing and serializing:
 - vk_parse32
@@ -72,7 +60,7 @@ For C, there are the simple functions for parsing and serializing:
 #include <vk_value_serialization.h>
 ```
 
-### C++
+### C++ <!-- omit in toc -->
 
 Using the HPP header in C++ also grants the use of a few templated functions and macros to make usage just a tad easier, no longer having to deal with the casting to uint types, and can be included similarly, and does include the original C functions as well:
 ```c
@@ -114,7 +102,7 @@ STecVkSerializationResult vk_serialize32(char const *pVkType,
                                          char *pSerialized);
 ```
 
-### Usage
+### Usage <!-- omit in toc -->
 
 ```c
 char testStr[20];
@@ -164,7 +152,7 @@ STecVkSerializationResult vk_parse32(char const *pVkType,
                                      uint32_t *pParsedValue);
 ```
 
-### Usage
+### Usage <!-- omit in toc -->
 
 ```c
 VkImageLayout parsedLayout;
@@ -181,9 +169,9 @@ result = vk_parse64("VkPipelineStageFlagBits2",
 
 # Vulkan Result to String (C)
 
-C-compatible header file with a single function, which will convert a VkResult to the corresponding string representation, or as close as possible in the case with shared values.
+C-compatible header file with functions which will convert a VkResult to the corresponding string representation, or as close as possible in the case with shared values.
 
-## Usage
+## Usage <!-- omit in toc -->
 
 On *ONE* compilation unit, include the definition of `#define VK_RESULT_TO_STRING_CONFIG_MAIN` before the header is included so that the definitions are compiled somewhere following the one definition rule (ODR).
 
@@ -202,11 +190,31 @@ int main(int, char **) {
 }
 ```
 
+# OpenXR Result to String (C)
+
+C-compatible header file with a single function, `XrResult_to_string`, which will convert a given XrResult to a string representation, or as close as possible in the case with shared values. If the given value doesn't have a corresponding string, it returns `NULL`.
+
+## Usage <!-- omit in toc -->
+
+On *ONE* compilation unit, include the definition of `#define XR_RESULT_TO_STRING_CONFIG_MAIN` before the header is included so that the definitions are compiled somewhere following the one definition rule (ODR).
+
+```cpp
+#define XR_RESULT_TO_STRING_CONFIG_MAIN
+#include "xr_result_to_string.h"
+#include <iostream>
+
+int main(int, char **) {
+  char const* resStr = XrResult_to_string(XR_ERROR_TIME_INVALID);
+  if(resStr != nullptr)
+    std::cout << resStr << std::endl;
+}
+```
+
 # Vulkan Error Code (C++)
 
 Header file for C++. Contains the implementation details that allow the use of VkResult values with std::error_code and std::error_category.
 
-## Usage
+## Usage <!-- omit in toc -->
 
 On *ONE* compilation unit, include the definition of `#define VK_ERROR_CODE_CONFIG_MAIN` **AND** ensure that `#define VK_RESULT_TO_STRING_CONFIG_MAIN` is defined somewhere before the header is included, not necessarily in the same compilation unit, so that the definitions are compiled somewhere following the one definition rule (ODR).
 
@@ -232,7 +240,7 @@ It does follow through the `pNext` pointers to any other structs that are assume
 
 Structs that have no externally held data are inlined as empty functions for better compilation efficacy.
 
-## Usage
+## Usage <!-- omit in toc -->
 
 On *ONE* compilation unit, include the definition of `#define VK_STRUCT_CLEANUP_CONFIG_MAIN` so that the definitions are compiled somewhere following the one definition rule (ODR).
 
@@ -240,24 +248,28 @@ Otherwise, call the appropriate function based on the Vulkan struct name, which 
 
 If a Vulkan struct is an undetermined type, but is at least of a type that contains VkStructureType/sType member, then `vk_cleanup_struct(ptr)` can be used.
 
-# Generating Header Mini-Libs
+# Generating fresh Mini-Libs
 
 In the root of the repository is a shell script, `tools/generate.sh` that will iterate through the range of Vulkan versions, parsing the XML files and collecting the relevant data. After that, it generates the header files using that procesed data.
 
 
-## Possible Arguments
+## Possible Arguments <!-- omit in toc -->
 
-### -s, --start \<INT>
-The starting version of Vulkan to generate for (default: 72)
+### -s, --start \<INT> <!-- omit in toc -->
+The starting version of Vulkan to generate for (default: 72 for Vulkan, 0 for OpenXR)
 
 NOTE: Minimal version is 72, as that is when the XML was first published.
 
-### -e, --end \<INT>
+### -e, --end \<INT> <!-- omit in toc -->
 The ending version of Vulkan to generate for (default: none)
 
-### -o, --output \<DIR>
+### -o, --output \<DIR> <!-- omit in toc -->
 
 The directory in which to generate header files (default: <repo>/include)
 
-### --skip-parse
-Skips parsing the Vulkan XML doc and re-generating the cache file. Use this if the cache has been previously generated and you're just re-generating the headers from that cache.
+### --openxr <!-- omit in toc -->
+
+Parses then generates files for OpenXR instead of the Vulkan default.
+
+### --skip-parse <!-- omit in toc -->
+Skips parsing the XML doc and re-generating the cache file. Use this if the cache has been previously generated and you're just re-generating the headers from that cache.

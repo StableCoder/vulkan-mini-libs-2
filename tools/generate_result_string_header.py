@@ -9,9 +9,10 @@ import xml.etree.ElementTree as ET
 def main(argv):
     inputFile = ''
     outputFile = ''
+    apiType = ''
 
     try:
-        opts, args = getopt.getopt(argv, 'i:o:', [])
+        opts, args = getopt.getopt(argv, 'i:o:t:', [])
     except getopt.GetoptError:
         print('Error parsing options')
         sys.exit(1)
@@ -20,12 +21,17 @@ def main(argv):
             inputFile = arg
         elif opt == '-o':
             outputFile = arg
+        elif opt == '-t':
+            apiType = arg
 
     if(inputFile == ''):
-        print("Error: No Vulkan XML file specified")
+        print("Error: No XML file specified")
         sys.exit(1)
     if(outputFile == ''):
         print("Error: No output file specified")
+        sys.exit(1)
+    if(apiType == ''):
+        print("Error: No API type specified")
         sys.exit(1)
 
     try:
@@ -41,65 +47,81 @@ def main(argv):
 
     outFile = open(outputFile, "w")
 
+    if apiType == 'Vulkan':
+        apiVersionStr = 'VK_HEADER_VERSION'
+        enumType = 'VkResult'
+        header = '<vulkan/vulkan.h>'
+        guard = 'VK_RESULT'
+    elif apiType == 'OpenXR':
+        apiVersionStr = '(XR_CURRENT_API_VERSION & 0xffffffffULL)'
+        enumType = 'XrResult'
+        header = '<openxr/openxr.h>'
+        guard = 'XR_RESULT'
+
     # Common Header
     with open("common_header.txt") as fd:
         outFile.write(fd.read())
         outFile.write('\n')
 
-    outFile.write("""#ifndef VK_RESULT_TO_STRING_H
-#define VK_RESULT_TO_STRING_H
+    outFile.write("""#ifndef {0}_TO_STRING_H
+#define {0}_TO_STRING_H
 
 /*  USAGE
     To use, include this header where the declarations for the boolean checks are required.
 
     On *ONE* compilation unit, include the definition of:
-    #define VK_RESULT_TO_STRING_CONFIG_MAIN
+    #define {0}_TO_STRING_CONFIG_MAIN
 
     so that the definitions are compiled somewhere following the one definition rule.
 */
 
 #ifdef __cplusplus
-extern "C" {
+extern "C" {{
 #endif
 
-#include <vulkan/vulkan.h>
+#include {1}
 
-""")
+""".format(guard, header))
 
     # Static asserts
     outFile.write('\n#ifdef __cplusplus\n')
     outFile.write(
-        "static_assert(VK_HEADER_VERSION >= {0}, \"VK_HEADER_VERSION is from before the minimum supported version of v{0}.\");\n".format(firstVersion))
+        "static_assert({0} >= {1}, \"{2} header version is from before the minimum supported version of v{1}.\");\n".format(apiVersionStr, firstVersion, apiType))
     outFile.write(
-        "static_assert(VK_HEADER_VERSION <= {0}, \"VK_HEADER_VERSION is from after the maximum supported version of v{0}.\");\n".format(lastVersion))
+        "static_assert({0} <= {1}, \"{2} header version is from after the maximum supported version of v{1}.\");\n".format(apiVersionStr, lastVersion, apiType))
     outFile.write('#else\n')
     outFile.write(
-        "_Static_assert(VK_HEADER_VERSION >= {0}, \"VK_HEADER_VERSION is from before the minimum supported version of v{0}.\");\n".format(firstVersion))
+        "_Static_assert({0} >= {1}, \"{2} header version is from before the minimum supported version of v{1}.\");\n".format(apiVersionStr, firstVersion, apiType))
     outFile.write(
-        "_Static_assert(VK_HEADER_VERSION <= {0}, \"VK_HEADER_VERSION is from after the maximum supported version of v{0}.\");\n".format(lastVersion))
+        "_Static_assert({0} <= {1}, \"{2} header version is from after the maximum supported version of v{1}.\");\n".format(apiVersionStr, lastVersion, apiType))
     outFile.write('#endif\n')
 
     outFile.write("""
 /// Returns a string representing the given VkResult parameter. If there is no known representation,
 /// returns NULL.
-char const *VkResult_to_string(VkResult result);
+char const *{0}_to_string({0} result);
+""".format(enumType))
 
+    if apiType == 'Vulkan':
+        outFile.write("""
 /// Similar to VkResult_to_string, except in the case where it is an unknown value, returns a string
 /// stating '(unrecognized positive/negative VkResult value)', thus never returning NULL.
 char const *vkResultToString(VkResult result);
+""")
 
-#ifdef VK_RESULT_TO_STRING_CONFIG_MAIN
+    outFile.write("""
+#ifdef {0}_TO_STRING_CONFIG_MAIN
 
-char const* VkResult_to_string(VkResult result) {
+char const* {1}_to_string({1} result) {{
   // Check in descending order to get the 'latest' version of the error code text available.
   // Also, because codes have been re-used over time, can't use a switch and have to do this large set of ifs.
   // Luckily this *should* be a relatively rare call.
-""")
+""".format(guard, enumType))
 
     # Content
     currentVersion = lastVersion
     while currentVersion >= firstVersion:
-        for enum in dataRoot.findall('enums/VkResult/values/'):
+        for enum in dataRoot.findall('enums/{}/values/'.format(enumType)):
             if int(enum.get('first')) != currentVersion:
                 continue
 
@@ -108,17 +130,17 @@ char const* VkResult_to_string(VkResult result) {
             if int(enum.get('first')) != firstVersion:
                 guarded = True
                 outFile.write(
-                    '#if VK_HEADER_VERSION >= {}'.format(enum.get('first')))
+                    '#if {} >= {}'.format(apiVersionStr, enum.get('first')))
             # Guard check for last version
             if int(enum.get('last')) != lastVersion:
                 if guarded:
                     # If already started, append to it
                     outFile.write(
-                        ' && VK_HEADER_VERSION <= {}'.format(enum.get('last')))
+                        ' && {} <= {}'.format(apiVersionStr, enum.get('last')))
                 else:
                     guarded = True
                     outFile.write(
-                        '#if VK_HEADER_VERSION <= {}'.format(enum.get('last')))
+                        '#if {} <= {}'.format(apiVersionStr, enum.get('last')))
             # Guard check for platforms
             for platform in enum.findall('platforms/'):
                 if guarded:
@@ -142,7 +164,10 @@ char const* VkResult_to_string(VkResult result) {
     outFile.write("""
   return NULL;
 }
+""")
 
+    if apiType == 'Vulkan':
+        outFile.write("""
 char const* vkResultToString(VkResult result) {
   char const* pResultString = VkResult_to_string(result);
   if(pResultString != NULL)
@@ -153,15 +178,17 @@ char const* vkResultToString(VkResult result) {
   else
     return "(unrecognized negative VkResult value)";
 }
+""")
 
-#endif // VK_RESULT_TO_STRING_CONFIG_MAIN
+    outFile.write("""
+#endif // {0}_TO_STRING_CONFIG_MAIN
 
 #ifdef __cplusplus
-}
+}}
 #endif
 
-#endif // VK_RESULT_TO_STRING_H
-""")
+#endif // {0}_TO_STRING_H
+""".format(guard))
 
 
 if __name__ == "__main__":
