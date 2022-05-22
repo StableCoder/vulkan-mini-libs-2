@@ -84,8 +84,12 @@ def processFeatureEnum(featureEnum, outEnum, vkVersion):
         ET.SubElement(value, 'platforms')
         if not featureEnum.get('offset') is None:
             extNum = int(featureEnum.get('extnumber'))
-            value.set('value', str(1000000000 + (extNum - 1)
-                      * 1000 + int(featureEnum.get('offset'))))
+            if not featureEnum.get('dir') is None and featureEnum.get('dir') == '-':
+                value.set('value', str(-(1000000000 + (extNum - 1)
+                                         * 1000 + int(featureEnum.get('offset')))))
+            else:
+                value.set('value', str(1000000000 + (extNum - 1)
+                                       * 1000 + int(featureEnum.get('offset'))))
         elif not featureEnum.get('value') is None:
             value.set('value', featureEnum.get('value'))
         elif not featureEnum.get('bitpos') is None:
@@ -126,8 +130,12 @@ def processExtensionEnums(extension, outEnum, vkVersion):
                 tempExtNum = extNum
                 if not extEnum.get('extnumber') is None:
                     tempExtNum = int(extEnum.get('extnumber'))
-                value.set('value', str(1000000000 + (tempExtNum - 1)
-                          * 1000 + int(extEnum.get('offset'))))
+                if not extEnum.get('dir') is None and extEnum.get('dir') == '-':
+                    value.set('value', str(-(1000000000 + (tempExtNum - 1)
+                                             * 1000 + int(extEnum.get('offset')))))
+                else:
+                    value.set('value', str(1000000000 + (tempExtNum - 1)
+                                           * 1000 + int(extEnum.get('offset'))))
             elif not extEnum.get('value') is None:
                 value.set('value', extEnum.get('value'))
             elif not extEnum.get('bitpos') is None:
