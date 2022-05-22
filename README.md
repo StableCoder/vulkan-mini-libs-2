@@ -19,8 +19,9 @@
   - [Usage](#usage-5)
 - [Generating Header Mini-Libs](#generating-header-mini-libs)
   - [Possible Arguments](#possible-arguments)
-    - [-s, --start <INT>](#-s---start-int)
-    - [-e, --end <INT>](#-e---end-int)
+    - [-s, --start \<INT\>](#-s---start-int)
+    - [-e, --end \<INT\>](#-e---end-int)
+    - [-o, --output \<DIR\>](#-o---output-dir)
     - [--skip-parse](#--skip-parse)
 
 A set of small header-only libraries that are of limited scope each to perform a very specific task.
@@ -31,7 +32,7 @@ Compared to the previous version of these libraries which generated header versi
 
 This program builds header files for use in C11/C++17 or newer. It
 contains all Vulkan enum types/flags/values of the indicated Vulkan header spec
-version range, and can convert to/from strings representing those values. 
+version range, and can convert to/from strings representing those values.
 
 Supports both plain enums and the bitmasks.
 
@@ -186,7 +187,10 @@ C-compatible header file with a single function, which will convert a VkResult t
 
 On *ONE* compilation unit, include the definition of `#define VK_RESULT_TO_STRING_CONFIG_MAIN` before the header is included so that the definitions are compiled somewhere following the one definition rule (ODR).
 
-Then simply call the `char const *vkResultToString(VkResult)` function:
+There are two functions that can be called:
+- `char const *VkResult_to_string(VkResult)` which returns NULL if there is no compiled string representation for the given VkResult.
+- `char const *vkResultToString(VkResult)` which returns a string of '(unrecognized positive VkResult value)' or '(unrecognized negative VkResult value)' if there is no compiled string representation for the given VkResult.
+
 ```cpp
 #define VK_RESULT_TO_STRING_CONFIG_MAIN
 #include "vk_result_to_string.h"
@@ -240,15 +244,20 @@ If a Vulkan struct is an undetermined type, but is at least of a type that conta
 
 In the root of the repository is a shell script, `tools/generate.sh` that will iterate through the range of Vulkan versions, parsing the XML files and collecting the relevant data. After that, it generates the header files using that procesed data.
 
+
 ## Possible Arguments
 
-### -s, --start <INT>
+### -s, --start \<INT>
 The starting version of Vulkan to generate for (default: 72)
 
 NOTE: Minimal version is 72, as that is when the XML was first published.
 
-### -e, --end <INT>
+### -e, --end \<INT>
 The ending version of Vulkan to generate for (default: none)
+
+### -o, --output \<DIR>
+
+The directory in which to generate header files (default: <repo>/include)
 
 ### --skip-parse
 Skips parsing the Vulkan XML doc and re-generating the cache file. Use this if the cache has been previously generated and you're just re-generating the headers from that cache.
