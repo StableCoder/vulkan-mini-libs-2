@@ -44,13 +44,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 214,
-              "VK_HEADER_VERSION is from after the maximum supported version of v214.");
+static_assert(VK_HEADER_VERSION <= 215,
+              "VK_HEADER_VERSION is from after the maximum supported version of v215.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 214,
-               "VK_HEADER_VERSION is from after the maximum supported version of v214.");
+_Static_assert(VK_HEADER_VERSION <= 215,
+               "VK_HEADER_VERSION is from after the maximum supported version of v215.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -4221,9 +4221,25 @@ void cleanup_VkPhysicalDevicePipelinePropertiesFeaturesEXT(
     VkPhysicalDevicePipelinePropertiesFeaturesEXT const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 214 && VK_AMD_shader_early_and_late_fragment_tests
+#if VK_HEADER_VERSION >= 214 && VK_HEADER_VERSION <= 214 &&                                        \
+    VK_AMD_shader_early_and_late_fragment_tests
 void cleanup_VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT(
     VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 215 && VK_KHR_fragment_shader_barycentric
+void cleanup_VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR(
+    VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 215 && VK_KHR_fragment_shader_barycentric
+void cleanup_VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR(
+    VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 215 && VK_AMD_shader_early_and_late_fragment_tests
+void cleanup_VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD(
+    VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -9975,11 +9991,38 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
-#if VK_HEADER_VERSION >= 214 && VK_AMD_shader_early_and_late_fragment_tests
+#if VK_HEADER_VERSION >= 214 && VK_HEADER_VERSION <= 214 &&                                        \
+    VK_AMD_shader_early_and_late_fragment_tests
   if (pTemp->sType ==
       VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT(
         (VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 215 && VK_KHR_fragment_shader_barycentric
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_BARYCENTRIC_FEATURES_KHR) {
+    cleanup_VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR(
+        (VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 215 && VK_KHR_fragment_shader_barycentric
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_SHADER_BARYCENTRIC_PROPERTIES_KHR) {
+    cleanup_VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR(
+        (VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 215 && VK_AMD_shader_early_and_late_fragment_tests
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_FEATURES_AMD) {
+    cleanup_VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD(
+        (VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD const *)pData);
     return;
   }
 #endif
@@ -19845,9 +19888,40 @@ void cleanup_VkPhysicalDevicePipelinePropertiesFeaturesEXT(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 214 && VK_AMD_shader_early_and_late_fragment_tests
+#if VK_HEADER_VERSION >= 214 && VK_HEADER_VERSION <= 214 &&                                        \
+    VK_AMD_shader_early_and_late_fragment_tests
 void cleanup_VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT(
     VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 215 && VK_KHR_fragment_shader_barycentric
+void cleanup_VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR(
+    VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 215 && VK_KHR_fragment_shader_barycentric
+void cleanup_VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR(
+    VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 215 && VK_AMD_shader_early_and_late_fragment_tests
+void cleanup_VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD(
+    VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

@@ -51,13 +51,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 214,
-              "VK_HEADER_VERSION is from after the maximum supported version of v214.");
+static_assert(VK_HEADER_VERSION <= 215,
+              "VK_HEADER_VERSION is from after the maximum supported version of v215.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 214,
-               "VK_HEADER_VERSION is from after the maximum supported version of v214.");
+_Static_assert(VK_HEADER_VERSION <= 215,
+               "VK_HEADER_VERSION is from after the maximum supported version of v215.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -4408,6 +4408,18 @@ bool compare_VkPhysicalDeviceDrmPropertiesEXT(VkPhysicalDeviceDrmPropertiesEXT c
                                               VkPhysicalDeviceDrmPropertiesEXT const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 215 && VK_KHR_fragment_shader_barycentric
+bool compare_VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR(
+    VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR const *s1,
+    VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 215 && VK_KHR_fragment_shader_barycentric
+bool compare_VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR(
+    VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR const *s1,
+    VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 182 && VK_NV_ray_tracing_motion_blur
 bool compare_VkPhysicalDeviceRayTracingMotionBlurFeaturesNV(
     VkPhysicalDeviceRayTracingMotionBlurFeaturesNV const *s1,
@@ -4715,7 +4727,14 @@ bool compare_VkPhysicalDevicePipelinePropertiesFeaturesEXT(
     VkPhysicalDevicePipelinePropertiesFeaturesEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 214 && VK_AMD_shader_early_and_late_fragment_tests
+#if VK_HEADER_VERSION >= 215 && VK_AMD_shader_early_and_late_fragment_tests
+bool compare_VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD(
+    VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD const *s1,
+    VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 214 && VK_HEADER_VERSION <= 214 &&                                        \
+    VK_AMD_shader_early_and_late_fragment_tests
 bool compare_VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT(
     VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT const *s1,
     VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT const *s2);
@@ -15640,6 +15659,30 @@ bool compare_VkPhysicalDeviceDrmPropertiesEXT(VkPhysicalDeviceDrmPropertiesEXT c
 }
 #endif
 
+#if VK_HEADER_VERSION >= 215 && VK_KHR_fragment_shader_barycentric
+bool compare_VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR(
+    VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR const *s1,
+    VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR const *s2) {
+  if ((s1->fragmentShaderBarycentric != s2->fragmentShaderBarycentric) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 215 && VK_KHR_fragment_shader_barycentric
+bool compare_VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR(
+    VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR const *s1,
+    VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR const *s2) {
+  if ((s1->triStripVertexOrderIndependentOfProvokingVertex !=
+       s2->triStripVertexOrderIndependentOfProvokingVertex) ||
+      false)
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 182 && VK_NV_ray_tracing_motion_blur
 bool compare_VkPhysicalDeviceRayTracingMotionBlurFeaturesNV(
     VkPhysicalDeviceRayTracingMotionBlurFeaturesNV const *s1,
@@ -16324,7 +16367,19 @@ bool compare_VkPhysicalDevicePipelinePropertiesFeaturesEXT(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 214 && VK_AMD_shader_early_and_late_fragment_tests
+#if VK_HEADER_VERSION >= 215 && VK_AMD_shader_early_and_late_fragment_tests
+bool compare_VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD(
+    VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD const *s1,
+    VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD const *s2) {
+  if ((s1->shaderEarlyAndLateFragmentTests != s2->shaderEarlyAndLateFragmentTests) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 214 && VK_HEADER_VERSION <= 214 &&                                        \
+    VK_AMD_shader_early_and_late_fragment_tests
 bool compare_VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT(
     VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT const *s1,
     VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesEXT const *s2) {
