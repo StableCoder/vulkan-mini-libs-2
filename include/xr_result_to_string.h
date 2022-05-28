@@ -44,13 +44,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) >= 0,
               "OpenXR header version is from before the minimum supported version of v0.");
-static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 22,
-              "OpenXR header version is from after the maximum supported version of v22.");
+static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 23,
+              "OpenXR header version is from after the maximum supported version of v23.");
 #else
 _Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) >= 0,
                "OpenXR header version is from before the minimum supported version of v0.");
-_Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 22,
-               "OpenXR header version is from after the maximum supported version of v22.");
+_Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 23,
+               "OpenXR header version is from after the maximum supported version of v23.");
 #endif
 
 /// Returns a string representing the given VkResult parameter. If there is no known representation,
@@ -63,6 +63,22 @@ char const *XrResult_to_string(XrResult result) {
   // Check in descending order to get the 'latest' version of the error code text available.
   // Also, because codes have been re-used over time, can't use a switch and have to do this large
   // set of ifs. Luckily this *should* be a relatively rare call.
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 23 && XR_FB_spatial_entity
+  if (result == XR_ERROR_SPACE_COMPONENT_NOT_SUPPORTED_FB)
+    return "XR_ERROR_SPACE_COMPONENT_NOT_SUPPORTED_FB";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 23 && XR_FB_spatial_entity
+  if (result == XR_ERROR_SPACE_COMPONENT_NOT_ENABLED_FB)
+    return "XR_ERROR_SPACE_COMPONENT_NOT_ENABLED_FB";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 23 && XR_FB_spatial_entity
+  if (result == XR_ERROR_SPACE_COMPONENT_STATUS_PENDING_FB)
+    return "XR_ERROR_SPACE_COMPONENT_STATUS_PENDING_FB";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 23 && XR_FB_spatial_entity
+  if (result == XR_ERROR_SPACE_COMPONENT_STATUS_ALREADY_SET_FB)
+    return "XR_ERROR_SPACE_COMPONENT_STATUS_ALREADY_SET_FB";
+#endif
 #if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 21 && XR_FB_render_model
   if (result == XR_ERROR_RENDER_MODEL_KEY_INVALID_FB)
     return "XR_ERROR_RENDER_MODEL_KEY_INVALID_FB";
