@@ -45,13 +45,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 215,
-              "VK_HEADER_VERSION is from after the maximum supported version of v215.");
+static_assert(VK_HEADER_VERSION <= 216,
+              "VK_HEADER_VERSION is from after the maximum supported version of v216.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 215,
-               "VK_HEADER_VERSION is from after the maximum supported version of v215.");
+_Static_assert(VK_HEADER_VERSION <= 216,
+               "VK_HEADER_VERSION is from after the maximum supported version of v216.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -505,6 +505,7 @@ EnumValueSet const VkImageViewCreateFlagsSets[] = {
     {"RESERVED_1_BIT_EXT", 0x00000002, false},
     {"FRAGMENT_DENSITY_MAP_DEFERRED_BIT_EXT", 0x00000002, false},
     {"RESERVED_2_BIT_AMD", 0x00000004, false},
+    {"RESERVED_3_BIT_EXT", 0x00000008, false},
 };
 
 EnumValueSet const VkPipelineCreateFlagsSets[] = {
@@ -3032,7 +3033,7 @@ EnumType const cEnumTypes[285] = {
     {"VkShaderStageFlags", VkShaderStageFlagsSets, 37},
     {"VkImageUsageFlags", VkImageUsageFlagsSets, 33},
     {"VkImageCreateFlags", VkImageCreateFlagsSets, 30},
-    {"VkImageViewCreateFlags", VkImageViewCreateFlagsSets, 4},
+    {"VkImageViewCreateFlags", VkImageViewCreateFlagsSets, 5},
     {"VkPipelineCreateFlags", VkPipelineCreateFlagsSets, 55},
     {"VkColorComponentFlags", VkColorComponentFlagsSets, 4},
     {"VkFenceCreateFlags", VkFenceCreateFlagsSets, 1},

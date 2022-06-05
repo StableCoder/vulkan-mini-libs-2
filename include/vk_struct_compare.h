@@ -51,13 +51,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 215,
-              "VK_HEADER_VERSION is from after the maximum supported version of v215.");
+static_assert(VK_HEADER_VERSION <= 216,
+              "VK_HEADER_VERSION is from after the maximum supported version of v216.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 215,
-               "VK_HEADER_VERSION is from after the maximum supported version of v215.");
+_Static_assert(VK_HEADER_VERSION <= 216,
+               "VK_HEADER_VERSION is from after the maximum supported version of v216.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -4705,9 +4705,21 @@ bool compare_VkRenderPassCreationFeedbackInfoEXT(VkRenderPassCreationFeedbackInf
                                                  VkRenderPassCreationFeedbackInfoEXT const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 216 && VK_EXT_subpass_merge_feedback
+bool compare_VkRenderPassCreationFeedbackCreateInfoEXT(
+    VkRenderPassCreationFeedbackCreateInfoEXT const *s1,
+    VkRenderPassCreationFeedbackCreateInfoEXT const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 213 && VK_EXT_subpass_merge_feedback
 bool compare_VkRenderPassSubpassFeedbackInfoEXT(VkRenderPassSubpassFeedbackInfoEXT const *s1,
                                                 VkRenderPassSubpassFeedbackInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 216 && VK_EXT_subpass_merge_feedback
+bool compare_VkRenderPassSubpassFeedbackCreateInfoEXT(
+    VkRenderPassSubpassFeedbackCreateInfoEXT const *s1,
+    VkRenderPassSubpassFeedbackCreateInfoEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 213 && VK_EXT_subpass_merge_feedback
@@ -16317,6 +16329,14 @@ bool compare_VkRenderPassCreationFeedbackInfoEXT(VkRenderPassCreationFeedbackInf
 }
 #endif
 
+#if VK_HEADER_VERSION >= 216 && VK_EXT_subpass_merge_feedback
+bool compare_VkRenderPassCreationFeedbackCreateInfoEXT(
+    VkRenderPassCreationFeedbackCreateInfoEXT const *s1,
+    VkRenderPassCreationFeedbackCreateInfoEXT const *s2) {
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 213 && VK_EXT_subpass_merge_feedback
 bool compare_VkRenderPassSubpassFeedbackInfoEXT(VkRenderPassSubpassFeedbackInfoEXT const *s1,
                                                 VkRenderPassSubpassFeedbackInfoEXT const *s2) {
@@ -16329,6 +16349,14 @@ bool compare_VkRenderPassSubpassFeedbackInfoEXT(VkRenderPassSubpassFeedbackInfoE
       return false;
   }
 
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 216 && VK_EXT_subpass_merge_feedback
+bool compare_VkRenderPassSubpassFeedbackCreateInfoEXT(
+    VkRenderPassSubpassFeedbackCreateInfoEXT const *s1,
+    VkRenderPassSubpassFeedbackCreateInfoEXT const *s2) {
   return true;
 }
 #endif

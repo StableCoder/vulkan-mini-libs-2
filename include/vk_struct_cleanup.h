@@ -44,13 +44,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 215,
-              "VK_HEADER_VERSION is from after the maximum supported version of v215.");
+static_assert(VK_HEADER_VERSION <= 216,
+              "VK_HEADER_VERSION is from after the maximum supported version of v216.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 215,
-               "VK_HEADER_VERSION is from after the maximum supported version of v215.");
+_Static_assert(VK_HEADER_VERSION <= 216,
+               "VK_HEADER_VERSION is from after the maximum supported version of v216.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -4240,6 +4240,16 @@ void cleanup_VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR(
 #if VK_HEADER_VERSION >= 215 && VK_AMD_shader_early_and_late_fragment_tests
 void cleanup_VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD(
     VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 216 && VK_EXT_subpass_merge_feedback
+void cleanup_VkRenderPassCreationFeedbackCreateInfoEXT(
+    VkRenderPassCreationFeedbackCreateInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 216 && VK_EXT_subpass_merge_feedback
+void cleanup_VkRenderPassSubpassFeedbackCreateInfoEXT(
+    VkRenderPassSubpassFeedbackCreateInfoEXT const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -10023,6 +10033,22 @@ void cleanup_vk_struct(void const *pData) {
       VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_EARLY_AND_LATE_FRAGMENT_TESTS_FEATURES_AMD) {
     cleanup_VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD(
         (VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 216 && VK_EXT_subpass_merge_feedback
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RENDER_PASS_CREATION_FEEDBACK_CREATE_INFO_EXT) {
+    cleanup_VkRenderPassCreationFeedbackCreateInfoEXT(
+        (VkRenderPassCreationFeedbackCreateInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 216 && VK_EXT_subpass_merge_feedback
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RENDER_PASS_SUBPASS_FEEDBACK_CREATE_INFO_EXT) {
+    cleanup_VkRenderPassSubpassFeedbackCreateInfoEXT(
+        (VkRenderPassSubpassFeedbackCreateInfoEXT const *)pData);
     return;
   }
 #endif
@@ -19843,19 +19869,23 @@ void cleanup_VkRenderPassCreationControlEXT(VkRenderPassCreationControlEXT const
 
 #if VK_HEADER_VERSION >= 213 && VK_EXT_subpass_merge_feedback
 void cleanup_VkRenderPassCreationFeedbackInfoEXT(VkRenderPassCreationFeedbackInfoEXT const *pData) {
+#if VK_HEADER_VERSION <= 215
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
+#endif
 }
 #endif
 
 #if VK_HEADER_VERSION >= 213 && VK_EXT_subpass_merge_feedback
 void cleanup_VkRenderPassSubpassFeedbackInfoEXT(VkRenderPassSubpassFeedbackInfoEXT const *pData) {
+#if VK_HEADER_VERSION <= 215
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
+#endif
 }
 #endif
 
@@ -19926,6 +19956,36 @@ void cleanup_VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD(
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 216 && VK_EXT_subpass_merge_feedback
+void cleanup_VkRenderPassCreationFeedbackCreateInfoEXT(
+    VkRenderPassCreationFeedbackCreateInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pRenderPassFeedback
+  if (pData->pRenderPassFeedback != NULL)
+    cleanup_VkRenderPassCreationFeedbackInfoEXT(pData->pRenderPassFeedback);
+  free((void *)pData->pRenderPassFeedback);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 216 && VK_EXT_subpass_merge_feedback
+void cleanup_VkRenderPassSubpassFeedbackCreateInfoEXT(
+    VkRenderPassSubpassFeedbackCreateInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pSubpassFeedback
+  if (pData->pSubpassFeedback != NULL)
+    cleanup_VkRenderPassSubpassFeedbackInfoEXT(pData->pSubpassFeedback);
+  free((void *)pData->pSubpassFeedback);
 }
 #endif
 
