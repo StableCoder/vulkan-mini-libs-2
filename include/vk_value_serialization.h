@@ -45,13 +45,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 216,
-              "VK_HEADER_VERSION is from after the maximum supported version of v216.");
+static_assert(VK_HEADER_VERSION <= 217,
+              "VK_HEADER_VERSION is from after the maximum supported version of v217.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 216,
-               "VK_HEADER_VERSION is from after the maximum supported version of v216.");
+_Static_assert(VK_HEADER_VERSION <= 217,
+               "VK_HEADER_VERSION is from after the maximum supported version of v217.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -203,6 +203,7 @@ EnumValueSet const VkSamplerCreateFlagsSets[] = {
     {"RESERVED_2_BIT_EXT", 0x00000004, false},
     {"RESERVED_3_BIT_AMD", 0x00000008, false},
     {"IMAGE_PROCESSING_BIT_QCOM", 0x00000010, false},
+    {"NON_SEAMLESS_CUBE_MAP_BIT_EXT", 0x00000004, false},
 };
 
 EnumValueSet const VkPipelineLayoutCreateFlagsSets[] = {
@@ -1398,6 +1399,12 @@ EnumValueSet const VkImageCompressionFixedRateFlagsEXTSets[] = {
     {"18BPC", 0x00020000, false}, {"19BPC", 0x00040000, false}, {"20BPC", 0x00080000, false},
     {"21BPC", 0x00100000, false}, {"22BPC", 0x00200000, false}, {"23BPC", 0x00400000, false},
     {"24BPC", 0x00800000, false},
+};
+
+EnumValueSet const VkExportMetalObjectTypeFlagsEXTSets[] = {
+    {"METAL_DEVICE", 0x00000001, false},    {"METAL_COMMAND_QUEUE", 0x00000002, false},
+    {"METAL_BUFFER", 0x00000004, false},    {"METAL_TEXTURE", 0x00000008, false},
+    {"METAL_IOSURFACE", 0x00000010, false}, {"METAL_SHARED_EVENT", 0x00000020, false},
 };
 
 EnumValueSet const VkVideoCodecOperationFlagsKHRSets[] = {
@@ -3002,11 +3009,11 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[285] = {
+EnumType const cEnumTypes[286] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", NULL, 0},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 3},
-    {"VkSamplerCreateFlags", VkSamplerCreateFlagsSets, 5},
+    {"VkSamplerCreateFlags", VkSamplerCreateFlagsSets, 6},
     {"VkPipelineLayoutCreateFlags", VkPipelineLayoutCreateFlagsSets, 3},
     {"VkPipelineCacheCreateFlags", VkPipelineCacheCreateFlagsSets, 6},
     {"VkPipelineDepthStencilStateCreateFlags", VkPipelineDepthStencilStateCreateFlagsSets, 2},
@@ -3144,6 +3151,7 @@ EnumType const cEnumTypes[285] = {
     {"VkGraphicsPipelineLibraryFlagsEXT", VkGraphicsPipelineLibraryFlagsEXTSets, 4},
     {"VkImageCompressionFlagsEXT", VkImageCompressionFlagsEXTSets, 4},
     {"VkImageCompressionFixedRateFlagsEXT", VkImageCompressionFixedRateFlagsEXTSets, 25},
+    {"VkExportMetalObjectTypeFlagsEXT", VkExportMetalObjectTypeFlagsEXTSets, 6},
     {"VkVideoCodecOperationFlagsKHR", VkVideoCodecOperationFlagsKHRSets, 5},
     {"VkVideoCapabilityFlagsKHR", VkVideoCapabilityFlagsKHRSets, 2},
     {"VkVideoSessionCreateFlagsKHR", VkVideoSessionCreateFlagsKHRSets, 2},

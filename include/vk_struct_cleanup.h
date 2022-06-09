@@ -44,13 +44,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 216,
-              "VK_HEADER_VERSION is from after the maximum supported version of v216.");
+static_assert(VK_HEADER_VERSION <= 217,
+              "VK_HEADER_VERSION is from after the maximum supported version of v217.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 216,
-               "VK_HEADER_VERSION is from after the maximum supported version of v216.");
+_Static_assert(VK_HEADER_VERSION <= 217,
+               "VK_HEADER_VERSION is from after the maximum supported version of v217.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -4250,6 +4250,59 @@ void cleanup_VkRenderPassCreationFeedbackCreateInfoEXT(
 #if VK_HEADER_VERSION >= 216 && VK_EXT_subpass_merge_feedback
 void cleanup_VkRenderPassSubpassFeedbackCreateInfoEXT(
     VkRenderPassSubpassFeedbackCreateInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+void cleanup_VkExportMetalObjectCreateInfoEXT(VkExportMetalObjectCreateInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+void cleanup_VkExportMetalObjectsInfoEXT(VkExportMetalObjectsInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+void cleanup_VkExportMetalDeviceInfoEXT(VkExportMetalDeviceInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+void cleanup_VkExportMetalCommandQueueInfoEXT(VkExportMetalCommandQueueInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+void cleanup_VkExportMetalBufferInfoEXT(VkExportMetalBufferInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+void cleanup_VkImportMetalBufferInfoEXT(VkImportMetalBufferInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+void cleanup_VkExportMetalTextureInfoEXT(VkExportMetalTextureInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+void cleanup_VkImportMetalTextureInfoEXT(VkImportMetalTextureInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+void cleanup_VkExportMetalIOSurfaceInfoEXT(VkExportMetalIOSurfaceInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+void cleanup_VkImportMetalIOSurfaceInfoEXT(VkImportMetalIOSurfaceInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+void cleanup_VkExportMetalSharedEventInfoEXT(VkExportMetalSharedEventInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+void cleanup_VkImportMetalSharedEventInfoEXT(VkImportMetalSharedEventInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_non_seamless_cube_map
+void cleanup_VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT(
+    VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -10049,6 +10102,98 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_RENDER_PASS_SUBPASS_FEEDBACK_CREATE_INFO_EXT) {
     cleanup_VkRenderPassSubpassFeedbackCreateInfoEXT(
         (VkRenderPassSubpassFeedbackCreateInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+  if (pTemp->sType == VK_STRUCTURE_TYPE_EXPORT_METAL_OBJECT_CREATE_INFO_EXT) {
+    cleanup_VkExportMetalObjectCreateInfoEXT((VkExportMetalObjectCreateInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+  if (pTemp->sType == VK_STRUCTURE_TYPE_EXPORT_METAL_OBJECTS_INFO_EXT) {
+    cleanup_VkExportMetalObjectsInfoEXT((VkExportMetalObjectsInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+  if (pTemp->sType == VK_STRUCTURE_TYPE_EXPORT_METAL_DEVICE_INFO_EXT) {
+    cleanup_VkExportMetalDeviceInfoEXT((VkExportMetalDeviceInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+  if (pTemp->sType == VK_STRUCTURE_TYPE_EXPORT_METAL_COMMAND_QUEUE_INFO_EXT) {
+    cleanup_VkExportMetalCommandQueueInfoEXT((VkExportMetalCommandQueueInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+  if (pTemp->sType == VK_STRUCTURE_TYPE_EXPORT_METAL_BUFFER_INFO_EXT) {
+    cleanup_VkExportMetalBufferInfoEXT((VkExportMetalBufferInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMPORT_METAL_BUFFER_INFO_EXT) {
+    cleanup_VkImportMetalBufferInfoEXT((VkImportMetalBufferInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+  if (pTemp->sType == VK_STRUCTURE_TYPE_EXPORT_METAL_TEXTURE_INFO_EXT) {
+    cleanup_VkExportMetalTextureInfoEXT((VkExportMetalTextureInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMPORT_METAL_TEXTURE_INFO_EXT) {
+    cleanup_VkImportMetalTextureInfoEXT((VkImportMetalTextureInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+  if (pTemp->sType == VK_STRUCTURE_TYPE_EXPORT_METAL_IO_SURFACE_INFO_EXT) {
+    cleanup_VkExportMetalIOSurfaceInfoEXT((VkExportMetalIOSurfaceInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMPORT_METAL_IO_SURFACE_INFO_EXT) {
+    cleanup_VkImportMetalIOSurfaceInfoEXT((VkImportMetalIOSurfaceInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+  if (pTemp->sType == VK_STRUCTURE_TYPE_EXPORT_METAL_SHARED_EVENT_INFO_EXT) {
+    cleanup_VkExportMetalSharedEventInfoEXT((VkExportMetalSharedEventInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMPORT_METAL_SHARED_EVENT_INFO_EXT) {
+    cleanup_VkImportMetalSharedEventInfoEXT((VkImportMetalSharedEventInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_non_seamless_cube_map
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_NON_SEAMLESS_CUBE_MAP_FEATURES_EXT) {
+    cleanup_VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT(
+        (VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT const *)pData);
     return;
   }
 #endif
@@ -19986,6 +20131,124 @@ void cleanup_VkRenderPassSubpassFeedbackCreateInfoEXT(
   if (pData->pSubpassFeedback != NULL)
     cleanup_VkRenderPassSubpassFeedbackInfoEXT(pData->pSubpassFeedback);
   free((void *)pData->pSubpassFeedback);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+void cleanup_VkExportMetalObjectCreateInfoEXT(VkExportMetalObjectCreateInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+void cleanup_VkExportMetalObjectsInfoEXT(VkExportMetalObjectsInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+void cleanup_VkExportMetalDeviceInfoEXT(VkExportMetalDeviceInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+void cleanup_VkExportMetalCommandQueueInfoEXT(VkExportMetalCommandQueueInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+void cleanup_VkExportMetalBufferInfoEXT(VkExportMetalBufferInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+void cleanup_VkImportMetalBufferInfoEXT(VkImportMetalBufferInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+void cleanup_VkExportMetalTextureInfoEXT(VkExportMetalTextureInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+void cleanup_VkImportMetalTextureInfoEXT(VkImportMetalTextureInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+void cleanup_VkExportMetalIOSurfaceInfoEXT(VkExportMetalIOSurfaceInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+void cleanup_VkImportMetalIOSurfaceInfoEXT(VkImportMetalIOSurfaceInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+void cleanup_VkExportMetalSharedEventInfoEXT(VkExportMetalSharedEventInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+void cleanup_VkImportMetalSharedEventInfoEXT(VkImportMetalSharedEventInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_non_seamless_cube_map
+void cleanup_VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT(
+    VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
 }
 #endif
 

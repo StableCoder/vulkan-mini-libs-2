@@ -51,13 +51,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 216,
-              "VK_HEADER_VERSION is from after the maximum supported version of v216.");
+static_assert(VK_HEADER_VERSION <= 217,
+              "VK_HEADER_VERSION is from after the maximum supported version of v217.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 216,
-               "VK_HEADER_VERSION is from after the maximum supported version of v216.");
+_Static_assert(VK_HEADER_VERSION <= 217,
+               "VK_HEADER_VERSION is from after the maximum supported version of v217.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -4743,6 +4743,72 @@ bool compare_VkPhysicalDevicePipelinePropertiesFeaturesEXT(
 bool compare_VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD(
     VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD const *s1,
     VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+bool compare_VkExportMetalObjectCreateInfoEXT(VkExportMetalObjectCreateInfoEXT const *s1,
+                                              VkExportMetalObjectCreateInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+bool compare_VkExportMetalObjectsInfoEXT(VkExportMetalObjectsInfoEXT const *s1,
+                                         VkExportMetalObjectsInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+bool compare_VkExportMetalDeviceInfoEXT(VkExportMetalDeviceInfoEXT const *s1,
+                                        VkExportMetalDeviceInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+bool compare_VkExportMetalCommandQueueInfoEXT(VkExportMetalCommandQueueInfoEXT const *s1,
+                                              VkExportMetalCommandQueueInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+bool compare_VkExportMetalBufferInfoEXT(VkExportMetalBufferInfoEXT const *s1,
+                                        VkExportMetalBufferInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+bool compare_VkImportMetalBufferInfoEXT(VkImportMetalBufferInfoEXT const *s1,
+                                        VkImportMetalBufferInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+bool compare_VkExportMetalTextureInfoEXT(VkExportMetalTextureInfoEXT const *s1,
+                                         VkExportMetalTextureInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+bool compare_VkImportMetalTextureInfoEXT(VkImportMetalTextureInfoEXT const *s1,
+                                         VkImportMetalTextureInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+bool compare_VkExportMetalIOSurfaceInfoEXT(VkExportMetalIOSurfaceInfoEXT const *s1,
+                                           VkExportMetalIOSurfaceInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+bool compare_VkImportMetalIOSurfaceInfoEXT(VkImportMetalIOSurfaceInfoEXT const *s1,
+                                           VkImportMetalIOSurfaceInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+bool compare_VkExportMetalSharedEventInfoEXT(VkExportMetalSharedEventInfoEXT const *s1,
+                                             VkExportMetalSharedEventInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+bool compare_VkImportMetalSharedEventInfoEXT(VkImportMetalSharedEventInfoEXT const *s1,
+                                             VkImportMetalSharedEventInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_non_seamless_cube_map
+bool compare_VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT(
+    VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT const *s1,
+    VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 214 && VK_HEADER_VERSION <= 214 &&                                        \
@@ -16400,6 +16466,137 @@ bool compare_VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD(
     VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD const *s1,
     VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD const *s2) {
   if ((s1->shaderEarlyAndLateFragmentTests != s2->shaderEarlyAndLateFragmentTests) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+bool compare_VkExportMetalObjectCreateInfoEXT(VkExportMetalObjectCreateInfoEXT const *s1,
+                                              VkExportMetalObjectCreateInfoEXT const *s2) {
+  if ((s1->exportObjectType != s2->exportObjectType) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+bool compare_VkExportMetalObjectsInfoEXT(VkExportMetalObjectsInfoEXT const *s1,
+                                         VkExportMetalObjectsInfoEXT const *s2) {
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+bool compare_VkExportMetalDeviceInfoEXT(VkExportMetalDeviceInfoEXT const *s1,
+                                        VkExportMetalDeviceInfoEXT const *s2) {
+  if ((s1->mtlDevice != s2->mtlDevice) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+bool compare_VkExportMetalCommandQueueInfoEXT(VkExportMetalCommandQueueInfoEXT const *s1,
+                                              VkExportMetalCommandQueueInfoEXT const *s2) {
+  if ((s1->queue != s2->queue) || (s1->mtlCommandQueue != s2->mtlCommandQueue) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+bool compare_VkExportMetalBufferInfoEXT(VkExportMetalBufferInfoEXT const *s1,
+                                        VkExportMetalBufferInfoEXT const *s2) {
+  if ((s1->memory != s2->memory) || (s1->mtlBuffer != s2->mtlBuffer) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+bool compare_VkImportMetalBufferInfoEXT(VkImportMetalBufferInfoEXT const *s1,
+                                        VkImportMetalBufferInfoEXT const *s2) {
+  if ((s1->mtlBuffer != s2->mtlBuffer) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+bool compare_VkExportMetalTextureInfoEXT(VkExportMetalTextureInfoEXT const *s1,
+                                         VkExportMetalTextureInfoEXT const *s2) {
+  if ((s1->image != s2->image) || (s1->imageView != s2->imageView) ||
+      (s1->bufferView != s2->bufferView) || (s1->plane != s2->plane) ||
+      (s1->mtlTexture != s2->mtlTexture) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+bool compare_VkImportMetalTextureInfoEXT(VkImportMetalTextureInfoEXT const *s1,
+                                         VkImportMetalTextureInfoEXT const *s2) {
+  if ((s1->plane != s2->plane) || (s1->mtlTexture != s2->mtlTexture) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+bool compare_VkExportMetalIOSurfaceInfoEXT(VkExportMetalIOSurfaceInfoEXT const *s1,
+                                           VkExportMetalIOSurfaceInfoEXT const *s2) {
+  if ((s1->image != s2->image) || (s1->ioSurface != s2->ioSurface) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+bool compare_VkImportMetalIOSurfaceInfoEXT(VkImportMetalIOSurfaceInfoEXT const *s1,
+                                           VkImportMetalIOSurfaceInfoEXT const *s2) {
+  if ((s1->ioSurface != s2->ioSurface) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+bool compare_VkExportMetalSharedEventInfoEXT(VkExportMetalSharedEventInfoEXT const *s1,
+                                             VkExportMetalSharedEventInfoEXT const *s2) {
+  if ((s1->semaphore != s2->semaphore) || (s1->event != s2->event) ||
+      (s1->mtlSharedEvent != s2->mtlSharedEvent) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_metal_objects
+bool compare_VkImportMetalSharedEventInfoEXT(VkImportMetalSharedEventInfoEXT const *s1,
+                                             VkImportMetalSharedEventInfoEXT const *s2) {
+  if ((s1->mtlSharedEvent != s2->mtlSharedEvent) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 217 && VK_EXT_non_seamless_cube_map
+bool compare_VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT(
+    VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT const *s1,
+    VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT const *s2) {
+  if ((s1->nonSeamlessCubeMap != s2->nonSeamlessCubeMap) || false)
     return false;
 
   return true;
