@@ -45,13 +45,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 217,
-              "VK_HEADER_VERSION is from after the maximum supported version of v217.");
+static_assert(VK_HEADER_VERSION <= 218,
+              "VK_HEADER_VERSION is from after the maximum supported version of v218.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 217,
-               "VK_HEADER_VERSION is from after the maximum supported version of v217.");
+_Static_assert(VK_HEADER_VERSION <= 218,
+               "VK_HEADER_VERSION is from after the maximum supported version of v218.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -430,6 +430,9 @@ EnumValueSet const VkShaderStageFlagsSets[] = {
     {"INTERSECTION_BIT_KHR", 0x00001000, false},
     {"CALLABLE_BIT_KHR", 0x00002000, false},
     {"SUBPASS_SHADING_BIT_HUAWEI", 0x00004000, false},
+    {"EXT_483_RESERVE_15", 0x00008000, false},
+    {"EXT_483_RESERVE_16", 0x00010000, false},
+    {"EXT_483_RESERVE_17", 0x00020000, false},
 };
 
 EnumValueSet const VkImageUsageFlagsSets[] = {
@@ -3037,7 +3040,7 @@ EnumType const cEnumTypes[286] = {
     {"VkAccessFlags", VkAccessFlagsSets, 45},
     {"VkBufferUsageFlags", VkBufferUsageFlagsSets, 37},
     {"VkBufferCreateFlags", VkBufferCreateFlagsSets, 9},
-    {"VkShaderStageFlags", VkShaderStageFlagsSets, 37},
+    {"VkShaderStageFlags", VkShaderStageFlagsSets, 40},
     {"VkImageUsageFlags", VkImageUsageFlagsSets, 33},
     {"VkImageCreateFlags", VkImageCreateFlagsSets, 30},
     {"VkImageViewCreateFlags", VkImageViewCreateFlagsSets, 5},

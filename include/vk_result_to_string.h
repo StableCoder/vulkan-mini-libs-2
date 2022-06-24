@@ -44,13 +44,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "Vulkan header version is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 217,
-              "Vulkan header version is from after the maximum supported version of v217.");
+static_assert(VK_HEADER_VERSION <= 218,
+              "Vulkan header version is from after the maximum supported version of v218.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "Vulkan header version is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 217,
-               "Vulkan header version is from after the maximum supported version of v217.");
+_Static_assert(VK_HEADER_VERSION <= 218,
+               "Vulkan header version is from after the maximum supported version of v218.");
 #endif
 
 /// Returns a string representing the given VkResult parameter. If there is no known representation,
@@ -67,6 +67,30 @@ char const *VkResult_to_string(VkResult result) {
   // Check in descending order to get the 'latest' version of the error code text available.
   // Also, because codes have been re-used over time, can't use a switch and have to do this large
   // set of ifs. Luckily this *should* be a relatively rare call.
+#if VK_HEADER_VERSION >= 218 && VK_KHR_video_queue
+  if (result == VK_ERROR_IMAGE_USAGE_NOT_SUPPORTED_KHR)
+    return "VK_ERROR_IMAGE_USAGE_NOT_SUPPORTED_KHR";
+#endif
+#if VK_HEADER_VERSION >= 218 && VK_KHR_video_queue
+  if (result == VK_ERROR_VIDEO_PICTURE_LAYOUT_NOT_SUPPORTED_KHR)
+    return "VK_ERROR_VIDEO_PICTURE_LAYOUT_NOT_SUPPORTED_KHR";
+#endif
+#if VK_HEADER_VERSION >= 218 && VK_KHR_video_queue
+  if (result == VK_ERROR_VIDEO_PROFILE_OPERATION_NOT_SUPPORTED_KHR)
+    return "VK_ERROR_VIDEO_PROFILE_OPERATION_NOT_SUPPORTED_KHR";
+#endif
+#if VK_HEADER_VERSION >= 218 && VK_KHR_video_queue
+  if (result == VK_ERROR_VIDEO_PROFILE_FORMAT_NOT_SUPPORTED_KHR)
+    return "VK_ERROR_VIDEO_PROFILE_FORMAT_NOT_SUPPORTED_KHR";
+#endif
+#if VK_HEADER_VERSION >= 218 && VK_KHR_video_queue
+  if (result == VK_ERROR_VIDEO_PROFILE_CODEC_NOT_SUPPORTED_KHR)
+    return "VK_ERROR_VIDEO_PROFILE_CODEC_NOT_SUPPORTED_KHR";
+#endif
+#if VK_HEADER_VERSION >= 218 && VK_KHR_video_queue
+  if (result == VK_ERROR_VIDEO_STD_VERSION_NOT_SUPPORTED_KHR)
+    return "VK_ERROR_VIDEO_STD_VERSION_NOT_SUPPORTED_KHR";
+#endif
 #if VK_HEADER_VERSION >= 213 && VK_EXT_image_compression_control
   if (result == VK_ERROR_COMPRESSION_EXHAUSTED_EXT)
     return "VK_ERROR_COMPRESSION_EXHAUSTED_EXT";

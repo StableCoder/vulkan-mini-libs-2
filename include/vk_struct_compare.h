@@ -51,13 +51,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 217,
-              "VK_HEADER_VERSION is from after the maximum supported version of v217.");
+static_assert(VK_HEADER_VERSION <= 218,
+              "VK_HEADER_VERSION is from after the maximum supported version of v218.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 217,
-               "VK_HEADER_VERSION is from after the maximum supported version of v217.");
+_Static_assert(VK_HEADER_VERSION <= 218,
+               "VK_HEADER_VERSION is from after the maximum supported version of v218.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -14566,7 +14566,14 @@ bool compare_VkVideoQueueFamilyProperties2KHR(VkVideoQueueFamilyProperties2KHR c
 bool compare_VkQueueFamilyQueryResultStatusProperties2KHR(
     VkQueueFamilyQueryResultStatusProperties2KHR const *s1,
     VkQueueFamilyQueryResultStatusProperties2KHR const *s2) {
-  if ((s1->supported != s2->supported) || false)
+  if (
+#if VK_HEADER_VERSION >= 218
+      (s1->queryResultStatusSupport != s2->queryResultStatusSupport) ||
+#endif
+#if VK_HEADER_VERSION <= 217
+      (s1->supported != s2->supported) ||
+#endif
+      false)
     return false;
 
   return true;
@@ -14595,7 +14602,23 @@ bool compare_VkPhysicalDeviceVideoFormatInfoKHR(VkPhysicalDeviceVideoFormatInfoK
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
 bool compare_VkVideoFormatPropertiesKHR(VkVideoFormatPropertiesKHR const *s1,
                                         VkVideoFormatPropertiesKHR const *s2) {
-  if ((s1->format != s2->format) || false)
+  if ((s1->format != s2->format) ||
+#if VK_HEADER_VERSION >= 218
+      !compare_VkComponentMapping(&s1->componentMapping, &s2->componentMapping) ||
+#endif
+#if VK_HEADER_VERSION >= 218
+      (s1->imageCreateFlags != s2->imageCreateFlags) ||
+#endif
+#if VK_HEADER_VERSION >= 218
+      (s1->imageType != s2->imageType) ||
+#endif
+#if VK_HEADER_VERSION >= 218
+      (s1->imageTiling != s2->imageTiling) ||
+#endif
+#if VK_HEADER_VERSION >= 218
+      (s1->imageUsageFlags != s2->imageUsageFlags) ||
+#endif
+      false)
     return false;
 
   return true;

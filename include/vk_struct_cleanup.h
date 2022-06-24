@@ -44,13 +44,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 217,
-              "VK_HEADER_VERSION is from after the maximum supported version of v217.");
+static_assert(VK_HEADER_VERSION <= 218,
+              "VK_HEADER_VERSION is from after the maximum supported version of v218.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 217,
-               "VK_HEADER_VERSION is from after the maximum supported version of v217.");
+_Static_assert(VK_HEADER_VERSION <= 218,
+               "VK_HEADER_VERSION is from after the maximum supported version of v218.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -17476,10 +17476,12 @@ void cleanup_VkPhysicalDeviceVideoFormatInfoKHR(VkPhysicalDeviceVideoFormatInfoK
     cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
+#if VK_HEADER_VERSION <= 217
   // pVideoProfiles
   if (pData->pVideoProfiles != NULL)
     cleanup_VkVideoProfilesKHR(pData->pVideoProfiles);
   free((void *)pData->pVideoProfiles);
+#endif
 }
 #endif
 
