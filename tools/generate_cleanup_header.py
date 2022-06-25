@@ -6,23 +6,29 @@ import yaml
 import xml.etree.ElementTree as ET
 
 
-def guardStruct(struct, firstVersion, lastVersion, outFile):
+def guardStruct(struct, firstVersion, lastVersion, sTypeCheck, outFile):
     guarded = False
+    if sTypeCheck:
+        firstCheck = struct.find('members/sType').get('first')
+        lastCheck = struct.find('members/sType').get('last')
+    else:
+        firstCheck = struct.get('first')
+        lastCheck = struct.get('last')
     # Guard check for first version
-    if struct.get('first') != firstVersion:
+    if firstCheck != firstVersion:
         guarded = True
         outFile.write('#if VK_HEADER_VERSION >= {}'.format(
-            struct.get('first')))
+            firstCheck))
     # Guard check for last version
-    if struct.get('last') != lastVersion:
+    if lastCheck != lastVersion:
         if guarded:
             # If already started, append to it
             outFile.write(
-                ' && VK_HEADER_VERSION <= {}'.format(struct.get('last')))
+                ' && VK_HEADER_VERSION <= {}'.format(lastCheck))
         else:
             guarded = True
             outFile.write(
-                '#if VK_HEADER_VERSION <= {}'.format(struct.get('last')))
+                '#if VK_HEADER_VERSION <= {}'.format(lastCheck))
     # Guard check for platforms
     platforms = struct.findall('platforms/')
     if platforms:
@@ -190,7 +196,8 @@ extern "C" {
             if name in yamlData:
                 continue
             outFile.write('\n')
-            guarded = guardStruct(struct, firstVersion, lastVersion, outFile)
+            guarded = guardStruct(struct, firstVersion,
+                                  lastVersion, False, outFile)
             members = getExternalDataMembers(struct.findall('members/'))
             # If there's not pointer members to delete, leave an empty inlinable function instead
             if len(members) == 0:
@@ -230,7 +237,8 @@ void cleanup_vk_struct(void const* pData) {
                 continue
 
             outFile.write('\n')
-            guarded = guardStruct(struct, firstVersion, lastVersion, outFile)
+            guarded = guardStruct(struct, firstVersion,
+                                  lastVersion, True, outFile)
             outFile.write(
                 'if (pTemp->sType =={}) {{\n'.format(sTypeValue.text))
             outFile.write(
@@ -257,7 +265,8 @@ void cleanup_vk_struct(void const* pData) {
             members = getExternalDataMembers(struct.findall('members/'))
 
             outFile.write('\n')
-            guarded = guardStruct(struct, firstVersion, lastVersion, outFile)
+            guarded = guardStruct(struct, firstVersion,
+                                  lastVersion, False, outFile)
             if len(members) == 0:
                 outFile.write(
                     'extern inline void cleanup_{0}({0} const* pData);\n'.format(name))
@@ -272,7 +281,7 @@ void cleanup_vk_struct(void const* pData) {
                     outFile.write('\n')
 
                     guardedMember = guardStruct(
-                        member, membersNode.get('first'), membersNode.get('last'), outFile)
+                        member, membersNode.get('first'), membersNode.get('last'), False, outFile)
                     if member.get('len') is None:
                         # Single member, no iteration or counting business here
                         outFile.write('    // {}\n'.format(member.tag))
