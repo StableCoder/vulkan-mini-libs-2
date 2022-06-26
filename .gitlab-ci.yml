@@ -1,7 +1,12 @@
 # Global
 
 stages:
-  - Platform Tests
+  - Arch
+  - Debian
+  - Fedora
+  - Ubuntu
+  - Windows
+  - macOS
   - Analysis
 
 variables:
@@ -11,32 +16,7 @@ variables:
 # Platform Tests
 
 .platform_unix_template: &platform_unix_template
-  stage: Platform Tests
-  tags:
-    - docker-linux
-  script:
-    - mkdir build && cd build
-    - cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DBUILD_EXAMPLES=ON -DBUILD_TESTS=ON
-    - ninja
-    - ctest
-
-.platform_windows_template: &platform_windows_template
-  stage: Platform Tests
-  image: docker.io/stabletec/build-foe:windows
-  tags:
-    - docker-windows
-    - amd64
-  script:
-    - mkdir build; cd build
-    - cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DBUILD_EXAMPLES=ON -DBUILD_TESTS=ON
-    - ninja
-    - ninja test
-
-.platform_macos_template: &platform_macos_template
-  stage: Platform Tests
-  tags:
-    - macos
-    - amd64
+  needs: []
   dependencies: []
   script:
     - mkdir build && cd build
@@ -44,56 +24,184 @@ variables:
     - ninja
     - ctest
 
-Arch/GCC:
-  image: docker.io/stabletec/build-foe:arch
-  variables:
-    CC: gcc
-    CXX: g++
-  <<: *platform_unix_template
-
-Arch/Clang:
-  image: docker.io/stabletec/build-foe:arch
-  variables:
-    CC: clang
-    CXX: clang++
-  <<: *platform_unix_template
-
-Fedora/GCC:
-  image: docker.io/stabletec/build-foe:fedora
-  variables:
-    CC: gcc
-    CXX: g++
-  <<: *platform_unix_template
-
-Fedora/Clang:
-  image: docker.io/stabletec/build-foe:fedora
-  variables:
-    CC: clang
-    CXX: clang++
-  <<: *platform_unix_template
-
-Ubuntu/GCC:
-  image: docker.io/stabletec/build-foe:ubuntu
-  variables:
-    CC: gcc
-    CXX: g++
-  <<: *platform_unix_template
-
-Ubuntu/Clang:
-  image: docker.io/stabletec/build-foe:ubuntu
-  variables:
-    CC: clang
-    CXX: clang++
-  <<: *platform_unix_template
-
-Debian 10/GCC (Old v97):
-  image: docker.io/stabletec/build-core:debian-10
-  variables:
-    CC: gcc
-    CXX: g++
-  stage: Platform Tests
+.platform_windows_template: &platform_windows_template
+  stage: Windows
+  image: docker.io/stabletec/build-foe:windows
   tags:
-    - docker-linux
+    - docker-windows
+    - amd64
+  needs: []
+  dependencies: []
+  script:
+    - mkdir build; cd build
+    - cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DBUILD_EXAMPLES=ON -DBUILD_TESTS=ON
+    - ninja
+    - ninja test
+
+.platform_macos_template: &platform_macos_template
+  stage: macOS
+  needs: []
+  dependencies: []
+  script:
+    - mkdir build && cd build
+    - cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DBUILD_EXAMPLES=ON -DBUILD_TESTS=ON
+    - ninja
+    - ctest
+
+Arch/GCC (amd64):
+  stage: Arch
+  image: docker.io/stabletec/build-foe:arch
+  tags:
+    - container
+    - linux
+    - amd64
+  variables:
+    CC: gcc
+    CXX: g++
+  <<: *platform_unix_template
+
+Arch/Clang (amd64):
+  stage: Arch
+  image: docker.io/stabletec/build-foe:arch
+  tags:
+    - container
+    - linux
+    - amd64
+  variables:
+    CC: clang
+    CXX: clang++
+  <<: *platform_unix_template
+
+Fedora/GCC (amd64):
+  stage: Fedora
+  image: docker.io/stabletec/build-foe:fedora
+  tags:
+    - container
+    - linux
+    - amd64
+  variables:
+    CC: gcc
+    CXX: g++
+  <<: *platform_unix_template
+
+Fedora/Clang (amd64):
+  stage: Fedora
+  image: docker.io/stabletec/build-foe:fedora
+  tags:
+    - container
+    - linux
+    - amd64
+  variables:
+    CC: clang
+    CXX: clang++
+  <<: *platform_unix_template
+
+Fedora/GCC (arm64):
+  stage: Fedora
+  image: docker.io/stabletec/build-foe:fedora
+  tags:
+    - container
+    - linux
+    - arm64
+  variables:
+    CC: gcc
+    CXX: g++
+  <<: *platform_unix_template
+
+Fedora/Clang (arm64):
+  stage: Fedora
+  image: docker.io/stabletec/build-foe:fedora
+  tags:
+    - container
+    - linux
+    - arm64
+  variables:
+    CC: clang
+    CXX: clang++
+  <<: *platform_unix_template
+
+Ubuntu/GCC (amd64):
+  stage: Ubuntu
+  image: docker.io/stabletec/build-foe:ubuntu
+  tags:
+    - container
+    - linux
+    - amd64
+  variables:
+    CC: gcc
+    CXX: g++
+  <<: *platform_unix_template
+
+Ubuntu/Clang (amd64):
+  stage: Ubuntu
+  image: docker.io/stabletec/build-foe:ubuntu
+  tags:
+    - container
+    - linux
+    - amd64
+  variables:
+    CC: clang
+    CXX: clang++
+  <<: *platform_unix_template
+
+Ubuntu/GCC (arm64):
+  stage: Ubuntu
+  image: docker.io/stabletec/build-foe:ubuntu
+  tags:
+    - container
+    - linux
+    - arm64
+  variables:
+    CC: gcc
+    CXX: g++
+  <<: *platform_unix_template
+
+Ubuntu/Clang (arm64):
+  stage: Ubuntu
+  image: docker.io/stabletec/build-foe:ubuntu
+  tags:
+    - container
+    - linux
+    - arm64
+  variables:
+    CC: clang
+    CXX: clang++
+  <<: *platform_unix_template
+
+Ubuntu/GCC (riscv64):
+  stage: Ubuntu
+  image: docker.io/stabletec/build-foe:ubuntu
+  tags:
+    - container
+    - linux
+    - riscv64
+  variables:
+    CC: gcc
+    CXX: g++
+  <<: *platform_unix_template
+
+Ubuntu/Clang (riscv64):
+  stage: Ubuntu
+  image: docker.io/stabletec/build-foe:ubuntu
+  tags:
+    - container
+    - linux
+    - riscv64
+  variables:
+    CC: clang
+    CXX: clang++
+  <<: *platform_unix_template
+
+Debian 10/GCC (Old v97)(amd64):
+  stage: Debian
+  image: docker.io/stabletec/build-core:debian-10
+  tags:
+    - container
+    - linux
+    - amd64
+  variables:
+    CC: gcc
+    CXX: g++
   script:
     - apt install -y libvulkan-dev
     - mkdir build && cd build
@@ -101,14 +209,16 @@ Debian 10/GCC (Old v97):
     - ninja
     - ctest
 
-Debian 10/Clang (Old v97):
+Debian 10/Clang (Old v97)(amd64):
+  stage: Debian
   image: docker.io/stabletec/build-core:debian-10
+  tags:
+    - container
+    - linux
+    - amd64
   variables:
     CC: clang
     CXX: clang++
-  stage: Platform Tests
-  tags:
-    - docker-linux
   script:
     - apt install -y libvulkan-dev
     - mkdir build && cd build
@@ -116,16 +226,28 @@ Debian 10/Clang (Old v97):
     - ninja
     - ctest
 
-Windows/MSVC:
+Windows/MSVC (amd64):
   <<: *platform_windows_template
 
-Windows/Clang-cl:
+Windows/Clang-cl (amd64):
   variables:
     CC: clang-cl
     CXX: clang-cl
   <<: *platform_windows_template
 
 macOS/Clang (amd64):
+  tags:
+    - macos
+    - amd64
+  variables:
+    CC: clang
+    CXX: clang++
+  <<: *platform_macos_template
+
+macOS/Clang (arm64):
+  tags:
+    - macos
+    - arm64
   variables:
     CC: clang
     CXX: clang++
@@ -136,7 +258,12 @@ Code Coverage:
   stage: Analysis
   image: docker.io/stabletec/build-foe:arch
   tags:
-    - docker-linux
+    - container
+    - linux
+    - amd64
+  needs:
+  - Arch/GCC (amd64)
+  - Arch/Clang (amd64)
   dependencies: []
   variables:
     CC: clang
@@ -157,7 +284,12 @@ Code Coverage:
   stage: Analysis
   image: docker.io/stabletec/build-foe:arch
   tags:
-    - docker-linux
+    - container
+    - linux
+    - amd64
+  needs:
+  - Arch/GCC (amd64)
+  - Arch/Clang (amd64)
   dependencies: []
   script:
     - mkdir build && cd build
