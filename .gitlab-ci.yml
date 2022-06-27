@@ -120,6 +120,30 @@ Fedora/Clang (arm64):
     CXX: clang++
   <<: *platform_unix_template
 
+Fedora/GCC (ppc64le):
+  stage: Fedora
+  image: docker.io/stabletec/build-foe:fedora
+  tags:
+    - container
+    - linux
+    - ppc64le
+  variables:
+    CC: gcc
+    CXX: g++
+  <<: *platform_unix_template
+
+Fedora/Clang (ppc64le):
+  stage: Fedora
+  image: docker.io/stabletec/build-foe:fedora
+  tags:
+    - container
+    - linux
+    - ppc64le
+  variables:
+    CC: clang
+    CXX: clang++
+  <<: *platform_unix_template
+
 Ubuntu/GCC (amd64):
   stage: Ubuntu
   image: docker.io/stabletec/build-foe:ubuntu
@@ -163,6 +187,30 @@ Ubuntu/Clang (arm64):
     - container
     - linux
     - arm64
+  variables:
+    CC: clang
+    CXX: clang++
+  <<: *platform_unix_template
+
+Ubuntu/GCC (ppc64le):
+  stage: Ubuntu
+  image: docker.io/stabletec/build-foe:ubuntu
+  tags:
+    - container
+    - linux
+    - ppc64le
+  variables:
+    CC: gcc
+    CXX: g++
+  <<: *platform_unix_template
+
+Ubuntu/Clang (ppc64le):
+  stage: Ubuntu
+  image: docker.io/stabletec/build-foe:ubuntu
+  tags:
+    - container
+    - linux
+    - ppc64le
   variables:
     CC: clang
     CXX: clang++
