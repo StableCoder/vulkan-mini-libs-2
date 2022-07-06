@@ -45,13 +45,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 218,
-              "VK_HEADER_VERSION is from after the maximum supported version of v218.");
+static_assert(VK_HEADER_VERSION <= 219,
+              "VK_HEADER_VERSION is from after the maximum supported version of v219.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 218,
-               "VK_HEADER_VERSION is from after the maximum supported version of v218.");
+_Static_assert(VK_HEADER_VERSION <= 219,
+               "VK_HEADER_VERSION is from after the maximum supported version of v219.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -378,6 +378,7 @@ EnumValueSet const VkBufferUsageFlagsSets[] = {
     {"RESERVED_22_BIT_AMD", 0x00400000, false},
     {"RESERVED_23_BIT_NV", 0x00800000, false},
     {"RESERVED_24_BIT_NV", 0x01000000, false},
+    {"RESERVED_25_BIT_AMD", 0x02000000, false},
 };
 
 EnumValueSet const VkBufferCreateFlagsSets[] = {
@@ -502,6 +503,7 @@ EnumValueSet const VkImageCreateFlagsSets[] = {
     {"FRAGMENT_DENSITY_MAP_OFFSET_BIT_QCOM", 0x00008000, false},
     {"RESERVED_18_BIT_EXT", 0x00040000, false},
     {"2D_VIEW_COMPATIBLE_BIT_EXT", 0x00020000, false},
+    {"MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_BIT_EXT", 0x00040000, false},
 };
 
 EnumValueSet const VkImageViewCreateFlagsSets[] = {
@@ -2871,6 +2873,7 @@ EnumValueSet const VkDriverIdSets[] = {
     {"MESA_PANVK", 20, false},
     {"SAMSUNG_PROPRIETARY", 21, false},
     {"MESA_VENUS", 22, false},
+    {"MESA_DOZEN", 23, false},
 };
 
 EnumValueSet const VkShadingRatePaletteEntryNVSets[] = {
@@ -3038,11 +3041,11 @@ EnumType const cEnumTypes[286] = {
     {"VkMemoryPropertyFlags", VkMemoryPropertyFlagsSets, 10},
     {"VkMemoryHeapFlags", VkMemoryHeapFlagsSets, 4},
     {"VkAccessFlags", VkAccessFlagsSets, 45},
-    {"VkBufferUsageFlags", VkBufferUsageFlagsSets, 37},
+    {"VkBufferUsageFlags", VkBufferUsageFlagsSets, 38},
     {"VkBufferCreateFlags", VkBufferCreateFlagsSets, 9},
     {"VkShaderStageFlags", VkShaderStageFlagsSets, 40},
     {"VkImageUsageFlags", VkImageUsageFlagsSets, 33},
-    {"VkImageCreateFlags", VkImageCreateFlagsSets, 30},
+    {"VkImageCreateFlags", VkImageCreateFlagsSets, 31},
     {"VkImageViewCreateFlags", VkImageViewCreateFlagsSets, 5},
     {"VkPipelineCreateFlags", VkPipelineCreateFlagsSets, 55},
     {"VkColorComponentFlags", VkColorComponentFlagsSets, 4},
@@ -3278,7 +3281,7 @@ EnumType const cEnumTypes[286] = {
     {"VkShaderFloatControlsIndependence", VkShaderFloatControlsIndependenceSets, 6},
     {"VkFragmentShadingRateCombinerOpKHR", VkFragmentShadingRateCombinerOpKHRSets, 5},
     {"VkVendorId", VkVendorIdSets, 6},
-    {"VkDriverId", VkDriverIdSets, 34},
+    {"VkDriverId", VkDriverIdSets, 35},
     {"VkShadingRatePaletteEntryNV", VkShadingRatePaletteEntryNVSets, 12},
     {"VkCoarseSampleOrderTypeNV", VkCoarseSampleOrderTypeNVSets, 4},
     {"VkPipelineExecutableStatisticFormatKHR", VkPipelineExecutableStatisticFormatKHRSets, 4},

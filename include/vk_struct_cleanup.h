@@ -44,13 +44,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 218,
-              "VK_HEADER_VERSION is from after the maximum supported version of v218.");
+static_assert(VK_HEADER_VERSION <= 219,
+              "VK_HEADER_VERSION is from after the maximum supported version of v219.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 218,
-               "VK_HEADER_VERSION is from after the maximum supported version of v218.");
+_Static_assert(VK_HEADER_VERSION <= 219,
+               "VK_HEADER_VERSION is from after the maximum supported version of v219.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -4303,6 +4303,39 @@ void cleanup_VkImportMetalSharedEventInfoEXT(VkImportMetalSharedEventInfoEXT con
 #if VK_HEADER_VERSION >= 217 && VK_EXT_non_seamless_cube_map
 void cleanup_VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT(
     VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 219 && VK_EXT_multisampled_render_to_single_sampled
+void cleanup_VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT(
+    VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 219 && VK_EXT_multisampled_render_to_single_sampled
+void cleanup_VkSubpassResolvePerformanceQueryEXT(VkSubpassResolvePerformanceQueryEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 219 && VK_EXT_multisampled_render_to_single_sampled
+void cleanup_VkMultisampledRenderToSingleSampledInfoEXT(
+    VkMultisampledRenderToSingleSampledInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 219 && VK_EXT_shader_module_identifier
+void cleanup_VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT(
+    VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 219 && VK_EXT_shader_module_identifier
+void cleanup_VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT(
+    VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 219 && VK_EXT_shader_module_identifier
+void cleanup_VkPipelineShaderStageModuleIdentifierCreateInfoEXT(
+    VkPipelineShaderStageModuleIdentifierCreateInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 219 && VK_EXT_shader_module_identifier
+void cleanup_VkShaderModuleIdentifierEXT(VkShaderModuleIdentifierEXT const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -10195,6 +10228,61 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_NON_SEAMLESS_CUBE_MAP_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT(
         (VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 219 && VK_EXT_multisampled_render_to_single_sampled
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_FEATURES_EXT) {
+    cleanup_VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT(
+        (VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 219 && VK_EXT_multisampled_render_to_single_sampled
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SUBPASS_RESOLVE_PERFORMANCE_QUERY_EXT) {
+    cleanup_VkSubpassResolvePerformanceQueryEXT((VkSubpassResolvePerformanceQueryEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 219 && VK_EXT_multisampled_render_to_single_sampled
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_INFO_EXT) {
+    cleanup_VkMultisampledRenderToSingleSampledInfoEXT(
+        (VkMultisampledRenderToSingleSampledInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 219 && VK_EXT_shader_module_identifier
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MODULE_IDENTIFIER_FEATURES_EXT) {
+    cleanup_VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT(
+        (VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 219 && VK_EXT_shader_module_identifier
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MODULE_IDENTIFIER_PROPERTIES_EXT) {
+    cleanup_VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT(
+        (VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 219 && VK_EXT_shader_module_identifier
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_MODULE_IDENTIFIER_CREATE_INFO_EXT) {
+    cleanup_VkPipelineShaderStageModuleIdentifierCreateInfoEXT(
+        (VkPipelineShaderStageModuleIdentifierCreateInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 219 && VK_EXT_shader_module_identifier
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SHADER_MODULE_IDENTIFIER_EXT) {
+    cleanup_VkShaderModuleIdentifierEXT((VkShaderModuleIdentifierEXT const *)pData);
     return;
   }
 #endif
@@ -20248,6 +20336,77 @@ void cleanup_VkImportMetalSharedEventInfoEXT(VkImportMetalSharedEventInfoEXT con
 #if VK_HEADER_VERSION >= 217 && VK_EXT_non_seamless_cube_map
 void cleanup_VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT(
     VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 219 && VK_EXT_multisampled_render_to_single_sampled
+void cleanup_VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT(
+    VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 219 && VK_EXT_multisampled_render_to_single_sampled
+void cleanup_VkSubpassResolvePerformanceQueryEXT(VkSubpassResolvePerformanceQueryEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 219 && VK_EXT_multisampled_render_to_single_sampled
+void cleanup_VkMultisampledRenderToSingleSampledInfoEXT(
+    VkMultisampledRenderToSingleSampledInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 219 && VK_EXT_shader_module_identifier
+void cleanup_VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT(
+    VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 219 && VK_EXT_shader_module_identifier
+void cleanup_VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT(
+    VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 219 && VK_EXT_shader_module_identifier
+void cleanup_VkPipelineShaderStageModuleIdentifierCreateInfoEXT(
+    VkPipelineShaderStageModuleIdentifierCreateInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pIdentifier - identifierSize
+  free((void *)pData->pIdentifier);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 219 && VK_EXT_shader_module_identifier
+void cleanup_VkShaderModuleIdentifierEXT(VkShaderModuleIdentifierEXT const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

@@ -51,13 +51,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 218,
-              "VK_HEADER_VERSION is from after the maximum supported version of v218.");
+static_assert(VK_HEADER_VERSION <= 219,
+              "VK_HEADER_VERSION is from after the maximum supported version of v219.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 218,
-               "VK_HEADER_VERSION is from after the maximum supported version of v218.");
+_Static_assert(VK_HEADER_VERSION <= 219,
+               "VK_HEADER_VERSION is from after the maximum supported version of v219.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -4011,6 +4011,23 @@ bool compare_VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT(
     VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 219 && VK_EXT_multisampled_render_to_single_sampled
+bool compare_VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT(
+    VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT const *s1,
+    VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 219 && VK_EXT_multisampled_render_to_single_sampled
+bool compare_VkSubpassResolvePerformanceQueryEXT(VkSubpassResolvePerformanceQueryEXT const *s1,
+                                                 VkSubpassResolvePerformanceQueryEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 219 && VK_EXT_multisampled_render_to_single_sampled
+bool compare_VkMultisampledRenderToSingleSampledInfoEXT(
+    VkMultisampledRenderToSingleSampledInfoEXT const *s1,
+    VkMultisampledRenderToSingleSampledInfoEXT const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
 bool compare_VkVideoQueueFamilyProperties2KHR(VkVideoQueueFamilyProperties2KHR const *s1,
                                               VkVideoQueueFamilyProperties2KHR const *s2);
@@ -4661,6 +4678,29 @@ bool compare_VkDescriptorSetBindingReferenceVALVE(VkDescriptorSetBindingReferenc
 bool compare_VkDescriptorSetLayoutHostMappingInfoVALVE(
     VkDescriptorSetLayoutHostMappingInfoVALVE const *s1,
     VkDescriptorSetLayoutHostMappingInfoVALVE const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 219 && VK_EXT_shader_module_identifier
+bool compare_VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT(
+    VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT const *s1,
+    VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 219 && VK_EXT_shader_module_identifier
+bool compare_VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT(
+    VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT const *s1,
+    VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 219 && VK_EXT_shader_module_identifier
+bool compare_VkPipelineShaderStageModuleIdentifierCreateInfoEXT(
+    VkPipelineShaderStageModuleIdentifierCreateInfoEXT const *s1,
+    VkPipelineShaderStageModuleIdentifierCreateInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 219 && VK_EXT_shader_module_identifier
+bool compare_VkShaderModuleIdentifierEXT(VkShaderModuleIdentifierEXT const *s1,
+                                         VkShaderModuleIdentifierEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 213 && VK_EXT_image_compression_control
@@ -14552,6 +14592,40 @@ bool compare_VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 219 && VK_EXT_multisampled_render_to_single_sampled
+bool compare_VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT(
+    VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT const *s1,
+    VkPhysicalDeviceMultisampledRenderToSingleSampledFeaturesEXT const *s2) {
+  if ((s1->multisampledRenderToSingleSampled != s2->multisampledRenderToSingleSampled) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 219 && VK_EXT_multisampled_render_to_single_sampled
+bool compare_VkSubpassResolvePerformanceQueryEXT(VkSubpassResolvePerformanceQueryEXT const *s1,
+                                                 VkSubpassResolvePerformanceQueryEXT const *s2) {
+  if ((s1->optimal != s2->optimal) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 219 && VK_EXT_multisampled_render_to_single_sampled
+bool compare_VkMultisampledRenderToSingleSampledInfoEXT(
+    VkMultisampledRenderToSingleSampledInfoEXT const *s1,
+    VkMultisampledRenderToSingleSampledInfoEXT const *s2) {
+  if ((s1->multisampledRenderToSingleSampledEnable !=
+       s2->multisampledRenderToSingleSampledEnable) ||
+      (s1->rasterizationSamples != s2->rasterizationSamples) || false)
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
 bool compare_VkVideoQueueFamilyProperties2KHR(VkVideoQueueFamilyProperties2KHR const *s1,
                                               VkVideoQueueFamilyProperties2KHR const *s2) {
@@ -16329,6 +16403,56 @@ bool compare_VkDescriptorSetLayoutHostMappingInfoVALVE(
   if ((s1->descriptorOffset != s2->descriptorOffset) ||
       (s1->descriptorSize != s2->descriptorSize) || false)
     return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 219 && VK_EXT_shader_module_identifier
+bool compare_VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT(
+    VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT const *s1,
+    VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT const *s2) {
+  if ((s1->shaderModuleIdentifier != s2->shaderModuleIdentifier) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 219 && VK_EXT_shader_module_identifier
+bool compare_VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT(
+    VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT const *s1,
+    VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT const *s2) {
+  for (uint32_t i = 0; i < VK_UUID_SIZE; ++i) {
+    if (s1->shaderModuleIdentifierAlgorithmUUID[i] != s2->shaderModuleIdentifierAlgorithmUUID[i])
+      return false;
+  }
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 219 && VK_EXT_shader_module_identifier
+bool compare_VkPipelineShaderStageModuleIdentifierCreateInfoEXT(
+    VkPipelineShaderStageModuleIdentifierCreateInfoEXT const *s1,
+    VkPipelineShaderStageModuleIdentifierCreateInfoEXT const *s2) {
+  if ((s1->identifierSize != s2->identifierSize) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 219 && VK_EXT_shader_module_identifier
+bool compare_VkShaderModuleIdentifierEXT(VkShaderModuleIdentifierEXT const *s1,
+                                         VkShaderModuleIdentifierEXT const *s2) {
+  if ((s1->identifierSize != s2->identifierSize) || false)
+    return false;
+
+  for (uint32_t i = 0; i < VK_MAX_SHADER_MODULE_IDENTIFIER_SIZE_EXT; ++i) {
+    if (s1->identifier[i] != s2->identifier[i])
+      return false;
+  }
 
   return true;
 }
