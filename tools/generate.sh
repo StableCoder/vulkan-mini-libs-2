@@ -1,3 +1,7 @@
+# Copyright (C) 2022 George Cave.
+#
+# SPDX-License-Identifier: Apache-2.0
+
 #!/bin/bash
 set -e
 
@@ -78,7 +82,7 @@ if [ $SKIP_PARSE -eq 0 ]; then
         git clone https://github.com/KhronosGroup/$TYPE-Docs
     fi
     pushd $TYPE-Docs >/dev/null
-    git fetch -p
+    #git fetch -p
 
     # Collect the per-version XML data
     FIRST=1
