@@ -82,7 +82,7 @@ if [ $SKIP_PARSE -eq 0 ]; then
         git clone https://github.com/KhronosGroup/$TYPE-Docs
     fi
     pushd $TYPE-Docs >/dev/null
-    #git fetch -p
+    git fetch -p
 
     # Collect the per-version XML data
     FIRST=1

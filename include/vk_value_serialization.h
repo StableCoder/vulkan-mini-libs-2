@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 219,
-              "VK_HEADER_VERSION is from after the maximum supported version of v219.");
+static_assert(VK_HEADER_VERSION <= 220,
+              "VK_HEADER_VERSION is from after the maximum supported version of v220.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 219,
-               "VK_HEADER_VERSION is from after the maximum supported version of v219.");
+_Static_assert(VK_HEADER_VERSION <= 220,
+               "VK_HEADER_VERSION is from after the maximum supported version of v220.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -235,6 +235,7 @@ EnumValueSet const VkDescriptorSetLayoutCreateFlagsSets[] = {
     {"HOST_ONLY_POOL_BIT_VALVE", 0x00000004, false},
     {"RESERVED_3_BIT_AMD", 0x00000008, false},
     {"RESERVED_4_BIT_AMD", 0x00000010, false},
+    {"RESERVED_5_BIT_AMD", 0x00000020, false},
 };
 
 EnumValueSet const VkInstanceCreateFlagsSets[] = {
@@ -869,6 +870,7 @@ EnumValueSet const VkAccelerationStructureCreateFlagsKHRSets[] = {
     {"DEVICE_ADDRESS_CAPTURE_REPLAY", 0x00000001, false},
     {"RESERVED_BIT_2_NV", 0x00000004, false},
     {"MOTION_BIT_NV", 0x00000004, false},
+    {"RESERVED_3_BIT_AMD", 0x00000008, false},
 };
 
 EnumValueSet const VkPipelineCreationFeedbackFlagsSets[] = {
@@ -3020,7 +3022,7 @@ EnumType const cEnumTypes[286] = {
     {"VkPipelineInputAssemblyStateCreateFlags", NULL, 0},
     {"VkPipelineVertexInputStateCreateFlags", NULL, 0},
     {"VkPipelineShaderStageCreateFlags", VkPipelineShaderStageCreateFlagsSets, 6},
-    {"VkDescriptorSetLayoutCreateFlags", VkDescriptorSetLayoutCreateFlagsSets, 7},
+    {"VkDescriptorSetLayoutCreateFlags", VkDescriptorSetLayoutCreateFlagsSets, 8},
     {"VkBufferViewCreateFlags", NULL, 0},
     {"VkInstanceCreateFlags", VkInstanceCreateFlagsSets, 1},
     {"VkDeviceCreateFlags", NULL, 0},
@@ -3069,7 +3071,7 @@ EnumType const cEnumTypes[286] = {
     {"VkGeometryInstanceFlagsKHR", VkGeometryInstanceFlagsKHRSets, 11},
     {"VkBuildAccelerationStructureFlagsKHR", VkBuildAccelerationStructureFlagsKHRSets, 14},
     {"VkPrivateDataSlotCreateFlags", NULL, 0},
-    {"VkAccelerationStructureCreateFlagsKHR", VkAccelerationStructureCreateFlagsKHRSets, 3},
+    {"VkAccelerationStructureCreateFlagsKHR", VkAccelerationStructureCreateFlagsKHRSets, 4},
     {"VkDescriptorUpdateTemplateCreateFlags", NULL, 0},
     {"VkPipelineCreationFeedbackFlags", VkPipelineCreationFeedbackFlagsSets, 6},
     {"VkPerformanceCounterDescriptionFlagsKHR", VkPerformanceCounterDescriptionFlagsKHRSets, 4},
