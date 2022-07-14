@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 220,
-              "VK_HEADER_VERSION is from after the maximum supported version of v220.");
+static_assert(VK_HEADER_VERSION <= 221,
+              "VK_HEADER_VERSION is from after the maximum supported version of v221.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 220,
-               "VK_HEADER_VERSION is from after the maximum supported version of v220.");
+_Static_assert(VK_HEADER_VERSION <= 221,
+               "VK_HEADER_VERSION is from after the maximum supported version of v221.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -597,7 +597,7 @@ EnumValueSet const VkFormatFeatureFlagsSets[] = {
     {"SAMPLED_IMAGE_YCBCR_CONVERSION_CHROMA_RECONSTRUCTION_EXPLICIT_FORCEABLE", 0x00200000, false},
     {"DISJOINT", 0x00400000, false},
     {"COSITED_CHROMA_SAMPLES", 0x00800000, false},
-    {"SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG", 0x00002000, false},
+    {"SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG", 0x00002000, true},
     {"TRANSFER_SRC_BIT_KHR", 0x00004000, true},
     {"TRANSFER_DST_BIT_KHR", 0x00008000, true},
     {"SAMPLED_IMAGE_FILTER_MINMAX_BIT_EXT", 0x00010000, true},
@@ -615,7 +615,7 @@ EnumValueSet const VkFormatFeatureFlagsSets[] = {
     {"RESERVED_25_BIT_KHR", 0x02000000, false},
     {"RESERVED_26_BIT_KHR", 0x04000000, false},
     {"FRAGMENT_DENSITY_MAP_BIT_EXT", 0x01000000, false},
-    {"SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT", 0x00002000, true},
+    {"SAMPLED_IMAGE_FILTER_CUBIC_BIT_EXT", 0x00002000, false},
     {"RESERVED_29_BIT_NV", 0x20000000, false},
     {"SAMPLED_IMAGE_FILTER_MINMAX", 0x00010000, false},
     {"ACCELERATION_STRUCTURE_VERTEX_BUFFER_BIT_KHR", 0x20000000, false},
@@ -2324,8 +2324,8 @@ EnumValueSet const VkSamplerAddressModeSets[] = {
 EnumValueSet const VkFilterSets[] = {
     {"NEAREST", 0, false},
     {"LINEAR", 1, false},
-    {"CUBIC_IMG", 1000015000, false},
-    {"CUBIC_EXT", 1000015000, true},
+    {"CUBIC_IMG", 1000015000, true},
+    {"CUBIC_EXT", 1000015000, false},
 };
 
 EnumValueSet const VkSamplerMipmapModeSets[] = {
@@ -2635,6 +2635,20 @@ EnumValueSet const VkSubpassMergeStatusEXTSets[] = {
 EnumValueSet const VkProvokingVertexModeEXTSets[] = {
     {"FIRST_VERTEX", 0, false},
     {"LAST_VERTEX", 1, false},
+};
+
+EnumValueSet const VkPipelineRobustnessBufferBehaviorEXTSets[] = {
+    {"DEVICE_DEFAULT", 0, false},
+    {"DISABLED", 1, false},
+    {"ROBUST_BUFFER_ACCESS", 2, false},
+    {"ROBUST_BUFFER_ACCESS_2", 3, false},
+};
+
+EnumValueSet const VkPipelineRobustnessImageBehaviorEXTSets[] = {
+    {"DEVICE_DEFAULT", 0, false},
+    {"DISABLED", 1, false},
+    {"ROBUST_IMAGE_ACCESS", 2, false},
+    {"ROBUST_IMAGE_ACCESS_2", 3, false},
 };
 
 EnumValueSet const VkColorSpaceKHRSets[] = {
@@ -3005,7 +3019,7 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[286] = {
+EnumType const cEnumTypes[288] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", NULL, 0},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 3},
@@ -3250,6 +3264,8 @@ EnumType const cEnumTypes[286] = {
     {"VkFragmentShadingRateTypeNV", VkFragmentShadingRateTypeNVSets, 2},
     {"VkSubpassMergeStatusEXT", VkSubpassMergeStatusEXTSets, 14},
     {"VkProvokingVertexModeEXT", VkProvokingVertexModeEXTSets, 2},
+    {"VkPipelineRobustnessBufferBehaviorEXT", VkPipelineRobustnessBufferBehaviorEXTSets, 4},
+    {"VkPipelineRobustnessImageBehaviorEXT", VkPipelineRobustnessImageBehaviorEXTSets, 4},
     {"VkColorSpaceKHR", VkColorSpaceKHRSets, 18},
     {"VkPresentModeKHR", VkPresentModeKHRSets, 6},
     {"VkDebugReportObjectTypeEXT", VkDebugReportObjectTypeEXTSets, 46},

@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 220,
-              "VK_HEADER_VERSION is from after the maximum supported version of v220.");
+static_assert(VK_HEADER_VERSION <= 221,
+              "VK_HEADER_VERSION is from after the maximum supported version of v221.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 220,
-               "VK_HEADER_VERSION is from after the maximum supported version of v220.");
+_Static_assert(VK_HEADER_VERSION <= 221,
+               "VK_HEADER_VERSION is from after the maximum supported version of v221.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -4837,6 +4837,23 @@ bool compare_VkImportMetalSharedEventInfoEXT(VkImportMetalSharedEventInfoEXT con
 bool compare_VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT(
     VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT const *s1,
     VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 221 && VK_EXT_pipeline_robustness
+bool compare_VkPhysicalDevicePipelineRobustnessFeaturesEXT(
+    VkPhysicalDevicePipelineRobustnessFeaturesEXT const *s1,
+    VkPhysicalDevicePipelineRobustnessFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 221 && VK_EXT_pipeline_robustness
+bool compare_VkPipelineRobustnessCreateInfoEXT(VkPipelineRobustnessCreateInfoEXT const *s1,
+                                               VkPipelineRobustnessCreateInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 221 && VK_EXT_pipeline_robustness
+bool compare_VkPhysicalDevicePipelineRobustnessPropertiesEXT(
+    VkPhysicalDevicePipelineRobustnessPropertiesEXT const *s1,
+    VkPhysicalDevicePipelineRobustnessPropertiesEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 214 && VK_HEADER_VERSION <= 214 &&                                        \
@@ -16732,6 +16749,42 @@ bool compare_VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT(
     VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT const *s1,
     VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT const *s2) {
   if ((s1->nonSeamlessCubeMap != s2->nonSeamlessCubeMap) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 221 && VK_EXT_pipeline_robustness
+bool compare_VkPhysicalDevicePipelineRobustnessFeaturesEXT(
+    VkPhysicalDevicePipelineRobustnessFeaturesEXT const *s1,
+    VkPhysicalDevicePipelineRobustnessFeaturesEXT const *s2) {
+  if ((s1->pipelineRobustness != s2->pipelineRobustness) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 221 && VK_EXT_pipeline_robustness
+bool compare_VkPipelineRobustnessCreateInfoEXT(VkPipelineRobustnessCreateInfoEXT const *s1,
+                                               VkPipelineRobustnessCreateInfoEXT const *s2) {
+  if ((s1->storageBuffers != s2->storageBuffers) || (s1->uniformBuffers != s2->uniformBuffers) ||
+      (s1->vertexInputs != s2->vertexInputs) || (s1->images != s2->images) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 221 && VK_EXT_pipeline_robustness
+bool compare_VkPhysicalDevicePipelineRobustnessPropertiesEXT(
+    VkPhysicalDevicePipelineRobustnessPropertiesEXT const *s1,
+    VkPhysicalDevicePipelineRobustnessPropertiesEXT const *s2) {
+  if ((s1->defaultRobustnessStorageBuffers != s2->defaultRobustnessStorageBuffers) ||
+      (s1->defaultRobustnessUniformBuffers != s2->defaultRobustnessUniformBuffers) ||
+      (s1->defaultRobustnessVertexInputs != s2->defaultRobustnessVertexInputs) ||
+      (s1->defaultRobustnessImages != s2->defaultRobustnessImages) || false)
     return false;
 
   return true;

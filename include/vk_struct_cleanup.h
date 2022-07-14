@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 220,
-              "VK_HEADER_VERSION is from after the maximum supported version of v220.");
+static_assert(VK_HEADER_VERSION <= 221,
+              "VK_HEADER_VERSION is from after the maximum supported version of v221.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 220,
-               "VK_HEADER_VERSION is from after the maximum supported version of v220.");
+_Static_assert(VK_HEADER_VERSION <= 221,
+               "VK_HEADER_VERSION is from after the maximum supported version of v221.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -4324,6 +4324,20 @@ void cleanup_VkPipelineShaderStageModuleIdentifierCreateInfoEXT(
 
 #if VK_HEADER_VERSION >= 219 && VK_EXT_shader_module_identifier
 void cleanup_VkShaderModuleIdentifierEXT(VkShaderModuleIdentifierEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 221 && VK_EXT_pipeline_robustness
+void cleanup_VkPhysicalDevicePipelineRobustnessFeaturesEXT(
+    VkPhysicalDevicePipelineRobustnessFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 221 && VK_EXT_pipeline_robustness
+void cleanup_VkPipelineRobustnessCreateInfoEXT(VkPipelineRobustnessCreateInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 221 && VK_EXT_pipeline_robustness
+void cleanup_VkPhysicalDevicePipelineRobustnessPropertiesEXT(
+    VkPhysicalDevicePipelineRobustnessPropertiesEXT const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -10271,6 +10285,29 @@ void cleanup_vk_struct(void const *pData) {
 #if VK_HEADER_VERSION >= 219 && VK_EXT_shader_module_identifier
   if (pTemp->sType == VK_STRUCTURE_TYPE_SHADER_MODULE_IDENTIFIER_EXT) {
     cleanup_VkShaderModuleIdentifierEXT((VkShaderModuleIdentifierEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 221 && VK_EXT_pipeline_robustness
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_FEATURES_EXT) {
+    cleanup_VkPhysicalDevicePipelineRobustnessFeaturesEXT(
+        (VkPhysicalDevicePipelineRobustnessFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 221 && VK_EXT_pipeline_robustness
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_ROBUSTNESS_CREATE_INFO_EXT) {
+    cleanup_VkPipelineRobustnessCreateInfoEXT((VkPipelineRobustnessCreateInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 221 && VK_EXT_pipeline_robustness
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_ROBUSTNESS_PROPERTIES_EXT) {
+    cleanup_VkPhysicalDevicePipelineRobustnessPropertiesEXT(
+        (VkPhysicalDevicePipelineRobustnessPropertiesEXT const *)pData);
     return;
   }
 #endif
@@ -20395,6 +20432,35 @@ void cleanup_VkPipelineShaderStageModuleIdentifierCreateInfoEXT(
 
 #if VK_HEADER_VERSION >= 219 && VK_EXT_shader_module_identifier
 void cleanup_VkShaderModuleIdentifierEXT(VkShaderModuleIdentifierEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 221 && VK_EXT_pipeline_robustness
+void cleanup_VkPhysicalDevicePipelineRobustnessFeaturesEXT(
+    VkPhysicalDevicePipelineRobustnessFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 221 && VK_EXT_pipeline_robustness
+void cleanup_VkPipelineRobustnessCreateInfoEXT(VkPipelineRobustnessCreateInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 221 && VK_EXT_pipeline_robustness
+void cleanup_VkPhysicalDevicePipelineRobustnessPropertiesEXT(
+    VkPhysicalDevicePipelineRobustnessPropertiesEXT const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
