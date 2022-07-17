@@ -37,9 +37,9 @@ last alphanumeric character, as these are trimmed off.
 For example, all of the following convert to VK_IMAGE_LAYOUT_GENERAL:
 `vk imAGE_LayOut GenerAL`, `VK_IMAGE_LAYOUT_GENERAL`,`GENERAL`, `   General `
 
-Also, to assist with forward and backwards compatability, all the vendor tags can 
+Also, to assist with forward and backwards compatibility, all the vendor tags can 
 stripped from the typenames and values, since they can be removed in later versions 
-leading to incompatability issues. For example, the flag for VkToolPurposeFlagBitsEXT, 
+leading to incompatibility issues. For example, the flag for VkToolPurposeFlagBitsEXT, 
 `VK_TOOL_PURPOSE_VALIDATION_BIT_EXT`, can will output as `VALIDATION`, and can 
 be read similarly, with the above rules applicable for parsing. Also removed often is
 the `_BIT` suffix.
