@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 221,
-              "VK_HEADER_VERSION is from after the maximum supported version of v221.");
+static_assert(VK_HEADER_VERSION <= 222,
+              "VK_HEADER_VERSION is from after the maximum supported version of v222.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 221,
-               "VK_HEADER_VERSION is from after the maximum supported version of v221.");
+_Static_assert(VK_HEADER_VERSION <= 222,
+               "VK_HEADER_VERSION is from after the maximum supported version of v222.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -4555,7 +4555,7 @@ bool compare_VkPipelineRenderingCreateInfoKHR(VkPipelineRenderingCreateInfoKHR c
 bool compare_VkRenderingInfo(VkRenderingInfo const *s1, VkRenderingInfo const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 197 && VK_KHR_dynamic_rendering
+#if VK_HEADER_VERSION >= 197 && (VK_KHR_dynamic_rendering || VK_QCOM_tile_properties)
 bool compare_VkRenderingInfoKHR(VkRenderingInfoKHR const *s1, VkRenderingInfoKHR const *s2);
 #endif
 
@@ -4854,6 +4854,33 @@ bool compare_VkPipelineRobustnessCreateInfoEXT(VkPipelineRobustnessCreateInfoEXT
 bool compare_VkPhysicalDevicePipelineRobustnessPropertiesEXT(
     VkPhysicalDevicePipelineRobustnessPropertiesEXT const *s1,
     VkPhysicalDevicePipelineRobustnessPropertiesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 222 && VK_QCOM_image_processing
+bool compare_VkImageViewSampleWeightCreateInfoQCOM(VkImageViewSampleWeightCreateInfoQCOM const *s1,
+                                                   VkImageViewSampleWeightCreateInfoQCOM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 222 && VK_QCOM_image_processing
+bool compare_VkPhysicalDeviceImageProcessingFeaturesQCOM(
+    VkPhysicalDeviceImageProcessingFeaturesQCOM const *s1,
+    VkPhysicalDeviceImageProcessingFeaturesQCOM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 222 && VK_QCOM_image_processing
+bool compare_VkPhysicalDeviceImageProcessingPropertiesQCOM(
+    VkPhysicalDeviceImageProcessingPropertiesQCOM const *s1,
+    VkPhysicalDeviceImageProcessingPropertiesQCOM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 222 && VK_QCOM_tile_properties
+bool compare_VkPhysicalDeviceTilePropertiesFeaturesQCOM(
+    VkPhysicalDeviceTilePropertiesFeaturesQCOM const *s1,
+    VkPhysicalDeviceTilePropertiesFeaturesQCOM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 222 && VK_QCOM_tile_properties
+bool compare_VkTilePropertiesQCOM(VkTilePropertiesQCOM const *s1, VkTilePropertiesQCOM const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 214 && VK_HEADER_VERSION <= 214 &&                                        \
@@ -16178,7 +16205,7 @@ bool compare_VkRenderingInfo(VkRenderingInfo const *s1, VkRenderingInfo const *s
 }
 #endif
 
-#if VK_HEADER_VERSION >= 197 && VK_KHR_dynamic_rendering
+#if VK_HEADER_VERSION >= 197 && (VK_KHR_dynamic_rendering || VK_QCOM_tile_properties)
 bool compare_VkRenderingInfoKHR(VkRenderingInfoKHR const *s1, VkRenderingInfoKHR const *s2) {
   if ((s1->flags != s2->flags) || !compare_VkRect2D(&s1->renderArea, &s2->renderArea) ||
       (s1->layerCount != s2->layerCount) || (s1->viewMask != s2->viewMask) ||
@@ -16785,6 +16812,68 @@ bool compare_VkPhysicalDevicePipelineRobustnessPropertiesEXT(
       (s1->defaultRobustnessUniformBuffers != s2->defaultRobustnessUniformBuffers) ||
       (s1->defaultRobustnessVertexInputs != s2->defaultRobustnessVertexInputs) ||
       (s1->defaultRobustnessImages != s2->defaultRobustnessImages) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 222 && VK_QCOM_image_processing
+bool compare_VkImageViewSampleWeightCreateInfoQCOM(
+    VkImageViewSampleWeightCreateInfoQCOM const *s1,
+    VkImageViewSampleWeightCreateInfoQCOM const *s2) {
+  if (!compare_VkOffset2D(&s1->filterCenter, &s2->filterCenter) ||
+      !compare_VkExtent2D(&s1->filterSize, &s2->filterSize) || (s1->numPhases != s2->numPhases) ||
+      false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 222 && VK_QCOM_image_processing
+bool compare_VkPhysicalDeviceImageProcessingFeaturesQCOM(
+    VkPhysicalDeviceImageProcessingFeaturesQCOM const *s1,
+    VkPhysicalDeviceImageProcessingFeaturesQCOM const *s2) {
+  if ((s1->textureSampleWeighted != s2->textureSampleWeighted) ||
+      (s1->textureBoxFilter != s2->textureBoxFilter) ||
+      (s1->textureBlockMatch != s2->textureBlockMatch) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 222 && VK_QCOM_image_processing
+bool compare_VkPhysicalDeviceImageProcessingPropertiesQCOM(
+    VkPhysicalDeviceImageProcessingPropertiesQCOM const *s1,
+    VkPhysicalDeviceImageProcessingPropertiesQCOM const *s2) {
+  if ((s1->maxWeightFilterPhases != s2->maxWeightFilterPhases) ||
+      !compare_VkExtent2D(&s1->maxWeightFilterDimension, &s2->maxWeightFilterDimension) ||
+      !compare_VkExtent2D(&s1->maxBlockMatchRegion, &s2->maxBlockMatchRegion) ||
+      !compare_VkExtent2D(&s1->maxBoxFilterBlockSize, &s2->maxBoxFilterBlockSize) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 222 && VK_QCOM_tile_properties
+bool compare_VkPhysicalDeviceTilePropertiesFeaturesQCOM(
+    VkPhysicalDeviceTilePropertiesFeaturesQCOM const *s1,
+    VkPhysicalDeviceTilePropertiesFeaturesQCOM const *s2) {
+  if ((s1->tileProperties != s2->tileProperties) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 222 && VK_QCOM_tile_properties
+bool compare_VkTilePropertiesQCOM(VkTilePropertiesQCOM const *s1, VkTilePropertiesQCOM const *s2) {
+  if (!compare_VkExtent3D(&s1->tileSize, &s2->tileSize) ||
+      !compare_VkExtent2D(&s1->apronSize, &s2->apronSize) ||
+      !compare_VkOffset2D(&s1->origin, &s2->origin) || false)
     return false;
 
   return true;
