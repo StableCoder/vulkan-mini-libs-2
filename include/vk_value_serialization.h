@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 222,
-              "VK_HEADER_VERSION is from after the maximum supported version of v222.");
+static_assert(VK_HEADER_VERSION <= 223,
+              "VK_HEADER_VERSION is from after the maximum supported version of v223.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 222,
-               "VK_HEADER_VERSION is from after the maximum supported version of v222.");
+_Static_assert(VK_HEADER_VERSION <= 223,
+               "VK_HEADER_VERSION is from after the maximum supported version of v223.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -259,6 +259,7 @@ EnumValueSet const VkQueueFlagsSets[] = {
     {"VIDEO_ENCODE_BIT_KHR", 0x00000040, false},
     {"RESERVED_7_BIT_QCOM", 0x00000080, false},
     {"RESERVED_8_BIT_NV", 0x00000100, false},
+    {"RESERVED_9_BIT_EXT", 0x00000200, false},
 };
 
 EnumValueSet const VkMemoryPropertyFlagsSets[] = {
@@ -495,6 +496,7 @@ EnumValueSet const VkImageCreateFlagsSets[] = {
     {"RESERVED_18_BIT_EXT", 0x00040000, false},
     {"2D_VIEW_COMPATIBLE_BIT_EXT", 0x00020000, false},
     {"MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_BIT_EXT", 0x00040000, false},
+    {"RESERVED_19_BIT_EXT", 0x00080000, false},
 };
 
 EnumValueSet const VkImageViewCreateFlagsSets[] = {
@@ -1126,6 +1128,8 @@ EnumValueSet const VkFormatFeatureFlags2Sets[] = {
     {"WEIGHT_SAMPLED_IMAGE_BIT_QCOM", 0x800000000, false},
     {"BLOCK_MATCHING_BIT_QCOM", 0x1000000000, false},
     {"BOX_FILTER_SAMPLED_BIT_QCOM", 0x2000000000, false},
+    {"RESERVED_44_BIT_EXT", 0x100000000000, false},
+    {"RESERVED_45_BIT_EXT", 0x200000000000, false},
 };
 
 EnumValueSet const VkRenderingFlagsSets[] = {
@@ -3049,7 +3053,7 @@ EnumType const cEnumTypes[288] = {
     {"VkInstanceCreateFlags", VkInstanceCreateFlagsSets, 1},
     {"VkDeviceCreateFlags", NULL, 0},
     {"VkDeviceQueueCreateFlags", VkDeviceQueueCreateFlagsSets, 2},
-    {"VkQueueFlags", VkQueueFlagsSets, 11},
+    {"VkQueueFlags", VkQueueFlagsSets, 12},
     {"VkMemoryPropertyFlags", VkMemoryPropertyFlagsSets, 10},
     {"VkMemoryHeapFlags", VkMemoryHeapFlagsSets, 4},
     {"VkAccessFlags", VkAccessFlagsSets, 45},
@@ -3057,7 +3061,7 @@ EnumType const cEnumTypes[288] = {
     {"VkBufferCreateFlags", VkBufferCreateFlagsSets, 9},
     {"VkShaderStageFlags", VkShaderStageFlagsSets, 40},
     {"VkImageUsageFlags", VkImageUsageFlagsSets, 35},
-    {"VkImageCreateFlags", VkImageCreateFlagsSets, 31},
+    {"VkImageCreateFlags", VkImageCreateFlagsSets, 32},
     {"VkImageViewCreateFlags", VkImageViewCreateFlagsSets, 5},
     {"VkPipelineCreateFlags", VkPipelineCreateFlagsSets, 55},
     {"VkColorComponentFlags", VkColorComponentFlagsSets, 4},
@@ -3106,7 +3110,7 @@ EnumType const cEnumTypes[288] = {
     {"VkPipelineStageFlags2", VkPipelineStageFlags2Sets, 72},
     {"VkAccelerationStructureMotionInfoFlagsNV", NULL, 0},
     {"VkAccelerationStructureMotionInstanceFlagsNV", NULL, 0},
-    {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Sets, 75},
+    {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Sets, 77},
     {"VkRenderingFlags", VkRenderingFlagsSets, 7},
     {"VkCompositeAlphaFlagsKHR", VkCompositeAlphaFlagsKHRSets, 4},
     {"VkDisplayPlaneAlphaFlagsKHR", VkDisplayPlaneAlphaFlagsKHRSets, 4},
