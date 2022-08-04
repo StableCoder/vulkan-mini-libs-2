@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 223,
-              "VK_HEADER_VERSION is from after the maximum supported version of v223.");
+static_assert(VK_HEADER_VERSION <= 224,
+              "VK_HEADER_VERSION is from after the maximum supported version of v224.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 223,
-               "VK_HEADER_VERSION is from after the maximum supported version of v223.");
+_Static_assert(VK_HEADER_VERSION <= 224,
+               "VK_HEADER_VERSION is from after the maximum supported version of v224.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -4362,6 +4362,20 @@ void cleanup_VkPhysicalDeviceTilePropertiesFeaturesQCOM(
 
 #if VK_HEADER_VERSION >= 222 && VK_QCOM_tile_properties
 void cleanup_VkTilePropertiesQCOM(VkTilePropertiesQCOM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 224 && VK_SEC_amigo_profiling
+void cleanup_VkPhysicalDeviceAmigoProfilingFeaturesSEC(
+    VkPhysicalDeviceAmigoProfilingFeaturesSEC const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 224 && VK_SEC_amigo_profiling
+void cleanup_VkAmigoProfilingSubmitInfoSEC(VkAmigoProfilingSubmitInfoSEC const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 224 && VK_EXT_attachment_feedback_loop_layout
+void cleanup_VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT(
+    VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -10372,6 +10386,30 @@ void cleanup_vk_struct(void const *pData) {
 #if VK_HEADER_VERSION >= 222 && VK_QCOM_tile_properties
   if (pTemp->sType == VK_STRUCTURE_TYPE_TILE_PROPERTIES_QCOM) {
     cleanup_VkTilePropertiesQCOM((VkTilePropertiesQCOM const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 224 && VK_SEC_amigo_profiling
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_AMIGO_PROFILING_FEATURES_SEC) {
+    cleanup_VkPhysicalDeviceAmigoProfilingFeaturesSEC(
+        (VkPhysicalDeviceAmigoProfilingFeaturesSEC const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 224 && VK_SEC_amigo_profiling
+  if (pTemp->sType == VK_STRUCTURE_TYPE_AMIGO_PROFILING_SUBMIT_INFO_SEC) {
+    cleanup_VkAmigoProfilingSubmitInfoSEC((VkAmigoProfilingSubmitInfoSEC const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 224 && VK_EXT_attachment_feedback_loop_layout
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ATTACHMENT_FEEDBACK_LOOP_LAYOUT_FEATURES_EXT) {
+    cleanup_VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT(
+        (VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT const *)pData);
     return;
   }
 #endif
@@ -20574,6 +20612,35 @@ void cleanup_VkPhysicalDeviceTilePropertiesFeaturesQCOM(
 
 #if VK_HEADER_VERSION >= 222 && VK_QCOM_tile_properties
 void cleanup_VkTilePropertiesQCOM(VkTilePropertiesQCOM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 224 && VK_SEC_amigo_profiling
+void cleanup_VkPhysicalDeviceAmigoProfilingFeaturesSEC(
+    VkPhysicalDeviceAmigoProfilingFeaturesSEC const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 224 && VK_SEC_amigo_profiling
+void cleanup_VkAmigoProfilingSubmitInfoSEC(VkAmigoProfilingSubmitInfoSEC const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 224 && VK_EXT_attachment_feedback_loop_layout
+void cleanup_VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT(
+    VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

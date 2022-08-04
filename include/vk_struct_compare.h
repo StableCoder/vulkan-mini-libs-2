@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 223,
-              "VK_HEADER_VERSION is from after the maximum supported version of v223.");
+static_assert(VK_HEADER_VERSION <= 224,
+              "VK_HEADER_VERSION is from after the maximum supported version of v224.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 223,
-               "VK_HEADER_VERSION is from after the maximum supported version of v223.");
+_Static_assert(VK_HEADER_VERSION <= 224,
+               "VK_HEADER_VERSION is from after the maximum supported version of v224.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -4881,6 +4881,23 @@ bool compare_VkPhysicalDeviceTilePropertiesFeaturesQCOM(
 
 #if VK_HEADER_VERSION >= 222 && VK_QCOM_tile_properties
 bool compare_VkTilePropertiesQCOM(VkTilePropertiesQCOM const *s1, VkTilePropertiesQCOM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 224 && VK_SEC_amigo_profiling
+bool compare_VkPhysicalDeviceAmigoProfilingFeaturesSEC(
+    VkPhysicalDeviceAmigoProfilingFeaturesSEC const *s1,
+    VkPhysicalDeviceAmigoProfilingFeaturesSEC const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 224 && VK_SEC_amigo_profiling
+bool compare_VkAmigoProfilingSubmitInfoSEC(VkAmigoProfilingSubmitInfoSEC const *s1,
+                                           VkAmigoProfilingSubmitInfoSEC const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 224 && VK_EXT_attachment_feedback_loop_layout
+bool compare_VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT(
+    VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT const *s1,
+    VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 214 && VK_HEADER_VERSION <= 214 &&                                        \
@@ -16874,6 +16891,39 @@ bool compare_VkTilePropertiesQCOM(VkTilePropertiesQCOM const *s1, VkTileProperti
   if (!compare_VkExtent3D(&s1->tileSize, &s2->tileSize) ||
       !compare_VkExtent2D(&s1->apronSize, &s2->apronSize) ||
       !compare_VkOffset2D(&s1->origin, &s2->origin) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 224 && VK_SEC_amigo_profiling
+bool compare_VkPhysicalDeviceAmigoProfilingFeaturesSEC(
+    VkPhysicalDeviceAmigoProfilingFeaturesSEC const *s1,
+    VkPhysicalDeviceAmigoProfilingFeaturesSEC const *s2) {
+  if ((s1->amigoProfiling != s2->amigoProfiling) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 224 && VK_SEC_amigo_profiling
+bool compare_VkAmigoProfilingSubmitInfoSEC(VkAmigoProfilingSubmitInfoSEC const *s1,
+                                           VkAmigoProfilingSubmitInfoSEC const *s2) {
+  if ((s1->firstDrawTimestamp != s2->firstDrawTimestamp) ||
+      (s1->swapBufferTimestamp != s2->swapBufferTimestamp) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 224 && VK_EXT_attachment_feedback_loop_layout
+bool compare_VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT(
+    VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT const *s1,
+    VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT const *s2) {
+  if ((s1->attachmentFeedbackLoopLayout != s2->attachmentFeedbackLoopLayout) || false)
     return false;
 
   return true;
