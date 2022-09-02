@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 225,
-              "VK_HEADER_VERSION is from after the maximum supported version of v225.");
+static_assert(VK_HEADER_VERSION <= 226,
+              "VK_HEADER_VERSION is from after the maximum supported version of v226.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 225,
-               "VK_HEADER_VERSION is from after the maximum supported version of v225.");
+_Static_assert(VK_HEADER_VERSION <= 226,
+               "VK_HEADER_VERSION is from after the maximum supported version of v226.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -4463,6 +4463,34 @@ void cleanup_VkVideoEncodeH265ReferenceListsInfoEXT(
 #if VK_HEADER_VERSION >= 225 && VK_EXT_rasterization_order_attachment_access
 void cleanup_VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT(
     VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 226 && VK_EXT_mesh_shader
+void cleanup_VkPhysicalDeviceMeshShaderFeaturesEXT(
+    VkPhysicalDeviceMeshShaderFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 226 && VK_EXT_mesh_shader
+void cleanup_VkPhysicalDeviceMeshShaderPropertiesEXT(
+    VkPhysicalDeviceMeshShaderPropertiesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 226 && VK_EXT_mesh_shader
+inline void cleanup_VkDrawMeshTasksIndirectCommandEXT(
+    VkDrawMeshTasksIndirectCommandEXT const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 226 && VK_KHR_video_decode_queue
+void cleanup_VkVideoDecodeUsageInfoKHR(VkVideoDecodeUsageInfoKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 226 && VK_KHR_video_encode_queue
+void cleanup_VkVideoEncodeUsageInfoKHR(VkVideoEncodeUsageInfoKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 226 && VK_EXT_depth_clamp_zero_one
+void cleanup_VkPhysicalDeviceDepthClampZeroOneFeaturesEXT(
+    VkPhysicalDeviceDepthClampZeroOneFeaturesEXT const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -10646,6 +10674,44 @@ void cleanup_vk_struct(void const *pData) {
       VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT(
         (VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 226 && VK_EXT_mesh_shader
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_FEATURES_EXT) {
+    cleanup_VkPhysicalDeviceMeshShaderFeaturesEXT(
+        (VkPhysicalDeviceMeshShaderFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 226 && VK_EXT_mesh_shader
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_PROPERTIES_EXT) {
+    cleanup_VkPhysicalDeviceMeshShaderPropertiesEXT(
+        (VkPhysicalDeviceMeshShaderPropertiesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 226 && VK_KHR_video_decode_queue
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_USAGE_INFO_KHR) {
+    cleanup_VkVideoDecodeUsageInfoKHR((VkVideoDecodeUsageInfoKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 226 && VK_KHR_video_encode_queue
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_USAGE_INFO_KHR) {
+    cleanup_VkVideoEncodeUsageInfoKHR((VkVideoEncodeUsageInfoKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 226 && VK_EXT_depth_clamp_zero_one
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_EXT) {
+    cleanup_VkPhysicalDeviceDepthClampZeroOneFeaturesEXT(
+        (VkPhysicalDeviceDepthClampZeroOneFeaturesEXT const *)pData);
     return;
   }
 #endif
@@ -21135,6 +21201,59 @@ void cleanup_VkVideoEncodeH265ReferenceListsInfoEXT(
 #if VK_HEADER_VERSION >= 225 && VK_EXT_rasterization_order_attachment_access
 void cleanup_VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT(
     VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 226 && VK_EXT_mesh_shader
+void cleanup_VkPhysicalDeviceMeshShaderFeaturesEXT(
+    VkPhysicalDeviceMeshShaderFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 226 && VK_EXT_mesh_shader
+void cleanup_VkPhysicalDeviceMeshShaderPropertiesEXT(
+    VkPhysicalDeviceMeshShaderPropertiesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 226 && VK_EXT_mesh_shader
+extern inline void cleanup_VkDrawMeshTasksIndirectCommandEXT(
+    VkDrawMeshTasksIndirectCommandEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 226 && VK_KHR_video_decode_queue
+void cleanup_VkVideoDecodeUsageInfoKHR(VkVideoDecodeUsageInfoKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 226 && VK_KHR_video_encode_queue
+void cleanup_VkVideoEncodeUsageInfoKHR(VkVideoEncodeUsageInfoKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 226 && VK_EXT_depth_clamp_zero_one
+void cleanup_VkPhysicalDeviceDepthClampZeroOneFeaturesEXT(
+    VkPhysicalDeviceDepthClampZeroOneFeaturesEXT const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

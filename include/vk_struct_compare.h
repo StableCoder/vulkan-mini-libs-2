@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 225,
-              "VK_HEADER_VERSION is from after the maximum supported version of v225.");
+static_assert(VK_HEADER_VERSION <= 226,
+              "VK_HEADER_VERSION is from after the maximum supported version of v226.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 225,
-               "VK_HEADER_VERSION is from after the maximum supported version of v225.");
+_Static_assert(VK_HEADER_VERSION <= 226,
+               "VK_HEADER_VERSION is from after the maximum supported version of v226.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -2603,6 +2603,22 @@ bool compare_VkDrawMeshTasksIndirectCommandNV(VkDrawMeshTasksIndirectCommandNV c
                                               VkDrawMeshTasksIndirectCommandNV const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 226 && VK_EXT_mesh_shader
+bool compare_VkPhysicalDeviceMeshShaderFeaturesEXT(VkPhysicalDeviceMeshShaderFeaturesEXT const *s1,
+                                                   VkPhysicalDeviceMeshShaderFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 226 && VK_EXT_mesh_shader
+bool compare_VkPhysicalDeviceMeshShaderPropertiesEXT(
+    VkPhysicalDeviceMeshShaderPropertiesEXT const *s1,
+    VkPhysicalDeviceMeshShaderPropertiesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 226 && VK_EXT_mesh_shader
+bool compare_VkDrawMeshTasksIndirectCommandEXT(VkDrawMeshTasksIndirectCommandEXT const *s1,
+                                               VkDrawMeshTasksIndirectCommandEXT const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 91 && VK_NV_ray_tracing
 bool compare_VkRayTracingShaderGroupCreateInfoNV(VkRayTracingShaderGroupCreateInfoNV const *s1,
                                                  VkRayTracingShaderGroupCreateInfoNV const *s2);
@@ -4077,6 +4093,11 @@ bool compare_VkVideoDecodeCapabilitiesKHR(VkVideoDecodeCapabilitiesKHR const *s1
                                           VkVideoDecodeCapabilitiesKHR const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 226 && VK_KHR_video_decode_queue
+bool compare_VkVideoDecodeUsageInfoKHR(VkVideoDecodeUsageInfoKHR const *s1,
+                                       VkVideoDecodeUsageInfoKHR const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_decode_queue
 bool compare_VkVideoDecodeInfoKHR(VkVideoDecodeInfoKHR const *s1, VkVideoDecodeInfoKHR const *s2);
 #endif
@@ -4178,6 +4199,11 @@ bool compare_VkVideoEndCodingInfoKHR(VkVideoEndCodingInfoKHR const *s1,
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_queue
 bool compare_VkVideoCodingControlInfoKHR(VkVideoCodingControlInfoKHR const *s1,
                                          VkVideoCodingControlInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 226 && VK_KHR_video_encode_queue
+bool compare_VkVideoEncodeUsageInfoKHR(VkVideoEncodeUsageInfoKHR const *s1,
+                                       VkVideoEncodeUsageInfoKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_encode_queue
@@ -4910,6 +4936,12 @@ bool compare_VkAmigoProfilingSubmitInfoSEC(VkAmigoProfilingSubmitInfoSEC const *
 bool compare_VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT(
     VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT const *s1,
     VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 226 && VK_EXT_depth_clamp_zero_one
+bool compare_VkPhysicalDeviceDepthClampZeroOneFeaturesEXT(
+    VkPhysicalDeviceDepthClampZeroOneFeaturesEXT const *s1,
+    VkPhysicalDeviceDepthClampZeroOneFeaturesEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_HEADER_VERSION <= 224 && VK_KHR_video_queue
@@ -11326,6 +11358,82 @@ bool compare_VkDrawMeshTasksIndirectCommandNV(VkDrawMeshTasksIndirectCommandNV c
 }
 #endif
 
+#if VK_HEADER_VERSION >= 226 && VK_EXT_mesh_shader
+bool compare_VkPhysicalDeviceMeshShaderFeaturesEXT(
+    VkPhysicalDeviceMeshShaderFeaturesEXT const *s1,
+    VkPhysicalDeviceMeshShaderFeaturesEXT const *s2) {
+  if ((s1->taskShader != s2->taskShader) || (s1->meshShader != s2->meshShader) ||
+      (s1->multiviewMeshShader != s2->multiviewMeshShader) ||
+      (s1->primitiveFragmentShadingRateMeshShader != s2->primitiveFragmentShadingRateMeshShader) ||
+      (s1->meshShaderQueries != s2->meshShaderQueries) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 226 && VK_EXT_mesh_shader
+bool compare_VkPhysicalDeviceMeshShaderPropertiesEXT(
+    VkPhysicalDeviceMeshShaderPropertiesEXT const *s1,
+    VkPhysicalDeviceMeshShaderPropertiesEXT const *s2) {
+  if ((s1->maxTaskWorkGroupTotalCount != s2->maxTaskWorkGroupTotalCount) ||
+      (s1->maxTaskWorkGroupInvocations != s2->maxTaskWorkGroupInvocations) ||
+      (s1->maxTaskPayloadSize != s2->maxTaskPayloadSize) ||
+      (s1->maxTaskSharedMemorySize != s2->maxTaskSharedMemorySize) ||
+      (s1->maxTaskPayloadAndSharedMemorySize != s2->maxTaskPayloadAndSharedMemorySize) ||
+      (s1->maxMeshWorkGroupTotalCount != s2->maxMeshWorkGroupTotalCount) ||
+      (s1->maxMeshWorkGroupInvocations != s2->maxMeshWorkGroupInvocations) ||
+      (s1->maxMeshSharedMemorySize != s2->maxMeshSharedMemorySize) ||
+      (s1->maxMeshPayloadAndSharedMemorySize != s2->maxMeshPayloadAndSharedMemorySize) ||
+      (s1->maxMeshOutputMemorySize != s2->maxMeshOutputMemorySize) ||
+      (s1->maxMeshPayloadAndOutputMemorySize != s2->maxMeshPayloadAndOutputMemorySize) ||
+      (s1->maxMeshOutputComponents != s2->maxMeshOutputComponents) ||
+      (s1->maxMeshOutputVertices != s2->maxMeshOutputVertices) ||
+      (s1->maxMeshOutputPrimitives != s2->maxMeshOutputPrimitives) ||
+      (s1->maxMeshOutputLayers != s2->maxMeshOutputLayers) ||
+      (s1->maxMeshMultiviewViewCount != s2->maxMeshMultiviewViewCount) ||
+      (s1->meshOutputPerVertexGranularity != s2->meshOutputPerVertexGranularity) ||
+      (s1->meshOutputPerPrimitiveGranularity != s2->meshOutputPerPrimitiveGranularity) ||
+      (s1->maxPreferredTaskWorkGroupInvocations != s2->maxPreferredTaskWorkGroupInvocations) ||
+      (s1->maxPreferredMeshWorkGroupInvocations != s2->maxPreferredMeshWorkGroupInvocations) ||
+      (s1->prefersLocalInvocationVertexOutput != s2->prefersLocalInvocationVertexOutput) ||
+      (s1->prefersLocalInvocationPrimitiveOutput != s2->prefersLocalInvocationPrimitiveOutput) ||
+      (s1->prefersCompactVertexOutput != s2->prefersCompactVertexOutput) ||
+      (s1->prefersCompactPrimitiveOutput != s2->prefersCompactPrimitiveOutput) || false)
+    return false;
+
+  for (uint32_t i = 0; i < 3; ++i) {
+    if (s1->maxTaskWorkGroupCount[i] != s2->maxTaskWorkGroupCount[i])
+      return false;
+  }
+  for (uint32_t i = 0; i < 3; ++i) {
+    if (s1->maxTaskWorkGroupSize[i] != s2->maxTaskWorkGroupSize[i])
+      return false;
+  }
+  for (uint32_t i = 0; i < 3; ++i) {
+    if (s1->maxMeshWorkGroupCount[i] != s2->maxMeshWorkGroupCount[i])
+      return false;
+  }
+  for (uint32_t i = 0; i < 3; ++i) {
+    if (s1->maxMeshWorkGroupSize[i] != s2->maxMeshWorkGroupSize[i])
+      return false;
+  }
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 226 && VK_EXT_mesh_shader
+bool compare_VkDrawMeshTasksIndirectCommandEXT(VkDrawMeshTasksIndirectCommandEXT const *s1,
+                                               VkDrawMeshTasksIndirectCommandEXT const *s2) {
+  if ((s1->groupCountX != s2->groupCountX) || (s1->groupCountY != s2->groupCountY) ||
+      (s1->groupCountZ != s2->groupCountZ) || false)
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 91 && VK_NV_ray_tracing
 bool compare_VkRayTracingShaderGroupCreateInfoNV(VkRayTracingShaderGroupCreateInfoNV const *s1,
                                                  VkRayTracingShaderGroupCreateInfoNV const *s2) {
@@ -14937,6 +15045,16 @@ bool compare_VkVideoDecodeCapabilitiesKHR(VkVideoDecodeCapabilitiesKHR const *s1
 }
 #endif
 
+#if VK_HEADER_VERSION >= 226 && VK_KHR_video_decode_queue
+bool compare_VkVideoDecodeUsageInfoKHR(VkVideoDecodeUsageInfoKHR const *s1,
+                                       VkVideoDecodeUsageInfoKHR const *s2) {
+  if ((s1->videoUsageHints != s2->videoUsageHints) || false)
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_decode_queue
 bool compare_VkVideoDecodeInfoKHR(VkVideoDecodeInfoKHR const *s1, VkVideoDecodeInfoKHR const *s2) {
   if ((s1->flags != s2->flags) || (s1->srcBuffer != s2->srcBuffer) ||
@@ -15172,6 +15290,18 @@ bool compare_VkVideoEndCodingInfoKHR(VkVideoEndCodingInfoKHR const *s1,
 bool compare_VkVideoCodingControlInfoKHR(VkVideoCodingControlInfoKHR const *s1,
                                          VkVideoCodingControlInfoKHR const *s2) {
   if ((s1->flags != s2->flags) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 226 && VK_KHR_video_encode_queue
+bool compare_VkVideoEncodeUsageInfoKHR(VkVideoEncodeUsageInfoKHR const *s1,
+                                       VkVideoEncodeUsageInfoKHR const *s2) {
+  if ((s1->videoUsageHints != s2->videoUsageHints) ||
+      (s1->videoContentHints != s2->videoContentHints) || (s1->tuningMode != s2->tuningMode) ||
+      false)
     return false;
 
   return true;
@@ -17032,6 +17162,17 @@ bool compare_VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT(
     VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT const *s1,
     VkPhysicalDeviceAttachmentFeedbackLoopLayoutFeaturesEXT const *s2) {
   if ((s1->attachmentFeedbackLoopLayout != s2->attachmentFeedbackLoopLayout) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 226 && VK_EXT_depth_clamp_zero_one
+bool compare_VkPhysicalDeviceDepthClampZeroOneFeaturesEXT(
+    VkPhysicalDeviceDepthClampZeroOneFeaturesEXT const *s1,
+    VkPhysicalDeviceDepthClampZeroOneFeaturesEXT const *s2) {
+  if ((s1->depthClampZeroOne != s2->depthClampZeroOne) || false)
     return false;
 
   return true;
