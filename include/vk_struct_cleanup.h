@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 226,
-              "VK_HEADER_VERSION is from after the maximum supported version of v226.");
+static_assert(VK_HEADER_VERSION <= 227,
+              "VK_HEADER_VERSION is from after the maximum supported version of v227.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 226,
-               "VK_HEADER_VERSION is from after the maximum supported version of v226.");
+_Static_assert(VK_HEADER_VERSION <= 227,
+               "VK_HEADER_VERSION is from after the maximum supported version of v227.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -4491,6 +4491,11 @@ void cleanup_VkVideoEncodeUsageInfoKHR(VkVideoEncodeUsageInfoKHR const *pData);
 #if VK_HEADER_VERSION >= 226 && VK_EXT_depth_clamp_zero_one
 void cleanup_VkPhysicalDeviceDepthClampZeroOneFeaturesEXT(
     VkPhysicalDeviceDepthClampZeroOneFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 227 && VK_EXT_legacy_dithering
+void cleanup_VkPhysicalDeviceLegacyDitheringFeaturesEXT(
+    VkPhysicalDeviceLegacyDitheringFeaturesEXT const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -10712,6 +10717,14 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceDepthClampZeroOneFeaturesEXT(
         (VkPhysicalDeviceDepthClampZeroOneFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 227 && VK_EXT_legacy_dithering
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LEGACY_DITHERING_FEATURES_EXT) {
+    cleanup_VkPhysicalDeviceLegacyDitheringFeaturesEXT(
+        (VkPhysicalDeviceLegacyDitheringFeaturesEXT const *)pData);
     return;
   }
 #endif
@@ -21254,6 +21267,16 @@ void cleanup_VkVideoEncodeUsageInfoKHR(VkVideoEncodeUsageInfoKHR const *pData) {
 #if VK_HEADER_VERSION >= 226 && VK_EXT_depth_clamp_zero_one
 void cleanup_VkPhysicalDeviceDepthClampZeroOneFeaturesEXT(
     VkPhysicalDeviceDepthClampZeroOneFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 227 && VK_EXT_legacy_dithering
+void cleanup_VkPhysicalDeviceLegacyDitheringFeaturesEXT(
+    VkPhysicalDeviceLegacyDitheringFeaturesEXT const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

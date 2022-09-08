@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 226,
-              "VK_HEADER_VERSION is from after the maximum supported version of v226.");
+static_assert(VK_HEADER_VERSION <= 227,
+              "VK_HEADER_VERSION is from after the maximum supported version of v227.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 226,
-               "VK_HEADER_VERSION is from after the maximum supported version of v226.");
+_Static_assert(VK_HEADER_VERSION <= 227,
+               "VK_HEADER_VERSION is from after the maximum supported version of v227.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -4013,6 +4013,12 @@ bool compare_VkPhysicalDeviceSynchronization2FeaturesKHR(
 bool compare_VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT(
     VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT const *s1,
     VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 227 && VK_EXT_legacy_dithering
+bool compare_VkPhysicalDeviceLegacyDitheringFeaturesEXT(
+    VkPhysicalDeviceLegacyDitheringFeaturesEXT const *s1,
+    VkPhysicalDeviceLegacyDitheringFeaturesEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 219 && VK_EXT_multisampled_render_to_single_sampled
@@ -14850,6 +14856,17 @@ bool compare_VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT(
       (s1->primitivesGeneratedQueryWithNonZeroStreams !=
        s2->primitivesGeneratedQueryWithNonZeroStreams) ||
       false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 227 && VK_EXT_legacy_dithering
+bool compare_VkPhysicalDeviceLegacyDitheringFeaturesEXT(
+    VkPhysicalDeviceLegacyDitheringFeaturesEXT const *s1,
+    VkPhysicalDeviceLegacyDitheringFeaturesEXT const *s2) {
+  if ((s1->legacyDithering != s2->legacyDithering) || false)
     return false;
 
   return true;

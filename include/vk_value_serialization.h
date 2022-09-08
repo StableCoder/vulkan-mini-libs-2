@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 226,
-              "VK_HEADER_VERSION is from after the maximum supported version of v226.");
+static_assert(VK_HEADER_VERSION <= 227,
+              "VK_HEADER_VERSION is from after the maximum supported version of v227.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 226,
-               "VK_HEADER_VERSION is from after the maximum supported version of v226.");
+_Static_assert(VK_HEADER_VERSION <= 227,
+               "VK_HEADER_VERSION is from after the maximum supported version of v227.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -743,6 +743,7 @@ EnumValueSet const VkSubpassDescriptionFlagsSets[] = {
     {"RASTERIZATION_ORDER_ATTACHMENT_COLOR_ACCESS_BIT_EXT", 0x00000010, false},
     {"RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_BIT_EXT", 0x00000020, false},
     {"RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_BIT_EXT", 0x00000040, false},
+    {"ENABLE_LEGACY_DITHERING_BIT_EXT", 0x00000080, false},
 };
 
 EnumValueSet const VkPipelineStageFlagsSets[] = {
@@ -1166,6 +1167,7 @@ EnumValueSet const VkRenderingFlagsSets[] = {
     {"RESUMING", 0x00000004, false},
     {"RESUMING_BIT_KHR", 0x00000004, true},
     {"RESERVED_3_BIT_EXT", 0x00000008, false},
+    {"ENABLE_LEGACY_DITHERING_BIT_EXT", 0x00000008, false},
 };
 
 EnumValueSet const VkCompositeAlphaFlagsKHRSets[] = {
@@ -3155,7 +3157,7 @@ EnumType const cEnumTypes[295] = {
     {"VkImageAspectFlags", VkImageAspectFlagsSets, 16},
     {"VkSparseMemoryBindFlags", VkSparseMemoryBindFlagsSets, 1},
     {"VkSparseImageFormatFlags", VkSparseImageFormatFlagsSets, 3},
-    {"VkSubpassDescriptionFlags", VkSubpassDescriptionFlagsSets, 13},
+    {"VkSubpassDescriptionFlags", VkSubpassDescriptionFlagsSets, 14},
     {"VkPipelineStageFlags", VkPipelineStageFlagsSets, 42},
     {"VkSampleCountFlags", VkSampleCountFlagsSets, 7},
     {"VkAttachmentDescriptionFlags", VkAttachmentDescriptionFlagsSets, 1},
@@ -3185,7 +3187,7 @@ EnumType const cEnumTypes[295] = {
     {"VkAccelerationStructureMotionInfoFlagsNV", NULL, 0},
     {"VkAccelerationStructureMotionInstanceFlagsNV", NULL, 0},
     {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Sets, 77},
-    {"VkRenderingFlags", VkRenderingFlagsSets, 7},
+    {"VkRenderingFlags", VkRenderingFlagsSets, 8},
     {"VkCompositeAlphaFlagsKHR", VkCompositeAlphaFlagsKHRSets, 4},
     {"VkDisplayPlaneAlphaFlagsKHR", VkDisplayPlaneAlphaFlagsKHRSets, 4},
     {"VkSurfaceTransformFlagsKHR", VkSurfaceTransformFlagsKHRSets, 9},
