@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 227,
-              "VK_HEADER_VERSION is from after the maximum supported version of v227.");
+static_assert(VK_HEADER_VERSION <= 228,
+              "VK_HEADER_VERSION is from after the maximum supported version of v228.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 227,
-               "VK_HEADER_VERSION is from after the maximum supported version of v227.");
+_Static_assert(VK_HEADER_VERSION <= 228,
+               "VK_HEADER_VERSION is from after the maximum supported version of v228.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -4498,6 +4498,20 @@ void cleanup_VkPhysicalDeviceLegacyDitheringFeaturesEXT(
     VkPhysicalDeviceLegacyDitheringFeaturesEXT const *pData);
 #endif
 
+#if VK_HEADER_VERSION >= 228 && VK_EXT_mutable_descriptor_type
+void cleanup_VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT(
+    VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 228 && VK_EXT_mutable_descriptor_type
+void cleanup_VkMutableDescriptorTypeListEXT(VkMutableDescriptorTypeListEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 228 && VK_EXT_mutable_descriptor_type
+void cleanup_VkMutableDescriptorTypeCreateInfoEXT(
+    VkMutableDescriptorTypeCreateInfoEXT const *pData);
+#endif
+
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
 
 #include <stdlib.h>
@@ -8472,7 +8486,7 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
-#if VK_HEADER_VERSION >= 164 && VK_VALVE_mutable_descriptor_type
+#if VK_HEADER_VERSION >= 164 && VK_HEADER_VERSION <= 227 && VK_VALVE_mutable_descriptor_type
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_VALVE) {
     cleanup_VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE(
         (VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE const *)pData);
@@ -8480,7 +8494,7 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
-#if VK_HEADER_VERSION >= 164 && VK_VALVE_mutable_descriptor_type
+#if VK_HEADER_VERSION >= 164 && VK_HEADER_VERSION <= 227 && VK_VALVE_mutable_descriptor_type
   if (pTemp->sType == VK_STRUCTURE_TYPE_MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_VALVE) {
     cleanup_VkMutableDescriptorTypeCreateInfoVALVE(
         (VkMutableDescriptorTypeCreateInfoVALVE const *)pData);
@@ -10725,6 +10739,22 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LEGACY_DITHERING_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceLegacyDitheringFeaturesEXT(
         (VkPhysicalDeviceLegacyDitheringFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 228 && VK_EXT_mutable_descriptor_type
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MUTABLE_DESCRIPTOR_TYPE_FEATURES_EXT) {
+    cleanup_VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT(
+        (VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 228 && VK_EXT_mutable_descriptor_type
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_EXT) {
+    cleanup_VkMutableDescriptorTypeCreateInfoEXT(
+        (VkMutableDescriptorTypeCreateInfoEXT const *)pData);
     return;
   }
 #endif
@@ -21281,6 +21311,40 @@ void cleanup_VkPhysicalDeviceLegacyDitheringFeaturesEXT(
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 228 && VK_EXT_mutable_descriptor_type
+void cleanup_VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT(
+    VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 228 && VK_EXT_mutable_descriptor_type
+void cleanup_VkMutableDescriptorTypeListEXT(VkMutableDescriptorTypeListEXT const *pData) {
+  // pDescriptorTypes - descriptorTypeCount
+  free((void *)pData->pDescriptorTypes);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 228 && VK_EXT_mutable_descriptor_type
+void cleanup_VkMutableDescriptorTypeCreateInfoEXT(
+    VkMutableDescriptorTypeCreateInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pMutableDescriptorTypeLists - mutableDescriptorTypeListCount
+  if (pData->pMutableDescriptorTypeLists != NULL) {
+    for (uint32_t i = 0; i < pData->mutableDescriptorTypeListCount; ++i)
+      cleanup_VkMutableDescriptorTypeListEXT(&pData->pMutableDescriptorTypeLists[i]);
+  }
+  free((void *)pData->pMutableDescriptorTypeLists);
 }
 #endif
 

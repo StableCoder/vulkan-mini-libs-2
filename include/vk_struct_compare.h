@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 227,
-              "VK_HEADER_VERSION is from after the maximum supported version of v227.");
+static_assert(VK_HEADER_VERSION <= 228,
+              "VK_HEADER_VERSION is from after the maximum supported version of v228.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 227,
-               "VK_HEADER_VERSION is from after the maximum supported version of v227.");
+_Static_assert(VK_HEADER_VERSION <= 228,
+               "VK_HEADER_VERSION is from after the maximum supported version of v228.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -3862,15 +3862,31 @@ bool compare_VkPhysicalDeviceImage2DViewOf3DFeaturesEXT(
     VkPhysicalDeviceImage2DViewOf3DFeaturesEXT const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 228 && VK_EXT_mutable_descriptor_type
+bool compare_VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT(
+    VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT const *s1,
+    VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 164 && VK_VALVE_mutable_descriptor_type
 bool compare_VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE(
     VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE const *s1,
     VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 228 && VK_EXT_mutable_descriptor_type
+bool compare_VkMutableDescriptorTypeListEXT(VkMutableDescriptorTypeListEXT const *s1,
+                                            VkMutableDescriptorTypeListEXT const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 164 && VK_VALVE_mutable_descriptor_type
 bool compare_VkMutableDescriptorTypeListVALVE(VkMutableDescriptorTypeListVALVE const *s1,
                                               VkMutableDescriptorTypeListVALVE const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 228 && VK_EXT_mutable_descriptor_type
+bool compare_VkMutableDescriptorTypeCreateInfoEXT(VkMutableDescriptorTypeCreateInfoEXT const *s1,
+                                                  VkMutableDescriptorTypeCreateInfoEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 164 && VK_VALVE_mutable_descriptor_type
@@ -14519,6 +14535,17 @@ bool compare_VkPhysicalDeviceImage2DViewOf3DFeaturesEXT(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 228 && VK_EXT_mutable_descriptor_type
+bool compare_VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT(
+    VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT const *s1,
+    VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT const *s2) {
+  if ((s1->mutableDescriptorType != s2->mutableDescriptorType) || false)
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 164 && VK_VALVE_mutable_descriptor_type
 bool compare_VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE(
     VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE const *s1,
@@ -14530,10 +14557,30 @@ bool compare_VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 228 && VK_EXT_mutable_descriptor_type
+bool compare_VkMutableDescriptorTypeListEXT(VkMutableDescriptorTypeListEXT const *s1,
+                                            VkMutableDescriptorTypeListEXT const *s2) {
+  if ((s1->descriptorTypeCount != s2->descriptorTypeCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 164 && VK_VALVE_mutable_descriptor_type
 bool compare_VkMutableDescriptorTypeListVALVE(VkMutableDescriptorTypeListVALVE const *s1,
                                               VkMutableDescriptorTypeListVALVE const *s2) {
   if ((s1->descriptorTypeCount != s2->descriptorTypeCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 228 && VK_EXT_mutable_descriptor_type
+bool compare_VkMutableDescriptorTypeCreateInfoEXT(VkMutableDescriptorTypeCreateInfoEXT const *s1,
+                                                  VkMutableDescriptorTypeCreateInfoEXT const *s2) {
+  if ((s1->mutableDescriptorTypeListCount != s2->mutableDescriptorTypeListCount) || false)
     return false;
 
   return true;
