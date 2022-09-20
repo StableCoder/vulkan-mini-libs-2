@@ -135,7 +135,7 @@ Debian 10/GCC (Old v97):
   stage: Linux
   parallel:
     matrix:
-    - ARCH: [amd64, arm64, ppc64le]
+    - ARCH: [amd64, arm64]
   image: docker.io/stabletec/build-core:debian-10
   tags:
     - container
