@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 229,
-              "VK_HEADER_VERSION is from after the maximum supported version of v229.");
+static_assert(VK_HEADER_VERSION <= 230,
+              "VK_HEADER_VERSION is from after the maximum supported version of v230.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 229,
-               "VK_HEADER_VERSION is from after the maximum supported version of v229.");
+_Static_assert(VK_HEADER_VERSION <= 230,
+               "VK_HEADER_VERSION is from after the maximum supported version of v230.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -4510,6 +4510,162 @@ void cleanup_VkMutableDescriptorTypeListEXT(VkMutableDescriptorTypeListEXT const
 #if VK_HEADER_VERSION >= 228 && VK_EXT_mutable_descriptor_type
 void cleanup_VkMutableDescriptorTypeCreateInfoEXT(
     VkMutableDescriptorTypeCreateInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_NV_present_barrier
+void cleanup_VkPhysicalDevicePresentBarrierFeaturesNV(
+    VkPhysicalDevicePresentBarrierFeaturesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_NV_present_barrier
+void cleanup_VkSurfaceCapabilitiesPresentBarrierNV(
+    VkSurfaceCapabilitiesPresentBarrierNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_NV_present_barrier
+void cleanup_VkSwapchainPresentBarrierCreateInfoNV(
+    VkSwapchainPresentBarrierCreateInfoNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_extended_dynamic_state3
+void cleanup_VkPhysicalDeviceExtendedDynamicState3FeaturesEXT(
+    VkPhysicalDeviceExtendedDynamicState3FeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_extended_dynamic_state3
+void cleanup_VkPhysicalDeviceExtendedDynamicState3PropertiesEXT(
+    VkPhysicalDeviceExtendedDynamicState3PropertiesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_extended_dynamic_state3
+inline void cleanup_VkColorBlendEquationEXT(VkColorBlendEquationEXT const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_extended_dynamic_state3
+inline void cleanup_VkColorBlendAdvancedEXT(VkColorBlendAdvancedEXT const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_pipeline_protected_access
+void cleanup_VkPhysicalDevicePipelineProtectedAccessFeaturesEXT(
+    VkPhysicalDevicePipelineProtectedAccessFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+void cleanup_VkMicromapBuildInfoEXT(VkMicromapBuildInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+void cleanup_VkMicromapCreateInfoEXT(VkMicromapCreateInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+void cleanup_VkMicromapVersionInfoEXT(VkMicromapVersionInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+void cleanup_VkCopyMicromapInfoEXT(VkCopyMicromapInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+void cleanup_VkCopyMicromapToMemoryInfoEXT(VkCopyMicromapToMemoryInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+void cleanup_VkCopyMemoryToMicromapInfoEXT(VkCopyMemoryToMicromapInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+void cleanup_VkMicromapBuildSizesInfoEXT(VkMicromapBuildSizesInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+inline void cleanup_VkMicromapUsageEXT(VkMicromapUsageEXT const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+inline void cleanup_VkMicromapTriangleEXT(VkMicromapTriangleEXT const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+void cleanup_VkPhysicalDeviceOpacityMicromapFeaturesEXT(
+    VkPhysicalDeviceOpacityMicromapFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+void cleanup_VkPhysicalDeviceOpacityMicromapPropertiesEXT(
+    VkPhysicalDeviceOpacityMicromapPropertiesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+void cleanup_VkAccelerationStructureTrianglesOpacityMicromapEXT(
+    VkAccelerationStructureTrianglesOpacityMicromapEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_device_address_binding_report
+void cleanup_VkPhysicalDeviceAddressBindingReportFeaturesEXT(
+    VkPhysicalDeviceAddressBindingReportFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_device_address_binding_report
+void cleanup_VkDeviceAddressBindingCallbackDataEXT(
+    VkDeviceAddressBindingCallbackDataEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_NV_optical_flow
+void cleanup_VkPhysicalDeviceOpticalFlowFeaturesNV(
+    VkPhysicalDeviceOpticalFlowFeaturesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_NV_optical_flow
+void cleanup_VkPhysicalDeviceOpticalFlowPropertiesNV(
+    VkPhysicalDeviceOpticalFlowPropertiesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_NV_optical_flow
+void cleanup_VkOpticalFlowImageFormatInfoNV(VkOpticalFlowImageFormatInfoNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_NV_optical_flow
+void cleanup_VkOpticalFlowImageFormatPropertiesNV(
+    VkOpticalFlowImageFormatPropertiesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_NV_optical_flow
+void cleanup_VkOpticalFlowSessionCreateInfoNV(VkOpticalFlowSessionCreateInfoNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_NV_optical_flow
+void cleanup_VkOpticalFlowSessionCreatePrivateDataInfoNV(
+    VkOpticalFlowSessionCreatePrivateDataInfoNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_NV_optical_flow
+void cleanup_VkOpticalFlowExecuteInfoNV(VkOpticalFlowExecuteInfoNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_device_fault
+void cleanup_VkPhysicalDeviceFaultFeaturesEXT(VkPhysicalDeviceFaultFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_device_fault
+inline void cleanup_VkDeviceFaultAddressInfoEXT(VkDeviceFaultAddressInfoEXT const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_device_fault
+inline void cleanup_VkDeviceFaultVendorInfoEXT(VkDeviceFaultVendorInfoEXT const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_device_fault
+void cleanup_VkDeviceFaultCountsEXT(VkDeviceFaultCountsEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_device_fault
+void cleanup_VkDeviceFaultInfoEXT(VkDeviceFaultInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_device_fault
+inline void cleanup_VkDeviceFaultVendorBinaryHeaderVersionOneEXT(
+    VkDeviceFaultVendorBinaryHeaderVersionOneEXT const *pData) {}
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -10755,6 +10911,217 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_MUTABLE_DESCRIPTOR_TYPE_CREATE_INFO_EXT) {
     cleanup_VkMutableDescriptorTypeCreateInfoEXT(
         (VkMutableDescriptorTypeCreateInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_NV_present_barrier
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_BARRIER_FEATURES_NV) {
+    cleanup_VkPhysicalDevicePresentBarrierFeaturesNV(
+        (VkPhysicalDevicePresentBarrierFeaturesNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_NV_present_barrier
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_PRESENT_BARRIER_NV) {
+    cleanup_VkSurfaceCapabilitiesPresentBarrierNV(
+        (VkSurfaceCapabilitiesPresentBarrierNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_NV_present_barrier
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SWAPCHAIN_PRESENT_BARRIER_CREATE_INFO_NV) {
+    cleanup_VkSwapchainPresentBarrierCreateInfoNV(
+        (VkSwapchainPresentBarrierCreateInfoNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_extended_dynamic_state3
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_3_FEATURES_EXT) {
+    cleanup_VkPhysicalDeviceExtendedDynamicState3FeaturesEXT(
+        (VkPhysicalDeviceExtendedDynamicState3FeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_extended_dynamic_state3
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_DYNAMIC_STATE_3_PROPERTIES_EXT) {
+    cleanup_VkPhysicalDeviceExtendedDynamicState3PropertiesEXT(
+        (VkPhysicalDeviceExtendedDynamicState3PropertiesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_pipeline_protected_access
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_PROTECTED_ACCESS_FEATURES_EXT) {
+    cleanup_VkPhysicalDevicePipelineProtectedAccessFeaturesEXT(
+        (VkPhysicalDevicePipelineProtectedAccessFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MICROMAP_BUILD_INFO_EXT) {
+    cleanup_VkMicromapBuildInfoEXT((VkMicromapBuildInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MICROMAP_CREATE_INFO_EXT) {
+    cleanup_VkMicromapCreateInfoEXT((VkMicromapCreateInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MICROMAP_VERSION_INFO_EXT) {
+    cleanup_VkMicromapVersionInfoEXT((VkMicromapVersionInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+  if (pTemp->sType == VK_STRUCTURE_TYPE_COPY_MICROMAP_INFO_EXT) {
+    cleanup_VkCopyMicromapInfoEXT((VkCopyMicromapInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+  if (pTemp->sType == VK_STRUCTURE_TYPE_COPY_MICROMAP_TO_MEMORY_INFO_EXT) {
+    cleanup_VkCopyMicromapToMemoryInfoEXT((VkCopyMicromapToMemoryInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+  if (pTemp->sType == VK_STRUCTURE_TYPE_COPY_MEMORY_TO_MICROMAP_INFO_EXT) {
+    cleanup_VkCopyMemoryToMicromapInfoEXT((VkCopyMemoryToMicromapInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MICROMAP_BUILD_SIZES_INFO_EXT) {
+    cleanup_VkMicromapBuildSizesInfoEXT((VkMicromapBuildSizesInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_OPACITY_MICROMAP_FEATURES_EXT) {
+    cleanup_VkPhysicalDeviceOpacityMicromapFeaturesEXT(
+        (VkPhysicalDeviceOpacityMicromapFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_OPACITY_MICROMAP_PROPERTIES_EXT) {
+    cleanup_VkPhysicalDeviceOpacityMicromapPropertiesEXT(
+        (VkPhysicalDeviceOpacityMicromapPropertiesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_OPACITY_MICROMAP_EXT) {
+    cleanup_VkAccelerationStructureTrianglesOpacityMicromapEXT(
+        (VkAccelerationStructureTrianglesOpacityMicromapEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_device_address_binding_report
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ADDRESS_BINDING_REPORT_FEATURES_EXT) {
+    cleanup_VkPhysicalDeviceAddressBindingReportFeaturesEXT(
+        (VkPhysicalDeviceAddressBindingReportFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_device_address_binding_report
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_ADDRESS_BINDING_CALLBACK_DATA_EXT) {
+    cleanup_VkDeviceAddressBindingCallbackDataEXT(
+        (VkDeviceAddressBindingCallbackDataEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_NV_optical_flow
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_OPTICAL_FLOW_FEATURES_NV) {
+    cleanup_VkPhysicalDeviceOpticalFlowFeaturesNV(
+        (VkPhysicalDeviceOpticalFlowFeaturesNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_NV_optical_flow
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_OPTICAL_FLOW_PROPERTIES_NV) {
+    cleanup_VkPhysicalDeviceOpticalFlowPropertiesNV(
+        (VkPhysicalDeviceOpticalFlowPropertiesNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_NV_optical_flow
+  if (pTemp->sType == VK_STRUCTURE_TYPE_OPTICAL_FLOW_IMAGE_FORMAT_INFO_NV) {
+    cleanup_VkOpticalFlowImageFormatInfoNV((VkOpticalFlowImageFormatInfoNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_NV_optical_flow
+  if (pTemp->sType == VK_STRUCTURE_TYPE_OPTICAL_FLOW_IMAGE_FORMAT_PROPERTIES_NV) {
+    cleanup_VkOpticalFlowImageFormatPropertiesNV(
+        (VkOpticalFlowImageFormatPropertiesNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_NV_optical_flow
+  if (pTemp->sType == VK_STRUCTURE_TYPE_OPTICAL_FLOW_SESSION_CREATE_INFO_NV) {
+    cleanup_VkOpticalFlowSessionCreateInfoNV((VkOpticalFlowSessionCreateInfoNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_NV_optical_flow
+  if (pTemp->sType == VK_STRUCTURE_TYPE_OPTICAL_FLOW_SESSION_CREATE_PRIVATE_DATA_INFO_NV) {
+    cleanup_VkOpticalFlowSessionCreatePrivateDataInfoNV(
+        (VkOpticalFlowSessionCreatePrivateDataInfoNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_NV_optical_flow
+  if (pTemp->sType == VK_STRUCTURE_TYPE_OPTICAL_FLOW_EXECUTE_INFO_NV) {
+    cleanup_VkOpticalFlowExecuteInfoNV((VkOpticalFlowExecuteInfoNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_device_fault
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FAULT_FEATURES_EXT) {
+    cleanup_VkPhysicalDeviceFaultFeaturesEXT((VkPhysicalDeviceFaultFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_device_fault
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_FAULT_COUNTS_EXT) {
+    cleanup_VkDeviceFaultCountsEXT((VkDeviceFaultCountsEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_device_fault
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_FAULT_INFO_EXT) {
+    cleanup_VkDeviceFaultInfoEXT((VkDeviceFaultInfoEXT const *)pData);
     return;
   }
 #endif
@@ -21428,6 +21795,362 @@ void cleanup_VkMutableDescriptorTypeCreateInfoEXT(
   }
   free((void *)pData->pMutableDescriptorTypeLists);
 }
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_NV_present_barrier
+void cleanup_VkPhysicalDevicePresentBarrierFeaturesNV(
+    VkPhysicalDevicePresentBarrierFeaturesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_NV_present_barrier
+void cleanup_VkSurfaceCapabilitiesPresentBarrierNV(
+    VkSurfaceCapabilitiesPresentBarrierNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_NV_present_barrier
+void cleanup_VkSwapchainPresentBarrierCreateInfoNV(
+    VkSwapchainPresentBarrierCreateInfoNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_extended_dynamic_state3
+void cleanup_VkPhysicalDeviceExtendedDynamicState3FeaturesEXT(
+    VkPhysicalDeviceExtendedDynamicState3FeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_extended_dynamic_state3
+void cleanup_VkPhysicalDeviceExtendedDynamicState3PropertiesEXT(
+    VkPhysicalDeviceExtendedDynamicState3PropertiesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_extended_dynamic_state3
+extern inline void cleanup_VkColorBlendEquationEXT(VkColorBlendEquationEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_extended_dynamic_state3
+extern inline void cleanup_VkColorBlendAdvancedEXT(VkColorBlendAdvancedEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_pipeline_protected_access
+void cleanup_VkPhysicalDevicePipelineProtectedAccessFeaturesEXT(
+    VkPhysicalDevicePipelineProtectedAccessFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+void cleanup_VkMicromapBuildInfoEXT(VkMicromapBuildInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pUsageCounts - usageCountsCount
+  if (pData->pUsageCounts != NULL) {
+    for (uint32_t i = 0; i < pData->usageCountsCount; ++i)
+      cleanup_VkMicromapUsageEXT(&pData->pUsageCounts[i]);
+  }
+  free((void *)pData->pUsageCounts);
+
+  // ppUsageCounts - usageCountsCount,1
+  for (uint32_t i = 0; i < pData->usageCountsCount; ++i) {
+    if (pData->ppUsageCounts[i] != NULL) {
+      for (uint32_t j = 0; j < pData->1 [i]; ++j)
+        cleanup_VkMicromapUsageEXT(&pData->ppUsageCounts[i][j]);
+    }
+    free((void *)pData->ppUsageCounts[i]);
+  }
+  free((void *)pData->ppUsageCounts);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+void cleanup_VkMicromapCreateInfoEXT(VkMicromapCreateInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+void cleanup_VkMicromapVersionInfoEXT(VkMicromapVersionInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pVersionData - 2*VK_UUID_SIZE
+  free((void *)pData->pVersionData);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+void cleanup_VkCopyMicromapInfoEXT(VkCopyMicromapInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+void cleanup_VkCopyMicromapToMemoryInfoEXT(VkCopyMicromapToMemoryInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+void cleanup_VkCopyMemoryToMicromapInfoEXT(VkCopyMemoryToMicromapInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+void cleanup_VkMicromapBuildSizesInfoEXT(VkMicromapBuildSizesInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+extern inline void cleanup_VkMicromapUsageEXT(VkMicromapUsageEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+extern inline void cleanup_VkMicromapTriangleEXT(VkMicromapTriangleEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+void cleanup_VkPhysicalDeviceOpacityMicromapFeaturesEXT(
+    VkPhysicalDeviceOpacityMicromapFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+void cleanup_VkPhysicalDeviceOpacityMicromapPropertiesEXT(
+    VkPhysicalDeviceOpacityMicromapPropertiesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+void cleanup_VkAccelerationStructureTrianglesOpacityMicromapEXT(
+    VkAccelerationStructureTrianglesOpacityMicromapEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pUsageCounts - usageCountsCount
+  if (pData->pUsageCounts != NULL) {
+    for (uint32_t i = 0; i < pData->usageCountsCount; ++i)
+      cleanup_VkMicromapUsageEXT(&pData->pUsageCounts[i]);
+  }
+  free((void *)pData->pUsageCounts);
+
+  // ppUsageCounts - usageCountsCount,1
+  for (uint32_t i = 0; i < pData->usageCountsCount; ++i) {
+    if (pData->ppUsageCounts[i] != NULL) {
+      for (uint32_t j = 0; j < pData->1 [i]; ++j)
+        cleanup_VkMicromapUsageEXT(&pData->ppUsageCounts[i][j]);
+    }
+    free((void *)pData->ppUsageCounts[i]);
+  }
+  free((void *)pData->ppUsageCounts);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_device_address_binding_report
+void cleanup_VkPhysicalDeviceAddressBindingReportFeaturesEXT(
+    VkPhysicalDeviceAddressBindingReportFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_device_address_binding_report
+void cleanup_VkDeviceAddressBindingCallbackDataEXT(
+    VkDeviceAddressBindingCallbackDataEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_NV_optical_flow
+void cleanup_VkPhysicalDeviceOpticalFlowFeaturesNV(
+    VkPhysicalDeviceOpticalFlowFeaturesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_NV_optical_flow
+void cleanup_VkPhysicalDeviceOpticalFlowPropertiesNV(
+    VkPhysicalDeviceOpticalFlowPropertiesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_NV_optical_flow
+void cleanup_VkOpticalFlowImageFormatInfoNV(VkOpticalFlowImageFormatInfoNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_NV_optical_flow
+void cleanup_VkOpticalFlowImageFormatPropertiesNV(
+    VkOpticalFlowImageFormatPropertiesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_NV_optical_flow
+void cleanup_VkOpticalFlowSessionCreateInfoNV(VkOpticalFlowSessionCreateInfoNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_NV_optical_flow
+void cleanup_VkOpticalFlowSessionCreatePrivateDataInfoNV(
+    VkOpticalFlowSessionCreatePrivateDataInfoNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pPrivateData
+  free((void *)pData->pPrivateData);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_NV_optical_flow
+void cleanup_VkOpticalFlowExecuteInfoNV(VkOpticalFlowExecuteInfoNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pRegions - regionCount
+  if (pData->pRegions != NULL) {
+    for (uint32_t i = 0; i < pData->regionCount; ++i)
+      cleanup_VkRect2D(&pData->pRegions[i]);
+  }
+  free((void *)pData->pRegions);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_device_fault
+void cleanup_VkPhysicalDeviceFaultFeaturesEXT(VkPhysicalDeviceFaultFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_device_fault
+extern inline void cleanup_VkDeviceFaultAddressInfoEXT(VkDeviceFaultAddressInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_device_fault
+extern inline void cleanup_VkDeviceFaultVendorInfoEXT(VkDeviceFaultVendorInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_device_fault
+void cleanup_VkDeviceFaultCountsEXT(VkDeviceFaultCountsEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_device_fault
+void cleanup_VkDeviceFaultInfoEXT(VkDeviceFaultInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pAddressInfos
+  if (pData->pAddressInfos != NULL)
+    cleanup_VkDeviceFaultAddressInfoEXT(pData->pAddressInfos);
+  free((void *)pData->pAddressInfos);
+
+  // pVendorInfos
+  if (pData->pVendorInfos != NULL)
+    cleanup_VkDeviceFaultVendorInfoEXT(pData->pVendorInfos);
+  free((void *)pData->pVendorInfos);
+
+  // pVendorBinaryData
+  free((void *)pData->pVendorBinaryData);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_EXT_device_fault
+extern inline void cleanup_VkDeviceFaultVendorBinaryHeaderVersionOneEXT(
+    VkDeviceFaultVendorBinaryHeaderVersionOneEXT const *pData);
 #endif
 
 #endif // VK_STRUCT_CLEANUP_CONFIG_MAIN
