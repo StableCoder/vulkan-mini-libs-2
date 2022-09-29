@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 228,
-              "VK_HEADER_VERSION is from after the maximum supported version of v228.");
+static_assert(VK_HEADER_VERSION <= 229,
+              "VK_HEADER_VERSION is from after the maximum supported version of v229.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 228,
-               "VK_HEADER_VERSION is from after the maximum supported version of v228.");
+_Static_assert(VK_HEADER_VERSION <= 229,
+               "VK_HEADER_VERSION is from after the maximum supported version of v229.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -4415,10 +4415,6 @@ void cleanup_VkVideoReferenceSlotInfoKHR(VkVideoReferenceSlotInfoKHR const *pDat
 void cleanup_VkVideoDecodeH264ProfileInfoEXT(VkVideoDecodeH264ProfileInfoEXT const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 225 && VK_EXT_video_decode_h264
-void cleanup_VkVideoDecodeH264MvcInfoEXT(VkVideoDecodeH264MvcInfoEXT const *pData);
-#endif
-
 #if VK_HEADER_VERSION >= 225 && VK_EXT_video_decode_h265
 void cleanup_VkVideoDecodeH265ProfileInfoEXT(VkVideoDecodeH265ProfileInfoEXT const *pData);
 #endif
@@ -4463,6 +4459,10 @@ void cleanup_VkVideoEncodeH265ReferenceListsInfoEXT(
 #if VK_HEADER_VERSION >= 225 && VK_EXT_rasterization_order_attachment_access
 void cleanup_VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT(
     VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 225 && VK_HEADER_VERSION <= 228 && VK_EXT_video_decode_h264
+void cleanup_VkVideoDecodeH264MvcInfoEXT(VkVideoDecodeH264MvcInfoEXT const *pData);
 #endif
 
 #if VK_HEADER_VERSION >= 226 && VK_EXT_mesh_shader
@@ -10613,13 +10613,6 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
-#if VK_HEADER_VERSION >= 225 && VK_EXT_video_decode_h264
-  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_MVC_INFO_EXT) {
-    cleanup_VkVideoDecodeH264MvcInfoEXT((VkVideoDecodeH264MvcInfoEXT const *)pData);
-    return;
-  }
-#endif
-
 #if VK_HEADER_VERSION >= 225 && VK_EXT_video_decode_h265
   if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_PROFILE_INFO_EXT) {
     cleanup_VkVideoDecodeH265ProfileInfoEXT((VkVideoDecodeH265ProfileInfoEXT const *)pData);
@@ -10693,6 +10686,13 @@ void cleanup_vk_struct(void const *pData) {
       VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RASTERIZATION_ORDER_ATTACHMENT_ACCESS_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT(
         (VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 225 && VK_HEADER_VERSION <= 228 && VK_EXT_video_decode_h264
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_MVC_INFO_EXT) {
+    cleanup_VkVideoDecodeH264MvcInfoEXT((VkVideoDecodeH264MvcInfoEXT const *)pData);
     return;
   }
 #endif
@@ -18077,11 +18077,25 @@ void cleanup_VkVideoDecodeH264SessionParametersAddInfoEXT(
     cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
+#if VK_HEADER_VERSION >= 229
+  // pStdSPSs - stdSPSCount
+  free((void *)pData->pStdSPSs);
+#endif
+
+#if VK_HEADER_VERSION >= 229
+  // pStdPPSs - stdPPSCount
+  free((void *)pData->pStdPPSs);
+#endif
+
+#if VK_HEADER_VERSION <= 228
   // pSpsStd - spsStdCount
   free((void *)pData->pSpsStd);
+#endif
 
+#if VK_HEADER_VERSION <= 228
   // pPpsStd - ppsStdCount
   free((void *)pData->pPpsStd);
+#endif
 }
 #endif
 
@@ -18110,8 +18124,15 @@ void cleanup_VkVideoDecodeH264PictureInfoEXT(VkVideoDecodeH264PictureInfoEXT con
   // pStdPictureInfo
   free((void *)pData->pStdPictureInfo);
 
+#if VK_HEADER_VERSION >= 229
+  // pSliceOffsets - sliceCount
+  free((void *)pData->pSliceOffsets);
+#endif
+
+#if VK_HEADER_VERSION <= 228
   // pSlicesDataOffsets - slicesCount
   free((void *)pData->pSlicesDataOffsets);
+#endif
 }
 #endif
 
@@ -18144,16 +18165,35 @@ void cleanup_VkVideoDecodeH265SessionParametersAddInfoEXT(
     cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
-#if VK_HEADER_VERSION >= 209
+#if VK_HEADER_VERSION >= 229
+  // pStdVPSs - stdVPSCount
+  free((void *)pData->pStdVPSs);
+#endif
+
+#if VK_HEADER_VERSION >= 229
+  // pStdSPSs - stdSPSCount
+  free((void *)pData->pStdSPSs);
+#endif
+
+#if VK_HEADER_VERSION >= 229
+  // pStdPPSs - stdPPSCount
+  free((void *)pData->pStdPPSs);
+#endif
+
+#if VK_HEADER_VERSION >= 209 && VK_HEADER_VERSION <= 228
   // pVpsStd - vpsStdCount
   free((void *)pData->pVpsStd);
 #endif
 
+#if VK_HEADER_VERSION <= 228
   // pSpsStd - spsStdCount
   free((void *)pData->pSpsStd);
+#endif
 
+#if VK_HEADER_VERSION <= 228
   // pPpsStd - ppsStdCount
   free((void *)pData->pPpsStd);
+#endif
 }
 #endif
 
@@ -18182,8 +18222,15 @@ void cleanup_VkVideoDecodeH265PictureInfoEXT(VkVideoDecodeH265PictureInfoEXT con
   // pStdPictureInfo
   free((void *)pData->pStdPictureInfo);
 
+#if VK_HEADER_VERSION >= 229
+  // pSliceOffsets - sliceCount
+  free((void *)pData->pSliceOffsets);
+#endif
+
+#if VK_HEADER_VERSION <= 228
   // pSlicesDataOffsets - slicesCount
   free((void *)pData->pSlicesDataOffsets);
+#endif
 }
 #endif
 
@@ -18330,11 +18377,25 @@ void cleanup_VkVideoEncodeH264SessionParametersAddInfoEXT(
     cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
+#if VK_HEADER_VERSION >= 229
+  // pStdSPSs - stdSPSCount
+  free((void *)pData->pStdSPSs);
+#endif
+
+#if VK_HEADER_VERSION >= 229
+  // pStdPPSs - stdPPSCount
+  free((void *)pData->pStdPPSs);
+#endif
+
+#if VK_HEADER_VERSION <= 228
   // pSpsStd - spsStdCount
   free((void *)pData->pSpsStd);
+#endif
 
+#if VK_HEADER_VERSION <= 228
   // pPpsStd - ppsStdCount
   free((void *)pData->pPpsStd);
+#endif
 }
 #endif
 
@@ -19249,14 +19310,35 @@ void cleanup_VkVideoEncodeH265SessionParametersAddInfoEXT(
     cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
+#if VK_HEADER_VERSION >= 229
+  // pStdVPSs - stdVPSCount
+  free((void *)pData->pStdVPSs);
+#endif
+
+#if VK_HEADER_VERSION >= 229
+  // pStdSPSs - stdSPSCount
+  free((void *)pData->pStdSPSs);
+#endif
+
+#if VK_HEADER_VERSION >= 229
+  // pStdPPSs - stdPPSCount
+  free((void *)pData->pStdPPSs);
+#endif
+
+#if VK_HEADER_VERSION <= 228
   // pVpsStd - vpsStdCount
   free((void *)pData->pVpsStd);
+#endif
 
+#if VK_HEADER_VERSION <= 228
   // pSpsStd - spsStdCount
   free((void *)pData->pSpsStd);
+#endif
 
+#if VK_HEADER_VERSION <= 228
   // pPpsStd - ppsStdCount
   free((void *)pData->pPpsStd);
+#endif
 }
 #endif
 
@@ -21087,18 +21169,6 @@ void cleanup_VkVideoDecodeH264ProfileInfoEXT(VkVideoDecodeH264ProfileInfoEXT con
 }
 #endif
 
-#if VK_HEADER_VERSION >= 225 && VK_EXT_video_decode_h264
-void cleanup_VkVideoDecodeH264MvcInfoEXT(VkVideoDecodeH264MvcInfoEXT const *pData) {
-  // pNext
-  if (pData->pNext != NULL)
-    cleanup_vk_struct(pData->pNext);
-  free((void *)pData->pNext);
-
-  // pStdMvc
-  free((void *)pData->pStdMvc);
-}
-#endif
-
 #if VK_HEADER_VERSION >= 225 && VK_EXT_video_decode_h265
 void cleanup_VkVideoDecodeH265ProfileInfoEXT(VkVideoDecodeH265ProfileInfoEXT const *pData) {
   // pNext
@@ -21248,6 +21318,18 @@ void cleanup_VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT(
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 225 && VK_HEADER_VERSION <= 228 && VK_EXT_video_decode_h264
+void cleanup_VkVideoDecodeH264MvcInfoEXT(VkVideoDecodeH264MvcInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pStdMvc
+  free((void *)pData->pStdMvc);
 }
 #endif
 
