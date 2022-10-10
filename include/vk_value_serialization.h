@@ -3791,7 +3791,6 @@ bool parseValue(char const *pValueStr,
  */
 char *formatString(char **ppStart, char *pEnd) {
   // Trim left
-  size_t cutOffset = 0;
   for (; *ppStart != pEnd;) {
     if (isalnum(**ppStart))
       break;
@@ -3801,7 +3800,6 @@ char *formatString(char **ppStart, char *pEnd) {
 
   // Trim right
   char *pNewEnd = *ppStart;
-  cutOffset = 0;
   for (char *ch = *ppStart; ch < pEnd; ++ch) {
     if (isalnum(*ch))
       pNewEnd = ch + 1;
