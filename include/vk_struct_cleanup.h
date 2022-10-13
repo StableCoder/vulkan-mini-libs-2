@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 230,
-              "VK_HEADER_VERSION is from after the maximum supported version of v230.");
+static_assert(VK_HEADER_VERSION <= 231,
+              "VK_HEADER_VERSION is from after the maximum supported version of v231.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 230,
-               "VK_HEADER_VERSION is from after the maximum supported version of v230.");
+_Static_assert(VK_HEADER_VERSION <= 231,
+               "VK_HEADER_VERSION is from after the maximum supported version of v231.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -4666,6 +4666,16 @@ void cleanup_VkDeviceFaultInfoEXT(VkDeviceFaultInfoEXT const *pData);
 #if VK_HEADER_VERSION >= 230 && VK_EXT_device_fault
 inline void cleanup_VkDeviceFaultVendorBinaryHeaderVersionOneEXT(
     VkDeviceFaultVendorBinaryHeaderVersionOneEXT const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 231 && VK_ARM_shader_core_builtins
+void cleanup_VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM(
+    VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 231 && VK_ARM_shader_core_builtins
+void cleanup_VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM(
+    VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -11122,6 +11132,22 @@ void cleanup_vk_struct(void const *pData) {
 #if VK_HEADER_VERSION >= 230 && VK_EXT_device_fault
   if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_FAULT_INFO_EXT) {
     cleanup_VkDeviceFaultInfoEXT((VkDeviceFaultInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 231 && VK_ARM_shader_core_builtins
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_PROPERTIES_ARM) {
+    cleanup_VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM(
+        (VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 231 && VK_ARM_shader_core_builtins
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_CORE_BUILTINS_FEATURES_ARM) {
+    cleanup_VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM(
+        (VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM const *)pData);
     return;
   }
 #endif
@@ -22151,6 +22177,26 @@ void cleanup_VkDeviceFaultInfoEXT(VkDeviceFaultInfoEXT const *pData) {
 #if VK_HEADER_VERSION >= 230 && VK_EXT_device_fault
 extern inline void cleanup_VkDeviceFaultVendorBinaryHeaderVersionOneEXT(
     VkDeviceFaultVendorBinaryHeaderVersionOneEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 231 && VK_ARM_shader_core_builtins
+void cleanup_VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM(
+    VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 231 && VK_ARM_shader_core_builtins
+void cleanup_VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM(
+    VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
 #endif
 
 #endif // VK_STRUCT_CLEANUP_CONFIG_MAIN

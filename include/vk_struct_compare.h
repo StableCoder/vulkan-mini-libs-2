@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 230,
-              "VK_HEADER_VERSION is from after the maximum supported version of v230.");
+static_assert(VK_HEADER_VERSION <= 231,
+              "VK_HEADER_VERSION is from after the maximum supported version of v231.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 230,
-               "VK_HEADER_VERSION is from after the maximum supported version of v230.");
+_Static_assert(VK_HEADER_VERSION <= 231,
+               "VK_HEADER_VERSION is from after the maximum supported version of v231.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -5143,6 +5143,18 @@ bool compare_VkDeviceFaultInfoEXT(VkDeviceFaultInfoEXT const *s1, VkDeviceFaultI
 bool compare_VkDeviceFaultVendorBinaryHeaderVersionOneEXT(
     VkDeviceFaultVendorBinaryHeaderVersionOneEXT const *s1,
     VkDeviceFaultVendorBinaryHeaderVersionOneEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 231 && VK_ARM_shader_core_builtins
+bool compare_VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM(
+    VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM const *s1,
+    VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 231 && VK_ARM_shader_core_builtins
+bool compare_VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM(
+    VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM const *s1,
+    VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 225 && VK_HEADER_VERSION <= 228 && VK_EXT_video_decode_h264
@@ -18071,6 +18083,29 @@ bool compare_VkDeviceFaultVendorBinaryHeaderVersionOneEXT(
     if (s1->pipelineCacheUUID[i] != s2->pipelineCacheUUID[i])
       return false;
   }
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 231 && VK_ARM_shader_core_builtins
+bool compare_VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM(
+    VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM const *s1,
+    VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM const *s2) {
+  if ((s1->shaderCoreCount != s2->shaderCoreCount) ||
+      (s1->shaderWarpsPerCore != s2->shaderWarpsPerCore) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 231 && VK_ARM_shader_core_builtins
+bool compare_VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM(
+    VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM const *s1,
+    VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM const *s2) {
+  if ((s1->shaderCoreBuiltins != s2->shaderCoreBuiltins) || false)
+    return false;
 
   return true;
 }
