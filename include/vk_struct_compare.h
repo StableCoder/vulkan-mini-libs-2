@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 231,
-              "VK_HEADER_VERSION is from after the maximum supported version of v231.");
+static_assert(VK_HEADER_VERSION <= 232,
+              "VK_HEADER_VERSION is from after the maximum supported version of v232.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 231,
-               "VK_HEADER_VERSION is from after the maximum supported version of v231.");
+_Static_assert(VK_HEADER_VERSION <= 232,
+               "VK_HEADER_VERSION is from after the maximum supported version of v232.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -18092,7 +18092,11 @@ bool compare_VkDeviceFaultVendorBinaryHeaderVersionOneEXT(
 bool compare_VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM(
     VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM const *s1,
     VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM const *s2) {
-  if ((s1->shaderCoreCount != s2->shaderCoreCount) ||
+  if (
+#if VK_HEADER_VERSION >= 232
+      (s1->shaderCoreMask != s2->shaderCoreMask) ||
+#endif
+      (s1->shaderCoreCount != s2->shaderCoreCount) ||
       (s1->shaderWarpsPerCore != s2->shaderWarpsPerCore) || false)
     return false;
 

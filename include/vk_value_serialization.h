@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 231,
-              "VK_HEADER_VERSION is from after the maximum supported version of v231.");
+static_assert(VK_HEADER_VERSION <= 232,
+              "VK_HEADER_VERSION is from after the maximum supported version of v232.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 231,
-               "VK_HEADER_VERSION is from after the maximum supported version of v231.");
+_Static_assert(VK_HEADER_VERSION <= 232,
+               "VK_HEADER_VERSION is from after the maximum supported version of v232.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -1234,6 +1234,7 @@ EnumValueSet const VkSwapchainCreateFlagsKHRSets[] = {
     {"PROTECTED", 0x00000002, false},
     {"MUTABLE_FORMAT", 0x00000004, false},
     {"RESERVED_3_BIT_SEC", 0x00000008, false},
+    {"RESERVED_4_BIT_EXT", 0x00000010, false},
 };
 
 EnumValueSet const VkPeerMemoryFeatureFlagsSets[] = {
@@ -3347,7 +3348,7 @@ EnumType const cEnumTypes[312] = {
     {"VkCompositeAlphaFlagsKHR", VkCompositeAlphaFlagsKHRSets, 4},
     {"VkDisplayPlaneAlphaFlagsKHR", VkDisplayPlaneAlphaFlagsKHRSets, 4},
     {"VkSurfaceTransformFlagsKHR", VkSurfaceTransformFlagsKHRSets, 9},
-    {"VkSwapchainCreateFlagsKHR", VkSwapchainCreateFlagsKHRSets, 4},
+    {"VkSwapchainCreateFlagsKHR", VkSwapchainCreateFlagsKHRSets, 5},
     {"VkDisplayModeCreateFlagsKHR", NULL, 0},
     {"VkDisplaySurfaceCreateFlagsKHR", NULL, 0},
     {"VkAndroidSurfaceCreateFlagsKHR", NULL, 0},
