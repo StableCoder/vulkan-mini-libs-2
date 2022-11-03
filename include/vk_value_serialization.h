@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 232,
-              "VK_HEADER_VERSION is from after the maximum supported version of v232.");
+static_assert(VK_HEADER_VERSION <= 233,
+              "VK_HEADER_VERSION is from after the maximum supported version of v233.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 232,
-               "VK_HEADER_VERSION is from after the maximum supported version of v232.");
+_Static_assert(VK_HEADER_VERSION <= 233,
+               "VK_HEADER_VERSION is from after the maximum supported version of v233.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -1191,6 +1191,10 @@ EnumValueSet const VkRenderingFlagsSets[] = {
     {"RESUMING_BIT_KHR", 0x00000004, true},
     {"RESERVED_3_BIT_EXT", 0x00000008, false},
     {"ENABLE_LEGACY_DITHERING_BIT_EXT", 0x00000008, false},
+};
+
+EnumValueSet const VkMemoryDecompressionMethodFlagsNVSets[] = {
+    {"GDEFLATE_1_0", 0x00000001, false},
 };
 
 EnumValueSet const VkBuildMicromapFlagsEXTSets[] = {
@@ -2535,6 +2539,11 @@ EnumValueSet const VkObjectTypeSets[] = {
     {"OPTICAL_FLOW_SESSION_NV", 1000464000, false},
 };
 
+EnumValueSet const VkRayTracingInvocationReorderModeNVSets[] = {
+    {"NONE", 0, false},
+    {"REORDER", 1, false},
+};
+
 EnumValueSet const VkIndirectCommandsTokenTypeNVSets[] = {
     {"SHADER_GROUP", 0, false},
     {"STATE_FLAGS", 1, false},
@@ -3262,7 +3271,7 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[312] = {
+EnumType const cEnumTypes[314] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", NULL, 0},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 3},
@@ -3343,6 +3352,7 @@ EnumType const cEnumTypes[312] = {
     {"VkAccelerationStructureMotionInstanceFlagsNV", NULL, 0},
     {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Sets, 80},
     {"VkRenderingFlags", VkRenderingFlagsSets, 8},
+    {"VkMemoryDecompressionMethodFlagsNV", VkMemoryDecompressionMethodFlagsNVSets, 1},
     {"VkBuildMicromapFlagsEXT", VkBuildMicromapFlagsEXTSets, 3},
     {"VkMicromapCreateFlagsEXT", VkMicromapCreateFlagsEXTSets, 1},
     {"VkCompositeAlphaFlagsKHR", VkCompositeAlphaFlagsKHRSets, 4},
@@ -3474,6 +3484,7 @@ EnumType const cEnumTypes[312] = {
     {"VkSamplerMipmapMode", VkSamplerMipmapModeSets, 2},
     {"VkVertexInputRate", VkVertexInputRateSets, 2},
     {"VkObjectType", VkObjectTypeSets, 54},
+    {"VkRayTracingInvocationReorderModeNV", VkRayTracingInvocationReorderModeNVSets, 2},
     {"VkIndirectCommandsTokenTypeNV", VkIndirectCommandsTokenTypeNVSets, 9},
     {"VkDescriptorUpdateTemplateType", VkDescriptorUpdateTemplateTypeSets, 3},
     {"VkViewportCoordinateSwizzleNV", VkViewportCoordinateSwizzleNVSets, 8},

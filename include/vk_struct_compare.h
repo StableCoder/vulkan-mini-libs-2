@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 232,
-              "VK_HEADER_VERSION is from after the maximum supported version of v232.");
+static_assert(VK_HEADER_VERSION <= 233,
+              "VK_HEADER_VERSION is from after the maximum supported version of v233.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 232,
-               "VK_HEADER_VERSION is from after the maximum supported version of v232.");
+_Static_assert(VK_HEADER_VERSION <= 233,
+               "VK_HEADER_VERSION is from after the maximum supported version of v233.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -171,6 +171,16 @@ bool compare_VkImageCopy(VkImageCopy const *s1, VkImageCopy const *s2);
 bool compare_VkImageBlit(VkImageBlit const *s1, VkImageBlit const *s2);
 
 bool compare_VkBufferImageCopy(VkBufferImageCopy const *s1, VkBufferImageCopy const *s2);
+
+#if VK_HEADER_VERSION >= 233 && VK_NV_copy_memory_indirect
+bool compare_VkCopyMemoryIndirectCommandNV(VkCopyMemoryIndirectCommandNV const *s1,
+                                           VkCopyMemoryIndirectCommandNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 233 && VK_NV_copy_memory_indirect
+bool compare_VkCopyMemoryToImageIndirectCommandNV(VkCopyMemoryToImageIndirectCommandNV const *s1,
+                                                  VkCopyMemoryToImageIndirectCommandNV const *s2);
+#endif
 
 bool compare_VkImageResolve(VkImageResolve const *s1, VkImageResolve const *s2);
 
@@ -2540,6 +2550,30 @@ bool compare_VkPhysicalDeviceShaderImageFootprintFeaturesNV(
 bool compare_VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV(
     VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV const *s1,
     VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 233 && VK_NV_copy_memory_indirect
+bool compare_VkPhysicalDeviceCopyMemoryIndirectFeaturesNV(
+    VkPhysicalDeviceCopyMemoryIndirectFeaturesNV const *s1,
+    VkPhysicalDeviceCopyMemoryIndirectFeaturesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 233 && VK_NV_copy_memory_indirect
+bool compare_VkPhysicalDeviceCopyMemoryIndirectPropertiesNV(
+    VkPhysicalDeviceCopyMemoryIndirectPropertiesNV const *s1,
+    VkPhysicalDeviceCopyMemoryIndirectPropertiesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 233 && VK_NV_memory_decompression
+bool compare_VkPhysicalDeviceMemoryDecompressionFeaturesNV(
+    VkPhysicalDeviceMemoryDecompressionFeaturesNV const *s1,
+    VkPhysicalDeviceMemoryDecompressionFeaturesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 233 && VK_NV_memory_decompression
+bool compare_VkPhysicalDeviceMemoryDecompressionPropertiesNV(
+    VkPhysicalDeviceMemoryDecompressionPropertiesNV const *s1,
+    VkPhysicalDeviceMemoryDecompressionPropertiesNV const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 85 && VK_NV_shading_rate_image
@@ -5145,6 +5179,11 @@ bool compare_VkDeviceFaultVendorBinaryHeaderVersionOneEXT(
     VkDeviceFaultVendorBinaryHeaderVersionOneEXT const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 233 && VK_NV_memory_decompression
+bool compare_VkDecompressMemoryRegionNV(VkDecompressMemoryRegionNV const *s1,
+                                        VkDecompressMemoryRegionNV const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 231 && VK_ARM_shader_core_builtins
 bool compare_VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM(
     VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM const *s1,
@@ -5155,6 +5194,18 @@ bool compare_VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM(
 bool compare_VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM(
     VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM const *s1,
     VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 233 && VK_NV_ray_tracing_invocation_reorder
+bool compare_VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV(
+    VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV const *s1,
+    VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 233 && VK_NV_ray_tracing_invocation_reorder
+bool compare_VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV(
+    VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV const *s1,
+    VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 225 && VK_HEADER_VERSION <= 228 && VK_EXT_video_decode_h264
@@ -5980,6 +6031,31 @@ bool compare_VkBufferImageCopy(VkBufferImageCopy const *s1, VkBufferImageCopy co
 
   return true;
 }
+
+#if VK_HEADER_VERSION >= 233 && VK_NV_copy_memory_indirect
+bool compare_VkCopyMemoryIndirectCommandNV(VkCopyMemoryIndirectCommandNV const *s1,
+                                           VkCopyMemoryIndirectCommandNV const *s2) {
+  if ((s1->srcAddress != s2->srcAddress) || (s1->dstAddress != s2->dstAddress) ||
+      (s1->size != s2->size) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 233 && VK_NV_copy_memory_indirect
+bool compare_VkCopyMemoryToImageIndirectCommandNV(VkCopyMemoryToImageIndirectCommandNV const *s1,
+                                                  VkCopyMemoryToImageIndirectCommandNV const *s2) {
+  if ((s1->srcAddress != s2->srcAddress) || (s1->bufferRowLength != s2->bufferRowLength) ||
+      (s1->bufferImageHeight != s2->bufferImageHeight) ||
+      !compare_VkImageSubresourceLayers(&s1->imageSubresource, &s2->imageSubresource) ||
+      !compare_VkOffset3D(&s1->imageOffset, &s2->imageOffset) ||
+      !compare_VkExtent3D(&s1->imageExtent, &s2->imageExtent) || false)
+    return false;
+
+  return true;
+}
+#endif
 
 bool compare_VkImageResolve(VkImageResolve const *s1, VkImageResolve const *s2) {
   if (!compare_VkImageSubresourceLayers(&s1->srcSubresource, &s2->srcSubresource) ||
@@ -11428,6 +11504,51 @@ bool compare_VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV(
     VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV const *s1,
     VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV const *s2) {
   if ((s1->dedicatedAllocationImageAliasing != s2->dedicatedAllocationImageAliasing) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 233 && VK_NV_copy_memory_indirect
+bool compare_VkPhysicalDeviceCopyMemoryIndirectFeaturesNV(
+    VkPhysicalDeviceCopyMemoryIndirectFeaturesNV const *s1,
+    VkPhysicalDeviceCopyMemoryIndirectFeaturesNV const *s2) {
+  if ((s1->indirectCopy != s2->indirectCopy) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 233 && VK_NV_copy_memory_indirect
+bool compare_VkPhysicalDeviceCopyMemoryIndirectPropertiesNV(
+    VkPhysicalDeviceCopyMemoryIndirectPropertiesNV const *s1,
+    VkPhysicalDeviceCopyMemoryIndirectPropertiesNV const *s2) {
+  if ((s1->supportedQueues != s2->supportedQueues) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 233 && VK_NV_memory_decompression
+bool compare_VkPhysicalDeviceMemoryDecompressionFeaturesNV(
+    VkPhysicalDeviceMemoryDecompressionFeaturesNV const *s1,
+    VkPhysicalDeviceMemoryDecompressionFeaturesNV const *s2) {
+  if ((s1->memoryDecompression != s2->memoryDecompression) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 233 && VK_NV_memory_decompression
+bool compare_VkPhysicalDeviceMemoryDecompressionPropertiesNV(
+    VkPhysicalDeviceMemoryDecompressionPropertiesNV const *s1,
+    VkPhysicalDeviceMemoryDecompressionPropertiesNV const *s2) {
+  if ((s1->decompressionMethods != s2->decompressionMethods) ||
+      (s1->maxDecompressionIndirectCount != s2->maxDecompressionIndirectCount) || false)
     return false;
 
   return true;
@@ -18088,6 +18209,19 @@ bool compare_VkDeviceFaultVendorBinaryHeaderVersionOneEXT(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 233 && VK_NV_memory_decompression
+bool compare_VkDecompressMemoryRegionNV(VkDecompressMemoryRegionNV const *s1,
+                                        VkDecompressMemoryRegionNV const *s2) {
+  if ((s1->srcAddress != s2->srcAddress) || (s1->dstAddress != s2->dstAddress) ||
+      (s1->compressedSize != s2->compressedSize) ||
+      (s1->decompressedSize != s2->decompressedSize) ||
+      (s1->decompressionMethod != s2->decompressionMethod) || false)
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 231 && VK_ARM_shader_core_builtins
 bool compare_VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM(
     VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM const *s1,
@@ -18109,6 +18243,30 @@ bool compare_VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM(
     VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM const *s1,
     VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM const *s2) {
   if ((s1->shaderCoreBuiltins != s2->shaderCoreBuiltins) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 233 && VK_NV_ray_tracing_invocation_reorder
+bool compare_VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV(
+    VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV const *s1,
+    VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV const *s2) {
+  if ((s1->rayTracingInvocationReorder != s2->rayTracingInvocationReorder) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 233 && VK_NV_ray_tracing_invocation_reorder
+bool compare_VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV(
+    VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV const *s1,
+    VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV const *s2) {
+  if ((s1->rayTracingInvocationReorderReorderingHint !=
+       s2->rayTracingInvocationReorderReorderingHint) ||
+      false)
     return false;
 
   return true;
