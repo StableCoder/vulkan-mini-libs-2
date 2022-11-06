@@ -4890,11 +4890,6 @@ bool compare_VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT(
 #endif
 
 #if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
-bool compare_VkMicromapBuildInfoEXT(VkMicromapBuildInfoEXT const *s1,
-                                    VkMicromapBuildInfoEXT const *s2);
-#endif
-
-#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
 bool compare_VkMicromapCreateInfoEXT(VkMicromapCreateInfoEXT const *s1,
                                      VkMicromapCreateInfoEXT const *s2);
 #endif
@@ -4907,16 +4902,6 @@ bool compare_VkMicromapVersionInfoEXT(VkMicromapVersionInfoEXT const *s1,
 #if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
 bool compare_VkCopyMicromapInfoEXT(VkCopyMicromapInfoEXT const *s1,
                                    VkCopyMicromapInfoEXT const *s2);
-#endif
-
-#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
-bool compare_VkCopyMicromapToMemoryInfoEXT(VkCopyMicromapToMemoryInfoEXT const *s1,
-                                           VkCopyMicromapToMemoryInfoEXT const *s2);
-#endif
-
-#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
-bool compare_VkCopyMemoryToMicromapInfoEXT(VkCopyMemoryToMicromapInfoEXT const *s1,
-                                           VkCopyMemoryToMicromapInfoEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
@@ -4943,12 +4928,6 @@ bool compare_VkPhysicalDeviceOpacityMicromapFeaturesEXT(
 bool compare_VkPhysicalDeviceOpacityMicromapPropertiesEXT(
     VkPhysicalDeviceOpacityMicromapPropertiesEXT const *s1,
     VkPhysicalDeviceOpacityMicromapPropertiesEXT const *s2);
-#endif
-
-#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
-bool compare_VkAccelerationStructureTrianglesOpacityMicromapEXT(
-    VkAccelerationStructureTrianglesOpacityMicromapEXT const *s1,
-    VkAccelerationStructureTrianglesOpacityMicromapEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 213 && VK_EXT_pipeline_properties
@@ -17582,20 +17561,6 @@ bool compare_VkPhysicalDeviceSubpassMergeFeedbackFeaturesEXT(
 #endif
 
 #if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
-bool compare_VkMicromapBuildInfoEXT(VkMicromapBuildInfoEXT const *s1,
-                                    VkMicromapBuildInfoEXT const *s2) {
-  if ((s1->type != s2->type) || (s1->flags != s2->flags) || (s1->mode != s2->mode) ||
-      (s1->dstMicromap != s2->dstMicromap) || (s1->usageCountsCount != s2->usageCountsCount) ||
-      (s1->data != s2->data) || (s1->scratchData != s2->scratchData) ||
-      (s1->triangleArray != s2->triangleArray) ||
-      (s1->triangleArrayStride != s2->triangleArrayStride) || false)
-    return false;
-
-  return true;
-}
-#endif
-
-#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
 bool compare_VkMicromapCreateInfoEXT(VkMicromapCreateInfoEXT const *s1,
                                      VkMicromapCreateInfoEXT const *s2) {
   if ((s1->createFlags != s2->createFlags) || (s1->buffer != s2->buffer) ||
@@ -17617,26 +17582,6 @@ bool compare_VkMicromapVersionInfoEXT(VkMicromapVersionInfoEXT const *s1,
 #if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
 bool compare_VkCopyMicromapInfoEXT(VkCopyMicromapInfoEXT const *s1,
                                    VkCopyMicromapInfoEXT const *s2) {
-  if ((s1->src != s2->src) || (s1->dst != s2->dst) || (s1->mode != s2->mode) || false)
-    return false;
-
-  return true;
-}
-#endif
-
-#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
-bool compare_VkCopyMicromapToMemoryInfoEXT(VkCopyMicromapToMemoryInfoEXT const *s1,
-                                           VkCopyMicromapToMemoryInfoEXT const *s2) {
-  if ((s1->src != s2->src) || (s1->dst != s2->dst) || (s1->mode != s2->mode) || false)
-    return false;
-
-  return true;
-}
-#endif
-
-#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
-bool compare_VkCopyMemoryToMicromapInfoEXT(VkCopyMemoryToMicromapInfoEXT const *s1,
-                                           VkCopyMemoryToMicromapInfoEXT const *s2) {
   if ((s1->src != s2->src) || (s1->dst != s2->dst) || (s1->mode != s2->mode) || false)
     return false;
 
@@ -17694,19 +17639,6 @@ bool compare_VkPhysicalDeviceOpacityMicromapPropertiesEXT(
     VkPhysicalDeviceOpacityMicromapPropertiesEXT const *s2) {
   if ((s1->maxOpacity2StateSubdivisionLevel != s2->maxOpacity2StateSubdivisionLevel) ||
       (s1->maxOpacity4StateSubdivisionLevel != s2->maxOpacity4StateSubdivisionLevel) || false)
-    return false;
-
-  return true;
-}
-#endif
-
-#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
-bool compare_VkAccelerationStructureTrianglesOpacityMicromapEXT(
-    VkAccelerationStructureTrianglesOpacityMicromapEXT const *s1,
-    VkAccelerationStructureTrianglesOpacityMicromapEXT const *s2) {
-  if ((s1->indexType != s2->indexType) || (s1->indexBuffer != s2->indexBuffer) ||
-      (s1->indexStride != s2->indexStride) || (s1->baseTriangle != s2->baseTriangle) ||
-      (s1->usageCountsCount != s2->usageCountsCount) || (s1->micromap != s2->micromap) || false)
     return false;
 
   return true;

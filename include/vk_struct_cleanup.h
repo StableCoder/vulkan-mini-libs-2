@@ -4551,10 +4551,6 @@ void cleanup_VkPhysicalDevicePipelineProtectedAccessFeaturesEXT(
 #endif
 
 #if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
-void cleanup_VkMicromapBuildInfoEXT(VkMicromapBuildInfoEXT const *pData);
-#endif
-
-#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
 void cleanup_VkMicromapCreateInfoEXT(VkMicromapCreateInfoEXT const *pData);
 #endif
 
@@ -4594,11 +4590,6 @@ void cleanup_VkPhysicalDeviceOpacityMicromapFeaturesEXT(
 #if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
 void cleanup_VkPhysicalDeviceOpacityMicromapPropertiesEXT(
     VkPhysicalDeviceOpacityMicromapPropertiesEXT const *pData);
-#endif
-
-#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
-void cleanup_VkAccelerationStructureTrianglesOpacityMicromapEXT(
-    VkAccelerationStructureTrianglesOpacityMicromapEXT const *pData);
 #endif
 
 #if VK_HEADER_VERSION >= 230 && VK_EXT_device_address_binding_report
@@ -11017,13 +11008,6 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
-  if (pTemp->sType == VK_STRUCTURE_TYPE_MICROMAP_BUILD_INFO_EXT) {
-    cleanup_VkMicromapBuildInfoEXT((VkMicromapBuildInfoEXT const *)pData);
-    return;
-  }
-#endif
-
-#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
   if (pTemp->sType == VK_STRUCTURE_TYPE_MICROMAP_CREATE_INFO_EXT) {
     cleanup_VkMicromapCreateInfoEXT((VkMicromapCreateInfoEXT const *)pData);
     return;
@@ -11077,14 +11061,6 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_OPACITY_MICROMAP_PROPERTIES_EXT) {
     cleanup_VkPhysicalDeviceOpacityMicromapPropertiesEXT(
         (VkPhysicalDeviceOpacityMicromapPropertiesEXT const *)pData);
-    return;
-  }
-#endif
-
-#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
-  if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_OPACITY_MICROMAP_EXT) {
-    cleanup_VkAccelerationStructureTrianglesOpacityMicromapEXT(
-        (VkAccelerationStructureTrianglesOpacityMicromapEXT const *)pData);
     return;
   }
 #endif
@@ -21985,32 +21961,6 @@ void cleanup_VkPhysicalDevicePipelineProtectedAccessFeaturesEXT(
 #endif
 
 #if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
-void cleanup_VkMicromapBuildInfoEXT(VkMicromapBuildInfoEXT const *pData) {
-  // pNext
-  if (pData->pNext != NULL)
-    cleanup_vk_struct(pData->pNext);
-  free((void *)pData->pNext);
-
-  // pUsageCounts - usageCountsCount
-  if (pData->pUsageCounts != NULL) {
-    for (uint32_t i = 0; i < pData->usageCountsCount; ++i)
-      cleanup_VkMicromapUsageEXT(&pData->pUsageCounts[i]);
-  }
-  free((void *)pData->pUsageCounts);
-
-  // ppUsageCounts - usageCountsCount,1
-  for (uint32_t i = 0; i < pData->usageCountsCount; ++i) {
-    if (pData->ppUsageCounts[i] != NULL) {
-      for (uint32_t j = 0; j < pData->1 [i]; ++j)
-        cleanup_VkMicromapUsageEXT(&pData->ppUsageCounts[i][j]);
-    }
-    free((void *)pData->ppUsageCounts[i]);
-  }
-  free((void *)pData->ppUsageCounts);
-}
-#endif
-
-#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
 void cleanup_VkMicromapCreateInfoEXT(VkMicromapCreateInfoEXT const *pData) {
   // pNext
   if (pData->pNext != NULL)
@@ -22092,33 +22042,6 @@ void cleanup_VkPhysicalDeviceOpacityMicromapPropertiesEXT(
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
-}
-#endif
-
-#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
-void cleanup_VkAccelerationStructureTrianglesOpacityMicromapEXT(
-    VkAccelerationStructureTrianglesOpacityMicromapEXT const *pData) {
-  // pNext
-  if (pData->pNext != NULL)
-    cleanup_vk_struct(pData->pNext);
-  free((void *)pData->pNext);
-
-  // pUsageCounts - usageCountsCount
-  if (pData->pUsageCounts != NULL) {
-    for (uint32_t i = 0; i < pData->usageCountsCount; ++i)
-      cleanup_VkMicromapUsageEXT(&pData->pUsageCounts[i]);
-  }
-  free((void *)pData->pUsageCounts);
-
-  // ppUsageCounts - usageCountsCount,1
-  for (uint32_t i = 0; i < pData->usageCountsCount; ++i) {
-    if (pData->ppUsageCounts[i] != NULL) {
-      for (uint32_t j = 0; j < pData->1 [i]; ++j)
-        cleanup_VkMicromapUsageEXT(&pData->ppUsageCounts[i][j]);
-    }
-    free((void *)pData->ppUsageCounts[i]);
-  }
-  free((void *)pData->ppUsageCounts);
 }
 #endif
 

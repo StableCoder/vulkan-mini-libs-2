@@ -13,3 +13,7 @@ VkCopyAccelerationStructureToMemoryInfoKHR:
 VkCopyMemoryToAccelerationStructureInfoKHR:
 VkAccelerationStructureGeometryInstancesDataKHR:
 VkAccelerationStructureGeometryKHR:
+VkMicromapBuildInfoEXT:
+VkAccelerationStructureTrianglesOpacityMicromapEXT:
+VkCopyMicromapToMemoryInfoEXT:
+VkCopyMemoryToMicromapInfoEXT:

@@ -1,1 +1,3 @@
 VkAccelerationStructureBuildGeometryInfoKHR:
+VkMicromapBuildInfoEXT:
+VkAccelerationStructureTrianglesOpacityMicromapEXT:
