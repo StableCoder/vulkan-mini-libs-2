@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 234,
-              "VK_HEADER_VERSION is from after the maximum supported version of v234.");
+static_assert(VK_HEADER_VERSION <= 235,
+              "VK_HEADER_VERSION is from after the maximum supported version of v235.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 234,
-               "VK_HEADER_VERSION is from after the maximum supported version of v234.");
+_Static_assert(VK_HEADER_VERSION <= 235,
+               "VK_HEADER_VERSION is from after the maximum supported version of v235.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -4509,6 +4509,78 @@ bool compare_VkCuFunctionCreateInfoNVX(VkCuFunctionCreateInfoNVX const *s1,
 
 #if VK_HEADER_VERSION >= 178 && VK_NVX_binary_import
 bool compare_VkCuLaunchInfoNVX(VkCuLaunchInfoNVX const *s1, VkCuLaunchInfoNVX const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+bool compare_VkPhysicalDeviceDescriptorBufferFeaturesEXT(
+    VkPhysicalDeviceDescriptorBufferFeaturesEXT const *s1,
+    VkPhysicalDeviceDescriptorBufferFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+bool compare_VkPhysicalDeviceDescriptorBufferPropertiesEXT(
+    VkPhysicalDeviceDescriptorBufferPropertiesEXT const *s1,
+    VkPhysicalDeviceDescriptorBufferPropertiesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+bool compare_VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT(
+    VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT const *s1,
+    VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+bool compare_VkDescriptorAddressInfoEXT(VkDescriptorAddressInfoEXT const *s1,
+                                        VkDescriptorAddressInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+bool compare_VkDescriptorBufferBindingInfoEXT(VkDescriptorBufferBindingInfoEXT const *s1,
+                                              VkDescriptorBufferBindingInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+bool compare_VkDescriptorBufferBindingPushDescriptorBufferHandleEXT(
+    VkDescriptorBufferBindingPushDescriptorBufferHandleEXT const *s1,
+    VkDescriptorBufferBindingPushDescriptorBufferHandleEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+bool compare_VkDescriptorGetInfoEXT(VkDescriptorGetInfoEXT const *s1,
+                                    VkDescriptorGetInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+bool compare_VkBufferCaptureDescriptorDataInfoEXT(VkBufferCaptureDescriptorDataInfoEXT const *s1,
+                                                  VkBufferCaptureDescriptorDataInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+bool compare_VkImageCaptureDescriptorDataInfoEXT(VkImageCaptureDescriptorDataInfoEXT const *s1,
+                                                 VkImageCaptureDescriptorDataInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+bool compare_VkImageViewCaptureDescriptorDataInfoEXT(
+    VkImageViewCaptureDescriptorDataInfoEXT const *s1,
+    VkImageViewCaptureDescriptorDataInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+bool compare_VkSamplerCaptureDescriptorDataInfoEXT(VkSamplerCaptureDescriptorDataInfoEXT const *s1,
+                                                   VkSamplerCaptureDescriptorDataInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+bool compare_VkAccelerationStructureCaptureDescriptorDataInfoEXT(
+    VkAccelerationStructureCaptureDescriptorDataInfoEXT const *s1,
+    VkAccelerationStructureCaptureDescriptorDataInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+bool compare_VkOpaqueCaptureDescriptorDataCreateInfoEXT(
+    VkOpaqueCaptureDescriptorDataCreateInfoEXT const *s1,
+    VkOpaqueCaptureDescriptorDataCreateInfoEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
@@ -16614,6 +16686,186 @@ bool compare_VkCuLaunchInfoNVX(VkCuLaunchInfoNVX const *s1, VkCuLaunchInfoNVX co
       (s1->paramCount != s2->paramCount) || (s1->extraCount != s2->extraCount) || false)
     return false;
 
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+bool compare_VkPhysicalDeviceDescriptorBufferFeaturesEXT(
+    VkPhysicalDeviceDescriptorBufferFeaturesEXT const *s1,
+    VkPhysicalDeviceDescriptorBufferFeaturesEXT const *s2) {
+  if ((s1->descriptorBuffer != s2->descriptorBuffer) ||
+      (s1->descriptorBufferCaptureReplay != s2->descriptorBufferCaptureReplay) ||
+      (s1->descriptorBufferImageLayoutIgnored != s2->descriptorBufferImageLayoutIgnored) ||
+      (s1->descriptorBufferPushDescriptors != s2->descriptorBufferPushDescriptors) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+bool compare_VkPhysicalDeviceDescriptorBufferPropertiesEXT(
+    VkPhysicalDeviceDescriptorBufferPropertiesEXT const *s1,
+    VkPhysicalDeviceDescriptorBufferPropertiesEXT const *s2) {
+  if ((s1->combinedImageSamplerDescriptorSingleArray !=
+       s2->combinedImageSamplerDescriptorSingleArray) ||
+      (s1->bufferlessPushDescriptors != s2->bufferlessPushDescriptors) ||
+      (s1->allowSamplerImageViewPostSubmitCreation !=
+       s2->allowSamplerImageViewPostSubmitCreation) ||
+      (s1->descriptorBufferOffsetAlignment != s2->descriptorBufferOffsetAlignment) ||
+      (s1->maxDescriptorBufferBindings != s2->maxDescriptorBufferBindings) ||
+      (s1->maxResourceDescriptorBufferBindings != s2->maxResourceDescriptorBufferBindings) ||
+      (s1->maxSamplerDescriptorBufferBindings != s2->maxSamplerDescriptorBufferBindings) ||
+      (s1->maxEmbeddedImmutableSamplerBindings != s2->maxEmbeddedImmutableSamplerBindings) ||
+      (s1->maxEmbeddedImmutableSamplers != s2->maxEmbeddedImmutableSamplers) ||
+      (s1->bufferCaptureReplayDescriptorDataSize != s2->bufferCaptureReplayDescriptorDataSize) ||
+      (s1->imageCaptureReplayDescriptorDataSize != s2->imageCaptureReplayDescriptorDataSize) ||
+      (s1->imageViewCaptureReplayDescriptorDataSize !=
+       s2->imageViewCaptureReplayDescriptorDataSize) ||
+      (s1->samplerCaptureReplayDescriptorDataSize != s2->samplerCaptureReplayDescriptorDataSize) ||
+      (s1->accelerationStructureCaptureReplayDescriptorDataSize !=
+       s2->accelerationStructureCaptureReplayDescriptorDataSize) ||
+      (s1->samplerDescriptorSize != s2->samplerDescriptorSize) ||
+      (s1->combinedImageSamplerDescriptorSize != s2->combinedImageSamplerDescriptorSize) ||
+      (s1->sampledImageDescriptorSize != s2->sampledImageDescriptorSize) ||
+      (s1->storageImageDescriptorSize != s2->storageImageDescriptorSize) ||
+      (s1->uniformTexelBufferDescriptorSize != s2->uniformTexelBufferDescriptorSize) ||
+      (s1->robustUniformTexelBufferDescriptorSize != s2->robustUniformTexelBufferDescriptorSize) ||
+      (s1->storageTexelBufferDescriptorSize != s2->storageTexelBufferDescriptorSize) ||
+      (s1->robustStorageTexelBufferDescriptorSize != s2->robustStorageTexelBufferDescriptorSize) ||
+      (s1->uniformBufferDescriptorSize != s2->uniformBufferDescriptorSize) ||
+      (s1->robustUniformBufferDescriptorSize != s2->robustUniformBufferDescriptorSize) ||
+      (s1->storageBufferDescriptorSize != s2->storageBufferDescriptorSize) ||
+      (s1->robustStorageBufferDescriptorSize != s2->robustStorageBufferDescriptorSize) ||
+      (s1->inputAttachmentDescriptorSize != s2->inputAttachmentDescriptorSize) ||
+      (s1->accelerationStructureDescriptorSize != s2->accelerationStructureDescriptorSize) ||
+      (s1->maxSamplerDescriptorBufferRange != s2->maxSamplerDescriptorBufferRange) ||
+      (s1->maxResourceDescriptorBufferRange != s2->maxResourceDescriptorBufferRange) ||
+      (s1->samplerDescriptorBufferAddressSpaceSize !=
+       s2->samplerDescriptorBufferAddressSpaceSize) ||
+      (s1->resourceDescriptorBufferAddressSpaceSize !=
+       s2->resourceDescriptorBufferAddressSpaceSize) ||
+      (s1->descriptorBufferAddressSpaceSize != s2->descriptorBufferAddressSpaceSize) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+bool compare_VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT(
+    VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT const *s1,
+    VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT const *s2) {
+  if ((s1->combinedImageSamplerDensityMapDescriptorSize !=
+       s2->combinedImageSamplerDensityMapDescriptorSize) ||
+      false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+bool compare_VkDescriptorAddressInfoEXT(VkDescriptorAddressInfoEXT const *s1,
+                                        VkDescriptorAddressInfoEXT const *s2) {
+  if ((s1->address != s2->address) || (s1->range != s2->range) || (s1->format != s2->format) ||
+      false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+bool compare_VkDescriptorBufferBindingInfoEXT(VkDescriptorBufferBindingInfoEXT const *s1,
+                                              VkDescriptorBufferBindingInfoEXT const *s2) {
+  if ((s1->address != s2->address) || (s1->usage != s2->usage) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+bool compare_VkDescriptorBufferBindingPushDescriptorBufferHandleEXT(
+    VkDescriptorBufferBindingPushDescriptorBufferHandleEXT const *s1,
+    VkDescriptorBufferBindingPushDescriptorBufferHandleEXT const *s2) {
+  if ((s1->buffer != s2->buffer) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+bool compare_VkDescriptorGetInfoEXT(VkDescriptorGetInfoEXT const *s1,
+                                    VkDescriptorGetInfoEXT const *s2) {
+  if ((s1->type != s2->type) || (s1->data != s2->data) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+bool compare_VkBufferCaptureDescriptorDataInfoEXT(VkBufferCaptureDescriptorDataInfoEXT const *s1,
+                                                  VkBufferCaptureDescriptorDataInfoEXT const *s2) {
+  if ((s1->buffer != s2->buffer) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+bool compare_VkImageCaptureDescriptorDataInfoEXT(VkImageCaptureDescriptorDataInfoEXT const *s1,
+                                                 VkImageCaptureDescriptorDataInfoEXT const *s2) {
+  if ((s1->image != s2->image) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+bool compare_VkImageViewCaptureDescriptorDataInfoEXT(
+    VkImageViewCaptureDescriptorDataInfoEXT const *s1,
+    VkImageViewCaptureDescriptorDataInfoEXT const *s2) {
+  if ((s1->imageView != s2->imageView) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+bool compare_VkSamplerCaptureDescriptorDataInfoEXT(
+    VkSamplerCaptureDescriptorDataInfoEXT const *s1,
+    VkSamplerCaptureDescriptorDataInfoEXT const *s2) {
+  if ((s1->sampler != s2->sampler) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+bool compare_VkAccelerationStructureCaptureDescriptorDataInfoEXT(
+    VkAccelerationStructureCaptureDescriptorDataInfoEXT const *s1,
+    VkAccelerationStructureCaptureDescriptorDataInfoEXT const *s2) {
+  if ((s1->accelerationStructure != s2->accelerationStructure) ||
+      (s1->accelerationStructureNV != s2->accelerationStructureNV) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+bool compare_VkOpaqueCaptureDescriptorDataCreateInfoEXT(
+    VkOpaqueCaptureDescriptorDataCreateInfoEXT const *s1,
+    VkOpaqueCaptureDescriptorDataCreateInfoEXT const *s2) {
   return true;
 }
 #endif

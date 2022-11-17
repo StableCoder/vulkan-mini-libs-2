@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 234,
-              "VK_HEADER_VERSION is from after the maximum supported version of v234.");
+static_assert(VK_HEADER_VERSION <= 235,
+              "VK_HEADER_VERSION is from after the maximum supported version of v235.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 234,
-               "VK_HEADER_VERSION is from after the maximum supported version of v234.");
+_Static_assert(VK_HEADER_VERSION <= 235,
+               "VK_HEADER_VERSION is from after the maximum supported version of v235.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -192,6 +192,7 @@ EnumValueSet const VkSamplerCreateFlagsSets[] = {
     {"RESERVED_3_BIT_AMD", 0x00000008, false},
     {"IMAGE_PROCESSING_BIT_QCOM", 0x00000010, false},
     {"NON_SEAMLESS_CUBE_MAP_BIT_EXT", 0x00000004, false},
+    {"DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT", 0x00000008, false},
 };
 
 EnumValueSet const VkPipelineLayoutCreateFlagsSets[] = {
@@ -240,6 +241,8 @@ EnumValueSet const VkDescriptorSetLayoutCreateFlagsSets[] = {
     {"RESERVED_4_BIT_AMD", 0x00000010, false},
     {"RESERVED_5_BIT_AMD", 0x00000020, false},
     {"HOST_ONLY_POOL_BIT_EXT", 0x00000004, false},
+    {"DESCRIPTOR_BUFFER_BIT_EXT", 0x00000010, false},
+    {"EMBEDDED_IMMUTABLE_SAMPLERS_BIT_EXT", 0x00000020, false},
 };
 
 EnumValueSet const VkInstanceCreateFlagsSets[] = {
@@ -376,6 +379,9 @@ EnumValueSet const VkBufferUsageFlagsSets[] = {
     {"RESERVED_25_BIT_AMD", 0x02000000, false},
     {"MICROMAP_BUILD_INPUT_READ_ONLY_BIT_EXT", 0x00800000, false},
     {"MICROMAP_STORAGE_BIT_EXT", 0x01000000, false},
+    {"SAMPLER_DESCRIPTOR_BUFFER_BIT_EXT", 0x00200000, false},
+    {"RESOURCE_DESCRIPTOR_BUFFER_BIT_EXT", 0x00400000, false},
+    {"PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_BIT_EXT", 0x04000000, false},
 };
 
 EnumValueSet const VkBufferCreateFlagsSets[] = {
@@ -388,6 +394,7 @@ EnumValueSet const VkBufferCreateFlagsSets[] = {
     {"DEVICE_ADDRESS_CAPTURE_REPLAY", 0x00000010, false},
     {"RESERVED_5_BIT_NV", 0x00000020, false},
     {"RESERVED_5_BIT_AMD", 0x00000020, false},
+    {"DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT", 0x00000020, false},
 };
 
 EnumValueSet const VkShaderStageFlagsSets[] = {
@@ -433,6 +440,7 @@ EnumValueSet const VkShaderStageFlagsSets[] = {
     {"EXT_483_RESERVE_17", 0x00020000, false},
     {"TASK_BIT_EXT", 0x00000040, false},
     {"MESH_BIT_EXT", 0x00000080, false},
+    {"RESERVED_19_BIT_HUAWEI", 0x00080000, false},
 };
 
 EnumValueSet const VkImageUsageFlagsSets[] = {
@@ -507,6 +515,7 @@ EnumValueSet const VkImageCreateFlagsSets[] = {
     {"2D_VIEW_COMPATIBLE_BIT_EXT", 0x00020000, false},
     {"MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_BIT_EXT", 0x00040000, false},
     {"RESERVED_19_BIT_EXT", 0x00080000, false},
+    {"DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT", 0x00010000, false},
 };
 
 EnumValueSet const VkImageViewCreateFlagsSets[] = {
@@ -515,6 +524,7 @@ EnumValueSet const VkImageViewCreateFlagsSets[] = {
     {"FRAGMENT_DENSITY_MAP_DEFERRED_BIT_EXT", 0x00000002, false},
     {"RESERVED_2_BIT_AMD", 0x00000004, false},
     {"RESERVED_3_BIT_EXT", 0x00000008, false},
+    {"DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT", 0x00000004, false},
 };
 
 EnumValueSet const VkPipelineCreateFlagsSets[] = {
@@ -575,14 +585,15 @@ EnumValueSet const VkPipelineCreateFlagsSets[] = {
     {"RESERVED_25_BIT_EXT", 0x02000000, false},
     {"RESERVED_26_BIT_EXT", 0x04000000, false},
     {"RESERVED_27_BIT_EXT", 0x08000000, false},
-    {"RESERVED_29_AMD", 0x20000000, false},
     {"COLOR_ATTACHMENT_FEEDBACK_LOOP_BIT_EXT", 0x02000000, false},
     {"DEPTH_STENCIL_ATTACHMENT_FEEDBACK_LOOP_BIT_EXT", 0x04000000, false},
     {"RESERVED_BIT_28_NV", 0x10000000, false},
+    {"RESERVED_29_AMD", 0x20000000, false},
     {"RESERVED_30_BIT_EXT", 0x40000000, false},
     {"RAY_TRACING_OPACITY_MICROMAP_BIT_EXT", 0x01000000, false},
     {"NO_PROTECTED_ACCESS_BIT_EXT", 0x08000000, false},
     {"PROTECTED_ACCESS_ONLY_BIT_EXT", 0x40000000, false},
+    {"DESCRIPTOR_BUFFER_BIT_EXT", 0x20000000, false},
 };
 
 EnumValueSet const VkColorComponentFlagsSets[] = {
@@ -913,6 +924,7 @@ EnumValueSet const VkAccelerationStructureCreateFlagsKHRSets[] = {
     {"RESERVED_BIT_2_NV", 0x00000004, false},
     {"MOTION_BIT_NV", 0x00000004, false},
     {"RESERVED_3_BIT_AMD", 0x00000008, false},
+    {"DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT", 0x00000008, false},
 };
 
 EnumValueSet const VkPipelineCreationFeedbackFlagsSets[] = {
@@ -1004,8 +1016,8 @@ EnumValueSet const VkAccessFlags2Sets[] = {
     {"ACCELERATION_STRUCTURE_WRITE_BIT_NV", 0x00400000, true},
     {"FRAGMENT_DENSITY_MAP_READ_BIT_EXT", 0x01000000, false},
     {"COLOR_ATTACHMENT_READ_NONCOHERENT_BIT_EXT", 0x00080000, false},
-    {"RESERVED_41_BIT_AMD", 0x20000000000, false},
     {"INVOCATION_MASK_READ_BIT_HUAWEI", 0x8000000000, false},
+    {"RESERVED_41_BIT_AMD", 0x20000000000, false},
     {"RESERVED_387_BIT_KHR", 0x10000000000, false},
     {"RESERVED_42_BIT_NV", 0x40000000000, false},
     {"RESERVED_43_BIT_NV", 0x80000000000, false},
@@ -1017,6 +1029,7 @@ EnumValueSet const VkAccessFlags2Sets[] = {
     {"MICROMAP_WRITE_BIT_EXT", 0x200000000000, false},
     {"OPTICAL_FLOW_READ_BIT_NV", 0x40000000000, false},
     {"OPTICAL_FLOW_WRITE_BIT_NV", 0x80000000000, false},
+    {"DESCRIPTOR_BUFFER_READ_BIT_EXT", 0x20000000000, false},
 };
 
 EnumValueSet const VkPipelineStageFlags2Sets[] = {
@@ -1096,6 +1109,7 @@ EnumValueSet const VkPipelineStageFlags2Sets[] = {
     {"MESH_SHADER_BIT_EXT", 0x00100000, false},
     {"MICROMAP_BUILD_BIT_EXT", 0x40000000, false},
     {"OPTICAL_FLOW_BIT_NV", 0x20000000, false},
+    {"RESEVED_41_BIT_HUAWEI", 0x20000000000, false},
 };
 
 EnumValueSet const VkFormatFeatureFlags2Sets[] = {
@@ -3275,7 +3289,7 @@ EnumType const cEnumTypes[314] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", NULL, 0},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 3},
-    {"VkSamplerCreateFlags", VkSamplerCreateFlagsSets, 6},
+    {"VkSamplerCreateFlags", VkSamplerCreateFlagsSets, 7},
     {"VkPipelineLayoutCreateFlags", VkPipelineLayoutCreateFlagsSets, 3},
     {"VkPipelineCacheCreateFlags", VkPipelineCacheCreateFlagsSets, 6},
     {"VkPipelineDepthStencilStateCreateFlags", VkPipelineDepthStencilStateCreateFlagsSets, 4},
@@ -3288,7 +3302,7 @@ EnumType const cEnumTypes[314] = {
     {"VkPipelineInputAssemblyStateCreateFlags", NULL, 0},
     {"VkPipelineVertexInputStateCreateFlags", NULL, 0},
     {"VkPipelineShaderStageCreateFlags", VkPipelineShaderStageCreateFlagsSets, 6},
-    {"VkDescriptorSetLayoutCreateFlags", VkDescriptorSetLayoutCreateFlagsSets, 9},
+    {"VkDescriptorSetLayoutCreateFlags", VkDescriptorSetLayoutCreateFlagsSets, 11},
     {"VkBufferViewCreateFlags", NULL, 0},
     {"VkInstanceCreateFlags", VkInstanceCreateFlagsSets, 1},
     {"VkDeviceCreateFlags", NULL, 0},
@@ -3297,13 +3311,13 @@ EnumType const cEnumTypes[314] = {
     {"VkMemoryPropertyFlags", VkMemoryPropertyFlagsSets, 10},
     {"VkMemoryHeapFlags", VkMemoryHeapFlagsSets, 4},
     {"VkAccessFlags", VkAccessFlagsSets, 45},
-    {"VkBufferUsageFlags", VkBufferUsageFlagsSets, 40},
-    {"VkBufferCreateFlags", VkBufferCreateFlagsSets, 9},
-    {"VkShaderStageFlags", VkShaderStageFlagsSets, 42},
+    {"VkBufferUsageFlags", VkBufferUsageFlagsSets, 43},
+    {"VkBufferCreateFlags", VkBufferCreateFlagsSets, 10},
+    {"VkShaderStageFlags", VkShaderStageFlagsSets, 43},
     {"VkImageUsageFlags", VkImageUsageFlagsSets, 36},
-    {"VkImageCreateFlags", VkImageCreateFlagsSets, 32},
-    {"VkImageViewCreateFlags", VkImageViewCreateFlagsSets, 5},
-    {"VkPipelineCreateFlags", VkPipelineCreateFlagsSets, 63},
+    {"VkImageCreateFlags", VkImageCreateFlagsSets, 33},
+    {"VkImageViewCreateFlags", VkImageViewCreateFlagsSets, 6},
+    {"VkPipelineCreateFlags", VkPipelineCreateFlagsSets, 64},
     {"VkColorComponentFlags", VkColorComponentFlagsSets, 4},
     {"VkFenceCreateFlags", VkFenceCreateFlagsSets, 1},
     {"VkSemaphoreCreateFlags", NULL, 0},
@@ -3337,7 +3351,7 @@ EnumType const cEnumTypes[314] = {
     {"VkGeometryInstanceFlagsKHR", VkGeometryInstanceFlagsKHRSets, 13},
     {"VkBuildAccelerationStructureFlagsKHR", VkBuildAccelerationStructureFlagsKHRSets, 19},
     {"VkPrivateDataSlotCreateFlags", NULL, 0},
-    {"VkAccelerationStructureCreateFlagsKHR", VkAccelerationStructureCreateFlagsKHRSets, 4},
+    {"VkAccelerationStructureCreateFlagsKHR", VkAccelerationStructureCreateFlagsKHRSets, 5},
     {"VkDescriptorUpdateTemplateCreateFlags", NULL, 0},
     {"VkPipelineCreationFeedbackFlags", VkPipelineCreationFeedbackFlagsSets, 6},
     {"VkPerformanceCounterDescriptionFlagsKHR", VkPerformanceCounterDescriptionFlagsKHRSets, 4},
@@ -3346,8 +3360,8 @@ EnumType const cEnumTypes[314] = {
     {"VkPipelineCompilerControlFlagsAMD", NULL, 0},
     {"VkShaderCorePropertiesFlagsAMD", NULL, 0},
     {"VkDeviceDiagnosticsConfigFlagsNV", VkDeviceDiagnosticsConfigFlagsNVSets, 4},
-    {"VkAccessFlags2", VkAccessFlags2Sets, 73},
-    {"VkPipelineStageFlags2", VkPipelineStageFlags2Sets, 76},
+    {"VkAccessFlags2", VkAccessFlags2Sets, 74},
+    {"VkPipelineStageFlags2", VkPipelineStageFlags2Sets, 77},
     {"VkAccelerationStructureMotionInfoFlagsNV", NULL, 0},
     {"VkAccelerationStructureMotionInstanceFlagsNV", NULL, 0},
     {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Sets, 80},

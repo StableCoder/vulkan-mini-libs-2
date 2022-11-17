@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 234,
-              "VK_HEADER_VERSION is from after the maximum supported version of v234.");
+static_assert(VK_HEADER_VERSION <= 235,
+              "VK_HEADER_VERSION is from after the maximum supported version of v235.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 234,
-               "VK_HEADER_VERSION is from after the maximum supported version of v234.");
+_Static_assert(VK_HEADER_VERSION <= 235,
+               "VK_HEADER_VERSION is from after the maximum supported version of v235.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -4710,6 +4710,67 @@ void cleanup_VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV(
 #if VK_HEADER_VERSION >= 233 && VK_NV_ray_tracing_invocation_reorder
 void cleanup_VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV(
     VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+void cleanup_VkPhysicalDeviceDescriptorBufferFeaturesEXT(
+    VkPhysicalDeviceDescriptorBufferFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+void cleanup_VkPhysicalDeviceDescriptorBufferPropertiesEXT(
+    VkPhysicalDeviceDescriptorBufferPropertiesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+void cleanup_VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT(
+    VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+void cleanup_VkDescriptorAddressInfoEXT(VkDescriptorAddressInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+void cleanup_VkDescriptorBufferBindingInfoEXT(VkDescriptorBufferBindingInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+void cleanup_VkDescriptorBufferBindingPushDescriptorBufferHandleEXT(
+    VkDescriptorBufferBindingPushDescriptorBufferHandleEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+void cleanup_VkDescriptorGetInfoEXT(VkDescriptorGetInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+void cleanup_VkBufferCaptureDescriptorDataInfoEXT(
+    VkBufferCaptureDescriptorDataInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+void cleanup_VkImageCaptureDescriptorDataInfoEXT(VkImageCaptureDescriptorDataInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+void cleanup_VkImageViewCaptureDescriptorDataInfoEXT(
+    VkImageViewCaptureDescriptorDataInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+void cleanup_VkSamplerCaptureDescriptorDataInfoEXT(
+    VkSamplerCaptureDescriptorDataInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+void cleanup_VkAccelerationStructureCaptureDescriptorDataInfoEXT(
+    VkAccelerationStructureCaptureDescriptorDataInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+void cleanup_VkOpaqueCaptureDescriptorDataCreateInfoEXT(
+    VkOpaqueCaptureDescriptorDataCreateInfoEXT const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -11217,6 +11278,108 @@ void cleanup_vk_struct(void const *pData) {
       VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_PROPERTIES_NV) {
     cleanup_VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV(
         (VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_FEATURES_EXT) {
+    cleanup_VkPhysicalDeviceDescriptorBufferFeaturesEXT(
+        (VkPhysicalDeviceDescriptorBufferFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_PROPERTIES_EXT) {
+    cleanup_VkPhysicalDeviceDescriptorBufferPropertiesEXT(
+        (VkPhysicalDeviceDescriptorBufferPropertiesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_BUFFER_DENSITY_MAP_PROPERTIES_EXT) {
+    cleanup_VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT(
+        (VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DESCRIPTOR_ADDRESS_INFO_EXT) {
+    cleanup_VkDescriptorAddressInfoEXT((VkDescriptorAddressInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_INFO_EXT) {
+    cleanup_VkDescriptorBufferBindingInfoEXT((VkDescriptorBufferBindingInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_DESCRIPTOR_BUFFER_BINDING_PUSH_DESCRIPTOR_BUFFER_HANDLE_EXT) {
+    cleanup_VkDescriptorBufferBindingPushDescriptorBufferHandleEXT(
+        (VkDescriptorBufferBindingPushDescriptorBufferHandleEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DESCRIPTOR_GET_INFO_EXT) {
+    cleanup_VkDescriptorGetInfoEXT((VkDescriptorGetInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_CAPTURE_DESCRIPTOR_DATA_INFO_EXT) {
+    cleanup_VkBufferCaptureDescriptorDataInfoEXT(
+        (VkBufferCaptureDescriptorDataInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT) {
+    cleanup_VkImageCaptureDescriptorDataInfoEXT((VkImageCaptureDescriptorDataInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_VIEW_CAPTURE_DESCRIPTOR_DATA_INFO_EXT) {
+    cleanup_VkImageViewCaptureDescriptorDataInfoEXT(
+        (VkImageViewCaptureDescriptorDataInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SAMPLER_CAPTURE_DESCRIPTOR_DATA_INFO_EXT) {
+    cleanup_VkSamplerCaptureDescriptorDataInfoEXT(
+        (VkSamplerCaptureDescriptorDataInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_CAPTURE_DESCRIPTOR_DATA_INFO_EXT) {
+    cleanup_VkAccelerationStructureCaptureDescriptorDataInfoEXT(
+        (VkAccelerationStructureCaptureDescriptorDataInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+  if (pTemp->sType == VK_STRUCTURE_TYPE_OPAQUE_CAPTURE_DESCRIPTOR_DATA_CREATE_INFO_EXT) {
+    cleanup_VkOpaqueCaptureDescriptorDataCreateInfoEXT(
+        (VkOpaqueCaptureDescriptorDataCreateInfoEXT const *)pData);
     return;
   }
 #endif
@@ -22286,6 +22449,135 @@ void cleanup_VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV(
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+void cleanup_VkPhysicalDeviceDescriptorBufferFeaturesEXT(
+    VkPhysicalDeviceDescriptorBufferFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+void cleanup_VkPhysicalDeviceDescriptorBufferPropertiesEXT(
+    VkPhysicalDeviceDescriptorBufferPropertiesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+void cleanup_VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT(
+    VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+void cleanup_VkDescriptorAddressInfoEXT(VkDescriptorAddressInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+void cleanup_VkDescriptorBufferBindingInfoEXT(VkDescriptorBufferBindingInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+void cleanup_VkDescriptorBufferBindingPushDescriptorBufferHandleEXT(
+    VkDescriptorBufferBindingPushDescriptorBufferHandleEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+void cleanup_VkDescriptorGetInfoEXT(VkDescriptorGetInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+void cleanup_VkBufferCaptureDescriptorDataInfoEXT(
+    VkBufferCaptureDescriptorDataInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+void cleanup_VkImageCaptureDescriptorDataInfoEXT(VkImageCaptureDescriptorDataInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+void cleanup_VkImageViewCaptureDescriptorDataInfoEXT(
+    VkImageViewCaptureDescriptorDataInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+void cleanup_VkSamplerCaptureDescriptorDataInfoEXT(
+    VkSamplerCaptureDescriptorDataInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+void cleanup_VkAccelerationStructureCaptureDescriptorDataInfoEXT(
+    VkAccelerationStructureCaptureDescriptorDataInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+void cleanup_VkOpaqueCaptureDescriptorDataCreateInfoEXT(
+    VkOpaqueCaptureDescriptorDataCreateInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // opaqueCaptureDescriptorData
+  free((void *)pData->opaqueCaptureDescriptorData);
 }
 #endif
 
