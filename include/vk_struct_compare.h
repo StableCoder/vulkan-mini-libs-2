@@ -4546,11 +4546,6 @@ bool compare_VkDescriptorBufferBindingPushDescriptorBufferHandleEXT(
 #endif
 
 #if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
-bool compare_VkDescriptorGetInfoEXT(VkDescriptorGetInfoEXT const *s1,
-                                    VkDescriptorGetInfoEXT const *s2);
-#endif
-
-#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
 bool compare_VkBufferCaptureDescriptorDataInfoEXT(VkBufferCaptureDescriptorDataInfoEXT const *s1,
                                                   VkBufferCaptureDescriptorDataInfoEXT const *s2);
 #endif
@@ -16792,16 +16787,6 @@ bool compare_VkDescriptorBufferBindingPushDescriptorBufferHandleEXT(
     VkDescriptorBufferBindingPushDescriptorBufferHandleEXT const *s1,
     VkDescriptorBufferBindingPushDescriptorBufferHandleEXT const *s2) {
   if ((s1->buffer != s2->buffer) || false)
-    return false;
-
-  return true;
-}
-#endif
-
-#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
-bool compare_VkDescriptorGetInfoEXT(VkDescriptorGetInfoEXT const *s1,
-                                    VkDescriptorGetInfoEXT const *s2) {
-  if ((s1->type != s2->type) || (s1->data != s2->data) || false)
     return false;
 
   return true;
