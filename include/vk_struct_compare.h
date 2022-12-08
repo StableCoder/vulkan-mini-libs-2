@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 235,
-              "VK_HEADER_VERSION is from after the maximum supported version of v235.");
+static_assert(VK_HEADER_VERSION <= 236,
+              "VK_HEADER_VERSION is from after the maximum supported version of v236.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 235,
-               "VK_HEADER_VERSION is from after the maximum supported version of v235.");
+_Static_assert(VK_HEADER_VERSION <= 236,
+               "VK_HEADER_VERSION is from after the maximum supported version of v236.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -5252,6 +5252,22 @@ bool compare_VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV(
 bool compare_VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV(
     VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV const *s1,
     VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 236 && VK_LUNARG_direct_driver_loading
+bool compare_VkDirectDriverLoadingInfoLUNARG(VkDirectDriverLoadingInfoLUNARG const *s1,
+                                             VkDirectDriverLoadingInfoLUNARG const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 236 && VK_LUNARG_direct_driver_loading
+bool compare_VkDirectDriverLoadingListLUNARG(VkDirectDriverLoadingListLUNARG const *s1,
+                                             VkDirectDriverLoadingListLUNARG const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 236 && VK_QCOM_multiview_per_view_viewports
+bool compare_VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM(
+    VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM const *s1,
+    VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 225 && VK_HEADER_VERSION <= 228 && VK_EXT_video_decode_h264
@@ -15876,7 +15892,10 @@ bool compare_VkVideoDecodeH265SessionParametersCreateInfoEXT(
 bool compare_VkVideoDecodeH265PictureInfoEXT(VkVideoDecodeH265PictureInfoEXT const *s1,
                                              VkVideoDecodeH265PictureInfoEXT const *s2) {
   if (
-#if VK_HEADER_VERSION >= 229
+#if VK_HEADER_VERSION >= 236
+      (s1->sliceSegmentCount != s2->sliceSegmentCount) ||
+#endif
+#if VK_HEADER_VERSION >= 229 && VK_HEADER_VERSION <= 235
       (s1->sliceCount != s2->sliceCount) ||
 #endif
 #if VK_HEADER_VERSION <= 228
@@ -18436,6 +18455,38 @@ bool compare_VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV(
   if ((s1->rayTracingInvocationReorderReorderingHint !=
        s2->rayTracingInvocationReorderReorderingHint) ||
       false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 236 && VK_LUNARG_direct_driver_loading
+bool compare_VkDirectDriverLoadingInfoLUNARG(VkDirectDriverLoadingInfoLUNARG const *s1,
+                                             VkDirectDriverLoadingInfoLUNARG const *s2) {
+  if ((s1->flags != s2->flags) || (s1->pfnGetInstanceProcAddr != s2->pfnGetInstanceProcAddr) ||
+      false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 236 && VK_LUNARG_direct_driver_loading
+bool compare_VkDirectDriverLoadingListLUNARG(VkDirectDriverLoadingListLUNARG const *s1,
+                                             VkDirectDriverLoadingListLUNARG const *s2) {
+  if ((s1->mode != s2->mode) || (s1->driverCount != s2->driverCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 236 && VK_QCOM_multiview_per_view_viewports
+bool compare_VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM(
+    VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM const *s1,
+    VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM const *s2) {
+  if ((s1->multiviewPerViewViewports != s2->multiviewPerViewViewports) || false)
     return false;
 
   return true;

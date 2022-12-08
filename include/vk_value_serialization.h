@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 235,
-              "VK_HEADER_VERSION is from after the maximum supported version of v235.");
+static_assert(VK_HEADER_VERSION <= 236,
+              "VK_HEADER_VERSION is from after the maximum supported version of v236.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 235,
-               "VK_HEADER_VERSION is from after the maximum supported version of v235.");
+_Static_assert(VK_HEADER_VERSION <= 236,
+               "VK_HEADER_VERSION is from after the maximum supported version of v236.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -2858,6 +2858,11 @@ EnumValueSet const VkDeviceFaultVendorBinaryHeaderVersionEXTSets[] = {
     {"ONE", 1, false},
 };
 
+EnumValueSet const VkDirectDriverLoadingModeLUNARGSets[] = {
+    {"EXCLUSIVE", 0, false},
+    {"INCLUSIVE", 1, false},
+};
+
 EnumValueSet const VkColorSpaceKHRSets[] = {
     {"SRGB_NONLINEAR", 0, false},
     {"DISPLAY_P3_NONLINEAR_EXT", 1000104001, false},
@@ -3108,6 +3113,7 @@ EnumValueSet const VkDriverIdSets[] = {
     {"SAMSUNG_PROPRIETARY", 21, false},
     {"MESA_VENUS", 22, false},
     {"MESA_DOZEN", 23, false},
+    {"MESA_NVK", 24, false},
 };
 
 EnumValueSet const VkShadingRatePaletteEntryNVSets[] = {
@@ -3285,7 +3291,7 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[314] = {
+EnumType const cEnumTypes[316] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", NULL, 0},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 3},
@@ -3369,6 +3375,7 @@ EnumType const cEnumTypes[314] = {
     {"VkMemoryDecompressionMethodFlagsNV", VkMemoryDecompressionMethodFlagsNVSets, 1},
     {"VkBuildMicromapFlagsEXT", VkBuildMicromapFlagsEXTSets, 3},
     {"VkMicromapCreateFlagsEXT", VkMicromapCreateFlagsEXTSets, 1},
+    {"VkDirectDriverLoadingFlagsLUNARG", NULL, 0},
     {"VkCompositeAlphaFlagsKHR", VkCompositeAlphaFlagsKHRSets, 4},
     {"VkDisplayPlaneAlphaFlagsKHR", VkDisplayPlaneAlphaFlagsKHRSets, 4},
     {"VkSurfaceTransformFlagsKHR", VkSurfaceTransformFlagsKHRSets, 9},
@@ -3547,6 +3554,7 @@ EnumType const cEnumTypes[314] = {
     {"VkOpacityMicromapFormatEXT", VkOpacityMicromapFormatEXTSets, 2},
     {"VkOpacityMicromapSpecialIndexEXT", VkOpacityMicromapSpecialIndexEXTSets, 4},
     {"VkDeviceFaultVendorBinaryHeaderVersionEXT", VkDeviceFaultVendorBinaryHeaderVersionEXTSets, 1},
+    {"VkDirectDriverLoadingModeLUNARG", VkDirectDriverLoadingModeLUNARGSets, 2},
     {"VkColorSpaceKHR", VkColorSpaceKHRSets, 18},
     {"VkPresentModeKHR", VkPresentModeKHRSets, 6},
     {"VkDebugReportObjectTypeEXT", VkDebugReportObjectTypeEXTSets, 46},
@@ -3571,7 +3579,7 @@ EnumType const cEnumTypes[314] = {
     {"VkOpticalFlowSessionBindingPointNV", VkOpticalFlowSessionBindingPointNVSets, 9},
     {"VkDeviceFaultAddressTypeEXT", VkDeviceFaultAddressTypeEXTSets, 7},
     {"VkVendorId", VkVendorIdSets, 6},
-    {"VkDriverId", VkDriverIdSets, 35},
+    {"VkDriverId", VkDriverIdSets, 36},
     {"VkShadingRatePaletteEntryNV", VkShadingRatePaletteEntryNVSets, 12},
     {"VkCoarseSampleOrderTypeNV", VkCoarseSampleOrderTypeNVSets, 4},
     {"VkPipelineExecutableStatisticFormatKHR", VkPipelineExecutableStatisticFormatKHRSets, 4},

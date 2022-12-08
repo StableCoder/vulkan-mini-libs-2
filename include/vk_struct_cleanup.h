@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 235,
-              "VK_HEADER_VERSION is from after the maximum supported version of v235.");
+static_assert(VK_HEADER_VERSION <= 236,
+              "VK_HEADER_VERSION is from after the maximum supported version of v236.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 235,
-               "VK_HEADER_VERSION is from after the maximum supported version of v235.");
+_Static_assert(VK_HEADER_VERSION <= 236,
+               "VK_HEADER_VERSION is from after the maximum supported version of v236.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -4771,6 +4771,19 @@ void cleanup_VkAccelerationStructureCaptureDescriptorDataInfoEXT(
 #if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
 void cleanup_VkOpaqueCaptureDescriptorDataCreateInfoEXT(
     VkOpaqueCaptureDescriptorDataCreateInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 236 && VK_LUNARG_direct_driver_loading
+void cleanup_VkDirectDriverLoadingInfoLUNARG(VkDirectDriverLoadingInfoLUNARG const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 236 && VK_LUNARG_direct_driver_loading
+void cleanup_VkDirectDriverLoadingListLUNARG(VkDirectDriverLoadingListLUNARG const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 236 && VK_QCOM_multiview_per_view_viewports
+void cleanup_VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM(
+    VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -11380,6 +11393,29 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_OPAQUE_CAPTURE_DESCRIPTOR_DATA_CREATE_INFO_EXT) {
     cleanup_VkOpaqueCaptureDescriptorDataCreateInfoEXT(
         (VkOpaqueCaptureDescriptorDataCreateInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 236 && VK_LUNARG_direct_driver_loading
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DIRECT_DRIVER_LOADING_INFO_LUNARG) {
+    cleanup_VkDirectDriverLoadingInfoLUNARG((VkDirectDriverLoadingInfoLUNARG const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 236 && VK_LUNARG_direct_driver_loading
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DIRECT_DRIVER_LOADING_LIST_LUNARG) {
+    cleanup_VkDirectDriverLoadingListLUNARG((VkDirectDriverLoadingListLUNARG const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 236 && VK_QCOM_multiview_per_view_viewports
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MULTIVIEW_PER_VIEW_VIEWPORTS_FEATURES_QCOM) {
+    cleanup_VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM(
+        (VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM const *)pData);
     return;
   }
 #endif
@@ -18847,7 +18883,12 @@ void cleanup_VkVideoDecodeH265PictureInfoEXT(VkVideoDecodeH265PictureInfoEXT con
   // pStdPictureInfo
   free((void *)pData->pStdPictureInfo);
 
-#if VK_HEADER_VERSION >= 229
+#if VK_HEADER_VERSION >= 236
+  // pSliceSegmentOffsets - sliceSegmentCount
+  free((void *)pData->pSliceSegmentOffsets);
+#endif
+
+#if VK_HEADER_VERSION >= 229 && VK_HEADER_VERSION <= 235
   // pSliceOffsets - sliceCount
   free((void *)pData->pSliceOffsets);
 #endif
@@ -22578,6 +22619,41 @@ void cleanup_VkOpaqueCaptureDescriptorDataCreateInfoEXT(
 
   // opaqueCaptureDescriptorData
   free((void *)pData->opaqueCaptureDescriptorData);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 236 && VK_LUNARG_direct_driver_loading
+void cleanup_VkDirectDriverLoadingInfoLUNARG(VkDirectDriverLoadingInfoLUNARG const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 236 && VK_LUNARG_direct_driver_loading
+void cleanup_VkDirectDriverLoadingListLUNARG(VkDirectDriverLoadingListLUNARG const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pDrivers - driverCount
+  if (pData->pDrivers != NULL) {
+    for (uint32_t i = 0; i < pData->driverCount; ++i)
+      cleanup_VkDirectDriverLoadingInfoLUNARG(&pData->pDrivers[i]);
+  }
+  free((void *)pData->pDrivers);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 236 && VK_QCOM_multiview_per_view_viewports
+void cleanup_VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM(
+    VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
 }
 #endif
 
