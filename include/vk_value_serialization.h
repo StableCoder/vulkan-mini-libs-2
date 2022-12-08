@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 236,
-              "VK_HEADER_VERSION is from after the maximum supported version of v236.");
+static_assert(VK_HEADER_VERSION <= 237,
+              "VK_HEADER_VERSION is from after the maximum supported version of v237.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 236,
-               "VK_HEADER_VERSION is from after the maximum supported version of v236.");
+_Static_assert(VK_HEADER_VERSION <= 237,
+               "VK_HEADER_VERSION is from after the maximum supported version of v237.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -1253,6 +1253,7 @@ EnumValueSet const VkSwapchainCreateFlagsKHRSets[] = {
     {"MUTABLE_FORMAT", 0x00000004, false},
     {"RESERVED_3_BIT_SEC", 0x00000008, false},
     {"RESERVED_4_BIT_EXT", 0x00000010, false},
+    {"DEFERRED_MEMORY_ALLOCATION_BIT_EXT", 0x00000008, false},
 };
 
 EnumValueSet const VkPeerMemoryFeatureFlagsSets[] = {
@@ -1516,6 +1517,18 @@ EnumValueSet const VkOpticalFlowSessionCreateFlagsNVSets[] = {
 
 EnumValueSet const VkOpticalFlowExecuteFlagsNVSets[] = {
     {"DISABLE_TEMPORAL_HINTS", 0x00000001, false},
+};
+
+EnumValueSet const VkPresentScalingFlagsEXTSets[] = {
+    {"ONE_TO_ONE", 0x00000001, false},
+    {"ASPECT_RATIO_STRETCH", 0x00000002, false},
+    {"STRETCH", 0x00000004, false},
+};
+
+EnumValueSet const VkPresentGravityFlagsEXTSets[] = {
+    {"MIN", 0x00000001, false},
+    {"MAX", 0x00000002, false},
+    {"CENTERED", 0x00000004, false},
 };
 
 EnumValueSet const VkVideoCodecOperationFlagsKHRSets[] = {
@@ -3291,7 +3304,7 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[316] = {
+EnumType const cEnumTypes[318] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", NULL, 0},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 3},
@@ -3379,7 +3392,7 @@ EnumType const cEnumTypes[316] = {
     {"VkCompositeAlphaFlagsKHR", VkCompositeAlphaFlagsKHRSets, 4},
     {"VkDisplayPlaneAlphaFlagsKHR", VkDisplayPlaneAlphaFlagsKHRSets, 4},
     {"VkSurfaceTransformFlagsKHR", VkSurfaceTransformFlagsKHRSets, 9},
-    {"VkSwapchainCreateFlagsKHR", VkSwapchainCreateFlagsKHRSets, 5},
+    {"VkSwapchainCreateFlagsKHR", VkSwapchainCreateFlagsKHRSets, 6},
     {"VkDisplayModeCreateFlagsKHR", NULL, 0},
     {"VkDisplaySurfaceCreateFlagsKHR", NULL, 0},
     {"VkAndroidSurfaceCreateFlagsKHR", NULL, 0},
@@ -3443,6 +3456,8 @@ EnumType const cEnumTypes[316] = {
     {"VkOpticalFlowUsageFlagsNV", VkOpticalFlowUsageFlagsNVSets, 6},
     {"VkOpticalFlowSessionCreateFlagsNV", VkOpticalFlowSessionCreateFlagsNVSets, 5},
     {"VkOpticalFlowExecuteFlagsNV", VkOpticalFlowExecuteFlagsNVSets, 1},
+    {"VkPresentScalingFlagsEXT", VkPresentScalingFlagsEXTSets, 3},
+    {"VkPresentGravityFlagsEXT", VkPresentGravityFlagsEXTSets, 3},
     {"VkVideoCodecOperationFlagsKHR", VkVideoCodecOperationFlagsKHRSets, 6},
     {"VkVideoCapabilityFlagsKHR", VkVideoCapabilityFlagsKHRSets, 2},
     {"VkVideoSessionCreateFlagsKHR", VkVideoSessionCreateFlagsKHRSets, 2},

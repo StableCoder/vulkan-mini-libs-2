@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 236,
-              "VK_HEADER_VERSION is from after the maximum supported version of v236.");
+static_assert(VK_HEADER_VERSION <= 237,
+              "VK_HEADER_VERSION is from after the maximum supported version of v237.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 236,
-               "VK_HEADER_VERSION is from after the maximum supported version of v236.");
+_Static_assert(VK_HEADER_VERSION <= 237,
+               "VK_HEADER_VERSION is from after the maximum supported version of v237.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -5240,6 +5240,54 @@ bool compare_VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM(
 bool compare_VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM(
     VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM const *s1,
     VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 237 && VK_EXT_surface_maintenance1
+bool compare_VkSurfacePresentModeEXT(VkSurfacePresentModeEXT const *s1,
+                                     VkSurfacePresentModeEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 237 && VK_EXT_surface_maintenance1
+bool compare_VkSurfacePresentScalingCapabilitiesEXT(
+    VkSurfacePresentScalingCapabilitiesEXT const *s1,
+    VkSurfacePresentScalingCapabilitiesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 237 && VK_EXT_surface_maintenance1
+bool compare_VkSurfacePresentModeCompatibilityEXT(VkSurfacePresentModeCompatibilityEXT const *s1,
+                                                  VkSurfacePresentModeCompatibilityEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 237 && VK_EXT_swapchain_maintenance1
+bool compare_VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT(
+    VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT const *s1,
+    VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 237 && VK_EXT_swapchain_maintenance1
+bool compare_VkSwapchainPresentFenceInfoEXT(VkSwapchainPresentFenceInfoEXT const *s1,
+                                            VkSwapchainPresentFenceInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 237 && VK_EXT_swapchain_maintenance1
+bool compare_VkSwapchainPresentModesCreateInfoEXT(VkSwapchainPresentModesCreateInfoEXT const *s1,
+                                                  VkSwapchainPresentModesCreateInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 237 && VK_EXT_swapchain_maintenance1
+bool compare_VkSwapchainPresentModeInfoEXT(VkSwapchainPresentModeInfoEXT const *s1,
+                                           VkSwapchainPresentModeInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 237 && VK_EXT_swapchain_maintenance1
+bool compare_VkSwapchainPresentScalingCreateInfoEXT(
+    VkSwapchainPresentScalingCreateInfoEXT const *s1,
+    VkSwapchainPresentScalingCreateInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 237 && VK_EXT_swapchain_maintenance1
+bool compare_VkReleaseSwapchainImagesInfoEXT(VkReleaseSwapchainImagesInfoEXT const *s1,
+                                             VkReleaseSwapchainImagesInfoEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 233 && VK_NV_ray_tracing_invocation_reorder
@@ -18431,6 +18479,105 @@ bool compare_VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM(
     VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM const *s1,
     VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM const *s2) {
   if ((s1->shaderCoreBuiltins != s2->shaderCoreBuiltins) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 237 && VK_EXT_surface_maintenance1
+bool compare_VkSurfacePresentModeEXT(VkSurfacePresentModeEXT const *s1,
+                                     VkSurfacePresentModeEXT const *s2) {
+  if ((s1->presentMode != s2->presentMode) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 237 && VK_EXT_surface_maintenance1
+bool compare_VkSurfacePresentScalingCapabilitiesEXT(
+    VkSurfacePresentScalingCapabilitiesEXT const *s1,
+    VkSurfacePresentScalingCapabilitiesEXT const *s2) {
+  if ((s1->supportedPresentScaling != s2->supportedPresentScaling) ||
+      (s1->supportedPresentGravityX != s2->supportedPresentGravityX) ||
+      (s1->supportedPresentGravityY != s2->supportedPresentGravityY) ||
+      !compare_VkExtent2D(&s1->minScaledImageExtent, &s2->minScaledImageExtent) ||
+      !compare_VkExtent2D(&s1->maxScaledImageExtent, &s2->maxScaledImageExtent) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 237 && VK_EXT_surface_maintenance1
+bool compare_VkSurfacePresentModeCompatibilityEXT(VkSurfacePresentModeCompatibilityEXT const *s1,
+                                                  VkSurfacePresentModeCompatibilityEXT const *s2) {
+  if ((s1->presentModeCount != s2->presentModeCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 237 && VK_EXT_swapchain_maintenance1
+bool compare_VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT(
+    VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT const *s1,
+    VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT const *s2) {
+  if ((s1->swapchainMaintenance1 != s2->swapchainMaintenance1) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 237 && VK_EXT_swapchain_maintenance1
+bool compare_VkSwapchainPresentFenceInfoEXT(VkSwapchainPresentFenceInfoEXT const *s1,
+                                            VkSwapchainPresentFenceInfoEXT const *s2) {
+  if ((s1->swapchainCount != s2->swapchainCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 237 && VK_EXT_swapchain_maintenance1
+bool compare_VkSwapchainPresentModesCreateInfoEXT(VkSwapchainPresentModesCreateInfoEXT const *s1,
+                                                  VkSwapchainPresentModesCreateInfoEXT const *s2) {
+  if ((s1->presentModeCount != s2->presentModeCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 237 && VK_EXT_swapchain_maintenance1
+bool compare_VkSwapchainPresentModeInfoEXT(VkSwapchainPresentModeInfoEXT const *s1,
+                                           VkSwapchainPresentModeInfoEXT const *s2) {
+  if ((s1->swapchainCount != s2->swapchainCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 237 && VK_EXT_swapchain_maintenance1
+bool compare_VkSwapchainPresentScalingCreateInfoEXT(
+    VkSwapchainPresentScalingCreateInfoEXT const *s1,
+    VkSwapchainPresentScalingCreateInfoEXT const *s2) {
+  if ((s1->scalingBehavior != s2->scalingBehavior) ||
+      (s1->presentGravityX != s2->presentGravityX) ||
+      (s1->presentGravityY != s2->presentGravityY) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 237 && VK_EXT_swapchain_maintenance1
+bool compare_VkReleaseSwapchainImagesInfoEXT(VkReleaseSwapchainImagesInfoEXT const *s1,
+                                             VkReleaseSwapchainImagesInfoEXT const *s2) {
+  if ((s1->swapchain != s2->swapchain) || (s1->imageIndexCount != s2->imageIndexCount) || false)
     return false;
 
   return true;
