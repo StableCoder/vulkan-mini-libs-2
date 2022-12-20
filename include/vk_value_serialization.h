@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 237,
-              "VK_HEADER_VERSION is from after the maximum supported version of v237.");
+static_assert(VK_HEADER_VERSION <= 238,
+              "VK_HEADER_VERSION is from after the maximum supported version of v238.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 237,
-               "VK_HEADER_VERSION is from after the maximum supported version of v237.");
+_Static_assert(VK_HEADER_VERSION <= 238,
+               "VK_HEADER_VERSION is from after the maximum supported version of v238.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -1535,6 +1535,7 @@ EnumValueSet const VkVideoCodecOperationFlagsKHRSets[] = {
     {"ENCODE_H264_BIT_EXT", 0x00010000, false}, {"DECODE_H264_BIT_EXT", 0x00000001, false},
     {"DECODE_H265_BIT_EXT", 0x00000002, false}, {"INVALID", 0, false},
     {"ENCODE_H265_BIT_EXT", 0x00020000, false}, {"NONE", 0, false},
+    {"DECODE_H264", 0x00000001, false},         {"DECODE_H265", 0x00000002, false},
 };
 
 EnumValueSet const VkVideoCapabilityFlagsKHRSets[] = {
@@ -1572,7 +1573,7 @@ EnumValueSet const VkVideoDecodeFlagsKHRSets[] = {
     {"RESERVED_0", 0x00000001, false},
 };
 
-EnumValueSet const VkVideoDecodeH264PictureLayoutFlagsEXTSets[] = {
+EnumValueSet const VkVideoDecodeH264PictureLayoutFlagsKHRSets[] = {
     {"PROGRESSIVE", 0, false},
     {"INTERLACED_INTERLEAVED_LINES", 0x00000001, false},
     {"INTERLACED_SEPARATE_PLANES", 0x00000002, false},
@@ -3187,6 +3188,12 @@ EnumValueSet const VkAccelerationStructureMotionInstanceTypeNVSets[] = {
     {"SRT_MOTION", 2, false},
 };
 
+EnumValueSet const VkVideoDecodeH264PictureLayoutFlagsEXTSets[] = {
+    {"PROGRESSIVE", 0, false},
+    {"INTERLACED_INTERLEAVED_LINES", 0x00000001, false},
+    {"INTERLACED_SEPARATE_PLANES", 0x00000002, false},
+};
+
 EnumValueSet const VkVideoCodingQualityPresetFlagsKHRSets[] = {
     {"NORMAL", 0x00000001, false},
     {"POWER", 0x00000002, false},
@@ -3304,7 +3311,7 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[318] = {
+EnumType const cEnumTypes[319] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", NULL, 0},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 3},
@@ -3458,7 +3465,7 @@ EnumType const cEnumTypes[318] = {
     {"VkOpticalFlowExecuteFlagsNV", VkOpticalFlowExecuteFlagsNVSets, 1},
     {"VkPresentScalingFlagsEXT", VkPresentScalingFlagsEXTSets, 3},
     {"VkPresentGravityFlagsEXT", VkPresentGravityFlagsEXTSets, 3},
-    {"VkVideoCodecOperationFlagsKHR", VkVideoCodecOperationFlagsKHRSets, 6},
+    {"VkVideoCodecOperationFlagsKHR", VkVideoCodecOperationFlagsKHRSets, 8},
     {"VkVideoCapabilityFlagsKHR", VkVideoCapabilityFlagsKHRSets, 2},
     {"VkVideoSessionCreateFlagsKHR", VkVideoSessionCreateFlagsKHRSets, 2},
     {"VkVideoSessionParametersCreateFlagsKHR", NULL, 0},
@@ -3468,7 +3475,7 @@ EnumType const cEnumTypes[318] = {
     {"VkVideoDecodeUsageFlagsKHR", VkVideoDecodeUsageFlagsKHRSets, 4},
     {"VkVideoDecodeCapabilityFlagsKHR", VkVideoDecodeCapabilityFlagsKHRSets, 3},
     {"VkVideoDecodeFlagsKHR", VkVideoDecodeFlagsKHRSets, 2},
-    {"VkVideoDecodeH264PictureLayoutFlagsEXT", VkVideoDecodeH264PictureLayoutFlagsEXTSets, 3},
+    {"VkVideoDecodeH264PictureLayoutFlagsKHR", VkVideoDecodeH264PictureLayoutFlagsKHRSets, 3},
     {"VkVideoEncodeFlagsKHR", VkVideoEncodeFlagsKHRSets, 2},
     {"VkVideoEncodeUsageFlagsKHR", VkVideoEncodeUsageFlagsKHRSets, 5},
     {"VkVideoEncodeContentFlagsKHR", VkVideoEncodeContentFlagsKHRSets, 4},
@@ -3604,6 +3611,7 @@ EnumType const cEnumTypes[318] = {
     {"VkVideoEncodeH265RateControlStructureEXT", VkVideoEncodeH265RateControlStructureEXTSets, 3},
     {"VkAccelerationStructureMotionInstanceTypeNV", VkAccelerationStructureMotionInstanceTypeNVSets,
      3},
+    {"VkVideoDecodeH264PictureLayoutFlagsEXT", VkVideoDecodeH264PictureLayoutFlagsEXTSets, 3},
     {"VkVideoCodingQualityPresetFlagsKHR", VkVideoCodingQualityPresetFlagsKHRSets, 4},
     {"VkVideoEncodeH264RateControlStructureFlagsEXT",
      VkVideoEncodeH264RateControlStructureFlagsEXTSets, 3},
