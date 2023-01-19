@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 238,
-              "VK_HEADER_VERSION is from after the maximum supported version of v238.");
+static_assert(VK_HEADER_VERSION <= 239,
+              "VK_HEADER_VERSION is from after the maximum supported version of v239.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 238,
-               "VK_HEADER_VERSION is from after the maximum supported version of v238.");
+_Static_assert(VK_HEADER_VERSION <= 239,
+               "VK_HEADER_VERSION is from after the maximum supported version of v239.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -3435,6 +3435,12 @@ bool compare_VkPhysicalDeviceSubpassShadingPropertiesHUAWEI(
     VkPhysicalDeviceSubpassShadingPropertiesHUAWEI const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 239 && VK_HUAWEI_cluster_culling_shader
+bool compare_VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI(
+    VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI const *s1,
+    VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
 bool compare_VkMemoryOpaqueCaptureAddressAllocateInfo(
     VkMemoryOpaqueCaptureAddressAllocateInfo const *s1,
@@ -3760,6 +3766,12 @@ bool compare_VkPhysicalDevice4444FormatsFeaturesEXT(
 bool compare_VkPhysicalDeviceSubpassShadingFeaturesHUAWEI(
     VkPhysicalDeviceSubpassShadingFeaturesHUAWEI const *s1,
     VkPhysicalDeviceSubpassShadingFeaturesHUAWEI const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 239 && VK_HUAWEI_cluster_culling_shader
+bool compare_VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI(
+    VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI const *s1,
+    VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
@@ -13636,6 +13648,26 @@ bool compare_VkPhysicalDeviceSubpassShadingPropertiesHUAWEI(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 239 && VK_HUAWEI_cluster_culling_shader
+bool compare_VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI(
+    VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI const *s1,
+    VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI const *s2) {
+  if ((s1->maxOutputClusterCount != s2->maxOutputClusterCount) || false)
+    return false;
+
+  for (uint32_t i = 0; i < 3; ++i) {
+    if (s1->maxWorkGroupCount[i] != s2->maxWorkGroupCount[i])
+      return false;
+  }
+  for (uint32_t i = 0; i < 3; ++i) {
+    if (s1->maxWorkGroupSize[i] != s2->maxWorkGroupSize[i])
+      return false;
+  }
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
 bool compare_VkMemoryOpaqueCaptureAddressAllocateInfo(
     VkMemoryOpaqueCaptureAddressAllocateInfo const *s1,
@@ -14694,6 +14726,18 @@ bool compare_VkPhysicalDeviceSubpassShadingFeaturesHUAWEI(
     VkPhysicalDeviceSubpassShadingFeaturesHUAWEI const *s1,
     VkPhysicalDeviceSubpassShadingFeaturesHUAWEI const *s2) {
   if ((s1->subpassShading != s2->subpassShading) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 239 && VK_HUAWEI_cluster_culling_shader
+bool compare_VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI(
+    VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI const *s1,
+    VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI const *s2) {
+  if ((s1->clustercullingShader != s2->clustercullingShader) ||
+      (s1->multiviewClusterCullingShader != s2->multiviewClusterCullingShader) || false)
     return false;
 
   return true;
