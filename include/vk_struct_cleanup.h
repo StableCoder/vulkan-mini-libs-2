@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 239,
-              "VK_HEADER_VERSION is from after the maximum supported version of v239.");
+static_assert(VK_HEADER_VERSION <= 240,
+              "VK_HEADER_VERSION is from after the maximum supported version of v240.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 239,
-               "VK_HEADER_VERSION is from after the maximum supported version of v239.");
+_Static_assert(VK_HEADER_VERSION <= 240,
+               "VK_HEADER_VERSION is from after the maximum supported version of v240.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -4887,6 +4887,11 @@ void cleanup_VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI(
 #if VK_HEADER_VERSION >= 239 && VK_HUAWEI_cluster_culling_shader
 void cleanup_VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI(
     VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 240 && VK_EXT_pipeline_library_group_handles
+void cleanup_VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT(
+    VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -11691,6 +11696,15 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_FEATURES_HUAWEI) {
     cleanup_VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI(
         (VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 240 && VK_EXT_pipeline_library_group_handles
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_LIBRARY_GROUP_HANDLES_FEATURES_EXT) {
+    cleanup_VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT(
+        (VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT const *)pData);
     return;
   }
 #endif
@@ -23201,6 +23215,16 @@ void cleanup_VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI(
 #if VK_HEADER_VERSION >= 239 && VK_HUAWEI_cluster_culling_shader
 void cleanup_VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI(
     VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 240 && VK_EXT_pipeline_library_group_handles
+void cleanup_VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT(
+    VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

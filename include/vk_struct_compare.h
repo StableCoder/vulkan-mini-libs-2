@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 239,
-              "VK_HEADER_VERSION is from after the maximum supported version of v239.");
+static_assert(VK_HEADER_VERSION <= 240,
+              "VK_HEADER_VERSION is from after the maximum supported version of v240.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 239,
-               "VK_HEADER_VERSION is from after the maximum supported version of v239.");
+_Static_assert(VK_HEADER_VERSION <= 240,
+               "VK_HEADER_VERSION is from after the maximum supported version of v240.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -5235,6 +5235,12 @@ bool compare_VkDeviceFaultInfoEXT(VkDeviceFaultInfoEXT const *s1, VkDeviceFaultI
 bool compare_VkDeviceFaultVendorBinaryHeaderVersionOneEXT(
     VkDeviceFaultVendorBinaryHeaderVersionOneEXT const *s1,
     VkDeviceFaultVendorBinaryHeaderVersionOneEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 240 && VK_EXT_pipeline_library_group_handles
+bool compare_VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT(
+    VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT const *s1,
+    VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 233 && VK_NV_memory_decompression
@@ -18450,6 +18456,17 @@ bool compare_VkDeviceFaultVendorBinaryHeaderVersionOneEXT(
     if (s1->pipelineCacheUUID[i] != s2->pipelineCacheUUID[i])
       return false;
   }
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 240 && VK_EXT_pipeline_library_group_handles
+bool compare_VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT(
+    VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT const *s1,
+    VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT const *s2) {
+  if ((s1->pipelineLibraryGroupHandles != s2->pipelineLibraryGroupHandles) || false)
+    return false;
 
   return true;
 }
