@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "Vulkan header version is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 240,
-              "Vulkan header version is from after the maximum supported version of v240.");
+static_assert(VK_HEADER_VERSION <= 241,
+              "Vulkan header version is from after the maximum supported version of v241.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "Vulkan header version is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 240,
-               "Vulkan header version is from after the maximum supported version of v240.");
+_Static_assert(VK_HEADER_VERSION <= 241,
+               "Vulkan header version is from after the maximum supported version of v241.");
 #endif
 
 /// Returns a string representing the given VkResult parameter. If there is no known representation,
@@ -55,6 +55,18 @@ char const *VkResult_to_string(VkResult result) {
   // Check in descending order to get the 'latest' version of the error code text available.
   // Also, because codes have been re-used over time, can't use a switch and have to do this large
   // set of ifs. Luckily this *should* be a relatively rare call.
+#if VK_HEADER_VERSION >= 241
+  if (result == VK_ERROR_VALIDATION_FAILED)
+    return "VK_ERROR_VALIDATION_FAILED";
+#endif
+#if VK_HEADER_VERSION >= 241
+  if (result == VK_ERROR_INVALID_PIPELINE_CACHE_DATA)
+    return "VK_ERROR_INVALID_PIPELINE_CACHE_DATA";
+#endif
+#if VK_HEADER_VERSION >= 241
+  if (result == VK_ERROR_NO_PIPELINE_MATCH)
+    return "VK_ERROR_NO_PIPELINE_MATCH";
+#endif
 #if VK_HEADER_VERSION >= 218 && VK_KHR_video_queue
   if (result == VK_ERROR_IMAGE_USAGE_NOT_SUPPORTED_KHR)
     return "VK_ERROR_IMAGE_USAGE_NOT_SUPPORTED_KHR";

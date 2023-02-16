@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 240,
-              "VK_HEADER_VERSION is from after the maximum supported version of v240.");
+static_assert(VK_HEADER_VERSION <= 241,
+              "VK_HEADER_VERSION is from after the maximum supported version of v241.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 240,
-               "VK_HEADER_VERSION is from after the maximum supported version of v240.");
+_Static_assert(VK_HEADER_VERSION <= 241,
+               "VK_HEADER_VERSION is from after the maximum supported version of v241.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -208,6 +208,8 @@ EnumValueSet const VkPipelineCacheCreateFlagsSets[] = {
     {"RESERVED_1_BIT_KHR", 0x00000002, true},
     {"RESERVED_2_BIT_KHR", 0x00000004, false},
     {"EXTERNALLY_SYNCHRONIZED", 0x00000001, false},
+    {"READ_ONLY", 0x00000002, true},
+    {"USE_APPLICATION_STORAGE", 0x00000004, false},
 };
 
 EnumValueSet const VkPipelineDepthStencilStateCreateFlagsSets[] = {
@@ -288,6 +290,7 @@ EnumValueSet const VkMemoryHeapFlagsSets[] = {
     {"MULTI_INSTANCE", 0x00000002, false},
     {"MULTI_INSTANCE_BIT_KHR", 0x00000002, true},
     {"RESERVED_2_BIT_KHR", 0x00000004, false},
+    {"SEU_SAFE", 0x00000004, false},
 };
 
 EnumValueSet const VkAccessFlagsSets[] = {
@@ -1330,6 +1333,7 @@ EnumValueSet const VkExternalMemoryHandleTypeFlagsSets[] = {
     {"RESERVED_12_BIT_NV", 0x00001000, false},
     {"RESERVED_13_BIT_NV", 0x00002000, false},
     {"RDMA_ADDRESS_BIT_NV", 0x00001000, false},
+    {"SCI_BUF_BIT_NV", 0x00002000, false},
 };
 
 EnumValueSet const VkExternalMemoryFeatureFlagsSets[] = {
@@ -1353,6 +1357,7 @@ EnumValueSet const VkExternalSemaphoreHandleTypeFlagsSets[] = {
     {"RESERVED_5_BIT_NV", 0x00000020, false},
     {"RESERVED_6_BIT_NV", 0x00000040, false},
     {"ZIRCON_EVENT_BIT_FUCHSIA", 0x00000080, false},
+    {"SCI_SYNC_OBJ_BIT_NV", 0x00000020, false},
 };
 
 EnumValueSet const VkExternalSemaphoreFeatureFlagsSets[] = {
@@ -1378,6 +1383,8 @@ EnumValueSet const VkExternalFenceHandleTypeFlagsSets[] = {
     {"SYNC_FD_BIT_KHR", 0x00000008, true},
     {"RESERVED_4_BIT_NV", 0x00000010, false},
     {"RESERVED_5_BIT_NV", 0x00000020, false},
+    {"SCI_SYNC_OBJ_BIT_NV", 0x00000010, false},
+    {"SCI_SYNC_FENCE_BIT_NV", 0x00000020, false},
 };
 
 EnumValueSet const VkExternalFenceFeatureFlagsSets[] = {
@@ -1846,6 +1853,7 @@ EnumValueSet const VkBorderColorSets[] = {
 
 EnumValueSet const VkPipelineCacheHeaderVersionSets[] = {
     {"ONE", 1, false},
+    {"SAFETY_CRITICAL_ONE", 1000298001, false},
 };
 
 EnumValueSet const VkComponentSwizzleSets[] = {
@@ -1976,6 +1984,9 @@ EnumValueSet const VkDynamicStateSets[] = {
     {"SHADING_RATE_IMAGE_ENABLE_NV", 1000455030, false},
     {"REPRESENTATIVE_FRAGMENT_TEST_ENABLE_NV", 1000455031, false},
     {"COVERAGE_REDUCTION_MODE_NV", 1000455032, false},
+    {"DISCARD_RECTANGLE_ENABLE_EXT", 1000099001, false},
+    {"DISCARD_RECTANGLE_MODE_EXT", 1000099002, false},
+    {"EXCLUSIVE_SCISSOR_ENABLE_NV", 1000205000, false},
 };
 
 EnumValueSet const VkPolygonModeSets[] = {
@@ -2572,6 +2583,7 @@ EnumValueSet const VkObjectTypeSets[] = {
     {"PRIVATE_DATA_SLOT", 1000295000, false},
     {"MICROMAP_EXT", 1000396000, false},
     {"OPTICAL_FLOW_SESSION_NV", 1000464000, false},
+    {"SEMAPHORE_SCI_SYNC_POOL_NV", 1000489000, false},
 };
 
 EnumValueSet const VkRayTracingInvocationReorderModeNVSets[] = {
@@ -2793,6 +2805,39 @@ EnumValueSet const VkLineRasterizationModeEXTSets[] = {
     {"RECTANGULAR_SMOOTH", 3, false},
 };
 
+EnumValueSet const VkFaultLevelSets[] = {
+    {"UNASSIGNED", 0, false},
+    {"CRITICAL", 1, false},
+    {"RECOVERABLE", 2, false},
+    {"WARNING", 3, false},
+};
+
+EnumValueSet const VkFaultTypeSets[] = {
+    {"INVALID", 0, false},           {"UNASSIGNED", 1, false},
+    {"IMPLEMENTATION", 2, false},    {"SYSTEM", 3, false},
+    {"PHYSICAL_DEVICE", 4, false},   {"COMMAND_BUFFER_FULL", 5, false},
+    {"INVALID_API_USAGE", 6, false},
+};
+
+EnumValueSet const VkFaultQueryBehaviorSets[] = {
+    {"GET_AND_CLEAR_ALL_FAULTS", 0, false},
+};
+
+EnumValueSet const VkPipelineMatchControlSets[] = {
+    {"APPLICATION_UUID_EXACT_MATCH", 0, false},
+};
+
+EnumValueSet const VkSciSyncClientTypeNVSets[] = {
+    {"SIGNALER", 0, false},
+    {"WAITER", 1, false},
+    {"SIGNALER_WAITER", 2, false},
+};
+
+EnumValueSet const VkSciSyncPrimitiveTypeNVSets[] = {
+    {"FENCE", 0, false},
+    {"SEMAPHORE", 1, false},
+};
+
 EnumValueSet const VkFragmentShadingRateNVSets[] = {
     {"1_INVOCATION_PER_PIXEL", 0, false},       {"1_INVOCATION_PER_1X2_PIXELS", 1, false},
     {"1_INVOCATION_PER_2X1_PIXELS", 4, false},  {"1_INVOCATION_PER_2X2_PIXELS", 5, false},
@@ -2827,6 +2872,10 @@ EnumValueSet const VkSubpassMergeStatusEXTSets[] = {
 EnumValueSet const VkProvokingVertexModeEXTSets[] = {
     {"FIRST_VERTEX", 0, false},
     {"LAST_VERTEX", 1, false},
+};
+
+EnumValueSet const VkPipelineCacheValidationVersionSets[] = {
+    {"SAFETY_CRITICAL_ONE", 1, false},
 };
 
 EnumValueSet const VkPipelineRobustnessBufferBehaviorEXTSets[] = {
@@ -3319,13 +3368,13 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[319] = {
+EnumType const cEnumTypes[327] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", NULL, 0},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 3},
     {"VkSamplerCreateFlags", VkSamplerCreateFlagsSets, 7},
     {"VkPipelineLayoutCreateFlags", VkPipelineLayoutCreateFlagsSets, 3},
-    {"VkPipelineCacheCreateFlags", VkPipelineCacheCreateFlagsSets, 6},
+    {"VkPipelineCacheCreateFlags", VkPipelineCacheCreateFlagsSets, 8},
     {"VkPipelineDepthStencilStateCreateFlags", VkPipelineDepthStencilStateCreateFlagsSets, 4},
     {"VkPipelineDynamicStateCreateFlags", NULL, 0},
     {"VkPipelineColorBlendStateCreateFlags", VkPipelineColorBlendStateCreateFlagsSets, 2},
@@ -3343,7 +3392,7 @@ EnumType const cEnumTypes[319] = {
     {"VkDeviceQueueCreateFlags", VkDeviceQueueCreateFlagsSets, 2},
     {"VkQueueFlags", VkQueueFlagsSets, 13},
     {"VkMemoryPropertyFlags", VkMemoryPropertyFlagsSets, 10},
-    {"VkMemoryHeapFlags", VkMemoryHeapFlagsSets, 4},
+    {"VkMemoryHeapFlags", VkMemoryHeapFlagsSets, 5},
     {"VkAccessFlags", VkAccessFlagsSets, 45},
     {"VkBufferUsageFlags", VkBufferUsageFlagsSets, 43},
     {"VkBufferCreateFlags", VkBufferCreateFlagsSets, 10},
@@ -3394,6 +3443,7 @@ EnumType const cEnumTypes[319] = {
     {"VkPipelineCompilerControlFlagsAMD", NULL, 0},
     {"VkShaderCorePropertiesFlagsAMD", NULL, 0},
     {"VkDeviceDiagnosticsConfigFlagsNV", VkDeviceDiagnosticsConfigFlagsNVSets, 4},
+    {"VkRefreshObjectFlagsKHR", NULL, 0},
     {"VkAccessFlags2", VkAccessFlags2Sets, 74},
     {"VkPipelineStageFlags2", VkPipelineStageFlags2Sets, 78},
     {"VkAccelerationStructureMotionInfoFlagsNV", NULL, 0},
@@ -3431,12 +3481,12 @@ EnumType const cEnumTypes[319] = {
     {"VkCommandPoolTrimFlags", NULL, 0},
     {"VkExternalMemoryHandleTypeFlagsNV", VkExternalMemoryHandleTypeFlagsNVSets, 4},
     {"VkExternalMemoryFeatureFlagsNV", VkExternalMemoryFeatureFlagsNVSets, 3},
-    {"VkExternalMemoryHandleTypeFlags", VkExternalMemoryHandleTypeFlagsSets, 22},
+    {"VkExternalMemoryHandleTypeFlags", VkExternalMemoryHandleTypeFlagsSets, 23},
     {"VkExternalMemoryFeatureFlags", VkExternalMemoryFeatureFlagsSets, 6},
-    {"VkExternalSemaphoreHandleTypeFlags", VkExternalSemaphoreHandleTypeFlagsSets, 14},
+    {"VkExternalSemaphoreHandleTypeFlags", VkExternalSemaphoreHandleTypeFlagsSets, 15},
     {"VkExternalSemaphoreFeatureFlags", VkExternalSemaphoreFeatureFlagsSets, 4},
     {"VkSemaphoreImportFlags", VkSemaphoreImportFlagsSets, 2},
-    {"VkExternalFenceHandleTypeFlags", VkExternalFenceHandleTypeFlagsSets, 10},
+    {"VkExternalFenceHandleTypeFlags", VkExternalFenceHandleTypeFlagsSets, 12},
     {"VkExternalFenceFeatureFlags", VkExternalFenceFeatureFlagsSets, 4},
     {"VkFenceImportFlags", VkFenceImportFlagsSets, 2},
     {"VkSurfaceCounterFlagsEXT", VkSurfaceCounterFlagsEXTSets, 2},
@@ -3506,12 +3556,12 @@ EnumType const cEnumTypes[319] = {
     {"VkBlendFactor", VkBlendFactorSets, 19},
     {"VkBlendOp", VkBlendOpSets, 51},
     {"VkBorderColor", VkBorderColorSets, 8},
-    {"VkPipelineCacheHeaderVersion", VkPipelineCacheHeaderVersionSets, 1},
+    {"VkPipelineCacheHeaderVersion", VkPipelineCacheHeaderVersionSets, 2},
     {"VkComponentSwizzle", VkComponentSwizzleSets, 7},
     {"VkCommandBufferLevel", VkCommandBufferLevelSets, 2},
     {"VkCompareOp", VkCompareOpSets, 8},
     {"VkDescriptorType", VkDescriptorTypeSets, 20},
-    {"VkDynamicState", VkDynamicStateSets, 83},
+    {"VkDynamicState", VkDynamicStateSets, 86},
     {"VkPolygonMode", VkPolygonModeSets, 4},
     {"VkFormat", VkFormatSets, 332},
     {"VkFrontFace", VkFrontFaceSets, 2},
@@ -3534,7 +3584,7 @@ EnumType const cEnumTypes[319] = {
     {"VkFilter", VkFilterSets, 4},
     {"VkSamplerMipmapMode", VkSamplerMipmapModeSets, 2},
     {"VkVertexInputRate", VkVertexInputRateSets, 2},
-    {"VkObjectType", VkObjectTypeSets, 54},
+    {"VkObjectType", VkObjectTypeSets, 55},
     {"VkRayTracingInvocationReorderModeNV", VkRayTracingInvocationReorderModeNVSets, 2},
     {"VkIndirectCommandsTokenTypeNV", VkIndirectCommandsTokenTypeNVSets, 9},
     {"VkDescriptorUpdateTemplateType", VkDescriptorUpdateTemplateTypeSets, 3},
@@ -3571,10 +3621,17 @@ EnumType const cEnumTypes[319] = {
     {"VkPerformanceParameterTypeINTEL", VkPerformanceParameterTypeINTELSets, 2},
     {"VkPerformanceValueTypeINTEL", VkPerformanceValueTypeINTELSets, 5},
     {"VkLineRasterizationModeEXT", VkLineRasterizationModeEXTSets, 4},
+    {"VkFaultLevel", VkFaultLevelSets, 4},
+    {"VkFaultType", VkFaultTypeSets, 7},
+    {"VkFaultQueryBehavior", VkFaultQueryBehaviorSets, 1},
+    {"VkPipelineMatchControl", VkPipelineMatchControlSets, 1},
+    {"VkSciSyncClientTypeNV", VkSciSyncClientTypeNVSets, 3},
+    {"VkSciSyncPrimitiveTypeNV", VkSciSyncPrimitiveTypeNVSets, 2},
     {"VkFragmentShadingRateNV", VkFragmentShadingRateNVSets, 12},
     {"VkFragmentShadingRateTypeNV", VkFragmentShadingRateTypeNVSets, 2},
     {"VkSubpassMergeStatusEXT", VkSubpassMergeStatusEXTSets, 14},
     {"VkProvokingVertexModeEXT", VkProvokingVertexModeEXTSets, 2},
+    {"VkPipelineCacheValidationVersion", VkPipelineCacheValidationVersionSets, 1},
     {"VkPipelineRobustnessBufferBehaviorEXT", VkPipelineRobustnessBufferBehaviorEXTSets, 4},
     {"VkPipelineRobustnessImageBehaviorEXT", VkPipelineRobustnessImageBehaviorEXTSets, 4},
     {"VkDeviceAddressBindingTypeEXT", VkDeviceAddressBindingTypeEXTSets, 2},
