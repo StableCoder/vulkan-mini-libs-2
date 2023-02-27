@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 241,
-              "VK_HEADER_VERSION is from after the maximum supported version of v241.");
+static_assert(VK_HEADER_VERSION <= 242,
+              "VK_HEADER_VERSION is from after the maximum supported version of v242.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 241,
-               "VK_HEADER_VERSION is from after the maximum supported version of v241.");
+_Static_assert(VK_HEADER_VERSION <= 242,
+               "VK_HEADER_VERSION is from after the maximum supported version of v242.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -5063,6 +5063,10 @@ void cleanup_VkPhysicalDeviceMultiviewPerViewRenderAreasFeaturesQCOM(
 #if VK_HEADER_VERSION >= 241 && VK_QCOM_multiview_per_view_render_areas
 void cleanup_VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM(
     VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 242 && VK_NV_low_latency
+void cleanup_VkQueryLowLatencySupportNV(VkQueryLowLatencySupportNV const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -12130,6 +12134,13 @@ void cleanup_vk_struct(void const *pData) {
     return;
   }
 #endif
+
+#if VK_HEADER_VERSION >= 242 && VK_NV_low_latency
+  if (pTemp->sType == VK_STRUCTURE_TYPE_QUERY_LOW_LATENCY_SUPPORT_NV) {
+    cleanup_VkQueryLowLatencySupportNV((VkQueryLowLatencySupportNV const *)pData);
+    return;
+  }
+#endif
 }
 
 extern inline void cleanup_VkOffset2D(VkOffset2D const *pData);
@@ -12523,7 +12534,7 @@ void cleanup_VkPipelineShaderStageCreateInfo(VkPipelineShaderStageCreateInfo con
   // pName - null-terminated
   free((void *)pData->pName);
 
-#if VK_HEADER_VERSION >= 241
+#if VK_HEADER_VERSION >= 242
   // pName - null-terminated
   free((void *)pData->pName);
 #endif
@@ -12675,7 +12686,7 @@ void cleanup_VkGraphicsPipelineCreateInfo(VkGraphicsPipelineCreateInfo const *pD
   }
   free((void *)pData->pStages);
 
-#if VK_HEADER_VERSION >= 241
+#if VK_HEADER_VERSION >= 242
   // pStages - stageCount
   if (pData->pStages != NULL) {
     for (uint32_t i = 0; i < pData->stageCount; ++i)
@@ -24050,6 +24061,18 @@ void cleanup_VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM(
       cleanup_VkRect2D(&pData->pPerViewRenderAreas[i]);
   }
   free((void *)pData->pPerViewRenderAreas);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 242 && VK_NV_low_latency
+void cleanup_VkQueryLowLatencySupportNV(VkQueryLowLatencySupportNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pQueriedLowLatencyData
+  free((void *)pData->pQueriedLowLatencyData);
 }
 #endif
 

@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 241,
-              "VK_HEADER_VERSION is from after the maximum supported version of v241.");
+static_assert(VK_HEADER_VERSION <= 242,
+              "VK_HEADER_VERSION is from after the maximum supported version of v242.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 241,
-               "VK_HEADER_VERSION is from after the maximum supported version of v241.");
+_Static_assert(VK_HEADER_VERSION <= 242,
+               "VK_HEADER_VERSION is from after the maximum supported version of v242.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -5540,6 +5540,11 @@ bool compare_VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM(
     VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 242 && VK_NV_low_latency
+bool compare_VkQueryLowLatencySupportNV(VkQueryLowLatencySupportNV const *s1,
+                                        VkQueryLowLatencySupportNV const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 225 && VK_HEADER_VERSION <= 237 && VK_EXT_video_decode_h264
 bool compare_VkVideoDecodeH264ProfileInfoEXT(VkVideoDecodeH264ProfileInfoEXT const *s1,
                                              VkVideoDecodeH264ProfileInfoEXT const *s2);
@@ -6710,7 +6715,7 @@ bool compare_VkGraphicsPipelineCreateInfo(VkGraphicsPipelineCreateInfo const *s1
 bool compare_VkPipelineCacheCreateInfo(VkPipelineCacheCreateInfo const *s1,
                                        VkPipelineCacheCreateInfo const *s2) {
   if ((s1->flags != s2->flags) || (s1->initialDataSize != s2->initialDataSize) ||
-#if VK_HEADER_VERSION >= 241
+#if VK_HEADER_VERSION >= 242
       (s1->initialDataSize != s2->initialDataSize) ||
 #endif
       false)
@@ -7466,7 +7471,7 @@ bool compare_VkSwapchainCreateInfoKHR(VkSwapchainCreateInfoKHR const *s1,
       (s1->preTransform != s2->preTransform) || (s1->compositeAlpha != s2->compositeAlpha) ||
       (s1->presentMode != s2->presentMode) || (s1->clipped != s2->clipped) ||
       (s1->oldSwapchain != s2->oldSwapchain) ||
-#if VK_HEADER_VERSION >= 241
+#if VK_HEADER_VERSION >= 242
       (s1->oldSwapchain != s2->oldSwapchain) ||
 #endif
       false)
@@ -18175,7 +18180,7 @@ bool compare_VkCommandBufferInheritanceRenderingInfo(
     VkCommandBufferInheritanceRenderingInfo const *s2) {
   if ((s1->flags != s2->flags) || (s1->viewMask != s2->viewMask) ||
       (s1->colorAttachmentCount != s2->colorAttachmentCount) ||
-#if VK_HEADER_VERSION >= 241
+#if VK_HEADER_VERSION >= 242
       (s1->colorAttachmentCount != s2->colorAttachmentCount) ||
 #endif
       (s1->depthAttachmentFormat != s2->depthAttachmentFormat) ||
@@ -19360,6 +19365,13 @@ bool compare_VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM(
   if ((s1->perViewRenderAreaCount != s2->perViewRenderAreaCount) || false)
     return false;
 
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 242 && VK_NV_low_latency
+bool compare_VkQueryLowLatencySupportNV(VkQueryLowLatencySupportNV const *s1,
+                                        VkQueryLowLatencySupportNV const *s2) {
   return true;
 }
 #endif
