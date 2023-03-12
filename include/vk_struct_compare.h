@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 242,
-              "VK_HEADER_VERSION is from after the maximum supported version of v242.");
+static_assert(VK_HEADER_VERSION <= 243,
+              "VK_HEADER_VERSION is from after the maximum supported version of v243.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 242,
-               "VK_HEADER_VERSION is from after the maximum supported version of v242.");
+_Static_assert(VK_HEADER_VERSION <= 243,
+               "VK_HEADER_VERSION is from after the maximum supported version of v243.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -4503,6 +4503,12 @@ bool compare_VkVideoEncodeUsageInfoKHR(VkVideoEncodeUsageInfoKHR const *s1,
 bool compare_VkVideoEncodeInfoKHR(VkVideoEncodeInfoKHR const *s1, VkVideoEncodeInfoKHR const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 243 && VK_KHR_video_encode_queue
+bool compare_VkQueryPoolVideoEncodeFeedbackCreateInfoKHR(
+    VkQueryPoolVideoEncodeFeedbackCreateInfoKHR const *s1,
+    VkQueryPoolVideoEncodeFeedbackCreateInfoKHR const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_encode_queue
 bool compare_VkVideoEncodeRateControlInfoKHR(VkVideoEncodeRateControlInfoKHR const *s1,
                                              VkVideoEncodeRateControlInfoKHR const *s2);
@@ -4543,18 +4549,6 @@ bool compare_VkVideoEncodeH264DpbSlotInfoEXT(VkVideoEncodeH264DpbSlotInfoEXT con
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_encode_h264
 bool compare_VkVideoEncodeH264VclFrameInfoEXT(VkVideoEncodeH264VclFrameInfoEXT const *s1,
                                               VkVideoEncodeH264VclFrameInfoEXT const *s2);
-#endif
-
-#if VK_HEADER_VERSION >= 225 && VK_EXT_video_encode_h264
-bool compare_VkVideoEncodeH264ReferenceListsInfoEXT(
-    VkVideoEncodeH264ReferenceListsInfoEXT const *s1,
-    VkVideoEncodeH264ReferenceListsInfoEXT const *s2);
-#endif
-
-#if VK_HEADER_VERSION >= 225 && VK_EXT_video_encode_h264
-bool compare_VkVideoEncodeH264EmitPictureParametersInfoEXT(
-    VkVideoEncodeH264EmitPictureParametersInfoEXT const *s1,
-    VkVideoEncodeH264EmitPictureParametersInfoEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 225 && VK_EXT_video_encode_h264
@@ -4611,12 +4605,6 @@ bool compare_VkVideoEncodeH265VclFrameInfoEXT(VkVideoEncodeH265VclFrameInfoEXT c
 #endif
 
 #if VK_HEADER_VERSION >= 225 && VK_EXT_video_encode_h265
-bool compare_VkVideoEncodeH265EmitPictureParametersInfoEXT(
-    VkVideoEncodeH265EmitPictureParametersInfoEXT const *s1,
-    VkVideoEncodeH265EmitPictureParametersInfoEXT const *s2);
-#endif
-
-#if VK_HEADER_VERSION >= 225 && VK_EXT_video_encode_h265
 bool compare_VkVideoEncodeH265NaluSliceSegmentInfoEXT(
     VkVideoEncodeH265NaluSliceSegmentInfoEXT const *s1,
     VkVideoEncodeH265NaluSliceSegmentInfoEXT const *s2);
@@ -4651,12 +4639,6 @@ bool compare_VkVideoEncodeH265ProfileInfoEXT(VkVideoEncodeH265ProfileInfoEXT con
 #if VK_HEADER_VERSION >= 196 && VK_EXT_video_encode_h265
 bool compare_VkVideoEncodeH265DpbSlotInfoEXT(VkVideoEncodeH265DpbSlotInfoEXT const *s1,
                                              VkVideoEncodeH265DpbSlotInfoEXT const *s2);
-#endif
-
-#if VK_HEADER_VERSION >= 225 && VK_EXT_video_encode_h265
-bool compare_VkVideoEncodeH265ReferenceListsInfoEXT(
-    VkVideoEncodeH265ReferenceListsInfoEXT const *s1,
-    VkVideoEncodeH265ReferenceListsInfoEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_NV_inherited_viewport_scissor
@@ -5543,6 +5525,30 @@ bool compare_VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM(
 #if VK_HEADER_VERSION >= 242 && VK_NV_low_latency
 bool compare_VkQueryLowLatencySupportNV(VkQueryLowLatencySupportNV const *s1,
                                         VkQueryLowLatencySupportNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 225 && VK_HEADER_VERSION <= 242 && VK_EXT_video_encode_h264
+bool compare_VkVideoEncodeH264ReferenceListsInfoEXT(
+    VkVideoEncodeH264ReferenceListsInfoEXT const *s1,
+    VkVideoEncodeH264ReferenceListsInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 225 && VK_HEADER_VERSION <= 242 && VK_EXT_video_encode_h264
+bool compare_VkVideoEncodeH264EmitPictureParametersInfoEXT(
+    VkVideoEncodeH264EmitPictureParametersInfoEXT const *s1,
+    VkVideoEncodeH264EmitPictureParametersInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 225 && VK_HEADER_VERSION <= 242 && VK_EXT_video_encode_h265
+bool compare_VkVideoEncodeH265EmitPictureParametersInfoEXT(
+    VkVideoEncodeH265EmitPictureParametersInfoEXT const *s1,
+    VkVideoEncodeH265EmitPictureParametersInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 225 && VK_HEADER_VERSION <= 242 && VK_EXT_video_encode_h265
+bool compare_VkVideoEncodeH265ReferenceListsInfoEXT(
+    VkVideoEncodeH265ReferenceListsInfoEXT const *s1,
+    VkVideoEncodeH265ReferenceListsInfoEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 225 && VK_HEADER_VERSION <= 237 && VK_EXT_video_decode_h264
@@ -6715,7 +6721,7 @@ bool compare_VkGraphicsPipelineCreateInfo(VkGraphicsPipelineCreateInfo const *s1
 bool compare_VkPipelineCacheCreateInfo(VkPipelineCacheCreateInfo const *s1,
                                        VkPipelineCacheCreateInfo const *s2) {
   if ((s1->flags != s2->flags) || (s1->initialDataSize != s2->initialDataSize) ||
-#if VK_HEADER_VERSION >= 242
+#if VK_HEADER_VERSION >= 243
       (s1->initialDataSize != s2->initialDataSize) ||
 #endif
       false)
@@ -7471,7 +7477,7 @@ bool compare_VkSwapchainCreateInfoKHR(VkSwapchainCreateInfoKHR const *s1,
       (s1->preTransform != s2->preTransform) || (s1->compositeAlpha != s2->compositeAlpha) ||
       (s1->presentMode != s2->presentMode) || (s1->clipped != s2->clipped) ||
       (s1->oldSwapchain != s2->oldSwapchain) ||
-#if VK_HEADER_VERSION >= 242
+#if VK_HEADER_VERSION >= 243
       (s1->oldSwapchain != s2->oldSwapchain) ||
 #endif
       false)
@@ -14136,7 +14142,11 @@ bool compare_VkPhysicalDeviceSubpassShadingPropertiesHUAWEI(
 bool compare_VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI(
     VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI const *s1,
     VkPhysicalDeviceClusterCullingShaderPropertiesHUAWEI const *s2) {
-  if ((s1->maxOutputClusterCount != s2->maxOutputClusterCount) || false)
+  if ((s1->maxOutputClusterCount != s2->maxOutputClusterCount) ||
+#if VK_HEADER_VERSION >= 243
+      (s1->indirectBufferOffsetAlignment != s2->indirectBufferOffsetAlignment) ||
+#endif
+      false)
     return false;
 
   for (uint32_t i = 0; i < 3; ++i) {
@@ -16753,18 +16763,44 @@ bool compare_VkVideoEncodeUsageInfoKHR(VkVideoEncodeUsageInfoKHR const *s1,
 #if VK_HEADER_VERSION >= 175 && VK_KHR_video_encode_queue
 bool compare_VkVideoEncodeInfoKHR(VkVideoEncodeInfoKHR const *s1, VkVideoEncodeInfoKHR const *s2) {
   if ((s1->flags != s2->flags) || (s1->qualityLevel != s2->qualityLevel) ||
-      (s1->dstBitstreamBuffer != s2->dstBitstreamBuffer) ||
-      (s1->dstBitstreamBufferOffset != s2->dstBitstreamBufferOffset) ||
-      (s1->dstBitstreamBufferMaxRange != s2->dstBitstreamBufferMaxRange) ||
+#if VK_HEADER_VERSION >= 243
+      (s1->dstBuffer != s2->dstBuffer) ||
+#endif
+#if VK_HEADER_VERSION >= 243
+      (s1->dstBufferOffset != s2->dstBufferOffset) ||
+#endif
+#if VK_HEADER_VERSION >= 243
+      (s1->dstBufferRange != s2->dstBufferRange) ||
+#endif
       !compare_VkVideoPictureResourceInfoKHR(&s1->srcPictureResource, &s2->srcPictureResource) ||
       (s1->referenceSlotCount != s2->referenceSlotCount) ||
 #if VK_HEADER_VERSION >= 201
       (s1->precedingExternallyEncodedBytes != s2->precedingExternallyEncodedBytes) ||
 #endif
+#if VK_HEADER_VERSION <= 242
+      (s1->dstBitstreamBuffer != s2->dstBitstreamBuffer) ||
+#endif
+#if VK_HEADER_VERSION <= 242
+      (s1->dstBitstreamBufferOffset != s2->dstBitstreamBufferOffset) ||
+#endif
+#if VK_HEADER_VERSION <= 242
+      (s1->dstBitstreamBufferMaxRange != s2->dstBitstreamBufferMaxRange) ||
+#endif
 #if VK_HEADER_VERSION <= 210
       !compare_VkExtent2D(&s1->codedExtent, &s2->codedExtent) ||
 #endif
       false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 243 && VK_KHR_video_encode_queue
+bool compare_VkQueryPoolVideoEncodeFeedbackCreateInfoKHR(
+    VkQueryPoolVideoEncodeFeedbackCreateInfoKHR const *s1,
+    VkQueryPoolVideoEncodeFeedbackCreateInfoKHR const *s2) {
+  if ((s1->encodeFeedbackFlags != s2->encodeFeedbackFlags) || false)
     return false;
 
   return true;
@@ -16818,9 +16854,22 @@ bool compare_VkVideoEncodeRateControlLayerInfoKHR(VkVideoEncodeRateControlLayerI
 bool compare_VkVideoEncodeCapabilitiesKHR(VkVideoEncodeCapabilitiesKHR const *s1,
                                           VkVideoEncodeCapabilitiesKHR const *s2) {
   if ((s1->flags != s2->flags) || (s1->rateControlModes != s2->rateControlModes) ||
-      (s1->rateControlLayerCount != s2->rateControlLayerCount) ||
-      (s1->qualityLevelCount != s2->qualityLevelCount) ||
+#if VK_HEADER_VERSION >= 243
+      (s1->maxRateControlLayers != s2->maxRateControlLayers) ||
+#endif
+#if VK_HEADER_VERSION >= 243
+      (s1->maxQualityLevels != s2->maxQualityLevels) ||
+#endif
       !compare_VkExtent2D(&s1->inputImageDataFillAlignment, &s2->inputImageDataFillAlignment) ||
+#if VK_HEADER_VERSION >= 243
+      (s1->supportedEncodeFeedbackFlags != s2->supportedEncodeFeedbackFlags) ||
+#endif
+#if VK_HEADER_VERSION <= 242
+      (s1->rateControlLayerCount != s2->rateControlLayerCount) ||
+#endif
+#if VK_HEADER_VERSION <= 242
+      (s1->qualityLevelCount != s2->qualityLevelCount) ||
+#endif
       false)
     return false;
 
@@ -16831,8 +16880,7 @@ bool compare_VkVideoEncodeCapabilitiesKHR(VkVideoEncodeCapabilitiesKHR const *s1
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_encode_h264
 bool compare_VkVideoEncodeH264CapabilitiesEXT(VkVideoEncodeH264CapabilitiesEXT const *s1,
                                               VkVideoEncodeH264CapabilitiesEXT const *s2) {
-  if ((s1->flags != s2->flags) || (s1->inputModeFlags != s2->inputModeFlags) ||
-      (s1->outputModeFlags != s2->outputModeFlags) ||
+  if ((s1->flags != s2->flags) ||
 #if VK_HEADER_VERSION >= 206
       (s1->maxPPictureL0ReferenceCount != s2->maxPPictureL0ReferenceCount) ||
 #endif
@@ -16856,6 +16904,12 @@ bool compare_VkVideoEncodeH264CapabilitiesEXT(VkVideoEncodeH264CapabilitiesEXT c
 #endif
 #if VK_HEADER_VERSION >= 206
       (s1->log2MaxMvLengthVertical != s2->log2MaxMvLengthVertical) ||
+#endif
+#if VK_HEADER_VERSION <= 242
+      (s1->inputModeFlags != s2->inputModeFlags) ||
+#endif
+#if VK_HEADER_VERSION <= 242
+      (s1->outputModeFlags != s2->outputModeFlags) ||
 #endif
 #if VK_HEADER_VERSION <= 208
       !compare_VkExtensionProperties(&s1->stdExtensionVersion, &s2->stdExtensionVersion) ||
@@ -16939,7 +16993,11 @@ bool compare_VkVideoEncodeH264SessionParametersCreateInfoEXT(
 #if VK_HEADER_VERSION >= 175 && VK_EXT_video_encode_h264
 bool compare_VkVideoEncodeH264DpbSlotInfoEXT(VkVideoEncodeH264DpbSlotInfoEXT const *s1,
                                              VkVideoEncodeH264DpbSlotInfoEXT const *s2) {
-  if ((s1->slotIndex != s2->slotIndex) || false)
+  if (
+#if VK_HEADER_VERSION <= 242
+      (s1->slotIndex != s2->slotIndex) ||
+#endif
+      false)
     return false;
 
   return true;
@@ -16957,30 +17015,6 @@ bool compare_VkVideoEncodeH264VclFrameInfoEXT(VkVideoEncodeH264VclFrameInfoEXT c
       (s1->refDefaultFinalList1EntryCount != s2->refDefaultFinalList1EntryCount) ||
 #endif
       false)
-    return false;
-
-  return true;
-}
-#endif
-
-#if VK_HEADER_VERSION >= 225 && VK_EXT_video_encode_h264
-bool compare_VkVideoEncodeH264ReferenceListsInfoEXT(
-    VkVideoEncodeH264ReferenceListsInfoEXT const *s1,
-    VkVideoEncodeH264ReferenceListsInfoEXT const *s2) {
-  if ((s1->referenceList0EntryCount != s2->referenceList0EntryCount) ||
-      (s1->referenceList1EntryCount != s2->referenceList1EntryCount) || false)
-    return false;
-
-  return true;
-}
-#endif
-
-#if VK_HEADER_VERSION >= 225 && VK_EXT_video_encode_h264
-bool compare_VkVideoEncodeH264EmitPictureParametersInfoEXT(
-    VkVideoEncodeH264EmitPictureParametersInfoEXT const *s1,
-    VkVideoEncodeH264EmitPictureParametersInfoEXT const *s2) {
-  if ((s1->spsId != s2->spsId) || (s1->emitSpsEnable != s2->emitSpsEnable) ||
-      (s1->ppsIdEntryCount != s2->ppsIdEntryCount) || false)
     return false;
 
   return true;
@@ -17063,8 +17097,7 @@ bool compare_VkVideoEncodeH264RateControlLayerInfoEXT(
 #if VK_HEADER_VERSION >= 196 && VK_EXT_video_encode_h265
 bool compare_VkVideoEncodeH265CapabilitiesEXT(VkVideoEncodeH265CapabilitiesEXT const *s1,
                                               VkVideoEncodeH265CapabilitiesEXT const *s2) {
-  if ((s1->flags != s2->flags) || (s1->inputModeFlags != s2->inputModeFlags) ||
-      (s1->outputModeFlags != s2->outputModeFlags) || (s1->ctbSizes != s2->ctbSizes) ||
+  if ((s1->flags != s2->flags) || (s1->ctbSizes != s2->ctbSizes) ||
 #if VK_HEADER_VERSION >= 206
       (s1->transformBlockSizes != s2->transformBlockSizes) ||
 #endif
@@ -17112,6 +17145,12 @@ bool compare_VkVideoEncodeH265CapabilitiesEXT(VkVideoEncodeH265CapabilitiesEXT c
 #endif
 #if VK_HEADER_VERSION >= 206
       (s1->maxMaxNumMergeCand != s2->maxMaxNumMergeCand) ||
+#endif
+#if VK_HEADER_VERSION <= 242
+      (s1->inputModeFlags != s2->inputModeFlags) ||
+#endif
+#if VK_HEADER_VERSION <= 242
+      (s1->outputModeFlags != s2->outputModeFlags) ||
 #endif
 #if VK_HEADER_VERSION <= 208
       !compare_VkExtensionProperties(&s1->stdExtensionVersion, &s2->stdExtensionVersion) ||
@@ -17219,19 +17258,6 @@ bool compare_VkVideoEncodeH265VclFrameInfoEXT(VkVideoEncodeH265VclFrameInfoEXT c
 #endif
 
 #if VK_HEADER_VERSION >= 225 && VK_EXT_video_encode_h265
-bool compare_VkVideoEncodeH265EmitPictureParametersInfoEXT(
-    VkVideoEncodeH265EmitPictureParametersInfoEXT const *s1,
-    VkVideoEncodeH265EmitPictureParametersInfoEXT const *s2) {
-  if ((s1->vpsId != s2->vpsId) || (s1->spsId != s2->spsId) ||
-      (s1->emitVpsEnable != s2->emitVpsEnable) || (s1->emitSpsEnable != s2->emitSpsEnable) ||
-      (s1->ppsIdEntryCount != s2->ppsIdEntryCount) || false)
-    return false;
-
-  return true;
-}
-#endif
-
-#if VK_HEADER_VERSION >= 225 && VK_EXT_video_encode_h265
 bool compare_VkVideoEncodeH265NaluSliceSegmentInfoEXT(
     VkVideoEncodeH265NaluSliceSegmentInfoEXT const *s1,
     VkVideoEncodeH265NaluSliceSegmentInfoEXT const *s2) {
@@ -17308,19 +17334,11 @@ bool compare_VkVideoEncodeH265ProfileInfoEXT(VkVideoEncodeH265ProfileInfoEXT con
 #if VK_HEADER_VERSION >= 196 && VK_EXT_video_encode_h265
 bool compare_VkVideoEncodeH265DpbSlotInfoEXT(VkVideoEncodeH265DpbSlotInfoEXT const *s1,
                                              VkVideoEncodeH265DpbSlotInfoEXT const *s2) {
-  if ((s1->slotIndex != s2->slotIndex) || false)
-    return false;
-
-  return true;
-}
+  if (
+#if VK_HEADER_VERSION <= 242
+      (s1->slotIndex != s2->slotIndex) ||
 #endif
-
-#if VK_HEADER_VERSION >= 225 && VK_EXT_video_encode_h265
-bool compare_VkVideoEncodeH265ReferenceListsInfoEXT(
-    VkVideoEncodeH265ReferenceListsInfoEXT const *s1,
-    VkVideoEncodeH265ReferenceListsInfoEXT const *s2) {
-  if ((s1->referenceList0EntryCount != s2->referenceList0EntryCount) ||
-      (s1->referenceList1EntryCount != s2->referenceList1EntryCount) || false)
+      false)
     return false;
 
   return true;
@@ -18180,7 +18198,7 @@ bool compare_VkCommandBufferInheritanceRenderingInfo(
     VkCommandBufferInheritanceRenderingInfo const *s2) {
   if ((s1->flags != s2->flags) || (s1->viewMask != s2->viewMask) ||
       (s1->colorAttachmentCount != s2->colorAttachmentCount) ||
-#if VK_HEADER_VERSION >= 242
+#if VK_HEADER_VERSION >= 243
       (s1->colorAttachmentCount != s2->colorAttachmentCount) ||
 #endif
       (s1->depthAttachmentFormat != s2->depthAttachmentFormat) ||
@@ -19372,6 +19390,55 @@ bool compare_VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM(
 #if VK_HEADER_VERSION >= 242 && VK_NV_low_latency
 bool compare_VkQueryLowLatencySupportNV(VkQueryLowLatencySupportNV const *s1,
                                         VkQueryLowLatencySupportNV const *s2) {
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 225 && VK_HEADER_VERSION <= 242 && VK_EXT_video_encode_h264
+bool compare_VkVideoEncodeH264ReferenceListsInfoEXT(
+    VkVideoEncodeH264ReferenceListsInfoEXT const *s1,
+    VkVideoEncodeH264ReferenceListsInfoEXT const *s2) {
+  if ((s1->referenceList0EntryCount != s2->referenceList0EntryCount) ||
+      (s1->referenceList1EntryCount != s2->referenceList1EntryCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 225 && VK_HEADER_VERSION <= 242 && VK_EXT_video_encode_h264
+bool compare_VkVideoEncodeH264EmitPictureParametersInfoEXT(
+    VkVideoEncodeH264EmitPictureParametersInfoEXT const *s1,
+    VkVideoEncodeH264EmitPictureParametersInfoEXT const *s2) {
+  if ((s1->spsId != s2->spsId) || (s1->emitSpsEnable != s2->emitSpsEnable) ||
+      (s1->ppsIdEntryCount != s2->ppsIdEntryCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 225 && VK_HEADER_VERSION <= 242 && VK_EXT_video_encode_h265
+bool compare_VkVideoEncodeH265EmitPictureParametersInfoEXT(
+    VkVideoEncodeH265EmitPictureParametersInfoEXT const *s1,
+    VkVideoEncodeH265EmitPictureParametersInfoEXT const *s2) {
+  if ((s1->vpsId != s2->vpsId) || (s1->spsId != s2->spsId) ||
+      (s1->emitVpsEnable != s2->emitVpsEnable) || (s1->emitSpsEnable != s2->emitSpsEnable) ||
+      (s1->ppsIdEntryCount != s2->ppsIdEntryCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 225 && VK_HEADER_VERSION <= 242 && VK_EXT_video_encode_h265
+bool compare_VkVideoEncodeH265ReferenceListsInfoEXT(
+    VkVideoEncodeH265ReferenceListsInfoEXT const *s1,
+    VkVideoEncodeH265ReferenceListsInfoEXT const *s2) {
+  if ((s1->referenceList0EntryCount != s2->referenceList0EntryCount) ||
+      (s1->referenceList1EntryCount != s2->referenceList1EntryCount) || false)
+    return false;
+
   return true;
 }
 #endif
