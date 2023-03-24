@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 244,
-              "VK_HEADER_VERSION is from after the maximum supported version of v244.");
+static_assert(VK_HEADER_VERSION <= 245,
+              "VK_HEADER_VERSION is from after the maximum supported version of v245.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 244,
-               "VK_HEADER_VERSION is from after the maximum supported version of v244.");
+_Static_assert(VK_HEADER_VERSION <= 245,
+               "VK_HEADER_VERSION is from after the maximum supported version of v245.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -272,6 +272,8 @@ EnumValueSet const VkQueueFlagsSets[] = {
     {"RESERVED_8_BIT_NV", 0x00000100, false},
     {"RESERVED_9_BIT_EXT", 0x00000200, false},
     {"OPTICAL_FLOW_BIT_NV", 0x00000100, false},
+    {"RESERVED_11_BIT_ARM", 0x00000800, false},
+    {"RESERVED_10_BIT_EXT", 0x00000400, false},
 };
 
 EnumValueSet const VkMemoryPropertyFlagsSets[] = {
@@ -486,6 +488,7 @@ EnumValueSet const VkImageUsageFlagsSets[] = {
     {"SAMPLE_WEIGHT_BIT_QCOM", 0x00100000, false},
     {"SAMPLE_BLOCK_MATCH_BIT_QCOM", 0x00200000, false},
     {"ATTACHMENT_FEEDBACK_LOOP_BIT_EXT", 0x00080000, false},
+    {"RESERVED_23_BIT_EXT", 0x00800000, false},
 };
 
 EnumValueSet const VkImageCreateFlagsSets[] = {
@@ -600,6 +603,7 @@ EnumValueSet const VkPipelineCreateFlagsSets[] = {
     {"NO_PROTECTED_ACCESS_BIT_EXT", 0x08000000, false},
     {"PROTECTED_ACCESS_ONLY_BIT_EXT", 0x40000000, false},
     {"DESCRIPTOR_BUFFER_BIT_EXT", 0x20000000, false},
+    {"RAY_TRACING_DISPLACEMENT_MICROMAP_BIT_NV", 0x10000000, false},
 };
 
 EnumValueSet const VkColorComponentFlagsSets[] = {
@@ -924,6 +928,7 @@ EnumValueSet const VkBuildAccelerationStructureFlagsKHRSets[] = {
     {"ALLOW_OPACITY_MICROMAP_UPDATE_EXT", 0x00000040, false},
     {"ALLOW_DISABLE_OPACITY_MICROMAPS_EXT", 0x00000080, false},
     {"ALLOW_OPACITY_MICROMAP_DATA_UPDATE_EXT", 0x00000100, false},
+    {"ALLOW_DISPLACEMENT_MICROMAP_UPDATE_NV", 0x00000200, false},
 };
 
 EnumValueSet const VkPrivateDataSlotCreateFlagsSets[] = {
@@ -1041,6 +1046,10 @@ EnumValueSet const VkAccessFlags2Sets[] = {
     {"OPTICAL_FLOW_READ_BIT_NV", 0x40000000000, false},
     {"OPTICAL_FLOW_WRITE_BIT_NV", 0x80000000000, false},
     {"DESCRIPTOR_BUFFER_READ_BIT_EXT", 0x20000000000, false},
+    {"RESERVED_49_BIT_ARM", 0x2000000000000, false},
+    {"RESERVED_50_BIT_ARM", 0x4000000000000, false},
+    {"RESERVED_47_BIT_EXT", 0x800000000000, false},
+    {"RESERVED_48_BIT_EXT", 0x1000000000000, false},
 };
 
 EnumValueSet const VkPipelineStageFlags2Sets[] = {
@@ -1122,6 +1131,8 @@ EnumValueSet const VkPipelineStageFlags2Sets[] = {
     {"OPTICAL_FLOW_BIT_NV", 0x20000000, false},
     {"RESEVED_41_BIT_HUAWEI", 0x20000000000, false},
     {"CLUSTER_CULLING_SHADER_BIT_HUAWEI", 0x20000000000, false},
+    {"RESERVED_43_BIT_ARM", 0x80000000000, false},
+    {"RESERVED_42_BIT_EXT", 0x40000000000, false},
 };
 
 EnumValueSet const VkFormatFeatureFlags2Sets[] = {
@@ -2882,6 +2893,7 @@ EnumValueSet const VkDeviceAddressBindingTypeEXTSets[] = {
 
 EnumValueSet const VkMicromapTypeEXTSets[] = {
     {"OPACITY_MICROMAP", 0, false},
+    {"DISPLACEMENT_MICROMAP_NV", 1000397000, false},
 };
 
 EnumValueSet const VkBuildMicromapModeEXTSets[] = {
@@ -2914,6 +2926,12 @@ EnumValueSet const VkDeviceFaultVendorBinaryHeaderVersionEXTSets[] = {
 EnumValueSet const VkDirectDriverLoadingModeLUNARGSets[] = {
     {"EXCLUSIVE", 0, false},
     {"INCLUSIVE", 1, false},
+};
+
+EnumValueSet const VkDisplacementMicromapFormatNVSets[] = {
+    {"64_TRIANGLES_64_BYTES", 1, false},
+    {"256_TRIANGLES_128_BYTES", 2, false},
+    {"1024_TRIANGLES_128_BYTES", 3, false},
 };
 
 EnumValueSet const VkColorSpaceKHRSets[] = {
@@ -3378,7 +3396,7 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[329] = {
+EnumType const cEnumTypes[330] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", NULL, 0},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 3},
@@ -3400,17 +3418,17 @@ EnumType const cEnumTypes[329] = {
     {"VkInstanceCreateFlags", VkInstanceCreateFlagsSets, 1},
     {"VkDeviceCreateFlags", NULL, 0},
     {"VkDeviceQueueCreateFlags", VkDeviceQueueCreateFlagsSets, 2},
-    {"VkQueueFlags", VkQueueFlagsSets, 13},
+    {"VkQueueFlags", VkQueueFlagsSets, 15},
     {"VkMemoryPropertyFlags", VkMemoryPropertyFlagsSets, 10},
     {"VkMemoryHeapFlags", VkMemoryHeapFlagsSets, 5},
     {"VkAccessFlags", VkAccessFlagsSets, 45},
     {"VkBufferUsageFlags", VkBufferUsageFlagsSets, 43},
     {"VkBufferCreateFlags", VkBufferCreateFlagsSets, 10},
     {"VkShaderStageFlags", VkShaderStageFlagsSets, 44},
-    {"VkImageUsageFlags", VkImageUsageFlagsSets, 36},
+    {"VkImageUsageFlags", VkImageUsageFlagsSets, 37},
     {"VkImageCreateFlags", VkImageCreateFlagsSets, 33},
     {"VkImageViewCreateFlags", VkImageViewCreateFlagsSets, 6},
-    {"VkPipelineCreateFlags", VkPipelineCreateFlagsSets, 64},
+    {"VkPipelineCreateFlags", VkPipelineCreateFlagsSets, 65},
     {"VkColorComponentFlags", VkColorComponentFlagsSets, 4},
     {"VkFenceCreateFlags", VkFenceCreateFlagsSets, 1},
     {"VkSemaphoreCreateFlags", NULL, 0},
@@ -3442,7 +3460,7 @@ EnumType const cEnumTypes[329] = {
     {"VkIndirectStateFlagsNV", VkIndirectStateFlagsNVSets, 1},
     {"VkGeometryFlagsKHR", VkGeometryFlagsKHRSets, 4},
     {"VkGeometryInstanceFlagsKHR", VkGeometryInstanceFlagsKHRSets, 13},
-    {"VkBuildAccelerationStructureFlagsKHR", VkBuildAccelerationStructureFlagsKHRSets, 19},
+    {"VkBuildAccelerationStructureFlagsKHR", VkBuildAccelerationStructureFlagsKHRSets, 20},
     {"VkPrivateDataSlotCreateFlags", VkPrivateDataSlotCreateFlagsSets, 1},
     {"VkAccelerationStructureCreateFlagsKHR", VkAccelerationStructureCreateFlagsKHRSets, 5},
     {"VkDescriptorUpdateTemplateCreateFlags", NULL, 0},
@@ -3454,8 +3472,8 @@ EnumType const cEnumTypes[329] = {
     {"VkShaderCorePropertiesFlagsAMD", NULL, 0},
     {"VkDeviceDiagnosticsConfigFlagsNV", VkDeviceDiagnosticsConfigFlagsNVSets, 4},
     {"VkRefreshObjectFlagsKHR", NULL, 0},
-    {"VkAccessFlags2", VkAccessFlags2Sets, 74},
-    {"VkPipelineStageFlags2", VkPipelineStageFlags2Sets, 78},
+    {"VkAccessFlags2", VkAccessFlags2Sets, 78},
+    {"VkPipelineStageFlags2", VkPipelineStageFlags2Sets, 80},
     {"VkAccelerationStructureMotionInfoFlagsNV", NULL, 0},
     {"VkAccelerationStructureMotionInstanceFlagsNV", NULL, 0},
     {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Sets, 80},
@@ -3643,13 +3661,14 @@ EnumType const cEnumTypes[329] = {
     {"VkPipelineRobustnessBufferBehaviorEXT", VkPipelineRobustnessBufferBehaviorEXTSets, 4},
     {"VkPipelineRobustnessImageBehaviorEXT", VkPipelineRobustnessImageBehaviorEXTSets, 4},
     {"VkDeviceAddressBindingTypeEXT", VkDeviceAddressBindingTypeEXTSets, 2},
-    {"VkMicromapTypeEXT", VkMicromapTypeEXTSets, 1},
+    {"VkMicromapTypeEXT", VkMicromapTypeEXTSets, 2},
     {"VkBuildMicromapModeEXT", VkBuildMicromapModeEXTSets, 1},
     {"VkCopyMicromapModeEXT", VkCopyMicromapModeEXTSets, 4},
     {"VkOpacityMicromapFormatEXT", VkOpacityMicromapFormatEXTSets, 2},
     {"VkOpacityMicromapSpecialIndexEXT", VkOpacityMicromapSpecialIndexEXTSets, 4},
     {"VkDeviceFaultVendorBinaryHeaderVersionEXT", VkDeviceFaultVendorBinaryHeaderVersionEXTSets, 1},
     {"VkDirectDriverLoadingModeLUNARG", VkDirectDriverLoadingModeLUNARGSets, 2},
+    {"VkDisplacementMicromapFormatNV", VkDisplacementMicromapFormatNVSets, 3},
     {"VkColorSpaceKHR", VkColorSpaceKHRSets, 18},
     {"VkPresentModeKHR", VkPresentModeKHRSets, 6},
     {"VkDebugReportObjectTypeEXT", VkDebugReportObjectTypeEXTSets, 46},

@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 244,
-              "VK_HEADER_VERSION is from after the maximum supported version of v244.");
+static_assert(VK_HEADER_VERSION <= 245,
+              "VK_HEADER_VERSION is from after the maximum supported version of v245.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 244,
-               "VK_HEADER_VERSION is from after the maximum supported version of v244.");
+_Static_assert(VK_HEADER_VERSION <= 245,
+               "VK_HEADER_VERSION is from after the maximum supported version of v245.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -5080,6 +5080,21 @@ void cleanup_VkMemoryMapInfoKHR(VkMemoryMapInfoKHR const *pData);
 
 #if VK_HEADER_VERSION >= 244 && VK_KHR_map_memory2
 void cleanup_VkMemoryUnmapInfoKHR(VkMemoryUnmapInfoKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 245 && VK_NV_displacement_micromap
+void cleanup_VkPhysicalDeviceDisplacementMicromapFeaturesNV(
+    VkPhysicalDeviceDisplacementMicromapFeaturesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 245 && VK_NV_displacement_micromap
+void cleanup_VkPhysicalDeviceDisplacementMicromapPropertiesNV(
+    VkPhysicalDeviceDisplacementMicromapPropertiesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 245 && VK_NV_displacement_micromap
+void cleanup_VkAccelerationStructureTrianglesDisplacementMicromapNV(
+    VkAccelerationStructureTrianglesDisplacementMicromapNV const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -12176,6 +12191,30 @@ void cleanup_vk_struct(void const *pData) {
     return;
   }
 #endif
+
+#if VK_HEADER_VERSION >= 245 && VK_NV_displacement_micromap
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISPLACEMENT_MICROMAP_FEATURES_NV) {
+    cleanup_VkPhysicalDeviceDisplacementMicromapFeaturesNV(
+        (VkPhysicalDeviceDisplacementMicromapFeaturesNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 245 && VK_NV_displacement_micromap
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DISPLACEMENT_MICROMAP_PROPERTIES_NV) {
+    cleanup_VkPhysicalDeviceDisplacementMicromapPropertiesNV(
+        (VkPhysicalDeviceDisplacementMicromapPropertiesNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 245 && VK_NV_displacement_micromap
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_DISPLACEMENT_MICROMAP_NV) {
+    cleanup_VkAccelerationStructureTrianglesDisplacementMicromapNV(
+        (VkAccelerationStructureTrianglesDisplacementMicromapNV const *)pData);
+    return;
+  }
+#endif
 }
 
 extern inline void cleanup_VkOffset2D(VkOffset2D const *pData);
@@ -12569,7 +12608,7 @@ void cleanup_VkPipelineShaderStageCreateInfo(VkPipelineShaderStageCreateInfo con
   // pName - null-terminated
   free((void *)pData->pName);
 
-#if VK_HEADER_VERSION >= 244
+#if VK_HEADER_VERSION >= 245
   // pName - null-terminated
   free((void *)pData->pName);
 #endif
@@ -12721,7 +12760,7 @@ void cleanup_VkGraphicsPipelineCreateInfo(VkGraphicsPipelineCreateInfo const *pD
   }
   free((void *)pData->pStages);
 
-#if VK_HEADER_VERSION >= 244
+#if VK_HEADER_VERSION >= 245
   // pStages - stageCount
   if (pData->pStages != NULL) {
     for (uint32_t i = 0; i < pData->stageCount; ++i)
@@ -24199,6 +24238,53 @@ void cleanup_VkMemoryUnmapInfoKHR(VkMemoryUnmapInfoKHR const *pData) {
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 245 && VK_NV_displacement_micromap
+void cleanup_VkPhysicalDeviceDisplacementMicromapFeaturesNV(
+    VkPhysicalDeviceDisplacementMicromapFeaturesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 245 && VK_NV_displacement_micromap
+void cleanup_VkPhysicalDeviceDisplacementMicromapPropertiesNV(
+    VkPhysicalDeviceDisplacementMicromapPropertiesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 245 && VK_NV_displacement_micromap
+void cleanup_VkAccelerationStructureTrianglesDisplacementMicromapNV(
+    VkAccelerationStructureTrianglesDisplacementMicromapNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pUsageCounts - usageCountsCount
+  if (pData->pUsageCounts != NULL) {
+    for (uint32_t i = 0; i < pData->usageCountsCount; ++i)
+      cleanup_VkMicromapUsageEXT(&pData->pUsageCounts[i]);
+  }
+  free((void *)pData->pUsageCounts);
+
+  // ppUsageCounts - usageCountsCount,1
+  for (uint32_t i = 0; i < pData->usageCountsCount; ++i) {
+    if (pData->ppUsageCounts[i] != NULL) {
+      for (uint32_t j = 0; j < pData->1 [i]; ++j)
+        cleanup_VkMicromapUsageEXT(&pData->ppUsageCounts[i][j]);
+    }
+    free((void *)pData->ppUsageCounts[i]);
+  }
+  free((void *)pData->ppUsageCounts);
 }
 #endif
 

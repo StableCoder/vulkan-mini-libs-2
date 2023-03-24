@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 244,
-              "VK_HEADER_VERSION is from after the maximum supported version of v244.");
+static_assert(VK_HEADER_VERSION <= 245,
+              "VK_HEADER_VERSION is from after the maximum supported version of v245.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 244,
-               "VK_HEADER_VERSION is from after the maximum supported version of v244.");
+_Static_assert(VK_HEADER_VERSION <= 245,
+               "VK_HEADER_VERSION is from after the maximum supported version of v245.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -5177,6 +5177,24 @@ bool compare_VkPhysicalDeviceOpacityMicromapPropertiesEXT(
     VkPhysicalDeviceOpacityMicromapPropertiesEXT const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 245 && VK_NV_displacement_micromap
+bool compare_VkPhysicalDeviceDisplacementMicromapFeaturesNV(
+    VkPhysicalDeviceDisplacementMicromapFeaturesNV const *s1,
+    VkPhysicalDeviceDisplacementMicromapFeaturesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 245 && VK_NV_displacement_micromap
+bool compare_VkPhysicalDeviceDisplacementMicromapPropertiesNV(
+    VkPhysicalDeviceDisplacementMicromapPropertiesNV const *s1,
+    VkPhysicalDeviceDisplacementMicromapPropertiesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 245 && VK_NV_displacement_micromap
+bool compare_VkAccelerationStructureTrianglesDisplacementMicromapNV(
+    VkAccelerationStructureTrianglesDisplacementMicromapNV const *s1,
+    VkAccelerationStructureTrianglesDisplacementMicromapNV const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 213 && VK_EXT_pipeline_properties
 bool compare_VkPipelinePropertiesIdentifierEXT(VkPipelinePropertiesIdentifierEXT const *s1,
                                                VkPipelinePropertiesIdentifierEXT const *s2);
@@ -6729,7 +6747,7 @@ bool compare_VkGraphicsPipelineCreateInfo(VkGraphicsPipelineCreateInfo const *s1
 bool compare_VkPipelineCacheCreateInfo(VkPipelineCacheCreateInfo const *s1,
                                        VkPipelineCacheCreateInfo const *s2) {
   if ((s1->flags != s2->flags) || (s1->initialDataSize != s2->initialDataSize) ||
-#if VK_HEADER_VERSION >= 244
+#if VK_HEADER_VERSION >= 245
       (s1->initialDataSize != s2->initialDataSize) ||
 #endif
       false)
@@ -7485,7 +7503,7 @@ bool compare_VkSwapchainCreateInfoKHR(VkSwapchainCreateInfoKHR const *s1,
       (s1->preTransform != s2->preTransform) || (s1->compositeAlpha != s2->compositeAlpha) ||
       (s1->presentMode != s2->presentMode) || (s1->clipped != s2->clipped) ||
       (s1->oldSwapchain != s2->oldSwapchain) ||
-#if VK_HEADER_VERSION >= 244
+#if VK_HEADER_VERSION >= 245
       (s1->oldSwapchain != s2->oldSwapchain) ||
 #endif
       false)
@@ -18206,7 +18224,7 @@ bool compare_VkCommandBufferInheritanceRenderingInfo(
     VkCommandBufferInheritanceRenderingInfo const *s2) {
   if ((s1->flags != s2->flags) || (s1->viewMask != s2->viewMask) ||
       (s1->colorAttachmentCount != s2->colorAttachmentCount) ||
-#if VK_HEADER_VERSION >= 244
+#if VK_HEADER_VERSION >= 245
       (s1->colorAttachmentCount != s2->colorAttachmentCount) ||
 #endif
       (s1->depthAttachmentFormat != s2->depthAttachmentFormat) ||
@@ -18653,6 +18671,51 @@ bool compare_VkPhysicalDeviceOpacityMicromapPropertiesEXT(
     VkPhysicalDeviceOpacityMicromapPropertiesEXT const *s2) {
   if ((s1->maxOpacity2StateSubdivisionLevel != s2->maxOpacity2StateSubdivisionLevel) ||
       (s1->maxOpacity4StateSubdivisionLevel != s2->maxOpacity4StateSubdivisionLevel) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 245 && VK_NV_displacement_micromap
+bool compare_VkPhysicalDeviceDisplacementMicromapFeaturesNV(
+    VkPhysicalDeviceDisplacementMicromapFeaturesNV const *s1,
+    VkPhysicalDeviceDisplacementMicromapFeaturesNV const *s2) {
+  if ((s1->displacementMicromap != s2->displacementMicromap) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 245 && VK_NV_displacement_micromap
+bool compare_VkPhysicalDeviceDisplacementMicromapPropertiesNV(
+    VkPhysicalDeviceDisplacementMicromapPropertiesNV const *s1,
+    VkPhysicalDeviceDisplacementMicromapPropertiesNV const *s2) {
+  if ((s1->maxDisplacementMicromapSubdivisionLevel !=
+       s2->maxDisplacementMicromapSubdivisionLevel) ||
+      false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 245 && VK_NV_displacement_micromap
+bool compare_VkAccelerationStructureTrianglesDisplacementMicromapNV(
+    VkAccelerationStructureTrianglesDisplacementMicromapNV const *s1,
+    VkAccelerationStructureTrianglesDisplacementMicromapNV const *s2) {
+  if ((s1->displacementBiasAndScaleFormat != s2->displacementBiasAndScaleFormat) ||
+      (s1->displacementVectorFormat != s2->displacementVectorFormat) ||
+      (s1->displacementBiasAndScaleBuffer != s2->displacementBiasAndScaleBuffer) ||
+      (s1->displacementBiasAndScaleStride != s2->displacementBiasAndScaleStride) ||
+      (s1->displacementVectorBuffer != s2->displacementVectorBuffer) ||
+      (s1->displacementVectorStride != s2->displacementVectorStride) ||
+      (s1->displacedMicromapPrimitiveFlags != s2->displacedMicromapPrimitiveFlags) ||
+      (s1->displacedMicromapPrimitiveFlagsStride != s2->displacedMicromapPrimitiveFlagsStride) ||
+      (s1->indexType != s2->indexType) || (s1->indexBuffer != s2->indexBuffer) ||
+      (s1->indexStride != s2->indexStride) || (s1->baseTriangle != s2->baseTriangle) ||
+      (s1->usageCountsCount != s2->usageCountsCount) || (s1->micromap != s2->micromap) || false)
     return false;
 
   return true;
