@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) >= 0,
               "OpenXR header version is from before the minimum supported version of v0.");
-static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 26,
-              "OpenXR header version is from after the maximum supported version of v26.");
+static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 27,
+              "OpenXR header version is from after the maximum supported version of v27.");
 #else
 _Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) >= 0,
                "OpenXR header version is from before the minimum supported version of v0.");
-_Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 26,
-               "OpenXR header version is from after the maximum supported version of v26.");
+_Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 27,
+               "OpenXR header version is from after the maximum supported version of v27.");
 #endif
 
 /// Returns a string representing the given VkResult parameter. If there is no known representation,
@@ -51,6 +51,30 @@ char const *XrResult_to_string(XrResult result) {
   // Check in descending order to get the 'latest' version of the error code text available.
   // Also, because codes have been re-used over time, can't use a switch and have to do this large
   // set of ifs. Luckily this *should* be a relatively rare call.
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 27 && XR_FB_spatial_entity_sharing
+  if (result == XR_ERROR_SPACE_MAPPING_INSUFFICIENT_FB)
+    return "XR_ERROR_SPACE_MAPPING_INSUFFICIENT_FB";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 27 && XR_FB_spatial_entity_sharing
+  if (result == XR_ERROR_SPACE_LOCALIZATION_FAILED_FB)
+    return "XR_ERROR_SPACE_LOCALIZATION_FAILED_FB";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 27 && XR_FB_spatial_entity_sharing
+  if (result == XR_ERROR_SPACE_NETWORK_TIMEOUT_FB)
+    return "XR_ERROR_SPACE_NETWORK_TIMEOUT_FB";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 27 && XR_FB_spatial_entity_sharing
+  if (result == XR_ERROR_SPACE_NETWORK_REQUEST_FAILED_FB)
+    return "XR_ERROR_SPACE_NETWORK_REQUEST_FAILED_FB";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 27 && XR_FB_spatial_entity_sharing
+  if (result == XR_ERROR_SPACE_CLOUD_STORAGE_DISABLED_FB)
+    return "XR_ERROR_SPACE_CLOUD_STORAGE_DISABLED_FB";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 27 && XR_QCOM_tracking_optimization_settings
+  if (result == XR_ERROR_HINT_ALREADY_SET_QCOM)
+    return "XR_ERROR_HINT_ALREADY_SET_QCOM";
+#endif
 #if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 23 && XR_FB_spatial_entity
   if (result == XR_ERROR_SPACE_COMPONENT_NOT_SUPPORTED_FB)
     return "XR_ERROR_SPACE_COMPONENT_NOT_SUPPORTED_FB";
