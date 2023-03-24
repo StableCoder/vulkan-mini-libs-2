@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 243,
-              "VK_HEADER_VERSION is from after the maximum supported version of v243.");
+static_assert(VK_HEADER_VERSION <= 244,
+              "VK_HEADER_VERSION is from after the maximum supported version of v244.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 243,
-               "VK_HEADER_VERSION is from after the maximum supported version of v243.");
+_Static_assert(VK_HEADER_VERSION <= 244,
+               "VK_HEADER_VERSION is from after the maximum supported version of v244.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -5072,6 +5072,14 @@ void cleanup_VkQueryLowLatencySupportNV(VkQueryLowLatencySupportNV const *pData)
 #if VK_HEADER_VERSION >= 243 && VK_KHR_video_encode_queue
 void cleanup_VkQueryPoolVideoEncodeFeedbackCreateInfoKHR(
     VkQueryPoolVideoEncodeFeedbackCreateInfoKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 244 && VK_KHR_map_memory2
+void cleanup_VkMemoryMapInfoKHR(VkMemoryMapInfoKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 244 && VK_KHR_map_memory2
+void cleanup_VkMemoryUnmapInfoKHR(VkMemoryUnmapInfoKHR const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -12154,6 +12162,20 @@ void cleanup_vk_struct(void const *pData) {
     return;
   }
 #endif
+
+#if VK_HEADER_VERSION >= 244 && VK_KHR_map_memory2
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_MAP_INFO_KHR) {
+    cleanup_VkMemoryMapInfoKHR((VkMemoryMapInfoKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 244 && VK_KHR_map_memory2
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_UNMAP_INFO_KHR) {
+    cleanup_VkMemoryUnmapInfoKHR((VkMemoryUnmapInfoKHR const *)pData);
+    return;
+  }
+#endif
 }
 
 extern inline void cleanup_VkOffset2D(VkOffset2D const *pData);
@@ -12547,7 +12569,7 @@ void cleanup_VkPipelineShaderStageCreateInfo(VkPipelineShaderStageCreateInfo con
   // pName - null-terminated
   free((void *)pData->pName);
 
-#if VK_HEADER_VERSION >= 243
+#if VK_HEADER_VERSION >= 244
   // pName - null-terminated
   free((void *)pData->pName);
 #endif
@@ -12699,7 +12721,7 @@ void cleanup_VkGraphicsPipelineCreateInfo(VkGraphicsPipelineCreateInfo const *pD
   }
   free((void *)pData->pStages);
 
-#if VK_HEADER_VERSION >= 243
+#if VK_HEADER_VERSION >= 244
   // pStages - stageCount
   if (pData->pStages != NULL) {
     for (uint32_t i = 0; i < pData->stageCount; ++i)
@@ -24155,6 +24177,24 @@ void cleanup_VkQueryLowLatencySupportNV(VkQueryLowLatencySupportNV const *pData)
 #if VK_HEADER_VERSION >= 243 && VK_KHR_video_encode_queue
 void cleanup_VkQueryPoolVideoEncodeFeedbackCreateInfoKHR(
     VkQueryPoolVideoEncodeFeedbackCreateInfoKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 244 && VK_KHR_map_memory2
+void cleanup_VkMemoryMapInfoKHR(VkMemoryMapInfoKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 244 && VK_KHR_map_memory2
+void cleanup_VkMemoryUnmapInfoKHR(VkMemoryUnmapInfoKHR const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

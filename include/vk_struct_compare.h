@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 243,
-              "VK_HEADER_VERSION is from after the maximum supported version of v243.");
+static_assert(VK_HEADER_VERSION <= 244,
+              "VK_HEADER_VERSION is from after the maximum supported version of v244.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 243,
-               "VK_HEADER_VERSION is from after the maximum supported version of v243.");
+_Static_assert(VK_HEADER_VERSION <= 244,
+               "VK_HEADER_VERSION is from after the maximum supported version of v244.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -5527,6 +5527,14 @@ bool compare_VkQueryLowLatencySupportNV(VkQueryLowLatencySupportNV const *s1,
                                         VkQueryLowLatencySupportNV const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 244 && VK_KHR_map_memory2
+bool compare_VkMemoryMapInfoKHR(VkMemoryMapInfoKHR const *s1, VkMemoryMapInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 244 && VK_KHR_map_memory2
+bool compare_VkMemoryUnmapInfoKHR(VkMemoryUnmapInfoKHR const *s1, VkMemoryUnmapInfoKHR const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 225 && VK_HEADER_VERSION <= 242 && VK_EXT_video_encode_h264
 bool compare_VkVideoEncodeH264ReferenceListsInfoEXT(
     VkVideoEncodeH264ReferenceListsInfoEXT const *s1,
@@ -6721,7 +6729,7 @@ bool compare_VkGraphicsPipelineCreateInfo(VkGraphicsPipelineCreateInfo const *s1
 bool compare_VkPipelineCacheCreateInfo(VkPipelineCacheCreateInfo const *s1,
                                        VkPipelineCacheCreateInfo const *s2) {
   if ((s1->flags != s2->flags) || (s1->initialDataSize != s2->initialDataSize) ||
-#if VK_HEADER_VERSION >= 243
+#if VK_HEADER_VERSION >= 244
       (s1->initialDataSize != s2->initialDataSize) ||
 #endif
       false)
@@ -7477,7 +7485,7 @@ bool compare_VkSwapchainCreateInfoKHR(VkSwapchainCreateInfoKHR const *s1,
       (s1->preTransform != s2->preTransform) || (s1->compositeAlpha != s2->compositeAlpha) ||
       (s1->presentMode != s2->presentMode) || (s1->clipped != s2->clipped) ||
       (s1->oldSwapchain != s2->oldSwapchain) ||
-#if VK_HEADER_VERSION >= 243
+#if VK_HEADER_VERSION >= 244
       (s1->oldSwapchain != s2->oldSwapchain) ||
 #endif
       false)
@@ -18198,7 +18206,7 @@ bool compare_VkCommandBufferInheritanceRenderingInfo(
     VkCommandBufferInheritanceRenderingInfo const *s2) {
   if ((s1->flags != s2->flags) || (s1->viewMask != s2->viewMask) ||
       (s1->colorAttachmentCount != s2->colorAttachmentCount) ||
-#if VK_HEADER_VERSION >= 243
+#if VK_HEADER_VERSION >= 244
       (s1->colorAttachmentCount != s2->colorAttachmentCount) ||
 #endif
       (s1->depthAttachmentFormat != s2->depthAttachmentFormat) ||
@@ -19390,6 +19398,25 @@ bool compare_VkMultiviewPerViewRenderAreasRenderPassBeginInfoQCOM(
 #if VK_HEADER_VERSION >= 242 && VK_NV_low_latency
 bool compare_VkQueryLowLatencySupportNV(VkQueryLowLatencySupportNV const *s1,
                                         VkQueryLowLatencySupportNV const *s2) {
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 244 && VK_KHR_map_memory2
+bool compare_VkMemoryMapInfoKHR(VkMemoryMapInfoKHR const *s1, VkMemoryMapInfoKHR const *s2) {
+  if ((s1->flags != s2->flags) || (s1->memory != s2->memory) || (s1->offset != s2->offset) ||
+      (s1->size != s2->size) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 244 && VK_KHR_map_memory2
+bool compare_VkMemoryUnmapInfoKHR(VkMemoryUnmapInfoKHR const *s1, VkMemoryUnmapInfoKHR const *s2) {
+  if ((s1->flags != s2->flags) || (s1->memory != s2->memory) || false)
+    return false;
+
   return true;
 }
 #endif

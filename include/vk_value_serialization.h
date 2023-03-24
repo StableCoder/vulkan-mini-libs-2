@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 243,
-              "VK_HEADER_VERSION is from after the maximum supported version of v243.");
+static_assert(VK_HEADER_VERSION <= 244,
+              "VK_HEADER_VERSION is from after the maximum supported version of v244.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 243,
-               "VK_HEADER_VERSION is from after the maximum supported version of v243.");
+_Static_assert(VK_HEADER_VERSION <= 244,
+               "VK_HEADER_VERSION is from after the maximum supported version of v244.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -3378,7 +3378,7 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[328] = {
+EnumType const cEnumTypes[329] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", NULL, 0},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 3},
@@ -3558,6 +3558,7 @@ EnumType const cEnumTypes[328] = {
     {"VkVideoEncodeH265CtbSizeFlagsEXT", VkVideoEncodeH265CtbSizeFlagsEXTSets, 4},
     {"VkVideoEncodeH265TransformBlockSizeFlagsEXT", VkVideoEncodeH265TransformBlockSizeFlagsEXTSets,
      4},
+    {"VkMemoryUnmapFlagsKHR", NULL, 0},
     {"VkAttachmentLoadOp", VkAttachmentLoadOpSets, 4},
     {"VkAttachmentStoreOp", VkAttachmentStoreOpSets, 6},
     {"VkBlendFactor", VkBlendFactorSets, 19},
