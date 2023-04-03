@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 
-# Copyright (C) 2022 George Cave.
+# Copyright (C) 2022-2023 George Cave.
 #
 # SPDX-License-Identifier: Apache-2.0
 
 from os.path import exists
+import argparse
 import sys
-import getopt
 import re
 import xml.etree.ElementTree as ET
 
@@ -305,46 +305,33 @@ def processExtensionStruct(extension, structData, apiVersion):
 
 
 def main(argv):
-    inputFile = ''
-    workingFile = ''
-    apiVersion = ''
-    apiType = ''
-
-    try:
-        opts, args = getopt.getopt(argv, 'i:w:t:a', [])
-    except getopt.GetoptError:
-        print('Error parsing options')
-        sys.exit(1)
-    for opt, arg in opts:
-        if opt == '-i':
-            inputFile = arg
-        elif opt == '-w':
-            workingFile = arg
-        elif opt == '-t':
-            apiType = arg
-
-    if(inputFile == ''):
-        print("Error: No XML file specified")
-        sys.exit(1)
-    if(workingFile == ''):
-        print("Error: No working file specified")
-        sys.exit(1)
-    if apiType == '':
-        print("Error: No API type specified")
-        sys.exit(1)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-i', '--input',
+                        help='Input Spec XML file',
+                        required=True
+                        )
+    parser.add_argument('-c', '--cache',
+                        help='Cache XML file to read/write parsed spex data',
+                        required=True
+                        )
+    parser.add_argument('-a', '--api',
+                        help='Khronos API being processed',
+                        required=True)
+    args = parser.parse_args()
 
     dataRoot = ET.Element('root')
-    if exists(workingFile):
-        dataXml = ET.parse(workingFile)
+    if exists(args.cache):
+        dataXml = ET.parse(args.cache)
         dataRoot = dataXml.getroot()
 
-    vkXml = ET.parse(inputFile)
+    vkXml = ET.parse(args.input)
     vkRoot = vkXml.getroot()
 
     # Version
-    if apiType == 'Vulkan':
+    apiVersion = ''
+    if args.api == 'Vulkan':
         apiVersion = findVkVersion(vkRoot)
-    elif apiType == 'OpenXR':
+    elif args.api == 'OpenXR':
         apiVersion = findXrVersion(vkRoot)
     if apiVersion == '':
         print("Error: Failed to determine API version")
@@ -430,7 +417,7 @@ def main(argv):
 
     # Output XML
     tree = ET.ElementTree(dataRoot)
-    tree.write(workingFile)
+    tree.write(args.cache)
 
 
 if __name__ == "__main__":

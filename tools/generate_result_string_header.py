@@ -1,62 +1,46 @@
 #!/usr/bin/env python3
 
-# Copyright (C) 2022 George Cave.
+# Copyright (C) 2022-2023 George Cave.
 #
 # SPDX-License-Identifier: Apache-2.0
 
-
+import argparse
 import sys
-import getopt
 import xml.etree.ElementTree as ET
 
 
 def main(argv):
-    inputFile = ''
-    outputFile = ''
-    apiType = ''
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-i', '--input',
+                        help='Input XML cache file',
+                        required=True)
+    parser.add_argument('-o', '--output',
+                        help='Output file to write to',
+                        required=True)
+    parser.add_argument('-a', '--api',
+                        help='Khronos API being processed',
+                        required=True)
+    args = parser.parse_args()
 
     try:
-        opts, args = getopt.getopt(argv, 'i:o:t:', [])
-    except getopt.GetoptError:
-        print('Error parsing options')
-        sys.exit(1)
-    for opt, arg in opts:
-        if opt == '-i':
-            inputFile = arg
-        elif opt == '-o':
-            outputFile = arg
-        elif opt == '-t':
-            apiType = arg
-
-    if(inputFile == ''):
-        print("Error: No XML file specified")
-        sys.exit(1)
-    if(outputFile == ''):
-        print("Error: No output file specified")
-        sys.exit(1)
-    if(apiType == ''):
-        print("Error: No API type specified")
-        sys.exit(1)
-
-    try:
-        dataXml = ET.parse(inputFile)
+        dataXml = ET.parse(args.input)
         dataRoot = dataXml.getroot()
     except:
-        print("Error: Could not open input file: ", inputFile)
+        print("Error: Could not open input file: ", args.input)
         sys.exit(1)
 
     # Get first/last versions
     firstVersion = int(dataRoot.get('first'))
     lastVersion = int(dataRoot.get('last'))
 
-    outFile = open(outputFile, "w")
+    outFile = open(args.output, "w")
 
-    if apiType == 'Vulkan':
+    if args.api == 'Vulkan':
         apiVersionStr = 'VK_HEADER_VERSION'
         enumType = 'VkResult'
         header = '<vulkan/vulkan.h>'
         guard = 'VK_RESULT'
-    elif apiType == 'OpenXR':
+    elif args.api == 'OpenXR':
         apiVersionStr = '(XR_CURRENT_API_VERSION & 0xffffffffULL)'
         enumType = 'XrResult'
         header = '<openxr/openxr.h>'
@@ -90,14 +74,14 @@ extern "C" {{
     # Static asserts
     outFile.write('\n#ifdef __cplusplus\n')
     outFile.write(
-        "static_assert({0} >= {1}, \"{2} header version is from before the minimum supported version of v{1}.\");\n".format(apiVersionStr, firstVersion, apiType))
+        "static_assert({0} >= {1}, \"{2} header version is from before the minimum supported version of v{1}.\");\n".format(apiVersionStr, firstVersion, args.api))
     outFile.write(
-        "static_assert({0} <= {1}, \"{2} header version is from after the maximum supported version of v{1}.\");\n".format(apiVersionStr, lastVersion, apiType))
+        "static_assert({0} <= {1}, \"{2} header version is from after the maximum supported version of v{1}.\");\n".format(apiVersionStr, lastVersion, args.api))
     outFile.write('#else\n')
     outFile.write(
-        "_Static_assert({0} >= {1}, \"{2} header version is from before the minimum supported version of v{1}.\");\n".format(apiVersionStr, firstVersion, apiType))
+        "_Static_assert({0} >= {1}, \"{2} header version is from before the minimum supported version of v{1}.\");\n".format(apiVersionStr, firstVersion, args.api))
     outFile.write(
-        "_Static_assert({0} <= {1}, \"{2} header version is from after the maximum supported version of v{1}.\");\n".format(apiVersionStr, lastVersion, apiType))
+        "_Static_assert({0} <= {1}, \"{2} header version is from after the maximum supported version of v{1}.\");\n".format(apiVersionStr, lastVersion, args.api))
     outFile.write('#endif\n')
 
     outFile.write("""
@@ -106,7 +90,7 @@ extern "C" {{
 char const *{0}_to_string({0} result);
 """.format(enumType))
 
-    if apiType == 'Vulkan':
+    if args.api == 'Vulkan':
         outFile.write("""
 /// Similar to VkResult_to_string, except in the case where it is an unknown value, returns a string
 /// stating '(unrecognized positive/negative VkResult value)', thus never returning NULL.
@@ -170,7 +154,7 @@ char const* {1}_to_string({1} result) {{
 }
 """)
 
-    if apiType == 'Vulkan':
+    if args.api == 'Vulkan':
         outFile.write("""
 char const* vkResultToString(VkResult result) {
   char const* pResultString = VkResult_to_string(result);

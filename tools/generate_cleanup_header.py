@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
-# Copyright (C) 2022 George Cave.
+# Copyright (C) 2022-2023 George Cave.
 #
 # SPDX-License-Identifier: Apache-2.0
 
+import argparse
 import sys
-import getopt
 import yaml
 import xml.etree.ElementTree as ET
 
@@ -99,45 +99,30 @@ def processMultiMember(member, suffix, dataRoot, lenSplit, availableVars, outFil
 
 
 def main(argv):
-    inputFile = ''
-    yamlFile = ''
-    outputFile = ''
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-i', '--input',
+                        help='Input XML cache file',
+                        required=True)
+    parser.add_argument('-y', '--yaml',
+                        help='YAML file that specifies what items to be ignored',
+                        required=True)
+    parser.add_argument('-o', '--output',
+                        help='Output file to write to',
+                        required=True)
+    args = parser.parse_args()
 
     try:
-        opts, args = getopt.getopt(argv, 'i:y:o:', [])
-    except getopt.GetoptError:
-        print('Error parsing options')
-        sys.exit(1)
-    for opt, arg in opts:
-        if opt == '-i':
-            inputFile = arg
-        elif opt == '-y':
-            yamlFile = arg
-        elif opt == '-o':
-            outputFile = arg
-
-    if(inputFile == ''):
-        print("Error: No Vulkan XML file specified")
-        sys.exit(1)
-    if(yamlFile == ''):
-        print("Error: No Yaml exclude file specified")
-        sys.exit(1)
-    if(outputFile == ''):
-        print("Error: No output file specified")
-        sys.exit(1)
-
-    try:
-        dataXml = ET.parse(inputFile)
+        dataXml = ET.parse(args.input)
         dataRoot = dataXml.getroot()
     except:
-        print("Error: Could not open input file: ", inputFile)
+        print("Error: Could not open input file: ", args.input)
         sys.exit(1)
 
     try:
-        with open(yamlFile, 'r') as file:
+        with open(args.yaml, 'r') as file:
             yamlData = yaml.safe_load(file)
     except:
-        print("Error: Could not open Yaml file: ", yamlFile)
+        print("Error: Could not open Yaml file: ", args.yaml)
         sys.exit(1)
 
     # Get first/last versions
@@ -145,7 +130,7 @@ def main(argv):
     lastVersion = dataRoot.get('last')
     structs = dataRoot.findall('structs/')
 
-    outFile = open(outputFile, "w")
+    outFile = open(args.output, "w")
 
     # Common Header
     with open("common_header.txt") as fd:

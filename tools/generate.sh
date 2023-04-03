@@ -1,4 +1,4 @@
-# Copyright (C) 2022 George Cave.
+# Copyright (C) 2022-2023 George Cave.
 #
 # SPDX-License-Identifier: Apache-2.0
 
@@ -96,7 +96,7 @@ if [ $SKIP_PARSE -eq 0 ]; then
         fi
         git checkout $TAG
 
-        ../parse_xml.py -i $XML_PATH -w ../$CACHE -t $TYPE
+        ../parse_xml.py --input $XML_PATH --cache ../$CACHE --api $TYPE
         FIRST=0
     done
     popd >/dev/null
@@ -104,12 +104,12 @@ fi
 
 # Generate headers
 if [[ "$TYPE" == "Vulkan" ]]; then
-    ./generate_serialization_header.py -i $CACHE                                  -o "${OUTPUT}/vk_value_serialization.h"
-    ./generate_result_string_header.py -i $CACHE -t $TYPE                         -o "${OUTPUT}/vk_result_to_string.h"
-    ./generate_cleanup_header.py       -i $CACHE -y ../data/cleanup_excludes.yaml -o "${OUTPUT}/vk_struct_cleanup.h"
-    ./generate_comparison_headers.py   -i $CACHE -y ../data/compare_excludes.yaml -o "${OUTPUT}/vk_struct_compare.h"
+    ./generate_serialization_header.py --input $CACHE                                       --output "${OUTPUT}/vk_value_serialization.h"
+    ./generate_result_string_header.py --input $CACHE --api $TYPE                           --output "${OUTPUT}/vk_result_to_string.h"
+    ./generate_cleanup_header.py       --input $CACHE --yaml ../data/cleanup_excludes.yaml  --output "${OUTPUT}/vk_struct_cleanup.h"
+    ./generate_comparison_headers.py   --input $CACHE --yaml ../data/compare_excludes.yaml  --output "${OUTPUT}/vk_struct_compare.h"
 elif [[ "$TYPE" == "OpenXR" ]]; then
-    ./generate_result_string_header.py -i $CACHE -t $TYPE                         -o "${OUTPUT}/xr_result_to_string.h"
+    ./generate_result_string_header.py --input $CACHE --api $TYPE                           --output "${OUTPUT}/xr_result_to_string.h"
 fi
 
 # Format headers

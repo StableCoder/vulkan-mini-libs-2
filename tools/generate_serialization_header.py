@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
-# Copyright (C) 2022 George Cave.
+# Copyright (C) 2022-2023 George Cave.
 #
 # SPDX-License-Identifier: Apache-2.0
 
+import argparse
 import sys
-import getopt
 import xml.etree.ElementTree as ET
 
 
@@ -108,38 +108,26 @@ def processEnums(outFile, enums, vendors, first, last):
 
 
 def main(argv):
-    inputFile = ''
-    outputFile = ''
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-i', '--input',
+                        help='Input XML cache file',
+                        required=True)
+    parser.add_argument('-o', '--output',
+                        help='Output file to write to',
+                        required=True)
+    args = parser.parse_args()
 
     try:
-        opts, args = getopt.getopt(argv, 'i:o:', [])
-    except getopt.GetoptError:
-        print('Error parsing options')
-        sys.exit(1)
-    for opt, arg in opts:
-        if opt == '-i':
-            inputFile = arg
-        elif opt == '-o':
-            outputFile = arg
-
-    if(inputFile == ''):
-        print("Error: No Vulkan XML file specified")
-        sys.exit(1)
-    if(outputFile == ''):
-        print("Error: No output file specified")
-        sys.exit(1)
-
-    try:
-        dataXml = ET.parse(inputFile)
+        dataXml = ET.parse(args.input)
         dataRoot = dataXml.getroot()
     except:
-        print("Error: Could not open input file: ", inputFile)
+        print("Error: Could not open input file: ", args.input)
         sys.exit(1)
 
     firstVersion = int(dataRoot.get('first'))
     lastVersion = int(dataRoot.get('last'))
 
-    outFile = open(outputFile, "w")
+    outFile = open(args.output, "w")
 
     # Common Header
     with open("common_header.txt") as fd:
