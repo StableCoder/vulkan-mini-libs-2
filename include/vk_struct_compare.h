@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 245,
-              "VK_HEADER_VERSION is from after the maximum supported version of v245.");
+static_assert(VK_HEADER_VERSION <= 246,
+              "VK_HEADER_VERSION is from after the maximum supported version of v246.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 245,
-               "VK_HEADER_VERSION is from after the maximum supported version of v245.");
+_Static_assert(VK_HEADER_VERSION <= 246,
+               "VK_HEADER_VERSION is from after the maximum supported version of v246.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -3552,6 +3552,12 @@ bool compare_VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT(
     VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 246 && (VK_EXT_shader_object)
+bool compare_VkShaderRequiredSubgroupSizeCreateInfoEXT(
+    VkShaderRequiredSubgroupSizeCreateInfoEXT const *s1,
+    VkShaderRequiredSubgroupSizeCreateInfoEXT const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 182 && (VK_HUAWEI_subpass_shading)
 bool compare_VkSubpassShadingPipelineCreateInfoHUAWEI(
     VkSubpassShadingPipelineCreateInfoHUAWEI const *s1,
@@ -3805,12 +3811,12 @@ bool compare_VkPhysicalDeviceExtendedDynamicState3PropertiesEXT(
     VkPhysicalDeviceExtendedDynamicState3PropertiesEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 230 && (VK_EXT_extended_dynamic_state3)
+#if VK_HEADER_VERSION >= 230 && ((VK_EXT_extended_dynamic_state3) || (VK_EXT_shader_object))
 bool compare_VkColorBlendEquationEXT(VkColorBlendEquationEXT const *s1,
                                      VkColorBlendEquationEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 230 && (VK_EXT_extended_dynamic_state3)
+#if VK_HEADER_VERSION >= 230 && ((VK_EXT_extended_dynamic_state3) || (VK_EXT_shader_object))
 bool compare_VkColorBlendAdvancedEXT(VkColorBlendAdvancedEXT const *s1,
                                      VkColorBlendAdvancedEXT const *s2);
 #endif
@@ -4160,12 +4166,12 @@ bool compare_VkPhysicalDeviceExternalMemoryRDMAFeaturesNV(
     VkPhysicalDeviceExternalMemoryRDMAFeaturesNV const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 175 && (VK_EXT_vertex_input_dynamic_state)
+#if VK_HEADER_VERSION >= 175 && ((VK_EXT_vertex_input_dynamic_state) || (VK_EXT_shader_object))
 bool compare_VkVertexInputBindingDescription2EXT(VkVertexInputBindingDescription2EXT const *s1,
                                                  VkVertexInputBindingDescription2EXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 175 && (VK_EXT_vertex_input_dynamic_state)
+#if VK_HEADER_VERSION >= 175 && ((VK_EXT_vertex_input_dynamic_state) || (VK_EXT_shader_object))
 bool compare_VkVertexInputAttributeDescription2EXT(VkVertexInputAttributeDescription2EXT const *s1,
                                                    VkVertexInputAttributeDescription2EXT const *s2);
 #endif
@@ -5554,6 +5560,35 @@ bool compare_VkMemoryMapInfoKHR(VkMemoryMapInfoKHR const *s1, VkMemoryMapInfoKHR
 
 #if VK_HEADER_VERSION >= 244 && (VK_KHR_map_memory2)
 bool compare_VkMemoryUnmapInfoKHR(VkMemoryUnmapInfoKHR const *s1, VkMemoryUnmapInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 246 && (VK_EXT_shader_object)
+bool compare_VkPhysicalDeviceShaderObjectFeaturesEXT(
+    VkPhysicalDeviceShaderObjectFeaturesEXT const *s1,
+    VkPhysicalDeviceShaderObjectFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 246 && (VK_EXT_shader_object)
+bool compare_VkPhysicalDeviceShaderObjectPropertiesEXT(
+    VkPhysicalDeviceShaderObjectPropertiesEXT const *s1,
+    VkPhysicalDeviceShaderObjectPropertiesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 246 && (VK_EXT_shader_object)
+bool compare_VkShaderCreateInfoEXT(VkShaderCreateInfoEXT const *s1,
+                                   VkShaderCreateInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 246 && (VK_EXT_shader_tile_image)
+bool compare_VkPhysicalDeviceShaderTileImageFeaturesEXT(
+    VkPhysicalDeviceShaderTileImageFeaturesEXT const *s1,
+    VkPhysicalDeviceShaderTileImageFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 246 && (VK_EXT_shader_tile_image)
+bool compare_VkPhysicalDeviceShaderTileImagePropertiesEXT(
+    VkPhysicalDeviceShaderTileImagePropertiesEXT const *s1,
+    VkPhysicalDeviceShaderTileImagePropertiesEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 225 && VK_HEADER_VERSION <= 242 && (VK_EXT_video_encode_h264)
@@ -14136,6 +14171,14 @@ bool compare_VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 246 && (VK_EXT_shader_object)
+bool compare_VkShaderRequiredSubgroupSizeCreateInfoEXT(
+    VkShaderRequiredSubgroupSizeCreateInfoEXT const *s1,
+    VkShaderRequiredSubgroupSizeCreateInfoEXT const *s2) {
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 182 && (VK_HUAWEI_subpass_shading)
 bool compare_VkSubpassShadingPipelineCreateInfoHUAWEI(
     VkSubpassShadingPipelineCreateInfoHUAWEI const *s1,
@@ -15045,7 +15088,7 @@ bool compare_VkPhysicalDeviceExtendedDynamicState3PropertiesEXT(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 230 && (VK_EXT_extended_dynamic_state3)
+#if VK_HEADER_VERSION >= 230 && ((VK_EXT_extended_dynamic_state3) || (VK_EXT_shader_object))
 bool compare_VkColorBlendEquationEXT(VkColorBlendEquationEXT const *s1,
                                      VkColorBlendEquationEXT const *s2) {
   if ((s1->srcColorBlendFactor != s2->srcColorBlendFactor) ||
@@ -15060,7 +15103,7 @@ bool compare_VkColorBlendEquationEXT(VkColorBlendEquationEXT const *s1,
 }
 #endif
 
-#if VK_HEADER_VERSION >= 230 && (VK_EXT_extended_dynamic_state3)
+#if VK_HEADER_VERSION >= 230 && ((VK_EXT_extended_dynamic_state3) || (VK_EXT_shader_object))
 bool compare_VkColorBlendAdvancedEXT(VkColorBlendAdvancedEXT const *s1,
                                      VkColorBlendAdvancedEXT const *s2) {
   if ((s1->advancedBlendOp != s2->advancedBlendOp) ||
@@ -15893,7 +15936,7 @@ bool compare_VkPhysicalDeviceExternalMemoryRDMAFeaturesNV(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 175 && (VK_EXT_vertex_input_dynamic_state)
+#if VK_HEADER_VERSION >= 175 && ((VK_EXT_vertex_input_dynamic_state) || (VK_EXT_shader_object))
 bool compare_VkVertexInputBindingDescription2EXT(VkVertexInputBindingDescription2EXT const *s1,
                                                  VkVertexInputBindingDescription2EXT const *s2) {
   if ((s1->binding != s2->binding) || (s1->stride != s2->stride) ||
@@ -15904,7 +15947,7 @@ bool compare_VkVertexInputBindingDescription2EXT(VkVertexInputBindingDescription
 }
 #endif
 
-#if VK_HEADER_VERSION >= 175 && (VK_EXT_vertex_input_dynamic_state)
+#if VK_HEADER_VERSION >= 175 && ((VK_EXT_vertex_input_dynamic_state) || (VK_EXT_shader_object))
 bool compare_VkVertexInputAttributeDescription2EXT(
     VkVertexInputAttributeDescription2EXT const *s1,
     VkVertexInputAttributeDescription2EXT const *s2) {
@@ -19473,6 +19516,75 @@ bool compare_VkMemoryMapInfoKHR(VkMemoryMapInfoKHR const *s1, VkMemoryMapInfoKHR
 #if VK_HEADER_VERSION >= 244 && (VK_KHR_map_memory2)
 bool compare_VkMemoryUnmapInfoKHR(VkMemoryUnmapInfoKHR const *s1, VkMemoryUnmapInfoKHR const *s2) {
   if ((s1->flags != s2->flags) || (s1->memory != s2->memory) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 246 && (VK_EXT_shader_object)
+bool compare_VkPhysicalDeviceShaderObjectFeaturesEXT(
+    VkPhysicalDeviceShaderObjectFeaturesEXT const *s1,
+    VkPhysicalDeviceShaderObjectFeaturesEXT const *s2) {
+  if ((s1->shaderObject != s2->shaderObject) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 246 && (VK_EXT_shader_object)
+bool compare_VkPhysicalDeviceShaderObjectPropertiesEXT(
+    VkPhysicalDeviceShaderObjectPropertiesEXT const *s1,
+    VkPhysicalDeviceShaderObjectPropertiesEXT const *s2) {
+  if ((s1->shaderBinaryVersion != s2->shaderBinaryVersion) || false)
+    return false;
+
+  for (uint32_t i = 0; i < VK_UUID_SIZE; ++i) {
+    if (s1->shaderBinaryUUID[i] != s2->shaderBinaryUUID[i])
+      return false;
+  }
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 246 && (VK_EXT_shader_object)
+bool compare_VkShaderCreateInfoEXT(VkShaderCreateInfoEXT const *s1,
+                                   VkShaderCreateInfoEXT const *s2) {
+  if ((s1->flags != s2->flags) || (s1->stage != s2->stage) || (s1->nextStage != s2->nextStage) ||
+      (s1->codeType != s2->codeType) || (s1->codeSize != s2->codeSize) ||
+      (s1->setLayoutCount != s2->setLayoutCount) ||
+      (s1->pushConstantRangeCount != s2->pushConstantRangeCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 246 && (VK_EXT_shader_tile_image)
+bool compare_VkPhysicalDeviceShaderTileImageFeaturesEXT(
+    VkPhysicalDeviceShaderTileImageFeaturesEXT const *s1,
+    VkPhysicalDeviceShaderTileImageFeaturesEXT const *s2) {
+  if ((s1->shaderTileImageColorReadAccess != s2->shaderTileImageColorReadAccess) ||
+      (s1->shaderTileImageDepthReadAccess != s2->shaderTileImageDepthReadAccess) ||
+      (s1->shaderTileImageStencilReadAccess != s2->shaderTileImageStencilReadAccess) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 246 && (VK_EXT_shader_tile_image)
+bool compare_VkPhysicalDeviceShaderTileImagePropertiesEXT(
+    VkPhysicalDeviceShaderTileImagePropertiesEXT const *s1,
+    VkPhysicalDeviceShaderTileImagePropertiesEXT const *s2) {
+  if ((s1->shaderTileImageCoherentReadAccelerated != s2->shaderTileImageCoherentReadAccelerated) ||
+      (s1->shaderTileImageReadSampleFromPixelRateInvocation !=
+       s2->shaderTileImageReadSampleFromPixelRateInvocation) ||
+      (s1->shaderTileImageReadFromHelperInvocation !=
+       s2->shaderTileImageReadFromHelperInvocation) ||
+      false)
     return false;
 
   return true;

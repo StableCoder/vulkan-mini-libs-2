@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "vulkan header version is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 245,
-              "vulkan header version is from after the maximum supported version of v245.");
+static_assert(VK_HEADER_VERSION <= 246,
+              "vulkan header version is from after the maximum supported version of v246.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "vulkan header version is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 245,
-               "vulkan header version is from after the maximum supported version of v245.");
+_Static_assert(VK_HEADER_VERSION <= 246,
+               "vulkan header version is from after the maximum supported version of v246.");
 #endif
 
 /// Returns a string representing the given VkResult parameter. If there is no known representation,
@@ -55,6 +55,10 @@ char const *VkResult_to_string(VkResult result) {
   // Check in descending order to get the 'latest' version of the error code text available.
   // Also, because codes have been re-used over time, can't use a switch and have to do this large
   // set of ifs. Luckily this *should* be a relatively rare call.
+#if VK_HEADER_VERSION >= 246 && VK_EXT_shader_object
+  if (result == VK_ERROR_INCOMPATIBLE_SHADER_BINARY_EXT)
+    return "VK_ERROR_INCOMPATIBLE_SHADER_BINARY_EXT";
+#endif
 #if VK_HEADER_VERSION >= 243 && VK_KHR_video_encode_queue
   if (result == VK_ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR)
     return "VK_ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR";

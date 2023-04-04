@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 245,
-              "VK_HEADER_VERSION is from after the maximum supported version of v245.");
+static_assert(VK_HEADER_VERSION <= 246,
+              "VK_HEADER_VERSION is from after the maximum supported version of v246.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 245,
-               "VK_HEADER_VERSION is from after the maximum supported version of v245.");
+_Static_assert(VK_HEADER_VERSION <= 246,
+               "VK_HEADER_VERSION is from after the maximum supported version of v246.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -3176,11 +3176,11 @@ void cleanup_VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT(
     VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 175 && (VK_EXT_vertex_input_dynamic_state)
+#if VK_HEADER_VERSION >= 175 && ((VK_EXT_vertex_input_dynamic_state) || (VK_EXT_shader_object))
 void cleanup_VkVertexInputBindingDescription2EXT(VkVertexInputBindingDescription2EXT const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 175 && (VK_EXT_vertex_input_dynamic_state)
+#if VK_HEADER_VERSION >= 175 && ((VK_EXT_vertex_input_dynamic_state) || (VK_EXT_shader_object))
 void cleanup_VkVertexInputAttributeDescription2EXT(
     VkVertexInputAttributeDescription2EXT const *pData);
 #endif
@@ -4539,11 +4539,11 @@ void cleanup_VkPhysicalDeviceExtendedDynamicState3PropertiesEXT(
     VkPhysicalDeviceExtendedDynamicState3PropertiesEXT const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 230 && (VK_EXT_extended_dynamic_state3)
+#if VK_HEADER_VERSION >= 230 && ((VK_EXT_extended_dynamic_state3) || (VK_EXT_shader_object))
 inline void cleanup_VkColorBlendEquationEXT(VkColorBlendEquationEXT const *pData) {}
 #endif
 
-#if VK_HEADER_VERSION >= 230 && (VK_EXT_extended_dynamic_state3)
+#if VK_HEADER_VERSION >= 230 && ((VK_EXT_extended_dynamic_state3) || (VK_EXT_shader_object))
 inline void cleanup_VkColorBlendAdvancedEXT(VkColorBlendAdvancedEXT const *pData) {}
 #endif
 
@@ -5098,6 +5098,35 @@ void cleanup_VkPhysicalDeviceDisplacementMicromapPropertiesNV(
 #if VK_HEADER_VERSION >= 245 && (VK_NV_displacement_micromap)
 void cleanup_VkAccelerationStructureTrianglesDisplacementMicromapNV(
     VkAccelerationStructureTrianglesDisplacementMicromapNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 246 && (VK_EXT_shader_object)
+inline void cleanup_VkShaderRequiredSubgroupSizeCreateInfoEXT(
+    VkShaderRequiredSubgroupSizeCreateInfoEXT const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 246 && (VK_EXT_shader_object)
+void cleanup_VkPhysicalDeviceShaderObjectFeaturesEXT(
+    VkPhysicalDeviceShaderObjectFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 246 && (VK_EXT_shader_object)
+void cleanup_VkPhysicalDeviceShaderObjectPropertiesEXT(
+    VkPhysicalDeviceShaderObjectPropertiesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 246 && (VK_EXT_shader_object)
+void cleanup_VkShaderCreateInfoEXT(VkShaderCreateInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 246 && (VK_EXT_shader_tile_image)
+void cleanup_VkPhysicalDeviceShaderTileImageFeaturesEXT(
+    VkPhysicalDeviceShaderTileImageFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 246 && (VK_EXT_shader_tile_image)
+void cleanup_VkPhysicalDeviceShaderTileImagePropertiesEXT(
+    VkPhysicalDeviceShaderTileImagePropertiesEXT const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -9235,14 +9264,14 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
-#if VK_HEADER_VERSION >= 175 && (VK_EXT_vertex_input_dynamic_state)
+#if VK_HEADER_VERSION >= 175 && ((VK_EXT_vertex_input_dynamic_state) || (VK_EXT_shader_object))
   if (pTemp->sType == VK_STRUCTURE_TYPE_VERTEX_INPUT_BINDING_DESCRIPTION_2_EXT) {
     cleanup_VkVertexInputBindingDescription2EXT((VkVertexInputBindingDescription2EXT const *)pData);
     return;
   }
 #endif
 
-#if VK_HEADER_VERSION >= 175 && (VK_EXT_vertex_input_dynamic_state)
+#if VK_HEADER_VERSION >= 175 && ((VK_EXT_vertex_input_dynamic_state) || (VK_EXT_shader_object))
   if (pTemp->sType == VK_STRUCTURE_TYPE_VERTEX_INPUT_ATTRIBUTE_DESCRIPTION_2_EXT) {
     cleanup_VkVertexInputAttributeDescription2EXT(
         (VkVertexInputAttributeDescription2EXT const *)pData);
@@ -12218,6 +12247,45 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_TRIANGLES_DISPLACEMENT_MICROMAP_NV) {
     cleanup_VkAccelerationStructureTrianglesDisplacementMicromapNV(
         (VkAccelerationStructureTrianglesDisplacementMicromapNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 246 && (VK_EXT_shader_object)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_OBJECT_FEATURES_EXT) {
+    cleanup_VkPhysicalDeviceShaderObjectFeaturesEXT(
+        (VkPhysicalDeviceShaderObjectFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 246 && (VK_EXT_shader_object)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_OBJECT_PROPERTIES_EXT) {
+    cleanup_VkPhysicalDeviceShaderObjectPropertiesEXT(
+        (VkPhysicalDeviceShaderObjectPropertiesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 246 && (VK_EXT_shader_object)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SHADER_CREATE_INFO_EXT) {
+    cleanup_VkShaderCreateInfoEXT((VkShaderCreateInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 246 && (VK_EXT_shader_tile_image)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TILE_IMAGE_FEATURES_EXT) {
+    cleanup_VkPhysicalDeviceShaderTileImageFeaturesEXT(
+        (VkPhysicalDeviceShaderTileImageFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 246 && (VK_EXT_shader_tile_image)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TILE_IMAGE_PROPERTIES_EXT) {
+    cleanup_VkPhysicalDeviceShaderTileImagePropertiesEXT(
+        (VkPhysicalDeviceShaderTileImagePropertiesEXT const *)pData);
     return;
   }
 #endif
@@ -19428,7 +19496,7 @@ void cleanup_VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 175 && (VK_EXT_vertex_input_dynamic_state)
+#if VK_HEADER_VERSION >= 175 && ((VK_EXT_vertex_input_dynamic_state) || (VK_EXT_shader_object))
 void cleanup_VkVertexInputBindingDescription2EXT(VkVertexInputBindingDescription2EXT const *pData) {
   // pNext
   if (pData->pNext != NULL)
@@ -19437,7 +19505,7 @@ void cleanup_VkVertexInputBindingDescription2EXT(VkVertexInputBindingDescription
 }
 #endif
 
-#if VK_HEADER_VERSION >= 175 && (VK_EXT_vertex_input_dynamic_state)
+#if VK_HEADER_VERSION >= 175 && ((VK_EXT_vertex_input_dynamic_state) || (VK_EXT_shader_object))
 void cleanup_VkVertexInputAttributeDescription2EXT(
     VkVertexInputAttributeDescription2EXT const *pData) {
   // pNext
@@ -23013,11 +23081,11 @@ void cleanup_VkPhysicalDeviceExtendedDynamicState3PropertiesEXT(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 230 && (VK_EXT_extended_dynamic_state3)
+#if VK_HEADER_VERSION >= 230 && ((VK_EXT_extended_dynamic_state3) || (VK_EXT_shader_object))
 extern inline void cleanup_VkColorBlendEquationEXT(VkColorBlendEquationEXT const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 230 && (VK_EXT_extended_dynamic_state3)
+#if VK_HEADER_VERSION >= 230 && ((VK_EXT_extended_dynamic_state3) || (VK_EXT_shader_object))
 extern inline void cleanup_VkColorBlendAdvancedEXT(VkColorBlendAdvancedEXT const *pData);
 #endif
 
@@ -24280,6 +24348,81 @@ void cleanup_VkAccelerationStructureTrianglesDisplacementMicromapNV(
     free((void *)pData->ppUsageCounts[i]);
   }
   free((void *)pData->ppUsageCounts);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 246 && (VK_EXT_shader_object)
+extern inline void cleanup_VkShaderRequiredSubgroupSizeCreateInfoEXT(
+    VkShaderRequiredSubgroupSizeCreateInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 246 && (VK_EXT_shader_object)
+void cleanup_VkPhysicalDeviceShaderObjectFeaturesEXT(
+    VkPhysicalDeviceShaderObjectFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 246 && (VK_EXT_shader_object)
+void cleanup_VkPhysicalDeviceShaderObjectPropertiesEXT(
+    VkPhysicalDeviceShaderObjectPropertiesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 246 && (VK_EXT_shader_object)
+void cleanup_VkShaderCreateInfoEXT(VkShaderCreateInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pCode - codeSize
+  free((void *)pData->pCode);
+
+  // pName - null-terminated
+  free((void *)pData->pName);
+
+  // pSetLayouts - setLayoutCount
+  free((void *)pData->pSetLayouts);
+
+  // pPushConstantRanges - pushConstantRangeCount
+  if (pData->pPushConstantRanges != NULL) {
+    for (uint32_t i = 0; i < pData->pushConstantRangeCount; ++i)
+      cleanup_VkPushConstantRange(&pData->pPushConstantRanges[i]);
+  }
+  free((void *)pData->pPushConstantRanges);
+
+  // pSpecializationInfo
+  if (pData->pSpecializationInfo != NULL)
+    cleanup_VkSpecializationInfo(pData->pSpecializationInfo);
+  free((void *)pData->pSpecializationInfo);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 246 && (VK_EXT_shader_tile_image)
+void cleanup_VkPhysicalDeviceShaderTileImageFeaturesEXT(
+    VkPhysicalDeviceShaderTileImageFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 246 && (VK_EXT_shader_tile_image)
+void cleanup_VkPhysicalDeviceShaderTileImagePropertiesEXT(
+    VkPhysicalDeviceShaderTileImagePropertiesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
 }
 #endif
 

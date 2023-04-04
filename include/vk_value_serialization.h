@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 245,
-              "VK_HEADER_VERSION is from after the maximum supported version of v245.");
+static_assert(VK_HEADER_VERSION <= 246,
+              "VK_HEADER_VERSION is from after the maximum supported version of v246.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 245,
-               "VK_HEADER_VERSION is from after the maximum supported version of v245.");
+_Static_assert(VK_HEADER_VERSION <= 246,
+               "VK_HEADER_VERSION is from after the maximum supported version of v246.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -1355,6 +1355,16 @@ EnumValueSet const VkPresentGravityFlagsEXTSets[] = {
     {"CENTERED", 0x00000004, false},
 };
 
+EnumValueSet const VkShaderCreateFlagsEXTSets[] = {
+    {"LINK_STAGE", 0x00000001, false},
+    {"ALLOW_VARYING_SUBGROUP_SIZE", 0x00000002, false},
+    {"REQUIRE_FULL_SUBGROUPS", 0x00000004, false},
+    {"NO_TASK_SHADER", 0x00000008, false},
+    {"DISPATCH_BASE", 0x00000010, false},
+    {"FRAGMENT_SHADING_RATE_ATTACHMENT", 0x00000020, false},
+    {"FRAGMENT_DENSITY_MAP_ATTACHMENT", 0x00000040, false},
+};
+
 EnumValueSet const VkVideoCodecOperationFlagsKHRSets[] = {
     {"ENCODE_H264_BIT_EXT", 0x00010000, false}, {"DECODE_H264_BIT_EXT", 0x00000001, false},
     {"DECODE_H265_BIT_EXT", 0x00000002, false}, {"INVALID", 0, false},
@@ -2341,6 +2351,7 @@ EnumValueSet const VkObjectTypeSets[] = {
     {"PRIVATE_DATA_SLOT", 1000295000, false},
     {"MICROMAP_EXT", 1000396000, false},
     {"OPTICAL_FLOW_SESSION_NV", 1000464000, false},
+    {"SHADER_EXT", 1000482000, false},
 };
 
 EnumValueSet const VkRayTracingInvocationReorderModeNVSets[] = {
@@ -2695,6 +2706,11 @@ EnumValueSet const VkDisplacementMicromapFormatNVSets[] = {
     {"64_TRIANGLES_64_BYTES", 1, false},
     {"256_TRIANGLES_128_BYTES", 2, false},
     {"1024_TRIANGLES_128_BYTES", 3, false},
+};
+
+EnumValueSet const VkShaderCodeTypeEXTSets[] = {
+    {"BINARY", 0, false},
+    {"SPIRV", 1, false},
 };
 
 EnumValueSet const VkColorSpaceKHRSets[] = {
@@ -3159,7 +3175,7 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[330] = {
+EnumType const cEnumTypes[332] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", NULL, 0},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 1},
@@ -3314,6 +3330,7 @@ EnumType const cEnumTypes[330] = {
     {"VkOpticalFlowExecuteFlagsNV", VkOpticalFlowExecuteFlagsNVSets, 1},
     {"VkPresentScalingFlagsEXT", VkPresentScalingFlagsEXTSets, 3},
     {"VkPresentGravityFlagsEXT", VkPresentGravityFlagsEXTSets, 3},
+    {"VkShaderCreateFlagsEXT", VkShaderCreateFlagsEXTSets, 7},
     {"VkVideoCodecOperationFlagsKHR", VkVideoCodecOperationFlagsKHRSets, 8},
     {"VkVideoCapabilityFlagsKHR", VkVideoCapabilityFlagsKHRSets, 2},
     {"VkVideoSessionCreateFlagsKHR", VkVideoSessionCreateFlagsKHRSets, 2},
@@ -3373,7 +3390,7 @@ EnumType const cEnumTypes[330] = {
     {"VkFilter", VkFilterSets, 4},
     {"VkSamplerMipmapMode", VkSamplerMipmapModeSets, 2},
     {"VkVertexInputRate", VkVertexInputRateSets, 2},
-    {"VkObjectType", VkObjectTypeSets, 54},
+    {"VkObjectType", VkObjectTypeSets, 55},
     {"VkRayTracingInvocationReorderModeNV", VkRayTracingInvocationReorderModeNVSets, 2},
     {"VkIndirectCommandsTokenTypeNV", VkIndirectCommandsTokenTypeNVSets, 9},
     {"VkDescriptorUpdateTemplateType", VkDescriptorUpdateTemplateTypeSets, 3},
@@ -3432,6 +3449,7 @@ EnumType const cEnumTypes[330] = {
     {"VkDeviceFaultVendorBinaryHeaderVersionEXT", VkDeviceFaultVendorBinaryHeaderVersionEXTSets, 1},
     {"VkDirectDriverLoadingModeLUNARG", VkDirectDriverLoadingModeLUNARGSets, 2},
     {"VkDisplacementMicromapFormatNV", VkDisplacementMicromapFormatNVSets, 3},
+    {"VkShaderCodeTypeEXT", VkShaderCodeTypeEXTSets, 2},
     {"VkColorSpaceKHR", VkColorSpaceKHRSets, 18},
     {"VkPresentModeKHR", VkPresentModeKHRSets, 6},
     {"VkDebugReportObjectTypeEXT", VkDebugReportObjectTypeEXTSets, 46},
