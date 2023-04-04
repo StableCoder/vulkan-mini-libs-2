@@ -177,10 +177,15 @@ def processExtensionEnums(extension, outEnum, apiVersion):
             ET.SubElement(enum.find('platforms'), extName)
 
 
-def processStruct(structNode, structData, apiVersion):
+def processStruct(structNode, structData, api, apiVersion):
     category = structNode.get('category')
     if category is None or category != 'struct':
         return
+
+    # If specified, make sure it is the correct API
+    if structNode.get('api') and structNode.get('api') != api:
+        return
+
     structName = structNode.get('name')
     alias = structNode.get('alias')
 
@@ -196,6 +201,8 @@ def processStruct(structNode, structData, apiVersion):
             members = ET.SubElement(struct, 'members', {
                 'first': apiVersion, 'last': apiVersion})
             for member in structNode.findall('./member'):
+                if member.get('api') and member.get('api') != api:
+                    continue
                 nameNode = member.find('name')
                 node = ET.SubElement(members, nameNode.text, {
                     'first': apiVersion, 'last': apiVersion})
@@ -291,17 +298,29 @@ def processFeatureStruct(featureName, featureType, structData, apiVersion):
 def processExtensionStruct(extension, structData, apiVersion):
     extName = extension.get('name')
 
-    for type in extension.findall('require/type'):
-        typeName = type.get('name')
-        struct = structData.find(typeName)
-        if not struct is None:
-            platforms = struct.find('platforms')
-            platform = platforms.find(extName)
-            if platform is None:
-                ET.SubElement(platforms, extName, {
-                    'first': apiVersion, 'last': apiVersion})
-            else:
-                platform.set('first', apiVersion)
+    for require in extension.findall('require'):
+        for type in require.findall('type'):
+            typeName = type.get('name')
+            struct = structData.find(typeName)
+            if not struct is None:
+                platforms = struct.find('platforms')
+                platform = platforms.find(extName)
+                if platform is None:
+                    ET.SubElement(platforms, extName, {
+                                  'first': apiVersion, 'last': apiVersion})
+                else:
+                    platform.set('first', apiVersion)
+
+                platform = platforms.find(extName)
+                if require.get('depends'):
+                    dependencies = require.get('depends').split(',')
+                    for dependency in dependencies:
+                        depend = platform.find(dependency)
+                        if depend is None:
+                            ET.SubElement(platform, dependency, {'first': apiVersion,
+                                                                 'last': apiVersion})
+                        else:
+                            depend.set('first', apiVersion)
 
 
 def main(argv):
@@ -317,6 +336,9 @@ def main(argv):
     parser.add_argument('-a', '--api',
                         help='Khronos API being processed',
                         required=True)
+    parser.add_argument('--ignore-feature', nargs='+',
+                        help='Features in the spec to ignore',
+                        default=[])
     args = parser.parse_args()
 
     dataRoot = ET.Element('root')
@@ -329,9 +351,9 @@ def main(argv):
 
     # Version
     apiVersion = ''
-    if args.api == 'Vulkan':
+    if args.api == 'vulkan':
         apiVersion = findVkVersion(vkRoot)
-    elif args.api == 'OpenXR':
+    elif args.api == 'openxr':
         apiVersion = findXrVersion(vkRoot)
     if apiVersion == '':
         print("Error: Failed to determine API version")
@@ -390,9 +412,20 @@ def main(argv):
     for enum in vkRoot.findall('enums'):
         processEnum(enum, enumData, apiVersion)
 
-    for feature in vkRoot.findall('feature/require/enum'):
-        processFeatureEnum(feature, enumData, apiVersion)
+    for feature in vkRoot.findall('feature'):
+        # If specified, make sure that the feature is for the desired API
+        if feature.get('api'):
+            apiList = feature.get('api').split(',')
+            if not args.api in apiList:
+                continue
+        for featureEnum in feature.findall('require/enum'):
+            processFeatureEnum(featureEnum, enumData, apiVersion)
     for extension in vkRoot.findall('extensions/extension'):
+        # If specified, make sure that the feature is for the desired API
+        if extension.get('supported'):
+            apiList = extension.get('supported').split(',')
+            if not args.api in apiList:
+                continue
         processExtensionEnums(extension, enumData, apiVersion)
 
     # Process Structs
@@ -401,12 +434,12 @@ def main(argv):
     structData = dataRoot.find('structs')
 
     for struct in vkRoot.findall('types/type'):
-        processStruct(struct, structData, apiVersion)
+        processStruct(struct, structData, args.api, apiVersion)
 
     for feature in vkRoot.findall('feature'):
         featureName = feature.get('name')
-        # Skip the core set
-        if featureName == 'VK_VERSION_1_0':
+        # Check to see if the feature is supposed to be ignored
+        if featureName in args.ignore_feature:
             continue
         for featureType in feature.findall('require/type'):
             processFeatureStruct(featureName, featureType,

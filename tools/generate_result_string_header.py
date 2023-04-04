@@ -35,12 +35,12 @@ def main(argv):
 
     outFile = open(args.output, "w")
 
-    if args.api == 'Vulkan':
+    if args.api == 'vulkan':
         apiVersionStr = 'VK_HEADER_VERSION'
         enumType = 'VkResult'
         header = '<vulkan/vulkan.h>'
         guard = 'VK_RESULT'
-    elif args.api == 'OpenXR':
+    elif args.api == 'openxr':
         apiVersionStr = '(XR_CURRENT_API_VERSION & 0xffffffffULL)'
         enumType = 'XrResult'
         header = '<openxr/openxr.h>'
@@ -90,7 +90,7 @@ extern "C" {{
 char const *{0}_to_string({0} result);
 """.format(enumType))
 
-    if args.api == 'Vulkan':
+    if args.api == 'vulkan':
         outFile.write("""
 /// Similar to VkResult_to_string, except in the case where it is an unknown value, returns a string
 /// stating '(unrecognized positive/negative VkResult value)', thus never returning NULL.
@@ -154,7 +154,7 @@ char const* {1}_to_string({1} result) {{
 }
 """)
 
-    if args.api == 'Vulkan':
+    if args.api == 'vulkan':
         outFile.write("""
 char const* vkResultToString(VkResult result) {
   char const* pResultString = VkResult_to_string(result);

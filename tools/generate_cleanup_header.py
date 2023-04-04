@@ -47,11 +47,16 @@ def guardStruct(struct, firstVersion, lastVersion, sTypeCheck, outFile):
             outFile.write('(')
         platformed = False
         for platform in platforms:
+            defineStr = platform.tag
+            subPlatforms = platform.findall('./')
+            for sub in subPlatforms:
+                defineStr += ' && {}'.format(sub.tag)
+
             if platformed:
-                outFile.write(' || {}'.format(platform.tag))
+                outFile.write(' || ({})'.format(defineStr))
             else:
                 platformed = True
-                outFile.write(platform.tag)
+                outFile.write('({})'.format(defineStr))
         if len(platforms) > 1:
             outFile.write(')')
 

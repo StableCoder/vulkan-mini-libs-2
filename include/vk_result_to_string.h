@@ -31,14 +31,14 @@ extern "C" {
 
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
-              "Vulkan header version is from before the minimum supported version of v72.");
+              "vulkan header version is from before the minimum supported version of v72.");
 static_assert(VK_HEADER_VERSION <= 245,
-              "Vulkan header version is from after the maximum supported version of v245.");
+              "vulkan header version is from after the maximum supported version of v245.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
-               "Vulkan header version is from before the minimum supported version of v72.");
+               "vulkan header version is from before the minimum supported version of v72.");
 _Static_assert(VK_HEADER_VERSION <= 245,
-               "Vulkan header version is from after the maximum supported version of v245.");
+               "vulkan header version is from after the maximum supported version of v245.");
 #endif
 
 /// Returns a string representing the given VkResult parameter. If there is no known representation,
@@ -58,18 +58,6 @@ char const *VkResult_to_string(VkResult result) {
 #if VK_HEADER_VERSION >= 243 && VK_KHR_video_encode_queue
   if (result == VK_ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR)
     return "VK_ERROR_INVALID_VIDEO_STD_PARAMETERS_KHR";
-#endif
-#if VK_HEADER_VERSION >= 241
-  if (result == VK_ERROR_VALIDATION_FAILED)
-    return "VK_ERROR_VALIDATION_FAILED";
-#endif
-#if VK_HEADER_VERSION >= 241
-  if (result == VK_ERROR_INVALID_PIPELINE_CACHE_DATA)
-    return "VK_ERROR_INVALID_PIPELINE_CACHE_DATA";
-#endif
-#if VK_HEADER_VERSION >= 241
-  if (result == VK_ERROR_NO_PIPELINE_MATCH)
-    return "VK_ERROR_NO_PIPELINE_MATCH";
 #endif
 #if VK_HEADER_VERSION >= 218 && VK_KHR_video_queue
   if (result == VK_ERROR_IMAGE_USAGE_NOT_SUPPORTED_KHR)
@@ -151,10 +139,6 @@ char const *VkResult_to_string(VkResult result) {
   if (result == VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS_KHR)
     return "VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS_KHR";
 #endif
-#if VK_HEADER_VERSION >= 128 && VK_HEADER_VERSION <= 134 && VK_EXT_extension_298
-  if (result == VK_RESULT_EXT_298_RESERVED_VALUE_0_EXT)
-    return "VK_RESULT_EXT_298_RESERVED_VALUE_0_EXT";
-#endif
 #if VK_HEADER_VERSION >= 104 && VK_EXT_full_screen_exclusive
   if (result == VK_ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT)
     return "VK_ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT";
@@ -163,7 +147,7 @@ char const *VkResult_to_string(VkResult result) {
   if (result == VK_ERROR_INVALID_DEVICE_ADDRESS_EXT)
     return "VK_ERROR_INVALID_DEVICE_ADDRESS_EXT";
 #endif
-#if VK_HEADER_VERSION >= 86 && VK_EXT_image_drm_format_modifier
+#if VK_HEADER_VERSION >= 88 && VK_EXT_image_drm_format_modifier
   if (result == VK_ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT)
     return "VK_ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT";
 #endif

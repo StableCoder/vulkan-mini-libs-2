@@ -12,9 +12,11 @@ START=
 END=
 OUTPUT="${MDIR}/include"
 SKIP_PARSE=0
+DOCS_REPO=""
+IGNORE_FEATURES=""
 
 # Type specific vars
-TYPE=Vulkan
+API=vulkan
 XML_PATH=xml/vk.xml
 CACHE=.vk_cache.xml
 REGEX="^v[0-9]*\.[0-9]*\.[0-9]*$"
@@ -50,7 +52,7 @@ while [[ $# -gt 0 ]]; do
         shift
         ;;
     --openxr)
-        TYPE=OpenXR
+        API=openxr
         XML_PATH=specification/registry/xr.xml
         CACHE=.xr_cache.xml
         REGEX="^release-[1-9].[0-9]*\.[0-9]*$"
@@ -63,10 +65,13 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-if [[ "$TYPE" == "Vulkan" ]]; then
+if [[ "$API" == "vulkan" ]]; then
     START=${START:=72} # Prior to v72, vk.xml was not published, so that's the default minimum.
-elif [[ "$TYPE" == "OpenXR" ]]; then
+    IGNORE_FEATURES="--ignore-feature VK_VERSION_1_0"
+    DOCS_REPO="Vulkan-Docs"
+elif [[ "$API" == "openxr" ]]; then
     START=${START:=0}
+    DOCS_REPO="OpenXR-Docs"
 fi
 
 cd "${MDIR}/tools"
@@ -78,10 +83,10 @@ if [ $SKIP_PARSE -eq 0 ]; then
     fi
 
     # Clone/update the Vulkan-Docs repository
-    if ! [ -d $TYPE-Docs ]; then
-        git clone https://github.com/KhronosGroup/$TYPE-Docs
+    if ! [ -d $DOCS_REPO ]; then
+        git clone https://github.com/KhronosGroup/$DOCS_REPO
     fi
-    pushd $TYPE-Docs >/dev/null
+    pushd $DOCS_REPO >/dev/null
     git fetch -p
 
     # Collect the per-version XML data
@@ -96,20 +101,20 @@ if [ $SKIP_PARSE -eq 0 ]; then
         fi
         git checkout $TAG
 
-        ../parse_xml.py --input $XML_PATH --cache ../$CACHE --api $TYPE
+        ../parse_xml.py --input $XML_PATH --cache ../$CACHE --api $API $IGNORE_FEATURES
         FIRST=0
     done
     popd >/dev/null
 fi
 
 # Generate headers
-if [[ "$TYPE" == "Vulkan" ]]; then
-    ./generate_serialization_header.py --input $CACHE                                       --output "${OUTPUT}/vk_value_serialization.h"
-    ./generate_result_string_header.py --input $CACHE --api $TYPE                           --output "${OUTPUT}/vk_result_to_string.h"
-    ./generate_cleanup_header.py       --input $CACHE --yaml ../data/cleanup_excludes.yaml  --output "${OUTPUT}/vk_struct_cleanup.h"
-    ./generate_comparison_headers.py   --input $CACHE --yaml ../data/compare_excludes.yaml  --output "${OUTPUT}/vk_struct_compare.h"
-elif [[ "$TYPE" == "OpenXR" ]]; then
-    ./generate_result_string_header.py --input $CACHE --api $TYPE                           --output "${OUTPUT}/xr_result_to_string.h"
+if [[ "$API" == "vulkan" ]]; then
+    ./generate_serialization_header.py --input $CACHE --output "${OUTPUT}/vk_value_serialization.h"
+    ./generate_result_string_header.py --input $CACHE --output "${OUTPUT}/vk_result_to_string.h"    --api $API
+    ./generate_cleanup_header.py       --input $CACHE --output "${OUTPUT}/vk_struct_cleanup.h"      --yaml ../data/cleanup_excludes.yaml
+    ./generate_comparison_header.py    --input $CACHE --output "${OUTPUT}/vk_struct_compare.h"      --yaml ../data/compare_excludes.yaml
+elif [[ "$API" == "openxr" ]]; then
+    ./generate_result_string_header.py --input $CACHE --output "${OUTPUT}/xr_result_to_string.h"    --api $API
 fi
 
 # Format headers
