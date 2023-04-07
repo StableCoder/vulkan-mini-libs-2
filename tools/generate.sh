@@ -5,12 +5,11 @@
 #!/bin/bash
 set -e
 
-MDIR="$(dirname "$(dirname "$(readlink -e "${BASH_SOURCE[0]}")")")"
-
 # Variables
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")"/.. && pwd)"
 START=
 END=
-OUTPUT="${MDIR}/include"
+OUTPUT="${ROOT_DIR}/include"
 SKIP_PARSE=0
 DOCS_REPO=""
 IGNORE_FEATURES=""
@@ -74,7 +73,7 @@ elif [[ "$API" == "openxr" ]]; then
     DOCS_REPO="OpenXR-Docs"
 fi
 
-cd "${MDIR}/tools"
+cd "${ROOT_DIR}/tools"
 
 if [ $SKIP_PARSE -eq 0 ]; then
     # Remove any previously generated data for a clean slate
@@ -111,8 +110,8 @@ fi
 if [[ "$API" == "vulkan" ]]; then
     ./generate_serialization_header.py --input $CACHE --output "${OUTPUT}/vk_value_serialization.h"
     ./generate_result_string_header.py --input $CACHE --output "${OUTPUT}/vk_result_to_string.h"    --api $API
-    ./generate_cleanup_header.py       --input $CACHE --output "${OUTPUT}/vk_struct_cleanup.h"      --yaml ../data/cleanup_excludes.yaml
-    ./generate_comparison_header.py    --input $CACHE --output "${OUTPUT}/vk_struct_compare.h"      --yaml ../data/compare_excludes.yaml
+    ./generate_cleanup_header.py       --input $CACHE --output "${OUTPUT}/vk_struct_cleanup.h"      --yaml ${ROOT_DIR}/data/cleanup_excludes.yaml
+    ./generate_comparison_header.py    --input $CACHE --output "${OUTPUT}/vk_struct_compare.h"      --yaml ${ROOT_DIR}/data/compare_excludes.yaml
 elif [[ "$API" == "openxr" ]]; then
     ./generate_result_string_header.py --input $CACHE --output "${OUTPUT}/xr_result_to_string.h"    --api $API
 fi
