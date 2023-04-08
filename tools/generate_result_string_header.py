@@ -5,6 +5,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import argparse
+import gen_common
 import sys
 import xml.etree.ElementTree as ET
 
@@ -47,9 +48,7 @@ def main(argv):
         guard = 'XR_RESULT'
 
     # Common Header
-    with open("common_header.txt") as fd:
-        outFile.write(fd.read())
-        outFile.write('\n')
+    gen_common.writeHeader(outFile)
 
     outFile.write("""#ifndef {0}_TO_STRING_H
 #define {0}_TO_STRING_H

@@ -3,7 +3,7 @@
 .vscode/
 auto-gen/
 build/
-Vulkan-Docs/
-OpenXR-Docs/
+*-Docs/
 compile_commands.json
 *.xml
+*.pyc

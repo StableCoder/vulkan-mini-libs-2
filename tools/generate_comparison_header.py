@@ -5,6 +5,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import argparse
+import gen_common
 import sys
 import yaml
 import xml.etree.ElementTree as ET
@@ -97,9 +98,7 @@ def main(argv):
     outFile = open(args.output, "w")
 
     # Common header
-    with open("common_header.txt") as fd:
-        outFile.write(fd.read())
-        outFile.write('\n')
+    gen_common.writeHeader(outFile)
 
     # Specific Header
     outFile.write("""#ifndef VK_STRUCT_COMPARE_H

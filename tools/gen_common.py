@@ -1,5 +1,14 @@
-/*
-    Copyright (C) 2021-2022 George Cave - gcave@stablecoder.ca
+#!/usr/bin/env python3
+
+# Copyright (C) 2022-2023 George Cave.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+from datetime import datetime
+
+def writeHeader(outFile):
+    outFile.write("""/*
+    Copyright (C) 2021-{} George Cave - gcave@stablecoder.ca
 
     SPDX-License-Identifier: Apache-2.0
 
@@ -10,3 +19,5 @@
 
     Check for an updated version anytime, or state concerns/bugs.
 */
+
+""".format(datetime.now().year))
