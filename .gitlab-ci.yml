@@ -24,7 +24,7 @@ variables:
 
 .platform_windows_template: &platform_windows_template
   stage: Windows
-  image: docker.io/stabletec/build-foe:windows
+  image: docker.io/stabletec/build-foe:windows-2019
   tags:
     - container
     - windows
