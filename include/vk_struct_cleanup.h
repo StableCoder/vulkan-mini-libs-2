@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 248,
-              "VK_HEADER_VERSION is from after the maximum supported version of v248.");
+static_assert(VK_HEADER_VERSION <= 249,
+              "VK_HEADER_VERSION is from after the maximum supported version of v249.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 248,
-               "VK_HEADER_VERSION is from after the maximum supported version of v248.");
+_Static_assert(VK_HEADER_VERSION <= 249,
+               "VK_HEADER_VERSION is from after the maximum supported version of v249.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -5127,6 +5127,11 @@ void cleanup_VkPhysicalDeviceShaderTileImageFeaturesEXT(
 #if VK_HEADER_VERSION >= 246 && (VK_EXT_shader_tile_image)
 void cleanup_VkPhysicalDeviceShaderTileImagePropertiesEXT(
     VkPhysicalDeviceShaderTileImagePropertiesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 249 && (VK_KHR_ray_tracing_position_fetch)
+void cleanup_VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR(
+    VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -12286,6 +12291,14 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TILE_IMAGE_PROPERTIES_EXT) {
     cleanup_VkPhysicalDeviceShaderTileImagePropertiesEXT(
         (VkPhysicalDeviceShaderTileImagePropertiesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 249 && (VK_KHR_ray_tracing_position_fetch)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_POSITION_FETCH_FEATURES_KHR) {
+    cleanup_VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR(
+        (VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR const *)pData);
     return;
   }
 #endif
@@ -24419,6 +24432,16 @@ void cleanup_VkPhysicalDeviceShaderTileImageFeaturesEXT(
 #if VK_HEADER_VERSION >= 246 && (VK_EXT_shader_tile_image)
 void cleanup_VkPhysicalDeviceShaderTileImagePropertiesEXT(
     VkPhysicalDeviceShaderTileImagePropertiesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 249 && (VK_KHR_ray_tracing_position_fetch)
+void cleanup_VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR(
+    VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

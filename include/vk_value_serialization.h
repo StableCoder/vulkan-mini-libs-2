@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 248,
-              "VK_HEADER_VERSION is from after the maximum supported version of v248.");
+static_assert(VK_HEADER_VERSION <= 249,
+              "VK_HEADER_VERSION is from after the maximum supported version of v249.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 248,
-               "VK_HEADER_VERSION is from after the maximum supported version of v248.");
+_Static_assert(VK_HEADER_VERSION <= 249,
+               "VK_HEADER_VERSION is from after the maximum supported version of v249.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -774,6 +774,7 @@ EnumValueSet const VkBuildAccelerationStructureFlagsKHRSets[] = {
     {"ALLOW_DISABLE_OPACITY_MICROMAPS_EXT", 0x00000080, false},
     {"ALLOW_OPACITY_MICROMAP_DATA_UPDATE_EXT", 0x00000100, false},
     {"ALLOW_DISPLACEMENT_MICROMAP_UPDATE_NV", 0x00000200, false},
+    {"ALLOW_DATA_ACCESS", 0x00000800, false},
 };
 
 EnumValueSet const VkAccelerationStructureCreateFlagsKHRSets[] = {
@@ -3239,7 +3240,7 @@ EnumType const cEnumTypes[332] = {
     {"VkIndirectStateFlagsNV", VkIndirectStateFlagsNVSets, 1},
     {"VkGeometryFlagsKHR", VkGeometryFlagsKHRSets, 4},
     {"VkGeometryInstanceFlagsKHR", VkGeometryInstanceFlagsKHRSets, 11},
-    {"VkBuildAccelerationStructureFlagsKHR", VkBuildAccelerationStructureFlagsKHRSets, 15},
+    {"VkBuildAccelerationStructureFlagsKHR", VkBuildAccelerationStructureFlagsKHRSets, 16},
     {"VkPrivateDataSlotCreateFlags", NULL, 0},
     {"VkAccelerationStructureCreateFlagsKHR", VkAccelerationStructureCreateFlagsKHRSets, 3},
     {"VkDescriptorUpdateTemplateCreateFlags", NULL, 0},

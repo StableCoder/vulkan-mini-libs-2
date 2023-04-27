@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 248,
-              "VK_HEADER_VERSION is from after the maximum supported version of v248.");
+static_assert(VK_HEADER_VERSION <= 249,
+              "VK_HEADER_VERSION is from after the maximum supported version of v249.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 248,
-               "VK_HEADER_VERSION is from after the maximum supported version of v248.");
+_Static_assert(VK_HEADER_VERSION <= 249,
+               "VK_HEADER_VERSION is from after the maximum supported version of v249.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -5529,6 +5529,12 @@ bool compare_VkDirectDriverLoadingListLUNARG(VkDirectDriverLoadingListLUNARG con
 bool compare_VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM(
     VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM const *s1,
     VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 249 && (VK_KHR_ray_tracing_position_fetch)
+bool compare_VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR(
+    VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR const *s1,
+    VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 241 && (VK_ARM_shader_core_properties)
@@ -19463,6 +19469,17 @@ bool compare_VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM(
     VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM const *s1,
     VkPhysicalDeviceMultiviewPerViewViewportsFeaturesQCOM const *s2) {
   if ((s1->multiviewPerViewViewports != s2->multiviewPerViewViewports) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 249 && (VK_KHR_ray_tracing_position_fetch)
+bool compare_VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR(
+    VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR const *s1,
+    VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR const *s2) {
+  if ((s1->rayTracingPositionFetch != s2->rayTracingPositionFetch) || false)
     return false;
 
   return true;
