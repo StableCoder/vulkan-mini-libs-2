@@ -177,6 +177,15 @@ Windows/MSVC:
     - ARCH: [amd64]
   <<: *platform_windows_template
 
+Windows/Clang:
+  parallel:
+    matrix:
+    - ARCH: [amd64]
+  variables:
+    CC: clang
+    CXX: clang
+  <<: *platform_windows_template
+
 Windows/Clang-cl:
   parallel:
     matrix:
@@ -185,6 +194,15 @@ Windows/Clang-cl:
     CC: clang-cl
     CXX: clang-cl
   <<: *platform_windows_template
+
+macOS/AppleClang:
+  parallel:
+    matrix:
+    - ARCH: [amd64, arm64]
+  tags:
+    - macos
+    - ${ARCH}
+  <<: *platform_macos_template
 
 macOS/Clang:
   parallel:
