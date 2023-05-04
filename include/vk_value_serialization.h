@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 249,
-              "VK_HEADER_VERSION is from after the maximum supported version of v249.");
+static_assert(VK_HEADER_VERSION <= 250,
+              "VK_HEADER_VERSION is from after the maximum supported version of v250.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 249,
-               "VK_HEADER_VERSION is from after the maximum supported version of v249.");
+_Static_assert(VK_HEADER_VERSION <= 250,
+               "VK_HEADER_VERSION is from after the maximum supported version of v250.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -1787,6 +1787,7 @@ EnumValueSet const VkDynamicStateSets[] = {
     {"DISCARD_RECTANGLE_ENABLE_EXT", 1000099001, false},
     {"DISCARD_RECTANGLE_MODE_EXT", 1000099002, false},
     {"EXCLUSIVE_SCISSOR_ENABLE_NV", 1000205000, false},
+    {"ATTACHMENT_FEEDBACK_LOOP_ENABLE_EXT", 1000524000, false},
 };
 
 EnumValueSet const VkPolygonModeSets[] = {
@@ -3368,7 +3369,7 @@ EnumType const cEnumTypes[332] = {
     {"VkCommandBufferLevel", VkCommandBufferLevelSets, 2},
     {"VkCompareOp", VkCompareOpSets, 8},
     {"VkDescriptorType", VkDescriptorTypeSets, 20},
-    {"VkDynamicState", VkDynamicStateSets, 86},
+    {"VkDynamicState", VkDynamicStateSets, 87},
     {"VkPolygonMode", VkPolygonModeSets, 4},
     {"VkFormat", VkFormatSets, 302},
     {"VkFrontFace", VkFrontFaceSets, 2},

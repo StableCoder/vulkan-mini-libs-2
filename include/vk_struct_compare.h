@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 249,
-              "VK_HEADER_VERSION is from after the maximum supported version of v249.");
+static_assert(VK_HEADER_VERSION <= 250,
+              "VK_HEADER_VERSION is from after the maximum supported version of v250.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 249,
-               "VK_HEADER_VERSION is from after the maximum supported version of v249.");
+_Static_assert(VK_HEADER_VERSION <= 250,
+               "VK_HEADER_VERSION is from after the maximum supported version of v250.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -4107,6 +4107,12 @@ bool compare_VkPhysicalDeviceImage2DViewOf3DFeaturesEXT(
 bool compare_VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT(
     VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT const *s1,
     VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 250 && (VK_EXT_attachment_feedback_loop_dynamic_state)
+bool compare_VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT(
+    VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT const *s1,
+    VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 228 && (VK_EXT_mutable_descriptor_type)
@@ -15829,6 +15835,17 @@ bool compare_VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT(
     VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT const *s1,
     VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT const *s2) {
   if ((s1->imageSlicedViewOf3D != s2->imageSlicedViewOf3D) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 250 && (VK_EXT_attachment_feedback_loop_dynamic_state)
+bool compare_VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT(
+    VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT const *s1,
+    VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT const *s2) {
+  if ((s1->attachmentFeedbackLoopDynamicState != s2->attachmentFeedbackLoopDynamicState) || false)
     return false;
 
   return true;
