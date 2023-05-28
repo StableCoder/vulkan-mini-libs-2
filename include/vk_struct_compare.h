@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 250,
-              "VK_HEADER_VERSION is from after the maximum supported version of v250.");
+static_assert(VK_HEADER_VERSION <= 251,
+              "VK_HEADER_VERSION is from after the maximum supported version of v251.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 250,
-               "VK_HEADER_VERSION is from after the maximum supported version of v250.");
+_Static_assert(VK_HEADER_VERSION <= 251,
+               "VK_HEADER_VERSION is from after the maximum supported version of v251.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -5459,6 +5459,12 @@ bool compare_VkPhysicalDeviceShaderCoreBuiltinsPropertiesARM(
 bool compare_VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM(
     VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM const *s1,
     VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 251 && (VK_EXT_dynamic_rendering_unused_attachments)
+bool compare_VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT(
+    VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT const *s1,
+    VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 237 && (VK_EXT_surface_maintenance1)
@@ -19331,6 +19337,17 @@ bool compare_VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM(
     VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM const *s1,
     VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM const *s2) {
   if ((s1->shaderCoreBuiltins != s2->shaderCoreBuiltins) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 251 && (VK_EXT_dynamic_rendering_unused_attachments)
+bool compare_VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT(
+    VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT const *s1,
+    VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT const *s2) {
+  if ((s1->dynamicRenderingUnusedAttachments != s2->dynamicRenderingUnusedAttachments) || false)
     return false;
 
   return true;

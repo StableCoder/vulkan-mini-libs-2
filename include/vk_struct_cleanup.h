@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 250,
-              "VK_HEADER_VERSION is from after the maximum supported version of v250.");
+static_assert(VK_HEADER_VERSION <= 251,
+              "VK_HEADER_VERSION is from after the maximum supported version of v251.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 250,
-               "VK_HEADER_VERSION is from after the maximum supported version of v250.");
+_Static_assert(VK_HEADER_VERSION <= 251,
+               "VK_HEADER_VERSION is from after the maximum supported version of v251.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -5137,6 +5137,11 @@ void cleanup_VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR(
 #if VK_HEADER_VERSION >= 250 && (VK_EXT_attachment_feedback_loop_dynamic_state)
 void cleanup_VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT(
     VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 251 && (VK_EXT_dynamic_rendering_unused_attachments)
+void cleanup_VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT(
+    VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -12313,6 +12318,15 @@ void cleanup_vk_struct(void const *pData) {
       VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ATTACHMENT_FEEDBACK_LOOP_DYNAMIC_STATE_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT(
         (VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 251 && (VK_EXT_dynamic_rendering_unused_attachments)
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_UNUSED_ATTACHMENTS_FEATURES_EXT) {
+    cleanup_VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT(
+        (VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT const *)pData);
     return;
   }
 #endif
@@ -24466,6 +24480,16 @@ void cleanup_VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR(
 #if VK_HEADER_VERSION >= 250 && (VK_EXT_attachment_feedback_loop_dynamic_state)
 void cleanup_VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT(
     VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 251 && (VK_EXT_dynamic_rendering_unused_attachments)
+void cleanup_VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT(
+    VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

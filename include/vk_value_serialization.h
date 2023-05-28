@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 250,
-              "VK_HEADER_VERSION is from after the maximum supported version of v250.");
+static_assert(VK_HEADER_VERSION <= 251,
+              "VK_HEADER_VERSION is from after the maximum supported version of v251.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 250,
-               "VK_HEADER_VERSION is from after the maximum supported version of v250.");
+_Static_assert(VK_HEADER_VERSION <= 251,
+               "VK_HEADER_VERSION is from after the maximum supported version of v251.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -160,12 +160,12 @@ STecVkSerializationResult vk_parse64(char const *pVkType,
 #include <string.h>
 
 #define cVendorCount sizeof(cVendorList) / sizeof(char const *)
-char const *cVendorList[37] = {
+char const *cVendorList[38] = {
     "IMG",    "AMD",  "AMDX",   "ARM",  "FSL",        "BRCM",     "NXP",     "NV",
     "NVX",    "VIV",  "VSI",    "KDAB", "ANDROID",    "CHROMIUM", "FUCHSIA", "GGP",
     "GOOGLE", "QCOM", "LUNARG", "NZXT", "SAMSUNG",    "SEC",      "TIZEN",   "RENDERDOC",
     "NN",     "MVK",  "KHR",    "KHX",  "EXT",        "MESA",     "INTEL",   "HUAWEI",
-    "VALVE",  "QNX",  "JUICE",  "FB",   "RASTERGRID",
+    "VALVE",  "QNX",  "JUICE",  "FB",   "RASTERGRID", "MSFT",
 };
 
 typedef struct EnumValueSet {
