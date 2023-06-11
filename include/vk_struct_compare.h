@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 251,
-              "VK_HEADER_VERSION is from after the maximum supported version of v251.");
+static_assert(VK_HEADER_VERSION <= 252,
+              "VK_HEADER_VERSION is from after the maximum supported version of v252.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 251,
-               "VK_HEADER_VERSION is from after the maximum supported version of v251.");
+_Static_assert(VK_HEADER_VERSION <= 252,
+               "VK_HEADER_VERSION is from after the maximum supported version of v252.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -5225,6 +5225,11 @@ bool compare_VkPhysicalDevicePipelinePropertiesFeaturesEXT(
 bool compare_VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD(
     VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD const *s1,
     VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 252 && (VK_EXT_external_memory_acquire_unmodified)
+bool compare_VkExternalMemoryAcquireUnmodifiedEXT(VkExternalMemoryAcquireUnmodifiedEXT const *s1,
+                                                  VkExternalMemoryAcquireUnmodifiedEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 217 && (VK_EXT_metal_objects)
@@ -18817,6 +18822,16 @@ bool compare_VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD(
     VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD const *s1,
     VkPhysicalDeviceShaderEarlyAndLateFragmentTestsFeaturesAMD const *s2) {
   if ((s1->shaderEarlyAndLateFragmentTests != s2->shaderEarlyAndLateFragmentTests) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 252 && (VK_EXT_external_memory_acquire_unmodified)
+bool compare_VkExternalMemoryAcquireUnmodifiedEXT(VkExternalMemoryAcquireUnmodifiedEXT const *s1,
+                                                  VkExternalMemoryAcquireUnmodifiedEXT const *s2) {
+  if ((s1->acquireUnmodifiedMemory != s2->acquireUnmodifiedMemory) || false)
     return false;
 
   return true;

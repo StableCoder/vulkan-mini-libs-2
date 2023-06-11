@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 251,
-              "VK_HEADER_VERSION is from after the maximum supported version of v251.");
+static_assert(VK_HEADER_VERSION <= 252,
+              "VK_HEADER_VERSION is from after the maximum supported version of v252.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 251,
-               "VK_HEADER_VERSION is from after the maximum supported version of v251.");
+_Static_assert(VK_HEADER_VERSION <= 252,
+               "VK_HEADER_VERSION is from after the maximum supported version of v252.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -5142,6 +5142,11 @@ void cleanup_VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT(
 #if VK_HEADER_VERSION >= 251 && (VK_EXT_dynamic_rendering_unused_attachments)
 void cleanup_VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT(
     VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 252 && (VK_EXT_external_memory_acquire_unmodified)
+void cleanup_VkExternalMemoryAcquireUnmodifiedEXT(
+    VkExternalMemoryAcquireUnmodifiedEXT const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -12327,6 +12332,14 @@ void cleanup_vk_struct(void const *pData) {
       VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DYNAMIC_RENDERING_UNUSED_ATTACHMENTS_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT(
         (VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 252 && (VK_EXT_external_memory_acquire_unmodified)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_ACQUIRE_UNMODIFIED_EXT) {
+    cleanup_VkExternalMemoryAcquireUnmodifiedEXT(
+        (VkExternalMemoryAcquireUnmodifiedEXT const *)pData);
     return;
   }
 #endif
@@ -24490,6 +24503,16 @@ void cleanup_VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT(
 #if VK_HEADER_VERSION >= 251 && (VK_EXT_dynamic_rendering_unused_attachments)
 void cleanup_VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT(
     VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 252 && (VK_EXT_external_memory_acquire_unmodified)
+void cleanup_VkExternalMemoryAcquireUnmodifiedEXT(
+    VkExternalMemoryAcquireUnmodifiedEXT const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
