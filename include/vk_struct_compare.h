@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 253,
-              "VK_HEADER_VERSION is from after the maximum supported version of v253.");
+static_assert(VK_HEADER_VERSION <= 254,
+              "VK_HEADER_VERSION is from after the maximum supported version of v254.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 253,
-               "VK_HEADER_VERSION is from after the maximum supported version of v253.");
+_Static_assert(VK_HEADER_VERSION <= 254,
+               "VK_HEADER_VERSION is from after the maximum supported version of v254.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -5536,6 +5536,15 @@ bool compare_VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT(
     VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 254 && (VK_EXT_depth_bias_control)
+bool compare_VkDepthBiasInfoEXT(VkDepthBiasInfoEXT const *s1, VkDepthBiasInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_EXT_depth_bias_control)
+bool compare_VkDepthBiasRepresentationInfoEXT(VkDepthBiasRepresentationInfoEXT const *s1,
+                                              VkDepthBiasRepresentationInfoEXT const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 233 && (VK_NV_memory_decompression)
 bool compare_VkDecompressMemoryRegionNV(VkDecompressMemoryRegionNV const *s1,
                                         VkDecompressMemoryRegionNV const *s2);
@@ -5605,6 +5614,12 @@ bool compare_VkSwapchainPresentScalingCreateInfoEXT(
 #if VK_HEADER_VERSION >= 237 && (VK_EXT_swapchain_maintenance1)
 bool compare_VkReleaseSwapchainImagesInfoEXT(VkReleaseSwapchainImagesInfoEXT const *s1,
                                              VkReleaseSwapchainImagesInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_EXT_depth_bias_control)
+bool compare_VkPhysicalDeviceDepthBiasControlFeaturesEXT(
+    VkPhysicalDeviceDepthBiasControlFeaturesEXT const *s1,
+    VkPhysicalDeviceDepthBiasControlFeaturesEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 233 && (VK_NV_ray_tracing_invocation_reorder)
@@ -5699,6 +5714,31 @@ bool compare_VkPhysicalDeviceShaderTileImageFeaturesEXT(
 bool compare_VkPhysicalDeviceShaderTileImagePropertiesEXT(
     VkPhysicalDeviceShaderTileImagePropertiesEXT const *s1,
     VkPhysicalDeviceShaderTileImagePropertiesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_QNX_external_memory_screen_buffer)
+bool compare_VkImportScreenBufferInfoQNX(VkImportScreenBufferInfoQNX const *s1,
+                                         VkImportScreenBufferInfoQNX const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_QNX_external_memory_screen_buffer)
+bool compare_VkScreenBufferPropertiesQNX(VkScreenBufferPropertiesQNX const *s1,
+                                         VkScreenBufferPropertiesQNX const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_QNX_external_memory_screen_buffer)
+bool compare_VkScreenBufferFormatPropertiesQNX(VkScreenBufferFormatPropertiesQNX const *s1,
+                                               VkScreenBufferFormatPropertiesQNX const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_QNX_external_memory_screen_buffer)
+bool compare_VkExternalFormatQNX(VkExternalFormatQNX const *s1, VkExternalFormatQNX const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_QNX_external_memory_screen_buffer)
+bool compare_VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX(
+    VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX const *s1,
+    VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_HEADER_VERSION <= 252 && (VK_EXT_video_encode_h264)
@@ -19722,6 +19762,28 @@ bool compare_VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 254 && (VK_EXT_depth_bias_control)
+bool compare_VkDepthBiasInfoEXT(VkDepthBiasInfoEXT const *s1, VkDepthBiasInfoEXT const *s2) {
+  if ((s1->depthBiasConstantFactor != s2->depthBiasConstantFactor) ||
+      (s1->depthBiasClamp != s2->depthBiasClamp) ||
+      (s1->depthBiasSlopeFactor != s2->depthBiasSlopeFactor) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_EXT_depth_bias_control)
+bool compare_VkDepthBiasRepresentationInfoEXT(VkDepthBiasRepresentationInfoEXT const *s1,
+                                              VkDepthBiasRepresentationInfoEXT const *s2) {
+  if ((s1->depthBiasRepresentation != s2->depthBiasRepresentation) ||
+      (s1->depthBiasExact != s2->depthBiasExact) || false)
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 233 && (VK_NV_memory_decompression)
 bool compare_VkDecompressMemoryRegionNV(VkDecompressMemoryRegionNV const *s1,
                                         VkDecompressMemoryRegionNV const *s2) {
@@ -19866,6 +19928,21 @@ bool compare_VkSwapchainPresentScalingCreateInfoEXT(
 bool compare_VkReleaseSwapchainImagesInfoEXT(VkReleaseSwapchainImagesInfoEXT const *s1,
                                              VkReleaseSwapchainImagesInfoEXT const *s2) {
   if ((s1->swapchain != s2->swapchain) || (s1->imageIndexCount != s2->imageIndexCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_EXT_depth_bias_control)
+bool compare_VkPhysicalDeviceDepthBiasControlFeaturesEXT(
+    VkPhysicalDeviceDepthBiasControlFeaturesEXT const *s1,
+    VkPhysicalDeviceDepthBiasControlFeaturesEXT const *s2) {
+  if ((s1->depthBiasControl != s2->depthBiasControl) ||
+      (s1->leastRepresentableValueForceUnormRepresentation !=
+       s2->leastRepresentableValueForceUnormRepresentation) ||
+      (s1->floatRepresentation != s2->floatRepresentation) ||
+      (s1->depthBiasExact != s2->depthBiasExact) || false)
     return false;
 
   return true;
@@ -20062,6 +20139,61 @@ bool compare_VkPhysicalDeviceShaderTileImagePropertiesEXT(
       (s1->shaderTileImageReadFromHelperInvocation !=
        s2->shaderTileImageReadFromHelperInvocation) ||
       false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_QNX_external_memory_screen_buffer)
+bool compare_VkImportScreenBufferInfoQNX(VkImportScreenBufferInfoQNX const *s1,
+                                         VkImportScreenBufferInfoQNX const *s2) {
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_QNX_external_memory_screen_buffer)
+bool compare_VkScreenBufferPropertiesQNX(VkScreenBufferPropertiesQNX const *s1,
+                                         VkScreenBufferPropertiesQNX const *s2) {
+  if ((s1->allocationSize != s2->allocationSize) || (s1->memoryTypeBits != s2->memoryTypeBits) ||
+      false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_QNX_external_memory_screen_buffer)
+bool compare_VkScreenBufferFormatPropertiesQNX(VkScreenBufferFormatPropertiesQNX const *s1,
+                                               VkScreenBufferFormatPropertiesQNX const *s2) {
+  if ((s1->format != s2->format) || (s1->externalFormat != s2->externalFormat) ||
+      (s1->screenUsage != s2->screenUsage) || (s1->formatFeatures != s2->formatFeatures) ||
+      !compare_VkComponentMapping(&s1->samplerYcbcrConversionComponents,
+                                  &s2->samplerYcbcrConversionComponents) ||
+      (s1->suggestedYcbcrModel != s2->suggestedYcbcrModel) ||
+      (s1->suggestedYcbcrRange != s2->suggestedYcbcrRange) ||
+      (s1->suggestedXChromaOffset != s2->suggestedXChromaOffset) ||
+      (s1->suggestedYChromaOffset != s2->suggestedYChromaOffset) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_QNX_external_memory_screen_buffer)
+bool compare_VkExternalFormatQNX(VkExternalFormatQNX const *s1, VkExternalFormatQNX const *s2) {
+  if ((s1->externalFormat != s2->externalFormat) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_QNX_external_memory_screen_buffer)
+bool compare_VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX(
+    VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX const *s1,
+    VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX const *s2) {
+  if ((s1->screenBufferImport != s2->screenBufferImport) || false)
     return false;
 
   return true;

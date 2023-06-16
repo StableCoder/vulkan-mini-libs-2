@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 253,
-              "VK_HEADER_VERSION is from after the maximum supported version of v253.");
+static_assert(VK_HEADER_VERSION <= 254,
+              "VK_HEADER_VERSION is from after the maximum supported version of v254.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 253,
-               "VK_HEADER_VERSION is from after the maximum supported version of v253.");
+_Static_assert(VK_HEADER_VERSION <= 254,
+               "VK_HEADER_VERSION is from after the maximum supported version of v254.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -1153,6 +1153,7 @@ EnumValueSet const VkExternalMemoryHandleTypeFlagsSets[] = {
     {"HOST_MAPPED_FOREIGN_MEMORY_BIT_EXT", 0x00000100, false},
     {"ZIRCON_VMO_BIT_FUCHSIA", 0x00000800, false},
     {"RDMA_ADDRESS_BIT_NV", 0x00001000, false},
+    {"SCREEN_BUFFER_BIT_QNX", 0x00004000, false},
 };
 
 EnumValueSet const VkExternalMemoryFeatureFlagsSets[] = {
@@ -2773,6 +2774,12 @@ EnumValueSet const VkDeviceFaultVendorBinaryHeaderVersionEXTSets[] = {
     {"ONE", 1, false},
 };
 
+EnumValueSet const VkDepthBiasRepresentationEXTSets[] = {
+    {"LEAST_REPRESENTABLE_VALUE_FORMAT", 0, false},
+    {"LEAST_REPRESENTABLE_VALUE_FORCE_UNORM", 1, false},
+    {"FLOAT", 2, false},
+};
+
 EnumValueSet const VkDirectDriverLoadingModeLUNARGSets[] = {
     {"EXCLUSIVE", 0, false},
     {"INCLUSIVE", 1, false},
@@ -3251,7 +3258,7 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[336] = {
+EnumType const cEnumTypes[337] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", NULL, 0},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 1},
@@ -3365,7 +3372,7 @@ EnumType const cEnumTypes[336] = {
     {"VkCommandPoolTrimFlags", NULL, 0},
     {"VkExternalMemoryHandleTypeFlagsNV", VkExternalMemoryHandleTypeFlagsNVSets, 4},
     {"VkExternalMemoryFeatureFlagsNV", VkExternalMemoryFeatureFlagsNVSets, 3},
-    {"VkExternalMemoryHandleTypeFlags", VkExternalMemoryHandleTypeFlagsSets, 20},
+    {"VkExternalMemoryHandleTypeFlags", VkExternalMemoryHandleTypeFlagsSets, 21},
     {"VkExternalMemoryFeatureFlags", VkExternalMemoryFeatureFlagsSets, 6},
     {"VkExternalSemaphoreHandleTypeFlags", VkExternalSemaphoreHandleTypeFlagsSets, 12},
     {"VkExternalSemaphoreFeatureFlags", VkExternalSemaphoreFeatureFlagsSets, 4},
@@ -3527,6 +3534,7 @@ EnumType const cEnumTypes[336] = {
     {"VkOpacityMicromapFormatEXT", VkOpacityMicromapFormatEXTSets, 2},
     {"VkOpacityMicromapSpecialIndexEXT", VkOpacityMicromapSpecialIndexEXTSets, 4},
     {"VkDeviceFaultVendorBinaryHeaderVersionEXT", VkDeviceFaultVendorBinaryHeaderVersionEXTSets, 1},
+    {"VkDepthBiasRepresentationEXT", VkDepthBiasRepresentationEXTSets, 3},
     {"VkDirectDriverLoadingModeLUNARG", VkDirectDriverLoadingModeLUNARGSets, 2},
     {"VkDisplacementMicromapFormatNV", VkDisplacementMicromapFormatNVSets, 3},
     {"VkShaderCodeTypeEXT", VkShaderCodeTypeEXTSets, 2},

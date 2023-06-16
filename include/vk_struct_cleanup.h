@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 253,
-              "VK_HEADER_VERSION is from after the maximum supported version of v253.");
+static_assert(VK_HEADER_VERSION <= 254,
+              "VK_HEADER_VERSION is from after the maximum supported version of v254.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 253,
-               "VK_HEADER_VERSION is from after the maximum supported version of v253.");
+_Static_assert(VK_HEADER_VERSION <= 254,
+               "VK_HEADER_VERSION is from after the maximum supported version of v254.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -5219,6 +5219,40 @@ void cleanup_VkVideoEncodeH265PictureInfoEXT(VkVideoEncodeH265PictureInfoEXT con
 #if VK_HEADER_VERSION >= 253 && (VK_EXT_video_encode_h265)
 void cleanup_VkVideoEncodeH265GopRemainingFrameInfoEXT(
     VkVideoEncodeH265GopRemainingFrameInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_EXT_depth_bias_control)
+void cleanup_VkDepthBiasInfoEXT(VkDepthBiasInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_EXT_depth_bias_control)
+void cleanup_VkDepthBiasRepresentationInfoEXT(VkDepthBiasRepresentationInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_EXT_depth_bias_control)
+void cleanup_VkPhysicalDeviceDepthBiasControlFeaturesEXT(
+    VkPhysicalDeviceDepthBiasControlFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_QNX_external_memory_screen_buffer)
+void cleanup_VkImportScreenBufferInfoQNX(VkImportScreenBufferInfoQNX const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_QNX_external_memory_screen_buffer)
+void cleanup_VkScreenBufferPropertiesQNX(VkScreenBufferPropertiesQNX const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_QNX_external_memory_screen_buffer)
+void cleanup_VkScreenBufferFormatPropertiesQNX(VkScreenBufferFormatPropertiesQNX const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_QNX_external_memory_screen_buffer)
+void cleanup_VkExternalFormatQNX(VkExternalFormatQNX const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_QNX_external_memory_screen_buffer)
+void cleanup_VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX(
+    VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -12529,6 +12563,65 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_H265_GOP_REMAINING_FRAME_INFO_EXT) {
     cleanup_VkVideoEncodeH265GopRemainingFrameInfoEXT(
         (VkVideoEncodeH265GopRemainingFrameInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_EXT_depth_bias_control)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEPTH_BIAS_INFO_EXT) {
+    cleanup_VkDepthBiasInfoEXT((VkDepthBiasInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_EXT_depth_bias_control)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEPTH_BIAS_REPRESENTATION_INFO_EXT) {
+    cleanup_VkDepthBiasRepresentationInfoEXT((VkDepthBiasRepresentationInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_EXT_depth_bias_control)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_BIAS_CONTROL_FEATURES_EXT) {
+    cleanup_VkPhysicalDeviceDepthBiasControlFeaturesEXT(
+        (VkPhysicalDeviceDepthBiasControlFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_QNX_external_memory_screen_buffer)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMPORT_SCREEN_BUFFER_INFO_QNX) {
+    cleanup_VkImportScreenBufferInfoQNX((VkImportScreenBufferInfoQNX const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_QNX_external_memory_screen_buffer)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SCREEN_BUFFER_PROPERTIES_QNX) {
+    cleanup_VkScreenBufferPropertiesQNX((VkScreenBufferPropertiesQNX const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_QNX_external_memory_screen_buffer)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SCREEN_BUFFER_FORMAT_PROPERTIES_QNX) {
+    cleanup_VkScreenBufferFormatPropertiesQNX((VkScreenBufferFormatPropertiesQNX const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_QNX_external_memory_screen_buffer)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_QNX) {
+    cleanup_VkExternalFormatQNX((VkExternalFormatQNX const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_QNX_external_memory_screen_buffer)
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_SCREEN_BUFFER_FEATURES_QNX) {
+    cleanup_VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX(
+        (VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX const *)pData);
     return;
   }
 #endif
@@ -24878,6 +24971,83 @@ void cleanup_VkVideoEncodeH265PictureInfoEXT(VkVideoEncodeH265PictureInfoEXT con
 #if VK_HEADER_VERSION >= 253 && (VK_EXT_video_encode_h265)
 void cleanup_VkVideoEncodeH265GopRemainingFrameInfoEXT(
     VkVideoEncodeH265GopRemainingFrameInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_EXT_depth_bias_control)
+void cleanup_VkDepthBiasInfoEXT(VkDepthBiasInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_EXT_depth_bias_control)
+void cleanup_VkDepthBiasRepresentationInfoEXT(VkDepthBiasRepresentationInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_EXT_depth_bias_control)
+void cleanup_VkPhysicalDeviceDepthBiasControlFeaturesEXT(
+    VkPhysicalDeviceDepthBiasControlFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_QNX_external_memory_screen_buffer)
+void cleanup_VkImportScreenBufferInfoQNX(VkImportScreenBufferInfoQNX const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // buffer
+  free((void *)pData->buffer);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_QNX_external_memory_screen_buffer)
+void cleanup_VkScreenBufferPropertiesQNX(VkScreenBufferPropertiesQNX const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_QNX_external_memory_screen_buffer)
+void cleanup_VkScreenBufferFormatPropertiesQNX(VkScreenBufferFormatPropertiesQNX const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_QNX_external_memory_screen_buffer)
+void cleanup_VkExternalFormatQNX(VkExternalFormatQNX const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 254 && (VK_QNX_external_memory_screen_buffer)
+void cleanup_VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX(
+    VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
