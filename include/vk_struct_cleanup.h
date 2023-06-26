@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 254,
-              "VK_HEADER_VERSION is from after the maximum supported version of v254.");
+static_assert(VK_HEADER_VERSION <= 255,
+              "VK_HEADER_VERSION is from after the maximum supported version of v255.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 254,
-               "VK_HEADER_VERSION is from after the maximum supported version of v254.");
+_Static_assert(VK_HEADER_VERSION <= 255,
+               "VK_HEADER_VERSION is from after the maximum supported version of v255.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -5253,6 +5253,20 @@ void cleanup_VkExternalFormatQNX(VkExternalFormatQNX const *pData);
 #if VK_HEADER_VERSION >= 254 && (VK_QNX_external_memory_screen_buffer)
 void cleanup_VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX(
     VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 255 && (VK_KHR_cooperative_matrix)
+void cleanup_VkPhysicalDeviceCooperativeMatrixFeaturesKHR(
+    VkPhysicalDeviceCooperativeMatrixFeaturesKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 255 && (VK_KHR_cooperative_matrix)
+void cleanup_VkCooperativeMatrixPropertiesKHR(VkCooperativeMatrixPropertiesKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 255 && (VK_KHR_cooperative_matrix)
+void cleanup_VkPhysicalDeviceCooperativeMatrixPropertiesKHR(
+    VkPhysicalDeviceCooperativeMatrixPropertiesKHR const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -12622,6 +12636,29 @@ void cleanup_vk_struct(void const *pData) {
       VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_MEMORY_SCREEN_BUFFER_FEATURES_QNX) {
     cleanup_VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX(
         (VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 255 && (VK_KHR_cooperative_matrix)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_KHR) {
+    cleanup_VkPhysicalDeviceCooperativeMatrixFeaturesKHR(
+        (VkPhysicalDeviceCooperativeMatrixFeaturesKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 255 && (VK_KHR_cooperative_matrix)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_COOPERATIVE_MATRIX_PROPERTIES_KHR) {
+    cleanup_VkCooperativeMatrixPropertiesKHR((VkCooperativeMatrixPropertiesKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 255 && (VK_KHR_cooperative_matrix)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_PROPERTIES_KHR) {
+    cleanup_VkPhysicalDeviceCooperativeMatrixPropertiesKHR(
+        (VkPhysicalDeviceCooperativeMatrixPropertiesKHR const *)pData);
     return;
   }
 #endif
@@ -25048,6 +25085,35 @@ void cleanup_VkExternalFormatQNX(VkExternalFormatQNX const *pData) {
 #if VK_HEADER_VERSION >= 254 && (VK_QNX_external_memory_screen_buffer)
 void cleanup_VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX(
     VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 255 && (VK_KHR_cooperative_matrix)
+void cleanup_VkPhysicalDeviceCooperativeMatrixFeaturesKHR(
+    VkPhysicalDeviceCooperativeMatrixFeaturesKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 255 && (VK_KHR_cooperative_matrix)
+void cleanup_VkCooperativeMatrixPropertiesKHR(VkCooperativeMatrixPropertiesKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 255 && (VK_KHR_cooperative_matrix)
+void cleanup_VkPhysicalDeviceCooperativeMatrixPropertiesKHR(
+    VkPhysicalDeviceCooperativeMatrixPropertiesKHR const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

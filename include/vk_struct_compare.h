@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 254,
-              "VK_HEADER_VERSION is from after the maximum supported version of v254.");
+static_assert(VK_HEADER_VERSION <= 255,
+              "VK_HEADER_VERSION is from after the maximum supported version of v255.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 254,
-               "VK_HEADER_VERSION is from after the maximum supported version of v254.");
+_Static_assert(VK_HEADER_VERSION <= 255,
+               "VK_HEADER_VERSION is from after the maximum supported version of v255.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -5739,6 +5739,23 @@ bool compare_VkExternalFormatQNX(VkExternalFormatQNX const *s1, VkExternalFormat
 bool compare_VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX(
     VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX const *s1,
     VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 255 && (VK_KHR_cooperative_matrix)
+bool compare_VkPhysicalDeviceCooperativeMatrixFeaturesKHR(
+    VkPhysicalDeviceCooperativeMatrixFeaturesKHR const *s1,
+    VkPhysicalDeviceCooperativeMatrixFeaturesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 255 && (VK_KHR_cooperative_matrix)
+bool compare_VkCooperativeMatrixPropertiesKHR(VkCooperativeMatrixPropertiesKHR const *s1,
+                                              VkCooperativeMatrixPropertiesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 255 && (VK_KHR_cooperative_matrix)
+bool compare_VkPhysicalDeviceCooperativeMatrixPropertiesKHR(
+    VkPhysicalDeviceCooperativeMatrixPropertiesKHR const *s1,
+    VkPhysicalDeviceCooperativeMatrixPropertiesKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_HEADER_VERSION <= 252 && (VK_EXT_video_encode_h264)
@@ -20194,6 +20211,43 @@ bool compare_VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX(
     VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX const *s1,
     VkPhysicalDeviceExternalMemoryScreenBufferFeaturesQNX const *s2) {
   if ((s1->screenBufferImport != s2->screenBufferImport) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 255 && (VK_KHR_cooperative_matrix)
+bool compare_VkPhysicalDeviceCooperativeMatrixFeaturesKHR(
+    VkPhysicalDeviceCooperativeMatrixFeaturesKHR const *s1,
+    VkPhysicalDeviceCooperativeMatrixFeaturesKHR const *s2) {
+  if ((s1->cooperativeMatrix != s2->cooperativeMatrix) ||
+      (s1->cooperativeMatrixRobustBufferAccess != s2->cooperativeMatrixRobustBufferAccess) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 255 && (VK_KHR_cooperative_matrix)
+bool compare_VkCooperativeMatrixPropertiesKHR(VkCooperativeMatrixPropertiesKHR const *s1,
+                                              VkCooperativeMatrixPropertiesKHR const *s2) {
+  if ((s1->MSize != s2->MSize) || (s1->NSize != s2->NSize) || (s1->KSize != s2->KSize) ||
+      (s1->AType != s2->AType) || (s1->BType != s2->BType) || (s1->CType != s2->CType) ||
+      (s1->ResultType != s2->ResultType) ||
+      (s1->saturatingAccumulation != s2->saturatingAccumulation) || (s1->scope != s2->scope) ||
+      false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 255 && (VK_KHR_cooperative_matrix)
+bool compare_VkPhysicalDeviceCooperativeMatrixPropertiesKHR(
+    VkPhysicalDeviceCooperativeMatrixPropertiesKHR const *s1,
+    VkPhysicalDeviceCooperativeMatrixPropertiesKHR const *s2) {
+  if ((s1->cooperativeMatrixSupportedStages != s2->cooperativeMatrixSupportedStages) || false)
     return false;
 
   return true;

@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 254,
-              "VK_HEADER_VERSION is from after the maximum supported version of v254.");
+static_assert(VK_HEADER_VERSION <= 255,
+              "VK_HEADER_VERSION is from after the maximum supported version of v255.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 254,
-               "VK_HEADER_VERSION is from after the maximum supported version of v254.");
+_Static_assert(VK_HEADER_VERSION <= 255,
+               "VK_HEADER_VERSION is from after the maximum supported version of v255.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -2796,6 +2796,19 @@ EnumValueSet const VkShaderCodeTypeEXTSets[] = {
     {"SPIRV", 1, false},
 };
 
+EnumValueSet const VkScopeKHRSets[] = {
+    {"DEVICE", 1, false},
+    {"WORKGROUP", 2, false},
+    {"SUBGROUP", 3, false},
+    {"QUEUE_FAMILY", 5, false},
+};
+
+EnumValueSet const VkComponentTypeKHRSets[] = {
+    {"FLOAT16", 0, false}, {"FLOAT32", 1, false}, {"FLOAT64", 2, false}, {"SINT8", 3, false},
+    {"SINT16", 4, false},  {"SINT32", 5, false},  {"SINT64", 6, false},  {"UINT8", 7, false},
+    {"UINT16", 8, false},  {"UINT32", 9, false},  {"UINT64", 10, false},
+};
+
 EnumValueSet const VkColorSpaceKHRSets[] = {
     {"SRGB_NONLINEAR", 0, false},
     {"DISPLAY_P3_NONLINEAR_EXT", 1000104001, false},
@@ -3258,7 +3271,7 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[337] = {
+EnumType const cEnumTypes[339] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", NULL, 0},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 1},
@@ -3538,6 +3551,8 @@ EnumType const cEnumTypes[337] = {
     {"VkDirectDriverLoadingModeLUNARG", VkDirectDriverLoadingModeLUNARGSets, 2},
     {"VkDisplacementMicromapFormatNV", VkDisplacementMicromapFormatNVSets, 3},
     {"VkShaderCodeTypeEXT", VkShaderCodeTypeEXTSets, 2},
+    {"VkScopeKHR", VkScopeKHRSets, 4},
+    {"VkComponentTypeKHR", VkComponentTypeKHRSets, 11},
     {"VkColorSpaceKHR", VkColorSpaceKHRSets, 18},
     {"VkPresentModeKHR", VkPresentModeKHRSets, 6},
     {"VkDebugReportObjectTypeEXT", VkDebugReportObjectTypeEXTSets, 46},
