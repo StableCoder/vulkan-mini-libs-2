@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "vulkan header version is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 255,
-              "vulkan header version is from after the maximum supported version of v255.");
+static_assert(VK_HEADER_VERSION <= 256,
+              "vulkan header version is from after the maximum supported version of v256.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "vulkan header version is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 255,
-               "vulkan header version is from after the maximum supported version of v255.");
+_Static_assert(VK_HEADER_VERSION <= 256,
+               "vulkan header version is from after the maximum supported version of v256.");
 #endif
 
 /// Returns a string representing the given VkResult parameter. If there is no known representation,

@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 255,
-              "VK_HEADER_VERSION is from after the maximum supported version of v255.");
+static_assert(VK_HEADER_VERSION <= 256,
+              "VK_HEADER_VERSION is from after the maximum supported version of v256.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 255,
-               "VK_HEADER_VERSION is from after the maximum supported version of v255.");
+_Static_assert(VK_HEADER_VERSION <= 256,
+               "VK_HEADER_VERSION is from after the maximum supported version of v256.");
 #endif
 
 void cleanup_vk_struct(void const *pData);

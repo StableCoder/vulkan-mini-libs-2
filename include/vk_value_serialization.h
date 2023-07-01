@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 255,
-              "VK_HEADER_VERSION is from after the maximum supported version of v255.");
+static_assert(VK_HEADER_VERSION <= 256,
+              "VK_HEADER_VERSION is from after the maximum supported version of v256.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 255,
-               "VK_HEADER_VERSION is from after the maximum supported version of v255.");
+_Static_assert(VK_HEADER_VERSION <= 256,
+               "VK_HEADER_VERSION is from after the maximum supported version of v256.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -948,7 +948,7 @@ EnumValueSet const VkPipelineStageFlags2Sets[] = {
     {"FRAGMENT_DENSITY_PROCESS_BIT_EXT", 0x00800000, false},
     {"TASK_SHADER_BIT_NV", 0x00080000, true},
     {"MESH_SHADER_BIT_NV", 0x00100000, true},
-    {"SUBPASS_SHADING_BIT_HUAWEI", 0x8000000000, false},
+    {"SUBPASS_SHADING_BIT_HUAWEI", 0x8000000000, true},
     {"INVOCATION_MASK_BIT_HUAWEI", 0x10000000000, false},
     {"ACCELERATION_STRUCTURE_COPY_BIT_KHR", 0x10000000, false},
     {"TASK_SHADER_BIT_EXT", 0x00080000, false},
@@ -956,6 +956,7 @@ EnumValueSet const VkPipelineStageFlags2Sets[] = {
     {"MICROMAP_BUILD_BIT_EXT", 0x40000000, false},
     {"OPTICAL_FLOW_BIT_NV", 0x20000000, false},
     {"CLUSTER_CULLING_SHADER_BIT_HUAWEI", 0x20000000000, false},
+    {"SUBPASS_SHADER_BIT_HUAWEI", 0x8000000000, false},
 };
 
 EnumValueSet const VkFormatFeatureFlags2Sets[] = {
@@ -3349,7 +3350,7 @@ EnumType const cEnumTypes[339] = {
     {"VkDeviceDiagnosticsConfigFlagsNV", VkDeviceDiagnosticsConfigFlagsNVSets, 4},
     {"VkRefreshObjectFlagsKHR", NULL, 0},
     {"VkAccessFlags2", VkAccessFlags2Sets, 67},
-    {"VkPipelineStageFlags2", VkPipelineStageFlags2Sets, 74},
+    {"VkPipelineStageFlags2", VkPipelineStageFlags2Sets, 75},
     {"VkAccelerationStructureMotionInfoFlagsNV", NULL, 0},
     {"VkAccelerationStructureMotionInstanceFlagsNV", NULL, 0},
     {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Sets, 69},
