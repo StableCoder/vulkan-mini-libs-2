@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 256,
-              "VK_HEADER_VERSION is from after the maximum supported version of v256.");
+static_assert(VK_HEADER_VERSION <= 257,
+              "VK_HEADER_VERSION is from after the maximum supported version of v257.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 256,
-               "VK_HEADER_VERSION is from after the maximum supported version of v256.");
+_Static_assert(VK_HEADER_VERSION <= 257,
+               "VK_HEADER_VERSION is from after the maximum supported version of v257.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -2580,19 +2580,6 @@ EnumValueSet const VkMemoryOverallocationBehaviorAMDSets[] = {
     {"DISALLOWED", 2, false},
 };
 
-EnumValueSet const VkScopeNVSets[] = {
-    {"DEVICE", 1, false},
-    {"WORKGROUP", 2, false},
-    {"SUBGROUP", 3, false},
-    {"QUEUE_FAMILY", 5, false},
-};
-
-EnumValueSet const VkComponentTypeNVSets[] = {
-    {"FLOAT16", 0, false}, {"FLOAT32", 1, false}, {"FLOAT64", 2, false}, {"SINT8", 3, false},
-    {"SINT16", 4, false},  {"SINT32", 5, false},  {"SINT64", 6, false},  {"UINT8", 7, false},
-    {"UINT16", 8, false},  {"UINT32", 9, false},  {"UINT64", 10, false},
-};
-
 EnumValueSet const VkPerformanceCounterScopeKHRSets[] = {
     {"VK_QUERY_SCOPE_COMMAND_BUFFER", 0, true},
     {"VK_QUERY_SCOPE_RENDER_PASS", 1, true},
@@ -2798,16 +2785,20 @@ EnumValueSet const VkShaderCodeTypeEXTSets[] = {
 };
 
 EnumValueSet const VkScopeKHRSets[] = {
-    {"DEVICE", 1, false},
-    {"WORKGROUP", 2, false},
-    {"SUBGROUP", 3, false},
-    {"QUEUE_FAMILY", 5, false},
+    {"DEVICE", 1, false},       {"WORKGROUP", 2, false},      {"SUBGROUP", 3, false},
+    {"QUEUE_FAMILY", 5, false}, {"DEVICE_NV", 1, true},       {"WORKGROUP_NV", 2, true},
+    {"SUBGROUP_NV", 3, true},   {"QUEUE_FAMILY_NV", 5, true},
 };
 
 EnumValueSet const VkComponentTypeKHRSets[] = {
-    {"FLOAT16", 0, false}, {"FLOAT32", 1, false}, {"FLOAT64", 2, false}, {"SINT8", 3, false},
-    {"SINT16", 4, false},  {"SINT32", 5, false},  {"SINT64", 6, false},  {"UINT8", 7, false},
-    {"UINT16", 8, false},  {"UINT32", 9, false},  {"UINT64", 10, false},
+    {"FLOAT16", 0, false},   {"FLOAT32", 1, false},   {"FLOAT64", 2, false},
+    {"SINT8", 3, false},     {"SINT16", 4, false},    {"SINT32", 5, false},
+    {"SINT64", 6, false},    {"UINT8", 7, false},     {"UINT16", 8, false},
+    {"UINT32", 9, false},    {"UINT64", 10, false},   {"FLOAT16_NV", 0, true},
+    {"FLOAT32_NV", 1, true}, {"FLOAT64_NV", 2, true}, {"SINT8_NV", 3, true},
+    {"SINT16_NV", 4, true},  {"SINT32_NV", 5, true},  {"SINT64_NV", 6, true},
+    {"UINT8_NV", 7, true},   {"UINT16_NV", 8, true},  {"UINT32_NV", 9, true},
+    {"UINT64_NV", 10, true},
 };
 
 EnumValueSet const VkColorSpaceKHRSets[] = {
@@ -3272,7 +3263,7 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[339] = {
+EnumType const cEnumTypes[337] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", NULL, 0},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 1},
@@ -3517,8 +3508,6 @@ EnumType const cEnumTypes[339] = {
     {"VkAccelerationStructureCompatibilityKHR", VkAccelerationStructureCompatibilityKHRSets, 2},
     {"VkShaderGroupShaderKHR", VkShaderGroupShaderKHRSets, 4},
     {"VkMemoryOverallocationBehaviorAMD", VkMemoryOverallocationBehaviorAMDSets, 3},
-    {"VkScopeNV", VkScopeNVSets, 4},
-    {"VkComponentTypeNV", VkComponentTypeNVSets, 11},
     {"VkPerformanceCounterScopeKHR", VkPerformanceCounterScopeKHRSets, 6},
     {"VkPerformanceCounterUnitKHR", VkPerformanceCounterUnitKHRSets, 11},
     {"VkPerformanceCounterStorageKHR", VkPerformanceCounterStorageKHRSets, 6},
@@ -3552,8 +3541,8 @@ EnumType const cEnumTypes[339] = {
     {"VkDirectDriverLoadingModeLUNARG", VkDirectDriverLoadingModeLUNARGSets, 2},
     {"VkDisplacementMicromapFormatNV", VkDisplacementMicromapFormatNVSets, 3},
     {"VkShaderCodeTypeEXT", VkShaderCodeTypeEXTSets, 2},
-    {"VkScopeKHR", VkScopeKHRSets, 4},
-    {"VkComponentTypeKHR", VkComponentTypeKHRSets, 11},
+    {"VkScopeKHR", VkScopeKHRSets, 8},
+    {"VkComponentTypeKHR", VkComponentTypeKHRSets, 22},
     {"VkColorSpaceKHR", VkColorSpaceKHRSets, 18},
     {"VkPresentModeKHR", VkPresentModeKHRSets, 6},
     {"VkDebugReportObjectTypeEXT", VkDebugReportObjectTypeEXTSets, 46},
