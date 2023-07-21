@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) >= 0,
               "openxr header version is from before the minimum supported version of v0.");
-static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 27,
-              "openxr header version is from after the maximum supported version of v27.");
+static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 28,
+              "openxr header version is from after the maximum supported version of v28.");
 #else
 _Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) >= 0,
                "openxr header version is from before the minimum supported version of v0.");
-_Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 27,
-               "openxr header version is from after the maximum supported version of v27.");
+_Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 28,
+               "openxr header version is from after the maximum supported version of v28.");
 #endif
 
 /// Returns a string representing the given VkResult parameter. If there is no known representation,
@@ -51,6 +51,18 @@ char const *XrResult_to_string(XrResult result) {
   // Check in descending order to get the 'latest' version of the error code text available.
   // Also, because codes have been re-used over time, can't use a switch and have to do this large
   // set of ifs. Luckily this *should* be a relatively rare call.
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 28 && XR_META_passthrough_color_lut
+  if (result == XR_ERROR_PASSTHROUGH_COLOR_LUT_BUFFER_SIZE_MISMATCH_META)
+    return "XR_ERROR_PASSTHROUGH_COLOR_LUT_BUFFER_SIZE_MISMATCH_META";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 28 && XR_EXT_plane_detection
+  if (result == XR_ERROR_SPACE_NOT_LOCATABLE_EXT)
+    return "XR_ERROR_SPACE_NOT_LOCATABLE_EXT";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 28 && XR_EXT_plane_detection
+  if (result == XR_ERROR_PLANE_DETECTION_PERMISSION_DENIED_EXT)
+    return "XR_ERROR_PLANE_DETECTION_PERMISSION_DENIED_EXT";
+#endif
 #if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 27 && XR_FB_spatial_entity_sharing
   if (result == XR_ERROR_SPACE_MAPPING_INSUFFICIENT_FB)
     return "XR_ERROR_SPACE_MAPPING_INSUFFICIENT_FB";
