@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 257,
-              "VK_HEADER_VERSION is from after the maximum supported version of v257.");
+static_assert(VK_HEADER_VERSION <= 258,
+              "VK_HEADER_VERSION is from after the maximum supported version of v258.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 257,
-               "VK_HEADER_VERSION is from after the maximum supported version of v257.");
+_Static_assert(VK_HEADER_VERSION <= 258,
+               "VK_HEADER_VERSION is from after the maximum supported version of v258.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -211,6 +211,11 @@ bool compare_VkPipelineShaderStageCreateInfo(VkPipelineShaderStageCreateInfo con
 
 bool compare_VkComputePipelineCreateInfo(VkComputePipelineCreateInfo const *s1,
                                          VkComputePipelineCreateInfo const *s2);
+
+#if VK_HEADER_VERSION >= 258 && (VK_NV_device_generated_commands_compute)
+bool compare_VkComputePipelineIndirectBufferInfoNV(VkComputePipelineIndirectBufferInfoNV const *s1,
+                                                   VkComputePipelineIndirectBufferInfoNV const *s2);
+#endif
 
 bool compare_VkVertexInputBindingDescription(VkVertexInputBindingDescription const *s1,
                                              VkVertexInputBindingDescription const *s2);
@@ -596,6 +601,12 @@ bool compare_VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV(
     VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 258 && (VK_NV_device_generated_commands_compute)
+bool compare_VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV(
+    VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV const *s1,
+    VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 204 && (VK_VERSION_1_3)
 bool compare_VkDevicePrivateDataCreateInfo(VkDevicePrivateDataCreateInfo const *s1,
                                            VkDevicePrivateDataCreateInfo const *s2);
@@ -694,6 +705,16 @@ bool compare_VkGeneratedCommandsInfoNV(VkGeneratedCommandsInfoNV const *s1,
 bool compare_VkGeneratedCommandsMemoryRequirementsInfoNV(
     VkGeneratedCommandsMemoryRequirementsInfoNV const *s1,
     VkGeneratedCommandsMemoryRequirementsInfoNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 258 && (VK_NV_device_generated_commands_compute)
+bool compare_VkPipelineIndirectDeviceAddressInfoNV(VkPipelineIndirectDeviceAddressInfoNV const *s1,
+                                                   VkPipelineIndirectDeviceAddressInfoNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 258 && (VK_NV_device_generated_commands_compute)
+bool compare_VkBindPipelineIndirectCommandNV(VkBindPipelineIndirectCommandNV const *s1,
+                                             VkBindPipelineIndirectCommandNV const *s2);
 #endif
 
 #if (VK_VERSION_1_1)
@@ -4278,6 +4299,59 @@ bool compare_VkPhysicalDeviceSynchronization2FeaturesKHR(
     VkPhysicalDeviceSynchronization2FeaturesKHR const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
+bool compare_VkPhysicalDeviceHostImageCopyFeaturesEXT(
+    VkPhysicalDeviceHostImageCopyFeaturesEXT const *s1,
+    VkPhysicalDeviceHostImageCopyFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
+bool compare_VkPhysicalDeviceHostImageCopyPropertiesEXT(
+    VkPhysicalDeviceHostImageCopyPropertiesEXT const *s1,
+    VkPhysicalDeviceHostImageCopyPropertiesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
+bool compare_VkMemoryToImageCopyEXT(VkMemoryToImageCopyEXT const *s1,
+                                    VkMemoryToImageCopyEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
+bool compare_VkImageToMemoryCopyEXT(VkImageToMemoryCopyEXT const *s1,
+                                    VkImageToMemoryCopyEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
+bool compare_VkCopyMemoryToImageInfoEXT(VkCopyMemoryToImageInfoEXT const *s1,
+                                        VkCopyMemoryToImageInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
+bool compare_VkCopyImageToMemoryInfoEXT(VkCopyImageToMemoryInfoEXT const *s1,
+                                        VkCopyImageToMemoryInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
+bool compare_VkCopyImageToImageInfoEXT(VkCopyImageToImageInfoEXT const *s1,
+                                       VkCopyImageToImageInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
+bool compare_VkHostImageLayoutTransitionInfoEXT(VkHostImageLayoutTransitionInfoEXT const *s1,
+                                                VkHostImageLayoutTransitionInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
+bool compare_VkSubresourceHostMemcpySizeEXT(VkSubresourceHostMemcpySizeEXT const *s1,
+                                            VkSubresourceHostMemcpySizeEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
+bool compare_VkHostImageCopyDevicePerformanceQueryEXT(
+    VkHostImageCopyDevicePerformanceQueryEXT const *s1,
+    VkHostImageCopyDevicePerformanceQueryEXT const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 241 && (VKSC_VERSION_1_0)
 bool compare_VkPhysicalDeviceVulkanSC10Properties(VkPhysicalDeviceVulkanSC10Properties const *s1,
                                                   VkPhysicalDeviceVulkanSC10Properties const *s2);
@@ -5195,12 +5269,12 @@ bool compare_VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT(
     VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 213 && (VK_EXT_image_compression_control)
+#if VK_HEADER_VERSION >= 213 && ((VK_EXT_host_image_copy) || (VK_EXT_image_compression_control))
 bool compare_VkImageSubresource2EXT(VkImageSubresource2EXT const *s1,
                                     VkImageSubresource2EXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 213 && (VK_EXT_image_compression_control)
+#if VK_HEADER_VERSION >= 213 && ((VK_EXT_host_image_copy) || (VK_EXT_image_compression_control))
 bool compare_VkSubresourceLayout2EXT(VkSubresourceLayout2EXT const *s1,
                                      VkSubresourceLayout2EXT const *s2);
 #endif
@@ -6791,6 +6865,18 @@ bool compare_VkComputePipelineCreateInfo(VkComputePipelineCreateInfo const *s1,
   return true;
 }
 
+#if VK_HEADER_VERSION >= 258 && (VK_NV_device_generated_commands_compute)
+bool compare_VkComputePipelineIndirectBufferInfoNV(
+    VkComputePipelineIndirectBufferInfoNV const *s1,
+    VkComputePipelineIndirectBufferInfoNV const *s2) {
+  if ((s1->deviceAddress != s2->deviceAddress) || (s1->size != s2->size) ||
+      (s1->pipelineDeviceAddressCaptureReplay != s2->pipelineDeviceAddressCaptureReplay) || false)
+    return false;
+
+  return true;
+}
+#endif
+
 bool compare_VkVertexInputBindingDescription(VkVertexInputBindingDescription const *s1,
                                              VkVertexInputBindingDescription const *s2) {
   if ((s1->binding != s2->binding) || (s1->stride != s2->stride) ||
@@ -7972,6 +8058,19 @@ bool compare_VkPhysicalDeviceDeviceGeneratedCommandsFeaturesNV(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 258 && (VK_NV_device_generated_commands_compute)
+bool compare_VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV(
+    VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV const *s1,
+    VkPhysicalDeviceDeviceGeneratedCommandsComputeFeaturesNV const *s2) {
+  if ((s1->deviceGeneratedCompute != s2->deviceGeneratedCompute) ||
+      (s1->deviceGeneratedComputePipelines != s2->deviceGeneratedComputePipelines) ||
+      (s1->deviceGeneratedComputeCaptureReplay != s2->deviceGeneratedComputeCaptureReplay) || false)
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 204 && (VK_VERSION_1_3)
 bool compare_VkDevicePrivateDataCreateInfo(VkDevicePrivateDataCreateInfo const *s1,
                                            VkDevicePrivateDataCreateInfo const *s2) {
@@ -8193,6 +8292,27 @@ bool compare_VkGeneratedCommandsMemoryRequirementsInfoNV(
   if ((s1->pipelineBindPoint != s2->pipelineBindPoint) || (s1->pipeline != s2->pipeline) ||
       (s1->indirectCommandsLayout != s2->indirectCommandsLayout) ||
       (s1->maxSequencesCount != s2->maxSequencesCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 258 && (VK_NV_device_generated_commands_compute)
+bool compare_VkPipelineIndirectDeviceAddressInfoNV(
+    VkPipelineIndirectDeviceAddressInfoNV const *s1,
+    VkPipelineIndirectDeviceAddressInfoNV const *s2) {
+  if ((s1->pipelineBindPoint != s2->pipelineBindPoint) || (s1->pipeline != s2->pipeline) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 258 && (VK_NV_device_generated_commands_compute)
+bool compare_VkBindPipelineIndirectCommandNV(VkBindPipelineIndirectCommandNV const *s1,
+                                             VkBindPipelineIndirectCommandNV const *s2) {
+  if ((s1->pipelineAddress != s2->pipelineAddress) || false)
     return false;
 
   return true;
@@ -16365,6 +16485,131 @@ bool compare_VkPhysicalDeviceSynchronization2FeaturesKHR(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
+bool compare_VkPhysicalDeviceHostImageCopyFeaturesEXT(
+    VkPhysicalDeviceHostImageCopyFeaturesEXT const *s1,
+    VkPhysicalDeviceHostImageCopyFeaturesEXT const *s2) {
+  if ((s1->hostImageCopy != s2->hostImageCopy) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
+bool compare_VkPhysicalDeviceHostImageCopyPropertiesEXT(
+    VkPhysicalDeviceHostImageCopyPropertiesEXT const *s1,
+    VkPhysicalDeviceHostImageCopyPropertiesEXT const *s2) {
+  if ((s1->copySrcLayoutCount != s2->copySrcLayoutCount) ||
+      (s1->copyDstLayoutCount != s2->copyDstLayoutCount) ||
+      (s1->identicalMemoryTypeRequirements != s2->identicalMemoryTypeRequirements) || false)
+    return false;
+
+  for (uint32_t i = 0; i < VK_UUID_SIZE; ++i) {
+    if (s1->optimalTilingLayoutUUID[i] != s2->optimalTilingLayoutUUID[i])
+      return false;
+  }
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
+bool compare_VkMemoryToImageCopyEXT(VkMemoryToImageCopyEXT const *s1,
+                                    VkMemoryToImageCopyEXT const *s2) {
+  if ((s1->memoryRowLength != s2->memoryRowLength) ||
+      (s1->memoryImageHeight != s2->memoryImageHeight) ||
+      !compare_VkImageSubresourceLayers(&s1->imageSubresource, &s2->imageSubresource) ||
+      !compare_VkOffset3D(&s1->imageOffset, &s2->imageOffset) ||
+      !compare_VkExtent3D(&s1->imageExtent, &s2->imageExtent) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
+bool compare_VkImageToMemoryCopyEXT(VkImageToMemoryCopyEXT const *s1,
+                                    VkImageToMemoryCopyEXT const *s2) {
+  if ((s1->memoryRowLength != s2->memoryRowLength) ||
+      (s1->memoryImageHeight != s2->memoryImageHeight) ||
+      !compare_VkImageSubresourceLayers(&s1->imageSubresource, &s2->imageSubresource) ||
+      !compare_VkOffset3D(&s1->imageOffset, &s2->imageOffset) ||
+      !compare_VkExtent3D(&s1->imageExtent, &s2->imageExtent) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
+bool compare_VkCopyMemoryToImageInfoEXT(VkCopyMemoryToImageInfoEXT const *s1,
+                                        VkCopyMemoryToImageInfoEXT const *s2) {
+  if ((s1->flags != s2->flags) || (s1->dstImage != s2->dstImage) ||
+      (s1->dstImageLayout != s2->dstImageLayout) || (s1->regionCount != s2->regionCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
+bool compare_VkCopyImageToMemoryInfoEXT(VkCopyImageToMemoryInfoEXT const *s1,
+                                        VkCopyImageToMemoryInfoEXT const *s2) {
+  if ((s1->flags != s2->flags) || (s1->srcImage != s2->srcImage) ||
+      (s1->srcImageLayout != s2->srcImageLayout) || (s1->regionCount != s2->regionCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
+bool compare_VkCopyImageToImageInfoEXT(VkCopyImageToImageInfoEXT const *s1,
+                                       VkCopyImageToImageInfoEXT const *s2) {
+  if ((s1->flags != s2->flags) || (s1->srcImage != s2->srcImage) ||
+      (s1->srcImageLayout != s2->srcImageLayout) || (s1->dstImage != s2->dstImage) ||
+      (s1->dstImageLayout != s2->dstImageLayout) || (s1->regionCount != s2->regionCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
+bool compare_VkHostImageLayoutTransitionInfoEXT(VkHostImageLayoutTransitionInfoEXT const *s1,
+                                                VkHostImageLayoutTransitionInfoEXT const *s2) {
+  if ((s1->image != s2->image) || (s1->oldLayout != s2->oldLayout) ||
+      (s1->newLayout != s2->newLayout) ||
+      !compare_VkImageSubresourceRange(&s1->subresourceRange, &s2->subresourceRange) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
+bool compare_VkSubresourceHostMemcpySizeEXT(VkSubresourceHostMemcpySizeEXT const *s1,
+                                            VkSubresourceHostMemcpySizeEXT const *s2) {
+  if ((s1->size != s2->size) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
+bool compare_VkHostImageCopyDevicePerformanceQueryEXT(
+    VkHostImageCopyDevicePerformanceQueryEXT const *s1,
+    VkHostImageCopyDevicePerformanceQueryEXT const *s2) {
+  if ((s1->optimalDeviceAccess != s2->optimalDeviceAccess) ||
+      (s1->identicalMemoryLayout != s2->identicalMemoryLayout) || false)
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 241 && (VKSC_VERSION_1_0)
 bool compare_VkPhysicalDeviceVulkanSC10Properties(VkPhysicalDeviceVulkanSC10Properties const *s1,
                                                   VkPhysicalDeviceVulkanSC10Properties const *s2) {
@@ -19042,7 +19287,7 @@ bool compare_VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 213 && (VK_EXT_image_compression_control)
+#if VK_HEADER_VERSION >= 213 && ((VK_EXT_host_image_copy) || (VK_EXT_image_compression_control))
 bool compare_VkImageSubresource2EXT(VkImageSubresource2EXT const *s1,
                                     VkImageSubresource2EXT const *s2) {
   if (!compare_VkImageSubresource(&s1->imageSubresource, &s2->imageSubresource) || false)
@@ -19052,7 +19297,7 @@ bool compare_VkImageSubresource2EXT(VkImageSubresource2EXT const *s1,
 }
 #endif
 
-#if VK_HEADER_VERSION >= 213 && (VK_EXT_image_compression_control)
+#if VK_HEADER_VERSION >= 213 && ((VK_EXT_host_image_copy) || (VK_EXT_image_compression_control))
 bool compare_VkSubresourceLayout2EXT(VkSubresourceLayout2EXT const *s1,
                                      VkSubresourceLayout2EXT const *s2) {
   if (!compare_VkSubresourceLayout(&s1->subresourceLayout, &s2->subresourceLayout) || false)

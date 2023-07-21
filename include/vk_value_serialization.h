@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 257,
-              "VK_HEADER_VERSION is from after the maximum supported version of v257.");
+static_assert(VK_HEADER_VERSION <= 258,
+              "VK_HEADER_VERSION is from after the maximum supported version of v258.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 257,
-               "VK_HEADER_VERSION is from after the maximum supported version of v257.");
+_Static_assert(VK_HEADER_VERSION <= 258,
+               "VK_HEADER_VERSION is from after the maximum supported version of v258.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -227,6 +227,7 @@ EnumValueSet const VkDescriptorSetLayoutCreateFlagsSets[] = {
     {"HOST_ONLY_POOL_BIT_EXT", 0x00000004, false},
     {"DESCRIPTOR_BUFFER_BIT_EXT", 0x00000010, false},
     {"EMBEDDED_IMMUTABLE_SAMPLERS_BIT_EXT", 0x00000020, false},
+    {"INDIRECT_BINDABLE_BIT_NV", 0x00000080, false},
 };
 
 EnumValueSet const VkInstanceCreateFlagsSets[] = {
@@ -407,6 +408,7 @@ EnumValueSet const VkImageUsageFlagsSets[] = {
     {"SAMPLE_WEIGHT_BIT_QCOM", 0x00100000, false},
     {"SAMPLE_BLOCK_MATCH_BIT_QCOM", 0x00200000, false},
     {"ATTACHMENT_FEEDBACK_LOOP_BIT_EXT", 0x00080000, false},
+    {"HOST_TRANSFER_BIT_EXT", 0x00400000, false},
 };
 
 EnumValueSet const VkImageCreateFlagsSets[] = {
@@ -1030,6 +1032,7 @@ EnumValueSet const VkFormatFeatureFlags2Sets[] = {
     {"OPTICAL_FLOW_IMAGE_BIT_NV", 0x10000000000, false},
     {"OPTICAL_FLOW_VECTOR_BIT_NV", 0x20000000000, false},
     {"OPTICAL_FLOW_COST_BIT_NV", 0x40000000000, false},
+    {"HOST_IMAGE_TRANSFER_BIT_EXT", 0x400000000000, false},
 };
 
 EnumValueSet const VkRenderingFlagsSets[] = {
@@ -1282,6 +1285,10 @@ EnumValueSet const VkToolPurposeFlagsSets[] = {
 EnumValueSet const VkSubmitFlagsSets[] = {
     {"PROTECTED", 0x00000001, false},
     {"PROTECTED_BIT_KHR", 0x00000001, true},
+};
+
+EnumValueSet const VkHostImageCopyFlagsEXTSets[] = {
+    {"MEMCPY", 0x00000001, false},
 };
 
 EnumValueSet const VkImageConstraintsInfoFlagsFUCHSIASets[] = {
@@ -2447,6 +2454,8 @@ EnumValueSet const VkIndirectCommandsTokenTypeNVSets[] = {
     {"DRAW", 6, false},
     {"DRAW_TASKS", 7, false},
     {"DRAW_MESH_TASKS", 1000328000, false},
+    {"PIPELINE", 1000428003, false},
+    {"DISPATCH", 1000428004, false},
 };
 
 EnumValueSet const VkDescriptorUpdateTemplateTypeSets[] = {
@@ -3263,7 +3272,7 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[337] = {
+EnumType const cEnumTypes[338] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", NULL, 0},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 1},
@@ -3280,7 +3289,7 @@ EnumType const cEnumTypes[337] = {
     {"VkPipelineInputAssemblyStateCreateFlags", NULL, 0},
     {"VkPipelineVertexInputStateCreateFlags", NULL, 0},
     {"VkPipelineShaderStageCreateFlags", VkPipelineShaderStageCreateFlagsSets, 4},
-    {"VkDescriptorSetLayoutCreateFlags", VkDescriptorSetLayoutCreateFlagsSets, 7},
+    {"VkDescriptorSetLayoutCreateFlags", VkDescriptorSetLayoutCreateFlagsSets, 8},
     {"VkBufferViewCreateFlags", NULL, 0},
     {"VkInstanceCreateFlags", VkInstanceCreateFlagsSets, 1},
     {"VkDeviceCreateFlags", NULL, 0},
@@ -3292,7 +3301,7 @@ EnumType const cEnumTypes[337] = {
     {"VkBufferUsageFlags", VkBufferUsageFlagsSets, 30},
     {"VkBufferCreateFlags", VkBufferCreateFlagsSets, 8},
     {"VkShaderStageFlags", VkShaderStageFlagsSets, 32},
-    {"VkImageUsageFlags", VkImageUsageFlagsSets, 21},
+    {"VkImageUsageFlags", VkImageUsageFlagsSets, 22},
     {"VkImageCreateFlags", VkImageCreateFlagsSets, 25},
     {"VkImageViewCreateFlags", VkImageViewCreateFlagsSets, 3},
     {"VkPipelineCreateFlags", VkPipelineCreateFlagsSets, 39},
@@ -3344,7 +3353,7 @@ EnumType const cEnumTypes[337] = {
     {"VkPipelineStageFlags2", VkPipelineStageFlags2Sets, 75},
     {"VkAccelerationStructureMotionInfoFlagsNV", NULL, 0},
     {"VkAccelerationStructureMotionInstanceFlagsNV", NULL, 0},
-    {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Sets, 69},
+    {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Sets, 70},
     {"VkRenderingFlags", VkRenderingFlagsSets, 7},
     {"VkMemoryDecompressionMethodFlagsNV", VkMemoryDecompressionMethodFlagsNVSets, 1},
     {"VkBuildMicromapFlagsEXT", VkBuildMicromapFlagsEXTSets, 3},
@@ -3407,6 +3416,7 @@ EnumType const cEnumTypes[337] = {
     {"VkToolPurposeFlags", VkToolPurposeFlagsSets, 12},
     {"VkSubmitFlags", VkSubmitFlagsSets, 2},
     {"VkImageFormatConstraintsFlagsFUCHSIA", NULL, 0},
+    {"VkHostImageCopyFlagsEXT", VkHostImageCopyFlagsEXTSets, 1},
     {"VkImageConstraintsInfoFlagsFUCHSIA", VkImageConstraintsInfoFlagsFUCHSIASets, 5},
     {"VkGraphicsPipelineLibraryFlagsEXT", VkGraphicsPipelineLibraryFlagsEXTSets, 4},
     {"VkImageCompressionFlagsEXT", VkImageCompressionFlagsEXTSets, 4},
@@ -3484,7 +3494,7 @@ EnumType const cEnumTypes[337] = {
     {"VkVertexInputRate", VkVertexInputRateSets, 2},
     {"VkObjectType", VkObjectTypeSets, 55},
     {"VkRayTracingInvocationReorderModeNV", VkRayTracingInvocationReorderModeNVSets, 2},
-    {"VkIndirectCommandsTokenTypeNV", VkIndirectCommandsTokenTypeNVSets, 9},
+    {"VkIndirectCommandsTokenTypeNV", VkIndirectCommandsTokenTypeNVSets, 11},
     {"VkDescriptorUpdateTemplateType", VkDescriptorUpdateTemplateTypeSets, 3},
     {"VkViewportCoordinateSwizzleNV", VkViewportCoordinateSwizzleNVSets, 8},
     {"VkDiscardRectangleModeEXT", VkDiscardRectangleModeEXTSets, 2},
