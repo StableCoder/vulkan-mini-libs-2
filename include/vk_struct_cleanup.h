@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 259,
-              "VK_HEADER_VERSION is from after the maximum supported version of v259.");
+static_assert(VK_HEADER_VERSION <= 260,
+              "VK_HEADER_VERSION is from after the maximum supported version of v260.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 259,
-               "VK_HEADER_VERSION is from after the maximum supported version of v259.");
+_Static_assert(VK_HEADER_VERSION <= 260,
+               "VK_HEADER_VERSION is from after the maximum supported version of v260.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -1045,7 +1045,8 @@ inline void cleanup_VkImageSparseMemoryRequirementsInfo2KHR(
 void cleanup_VkMemoryRequirements2(VkMemoryRequirements2 const *pData);
 #endif
 
-#if ((VK_KHR_get_memory_requirements2) || (VK_NV_ray_tracing) || (VK_VERSION_1_1) ||               \
+#if ((VK_KHR_get_memory_requirements2) ||                                                          \
+     (VK_NV_ray_tracing && VK_KHR_get_memory_requirements2) || (VK_VERSION_1_1) ||                 \
      (VK_NVX_raytracing))
 inline void cleanup_VkMemoryRequirements2KHR(VkMemoryRequirements2KHR const *pData) {}
 #endif
@@ -3712,7 +3713,8 @@ void cleanup_VkVideoEncodeH265NaluSliceEXT(VkVideoEncodeH265NaluSliceEXT const *
 void cleanup_VkPipelineRenderingCreateInfoKHR(VkPipelineRenderingCreateInfoKHR const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 197 && ((VK_KHR_dynamic_rendering) || (VK_QCOM_tile_properties))
+#if VK_HEADER_VERSION >= 197 &&                                                                    \
+    ((VK_KHR_dynamic_rendering) || (VK_QCOM_tile_properties && VK_KHR_dynamic_rendering))
 void cleanup_VkRenderingInfoKHR(VkRenderingInfoKHR const *pData);
 #endif
 
@@ -5329,6 +5331,73 @@ void cleanup_VkSubresourceHostMemcpySizeEXT(VkSubresourceHostMemcpySizeEXT const
 #if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
 void cleanup_VkHostImageCopyDevicePerformanceQueryEXT(
     VkHostImageCopyDevicePerformanceQueryEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
+void cleanup_VkBufferUsageFlags2CreateInfoKHR(VkBufferUsageFlags2CreateInfoKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
+void cleanup_VkPipelineCreateFlags2CreateInfoKHR(VkPipelineCreateFlags2CreateInfoKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
+void cleanup_VkPhysicalDeviceMaintenance5FeaturesKHR(
+    VkPhysicalDeviceMaintenance5FeaturesKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
+void cleanup_VkPhysicalDeviceMaintenance5PropertiesKHR(
+    VkPhysicalDeviceMaintenance5PropertiesKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
+void cleanup_VkRenderingAreaInfoKHR(VkRenderingAreaInfoKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
+void cleanup_VkImageSubresource2KHR(VkImageSubresource2KHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
+void cleanup_VkSubresourceLayout2KHR(VkSubresourceLayout2KHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
+void cleanup_VkDeviceImageSubresourceInfoKHR(VkDeviceImageSubresourceInfoKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_AMDX_shader_enqueue)
+void cleanup_VkPhysicalDeviceShaderEnqueuePropertiesAMDX(
+    VkPhysicalDeviceShaderEnqueuePropertiesAMDX const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_AMDX_shader_enqueue)
+void cleanup_VkPhysicalDeviceShaderEnqueueFeaturesAMDX(
+    VkPhysicalDeviceShaderEnqueueFeaturesAMDX const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_AMDX_shader_enqueue)
+void cleanup_VkExecutionGraphPipelineCreateInfoAMDX(
+    VkExecutionGraphPipelineCreateInfoAMDX const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_AMDX_shader_enqueue)
+void cleanup_VkPipelineShaderStageNodeCreateInfoAMDX(
+    VkPipelineShaderStageNodeCreateInfoAMDX const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_AMDX_shader_enqueue)
+void cleanup_VkExecutionGraphPipelineScratchSizeAMDX(
+    VkExecutionGraphPipelineScratchSizeAMDX const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_AMDX_shader_enqueue)
+inline void cleanup_VkDispatchGraphInfoAMDX(VkDispatchGraphInfoAMDX const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_AMDX_shader_enqueue)
+inline void cleanup_VkDispatchGraphCountInfoAMDX(VkDispatchGraphCountInfoAMDX const *pData) {}
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -10303,7 +10372,7 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 197 && VK_HEADER_VERSION <= 203 &&                                        \
-    ((VK_KHR_dynamic_rendering) || (VK_QCOM_tile_properties))
+    ((VK_KHR_dynamic_rendering) || (VK_QCOM_tile_properties && VK_KHR_dynamic_rendering))
   if (pTemp->sType == VK_STRUCTURE_TYPE_RENDERING_INFO_KHR) {
     cleanup_VkRenderingInfoKHR((VkRenderingInfoKHR const *)pData);
     return;
@@ -11027,14 +11096,16 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
-#if VK_HEADER_VERSION >= 213 && ((VK_EXT_host_image_copy) || (VK_EXT_image_compression_control))
+#if VK_HEADER_VERSION >= 213 && VK_HEADER_VERSION <= 259 &&                                        \
+    ((VK_EXT_host_image_copy) || (VK_EXT_image_compression_control))
   if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_SUBRESOURCE_2_EXT) {
     cleanup_VkImageSubresource2EXT((VkImageSubresource2EXT const *)pData);
     return;
   }
 #endif
 
-#if VK_HEADER_VERSION >= 213 && ((VK_EXT_host_image_copy) || (VK_EXT_image_compression_control))
+#if VK_HEADER_VERSION >= 213 && VK_HEADER_VERSION <= 259 &&                                        \
+    ((VK_EXT_host_image_copy) || (VK_EXT_image_compression_control))
   if (pTemp->sType == VK_STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2_EXT) {
     cleanup_VkSubresourceLayout2EXT((VkSubresourceLayout2EXT const *)pData);
     return;
@@ -12819,6 +12890,104 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_HOST_IMAGE_COPY_DEVICE_PERFORMANCE_QUERY_EXT) {
     cleanup_VkHostImageCopyDevicePerformanceQueryEXT(
         (VkHostImageCopyDevicePerformanceQueryEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BUFFER_USAGE_FLAGS_2_CREATE_INFO_KHR) {
+    cleanup_VkBufferUsageFlags2CreateInfoKHR((VkBufferUsageFlags2CreateInfoKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_CREATE_FLAGS_2_CREATE_INFO_KHR) {
+    cleanup_VkPipelineCreateFlags2CreateInfoKHR((VkPipelineCreateFlags2CreateInfoKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_5_FEATURES_KHR) {
+    cleanup_VkPhysicalDeviceMaintenance5FeaturesKHR(
+        (VkPhysicalDeviceMaintenance5FeaturesKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_5_PROPERTIES_KHR) {
+    cleanup_VkPhysicalDeviceMaintenance5PropertiesKHR(
+        (VkPhysicalDeviceMaintenance5PropertiesKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RENDERING_AREA_INFO_KHR) {
+    cleanup_VkRenderingAreaInfoKHR((VkRenderingAreaInfoKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_SUBRESOURCE_2_KHR) {
+    cleanup_VkImageSubresource2KHR((VkImageSubresource2KHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SUBRESOURCE_LAYOUT_2_KHR) {
+    cleanup_VkSubresourceLayout2KHR((VkSubresourceLayout2KHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_IMAGE_SUBRESOURCE_INFO_KHR) {
+    cleanup_VkDeviceImageSubresourceInfoKHR((VkDeviceImageSubresourceInfoKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_AMDX_shader_enqueue)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ENQUEUE_PROPERTIES_AMDX) {
+    cleanup_VkPhysicalDeviceShaderEnqueuePropertiesAMDX(
+        (VkPhysicalDeviceShaderEnqueuePropertiesAMDX const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_AMDX_shader_enqueue)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ENQUEUE_FEATURES_AMDX) {
+    cleanup_VkPhysicalDeviceShaderEnqueueFeaturesAMDX(
+        (VkPhysicalDeviceShaderEnqueueFeaturesAMDX const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_AMDX_shader_enqueue)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_EXECUTION_GRAPH_PIPELINE_CREATE_INFO_AMDX) {
+    cleanup_VkExecutionGraphPipelineCreateInfoAMDX(
+        (VkExecutionGraphPipelineCreateInfoAMDX const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_AMDX_shader_enqueue)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_NODE_CREATE_INFO_AMDX) {
+    cleanup_VkPipelineShaderStageNodeCreateInfoAMDX(
+        (VkPipelineShaderStageNodeCreateInfoAMDX const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_AMDX_shader_enqueue)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_EXECUTION_GRAPH_PIPELINE_SCRATCH_SIZE_AMDX) {
+    cleanup_VkExecutionGraphPipelineScratchSizeAMDX(
+        (VkExecutionGraphPipelineScratchSizeAMDX const *)pData);
     return;
   }
 #endif
@@ -15203,7 +15372,8 @@ void cleanup_VkMemoryRequirements2(VkMemoryRequirements2 const *pData) {
 }
 #endif
 
-#if ((VK_KHR_get_memory_requirements2) || (VK_NV_ray_tracing) || (VK_VERSION_1_1) ||               \
+#if ((VK_KHR_get_memory_requirements2) ||                                                          \
+     (VK_NV_ray_tracing && VK_KHR_get_memory_requirements2) || (VK_VERSION_1_1) ||                 \
      (VK_NVX_raytracing))
 extern inline void cleanup_VkMemoryRequirements2KHR(VkMemoryRequirements2KHR const *pData);
 #endif
@@ -21606,7 +21776,8 @@ void cleanup_VkPipelineRenderingCreateInfoKHR(VkPipelineRenderingCreateInfoKHR c
 }
 #endif
 
-#if VK_HEADER_VERSION >= 197 && ((VK_KHR_dynamic_rendering) || (VK_QCOM_tile_properties))
+#if VK_HEADER_VERSION >= 197 &&                                                                    \
+    ((VK_KHR_dynamic_rendering) || (VK_QCOM_tile_properties && VK_KHR_dynamic_rendering))
 void cleanup_VkRenderingInfoKHR(VkRenderingInfoKHR const *pData) {
   // pNext
   if (pData->pNext != NULL)
@@ -25440,6 +25611,166 @@ void cleanup_VkHostImageCopyDevicePerformanceQueryEXT(
     cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
+void cleanup_VkBufferUsageFlags2CreateInfoKHR(VkBufferUsageFlags2CreateInfoKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
+void cleanup_VkPipelineCreateFlags2CreateInfoKHR(VkPipelineCreateFlags2CreateInfoKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
+void cleanup_VkPhysicalDeviceMaintenance5FeaturesKHR(
+    VkPhysicalDeviceMaintenance5FeaturesKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
+void cleanup_VkPhysicalDeviceMaintenance5PropertiesKHR(
+    VkPhysicalDeviceMaintenance5PropertiesKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
+void cleanup_VkRenderingAreaInfoKHR(VkRenderingAreaInfoKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pColorAttachmentFormats - colorAttachmentCount
+  free((void *)pData->pColorAttachmentFormats);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
+void cleanup_VkImageSubresource2KHR(VkImageSubresource2KHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
+void cleanup_VkSubresourceLayout2KHR(VkSubresourceLayout2KHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
+void cleanup_VkDeviceImageSubresourceInfoKHR(VkDeviceImageSubresourceInfoKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pCreateInfo
+  if (pData->pCreateInfo != NULL)
+    cleanup_VkImageCreateInfo(pData->pCreateInfo);
+  free((void *)pData->pCreateInfo);
+
+  // pSubresource
+  if (pData->pSubresource != NULL)
+    cleanup_VkImageSubresource2KHR(pData->pSubresource);
+  free((void *)pData->pSubresource);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_AMDX_shader_enqueue)
+void cleanup_VkPhysicalDeviceShaderEnqueuePropertiesAMDX(
+    VkPhysicalDeviceShaderEnqueuePropertiesAMDX const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_AMDX_shader_enqueue)
+void cleanup_VkPhysicalDeviceShaderEnqueueFeaturesAMDX(
+    VkPhysicalDeviceShaderEnqueueFeaturesAMDX const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_AMDX_shader_enqueue)
+void cleanup_VkExecutionGraphPipelineCreateInfoAMDX(
+    VkExecutionGraphPipelineCreateInfoAMDX const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pStages - stageCount
+  if (pData->pStages != NULL) {
+    for (uint32_t i = 0; i < pData->stageCount; ++i)
+      cleanup_VkPipelineShaderStageCreateInfo(&pData->pStages[i]);
+  }
+  free((void *)pData->pStages);
+
+  // pLibraryInfo
+  if (pData->pLibraryInfo != NULL)
+    cleanup_VkPipelineLibraryCreateInfoKHR(pData->pLibraryInfo);
+  free((void *)pData->pLibraryInfo);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_AMDX_shader_enqueue)
+void cleanup_VkPipelineShaderStageNodeCreateInfoAMDX(
+    VkPipelineShaderStageNodeCreateInfoAMDX const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pName - null-terminated
+  free((void *)pData->pName);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_AMDX_shader_enqueue)
+void cleanup_VkExecutionGraphPipelineScratchSizeAMDX(
+    VkExecutionGraphPipelineScratchSizeAMDX const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_AMDX_shader_enqueue)
+extern inline void cleanup_VkDispatchGraphInfoAMDX(VkDispatchGraphInfoAMDX const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 260 && (VK_AMDX_shader_enqueue)
+extern inline void cleanup_VkDispatchGraphCountInfoAMDX(VkDispatchGraphCountInfoAMDX const *pData);
 #endif
 
 #endif // VK_STRUCT_CLEANUP_CONFIG_MAIN
