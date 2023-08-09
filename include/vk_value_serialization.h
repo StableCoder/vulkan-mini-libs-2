@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 260,
-              "VK_HEADER_VERSION is from after the maximum supported version of v260.");
+static_assert(VK_HEADER_VERSION <= 261,
+              "VK_HEADER_VERSION is from after the maximum supported version of v261.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 260,
-               "VK_HEADER_VERSION is from after the maximum supported version of v260.");
+_Static_assert(VK_HEADER_VERSION <= 261,
+               "VK_HEADER_VERSION is from after the maximum supported version of v261.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -1064,16 +1064,12 @@ EnumValueSet const VkPipelineCreateFlags2KHRSets[] = {
     {"DISABLE_OPTIMIZATION", 0x00000001, false},
     {"ALLOW_DERIVATIVES", 0x00000002, false},
     {"DERIVATIVE", 0x00000004, false},
-    {"RESERVED_BIT_28_NV", 0x10000000, false},
     {"VIEW_INDEX_FROM_DEVICE_INDEX", 0x00000008, false},
     {"DISPATCH_BASE", 0x00000010, false},
-    {"DEFER_COMPILE", 0x00000020, false},
     {"CAPTURE_STATISTICS", 0x00000040, false},
     {"CAPTURE_INTERNAL_REPRESENTATIONS", 0x00000080, false},
     {"FAIL_ON_PIPELINE_COMPILE_REQUIRED", 0x00000100, false},
     {"EARLY_RETURN_ON_FAILURE", 0x00000200, false},
-    {"LINK_TIME_OPTIMIZATION", 0x00000400, false},
-    {"RETAIN_LINK_TIME_OPTIMIZATION_INFO", 0x00800000, false},
     {"LIBRARY", 0x00000800, false},
     {"RAY_TRACING_SKIP_TRIANGLES", 0x00001000, false},
     {"RAY_TRACING_SKIP_AABBS", 0x00002000, false},
@@ -1082,9 +1078,13 @@ EnumValueSet const VkPipelineCreateFlags2KHRSets[] = {
     {"RAY_TRACING_NO_NULL_MISS_SHADERS", 0x00010000, false},
     {"RAY_TRACING_NO_NULL_INTERSECTION_SHADERS", 0x00020000, false},
     {"RAY_TRACING_SHADER_GROUP_HANDLE_CAPTURE_REPLAY", 0x00080000, false},
+    {"RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT", 0x00200000, false},
+    {"RESERVED_BIT_28_NV", 0x10000000, false},
+    {"DEFER_COMPILE", 0x00000020, false},
+    {"LINK_TIME_OPTIMIZATION", 0x00000400, false},
+    {"RETAIN_LINK_TIME_OPTIMIZATION_INFO", 0x00800000, false},
     {"INDIRECT_BINDABLE", 0x00040000, false},
     {"RAY_TRACING_ALLOW_MOTION", 0x00100000, false},
-    {"RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT", 0x00200000, false},
     {"RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT", 0x00400000, false},
     {"RAY_TRACING_OPACITY_MICROMAP", 0x01000000, false},
     {"COLOR_ATTACHMENT_FEEDBACK_LOOP", 0x02000000, false},
@@ -1092,6 +1092,19 @@ EnumValueSet const VkPipelineCreateFlags2KHRSets[] = {
     {"NO_PROTECTED_ACCESS", 0x08000000, false},
     {"PROTECTED_ACCESS_ONLY", 0x40000000, false},
     {"DESCRIPTOR_BUFFER", 0x20000000, false},
+    {"DEFER_COMPILE_BIT_NV", 0x00000020, false},
+    {"LINK_TIME_OPTIMIZATION_BIT_EXT", 0x00000400, false},
+    {"RETAIN_LINK_TIME_OPTIMIZATION_INFO_BIT_EXT", 0x00800000, false},
+    {"INDIRECT_BINDABLE_BIT_NV", 0x00040000, false},
+    {"RAY_TRACING_ALLOW_MOTION_BIT_NV", 0x00100000, false},
+    {"RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT", 0x00400000, false},
+    {"RAY_TRACING_OPACITY_MICROMAP_BIT_EXT", 0x01000000, false},
+    {"COLOR_ATTACHMENT_FEEDBACK_LOOP_BIT_EXT", 0x02000000, false},
+    {"DEPTH_STENCIL_ATTACHMENT_FEEDBACK_LOOP_BIT_EXT", 0x04000000, false},
+    {"NO_PROTECTED_ACCESS_BIT_EXT", 0x08000000, false},
+    {"PROTECTED_ACCESS_ONLY_BIT_EXT", 0x40000000, false},
+    {"RAY_TRACING_DISPLACEMENT_MICROMAP_BIT_NV", 0x10000000, false},
+    {"DESCRIPTOR_BUFFER_BIT_EXT", 0x20000000, false},
 };
 
 EnumValueSet const VkBufferUsageFlags2KHRSets[] = {
@@ -1105,11 +1118,7 @@ EnumValueSet const VkBufferUsageFlags2KHRSets[] = {
     {"VERTEX_BUFFER", 0x00000080, false},
     {"INDIRECT_BUFFER", 0x00000100, false},
     {"EXECUTION_GRAPH_SCRATCH_BIT_AMDX", 0x02000000, false},
-    {"CONDITIONAL_RENDERING", 0x00000200, false},
     {"SHADER_BINDING_TABLE", 0x00000400, false},
-    {"RAY_TRACING", 0x00000400, true},
-    {"TRANSFORM_FEEDBACK_BUFFER", 0x00000800, false},
-    {"TRANSFORM_FEEDBACK_COUNTER_BUFFER", 0x00001000, false},
     {"VIDEO_DECODE_SRC", 0x00002000, false},
     {"VIDEO_DECODE_DST", 0x00004000, false},
     {"VIDEO_ENCODE_DST", 0x00008000, false},
@@ -1117,11 +1126,24 @@ EnumValueSet const VkBufferUsageFlags2KHRSets[] = {
     {"SHADER_DEVICE_ADDRESS", 0x00020000, false},
     {"ACCELERATION_STRUCTURE_BUILD_INPUT_READ_ONLY", 0x00080000, false},
     {"ACCELERATION_STRUCTURE_STORAGE", 0x00100000, false},
+    {"CONDITIONAL_RENDERING", 0x00000200, false},
+    {"RAY_TRACING", 0x00000400, true},
+    {"TRANSFORM_FEEDBACK_BUFFER", 0x00000800, false},
+    {"TRANSFORM_FEEDBACK_COUNTER_BUFFER", 0x00001000, false},
     {"SAMPLER_DESCRIPTOR_BUFFER", 0x00200000, false},
     {"RESOURCE_DESCRIPTOR_BUFFER", 0x00400000, false},
     {"PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER", 0x04000000, false},
     {"MICROMAP_BUILD_INPUT_READ_ONLY", 0x00800000, false},
     {"MICROMAP_STORAGE", 0x01000000, false},
+    {"CONDITIONAL_RENDERING_BIT_EXT", 0x00000200, false},
+    {"RAY_TRACING_BIT_NV", 0x00000400, true},
+    {"TRANSFORM_FEEDBACK_BUFFER_BIT_EXT", 0x00000800, false},
+    {"TRANSFORM_FEEDBACK_COUNTER_BUFFER_BIT_EXT", 0x00001000, false},
+    {"SAMPLER_DESCRIPTOR_BUFFER_BIT_EXT", 0x00200000, false},
+    {"RESOURCE_DESCRIPTOR_BUFFER_BIT_EXT", 0x00400000, false},
+    {"PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_BIT_EXT", 0x04000000, false},
+    {"MICROMAP_BUILD_INPUT_READ_ONLY_BIT_EXT", 0x00800000, false},
+    {"MICROMAP_STORAGE_BIT_EXT", 0x01000000, false},
 };
 
 EnumValueSet const VkCompositeAlphaFlagsKHRSets[] = {
@@ -3427,8 +3449,8 @@ EnumType const cEnumTypes[340] = {
     {"VkBuildMicromapFlagsEXT", VkBuildMicromapFlagsEXTSets, 3},
     {"VkMicromapCreateFlagsEXT", VkMicromapCreateFlagsEXTSets, 1},
     {"VkDirectDriverLoadingFlagsLUNARG", NULL, 0},
-    {"VkPipelineCreateFlags2KHR", VkPipelineCreateFlags2KHRSets, 31},
-    {"VkBufferUsageFlags2KHR", VkBufferUsageFlags2KHRSets, 27},
+    {"VkPipelineCreateFlags2KHR", VkPipelineCreateFlags2KHRSets, 44},
+    {"VkBufferUsageFlags2KHR", VkBufferUsageFlags2KHRSets, 36},
     {"VkCompositeAlphaFlagsKHR", VkCompositeAlphaFlagsKHRSets, 4},
     {"VkDisplayPlaneAlphaFlagsKHR", VkDisplayPlaneAlphaFlagsKHRSets, 4},
     {"VkSurfaceTransformFlagsKHR", VkSurfaceTransformFlagsKHRSets, 9},
