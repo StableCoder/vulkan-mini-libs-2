@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 261,
-              "VK_HEADER_VERSION is from after the maximum supported version of v261.");
+static_assert(VK_HEADER_VERSION <= 262,
+              "VK_HEADER_VERSION is from after the maximum supported version of v262.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 261,
-               "VK_HEADER_VERSION is from after the maximum supported version of v261.");
+_Static_assert(VK_HEADER_VERSION <= 262,
+               "VK_HEADER_VERSION is from after the maximum supported version of v262.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -2900,6 +2900,18 @@ EnumValueSet const VkComponentTypeKHRSets[] = {
     {"UINT64_NV", 10, true},
 };
 
+EnumValueSet const VkCubicFilterWeightsQCOMSets[] = {
+    {"CATMULL_ROM", 0, false},
+    {"ZERO_TANGENT_CARDINAL", 1, false},
+    {"B_SPLINE", 2, false},
+    {"MITCHELL_NETRAVALI", 3, false},
+};
+
+EnumValueSet const VkBlockMatchWindowCompareModeQCOMSets[] = {
+    {"MIN", 0, false},
+    {"MAX", 1, false},
+};
+
 EnumValueSet const VkColorSpaceKHRSets[] = {
     {"SRGB_NONLINEAR", 0, false},
     {"DISPLAY_P3_NONLINEAR_EXT", 1000104001, false},
@@ -3059,8 +3071,13 @@ EnumValueSet const VkChromaLocationSets[] = {
 };
 
 EnumValueSet const VkSamplerReductionModeSets[] = {
-    {"WEIGHTED_AVERAGE", 0, false},    {"MIN", 1, false},    {"MAX", 2, false},
-    {"WEIGHTED_AVERAGE_EXT", 0, true}, {"MIN_EXT", 1, true}, {"MAX_EXT", 2, true},
+    {"WEIGHTED_AVERAGE", 0, false},
+    {"MIN", 1, false},
+    {"MAX", 2, false},
+    {"WEIGHTED_AVERAGE_EXT", 0, true},
+    {"MIN_EXT", 1, true},
+    {"MAX_EXT", 2, true},
+    {"WEIGHTED_AVERAGE_RANGECLAMP_QCOM", 1000521000, false},
 };
 
 EnumValueSet const VkBlendOverlapEXTSets[] = {
@@ -3362,7 +3379,7 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[340] = {
+EnumType const cEnumTypes[342] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", NULL, 0},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 1},
@@ -3645,6 +3662,8 @@ EnumType const cEnumTypes[340] = {
     {"VkShaderCodeTypeEXT", VkShaderCodeTypeEXTSets, 2},
     {"VkScopeKHR", VkScopeKHRSets, 8},
     {"VkComponentTypeKHR", VkComponentTypeKHRSets, 22},
+    {"VkCubicFilterWeightsQCOM", VkCubicFilterWeightsQCOMSets, 4},
+    {"VkBlockMatchWindowCompareModeQCOM", VkBlockMatchWindowCompareModeQCOMSets, 2},
     {"VkColorSpaceKHR", VkColorSpaceKHRSets, 18},
     {"VkPresentModeKHR", VkPresentModeKHRSets, 6},
     {"VkDebugReportObjectTypeEXT", VkDebugReportObjectTypeEXTSets, 46},
@@ -3660,7 +3679,7 @@ EnumType const cEnumTypes[340] = {
     {"VkSamplerYcbcrModelConversion", VkSamplerYcbcrModelConversionSets, 10},
     {"VkSamplerYcbcrRange", VkSamplerYcbcrRangeSets, 4},
     {"VkChromaLocation", VkChromaLocationSets, 4},
-    {"VkSamplerReductionMode", VkSamplerReductionModeSets, 6},
+    {"VkSamplerReductionMode", VkSamplerReductionModeSets, 7},
     {"VkBlendOverlapEXT", VkBlendOverlapEXTSets, 3},
     {"VkFullScreenExclusiveEXT", VkFullScreenExclusiveEXTSets, 4},
     {"VkShaderFloatControlsIndependence", VkShaderFloatControlsIndependenceSets, 6},

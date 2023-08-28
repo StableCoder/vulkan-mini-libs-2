@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 261,
-              "VK_HEADER_VERSION is from after the maximum supported version of v261.");
+static_assert(VK_HEADER_VERSION <= 262,
+              "VK_HEADER_VERSION is from after the maximum supported version of v262.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 261,
-               "VK_HEADER_VERSION is from after the maximum supported version of v261.");
+_Static_assert(VK_HEADER_VERSION <= 262,
+               "VK_HEADER_VERSION is from after the maximum supported version of v262.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -5398,6 +5398,49 @@ inline void cleanup_VkDispatchGraphInfoAMDX(VkDispatchGraphInfoAMDX const *pData
 
 #if VK_HEADER_VERSION >= 260 && (VK_AMDX_shader_enqueue)
 inline void cleanup_VkDispatchGraphCountInfoAMDX(VkDispatchGraphCountInfoAMDX const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 262 && (VK_QCOM_filter_cubic_clamp)
+void cleanup_VkPhysicalDeviceCubicClampFeaturesQCOM(
+    VkPhysicalDeviceCubicClampFeaturesQCOM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 262 && (VK_QCOM_ycbcr_degamma)
+void cleanup_VkPhysicalDeviceYcbcrDegammaFeaturesQCOM(
+    VkPhysicalDeviceYcbcrDegammaFeaturesQCOM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 262 && (VK_QCOM_ycbcr_degamma)
+void cleanup_VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM(
+    VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 262 && (VK_QCOM_filter_cubic_weights)
+void cleanup_VkPhysicalDeviceCubicWeightsFeaturesQCOM(
+    VkPhysicalDeviceCubicWeightsFeaturesQCOM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 262 && (VK_QCOM_filter_cubic_weights)
+void cleanup_VkSamplerCubicWeightsCreateInfoQCOM(VkSamplerCubicWeightsCreateInfoQCOM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 262 && (VK_QCOM_filter_cubic_weights)
+void cleanup_VkBlitImageCubicWeightsInfoQCOM(VkBlitImageCubicWeightsInfoQCOM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 262 && (VK_QCOM_image_processing2)
+void cleanup_VkPhysicalDeviceImageProcessing2FeaturesQCOM(
+    VkPhysicalDeviceImageProcessing2FeaturesQCOM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 262 && (VK_QCOM_image_processing2)
+void cleanup_VkPhysicalDeviceImageProcessing2PropertiesQCOM(
+    VkPhysicalDeviceImageProcessing2PropertiesQCOM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 262 && (VK_QCOM_image_processing2)
+void cleanup_VkSamplerBlockMatchWindowCreateInfoQCOM(
+    VkSamplerBlockMatchWindowCreateInfoQCOM const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -12988,6 +13031,76 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_EXECUTION_GRAPH_PIPELINE_SCRATCH_SIZE_AMDX) {
     cleanup_VkExecutionGraphPipelineScratchSizeAMDX(
         (VkExecutionGraphPipelineScratchSizeAMDX const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 262 && (VK_QCOM_filter_cubic_clamp)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUBIC_CLAMP_FEATURES_QCOM) {
+    cleanup_VkPhysicalDeviceCubicClampFeaturesQCOM(
+        (VkPhysicalDeviceCubicClampFeaturesQCOM const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 262 && (VK_QCOM_ycbcr_degamma)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_YCBCR_DEGAMMA_FEATURES_QCOM) {
+    cleanup_VkPhysicalDeviceYcbcrDegammaFeaturesQCOM(
+        (VkPhysicalDeviceYcbcrDegammaFeaturesQCOM const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 262 && (VK_QCOM_ycbcr_degamma)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SAMPLER_YCBCR_CONVERSION_YCBCR_DEGAMMA_CREATE_INFO_QCOM) {
+    cleanup_VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM(
+        (VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 262 && (VK_QCOM_filter_cubic_weights)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUBIC_WEIGHTS_FEATURES_QCOM) {
+    cleanup_VkPhysicalDeviceCubicWeightsFeaturesQCOM(
+        (VkPhysicalDeviceCubicWeightsFeaturesQCOM const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 262 && (VK_QCOM_filter_cubic_weights)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SAMPLER_CUBIC_WEIGHTS_CREATE_INFO_QCOM) {
+    cleanup_VkSamplerCubicWeightsCreateInfoQCOM((VkSamplerCubicWeightsCreateInfoQCOM const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 262 && (VK_QCOM_filter_cubic_weights)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BLIT_IMAGE_CUBIC_WEIGHTS_INFO_QCOM) {
+    cleanup_VkBlitImageCubicWeightsInfoQCOM((VkBlitImageCubicWeightsInfoQCOM const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 262 && (VK_QCOM_image_processing2)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_PROCESSING_2_FEATURES_QCOM) {
+    cleanup_VkPhysicalDeviceImageProcessing2FeaturesQCOM(
+        (VkPhysicalDeviceImageProcessing2FeaturesQCOM const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 262 && (VK_QCOM_image_processing2)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_PROCESSING_2_PROPERTIES_QCOM) {
+    cleanup_VkPhysicalDeviceImageProcessing2PropertiesQCOM(
+        (VkPhysicalDeviceImageProcessing2PropertiesQCOM const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 262 && (VK_QCOM_image_processing2)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SAMPLER_BLOCK_MATCH_WINDOW_CREATE_INFO_QCOM) {
+    cleanup_VkSamplerBlockMatchWindowCreateInfoQCOM(
+        (VkSamplerBlockMatchWindowCreateInfoQCOM const *)pData);
     return;
   }
 #endif
@@ -25771,6 +25884,94 @@ extern inline void cleanup_VkDispatchGraphInfoAMDX(VkDispatchGraphInfoAMDX const
 
 #if VK_HEADER_VERSION >= 260 && (VK_AMDX_shader_enqueue)
 extern inline void cleanup_VkDispatchGraphCountInfoAMDX(VkDispatchGraphCountInfoAMDX const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 262 && (VK_QCOM_filter_cubic_clamp)
+void cleanup_VkPhysicalDeviceCubicClampFeaturesQCOM(
+    VkPhysicalDeviceCubicClampFeaturesQCOM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 262 && (VK_QCOM_ycbcr_degamma)
+void cleanup_VkPhysicalDeviceYcbcrDegammaFeaturesQCOM(
+    VkPhysicalDeviceYcbcrDegammaFeaturesQCOM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 262 && (VK_QCOM_ycbcr_degamma)
+void cleanup_VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM(
+    VkSamplerYcbcrConversionYcbcrDegammaCreateInfoQCOM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 262 && (VK_QCOM_filter_cubic_weights)
+void cleanup_VkPhysicalDeviceCubicWeightsFeaturesQCOM(
+    VkPhysicalDeviceCubicWeightsFeaturesQCOM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 262 && (VK_QCOM_filter_cubic_weights)
+void cleanup_VkSamplerCubicWeightsCreateInfoQCOM(VkSamplerCubicWeightsCreateInfoQCOM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 262 && (VK_QCOM_filter_cubic_weights)
+void cleanup_VkBlitImageCubicWeightsInfoQCOM(VkBlitImageCubicWeightsInfoQCOM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 262 && (VK_QCOM_image_processing2)
+void cleanup_VkPhysicalDeviceImageProcessing2FeaturesQCOM(
+    VkPhysicalDeviceImageProcessing2FeaturesQCOM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 262 && (VK_QCOM_image_processing2)
+void cleanup_VkPhysicalDeviceImageProcessing2PropertiesQCOM(
+    VkPhysicalDeviceImageProcessing2PropertiesQCOM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 262 && (VK_QCOM_image_processing2)
+void cleanup_VkSamplerBlockMatchWindowCreateInfoQCOM(
+    VkSamplerBlockMatchWindowCreateInfoQCOM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
 #endif
 
 #endif // VK_STRUCT_CLEANUP_CONFIG_MAIN
