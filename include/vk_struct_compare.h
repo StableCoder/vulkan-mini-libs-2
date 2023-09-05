@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 262,
-              "VK_HEADER_VERSION is from after the maximum supported version of v262.");
+static_assert(VK_HEADER_VERSION <= 263,
+              "VK_HEADER_VERSION is from after the maximum supported version of v263.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 262,
-               "VK_HEADER_VERSION is from after the maximum supported version of v262.");
+_Static_assert(VK_HEADER_VERSION <= 263,
+               "VK_HEADER_VERSION is from after the maximum supported version of v263.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -5966,6 +5966,12 @@ bool compare_VkPhysicalDeviceImageProcessing2PropertiesQCOM(
 bool compare_VkSamplerBlockMatchWindowCreateInfoQCOM(
     VkSamplerBlockMatchWindowCreateInfoQCOM const *s1,
     VkSamplerBlockMatchWindowCreateInfoQCOM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 263 && (VK_NV_descriptor_pool_overallocation)
+bool compare_VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV(
+    VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV const *s1,
+    VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_HEADER_VERSION <= 252 && (VK_EXT_video_encode_h264)
@@ -20902,6 +20908,17 @@ bool compare_VkSamplerBlockMatchWindowCreateInfoQCOM(
     VkSamplerBlockMatchWindowCreateInfoQCOM const *s2) {
   if (!compare_VkExtent2D(&s1->windowExtent, &s2->windowExtent) ||
       (s1->windowCompareMode != s2->windowCompareMode) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 263 && (VK_NV_descriptor_pool_overallocation)
+bool compare_VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV(
+    VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV const *s1,
+    VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV const *s2) {
+  if ((s1->descriptorPoolOverallocation != s2->descriptorPoolOverallocation) || false)
     return false;
 
   return true;

@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 262,
-              "VK_HEADER_VERSION is from after the maximum supported version of v262.");
+static_assert(VK_HEADER_VERSION <= 263,
+              "VK_HEADER_VERSION is from after the maximum supported version of v263.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 262,
-               "VK_HEADER_VERSION is from after the maximum supported version of v262.");
+_Static_assert(VK_HEADER_VERSION <= 263,
+               "VK_HEADER_VERSION is from after the maximum supported version of v263.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -5441,6 +5441,11 @@ void cleanup_VkPhysicalDeviceImageProcessing2PropertiesQCOM(
 #if VK_HEADER_VERSION >= 262 && (VK_QCOM_image_processing2)
 void cleanup_VkSamplerBlockMatchWindowCreateInfoQCOM(
     VkSamplerBlockMatchWindowCreateInfoQCOM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 263 && (VK_NV_descriptor_pool_overallocation)
+void cleanup_VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV(
+    VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -13101,6 +13106,15 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_SAMPLER_BLOCK_MATCH_WINDOW_CREATE_INFO_QCOM) {
     cleanup_VkSamplerBlockMatchWindowCreateInfoQCOM(
         (VkSamplerBlockMatchWindowCreateInfoQCOM const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 263 && (VK_NV_descriptor_pool_overallocation)
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV) {
+    cleanup_VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV(
+        (VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV const *)pData);
     return;
   }
 #endif
@@ -25967,6 +25981,16 @@ void cleanup_VkPhysicalDeviceImageProcessing2PropertiesQCOM(
 #if VK_HEADER_VERSION >= 262 && (VK_QCOM_image_processing2)
 void cleanup_VkSamplerBlockMatchWindowCreateInfoQCOM(
     VkSamplerBlockMatchWindowCreateInfoQCOM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 263 && (VK_NV_descriptor_pool_overallocation)
+void cleanup_VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV(
+    VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
