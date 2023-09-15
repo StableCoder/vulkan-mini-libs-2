@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 263,
-              "VK_HEADER_VERSION is from after the maximum supported version of v263.");
+static_assert(VK_HEADER_VERSION <= 264,
+              "VK_HEADER_VERSION is from after the maximum supported version of v264.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 263,
-               "VK_HEADER_VERSION is from after the maximum supported version of v263.");
+_Static_assert(VK_HEADER_VERSION <= 264,
+               "VK_HEADER_VERSION is from after the maximum supported version of v264.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -5446,6 +5446,20 @@ void cleanup_VkSamplerBlockMatchWindowCreateInfoQCOM(
 #if VK_HEADER_VERSION >= 263 && (VK_NV_descriptor_pool_overallocation)
 void cleanup_VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV(
     VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 264 && (VK_EXT_frame_boundary)
+void cleanup_VkFrameBoundaryEXT(VkFrameBoundaryEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 264 && (VK_EXT_frame_boundary)
+void cleanup_VkPhysicalDeviceFrameBoundaryFeaturesEXT(
+    VkPhysicalDeviceFrameBoundaryFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 264 && (VK_MSFT_layered_driver)
+void cleanup_VkPhysicalDeviceLayeredDriverPropertiesMSFT(
+    VkPhysicalDeviceLayeredDriverPropertiesMSFT const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -13115,6 +13129,29 @@ void cleanup_vk_struct(void const *pData) {
       VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DESCRIPTOR_POOL_OVERALLOCATION_FEATURES_NV) {
     cleanup_VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV(
         (VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 264 && (VK_EXT_frame_boundary)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_FRAME_BOUNDARY_EXT) {
+    cleanup_VkFrameBoundaryEXT((VkFrameBoundaryEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 264 && (VK_EXT_frame_boundary)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAME_BOUNDARY_FEATURES_EXT) {
+    cleanup_VkPhysicalDeviceFrameBoundaryFeaturesEXT(
+        (VkPhysicalDeviceFrameBoundaryFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 264 && (VK_MSFT_layered_driver)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_DRIVER_PROPERTIES_MSFT) {
+    cleanup_VkPhysicalDeviceLayeredDriverPropertiesMSFT(
+        (VkPhysicalDeviceLayeredDriverPropertiesMSFT const *)pData);
     return;
   }
 #endif
@@ -25991,6 +26028,44 @@ void cleanup_VkSamplerBlockMatchWindowCreateInfoQCOM(
 #if VK_HEADER_VERSION >= 263 && (VK_NV_descriptor_pool_overallocation)
 void cleanup_VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV(
     VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 264 && (VK_EXT_frame_boundary)
+void cleanup_VkFrameBoundaryEXT(VkFrameBoundaryEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pImages - imageCount
+  free((void *)pData->pImages);
+
+  // pBuffers - bufferCount
+  free((void *)pData->pBuffers);
+
+  // pTag
+  free((void *)pData->pTag);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 264 && (VK_EXT_frame_boundary)
+void cleanup_VkPhysicalDeviceFrameBoundaryFeaturesEXT(
+    VkPhysicalDeviceFrameBoundaryFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 264 && (VK_MSFT_layered_driver)
+void cleanup_VkPhysicalDeviceLayeredDriverPropertiesMSFT(
+    VkPhysicalDeviceLayeredDriverPropertiesMSFT const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 263,
-              "VK_HEADER_VERSION is from after the maximum supported version of v263.");
+static_assert(VK_HEADER_VERSION <= 264,
+              "VK_HEADER_VERSION is from after the maximum supported version of v264.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 263,
-               "VK_HEADER_VERSION is from after the maximum supported version of v263.");
+_Static_assert(VK_HEADER_VERSION <= 264,
+               "VK_HEADER_VERSION is from after the maximum supported version of v264.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -1442,6 +1442,10 @@ EnumValueSet const VkOpticalFlowSessionCreateFlagsNVSets[] = {
 
 EnumValueSet const VkOpticalFlowExecuteFlagsNVSets[] = {
     {"DISABLE_TEMPORAL_HINTS", 0x00000001, false},
+};
+
+EnumValueSet const VkFrameBoundaryFlagsEXTSets[] = {
+    {"FRAME_END", 0x00000001, false},
 };
 
 EnumValueSet const VkPresentScalingFlagsEXTSets[] = {
@@ -2921,6 +2925,11 @@ EnumValueSet const VkBlockMatchWindowCompareModeQCOMSets[] = {
     {"MAX", 1, false},
 };
 
+EnumValueSet const VkLayeredDriverUnderlyingApiMSFTSets[] = {
+    {"NONE", 0, false},
+    {"D3D12", 1, false},
+};
+
 EnumValueSet const VkColorSpaceKHRSets[] = {
     {"SRGB_NONLINEAR", 0, false},
     {"DISPLAY_P3_NONLINEAR_EXT", 1000104001, false},
@@ -3389,7 +3398,7 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[342] = {
+EnumType const cEnumTypes[344] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", NULL, 0},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 1},
@@ -3546,6 +3555,7 @@ EnumType const cEnumTypes[342] = {
     {"VkOpticalFlowUsageFlagsNV", VkOpticalFlowUsageFlagsNVSets, 6},
     {"VkOpticalFlowSessionCreateFlagsNV", VkOpticalFlowSessionCreateFlagsNVSets, 5},
     {"VkOpticalFlowExecuteFlagsNV", VkOpticalFlowExecuteFlagsNVSets, 1},
+    {"VkFrameBoundaryFlagsEXT", VkFrameBoundaryFlagsEXTSets, 1},
     {"VkPresentScalingFlagsEXT", VkPresentScalingFlagsEXTSets, 3},
     {"VkPresentGravityFlagsEXT", VkPresentGravityFlagsEXTSets, 3},
     {"VkShaderCreateFlagsEXT", VkShaderCreateFlagsEXTSets, 7},
@@ -3674,6 +3684,7 @@ EnumType const cEnumTypes[342] = {
     {"VkComponentTypeKHR", VkComponentTypeKHRSets, 22},
     {"VkCubicFilterWeightsQCOM", VkCubicFilterWeightsQCOMSets, 4},
     {"VkBlockMatchWindowCompareModeQCOM", VkBlockMatchWindowCompareModeQCOMSets, 2},
+    {"VkLayeredDriverUnderlyingApiMSFT", VkLayeredDriverUnderlyingApiMSFTSets, 2},
     {"VkColorSpaceKHR", VkColorSpaceKHRSets, 18},
     {"VkPresentModeKHR", VkPresentModeKHRSets, 6},
     {"VkDebugReportObjectTypeEXT", VkDebugReportObjectTypeEXTSets, 46},

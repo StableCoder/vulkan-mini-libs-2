@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 263,
-              "VK_HEADER_VERSION is from after the maximum supported version of v263.");
+static_assert(VK_HEADER_VERSION <= 264,
+              "VK_HEADER_VERSION is from after the maximum supported version of v264.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 263,
-               "VK_HEADER_VERSION is from after the maximum supported version of v263.");
+_Static_assert(VK_HEADER_VERSION <= 264,
+               "VK_HEADER_VERSION is from after the maximum supported version of v264.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -5675,6 +5675,16 @@ bool compare_VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM(
     VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 264 && (VK_EXT_frame_boundary)
+bool compare_VkFrameBoundaryEXT(VkFrameBoundaryEXT const *s1, VkFrameBoundaryEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 264 && (VK_EXT_frame_boundary)
+bool compare_VkPhysicalDeviceFrameBoundaryFeaturesEXT(
+    VkPhysicalDeviceFrameBoundaryFeaturesEXT const *s1,
+    VkPhysicalDeviceFrameBoundaryFeaturesEXT const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 251 && (VK_EXT_dynamic_rendering_unused_attachments)
 bool compare_VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT(
     VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT const *s1,
@@ -5972,6 +5982,12 @@ bool compare_VkSamplerBlockMatchWindowCreateInfoQCOM(
 bool compare_VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV(
     VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV const *s1,
     VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 264 && (VK_MSFT_layered_driver)
+bool compare_VkPhysicalDeviceLayeredDriverPropertiesMSFT(
+    VkPhysicalDeviceLayeredDriverPropertiesMSFT const *s1,
+    VkPhysicalDeviceLayeredDriverPropertiesMSFT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_HEADER_VERSION <= 252 && (VK_EXT_video_encode_h264)
@@ -20312,6 +20328,28 @@ bool compare_VkPhysicalDeviceShaderCoreBuiltinsFeaturesARM(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 264 && (VK_EXT_frame_boundary)
+bool compare_VkFrameBoundaryEXT(VkFrameBoundaryEXT const *s1, VkFrameBoundaryEXT const *s2) {
+  if ((s1->flags != s2->flags) || (s1->frameID != s2->frameID) ||
+      (s1->imageCount != s2->imageCount) || (s1->bufferCount != s2->bufferCount) ||
+      (s1->tagName != s2->tagName) || (s1->tagSize != s2->tagSize) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 264 && (VK_EXT_frame_boundary)
+bool compare_VkPhysicalDeviceFrameBoundaryFeaturesEXT(
+    VkPhysicalDeviceFrameBoundaryFeaturesEXT const *s1,
+    VkPhysicalDeviceFrameBoundaryFeaturesEXT const *s2) {
+  if ((s1->frameBoundary != s2->frameBoundary) || false)
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 251 && (VK_EXT_dynamic_rendering_unused_attachments)
 bool compare_VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT(
     VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT const *s1,
@@ -20919,6 +20957,17 @@ bool compare_VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV(
     VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV const *s1,
     VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV const *s2) {
   if ((s1->descriptorPoolOverallocation != s2->descriptorPoolOverallocation) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 264 && (VK_MSFT_layered_driver)
+bool compare_VkPhysicalDeviceLayeredDriverPropertiesMSFT(
+    VkPhysicalDeviceLayeredDriverPropertiesMSFT const *s1,
+    VkPhysicalDeviceLayeredDriverPropertiesMSFT const *s2) {
+  if ((s1->underlyingAPI != s2->underlyingAPI) || false)
     return false;
 
   return true;
