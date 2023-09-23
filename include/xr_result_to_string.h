@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) >= 0,
               "openxr header version is from before the minimum supported version of v0.");
-static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 29,
-              "openxr header version is from after the maximum supported version of v29.");
+static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 30,
+              "openxr header version is from after the maximum supported version of v30.");
 #else
 _Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) >= 0,
                "openxr header version is from before the minimum supported version of v0.");
-_Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 29,
-               "openxr header version is from after the maximum supported version of v29.");
+_Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 30,
+               "openxr header version is from after the maximum supported version of v30.");
 #endif
 
 /// Returns a string representing the given VkResult parameter. If there is no known representation,
