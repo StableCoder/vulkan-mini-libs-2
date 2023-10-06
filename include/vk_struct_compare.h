@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 266,
-              "VK_HEADER_VERSION is from after the maximum supported version of v266.");
+static_assert(VK_HEADER_VERSION <= 267,
+              "VK_HEADER_VERSION is from after the maximum supported version of v267.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 266,
-               "VK_HEADER_VERSION is from after the maximum supported version of v266.");
+_Static_assert(VK_HEADER_VERSION <= 267,
+               "VK_HEADER_VERSION is from after the maximum supported version of v267.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -5253,6 +5253,18 @@ bool compare_VkDescriptorSetLayoutHostMappingInfoVALVE(
     VkDescriptorSetLayoutHostMappingInfoVALVE const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 267 && (VK_EXT_nested_command_buffer)
+bool compare_VkPhysicalDeviceNestedCommandBufferFeaturesEXT(
+    VkPhysicalDeviceNestedCommandBufferFeaturesEXT const *s1,
+    VkPhysicalDeviceNestedCommandBufferFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 267 && (VK_EXT_nested_command_buffer)
+bool compare_VkPhysicalDeviceNestedCommandBufferPropertiesEXT(
+    VkPhysicalDeviceNestedCommandBufferPropertiesEXT const *s1,
+    VkPhysicalDeviceNestedCommandBufferPropertiesEXT const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 219 && (VK_EXT_shader_module_identifier)
 bool compare_VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT(
     VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT const *s1,
@@ -5755,6 +5767,18 @@ bool compare_VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV(
 bool compare_VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV(
     VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV const *s1,
     VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 267 && (VK_NV_extended_sparse_address_space)
+bool compare_VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV(
+    VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV const *s1,
+    VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 267 && (VK_NV_extended_sparse_address_space)
+bool compare_VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV(
+    VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV const *s1,
+    VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 236 && (VK_LUNARG_direct_driver_loading)
@@ -19477,6 +19501,30 @@ bool compare_VkDescriptorSetLayoutHostMappingInfoVALVE(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 267 && (VK_EXT_nested_command_buffer)
+bool compare_VkPhysicalDeviceNestedCommandBufferFeaturesEXT(
+    VkPhysicalDeviceNestedCommandBufferFeaturesEXT const *s1,
+    VkPhysicalDeviceNestedCommandBufferFeaturesEXT const *s2) {
+  if ((s1->nestedCommandBuffer != s2->nestedCommandBuffer) ||
+      (s1->nestedCommandBufferRendering != s2->nestedCommandBufferRendering) ||
+      (s1->nestedCommandBufferSimultaneousUse != s2->nestedCommandBufferSimultaneousUse) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 267 && (VK_EXT_nested_command_buffer)
+bool compare_VkPhysicalDeviceNestedCommandBufferPropertiesEXT(
+    VkPhysicalDeviceNestedCommandBufferPropertiesEXT const *s1,
+    VkPhysicalDeviceNestedCommandBufferPropertiesEXT const *s2) {
+  if ((s1->maxCommandBufferNestingLevel != s2->maxCommandBufferNestingLevel) || false)
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 219 && (VK_EXT_shader_module_identifier)
 bool compare_VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT(
     VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT const *s1,
@@ -20555,6 +20603,30 @@ bool compare_VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV(
   if ((s1->rayTracingInvocationReorderReorderingHint !=
        s2->rayTracingInvocationReorderReorderingHint) ||
       false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 267 && (VK_NV_extended_sparse_address_space)
+bool compare_VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV(
+    VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV const *s1,
+    VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV const *s2) {
+  if ((s1->extendedSparseAddressSpace != s2->extendedSparseAddressSpace) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 267 && (VK_NV_extended_sparse_address_space)
+bool compare_VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV(
+    VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV const *s1,
+    VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV const *s2) {
+  if ((s1->extendedSparseAddressSpaceSize != s2->extendedSparseAddressSpaceSize) ||
+      (s1->extendedSparseImageUsageFlags != s2->extendedSparseImageUsageFlags) ||
+      (s1->extendedSparseBufferUsageFlags != s2->extendedSparseBufferUsageFlags) || false)
     return false;
 
   return true;

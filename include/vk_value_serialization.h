@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 266,
-              "VK_HEADER_VERSION is from after the maximum supported version of v266.");
+static_assert(VK_HEADER_VERSION <= 267,
+              "VK_HEADER_VERSION is from after the maximum supported version of v267.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 266,
-               "VK_HEADER_VERSION is from after the maximum supported version of v266.");
+_Static_assert(VK_HEADER_VERSION <= 267,
+               "VK_HEADER_VERSION is from after the maximum supported version of v267.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -1048,6 +1048,7 @@ EnumValueSet const VkRenderingFlagsSets[] = {
     {"RESUMING", 0x00000004, false},
     {"RESUMING_BIT_KHR", 0x00000004, true},
     {"ENABLE_LEGACY_DITHERING_BIT_EXT", 0x00000008, false},
+    {"CONTENTS_INLINE_BIT_EXT", 0x00000010, false},
 };
 
 EnumValueSet const VkMemoryDecompressionMethodFlagsNVSets[] = {
@@ -2437,6 +2438,7 @@ EnumValueSet const VkQueryTypeSets[] = {
 EnumValueSet const VkSubpassContentsSets[] = {
     {"INLINE", 0, false},
     {"SECONDARY_COMMAND_BUFFERS", 1, false},
+    {"INLINE_AND_SECONDARY_COMMAND_BUFFERS_EXT", 1000451000, false},
 };
 
 EnumValueSet const VkStencilOpSets[] = {
@@ -3502,7 +3504,7 @@ EnumType const cEnumTypes[346] = {
     {"VkAccelerationStructureMotionInfoFlagsNV", NULL, 0},
     {"VkAccelerationStructureMotionInstanceFlagsNV", NULL, 0},
     {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Sets, 70},
-    {"VkRenderingFlags", VkRenderingFlagsSets, 7},
+    {"VkRenderingFlags", VkRenderingFlagsSets, 8},
     {"VkMemoryDecompressionMethodFlagsNV", VkMemoryDecompressionMethodFlagsNVSets, 1},
     {"VkBuildMicromapFlagsEXT", VkBuildMicromapFlagsEXTSets, 3},
     {"VkMicromapCreateFlagsEXT", VkMicromapCreateFlagsEXTSets, 1},
@@ -3635,7 +3637,7 @@ EnumType const cEnumTypes[346] = {
     {"VkPipelineBindPoint", VkPipelineBindPointSets, 7},
     {"VkPrimitiveTopology", VkPrimitiveTopologySets, 11},
     {"VkQueryType", VkQueryTypeSets, 19},
-    {"VkSubpassContents", VkSubpassContentsSets, 2},
+    {"VkSubpassContents", VkSubpassContentsSets, 3},
     {"VkStencilOp", VkStencilOpSets, 8},
     {"VkSystemAllocationScope", VkSystemAllocationScopeSets, 5},
     {"VkInternalAllocationType", VkInternalAllocationTypeSets, 1},

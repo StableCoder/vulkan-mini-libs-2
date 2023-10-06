@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 266,
-              "VK_HEADER_VERSION is from after the maximum supported version of v266.");
+static_assert(VK_HEADER_VERSION <= 267,
+              "VK_HEADER_VERSION is from after the maximum supported version of v267.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 266,
-               "VK_HEADER_VERSION is from after the maximum supported version of v266.");
+_Static_assert(VK_HEADER_VERSION <= 267,
+               "VK_HEADER_VERSION is from after the maximum supported version of v267.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -5511,6 +5511,26 @@ void cleanup_VkSwapchainLatencyCreateInfoNV(VkSwapchainLatencyCreateInfoNV const
 
 #if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
 void cleanup_VkLatencySurfaceCapabilitiesNV(VkLatencySurfaceCapabilitiesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 267 && (VK_EXT_nested_command_buffer)
+void cleanup_VkPhysicalDeviceNestedCommandBufferFeaturesEXT(
+    VkPhysicalDeviceNestedCommandBufferFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 267 && (VK_EXT_nested_command_buffer)
+void cleanup_VkPhysicalDeviceNestedCommandBufferPropertiesEXT(
+    VkPhysicalDeviceNestedCommandBufferPropertiesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 267 && (VK_NV_extended_sparse_address_space)
+void cleanup_VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV(
+    VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 267 && (VK_NV_extended_sparse_address_space)
+void cleanup_VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV(
+    VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -13291,6 +13311,39 @@ void cleanup_vk_struct(void const *pData) {
 #if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
   if (pTemp->sType == VK_STRUCTURE_TYPE_LATENCY_SURFACE_CAPABILITIES_NV) {
     cleanup_VkLatencySurfaceCapabilitiesNV((VkLatencySurfaceCapabilitiesNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 267 && (VK_EXT_nested_command_buffer)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_NESTED_COMMAND_BUFFER_FEATURES_EXT) {
+    cleanup_VkPhysicalDeviceNestedCommandBufferFeaturesEXT(
+        (VkPhysicalDeviceNestedCommandBufferFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 267 && (VK_EXT_nested_command_buffer)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_NESTED_COMMAND_BUFFER_PROPERTIES_EXT) {
+    cleanup_VkPhysicalDeviceNestedCommandBufferPropertiesEXT(
+        (VkPhysicalDeviceNestedCommandBufferPropertiesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 267 && (VK_NV_extended_sparse_address_space)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_SPARSE_ADDRESS_SPACE_FEATURES_NV) {
+    cleanup_VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV(
+        (VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 267 && (VK_NV_extended_sparse_address_space)
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_SPARSE_ADDRESS_SPACE_PROPERTIES_NV) {
+    cleanup_VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV(
+        (VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV const *)pData);
     return;
   }
 #endif
@@ -26187,7 +26240,7 @@ void cleanup_VkFrameBoundaryEXT(VkFrameBoundaryEXT const *pData) {
   // pBuffers - bufferCount
   free((void *)pData->pBuffers);
 
-  // pTag
+  // pTag - tagSize
   free((void *)pData->pTag);
 }
 #endif
@@ -26328,6 +26381,46 @@ void cleanup_VkLatencySurfaceCapabilitiesNV(VkLatencySurfaceCapabilitiesNV const
 
   // pPresentModes - presentModeCount
   free((void *)pData->pPresentModes);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 267 && (VK_EXT_nested_command_buffer)
+void cleanup_VkPhysicalDeviceNestedCommandBufferFeaturesEXT(
+    VkPhysicalDeviceNestedCommandBufferFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 267 && (VK_EXT_nested_command_buffer)
+void cleanup_VkPhysicalDeviceNestedCommandBufferPropertiesEXT(
+    VkPhysicalDeviceNestedCommandBufferPropertiesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 267 && (VK_NV_extended_sparse_address_space)
+void cleanup_VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV(
+    VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 267 && (VK_NV_extended_sparse_address_space)
+void cleanup_VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV(
+    VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
 }
 #endif
 
