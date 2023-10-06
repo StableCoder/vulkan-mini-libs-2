@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 265,
-              "VK_HEADER_VERSION is from after the maximum supported version of v265.");
+static_assert(VK_HEADER_VERSION <= 266,
+              "VK_HEADER_VERSION is from after the maximum supported version of v266.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 265,
-               "VK_HEADER_VERSION is from after the maximum supported version of v265.");
+_Static_assert(VK_HEADER_VERSION <= 266,
+               "VK_HEADER_VERSION is from after the maximum supported version of v266.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -5988,6 +5988,68 @@ bool compare_VkPhysicalDeviceDescriptorPoolOverallocationFeaturesNV(
 bool compare_VkPhysicalDeviceLayeredDriverPropertiesMSFT(
     VkPhysicalDeviceLayeredDriverPropertiesMSFT const *s1,
     VkPhysicalDeviceLayeredDriverPropertiesMSFT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_ANDROID_external_format_resolve)
+bool compare_VkPhysicalDeviceExternalFormatResolveFeaturesANDROID(
+    VkPhysicalDeviceExternalFormatResolveFeaturesANDROID const *s1,
+    VkPhysicalDeviceExternalFormatResolveFeaturesANDROID const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_ANDROID_external_format_resolve)
+bool compare_VkPhysicalDeviceExternalFormatResolvePropertiesANDROID(
+    VkPhysicalDeviceExternalFormatResolvePropertiesANDROID const *s1,
+    VkPhysicalDeviceExternalFormatResolvePropertiesANDROID const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_ANDROID_external_format_resolve)
+bool compare_VkAndroidHardwareBufferFormatResolvePropertiesANDROID(
+    VkAndroidHardwareBufferFormatResolvePropertiesANDROID const *s1,
+    VkAndroidHardwareBufferFormatResolvePropertiesANDROID const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+bool compare_VkLatencySleepModeInfoNV(VkLatencySleepModeInfoNV const *s1,
+                                      VkLatencySleepModeInfoNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+bool compare_VkLatencySleepInfoNV(VkLatencySleepInfoNV const *s1, VkLatencySleepInfoNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+bool compare_VkSetLatencyMarkerInfoNV(VkSetLatencyMarkerInfoNV const *s1,
+                                      VkSetLatencyMarkerInfoNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+bool compare_VkGetLatencyMarkerInfoNV(VkGetLatencyMarkerInfoNV const *s1,
+                                      VkGetLatencyMarkerInfoNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+bool compare_VkLatencyTimingsFrameReportNV(VkLatencyTimingsFrameReportNV const *s1,
+                                           VkLatencyTimingsFrameReportNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+bool compare_VkOutOfBandQueueTypeInfoNV(VkOutOfBandQueueTypeInfoNV const *s1,
+                                        VkOutOfBandQueueTypeInfoNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+bool compare_VkLatencySubmissionPresentIdNV(VkLatencySubmissionPresentIdNV const *s1,
+                                            VkLatencySubmissionPresentIdNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+bool compare_VkSwapchainLatencyCreateInfoNV(VkSwapchainLatencyCreateInfoNV const *s1,
+                                            VkSwapchainLatencyCreateInfoNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+bool compare_VkLatencySurfaceCapabilitiesNV(VkLatencySurfaceCapabilitiesNV const *s1,
+                                            VkLatencySurfaceCapabilitiesNV const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_HEADER_VERSION <= 252 && (VK_EXT_video_encode_h264)
@@ -20968,6 +21030,140 @@ bool compare_VkPhysicalDeviceLayeredDriverPropertiesMSFT(
     VkPhysicalDeviceLayeredDriverPropertiesMSFT const *s1,
     VkPhysicalDeviceLayeredDriverPropertiesMSFT const *s2) {
   if ((s1->underlyingAPI != s2->underlyingAPI) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_ANDROID_external_format_resolve)
+bool compare_VkPhysicalDeviceExternalFormatResolveFeaturesANDROID(
+    VkPhysicalDeviceExternalFormatResolveFeaturesANDROID const *s1,
+    VkPhysicalDeviceExternalFormatResolveFeaturesANDROID const *s2) {
+  if ((s1->externalFormatResolve != s2->externalFormatResolve) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_ANDROID_external_format_resolve)
+bool compare_VkPhysicalDeviceExternalFormatResolvePropertiesANDROID(
+    VkPhysicalDeviceExternalFormatResolvePropertiesANDROID const *s1,
+    VkPhysicalDeviceExternalFormatResolvePropertiesANDROID const *s2) {
+  if ((s1->nullColorAttachmentWithExternalFormatResolve !=
+       s2->nullColorAttachmentWithExternalFormatResolve) ||
+      (s1->externalFormatResolveChromaOffsetX != s2->externalFormatResolveChromaOffsetX) ||
+      (s1->externalFormatResolveChromaOffsetY != s2->externalFormatResolveChromaOffsetY) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_ANDROID_external_format_resolve)
+bool compare_VkAndroidHardwareBufferFormatResolvePropertiesANDROID(
+    VkAndroidHardwareBufferFormatResolvePropertiesANDROID const *s1,
+    VkAndroidHardwareBufferFormatResolvePropertiesANDROID const *s2) {
+  if ((s1->colorAttachmentFormat != s2->colorAttachmentFormat) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+bool compare_VkLatencySleepModeInfoNV(VkLatencySleepModeInfoNV const *s1,
+                                      VkLatencySleepModeInfoNV const *s2) {
+  if ((s1->lowLatencyMode != s2->lowLatencyMode) || (s1->lowLatencyBoost != s2->lowLatencyBoost) ||
+      (s1->minimumIntervalUs != s2->minimumIntervalUs) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+bool compare_VkLatencySleepInfoNV(VkLatencySleepInfoNV const *s1, VkLatencySleepInfoNV const *s2) {
+  if ((s1->signalSemaphore != s2->signalSemaphore) || (s1->value != s2->value) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+bool compare_VkSetLatencyMarkerInfoNV(VkSetLatencyMarkerInfoNV const *s1,
+                                      VkSetLatencyMarkerInfoNV const *s2) {
+  if ((s1->presentID != s2->presentID) || (s1->marker != s2->marker) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+bool compare_VkGetLatencyMarkerInfoNV(VkGetLatencyMarkerInfoNV const *s1,
+                                      VkGetLatencyMarkerInfoNV const *s2) {
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+bool compare_VkLatencyTimingsFrameReportNV(VkLatencyTimingsFrameReportNV const *s1,
+                                           VkLatencyTimingsFrameReportNV const *s2) {
+  if ((s1->presentID != s2->presentID) || (s1->inputSampleTimeUs != s2->inputSampleTimeUs) ||
+      (s1->simStartTimeUs != s2->simStartTimeUs) || (s1->simEndTimeUs != s2->simEndTimeUs) ||
+      (s1->renderSubmitStartTimeUs != s2->renderSubmitStartTimeUs) ||
+      (s1->renderSubmitEndTimeUs != s2->renderSubmitEndTimeUs) ||
+      (s1->presentStartTimeUs != s2->presentStartTimeUs) ||
+      (s1->presentEndTimeUs != s2->presentEndTimeUs) ||
+      (s1->driverStartTimeUs != s2->driverStartTimeUs) ||
+      (s1->driverEndTimeUs != s2->driverEndTimeUs) ||
+      (s1->osRenderQueueStartTimeUs != s2->osRenderQueueStartTimeUs) ||
+      (s1->osRenderQueueEndTimeUs != s2->osRenderQueueEndTimeUs) ||
+      (s1->gpuRenderStartTimeUs != s2->gpuRenderStartTimeUs) ||
+      (s1->gpuRenderEndTimeUs != s2->gpuRenderEndTimeUs) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+bool compare_VkOutOfBandQueueTypeInfoNV(VkOutOfBandQueueTypeInfoNV const *s1,
+                                        VkOutOfBandQueueTypeInfoNV const *s2) {
+  if ((s1->queueType != s2->queueType) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+bool compare_VkLatencySubmissionPresentIdNV(VkLatencySubmissionPresentIdNV const *s1,
+                                            VkLatencySubmissionPresentIdNV const *s2) {
+  if ((s1->presentID != s2->presentID) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+bool compare_VkSwapchainLatencyCreateInfoNV(VkSwapchainLatencyCreateInfoNV const *s1,
+                                            VkSwapchainLatencyCreateInfoNV const *s2) {
+  if ((s1->latencyModeEnable != s2->latencyModeEnable) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+bool compare_VkLatencySurfaceCapabilitiesNV(VkLatencySurfaceCapabilitiesNV const *s1,
+                                            VkLatencySurfaceCapabilitiesNV const *s2) {
+  if ((s1->presentModeCount != s2->presentModeCount) || false)
     return false;
 
   return true;

@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 265,
-              "VK_HEADER_VERSION is from after the maximum supported version of v265.");
+static_assert(VK_HEADER_VERSION <= 266,
+              "VK_HEADER_VERSION is from after the maximum supported version of v266.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 265,
-               "VK_HEADER_VERSION is from after the maximum supported version of v265.");
+_Static_assert(VK_HEADER_VERSION <= 266,
+               "VK_HEADER_VERSION is from after the maximum supported version of v266.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -5460,6 +5460,57 @@ void cleanup_VkPhysicalDeviceFrameBoundaryFeaturesEXT(
 #if VK_HEADER_VERSION >= 264 && (VK_MSFT_layered_driver)
 void cleanup_VkPhysicalDeviceLayeredDriverPropertiesMSFT(
     VkPhysicalDeviceLayeredDriverPropertiesMSFT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_ANDROID_external_format_resolve)
+void cleanup_VkPhysicalDeviceExternalFormatResolveFeaturesANDROID(
+    VkPhysicalDeviceExternalFormatResolveFeaturesANDROID const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_ANDROID_external_format_resolve)
+void cleanup_VkPhysicalDeviceExternalFormatResolvePropertiesANDROID(
+    VkPhysicalDeviceExternalFormatResolvePropertiesANDROID const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_ANDROID_external_format_resolve)
+void cleanup_VkAndroidHardwareBufferFormatResolvePropertiesANDROID(
+    VkAndroidHardwareBufferFormatResolvePropertiesANDROID const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+void cleanup_VkLatencySleepModeInfoNV(VkLatencySleepModeInfoNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+void cleanup_VkLatencySleepInfoNV(VkLatencySleepInfoNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+void cleanup_VkSetLatencyMarkerInfoNV(VkSetLatencyMarkerInfoNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+void cleanup_VkGetLatencyMarkerInfoNV(VkGetLatencyMarkerInfoNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+void cleanup_VkLatencyTimingsFrameReportNV(VkLatencyTimingsFrameReportNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+void cleanup_VkOutOfBandQueueTypeInfoNV(VkOutOfBandQueueTypeInfoNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+void cleanup_VkLatencySubmissionPresentIdNV(VkLatencySubmissionPresentIdNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+void cleanup_VkSwapchainLatencyCreateInfoNV(VkSwapchainLatencyCreateInfoNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+void cleanup_VkLatencySurfaceCapabilitiesNV(VkLatencySurfaceCapabilitiesNV const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -13152,6 +13203,94 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_DRIVER_PROPERTIES_MSFT) {
     cleanup_VkPhysicalDeviceLayeredDriverPropertiesMSFT(
         (VkPhysicalDeviceLayeredDriverPropertiesMSFT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_ANDROID_external_format_resolve)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_FEATURES_ANDROID) {
+    cleanup_VkPhysicalDeviceExternalFormatResolveFeaturesANDROID(
+        (VkPhysicalDeviceExternalFormatResolveFeaturesANDROID const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_ANDROID_external_format_resolve)
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTERNAL_FORMAT_RESOLVE_PROPERTIES_ANDROID) {
+    cleanup_VkPhysicalDeviceExternalFormatResolvePropertiesANDROID(
+        (VkPhysicalDeviceExternalFormatResolvePropertiesANDROID const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_ANDROID_external_format_resolve)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_RESOLVE_PROPERTIES_ANDROID) {
+    cleanup_VkAndroidHardwareBufferFormatResolvePropertiesANDROID(
+        (VkAndroidHardwareBufferFormatResolvePropertiesANDROID const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_LATENCY_SLEEP_MODE_INFO_NV) {
+    cleanup_VkLatencySleepModeInfoNV((VkLatencySleepModeInfoNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_LATENCY_SLEEP_INFO_NV) {
+    cleanup_VkLatencySleepInfoNV((VkLatencySleepInfoNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SET_LATENCY_MARKER_INFO_NV) {
+    cleanup_VkSetLatencyMarkerInfoNV((VkSetLatencyMarkerInfoNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_GET_LATENCY_MARKER_INFO_NV) {
+    cleanup_VkGetLatencyMarkerInfoNV((VkGetLatencyMarkerInfoNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_LATENCY_TIMINGS_FRAME_REPORT_NV) {
+    cleanup_VkLatencyTimingsFrameReportNV((VkLatencyTimingsFrameReportNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_OUT_OF_BAND_QUEUE_TYPE_INFO_NV) {
+    cleanup_VkOutOfBandQueueTypeInfoNV((VkOutOfBandQueueTypeInfoNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_LATENCY_SUBMISSION_PRESENT_ID_NV) {
+    cleanup_VkLatencySubmissionPresentIdNV((VkLatencySubmissionPresentIdNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SWAPCHAIN_LATENCY_CREATE_INFO_NV) {
+    cleanup_VkSwapchainLatencyCreateInfoNV((VkSwapchainLatencyCreateInfoNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_LATENCY_SURFACE_CAPABILITIES_NV) {
+    cleanup_VkLatencySurfaceCapabilitiesNV((VkLatencySurfaceCapabilitiesNV const *)pData);
     return;
   }
 #endif
@@ -26070,6 +26209,125 @@ void cleanup_VkPhysicalDeviceLayeredDriverPropertiesMSFT(
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_ANDROID_external_format_resolve)
+void cleanup_VkPhysicalDeviceExternalFormatResolveFeaturesANDROID(
+    VkPhysicalDeviceExternalFormatResolveFeaturesANDROID const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_ANDROID_external_format_resolve)
+void cleanup_VkPhysicalDeviceExternalFormatResolvePropertiesANDROID(
+    VkPhysicalDeviceExternalFormatResolvePropertiesANDROID const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_ANDROID_external_format_resolve)
+void cleanup_VkAndroidHardwareBufferFormatResolvePropertiesANDROID(
+    VkAndroidHardwareBufferFormatResolvePropertiesANDROID const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+void cleanup_VkLatencySleepModeInfoNV(VkLatencySleepModeInfoNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+void cleanup_VkLatencySleepInfoNV(VkLatencySleepInfoNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+void cleanup_VkSetLatencyMarkerInfoNV(VkSetLatencyMarkerInfoNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+void cleanup_VkGetLatencyMarkerInfoNV(VkGetLatencyMarkerInfoNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pTimings
+  if (pData->pTimings != NULL)
+    cleanup_VkLatencyTimingsFrameReportNV(pData->pTimings);
+  free((void *)pData->pTimings);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+void cleanup_VkLatencyTimingsFrameReportNV(VkLatencyTimingsFrameReportNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+void cleanup_VkOutOfBandQueueTypeInfoNV(VkOutOfBandQueueTypeInfoNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+void cleanup_VkLatencySubmissionPresentIdNV(VkLatencySubmissionPresentIdNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+void cleanup_VkSwapchainLatencyCreateInfoNV(VkSwapchainLatencyCreateInfoNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+void cleanup_VkLatencySurfaceCapabilitiesNV(VkLatencySurfaceCapabilitiesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pPresentModes - presentModeCount
+  free((void *)pData->pPresentModes);
 }
 #endif
 

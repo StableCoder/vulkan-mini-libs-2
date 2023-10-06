@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 265,
-              "VK_HEADER_VERSION is from after the maximum supported version of v265.");
+static_assert(VK_HEADER_VERSION <= 266,
+              "VK_HEADER_VERSION is from after the maximum supported version of v266.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 265,
-               "VK_HEADER_VERSION is from after the maximum supported version of v265.");
+_Static_assert(VK_HEADER_VERSION <= 266,
+               "VK_HEADER_VERSION is from after the maximum supported version of v266.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -1352,6 +1352,7 @@ EnumValueSet const VkResolveModeFlagsSets[] = {
     {"AVERAGE_BIT_KHR", 0x00000002, true},
     {"MIN_BIT_KHR", 0x00000004, true},
     {"MAX_BIT_KHR", 0x00000008, true},
+    {"EXTERNAL_FORMAT_DOWNSAMPLE_ANDROID", 0x00000010, false},
 };
 
 EnumValueSet const VkSwapchainImageUsageFlagsANDROIDSets[] = {
@@ -3144,6 +3145,26 @@ EnumValueSet const VkDeviceFaultAddressTypeEXTSets[] = {
     {"INSTRUCTION_POINTER_FAULT", 6, false},
 };
 
+EnumValueSet const VkLatencyMarkerNVSets[] = {
+    {"SIMULATION_START", 0, false},
+    {"SIMULATION_END", 1, false},
+    {"RENDERSUBMIT_START", 2, false},
+    {"RENDERSUBMIT_END", 3, false},
+    {"PRESENT_START", 4, false},
+    {"PRESENT_END", 5, false},
+    {"INPUT_SAMPLE", 6, false},
+    {"TRIGGER_FLASH", 7, false},
+    {"OUT_OF_BAND_RENDERSUBMIT_START", 8, false},
+    {"OUT_OF_BAND_RENDERSUBMIT_END", 9, false},
+    {"OUT_OF_BAND_PRESENT_START", 10, false},
+    {"OUT_OF_BAND_PRESENT_END", 11, false},
+};
+
+EnumValueSet const VkOutOfBandQueueTypeNVSets[] = {
+    {"RENDER", 0, false},
+    {"PRESENT", 1, false},
+};
+
 EnumValueSet const VkVendorIdSets[] = {
     {"VIV", 0x10001, false},      {"VSI", 0x10002, false},  {"KAZAN", 0x10003, false},
     {"CODEPLAY", 0x10004, false}, {"MESA", 0x10005, false}, {"POCL", 0x10006, false},
@@ -3188,6 +3209,7 @@ EnumValueSet const VkDriverIdSets[] = {
     {"MESA_DOZEN", 23, false},
     {"MESA_NVK", 24, false},
     {"IMAGINATION_OPEN_SOURCE_MESA", 25, false},
+    {"MESA_AGXV", 26, false},
 };
 
 EnumValueSet const VkShadingRatePaletteEntryNVSets[] = {
@@ -3398,7 +3420,7 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[344] = {
+EnumType const cEnumTypes[346] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", NULL, 0},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 1},
@@ -3537,7 +3559,7 @@ EnumType const cEnumTypes[344] = {
     {"VkPipelineRasterizationConservativeStateCreateFlagsEXT", NULL, 0},
     {"VkDescriptorBindingFlags", VkDescriptorBindingFlagsSets, 8},
     {"VkConditionalRenderingFlagsEXT", VkConditionalRenderingFlagsEXTSets, 1},
-    {"VkResolveModeFlags", VkResolveModeFlagsSets, 10},
+    {"VkResolveModeFlags", VkResolveModeFlagsSets, 11},
     {"VkPipelineRasterizationStateStreamCreateFlagsEXT", NULL, 0},
     {"VkPipelineRasterizationDepthClipStateCreateFlagsEXT", NULL, 0},
     {"VkSwapchainImageUsageFlagsANDROID", VkSwapchainImageUsageFlagsANDROIDSets, 1},
@@ -3708,8 +3730,10 @@ EnumType const cEnumTypes[344] = {
     {"VkOpticalFlowPerformanceLevelNV", VkOpticalFlowPerformanceLevelNVSets, 4},
     {"VkOpticalFlowSessionBindingPointNV", VkOpticalFlowSessionBindingPointNVSets, 9},
     {"VkDeviceFaultAddressTypeEXT", VkDeviceFaultAddressTypeEXTSets, 7},
+    {"VkLatencyMarkerNV", VkLatencyMarkerNVSets, 12},
+    {"VkOutOfBandQueueTypeNV", VkOutOfBandQueueTypeNVSets, 2},
     {"VkVendorId", VkVendorIdSets, 7},
-    {"VkDriverId", VkDriverIdSets, 37},
+    {"VkDriverId", VkDriverIdSets, 38},
     {"VkShadingRatePaletteEntryNV", VkShadingRatePaletteEntryNVSets, 12},
     {"VkCoarseSampleOrderTypeNV", VkCoarseSampleOrderTypeNVSets, 4},
     {"VkPipelineExecutableStatisticFormatKHR", VkPipelineExecutableStatisticFormatKHRSets, 4},
