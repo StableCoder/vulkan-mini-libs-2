@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 268,
-              "VK_HEADER_VERSION is from after the maximum supported version of v268.");
+static_assert(VK_HEADER_VERSION <= 269,
+              "VK_HEADER_VERSION is from after the maximum supported version of v269.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 268,
-               "VK_HEADER_VERSION is from after the maximum supported version of v268.");
+_Static_assert(VK_HEADER_VERSION <= 269,
+               "VK_HEADER_VERSION is from after the maximum supported version of v269.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -5087,6 +5087,20 @@ bool compare_VkBufferCollectionConstraintsInfoFUCHSIA(
     VkBufferCollectionConstraintsInfoFUCHSIA const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 269 && (VK_NV_cuda_kernel_launch)
+bool compare_VkCudaModuleCreateInfoNV(VkCudaModuleCreateInfoNV const *s1,
+                                      VkCudaModuleCreateInfoNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_NV_cuda_kernel_launch)
+bool compare_VkCudaFunctionCreateInfoNV(VkCudaFunctionCreateInfoNV const *s1,
+                                        VkCudaFunctionCreateInfoNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_NV_cuda_kernel_launch)
+bool compare_VkCudaLaunchInfoNV(VkCudaLaunchInfoNV const *s1, VkCudaLaunchInfoNV const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 195 && (VK_EXT_rgba10x6_formats)
 bool compare_VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT(
     VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT const *s1,
@@ -6074,6 +6088,36 @@ bool compare_VkSwapchainLatencyCreateInfoNV(VkSwapchainLatencyCreateInfoNV const
 #if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
 bool compare_VkLatencySurfaceCapabilitiesNV(VkLatencySurfaceCapabilitiesNV const *s1,
                                             VkLatencySurfaceCapabilitiesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_NV_cuda_kernel_launch)
+bool compare_VkPhysicalDeviceCudaKernelLaunchFeaturesNV(
+    VkPhysicalDeviceCudaKernelLaunchFeaturesNV const *s1,
+    VkPhysicalDeviceCudaKernelLaunchFeaturesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_NV_cuda_kernel_launch)
+bool compare_VkPhysicalDeviceCudaKernelLaunchPropertiesNV(
+    VkPhysicalDeviceCudaKernelLaunchPropertiesNV const *s1,
+    VkPhysicalDeviceCudaKernelLaunchPropertiesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_ARM_scheduling_controls)
+bool compare_VkDeviceQueueShaderCoreControlCreateInfoARM(
+    VkDeviceQueueShaderCoreControlCreateInfoARM const *s1,
+    VkDeviceQueueShaderCoreControlCreateInfoARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_ARM_scheduling_controls)
+bool compare_VkPhysicalDeviceSchedulingControlsFeaturesARM(
+    VkPhysicalDeviceSchedulingControlsFeaturesARM const *s1,
+    VkPhysicalDeviceSchedulingControlsFeaturesARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_ARM_scheduling_controls)
+bool compare_VkPhysicalDeviceSchedulingControlsPropertiesARM(
+    VkPhysicalDeviceSchedulingControlsPropertiesARM const *s1,
+    VkPhysicalDeviceSchedulingControlsPropertiesARM const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_HEADER_VERSION <= 252 && (VK_EXT_video_encode_h264)
@@ -19137,6 +19181,39 @@ bool compare_VkBufferCollectionConstraintsInfoFUCHSIA(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 269 && (VK_NV_cuda_kernel_launch)
+bool compare_VkCudaModuleCreateInfoNV(VkCudaModuleCreateInfoNV const *s1,
+                                      VkCudaModuleCreateInfoNV const *s2) {
+  if ((s1->dataSize != s2->dataSize) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_NV_cuda_kernel_launch)
+bool compare_VkCudaFunctionCreateInfoNV(VkCudaFunctionCreateInfoNV const *s1,
+                                        VkCudaFunctionCreateInfoNV const *s2) {
+  if ((s1->module != s2->module) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_NV_cuda_kernel_launch)
+bool compare_VkCudaLaunchInfoNV(VkCudaLaunchInfoNV const *s1, VkCudaLaunchInfoNV const *s2) {
+  if ((s1->function != s2->function) || (s1->gridDimX != s2->gridDimX) ||
+      (s1->gridDimY != s2->gridDimY) || (s1->gridDimZ != s2->gridDimZ) ||
+      (s1->blockDimX != s2->blockDimX) || (s1->blockDimY != s2->blockDimY) ||
+      (s1->blockDimZ != s2->blockDimZ) || (s1->sharedMemBytes != s2->sharedMemBytes) ||
+      (s1->paramCount != s2->paramCount) || (s1->extraCount != s2->extraCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 195 && (VK_EXT_rgba10x6_formats)
 bool compare_VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT(
     VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT const *s1,
@@ -21236,6 +21313,62 @@ bool compare_VkSwapchainLatencyCreateInfoNV(VkSwapchainLatencyCreateInfoNV const
 bool compare_VkLatencySurfaceCapabilitiesNV(VkLatencySurfaceCapabilitiesNV const *s1,
                                             VkLatencySurfaceCapabilitiesNV const *s2) {
   if ((s1->presentModeCount != s2->presentModeCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_NV_cuda_kernel_launch)
+bool compare_VkPhysicalDeviceCudaKernelLaunchFeaturesNV(
+    VkPhysicalDeviceCudaKernelLaunchFeaturesNV const *s1,
+    VkPhysicalDeviceCudaKernelLaunchFeaturesNV const *s2) {
+  if ((s1->cudaKernelLaunchFeatures != s2->cudaKernelLaunchFeatures) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_NV_cuda_kernel_launch)
+bool compare_VkPhysicalDeviceCudaKernelLaunchPropertiesNV(
+    VkPhysicalDeviceCudaKernelLaunchPropertiesNV const *s1,
+    VkPhysicalDeviceCudaKernelLaunchPropertiesNV const *s2) {
+  if ((s1->computeCapabilityMinor != s2->computeCapabilityMinor) ||
+      (s1->computeCapabilityMajor != s2->computeCapabilityMajor) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_ARM_scheduling_controls)
+bool compare_VkDeviceQueueShaderCoreControlCreateInfoARM(
+    VkDeviceQueueShaderCoreControlCreateInfoARM const *s1,
+    VkDeviceQueueShaderCoreControlCreateInfoARM const *s2) {
+  if ((s1->shaderCoreCount != s2->shaderCoreCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_ARM_scheduling_controls)
+bool compare_VkPhysicalDeviceSchedulingControlsFeaturesARM(
+    VkPhysicalDeviceSchedulingControlsFeaturesARM const *s1,
+    VkPhysicalDeviceSchedulingControlsFeaturesARM const *s2) {
+  if ((s1->schedulingControls != s2->schedulingControls) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_ARM_scheduling_controls)
+bool compare_VkPhysicalDeviceSchedulingControlsPropertiesARM(
+    VkPhysicalDeviceSchedulingControlsPropertiesARM const *s1,
+    VkPhysicalDeviceSchedulingControlsPropertiesARM const *s2) {
+  if ((s1->schedulingControlsFlags != s2->schedulingControlsFlags) || false)
     return false;
 
   return true;

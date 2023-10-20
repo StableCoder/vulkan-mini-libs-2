@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 268,
-              "VK_HEADER_VERSION is from after the maximum supported version of v268.");
+static_assert(VK_HEADER_VERSION <= 269,
+              "VK_HEADER_VERSION is from after the maximum supported version of v269.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 268,
-               "VK_HEADER_VERSION is from after the maximum supported version of v268.");
+_Static_assert(VK_HEADER_VERSION <= 269,
+               "VK_HEADER_VERSION is from after the maximum supported version of v269.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -5531,6 +5531,43 @@ void cleanup_VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV(
 #if VK_HEADER_VERSION >= 267 && (VK_NV_extended_sparse_address_space)
 void cleanup_VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV(
     VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_NV_cuda_kernel_launch)
+void cleanup_VkCudaModuleCreateInfoNV(VkCudaModuleCreateInfoNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_NV_cuda_kernel_launch)
+void cleanup_VkCudaFunctionCreateInfoNV(VkCudaFunctionCreateInfoNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_NV_cuda_kernel_launch)
+void cleanup_VkCudaLaunchInfoNV(VkCudaLaunchInfoNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_NV_cuda_kernel_launch)
+void cleanup_VkPhysicalDeviceCudaKernelLaunchFeaturesNV(
+    VkPhysicalDeviceCudaKernelLaunchFeaturesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_NV_cuda_kernel_launch)
+void cleanup_VkPhysicalDeviceCudaKernelLaunchPropertiesNV(
+    VkPhysicalDeviceCudaKernelLaunchPropertiesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_ARM_scheduling_controls)
+void cleanup_VkDeviceQueueShaderCoreControlCreateInfoARM(
+    VkDeviceQueueShaderCoreControlCreateInfoARM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_ARM_scheduling_controls)
+void cleanup_VkPhysicalDeviceSchedulingControlsFeaturesARM(
+    VkPhysicalDeviceSchedulingControlsFeaturesARM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_ARM_scheduling_controls)
+void cleanup_VkPhysicalDeviceSchedulingControlsPropertiesARM(
+    VkPhysicalDeviceSchedulingControlsPropertiesARM const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -13344,6 +13381,67 @@ void cleanup_vk_struct(void const *pData) {
       VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_EXTENDED_SPARSE_ADDRESS_SPACE_PROPERTIES_NV) {
     cleanup_VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV(
         (VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_NV_cuda_kernel_launch)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_CUDA_MODULE_CREATE_INFO_NV) {
+    cleanup_VkCudaModuleCreateInfoNV((VkCudaModuleCreateInfoNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_NV_cuda_kernel_launch)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_CUDA_FUNCTION_CREATE_INFO_NV) {
+    cleanup_VkCudaFunctionCreateInfoNV((VkCudaFunctionCreateInfoNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_NV_cuda_kernel_launch)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_CUDA_LAUNCH_INFO_NV) {
+    cleanup_VkCudaLaunchInfoNV((VkCudaLaunchInfoNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_NV_cuda_kernel_launch)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUDA_KERNEL_LAUNCH_FEATURES_NV) {
+    cleanup_VkPhysicalDeviceCudaKernelLaunchFeaturesNV(
+        (VkPhysicalDeviceCudaKernelLaunchFeaturesNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_NV_cuda_kernel_launch)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CUDA_KERNEL_LAUNCH_PROPERTIES_NV) {
+    cleanup_VkPhysicalDeviceCudaKernelLaunchPropertiesNV(
+        (VkPhysicalDeviceCudaKernelLaunchPropertiesNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_ARM_scheduling_controls)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_QUEUE_SHADER_CORE_CONTROL_CREATE_INFO_ARM) {
+    cleanup_VkDeviceQueueShaderCoreControlCreateInfoARM(
+        (VkDeviceQueueShaderCoreControlCreateInfoARM const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_ARM_scheduling_controls)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCHEDULING_CONTROLS_FEATURES_ARM) {
+    cleanup_VkPhysicalDeviceSchedulingControlsFeaturesARM(
+        (VkPhysicalDeviceSchedulingControlsFeaturesARM const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_ARM_scheduling_controls)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCHEDULING_CONTROLS_PROPERTIES_ARM) {
+    cleanup_VkPhysicalDeviceSchedulingControlsPropertiesARM(
+        (VkPhysicalDeviceSchedulingControlsPropertiesARM const *)pData);
     return;
   }
 #endif
@@ -26417,6 +26515,95 @@ void cleanup_VkPhysicalDeviceExtendedSparseAddressSpaceFeaturesNV(
 #if VK_HEADER_VERSION >= 267 && (VK_NV_extended_sparse_address_space)
 void cleanup_VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV(
     VkPhysicalDeviceExtendedSparseAddressSpacePropertiesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_NV_cuda_kernel_launch)
+void cleanup_VkCudaModuleCreateInfoNV(VkCudaModuleCreateInfoNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pData - dataSize
+  free((void *)pData->pData);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_NV_cuda_kernel_launch)
+void cleanup_VkCudaFunctionCreateInfoNV(VkCudaFunctionCreateInfoNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pName - null-terminated
+  free((void *)pData->pName);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_NV_cuda_kernel_launch)
+void cleanup_VkCudaLaunchInfoNV(VkCudaLaunchInfoNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pParams - paramCount
+  free((void *)pData->pParams);
+
+  // pExtras - extraCount
+  free((void *)pData->pExtras);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_NV_cuda_kernel_launch)
+void cleanup_VkPhysicalDeviceCudaKernelLaunchFeaturesNV(
+    VkPhysicalDeviceCudaKernelLaunchFeaturesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_NV_cuda_kernel_launch)
+void cleanup_VkPhysicalDeviceCudaKernelLaunchPropertiesNV(
+    VkPhysicalDeviceCudaKernelLaunchPropertiesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_ARM_scheduling_controls)
+void cleanup_VkDeviceQueueShaderCoreControlCreateInfoARM(
+    VkDeviceQueueShaderCoreControlCreateInfoARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_ARM_scheduling_controls)
+void cleanup_VkPhysicalDeviceSchedulingControlsFeaturesARM(
+    VkPhysicalDeviceSchedulingControlsFeaturesARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 269 && (VK_ARM_scheduling_controls)
+void cleanup_VkPhysicalDeviceSchedulingControlsPropertiesARM(
+    VkPhysicalDeviceSchedulingControlsPropertiesARM const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

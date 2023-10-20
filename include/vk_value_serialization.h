@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 268,
-              "VK_HEADER_VERSION is from after the maximum supported version of v268.");
+static_assert(VK_HEADER_VERSION <= 269,
+              "VK_HEADER_VERSION is from after the maximum supported version of v269.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 268,
-               "VK_HEADER_VERSION is from after the maximum supported version of v268.");
+_Static_assert(VK_HEADER_VERSION <= 269,
+               "VK_HEADER_VERSION is from after the maximum supported version of v269.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -1472,6 +1472,10 @@ EnumValueSet const VkShaderCreateFlagsEXTSets[] = {
     {"FRAGMENT_DENSITY_MAP_ATTACHMENT", 0x00000040, false},
 };
 
+EnumValueSet const VkPhysicalDeviceSchedulingControlsFlagsARMSets[] = {
+    {"SHADER_CORE_COUNT", 0x00000001, false},
+};
+
 EnumValueSet const VkVideoCodecOperationFlagsKHRSets[] = {
     {"ENCODE_H264_BIT_EXT", 0x00010000, false}, {"DECODE_H264_BIT_EXT", 0x00000001, false},
     {"DECODE_H265_BIT_EXT", 0x00000002, false}, {"INVALID", 0, false},
@@ -2543,6 +2547,8 @@ EnumValueSet const VkObjectTypeSets[] = {
     {"MICROMAP_EXT", 1000396000, false},
     {"OPTICAL_FLOW_SESSION_NV", 1000464000, false},
     {"SHADER_EXT", 1000482000, false},
+    {"CUDA_MODULE_NV", 1000307000, false},
+    {"CUDA_FUNCTION_NV", 1000307001, false},
 };
 
 EnumValueSet const VkRayTracingInvocationReorderModeNVSets[] = {
@@ -3010,6 +3016,8 @@ EnumValueSet const VkDebugReportObjectTypeEXTSets[] = {
     {"CU_MODULE_NVX", 1000029000, false},
     {"CU_FUNCTION_NVX", 1000029001, false},
     {"BUFFER_COLLECTION_FUCHSIA", 1000366000, false},
+    {"CUDA_MODULE_NV", 1000307000, false},
+    {"CUDA_FUNCTION_NV", 1000307001, false},
 };
 
 EnumValueSet const VkDeviceMemoryReportEventTypeEXTSets[] = {
@@ -3422,7 +3430,7 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[346] = {
+EnumType const cEnumTypes[347] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", NULL, 0},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 1},
@@ -3583,6 +3591,8 @@ EnumType const cEnumTypes[346] = {
     {"VkPresentScalingFlagsEXT", VkPresentScalingFlagsEXTSets, 3},
     {"VkPresentGravityFlagsEXT", VkPresentGravityFlagsEXTSets, 3},
     {"VkShaderCreateFlagsEXT", VkShaderCreateFlagsEXTSets, 7},
+    {"VkPhysicalDeviceSchedulingControlsFlagsARM", VkPhysicalDeviceSchedulingControlsFlagsARMSets,
+     1},
     {"VkVideoCodecOperationFlagsKHR", VkVideoCodecOperationFlagsKHRSets, 8},
     {"VkVideoCapabilityFlagsKHR", VkVideoCapabilityFlagsKHRSets, 2},
     {"VkVideoSessionCreateFlagsKHR", VkVideoSessionCreateFlagsKHRSets, 3},
@@ -3645,7 +3655,7 @@ EnumType const cEnumTypes[346] = {
     {"VkFilter", VkFilterSets, 4},
     {"VkSamplerMipmapMode", VkSamplerMipmapModeSets, 2},
     {"VkVertexInputRate", VkVertexInputRateSets, 2},
-    {"VkObjectType", VkObjectTypeSets, 55},
+    {"VkObjectType", VkObjectTypeSets, 57},
     {"VkRayTracingInvocationReorderModeNV", VkRayTracingInvocationReorderModeNVSets, 2},
     {"VkIndirectCommandsTokenTypeNV", VkIndirectCommandsTokenTypeNVSets, 11},
     {"VkDescriptorUpdateTemplateType", VkDescriptorUpdateTemplateTypeSets, 3},
@@ -3711,7 +3721,7 @@ EnumType const cEnumTypes[346] = {
     {"VkLayeredDriverUnderlyingApiMSFT", VkLayeredDriverUnderlyingApiMSFTSets, 2},
     {"VkColorSpaceKHR", VkColorSpaceKHRSets, 18},
     {"VkPresentModeKHR", VkPresentModeKHRSets, 6},
-    {"VkDebugReportObjectTypeEXT", VkDebugReportObjectTypeEXTSets, 46},
+    {"VkDebugReportObjectTypeEXT", VkDebugReportObjectTypeEXTSets, 48},
     {"VkDeviceMemoryReportEventTypeEXT", VkDeviceMemoryReportEventTypeEXTSets, 5},
     {"VkRasterizationOrderAMD", VkRasterizationOrderAMDSets, 2},
     {"VkValidationCheckEXT", VkValidationCheckEXTSets, 2},
