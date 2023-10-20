@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) >= 0,
               "openxr header version is from before the minimum supported version of v0.");
-static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 30,
-              "openxr header version is from after the maximum supported version of v30.");
+static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 31,
+              "openxr header version is from after the maximum supported version of v31.");
 #else
 _Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) >= 0,
                "openxr header version is from before the minimum supported version of v0.");
-_Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 30,
-               "openxr header version is from after the maximum supported version of v30.");
+_Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 31,
+               "openxr header version is from after the maximum supported version of v31.");
 #endif
 
 /// Returns a string representing the given VkResult parameter. If there is no known representation,
@@ -51,6 +51,10 @@ char const *XrResult_to_string(XrResult result) {
   // Check in descending order to get the 'latest' version of the error code text available.
   // Also, because codes have been re-used over time, can't use a switch and have to do this large
   // set of ifs. Luckily this *should* be a relatively rare call.
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 31 && XR_MSFT_scene_marker
+  if (result == XR_SCENE_MARKER_DATA_NOT_STRING_MSFT)
+    return "XR_SCENE_MARKER_DATA_NOT_STRING_MSFT";
+#endif
 #if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 28 && XR_META_passthrough_color_lut
   if (result == XR_ERROR_PASSTHROUGH_COLOR_LUT_BUFFER_SIZE_MISMATCH_META)
     return "XR_ERROR_PASSTHROUGH_COLOR_LUT_BUFFER_SIZE_MISMATCH_META";
