@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 269,
-              "VK_HEADER_VERSION is from after the maximum supported version of v269.");
+static_assert(VK_HEADER_VERSION <= 270,
+              "VK_HEADER_VERSION is from after the maximum supported version of v270.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 269,
-               "VK_HEADER_VERSION is from after the maximum supported version of v269.");
+_Static_assert(VK_HEADER_VERSION <= 270,
+               "VK_HEADER_VERSION is from after the maximum supported version of v270.");
 #endif
 
 typedef enum STecVkSerializationResult {

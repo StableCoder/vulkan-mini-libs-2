@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 269,
-              "VK_HEADER_VERSION is from after the maximum supported version of v269.");
+static_assert(VK_HEADER_VERSION <= 270,
+              "VK_HEADER_VERSION is from after the maximum supported version of v270.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 269,
-               "VK_HEADER_VERSION is from after the maximum supported version of v269.");
+_Static_assert(VK_HEADER_VERSION <= 270,
+               "VK_HEADER_VERSION is from after the maximum supported version of v270.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -5568,6 +5568,11 @@ void cleanup_VkPhysicalDeviceSchedulingControlsFeaturesARM(
 #if VK_HEADER_VERSION >= 269 && (VK_ARM_scheduling_controls)
 void cleanup_VkPhysicalDeviceSchedulingControlsPropertiesARM(
     VkPhysicalDeviceSchedulingControlsPropertiesARM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 270 && (VK_IMG_relaxed_line_rasterization)
+void cleanup_VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG(
+    VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -13442,6 +13447,14 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SCHEDULING_CONTROLS_PROPERTIES_ARM) {
     cleanup_VkPhysicalDeviceSchedulingControlsPropertiesARM(
         (VkPhysicalDeviceSchedulingControlsPropertiesARM const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 270 && (VK_IMG_relaxed_line_rasterization)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RELAXED_LINE_RASTERIZATION_FEATURES_IMG) {
+    cleanup_VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG(
+        (VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG const *)pData);
     return;
   }
 #endif
@@ -26604,6 +26617,16 @@ void cleanup_VkPhysicalDeviceSchedulingControlsFeaturesARM(
 #if VK_HEADER_VERSION >= 269 && (VK_ARM_scheduling_controls)
 void cleanup_VkPhysicalDeviceSchedulingControlsPropertiesARM(
     VkPhysicalDeviceSchedulingControlsPropertiesARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 270 && (VK_IMG_relaxed_line_rasterization)
+void cleanup_VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG(
+    VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

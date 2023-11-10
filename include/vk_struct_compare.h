@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 269,
-              "VK_HEADER_VERSION is from after the maximum supported version of v269.");
+static_assert(VK_HEADER_VERSION <= 270,
+              "VK_HEADER_VERSION is from after the maximum supported version of v270.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 269,
-               "VK_HEADER_VERSION is from after the maximum supported version of v269.");
+_Static_assert(VK_HEADER_VERSION <= 270,
+               "VK_HEADER_VERSION is from after the maximum supported version of v270.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -6118,6 +6118,12 @@ bool compare_VkPhysicalDeviceSchedulingControlsFeaturesARM(
 bool compare_VkPhysicalDeviceSchedulingControlsPropertiesARM(
     VkPhysicalDeviceSchedulingControlsPropertiesARM const *s1,
     VkPhysicalDeviceSchedulingControlsPropertiesARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 270 && (VK_IMG_relaxed_line_rasterization)
+bool compare_VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG(
+    VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG const *s1,
+    VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_HEADER_VERSION <= 252 && (VK_EXT_video_encode_h264)
@@ -21369,6 +21375,17 @@ bool compare_VkPhysicalDeviceSchedulingControlsPropertiesARM(
     VkPhysicalDeviceSchedulingControlsPropertiesARM const *s1,
     VkPhysicalDeviceSchedulingControlsPropertiesARM const *s2) {
   if ((s1->schedulingControlsFlags != s2->schedulingControlsFlags) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 270 && (VK_IMG_relaxed_line_rasterization)
+bool compare_VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG(
+    VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG const *s1,
+    VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG const *s2) {
+  if ((s1->relaxedLineRasterization != s2->relaxedLineRasterization) || false)
     return false;
 
   return true;
