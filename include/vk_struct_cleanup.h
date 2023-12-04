@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 270,
-              "VK_HEADER_VERSION is from after the maximum supported version of v270.");
+static_assert(VK_HEADER_VERSION <= 271,
+              "VK_HEADER_VERSION is from after the maximum supported version of v271.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 270,
-               "VK_HEADER_VERSION is from after the maximum supported version of v270.");
+_Static_assert(VK_HEADER_VERSION <= 271,
+               "VK_HEADER_VERSION is from after the maximum supported version of v271.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -6469,10 +6469,6 @@ void cleanup_VkSetLatencyMarkerInfoNV(VkSetLatencyMarkerInfoNV const *pData);
 #endif
 
 #if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
-void cleanup_VkGetLatencyMarkerInfoNV(VkGetLatencyMarkerInfoNV const *pData);
-#endif
-
-#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
 void cleanup_VkLatencyTimingsFrameReportNV(VkLatencyTimingsFrameReportNV const *pData);
 #endif
 
@@ -6490,6 +6486,10 @@ void cleanup_VkSwapchainLatencyCreateInfoNV(VkSwapchainLatencyCreateInfoNV const
 
 #if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
 void cleanup_VkLatencySurfaceCapabilitiesNV(VkLatencySurfaceCapabilitiesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 266 && VK_HEADER_VERSION <= 270 && (VK_NV_low_latency2)
+void cleanup_VkGetLatencyMarkerInfoNV(VkGetLatencyMarkerInfoNV const *pData);
 #endif
 
 #if VK_HEADER_VERSION >= 267 && (VK_EXT_nested_command_buffer)
@@ -6552,6 +6552,10 @@ void cleanup_VkPhysicalDeviceSchedulingControlsPropertiesARM(
 #if VK_HEADER_VERSION >= 270 && (VK_IMG_relaxed_line_rasterization)
 void cleanup_VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG(
     VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 271 && (VK_NV_low_latency2)
+void cleanup_VkGetLatencyMarkerInfoNV(VkGetLatencyMarkerInfoNV const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -15056,13 +15060,6 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
-  if (pTemp->sType == VK_STRUCTURE_TYPE_GET_LATENCY_MARKER_INFO_NV) {
-    cleanup_VkGetLatencyMarkerInfoNV((VkGetLatencyMarkerInfoNV const *)pData);
-    return;
-  }
-#endif
-
-#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
   if (pTemp->sType == VK_STRUCTURE_TYPE_LATENCY_TIMINGS_FRAME_REPORT_NV) {
     cleanup_VkLatencyTimingsFrameReportNV((VkLatencyTimingsFrameReportNV const *)pData);
     return;
@@ -15093,6 +15090,13 @@ void cleanup_vk_struct(void const *pData) {
 #if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
   if (pTemp->sType == VK_STRUCTURE_TYPE_LATENCY_SURFACE_CAPABILITIES_NV) {
     cleanup_VkLatencySurfaceCapabilitiesNV((VkLatencySurfaceCapabilitiesNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 266 && VK_HEADER_VERSION <= 270 && (VK_NV_low_latency2)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_GET_LATENCY_MARKER_INFO_NV) {
+    cleanup_VkGetLatencyMarkerInfoNV((VkGetLatencyMarkerInfoNV const *)pData);
     return;
   }
 #endif
@@ -15195,6 +15199,13 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RELAXED_LINE_RASTERIZATION_FEATURES_IMG) {
     cleanup_VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG(
         (VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 271 && (VK_NV_low_latency2)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_GET_LATENCY_MARKER_INFO_NV) {
+    cleanup_VkGetLatencyMarkerInfoNV((VkGetLatencyMarkerInfoNV const *)pData);
     return;
   }
 #endif
@@ -30262,20 +30273,6 @@ void cleanup_VkSetLatencyMarkerInfoNV(VkSetLatencyMarkerInfoNV const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
-void cleanup_VkGetLatencyMarkerInfoNV(VkGetLatencyMarkerInfoNV const *pData) {
-  // pNext
-  if (pData->pNext != NULL)
-    cleanup_vk_struct(pData->pNext);
-  free((void *)pData->pNext);
-
-  // pTimings
-  if (pData->pTimings != NULL)
-    cleanup_VkLatencyTimingsFrameReportNV(pData->pTimings);
-  free((void *)pData->pTimings);
-}
-#endif
-
-#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
 void cleanup_VkLatencyTimingsFrameReportNV(VkLatencyTimingsFrameReportNV const *pData) {
   // pNext
   if (pData->pNext != NULL)
@@ -30320,6 +30317,20 @@ void cleanup_VkLatencySurfaceCapabilitiesNV(VkLatencySurfaceCapabilitiesNV const
 
   // pPresentModes - presentModeCount
   free((void *)pData->pPresentModes);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 266 && VK_HEADER_VERSION <= 270 && (VK_NV_low_latency2)
+void cleanup_VkGetLatencyMarkerInfoNV(VkGetLatencyMarkerInfoNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pTimings
+  if (pData->pTimings != NULL)
+    cleanup_VkLatencyTimingsFrameReportNV(pData->pTimings);
+  free((void *)pData->pTimings);
 }
 #endif
 
@@ -30459,6 +30470,22 @@ void cleanup_VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG(
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 271 && (VK_NV_low_latency2)
+void cleanup_VkGetLatencyMarkerInfoNV(VkGetLatencyMarkerInfoNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pTimings - timingCount
+  if (pData->pTimings != NULL) {
+    for (uint32_t i = 0; i < pData->timingCount; ++i)
+      cleanup_VkLatencyTimingsFrameReportNV(&pData->pTimings[i]);
+  }
+  free((void *)pData->pTimings);
 }
 #endif
 

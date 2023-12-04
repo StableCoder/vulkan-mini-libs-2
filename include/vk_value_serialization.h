@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 270,
-              "VK_HEADER_VERSION is from after the maximum supported version of v270.");
+static_assert(VK_HEADER_VERSION <= 271,
+              "VK_HEADER_VERSION is from after the maximum supported version of v271.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 270,
-               "VK_HEADER_VERSION is from after the maximum supported version of v270.");
+_Static_assert(VK_HEADER_VERSION <= 271,
+               "VK_HEADER_VERSION is from after the maximum supported version of v271.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -3018,6 +3018,8 @@ EnumValueSet const VkDebugReportObjectTypeEXTSets[] = {
     {"BUFFER_COLLECTION_FUCHSIA", 1000366000, false},
     {"CUDA_MODULE_NV", 1000307000, false},
     {"CUDA_FUNCTION_NV", 1000307001, false},
+    {"CUDA_MODULE_NV", 1000307000, false},
+    {"CUDA_FUNCTION_NV", 1000307001, false},
 };
 
 EnumValueSet const VkDeviceMemoryReportEventTypeEXTSets[] = {
@@ -3721,7 +3723,7 @@ EnumType const cEnumTypes[347] = {
     {"VkLayeredDriverUnderlyingApiMSFT", VkLayeredDriverUnderlyingApiMSFTSets, 2},
     {"VkColorSpaceKHR", VkColorSpaceKHRSets, 18},
     {"VkPresentModeKHR", VkPresentModeKHRSets, 6},
-    {"VkDebugReportObjectTypeEXT", VkDebugReportObjectTypeEXTSets, 48},
+    {"VkDebugReportObjectTypeEXT", VkDebugReportObjectTypeEXTSets, 50},
     {"VkDeviceMemoryReportEventTypeEXT", VkDeviceMemoryReportEventTypeEXTSets, 5},
     {"VkRasterizationOrderAMD", VkRasterizationOrderAMDSets, 2},
     {"VkValidationCheckEXT", VkValidationCheckEXTSets, 2},

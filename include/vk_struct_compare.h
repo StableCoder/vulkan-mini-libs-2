@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 270,
-              "VK_HEADER_VERSION is from after the maximum supported version of v270.");
+static_assert(VK_HEADER_VERSION <= 271,
+              "VK_HEADER_VERSION is from after the maximum supported version of v271.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 270,
-               "VK_HEADER_VERSION is from after the maximum supported version of v270.");
+_Static_assert(VK_HEADER_VERSION <= 271,
+               "VK_HEADER_VERSION is from after the maximum supported version of v271.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -6060,7 +6060,7 @@ bool compare_VkSetLatencyMarkerInfoNV(VkSetLatencyMarkerInfoNV const *s1,
                                       VkSetLatencyMarkerInfoNV const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+#if VK_HEADER_VERSION >= 271 && (VK_NV_low_latency2)
 bool compare_VkGetLatencyMarkerInfoNV(VkGetLatencyMarkerInfoNV const *s1,
                                       VkGetLatencyMarkerInfoNV const *s2);
 #endif
@@ -6124,6 +6124,11 @@ bool compare_VkPhysicalDeviceSchedulingControlsPropertiesARM(
 bool compare_VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG(
     VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG const *s1,
     VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 266 && VK_HEADER_VERSION <= 270 && (VK_NV_low_latency2)
+bool compare_VkGetLatencyMarkerInfoNV(VkGetLatencyMarkerInfoNV const *s1,
+                                      VkGetLatencyMarkerInfoNV const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 213 && VK_HEADER_VERSION <= 259 &&                                        \
@@ -21523,9 +21528,12 @@ bool compare_VkSetLatencyMarkerInfoNV(VkSetLatencyMarkerInfoNV const *s1,
 }
 #endif
 
-#if VK_HEADER_VERSION >= 266 && (VK_NV_low_latency2)
+#if VK_HEADER_VERSION >= 271 && (VK_NV_low_latency2)
 bool compare_VkGetLatencyMarkerInfoNV(VkGetLatencyMarkerInfoNV const *s1,
                                       VkGetLatencyMarkerInfoNV const *s2) {
+  if ((s1->timingCount != s2->timingCount) || false)
+    return false;
+
   return true;
 }
 #endif
@@ -21654,6 +21662,13 @@ bool compare_VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG(
   if ((s1->relaxedLineRasterization != s2->relaxedLineRasterization) || false)
     return false;
 
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 266 && VK_HEADER_VERSION <= 270 && (VK_NV_low_latency2)
+bool compare_VkGetLatencyMarkerInfoNV(VkGetLatencyMarkerInfoNV const *s1,
+                                      VkGetLatencyMarkerInfoNV const *s2) {
   return true;
 }
 #endif
