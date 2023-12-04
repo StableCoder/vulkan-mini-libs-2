@@ -6,6 +6,8 @@
 
 from os.path import exists
 import argparse
+import copy
+import hashlib
 import sys
 import re
 import xml.etree.ElementTree as ET
@@ -189,11 +191,35 @@ def processStruct(structNode, structData, api, apiVersion):
     structName = structNode.get('name')
     alias = structNode.get('alias')
 
-    struct = structData.find(structName)
+    # Structure members/layouts can change, so need creeate a hash for each to sort/split them out
+    # However, we only want to do variant splits based on pertinent member/name/types, not attribute
+    # or comment changes
+    strippedStructNode = copy.deepcopy(structNode)
+    for member in strippedStructNode.findall('./member'):
+        if member.get('api') and member.get('api') != api:
+            strippedStructNode.remove(member)
+            continue
+        for subMember in member.findall('./'):
+            if subMember.tag != 'name' and subMember.tag != 'type':
+                member.remove(subMember)
+
+    strippedTree = ET.fromstring(ET.tostring(strippedStructNode, encoding='unicode'))
+    strippedTree = ''.join(strippedTree.itertext())
+    strippedTree = ''.join(strippedTree.split())
+    strippedTree = strippedTree.replace('const','')
+
+    structVariantHash = hashlib.sha256(strippedTree.encode('utf-8')).hexdigest()
+
+    struct = structData.find('./{}[@variant_hash=\'{}\']'.format(structName, structVariantHash))
     if struct is None:
         struct = ET.SubElement(structData, structName, {
+                               'variant_hash': structVariantHash,
                                'first': apiVersion, 'last': apiVersion})
         ET.SubElement(struct, 'platforms')
+
+        # uncomment when debugging variants
+        # xml_data = ET.SubElement(struct, 'xml_data')
+        # xml_data.text = strippedTree
 
         if alias:
             struct.set('alias', alias)
@@ -284,8 +310,7 @@ def processStruct(structNode, structData, api, apiVersion):
 def processFeatureStruct(featureName, featureType, structData, apiVersion):
     name = featureType.get('name')
 
-    struct = structData.find(name)
-    if not struct is None:
+    for struct in structData.findall(name):
         platforms = struct.find('platforms')
         platform = platforms.find(featureName)
         if platform is None:
@@ -301,8 +326,7 @@ def processExtensionStruct(extension, structData, apiVersion):
     for require in extension.findall('require'):
         for type in require.findall('type'):
             typeName = type.get('name')
-            struct = structData.find(typeName)
-            if not struct is None:
+            for struct in structData.findall(typeName):
                 platforms = struct.find('platforms')
                 platform = platforms.find(extName)
                 if platform is None:
