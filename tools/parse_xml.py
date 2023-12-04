@@ -210,7 +210,12 @@ def processStruct(structNode, structData, api, apiVersion):
 
     structVariantHash = hashlib.sha256(strippedTree.encode('utf-8')).hexdigest()
 
-    struct = structData.find('./{}[@variant_hash=\'{}\']'.format(structName, structVariantHash))
+    struct = None
+    if alias:
+        struct = structData.find('./{}[@variant_hash=\'{}\'][@alias=\'{}\']'.format(structName, structVariantHash, alias))
+    else:
+        struct = structData.find('./{}[@variant_hash=\'{}\']'.format(structName, structVariantHash))
+
     if struct is None:
         struct = ET.SubElement(structData, structName, {
                                'variant_hash': structVariantHash,

@@ -488,11 +488,6 @@ void cleanup_VkPresentRegionKHR(VkPresentRegionKHR const *pData);
 void cleanup_VkRectLayerKHR(VkRectLayerKHR const *pData);
 #endif
 
-#if (VK_KHR_variable_pointers)
-void cleanup_VkPhysicalDeviceVariablePointerFeaturesKHR(
-    VkPhysicalDeviceVariablePointerFeaturesKHR const *pData);
-#endif
-
 #if (VK_VERSION_1_1)
 void cleanup_VkExternalMemoryProperties(VkExternalMemoryProperties const *pData);
 #endif
@@ -1451,6 +1446,11 @@ void cleanup_VkPhysicalDeviceVariablePointerFeatures(
     VkPhysicalDeviceVariablePointerFeatures const *pData);
 #endif
 
+#if VK_HEADER_VERSION <= 105 && (VK_KHR_variable_pointers)
+void cleanup_VkPhysicalDeviceVariablePointerFeaturesKHR(
+    VkPhysicalDeviceVariablePointerFeaturesKHR const *pData);
+#endif
+
 #if VK_HEADER_VERSION <= 105 && (VK_VERSION_1_1)
 void cleanup_VkPhysicalDeviceShaderDrawParameterFeatures(
     VkPhysicalDeviceShaderDrawParameterFeatures const *pData);
@@ -2043,6 +2043,11 @@ void cleanup_VkPhysicalDeviceVariablePointersFeaturesKHR(
     VkPhysicalDeviceVariablePointersFeaturesKHR const *pData);
 #endif
 
+#if VK_HEADER_VERSION >= 106 && (VK_KHR_variable_pointers)
+void cleanup_VkPhysicalDeviceVariablePointerFeaturesKHR(
+    VkPhysicalDeviceVariablePointerFeaturesKHR const *pData);
+#endif
+
 #if VK_HEADER_VERSION >= 106 && (VK_VERSION_1_1)
 void cleanup_VkPhysicalDeviceVariablePointerFeatures(
     VkPhysicalDeviceVariablePointerFeatures const *pData);
@@ -2175,11 +2180,6 @@ void cleanup_VkFramebufferAttachmentImageInfoKHR(VkFramebufferAttachmentImageInf
 void cleanup_VkRenderPassAttachmentBeginInfoKHR(VkRenderPassAttachmentBeginInfoKHR const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 115 && (VK_KHR_shader_float16_int8)
-void cleanup_VkPhysicalDeviceFloat16Int8FeaturesKHR(
-    VkPhysicalDeviceFloat16Int8FeaturesKHR const *pData);
-#endif
-
 #if VK_HEADER_VERSION >= 115 && (VK_INTEL_shader_integer_functions2)
 void cleanup_VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL(
     VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL const *pData);
@@ -2188,6 +2188,11 @@ void cleanup_VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL(
 #if VK_HEADER_VERSION >= 115 && VK_HEADER_VERSION <= 130 && (VK_KHR_shader_float16_int8)
 void cleanup_VkPhysicalDeviceShaderFloat16Int8FeaturesKHR(
     VkPhysicalDeviceShaderFloat16Int8FeaturesKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 115 && VK_HEADER_VERSION <= 130 && (VK_KHR_shader_float16_int8)
+void cleanup_VkPhysicalDeviceFloat16Int8FeaturesKHR(
+    VkPhysicalDeviceFloat16Int8FeaturesKHR const *pData);
 #endif
 
 #if VK_HEADER_VERSION >= 116 && VK_HEADER_VERSION <= 203 && (VK_EXT_subgroup_size_control)
@@ -2374,10 +2379,6 @@ void cleanup_VkAcquireProfilingLockInfoKHR(VkAcquireProfilingLockInfoKHR const *
 void cleanup_VkPerformanceQuerySubmitInfoKHR(VkPerformanceQuerySubmitInfoKHR const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 129 && (VK_EXT_buffer_device_address)
-void cleanup_VkBufferDeviceAddressInfoEXT(VkBufferDeviceAddressInfoEXT const *pData);
-#endif
-
 #if VK_HEADER_VERSION >= 129 && VK_HEADER_VERSION <= 130 && (VK_KHR_buffer_device_address)
 void cleanup_VkPhysicalDeviceBufferDeviceAddressFeaturesKHR(
     VkPhysicalDeviceBufferDeviceAddressFeaturesKHR const *pData);
@@ -2385,6 +2386,10 @@ void cleanup_VkPhysicalDeviceBufferDeviceAddressFeaturesKHR(
 
 #if VK_HEADER_VERSION >= 129 && VK_HEADER_VERSION <= 130 && (VK_KHR_buffer_device_address)
 void cleanup_VkBufferDeviceAddressInfoKHR(VkBufferDeviceAddressInfoKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 129 && VK_HEADER_VERSION <= 130 && (VK_EXT_buffer_device_address)
+void cleanup_VkBufferDeviceAddressInfoEXT(VkBufferDeviceAddressInfoEXT const *pData);
 #endif
 
 #if VK_HEADER_VERSION >= 129 && VK_HEADER_VERSION <= 130 && (VK_KHR_buffer_device_address)
@@ -2466,6 +2471,11 @@ void cleanup_VkPhysicalDeviceShaderFloat16Int8Features(
 #if VK_HEADER_VERSION >= 131 && (VK_KHR_shader_float16_int8)
 void cleanup_VkPhysicalDeviceShaderFloat16Int8FeaturesKHR(
     VkPhysicalDeviceShaderFloat16Int8FeaturesKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 131 && (VK_KHR_shader_float16_int8)
+void cleanup_VkPhysicalDeviceFloat16Int8FeaturesKHR(
+    VkPhysicalDeviceFloat16Int8FeaturesKHR const *pData);
 #endif
 
 #if VK_HEADER_VERSION >= 131 && (VK_VERSION_1_2)
@@ -2739,6 +2749,10 @@ void cleanup_VkBufferDeviceAddressInfo(VkBufferDeviceAddressInfo const *pData);
 
 #if VK_HEADER_VERSION >= 131 && (VK_KHR_buffer_device_address)
 void cleanup_VkBufferDeviceAddressInfoKHR(VkBufferDeviceAddressInfoKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 131 && (VK_EXT_buffer_device_address)
+void cleanup_VkBufferDeviceAddressInfoEXT(VkBufferDeviceAddressInfoEXT const *pData);
 #endif
 
 #if VK_HEADER_VERSION >= 131 && (VK_VERSION_1_2)
@@ -16493,14 +16507,6 @@ void cleanup_VkPresentRegionKHR(VkPresentRegionKHR const *pData) {
 void cleanup_VkRectLayerKHR(VkRectLayerKHR const *pData) {}
 #endif
 
-#if (VK_KHR_variable_pointers)
-void cleanup_VkPhysicalDeviceVariablePointerFeaturesKHR(
-    VkPhysicalDeviceVariablePointerFeaturesKHR const *pData) {
-  cleanup_VkPhysicalDeviceVariablePointersFeatures(
-      (VkPhysicalDeviceVariablePointersFeatures const *)pData);
-}
-#endif
-
 #if (VK_VERSION_1_1)
 void cleanup_VkExternalMemoryProperties(VkExternalMemoryProperties const *pData) {}
 #endif
@@ -18537,6 +18543,14 @@ void cleanup_VkPhysicalDeviceVariablePointerFeatures(
 }
 #endif
 
+#if VK_HEADER_VERSION <= 105 && (VK_KHR_variable_pointers)
+void cleanup_VkPhysicalDeviceVariablePointerFeaturesKHR(
+    VkPhysicalDeviceVariablePointerFeaturesKHR const *pData) {
+  cleanup_VkPhysicalDeviceVariablePointerFeatures(
+      (VkPhysicalDeviceVariablePointerFeatures const *)pData);
+}
+#endif
+
 #if VK_HEADER_VERSION <= 105 && (VK_VERSION_1_1)
 void cleanup_VkPhysicalDeviceShaderDrawParameterFeatures(
     VkPhysicalDeviceShaderDrawParameterFeatures const *pData) {
@@ -19919,6 +19933,14 @@ void cleanup_VkPhysicalDeviceVariablePointersFeaturesKHR(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 106 && (VK_KHR_variable_pointers)
+void cleanup_VkPhysicalDeviceVariablePointerFeaturesKHR(
+    VkPhysicalDeviceVariablePointerFeaturesKHR const *pData) {
+  cleanup_VkPhysicalDeviceVariablePointersFeatures(
+      (VkPhysicalDeviceVariablePointersFeatures const *)pData);
+}
+#endif
+
 #if VK_HEADER_VERSION >= 106 && (VK_VERSION_1_1)
 void cleanup_VkPhysicalDeviceVariablePointerFeatures(
     VkPhysicalDeviceVariablePointerFeatures const *pData) {
@@ -20196,14 +20218,6 @@ void cleanup_VkRenderPassAttachmentBeginInfoKHR(VkRenderPassAttachmentBeginInfoK
 }
 #endif
 
-#if VK_HEADER_VERSION >= 115 && (VK_KHR_shader_float16_int8)
-void cleanup_VkPhysicalDeviceFloat16Int8FeaturesKHR(
-    VkPhysicalDeviceFloat16Int8FeaturesKHR const *pData) {
-  cleanup_VkPhysicalDeviceShaderFloat16Int8Features(
-      (VkPhysicalDeviceShaderFloat16Int8Features const *)pData);
-}
-#endif
-
 #if VK_HEADER_VERSION >= 115 && (VK_INTEL_shader_integer_functions2)
 void cleanup_VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL(
     VkPhysicalDeviceShaderIntegerFunctions2FeaturesINTEL const *pData) {
@@ -20221,6 +20235,14 @@ void cleanup_VkPhysicalDeviceShaderFloat16Int8FeaturesKHR(
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 115 && VK_HEADER_VERSION <= 130 && (VK_KHR_shader_float16_int8)
+void cleanup_VkPhysicalDeviceFloat16Int8FeaturesKHR(
+    VkPhysicalDeviceFloat16Int8FeaturesKHR const *pData) {
+  cleanup_VkPhysicalDeviceShaderFloat16Int8FeaturesKHR(
+      (VkPhysicalDeviceShaderFloat16Int8FeaturesKHR const *)pData);
 }
 #endif
 
@@ -20624,12 +20646,6 @@ void cleanup_VkPerformanceQuerySubmitInfoKHR(VkPerformanceQuerySubmitInfoKHR con
 }
 #endif
 
-#if VK_HEADER_VERSION >= 129 && (VK_EXT_buffer_device_address)
-void cleanup_VkBufferDeviceAddressInfoEXT(VkBufferDeviceAddressInfoEXT const *pData) {
-  cleanup_VkBufferDeviceAddressInfo((VkBufferDeviceAddressInfo const *)pData);
-}
-#endif
-
 #if VK_HEADER_VERSION >= 129 && VK_HEADER_VERSION <= 130 && (VK_KHR_buffer_device_address)
 void cleanup_VkPhysicalDeviceBufferDeviceAddressFeaturesKHR(
     VkPhysicalDeviceBufferDeviceAddressFeaturesKHR const *pData) {
@@ -20646,6 +20662,12 @@ void cleanup_VkBufferDeviceAddressInfoKHR(VkBufferDeviceAddressInfoKHR const *pD
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 129 && VK_HEADER_VERSION <= 130 && (VK_EXT_buffer_device_address)
+void cleanup_VkBufferDeviceAddressInfoEXT(VkBufferDeviceAddressInfoEXT const *pData) {
+  cleanup_VkBufferDeviceAddressInfoKHR((VkBufferDeviceAddressInfoKHR const *)pData);
 }
 #endif
 
@@ -20795,6 +20817,14 @@ void cleanup_VkPhysicalDeviceShaderFloat16Int8Features(
 #if VK_HEADER_VERSION >= 131 && (VK_KHR_shader_float16_int8)
 void cleanup_VkPhysicalDeviceShaderFloat16Int8FeaturesKHR(
     VkPhysicalDeviceShaderFloat16Int8FeaturesKHR const *pData) {
+  cleanup_VkPhysicalDeviceShaderFloat16Int8Features(
+      (VkPhysicalDeviceShaderFloat16Int8Features const *)pData);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 131 && (VK_KHR_shader_float16_int8)
+void cleanup_VkPhysicalDeviceFloat16Int8FeaturesKHR(
+    VkPhysicalDeviceFloat16Int8FeaturesKHR const *pData) {
   cleanup_VkPhysicalDeviceShaderFloat16Int8Features(
       (VkPhysicalDeviceShaderFloat16Int8Features const *)pData);
 }
@@ -21371,6 +21401,12 @@ void cleanup_VkBufferDeviceAddressInfo(VkBufferDeviceAddressInfo const *pData) {
 
 #if VK_HEADER_VERSION >= 131 && (VK_KHR_buffer_device_address)
 void cleanup_VkBufferDeviceAddressInfoKHR(VkBufferDeviceAddressInfoKHR const *pData) {
+  cleanup_VkBufferDeviceAddressInfo((VkBufferDeviceAddressInfo const *)pData);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 131 && (VK_EXT_buffer_device_address)
+void cleanup_VkBufferDeviceAddressInfoEXT(VkBufferDeviceAddressInfoEXT const *pData) {
   cleanup_VkBufferDeviceAddressInfo((VkBufferDeviceAddressInfo const *)pData);
 }
 #endif

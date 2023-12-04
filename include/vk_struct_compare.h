@@ -867,7 +867,7 @@ bool compare_VkPhysicalDeviceVariablePointersFeaturesKHR(
     VkPhysicalDeviceVariablePointersFeaturesKHR const *s2);
 #endif
 
-#if (VK_KHR_variable_pointers)
+#if VK_HEADER_VERSION >= 106 && (VK_KHR_variable_pointers)
 bool compare_VkPhysicalDeviceVariablePointerFeaturesKHR(
     VkPhysicalDeviceVariablePointerFeaturesKHR const *s1,
     VkPhysicalDeviceVariablePointerFeaturesKHR const *s2);
@@ -2115,7 +2115,7 @@ bool compare_VkPhysicalDeviceShaderFloat16Int8FeaturesKHR(
     VkPhysicalDeviceShaderFloat16Int8FeaturesKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 115 && (VK_KHR_shader_float16_int8)
+#if VK_HEADER_VERSION >= 131 && (VK_KHR_shader_float16_int8)
 bool compare_VkPhysicalDeviceFloat16Int8FeaturesKHR(
     VkPhysicalDeviceFloat16Int8FeaturesKHR const *s1,
     VkPhysicalDeviceFloat16Int8FeaturesKHR const *s2);
@@ -3148,7 +3148,7 @@ bool compare_VkBufferDeviceAddressInfoKHR(VkBufferDeviceAddressInfoKHR const *s1
                                           VkBufferDeviceAddressInfoKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 129 && (VK_EXT_buffer_device_address)
+#if VK_HEADER_VERSION >= 131 && (VK_EXT_buffer_device_address)
 bool compare_VkBufferDeviceAddressInfoEXT(VkBufferDeviceAddressInfoEXT const *s1,
                                           VkBufferDeviceAddressInfoEXT const *s2);
 #endif
@@ -7364,6 +7364,12 @@ bool compare_VkPhysicalDeviceShaderFloat16Int8FeaturesKHR(
     VkPhysicalDeviceShaderFloat16Int8FeaturesKHR const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 115 && VK_HEADER_VERSION <= 130 && (VK_KHR_shader_float16_int8)
+bool compare_VkPhysicalDeviceFloat16Int8FeaturesKHR(
+    VkPhysicalDeviceFloat16Int8FeaturesKHR const *s1,
+    VkPhysicalDeviceFloat16Int8FeaturesKHR const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 116 && VK_HEADER_VERSION <= 130 && (VK_KHR_shader_float_controls)
 bool compare_VkPhysicalDeviceFloatControlsPropertiesKHR(
     VkPhysicalDeviceFloatControlsPropertiesKHR const *s1,
@@ -7530,6 +7536,11 @@ bool compare_VkBufferDeviceAddressInfoKHR(VkBufferDeviceAddressInfoKHR const *s1
                                           VkBufferDeviceAddressInfoKHR const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 129 && VK_HEADER_VERSION <= 130 && (VK_EXT_buffer_device_address)
+bool compare_VkBufferDeviceAddressInfoEXT(VkBufferDeviceAddressInfoEXT const *s1,
+                                          VkBufferDeviceAddressInfoEXT const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 129 && VK_HEADER_VERSION <= 130 && (VK_KHR_buffer_device_address)
 bool compare_VkBufferOpaqueCaptureAddressCreateInfoKHR(
     VkBufferOpaqueCaptureAddressCreateInfoKHR const *s1,
@@ -7618,6 +7629,12 @@ bool compare_VkPhysicalDeviceShaderIntegerFunctions2INTEL(
 bool compare_VkPhysicalDeviceVariablePointerFeatures(
     VkPhysicalDeviceVariablePointerFeatures const *s1,
     VkPhysicalDeviceVariablePointerFeatures const *s2);
+#endif
+
+#if VK_HEADER_VERSION <= 105 && (VK_KHR_variable_pointers)
+bool compare_VkPhysicalDeviceVariablePointerFeaturesKHR(
+    VkPhysicalDeviceVariablePointerFeaturesKHR const *s1,
+    VkPhysicalDeviceVariablePointerFeaturesKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION <= 105 && (VK_VERSION_1_1)
@@ -10094,7 +10111,7 @@ bool compare_VkPhysicalDeviceVariablePointersFeaturesKHR(
 }
 #endif
 
-#if (VK_KHR_variable_pointers)
+#if VK_HEADER_VERSION >= 106 && (VK_KHR_variable_pointers)
 bool compare_VkPhysicalDeviceVariablePointerFeaturesKHR(
     VkPhysicalDeviceVariablePointerFeaturesKHR const *s1,
     VkPhysicalDeviceVariablePointerFeaturesKHR const *s2) {
@@ -12582,7 +12599,7 @@ bool compare_VkPhysicalDeviceShaderFloat16Int8FeaturesKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 115 && (VK_KHR_shader_float16_int8)
+#if VK_HEADER_VERSION >= 131 && (VK_KHR_shader_float16_int8)
 bool compare_VkPhysicalDeviceFloat16Int8FeaturesKHR(
     VkPhysicalDeviceFloat16Int8FeaturesKHR const *s1,
     VkPhysicalDeviceFloat16Int8FeaturesKHR const *s2) {
@@ -14886,7 +14903,7 @@ bool compare_VkBufferDeviceAddressInfoKHR(VkBufferDeviceAddressInfoKHR const *s1
 }
 #endif
 
-#if VK_HEADER_VERSION >= 129 && (VK_EXT_buffer_device_address)
+#if VK_HEADER_VERSION >= 131 && (VK_EXT_buffer_device_address)
 bool compare_VkBufferDeviceAddressInfoEXT(VkBufferDeviceAddressInfoEXT const *s1,
                                           VkBufferDeviceAddressInfoEXT const *s2) {
   return compare_VkBufferDeviceAddressInfo((VkBufferDeviceAddressInfo const *)s1,
@@ -24619,6 +24636,16 @@ bool compare_VkPhysicalDeviceShaderFloat16Int8FeaturesKHR(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 115 && VK_HEADER_VERSION <= 130 && (VK_KHR_shader_float16_int8)
+bool compare_VkPhysicalDeviceFloat16Int8FeaturesKHR(
+    VkPhysicalDeviceFloat16Int8FeaturesKHR const *s1,
+    VkPhysicalDeviceFloat16Int8FeaturesKHR const *s2) {
+  return compare_VkPhysicalDeviceShaderFloat16Int8FeaturesKHR(
+      (VkPhysicalDeviceShaderFloat16Int8FeaturesKHR const *)s1,
+      (VkPhysicalDeviceShaderFloat16Int8FeaturesKHR const *)s2);
+}
+#endif
+
 #if VK_HEADER_VERSION >= 116 && VK_HEADER_VERSION <= 130 && (VK_KHR_shader_float_controls)
 bool compare_VkPhysicalDeviceFloatControlsPropertiesKHR(
     VkPhysicalDeviceFloatControlsPropertiesKHR const *s1,
@@ -25054,6 +25081,14 @@ bool compare_VkBufferDeviceAddressInfoKHR(VkBufferDeviceAddressInfoKHR const *s1
 }
 #endif
 
+#if VK_HEADER_VERSION >= 129 && VK_HEADER_VERSION <= 130 && (VK_EXT_buffer_device_address)
+bool compare_VkBufferDeviceAddressInfoEXT(VkBufferDeviceAddressInfoEXT const *s1,
+                                          VkBufferDeviceAddressInfoEXT const *s2) {
+  return compare_VkBufferDeviceAddressInfoKHR((VkBufferDeviceAddressInfoKHR const *)s1,
+                                              (VkBufferDeviceAddressInfoKHR const *)s2);
+}
+#endif
+
 #if VK_HEADER_VERSION >= 129 && VK_HEADER_VERSION <= 130 && (VK_KHR_buffer_device_address)
 bool compare_VkBufferOpaqueCaptureAddressCreateInfoKHR(
     VkBufferOpaqueCaptureAddressCreateInfoKHR const *s1,
@@ -25243,6 +25278,16 @@ bool compare_VkPhysicalDeviceVariablePointerFeatures(
     return false;
 
   return true;
+}
+#endif
+
+#if VK_HEADER_VERSION <= 105 && (VK_KHR_variable_pointers)
+bool compare_VkPhysicalDeviceVariablePointerFeaturesKHR(
+    VkPhysicalDeviceVariablePointerFeaturesKHR const *s1,
+    VkPhysicalDeviceVariablePointerFeaturesKHR const *s2) {
+  return compare_VkPhysicalDeviceVariablePointerFeatures(
+      (VkPhysicalDeviceVariablePointerFeatures const *)s1,
+      (VkPhysicalDeviceVariablePointerFeatures const *)s2);
 }
 #endif
 
