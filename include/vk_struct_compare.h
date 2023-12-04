@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 271,
-              "VK_HEADER_VERSION is from after the maximum supported version of v271.");
+static_assert(VK_HEADER_VERSION <= 272,
+              "VK_HEADER_VERSION is from after the maximum supported version of v272.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 271,
-               "VK_HEADER_VERSION is from after the maximum supported version of v271.");
+_Static_assert(VK_HEADER_VERSION <= 272,
+               "VK_HEADER_VERSION is from after the maximum supported version of v272.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -497,6 +497,15 @@ bool compare_VkValidationFlagsEXT(VkValidationFlagsEXT const *s1, VkValidationFl
 #if VK_HEADER_VERSION >= 97 && (VK_EXT_validation_features)
 bool compare_VkValidationFeaturesEXT(VkValidationFeaturesEXT const *s1,
                                      VkValidationFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_EXT_layer_settings)
+bool compare_VkLayerSettingsCreateInfoEXT(VkLayerSettingsCreateInfoEXT const *s1,
+                                          VkLayerSettingsCreateInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_EXT_layer_settings)
+bool compare_VkLayerSettingEXT(VkLayerSettingEXT const *s1, VkLayerSettingEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 241 && (VK_EXT_application_parameters)
@@ -3980,6 +3989,12 @@ bool compare_VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI(
     VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 272 && (VK_HUAWEI_cluster_culling_shader)
+bool compare_VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI(
+    VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI const *s1,
+    VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 204 && (VK_VERSION_1_3)
 bool compare_VkBufferCopy2(VkBufferCopy2 const *s1, VkBufferCopy2 const *s2);
 #endif
@@ -6124,6 +6139,33 @@ bool compare_VkPhysicalDeviceSchedulingControlsPropertiesARM(
 bool compare_VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG(
     VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG const *s1,
     VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_ARM_render_pass_striped)
+bool compare_VkPhysicalDeviceRenderPassStripedFeaturesARM(
+    VkPhysicalDeviceRenderPassStripedFeaturesARM const *s1,
+    VkPhysicalDeviceRenderPassStripedFeaturesARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_ARM_render_pass_striped)
+bool compare_VkPhysicalDeviceRenderPassStripedPropertiesARM(
+    VkPhysicalDeviceRenderPassStripedPropertiesARM const *s1,
+    VkPhysicalDeviceRenderPassStripedPropertiesARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_ARM_render_pass_striped)
+bool compare_VkRenderPassStripeInfoARM(VkRenderPassStripeInfoARM const *s1,
+                                       VkRenderPassStripeInfoARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_ARM_render_pass_striped)
+bool compare_VkRenderPassStripeBeginInfoARM(VkRenderPassStripeBeginInfoARM const *s1,
+                                            VkRenderPassStripeBeginInfoARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_ARM_render_pass_striped)
+bool compare_VkRenderPassStripeSubmitInfoARM(VkRenderPassStripeSubmitInfoARM const *s1,
+                                             VkRenderPassStripeSubmitInfoARM const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 266 && VK_HEADER_VERSION <= 270 && (VK_NV_low_latency2)
@@ -9354,6 +9396,25 @@ bool compare_VkValidationFeaturesEXT(VkValidationFeaturesEXT const *s1,
                                      VkValidationFeaturesEXT const *s2) {
   if ((s1->enabledValidationFeatureCount != s2->enabledValidationFeatureCount) ||
       (s1->disabledValidationFeatureCount != s2->disabledValidationFeatureCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_EXT_layer_settings)
+bool compare_VkLayerSettingsCreateInfoEXT(VkLayerSettingsCreateInfoEXT const *s1,
+                                          VkLayerSettingsCreateInfoEXT const *s2) {
+  if ((s1->settingCount != s2->settingCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_EXT_layer_settings)
+bool compare_VkLayerSettingEXT(VkLayerSettingEXT const *s1, VkLayerSettingEXT const *s2) {
+  if ((s1->type != s2->type) || (s1->valueCount != s2->valueCount) || false)
     return false;
 
   return true;
@@ -16937,6 +16998,17 @@ bool compare_VkPhysicalDeviceClusterCullingShaderFeaturesHUAWEI(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 272 && (VK_HUAWEI_cluster_culling_shader)
+bool compare_VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI(
+    VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI const *s1,
+    VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI const *s2) {
+  if ((s1->clusterShadingRate != s2->clusterShadingRate) || false)
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 204 && (VK_VERSION_1_3)
 bool compare_VkBufferCopy2(VkBufferCopy2 const *s1, VkBufferCopy2 const *s2) {
   if ((s1->srcOffset != s2->srcOffset) || (s1->dstOffset != s2->dstOffset) ||
@@ -21660,6 +21732,59 @@ bool compare_VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG(
     VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG const *s1,
     VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG const *s2) {
   if ((s1->relaxedLineRasterization != s2->relaxedLineRasterization) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_ARM_render_pass_striped)
+bool compare_VkPhysicalDeviceRenderPassStripedFeaturesARM(
+    VkPhysicalDeviceRenderPassStripedFeaturesARM const *s1,
+    VkPhysicalDeviceRenderPassStripedFeaturesARM const *s2) {
+  if ((s1->renderPassStriped != s2->renderPassStriped) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_ARM_render_pass_striped)
+bool compare_VkPhysicalDeviceRenderPassStripedPropertiesARM(
+    VkPhysicalDeviceRenderPassStripedPropertiesARM const *s1,
+    VkPhysicalDeviceRenderPassStripedPropertiesARM const *s2) {
+  if (!compare_VkExtent2D(&s1->renderPassStripeGranularity, &s2->renderPassStripeGranularity) ||
+      (s1->maxRenderPassStripes != s2->maxRenderPassStripes) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_ARM_render_pass_striped)
+bool compare_VkRenderPassStripeInfoARM(VkRenderPassStripeInfoARM const *s1,
+                                       VkRenderPassStripeInfoARM const *s2) {
+  if (!compare_VkRect2D(&s1->stripeArea, &s2->stripeArea) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_ARM_render_pass_striped)
+bool compare_VkRenderPassStripeBeginInfoARM(VkRenderPassStripeBeginInfoARM const *s1,
+                                            VkRenderPassStripeBeginInfoARM const *s2) {
+  if ((s1->stripeInfoCount != s2->stripeInfoCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_ARM_render_pass_striped)
+bool compare_VkRenderPassStripeSubmitInfoARM(VkRenderPassStripeSubmitInfoARM const *s1,
+                                             VkRenderPassStripeSubmitInfoARM const *s2) {
+  if ((s1->stripeSemaphoreInfoCount != s2->stripeSemaphoreInfoCount) || false)
     return false;
 
   return true;

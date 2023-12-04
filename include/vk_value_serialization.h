@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 271,
-              "VK_HEADER_VERSION is from after the maximum supported version of v271.");
+static_assert(VK_HEADER_VERSION <= 272,
+              "VK_HEADER_VERSION is from after the maximum supported version of v272.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 271,
-               "VK_HEADER_VERSION is from after the maximum supported version of v271.");
+_Static_assert(VK_HEADER_VERSION <= 272,
+               "VK_HEADER_VERSION is from after the maximum supported version of v272.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -3157,6 +3157,11 @@ EnumValueSet const VkDeviceFaultAddressTypeEXTSets[] = {
     {"INSTRUCTION_POINTER_FAULT", 6, false},
 };
 
+EnumValueSet const VkLayerSettingTypeEXTSets[] = {
+    {"BOOL32", 0, false}, {"INT32", 1, false},   {"INT64", 2, false},   {"UINT32", 3, false},
+    {"UINT64", 4, false}, {"FLOAT32", 5, false}, {"FLOAT64", 6, false}, {"STRING", 7, false},
+};
+
 EnumValueSet const VkLatencyMarkerNVSets[] = {
     {"SIMULATION_START", 0, false},
     {"SIMULATION_END", 1, false},
@@ -3432,7 +3437,7 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[347] = {
+EnumType const cEnumTypes[348] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", NULL, 0},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 1},
@@ -3744,6 +3749,7 @@ EnumType const cEnumTypes[347] = {
     {"VkOpticalFlowPerformanceLevelNV", VkOpticalFlowPerformanceLevelNVSets, 4},
     {"VkOpticalFlowSessionBindingPointNV", VkOpticalFlowSessionBindingPointNVSets, 9},
     {"VkDeviceFaultAddressTypeEXT", VkDeviceFaultAddressTypeEXTSets, 7},
+    {"VkLayerSettingTypeEXT", VkLayerSettingTypeEXTSets, 8},
     {"VkLatencyMarkerNV", VkLatencyMarkerNVSets, 12},
     {"VkOutOfBandQueueTypeNV", VkOutOfBandQueueTypeNVSets, 2},
     {"VkVendorId", VkVendorIdSets, 7},

@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 271,
-              "VK_HEADER_VERSION is from after the maximum supported version of v271.");
+static_assert(VK_HEADER_VERSION <= 272,
+              "VK_HEADER_VERSION is from after the maximum supported version of v272.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 271,
-               "VK_HEADER_VERSION is from after the maximum supported version of v271.");
+_Static_assert(VK_HEADER_VERSION <= 272,
+               "VK_HEADER_VERSION is from after the maximum supported version of v272.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -6556,6 +6556,41 @@ void cleanup_VkPhysicalDeviceRelaxedLineRasterizationFeaturesIMG(
 
 #if VK_HEADER_VERSION >= 271 && (VK_NV_low_latency2)
 void cleanup_VkGetLatencyMarkerInfoNV(VkGetLatencyMarkerInfoNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_EXT_layer_settings)
+void cleanup_VkLayerSettingsCreateInfoEXT(VkLayerSettingsCreateInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_EXT_layer_settings)
+void cleanup_VkLayerSettingEXT(VkLayerSettingEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_HUAWEI_cluster_culling_shader)
+void cleanup_VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI(
+    VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_ARM_render_pass_striped)
+void cleanup_VkPhysicalDeviceRenderPassStripedFeaturesARM(
+    VkPhysicalDeviceRenderPassStripedFeaturesARM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_ARM_render_pass_striped)
+void cleanup_VkPhysicalDeviceRenderPassStripedPropertiesARM(
+    VkPhysicalDeviceRenderPassStripedPropertiesARM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_ARM_render_pass_striped)
+void cleanup_VkRenderPassStripeInfoARM(VkRenderPassStripeInfoARM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_ARM_render_pass_striped)
+void cleanup_VkRenderPassStripeBeginInfoARM(VkRenderPassStripeBeginInfoARM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_ARM_render_pass_striped)
+void cleanup_VkRenderPassStripeSubmitInfoARM(VkRenderPassStripeSubmitInfoARM const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -15206,6 +15241,59 @@ void cleanup_vk_struct(void const *pData) {
 #if VK_HEADER_VERSION >= 271 && (VK_NV_low_latency2)
   if (pTemp->sType == VK_STRUCTURE_TYPE_GET_LATENCY_MARKER_INFO_NV) {
     cleanup_VkGetLatencyMarkerInfoNV((VkGetLatencyMarkerInfoNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_EXT_layer_settings)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_LAYER_SETTINGS_CREATE_INFO_EXT) {
+    cleanup_VkLayerSettingsCreateInfoEXT((VkLayerSettingsCreateInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_HUAWEI_cluster_culling_shader)
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CLUSTER_CULLING_SHADER_VRS_FEATURES_HUAWEI) {
+    cleanup_VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI(
+        (VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_ARM_render_pass_striped)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RENDER_PASS_STRIPED_FEATURES_ARM) {
+    cleanup_VkPhysicalDeviceRenderPassStripedFeaturesARM(
+        (VkPhysicalDeviceRenderPassStripedFeaturesARM const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_ARM_render_pass_striped)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RENDER_PASS_STRIPED_PROPERTIES_ARM) {
+    cleanup_VkPhysicalDeviceRenderPassStripedPropertiesARM(
+        (VkPhysicalDeviceRenderPassStripedPropertiesARM const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_ARM_render_pass_striped)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RENDER_PASS_STRIPE_INFO_ARM) {
+    cleanup_VkRenderPassStripeInfoARM((VkRenderPassStripeInfoARM const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_ARM_render_pass_striped)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RENDER_PASS_STRIPE_BEGIN_INFO_ARM) {
+    cleanup_VkRenderPassStripeBeginInfoARM((VkRenderPassStripeBeginInfoARM const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_ARM_render_pass_striped)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RENDER_PASS_STRIPE_SUBMIT_INFO_ARM) {
+    cleanup_VkRenderPassStripeSubmitInfoARM((VkRenderPassStripeSubmitInfoARM const *)pData);
     return;
   }
 #endif
@@ -30486,6 +30574,106 @@ void cleanup_VkGetLatencyMarkerInfoNV(VkGetLatencyMarkerInfoNV const *pData) {
       cleanup_VkLatencyTimingsFrameReportNV(&pData->pTimings[i]);
   }
   free((void *)pData->pTimings);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_EXT_layer_settings)
+void cleanup_VkLayerSettingsCreateInfoEXT(VkLayerSettingsCreateInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pSettings - settingCount
+  if (pData->pSettings != NULL) {
+    for (uint32_t i = 0; i < pData->settingCount; ++i)
+      cleanup_VkLayerSettingEXT(&pData->pSettings[i]);
+  }
+  free((void *)pData->pSettings);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_EXT_layer_settings)
+void cleanup_VkLayerSettingEXT(VkLayerSettingEXT const *pData) {
+  // pLayerName - null-terminated
+  free((void *)pData->pLayerName);
+
+  // pSettingName - null-terminated
+  free((void *)pData->pSettingName);
+
+  // pValues - valueCount
+  free((void *)pData->pValues);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_HUAWEI_cluster_culling_shader)
+void cleanup_VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI(
+    VkPhysicalDeviceClusterCullingShaderVrsFeaturesHUAWEI const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_ARM_render_pass_striped)
+void cleanup_VkPhysicalDeviceRenderPassStripedFeaturesARM(
+    VkPhysicalDeviceRenderPassStripedFeaturesARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_ARM_render_pass_striped)
+void cleanup_VkPhysicalDeviceRenderPassStripedPropertiesARM(
+    VkPhysicalDeviceRenderPassStripedPropertiesARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_ARM_render_pass_striped)
+void cleanup_VkRenderPassStripeInfoARM(VkRenderPassStripeInfoARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_ARM_render_pass_striped)
+void cleanup_VkRenderPassStripeBeginInfoARM(VkRenderPassStripeBeginInfoARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pStripeInfos - stripeInfoCount
+  if (pData->pStripeInfos != NULL) {
+    for (uint32_t i = 0; i < pData->stripeInfoCount; ++i)
+      cleanup_VkRenderPassStripeInfoARM(&pData->pStripeInfos[i]);
+  }
+  free((void *)pData->pStripeInfos);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 272 && (VK_ARM_render_pass_striped)
+void cleanup_VkRenderPassStripeSubmitInfoARM(VkRenderPassStripeSubmitInfoARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pStripeSemaphoreInfos - stripeSemaphoreInfoCount
+  if (pData->pStripeSemaphoreInfos != NULL) {
+    for (uint32_t i = 0; i < pData->stripeSemaphoreInfoCount; ++i)
+      cleanup_VkSemaphoreSubmitInfo(&pData->pStripeSemaphoreInfos[i]);
+  }
+  free((void *)pData->pStripeSemaphoreInfos);
 }
 #endif
 
