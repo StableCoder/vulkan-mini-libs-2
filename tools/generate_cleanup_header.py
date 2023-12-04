@@ -191,14 +191,9 @@ extern "C" {
             outFile.write('\n')
             guarded = guardStruct(struct, firstVersion,
                                   lastVersion, False, outFile)
-            members = getExternalDataMembers(struct.findall('members/'))
-            # If there's not pointer members to delete, leave an empty inlinable function instead
-            if len(members) == 0:
-                outFile.write(
-                    'inline void cleanup_{0}({0} const* pData) {{}}\n'.format(name))
-            else:
-                outFile.write(
-                    'void cleanup_{0}({0} const* pData);\n'.format(name))
+
+            # Normal function declaration
+            outFile.write('void cleanup_{0}({0} const* pData);\n'.format(name))
             if guarded:
                 outFile.write('#endif\n')
         currentVersion += 1
@@ -260,9 +255,13 @@ void cleanup_vk_struct(void const* pData) {
             outFile.write('\n')
             guarded = guardStruct(struct, firstVersion,
                                   lastVersion, False, outFile)
-            if len(members) == 0:
+
+            if struct.get('alias') != None:
                 outFile.write(
-                    'extern inline void cleanup_{0}({0} const* pData);\n'.format(name))
+                    'void cleanup_{0}({0} const* pData) {{ cleanup_{1}(({1} const*)pData); }}\n'.format(name, struct.get('alias')))
+            elif len(members) == 0:
+                outFile.write(
+                    'void cleanup_{0}({0} const* pData) {{}}\n'.format(name))
             else:
                 outFile.write(
                     'void cleanup_{0}({0} const* pData) {{'.format(name))

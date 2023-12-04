@@ -8346,7 +8346,9 @@ bool compare_VkPhysicalDeviceExternalMemorySciBufFeaturesNV(
 bool compare_VkPhysicalDeviceExternalSciBufFeaturesNV(
     VkPhysicalDeviceExternalSciBufFeaturesNV const *s1,
     VkPhysicalDeviceExternalSciBufFeaturesNV const *s2) {
-  return true;
+  return compare_VkPhysicalDeviceExternalMemorySciBufFeaturesNV(
+      (VkPhysicalDeviceExternalMemorySciBufFeaturesNV const *)s1,
+      (VkPhysicalDeviceExternalMemorySciBufFeaturesNV const *)s2);
 }
 #endif
 
@@ -8398,10 +8400,8 @@ bool compare_VkDevicePrivateDataCreateInfo(VkDevicePrivateDataCreateInfo const *
 #if VK_HEADER_VERSION >= 140 && (VK_EXT_private_data)
 bool compare_VkDevicePrivateDataCreateInfoEXT(VkDevicePrivateDataCreateInfoEXT const *s1,
                                               VkDevicePrivateDataCreateInfoEXT const *s2) {
-  if ((s1->privateDataSlotRequestCount != s2->privateDataSlotRequestCount) || false)
-    return false;
-
-  return true;
+  return compare_VkDevicePrivateDataCreateInfo((VkDevicePrivateDataCreateInfo const *)s1,
+                                               (VkDevicePrivateDataCreateInfo const *)s2);
 }
 #endif
 
@@ -8418,10 +8418,8 @@ bool compare_VkPrivateDataSlotCreateInfo(VkPrivateDataSlotCreateInfo const *s1,
 #if VK_HEADER_VERSION >= 140 && (VK_EXT_private_data)
 bool compare_VkPrivateDataSlotCreateInfoEXT(VkPrivateDataSlotCreateInfoEXT const *s1,
                                             VkPrivateDataSlotCreateInfoEXT const *s2) {
-  if ((s1->flags != s2->flags) || false)
-    return false;
-
-  return true;
+  return compare_VkPrivateDataSlotCreateInfo((VkPrivateDataSlotCreateInfo const *)s1,
+                                             (VkPrivateDataSlotCreateInfo const *)s2);
 }
 #endif
 
@@ -8439,10 +8437,9 @@ bool compare_VkPhysicalDevicePrivateDataFeatures(VkPhysicalDevicePrivateDataFeat
 bool compare_VkPhysicalDevicePrivateDataFeaturesEXT(
     VkPhysicalDevicePrivateDataFeaturesEXT const *s1,
     VkPhysicalDevicePrivateDataFeaturesEXT const *s2) {
-  if ((s1->privateData != s2->privateData) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDevicePrivateDataFeatures(
+      (VkPhysicalDevicePrivateDataFeatures const *)s1,
+      (VkPhysicalDevicePrivateDataFeatures const *)s2);
 }
 #endif
 
@@ -8646,7 +8643,8 @@ bool compare_VkPhysicalDeviceFeatures2(VkPhysicalDeviceFeatures2 const *s1,
 #if (VK_KHR_get_physical_device_properties2)
 bool compare_VkPhysicalDeviceFeatures2KHR(VkPhysicalDeviceFeatures2KHR const *s1,
                                           VkPhysicalDeviceFeatures2KHR const *s2) {
-  return true;
+  return compare_VkPhysicalDeviceFeatures2((VkPhysicalDeviceFeatures2 const *)s1,
+                                           (VkPhysicalDeviceFeatures2 const *)s2);
 }
 #endif
 
@@ -8663,7 +8661,8 @@ bool compare_VkPhysicalDeviceProperties2(VkPhysicalDeviceProperties2 const *s1,
 #if (VK_KHR_get_physical_device_properties2)
 bool compare_VkPhysicalDeviceProperties2KHR(VkPhysicalDeviceProperties2KHR const *s1,
                                             VkPhysicalDeviceProperties2KHR const *s2) {
-  return true;
+  return compare_VkPhysicalDeviceProperties2((VkPhysicalDeviceProperties2 const *)s1,
+                                             (VkPhysicalDeviceProperties2 const *)s2);
 }
 #endif
 
@@ -8679,7 +8678,8 @@ bool compare_VkFormatProperties2(VkFormatProperties2 const *s1, VkFormatProperti
 #if (VK_KHR_get_physical_device_properties2)
 bool compare_VkFormatProperties2KHR(VkFormatProperties2KHR const *s1,
                                     VkFormatProperties2KHR const *s2) {
-  return true;
+  return compare_VkFormatProperties2((VkFormatProperties2 const *)s1,
+                                     (VkFormatProperties2 const *)s2);
 }
 #endif
 
@@ -8697,7 +8697,8 @@ bool compare_VkImageFormatProperties2(VkImageFormatProperties2 const *s1,
 #if (VK_KHR_get_physical_device_properties2)
 bool compare_VkImageFormatProperties2KHR(VkImageFormatProperties2KHR const *s1,
                                          VkImageFormatProperties2KHR const *s2) {
-  return true;
+  return compare_VkImageFormatProperties2((VkImageFormatProperties2 const *)s1,
+                                          (VkImageFormatProperties2 const *)s2);
 }
 #endif
 
@@ -8715,7 +8716,8 @@ bool compare_VkPhysicalDeviceImageFormatInfo2(VkPhysicalDeviceImageFormatInfo2 c
 #if (VK_KHR_get_physical_device_properties2)
 bool compare_VkPhysicalDeviceImageFormatInfo2KHR(VkPhysicalDeviceImageFormatInfo2KHR const *s1,
                                                  VkPhysicalDeviceImageFormatInfo2KHR const *s2) {
-  return true;
+  return compare_VkPhysicalDeviceImageFormatInfo2((VkPhysicalDeviceImageFormatInfo2 const *)s1,
+                                                  (VkPhysicalDeviceImageFormatInfo2 const *)s2);
 }
 #endif
 
@@ -8733,7 +8735,8 @@ bool compare_VkQueueFamilyProperties2(VkQueueFamilyProperties2 const *s1,
 #if (VK_KHR_get_physical_device_properties2)
 bool compare_VkQueueFamilyProperties2KHR(VkQueueFamilyProperties2KHR const *s1,
                                          VkQueueFamilyProperties2KHR const *s2) {
-  return true;
+  return compare_VkQueueFamilyProperties2((VkQueueFamilyProperties2 const *)s1,
+                                          (VkQueueFamilyProperties2 const *)s2);
 }
 #endif
 
@@ -8751,7 +8754,8 @@ bool compare_VkPhysicalDeviceMemoryProperties2(VkPhysicalDeviceMemoryProperties2
 #if (VK_KHR_get_physical_device_properties2)
 bool compare_VkPhysicalDeviceMemoryProperties2KHR(VkPhysicalDeviceMemoryProperties2KHR const *s1,
                                                   VkPhysicalDeviceMemoryProperties2KHR const *s2) {
-  return true;
+  return compare_VkPhysicalDeviceMemoryProperties2((VkPhysicalDeviceMemoryProperties2 const *)s1,
+                                                   (VkPhysicalDeviceMemoryProperties2 const *)s2);
 }
 #endif
 
@@ -8768,7 +8772,8 @@ bool compare_VkSparseImageFormatProperties2(VkSparseImageFormatProperties2 const
 #if (VK_KHR_get_physical_device_properties2)
 bool compare_VkSparseImageFormatProperties2KHR(VkSparseImageFormatProperties2KHR const *s1,
                                                VkSparseImageFormatProperties2KHR const *s2) {
-  return true;
+  return compare_VkSparseImageFormatProperties2((VkSparseImageFormatProperties2 const *)s1,
+                                                (VkSparseImageFormatProperties2 const *)s2);
 }
 #endif
 
@@ -8788,7 +8793,9 @@ bool compare_VkPhysicalDeviceSparseImageFormatInfo2(
 bool compare_VkPhysicalDeviceSparseImageFormatInfo2KHR(
     VkPhysicalDeviceSparseImageFormatInfo2KHR const *s1,
     VkPhysicalDeviceSparseImageFormatInfo2KHR const *s2) {
-  return true;
+  return compare_VkPhysicalDeviceSparseImageFormatInfo2(
+      (VkPhysicalDeviceSparseImageFormatInfo2 const *)s1,
+      (VkPhysicalDeviceSparseImageFormatInfo2 const *)s2);
 }
 #endif
 
@@ -8816,11 +8823,8 @@ bool compare_VkConformanceVersion(VkConformanceVersion const *s1, VkConformanceV
 #if VK_HEADER_VERSION >= 86 && (VK_KHR_driver_properties)
 bool compare_VkConformanceVersionKHR(VkConformanceVersionKHR const *s1,
                                      VkConformanceVersionKHR const *s2) {
-  if ((s1->major != s2->major) || (s1->minor != s2->minor) || (s1->subminor != s2->subminor) ||
-      (s1->patch != s2->patch) || false)
-    return false;
-
-  return true;
+  return compare_VkConformanceVersion((VkConformanceVersion const *)s1,
+                                      (VkConformanceVersion const *)s2);
 }
 #endif
 
@@ -8847,20 +8851,8 @@ bool compare_VkPhysicalDeviceDriverProperties(VkPhysicalDeviceDriverProperties c
 #if VK_HEADER_VERSION >= 86 && (VK_KHR_driver_properties)
 bool compare_VkPhysicalDeviceDriverPropertiesKHR(VkPhysicalDeviceDriverPropertiesKHR const *s1,
                                                  VkPhysicalDeviceDriverPropertiesKHR const *s2) {
-  if ((s1->driverID != s2->driverID) ||
-      !compare_VkConformanceVersionKHR(&s1->conformanceVersion, &s2->conformanceVersion) || false)
-    return false;
-
-  for (uint32_t i = 0; i < VK_MAX_DRIVER_NAME_SIZE_KHR; ++i) {
-    if (s1->driverName[i] != s2->driverName[i])
-      return false;
-  }
-  for (uint32_t i = 0; i < VK_MAX_DRIVER_INFO_SIZE_KHR; ++i) {
-    if (s1->driverInfo[i] != s2->driverInfo[i])
-      return false;
-  }
-
-  return true;
+  return compare_VkPhysicalDeviceDriverProperties((VkPhysicalDeviceDriverProperties const *)s1,
+                                                  (VkPhysicalDeviceDriverProperties const *)s2);
 }
 #endif
 
@@ -8908,7 +8900,9 @@ bool compare_VkPhysicalDeviceVariablePointersFeatures(
 bool compare_VkPhysicalDeviceVariablePointersFeaturesKHR(
     VkPhysicalDeviceVariablePointersFeaturesKHR const *s1,
     VkPhysicalDeviceVariablePointersFeaturesKHR const *s2) {
-  return true;
+  return compare_VkPhysicalDeviceVariablePointersFeatures(
+      (VkPhysicalDeviceVariablePointersFeatures const *)s1,
+      (VkPhysicalDeviceVariablePointersFeatures const *)s2);
 }
 #endif
 
@@ -8916,7 +8910,9 @@ bool compare_VkPhysicalDeviceVariablePointersFeaturesKHR(
 bool compare_VkPhysicalDeviceVariablePointerFeaturesKHR(
     VkPhysicalDeviceVariablePointerFeaturesKHR const *s1,
     VkPhysicalDeviceVariablePointerFeaturesKHR const *s2) {
-  return true;
+  return compare_VkPhysicalDeviceVariablePointersFeatures(
+      (VkPhysicalDeviceVariablePointersFeatures const *)s1,
+      (VkPhysicalDeviceVariablePointersFeatures const *)s2);
 }
 #endif
 
@@ -8924,11 +8920,9 @@ bool compare_VkPhysicalDeviceVariablePointerFeaturesKHR(
 bool compare_VkPhysicalDeviceVariablePointerFeatures(
     VkPhysicalDeviceVariablePointerFeatures const *s1,
     VkPhysicalDeviceVariablePointerFeatures const *s2) {
-  if ((s1->variablePointersStorageBuffer != s2->variablePointersStorageBuffer) ||
-      (s1->variablePointers != s2->variablePointers) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceVariablePointersFeatures(
+      (VkPhysicalDeviceVariablePointersFeatures const *)s1,
+      (VkPhysicalDeviceVariablePointersFeatures const *)s2);
 }
 #endif
 
@@ -8947,7 +8941,8 @@ bool compare_VkExternalMemoryProperties(VkExternalMemoryProperties const *s1,
 #if (VK_KHR_external_memory_capabilities)
 bool compare_VkExternalMemoryPropertiesKHR(VkExternalMemoryPropertiesKHR const *s1,
                                            VkExternalMemoryPropertiesKHR const *s2) {
-  return true;
+  return compare_VkExternalMemoryProperties((VkExternalMemoryProperties const *)s1,
+                                            (VkExternalMemoryProperties const *)s2);
 }
 #endif
 
@@ -8966,7 +8961,9 @@ bool compare_VkPhysicalDeviceExternalImageFormatInfo(
 bool compare_VkPhysicalDeviceExternalImageFormatInfoKHR(
     VkPhysicalDeviceExternalImageFormatInfoKHR const *s1,
     VkPhysicalDeviceExternalImageFormatInfoKHR const *s2) {
-  return true;
+  return compare_VkPhysicalDeviceExternalImageFormatInfo(
+      (VkPhysicalDeviceExternalImageFormatInfo const *)s1,
+      (VkPhysicalDeviceExternalImageFormatInfo const *)s2);
 }
 #endif
 
@@ -8985,7 +8982,8 @@ bool compare_VkExternalImageFormatProperties(VkExternalImageFormatProperties con
 #if (VK_KHR_external_memory_capabilities)
 bool compare_VkExternalImageFormatPropertiesKHR(VkExternalImageFormatPropertiesKHR const *s1,
                                                 VkExternalImageFormatPropertiesKHR const *s2) {
-  return true;
+  return compare_VkExternalImageFormatProperties((VkExternalImageFormatProperties const *)s1,
+                                                 (VkExternalImageFormatProperties const *)s2);
 }
 #endif
 
@@ -9004,7 +9002,8 @@ bool compare_VkPhysicalDeviceExternalBufferInfo(VkPhysicalDeviceExternalBufferIn
 bool compare_VkPhysicalDeviceExternalBufferInfoKHR(
     VkPhysicalDeviceExternalBufferInfoKHR const *s1,
     VkPhysicalDeviceExternalBufferInfoKHR const *s2) {
-  return true;
+  return compare_VkPhysicalDeviceExternalBufferInfo((VkPhysicalDeviceExternalBufferInfo const *)s1,
+                                                    (VkPhysicalDeviceExternalBufferInfo const *)s2);
 }
 #endif
 
@@ -9023,7 +9022,8 @@ bool compare_VkExternalBufferProperties(VkExternalBufferProperties const *s1,
 #if (VK_KHR_external_memory_capabilities)
 bool compare_VkExternalBufferPropertiesKHR(VkExternalBufferPropertiesKHR const *s1,
                                            VkExternalBufferPropertiesKHR const *s2) {
-  return true;
+  return compare_VkExternalBufferProperties((VkExternalBufferProperties const *)s1,
+                                            (VkExternalBufferProperties const *)s2);
 }
 #endif
 
@@ -9055,7 +9055,8 @@ bool compare_VkPhysicalDeviceIDProperties(VkPhysicalDeviceIDProperties const *s1
      (VK_KHR_external_fence_capabilities))
 bool compare_VkPhysicalDeviceIDPropertiesKHR(VkPhysicalDeviceIDPropertiesKHR const *s1,
                                              VkPhysicalDeviceIDPropertiesKHR const *s2) {
-  return true;
+  return compare_VkPhysicalDeviceIDProperties((VkPhysicalDeviceIDProperties const *)s1,
+                                              (VkPhysicalDeviceIDProperties const *)s2);
 }
 #endif
 
@@ -9072,7 +9073,8 @@ bool compare_VkExternalMemoryImageCreateInfo(VkExternalMemoryImageCreateInfo con
 #if (VK_KHR_external_memory)
 bool compare_VkExternalMemoryImageCreateInfoKHR(VkExternalMemoryImageCreateInfoKHR const *s1,
                                                 VkExternalMemoryImageCreateInfoKHR const *s2) {
-  return true;
+  return compare_VkExternalMemoryImageCreateInfo((VkExternalMemoryImageCreateInfo const *)s1,
+                                                 (VkExternalMemoryImageCreateInfo const *)s2);
 }
 #endif
 
@@ -9089,7 +9091,8 @@ bool compare_VkExternalMemoryBufferCreateInfo(VkExternalMemoryBufferCreateInfo c
 #if (VK_KHR_external_memory)
 bool compare_VkExternalMemoryBufferCreateInfoKHR(VkExternalMemoryBufferCreateInfoKHR const *s1,
                                                  VkExternalMemoryBufferCreateInfoKHR const *s2) {
-  return true;
+  return compare_VkExternalMemoryBufferCreateInfo((VkExternalMemoryBufferCreateInfo const *)s1,
+                                                  (VkExternalMemoryBufferCreateInfo const *)s2);
 }
 #endif
 
@@ -9106,7 +9109,8 @@ bool compare_VkExportMemoryAllocateInfo(VkExportMemoryAllocateInfo const *s1,
 #if (VK_KHR_external_memory)
 bool compare_VkExportMemoryAllocateInfoKHR(VkExportMemoryAllocateInfoKHR const *s1,
                                            VkExportMemoryAllocateInfoKHR const *s2) {
-  return true;
+  return compare_VkExportMemoryAllocateInfo((VkExportMemoryAllocateInfo const *)s1,
+                                            (VkExportMemoryAllocateInfo const *)s2);
 }
 #endif
 
@@ -9238,7 +9242,9 @@ bool compare_VkPhysicalDeviceExternalSemaphoreInfo(
 bool compare_VkPhysicalDeviceExternalSemaphoreInfoKHR(
     VkPhysicalDeviceExternalSemaphoreInfoKHR const *s1,
     VkPhysicalDeviceExternalSemaphoreInfoKHR const *s2) {
-  return true;
+  return compare_VkPhysicalDeviceExternalSemaphoreInfo(
+      (VkPhysicalDeviceExternalSemaphoreInfo const *)s1,
+      (VkPhysicalDeviceExternalSemaphoreInfo const *)s2);
 }
 #endif
 
@@ -9257,7 +9263,8 @@ bool compare_VkExternalSemaphoreProperties(VkExternalSemaphoreProperties const *
 #if (VK_KHR_external_semaphore_capabilities)
 bool compare_VkExternalSemaphorePropertiesKHR(VkExternalSemaphorePropertiesKHR const *s1,
                                               VkExternalSemaphorePropertiesKHR const *s2) {
-  return true;
+  return compare_VkExternalSemaphoreProperties((VkExternalSemaphoreProperties const *)s1,
+                                               (VkExternalSemaphoreProperties const *)s2);
 }
 #endif
 
@@ -9274,7 +9281,8 @@ bool compare_VkExportSemaphoreCreateInfo(VkExportSemaphoreCreateInfo const *s1,
 #if (VK_KHR_external_semaphore)
 bool compare_VkExportSemaphoreCreateInfoKHR(VkExportSemaphoreCreateInfoKHR const *s1,
                                             VkExportSemaphoreCreateInfoKHR const *s2) {
-  return true;
+  return compare_VkExportSemaphoreCreateInfo((VkExportSemaphoreCreateInfo const *)s1,
+                                             (VkExportSemaphoreCreateInfo const *)s2);
 }
 #endif
 
@@ -9378,7 +9386,8 @@ bool compare_VkPhysicalDeviceExternalFenceInfo(VkPhysicalDeviceExternalFenceInfo
 #if (VK_KHR_external_fence_capabilities)
 bool compare_VkPhysicalDeviceExternalFenceInfoKHR(VkPhysicalDeviceExternalFenceInfoKHR const *s1,
                                                   VkPhysicalDeviceExternalFenceInfoKHR const *s2) {
-  return true;
+  return compare_VkPhysicalDeviceExternalFenceInfo((VkPhysicalDeviceExternalFenceInfo const *)s1,
+                                                   (VkPhysicalDeviceExternalFenceInfo const *)s2);
 }
 #endif
 
@@ -9397,7 +9406,8 @@ bool compare_VkExternalFenceProperties(VkExternalFenceProperties const *s1,
 #if (VK_KHR_external_fence_capabilities)
 bool compare_VkExternalFencePropertiesKHR(VkExternalFencePropertiesKHR const *s1,
                                           VkExternalFencePropertiesKHR const *s2) {
-  return true;
+  return compare_VkExternalFenceProperties((VkExternalFenceProperties const *)s1,
+                                           (VkExternalFenceProperties const *)s2);
 }
 #endif
 
@@ -9414,7 +9424,8 @@ bool compare_VkExportFenceCreateInfo(VkExportFenceCreateInfo const *s1,
 #if (VK_KHR_external_fence)
 bool compare_VkExportFenceCreateInfoKHR(VkExportFenceCreateInfoKHR const *s1,
                                         VkExportFenceCreateInfoKHR const *s2) {
-  return true;
+  return compare_VkExportFenceCreateInfo((VkExportFenceCreateInfo const *)s1,
+                                         (VkExportFenceCreateInfo const *)s2);
 }
 #endif
 
@@ -9609,7 +9620,8 @@ bool compare_VkPhysicalDeviceMultiviewFeatures(VkPhysicalDeviceMultiviewFeatures
 #if (VK_KHR_multiview)
 bool compare_VkPhysicalDeviceMultiviewFeaturesKHR(VkPhysicalDeviceMultiviewFeaturesKHR const *s1,
                                                   VkPhysicalDeviceMultiviewFeaturesKHR const *s2) {
-  return true;
+  return compare_VkPhysicalDeviceMultiviewFeatures((VkPhysicalDeviceMultiviewFeatures const *)s1,
+                                                   (VkPhysicalDeviceMultiviewFeatures const *)s2);
 }
 #endif
 
@@ -9628,7 +9640,9 @@ bool compare_VkPhysicalDeviceMultiviewProperties(VkPhysicalDeviceMultiviewProper
 bool compare_VkPhysicalDeviceMultiviewPropertiesKHR(
     VkPhysicalDeviceMultiviewPropertiesKHR const *s1,
     VkPhysicalDeviceMultiviewPropertiesKHR const *s2) {
-  return true;
+  return compare_VkPhysicalDeviceMultiviewProperties(
+      (VkPhysicalDeviceMultiviewProperties const *)s1,
+      (VkPhysicalDeviceMultiviewProperties const *)s2);
 }
 #endif
 
@@ -9646,7 +9660,8 @@ bool compare_VkRenderPassMultiviewCreateInfo(VkRenderPassMultiviewCreateInfo con
 #if (VK_KHR_multiview)
 bool compare_VkRenderPassMultiviewCreateInfoKHR(VkRenderPassMultiviewCreateInfoKHR const *s1,
                                                 VkRenderPassMultiviewCreateInfoKHR const *s2) {
-  return true;
+  return compare_VkRenderPassMultiviewCreateInfo((VkRenderPassMultiviewCreateInfo const *)s1,
+                                                 (VkRenderPassMultiviewCreateInfo const *)s2);
 }
 #endif
 
@@ -9727,7 +9742,8 @@ bool compare_VkPhysicalDeviceGroupProperties(VkPhysicalDeviceGroupProperties con
 #if (VK_KHR_device_group_creation)
 bool compare_VkPhysicalDeviceGroupPropertiesKHR(VkPhysicalDeviceGroupPropertiesKHR const *s1,
                                                 VkPhysicalDeviceGroupPropertiesKHR const *s2) {
-  return true;
+  return compare_VkPhysicalDeviceGroupProperties((VkPhysicalDeviceGroupProperties const *)s1,
+                                                 (VkPhysicalDeviceGroupProperties const *)s2);
 }
 #endif
 
@@ -9744,7 +9760,8 @@ bool compare_VkMemoryAllocateFlagsInfo(VkMemoryAllocateFlagsInfo const *s1,
 #if (VK_KHR_device_group)
 bool compare_VkMemoryAllocateFlagsInfoKHR(VkMemoryAllocateFlagsInfoKHR const *s1,
                                           VkMemoryAllocateFlagsInfoKHR const *s2) {
-  return true;
+  return compare_VkMemoryAllocateFlagsInfo((VkMemoryAllocateFlagsInfo const *)s1,
+                                           (VkMemoryAllocateFlagsInfo const *)s2);
 }
 #endif
 
@@ -9762,7 +9779,8 @@ bool compare_VkBindBufferMemoryInfo(VkBindBufferMemoryInfo const *s1,
 #if (VK_KHR_bind_memory2)
 bool compare_VkBindBufferMemoryInfoKHR(VkBindBufferMemoryInfoKHR const *s1,
                                        VkBindBufferMemoryInfoKHR const *s2) {
-  return true;
+  return compare_VkBindBufferMemoryInfo((VkBindBufferMemoryInfo const *)s1,
+                                        (VkBindBufferMemoryInfo const *)s2);
 }
 #endif
 
@@ -9779,7 +9797,8 @@ bool compare_VkBindBufferMemoryDeviceGroupInfo(VkBindBufferMemoryDeviceGroupInfo
 #if (VK_KHR_device_group && VK_KHR_bind_memory2)
 bool compare_VkBindBufferMemoryDeviceGroupInfoKHR(VkBindBufferMemoryDeviceGroupInfoKHR const *s1,
                                                   VkBindBufferMemoryDeviceGroupInfoKHR const *s2) {
-  return true;
+  return compare_VkBindBufferMemoryDeviceGroupInfo((VkBindBufferMemoryDeviceGroupInfo const *)s1,
+                                                   (VkBindBufferMemoryDeviceGroupInfo const *)s2);
 }
 #endif
 
@@ -9797,7 +9816,8 @@ bool compare_VkBindImageMemoryInfo(VkBindImageMemoryInfo const *s1,
 #if (VK_KHR_bind_memory2)
 bool compare_VkBindImageMemoryInfoKHR(VkBindImageMemoryInfoKHR const *s1,
                                       VkBindImageMemoryInfoKHR const *s2) {
-  return true;
+  return compare_VkBindImageMemoryInfo((VkBindImageMemoryInfo const *)s1,
+                                       (VkBindImageMemoryInfo const *)s2);
 }
 #endif
 
@@ -9815,7 +9835,8 @@ bool compare_VkBindImageMemoryDeviceGroupInfo(VkBindImageMemoryDeviceGroupInfo c
 #if (VK_KHR_device_group && VK_KHR_bind_memory2)
 bool compare_VkBindImageMemoryDeviceGroupInfoKHR(VkBindImageMemoryDeviceGroupInfoKHR const *s1,
                                                  VkBindImageMemoryDeviceGroupInfoKHR const *s2) {
-  return true;
+  return compare_VkBindImageMemoryDeviceGroupInfo((VkBindImageMemoryDeviceGroupInfo const *)s1,
+                                                  (VkBindImageMemoryDeviceGroupInfo const *)s2);
 }
 #endif
 
@@ -9833,7 +9854,8 @@ bool compare_VkDeviceGroupRenderPassBeginInfo(VkDeviceGroupRenderPassBeginInfo c
 #if (VK_KHR_device_group)
 bool compare_VkDeviceGroupRenderPassBeginInfoKHR(VkDeviceGroupRenderPassBeginInfoKHR const *s1,
                                                  VkDeviceGroupRenderPassBeginInfoKHR const *s2) {
-  return true;
+  return compare_VkDeviceGroupRenderPassBeginInfo((VkDeviceGroupRenderPassBeginInfo const *)s1,
+                                                  (VkDeviceGroupRenderPassBeginInfo const *)s2);
 }
 #endif
 
@@ -9851,7 +9873,9 @@ bool compare_VkDeviceGroupCommandBufferBeginInfo(VkDeviceGroupCommandBufferBegin
 bool compare_VkDeviceGroupCommandBufferBeginInfoKHR(
     VkDeviceGroupCommandBufferBeginInfoKHR const *s1,
     VkDeviceGroupCommandBufferBeginInfoKHR const *s2) {
-  return true;
+  return compare_VkDeviceGroupCommandBufferBeginInfo(
+      (VkDeviceGroupCommandBufferBeginInfo const *)s1,
+      (VkDeviceGroupCommandBufferBeginInfo const *)s2);
 }
 #endif
 
@@ -9870,7 +9894,8 @@ bool compare_VkDeviceGroupSubmitInfo(VkDeviceGroupSubmitInfo const *s1,
 #if (VK_KHR_device_group)
 bool compare_VkDeviceGroupSubmitInfoKHR(VkDeviceGroupSubmitInfoKHR const *s1,
                                         VkDeviceGroupSubmitInfoKHR const *s2) {
-  return true;
+  return compare_VkDeviceGroupSubmitInfo((VkDeviceGroupSubmitInfo const *)s1,
+                                         (VkDeviceGroupSubmitInfo const *)s2);
 }
 #endif
 
@@ -9888,7 +9913,8 @@ bool compare_VkDeviceGroupBindSparseInfo(VkDeviceGroupBindSparseInfo const *s1,
 #if (VK_KHR_device_group)
 bool compare_VkDeviceGroupBindSparseInfoKHR(VkDeviceGroupBindSparseInfoKHR const *s1,
                                             VkDeviceGroupBindSparseInfoKHR const *s2) {
-  return true;
+  return compare_VkDeviceGroupBindSparseInfo((VkDeviceGroupBindSparseInfo const *)s1,
+                                             (VkDeviceGroupBindSparseInfo const *)s2);
 }
 #endif
 
@@ -9962,7 +9988,8 @@ bool compare_VkDeviceGroupDeviceCreateInfo(VkDeviceGroupDeviceCreateInfo const *
 #if (VK_KHR_device_group_creation)
 bool compare_VkDeviceGroupDeviceCreateInfoKHR(VkDeviceGroupDeviceCreateInfoKHR const *s1,
                                               VkDeviceGroupDeviceCreateInfoKHR const *s2) {
-  return true;
+  return compare_VkDeviceGroupDeviceCreateInfo((VkDeviceGroupDeviceCreateInfo const *)s1,
+                                               (VkDeviceGroupDeviceCreateInfo const *)s2);
 }
 #endif
 
@@ -9991,7 +10018,8 @@ bool compare_VkDescriptorUpdateTemplateEntry(VkDescriptorUpdateTemplateEntry con
 #if (VK_KHR_descriptor_update_template)
 bool compare_VkDescriptorUpdateTemplateEntryKHR(VkDescriptorUpdateTemplateEntryKHR const *s1,
                                                 VkDescriptorUpdateTemplateEntryKHR const *s2) {
-  return true;
+  return compare_VkDescriptorUpdateTemplateEntry((VkDescriptorUpdateTemplateEntry const *)s1,
+                                                 (VkDescriptorUpdateTemplateEntry const *)s2);
 }
 #endif
 
@@ -10014,7 +10042,9 @@ bool compare_VkDescriptorUpdateTemplateCreateInfo(VkDescriptorUpdateTemplateCrea
 bool compare_VkDescriptorUpdateTemplateCreateInfoKHR(
     VkDescriptorUpdateTemplateCreateInfoKHR const *s1,
     VkDescriptorUpdateTemplateCreateInfoKHR const *s2) {
-  return true;
+  return compare_VkDescriptorUpdateTemplateCreateInfo(
+      (VkDescriptorUpdateTemplateCreateInfo const *)s1,
+      (VkDescriptorUpdateTemplateCreateInfo const *)s2);
 }
 #endif
 
@@ -10256,7 +10286,8 @@ bool compare_VkInputAttachmentAspectReference(VkInputAttachmentAspectReference c
 #if (VK_KHR_maintenance2)
 bool compare_VkInputAttachmentAspectReferenceKHR(VkInputAttachmentAspectReferenceKHR const *s1,
                                                  VkInputAttachmentAspectReferenceKHR const *s2) {
-  return true;
+  return compare_VkInputAttachmentAspectReference((VkInputAttachmentAspectReference const *)s1,
+                                                  (VkInputAttachmentAspectReference const *)s2);
 }
 #endif
 
@@ -10275,7 +10306,9 @@ bool compare_VkRenderPassInputAttachmentAspectCreateInfo(
 bool compare_VkRenderPassInputAttachmentAspectCreateInfoKHR(
     VkRenderPassInputAttachmentAspectCreateInfoKHR const *s1,
     VkRenderPassInputAttachmentAspectCreateInfoKHR const *s2) {
-  return true;
+  return compare_VkRenderPassInputAttachmentAspectCreateInfo(
+      (VkRenderPassInputAttachmentAspectCreateInfo const *)s1,
+      (VkRenderPassInputAttachmentAspectCreateInfo const *)s2);
 }
 #endif
 
@@ -10390,7 +10423,9 @@ bool compare_VkPhysicalDevice16BitStorageFeatures(VkPhysicalDevice16BitStorageFe
 bool compare_VkPhysicalDevice16BitStorageFeaturesKHR(
     VkPhysicalDevice16BitStorageFeaturesKHR const *s1,
     VkPhysicalDevice16BitStorageFeaturesKHR const *s2) {
-  return true;
+  return compare_VkPhysicalDevice16BitStorageFeatures(
+      (VkPhysicalDevice16BitStorageFeatures const *)s1,
+      (VkPhysicalDevice16BitStorageFeatures const *)s2);
 }
 #endif
 
@@ -10421,10 +10456,9 @@ bool compare_VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures(
 bool compare_VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR(
     VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR const *s1,
     VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR const *s2) {
-  if ((s1->shaderSubgroupExtendedTypes != s2->shaderSubgroupExtendedTypes) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures(
+      (VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures const *)s1,
+      (VkPhysicalDeviceShaderSubgroupExtendedTypesFeatures const *)s2);
 }
 #endif
 
@@ -10441,7 +10475,8 @@ bool compare_VkBufferMemoryRequirementsInfo2(VkBufferMemoryRequirementsInfo2 con
 #if (VK_KHR_get_memory_requirements2)
 bool compare_VkBufferMemoryRequirementsInfo2KHR(VkBufferMemoryRequirementsInfo2KHR const *s1,
                                                 VkBufferMemoryRequirementsInfo2KHR const *s2) {
-  return true;
+  return compare_VkBufferMemoryRequirementsInfo2((VkBufferMemoryRequirementsInfo2 const *)s1,
+                                                 (VkBufferMemoryRequirementsInfo2 const *)s2);
 }
 #endif
 
@@ -10455,7 +10490,8 @@ bool compare_VkDeviceBufferMemoryRequirements(VkDeviceBufferMemoryRequirements c
 #if VK_HEADER_VERSION >= 195 && (VK_KHR_maintenance4)
 bool compare_VkDeviceBufferMemoryRequirementsKHR(VkDeviceBufferMemoryRequirementsKHR const *s1,
                                                  VkDeviceBufferMemoryRequirementsKHR const *s2) {
-  return true;
+  return compare_VkDeviceBufferMemoryRequirements((VkDeviceBufferMemoryRequirements const *)s1,
+                                                  (VkDeviceBufferMemoryRequirements const *)s2);
 }
 #endif
 
@@ -10472,7 +10508,8 @@ bool compare_VkImageMemoryRequirementsInfo2(VkImageMemoryRequirementsInfo2 const
 #if (VK_KHR_get_memory_requirements2)
 bool compare_VkImageMemoryRequirementsInfo2KHR(VkImageMemoryRequirementsInfo2KHR const *s1,
                                                VkImageMemoryRequirementsInfo2KHR const *s2) {
-  return true;
+  return compare_VkImageMemoryRequirementsInfo2((VkImageMemoryRequirementsInfo2 const *)s1,
+                                                (VkImageMemoryRequirementsInfo2 const *)s2);
 }
 #endif
 
@@ -10490,7 +10527,9 @@ bool compare_VkImageSparseMemoryRequirementsInfo2(VkImageSparseMemoryRequirement
 bool compare_VkImageSparseMemoryRequirementsInfo2KHR(
     VkImageSparseMemoryRequirementsInfo2KHR const *s1,
     VkImageSparseMemoryRequirementsInfo2KHR const *s2) {
-  return true;
+  return compare_VkImageSparseMemoryRequirementsInfo2(
+      (VkImageSparseMemoryRequirementsInfo2 const *)s1,
+      (VkImageSparseMemoryRequirementsInfo2 const *)s2);
 }
 #endif
 
@@ -10507,10 +10546,8 @@ bool compare_VkDeviceImageMemoryRequirements(VkDeviceImageMemoryRequirements con
 #if VK_HEADER_VERSION >= 195 && (VK_KHR_maintenance4)
 bool compare_VkDeviceImageMemoryRequirementsKHR(VkDeviceImageMemoryRequirementsKHR const *s1,
                                                 VkDeviceImageMemoryRequirementsKHR const *s2) {
-  if ((s1->planeAspect != s2->planeAspect) || false)
-    return false;
-
-  return true;
+  return compare_VkDeviceImageMemoryRequirements((VkDeviceImageMemoryRequirements const *)s1,
+                                                 (VkDeviceImageMemoryRequirements const *)s2);
 }
 #endif
 
@@ -10529,7 +10566,8 @@ bool compare_VkMemoryRequirements2(VkMemoryRequirements2 const *s1,
      (VK_NVX_raytracing))
 bool compare_VkMemoryRequirements2KHR(VkMemoryRequirements2KHR const *s1,
                                       VkMemoryRequirements2KHR const *s2) {
-  return true;
+  return compare_VkMemoryRequirements2((VkMemoryRequirements2 const *)s1,
+                                       (VkMemoryRequirements2 const *)s2);
 }
 #endif
 
@@ -10547,7 +10585,8 @@ bool compare_VkSparseImageMemoryRequirements2(VkSparseImageMemoryRequirements2 c
 #if (VK_KHR_get_memory_requirements2)
 bool compare_VkSparseImageMemoryRequirements2KHR(VkSparseImageMemoryRequirements2KHR const *s1,
                                                  VkSparseImageMemoryRequirements2KHR const *s2) {
-  return true;
+  return compare_VkSparseImageMemoryRequirements2((VkSparseImageMemoryRequirements2 const *)s1,
+                                                  (VkSparseImageMemoryRequirements2 const *)s2);
 }
 #endif
 
@@ -10566,7 +10605,9 @@ bool compare_VkPhysicalDevicePointClippingProperties(
 bool compare_VkPhysicalDevicePointClippingPropertiesKHR(
     VkPhysicalDevicePointClippingPropertiesKHR const *s1,
     VkPhysicalDevicePointClippingPropertiesKHR const *s2) {
-  return true;
+  return compare_VkPhysicalDevicePointClippingProperties(
+      (VkPhysicalDevicePointClippingProperties const *)s1,
+      (VkPhysicalDevicePointClippingProperties const *)s2);
 }
 #endif
 
@@ -10584,7 +10625,8 @@ bool compare_VkMemoryDedicatedRequirements(VkMemoryDedicatedRequirements const *
 #if (VK_KHR_dedicated_allocation)
 bool compare_VkMemoryDedicatedRequirementsKHR(VkMemoryDedicatedRequirementsKHR const *s1,
                                               VkMemoryDedicatedRequirementsKHR const *s2) {
-  return true;
+  return compare_VkMemoryDedicatedRequirements((VkMemoryDedicatedRequirements const *)s1,
+                                               (VkMemoryDedicatedRequirements const *)s2);
 }
 #endif
 
@@ -10601,7 +10643,8 @@ bool compare_VkMemoryDedicatedAllocateInfo(VkMemoryDedicatedAllocateInfo const *
 #if (VK_KHR_dedicated_allocation)
 bool compare_VkMemoryDedicatedAllocateInfoKHR(VkMemoryDedicatedAllocateInfoKHR const *s1,
                                               VkMemoryDedicatedAllocateInfoKHR const *s2) {
-  return true;
+  return compare_VkMemoryDedicatedAllocateInfo((VkMemoryDedicatedAllocateInfo const *)s1,
+                                               (VkMemoryDedicatedAllocateInfo const *)s2);
 }
 #endif
 
@@ -10628,7 +10671,8 @@ bool compare_VkImageViewSlicedCreateInfoEXT(VkImageViewSlicedCreateInfoEXT const
 #if (VK_KHR_maintenance2)
 bool compare_VkImageViewUsageCreateInfoKHR(VkImageViewUsageCreateInfoKHR const *s1,
                                            VkImageViewUsageCreateInfoKHR const *s2) {
-  return true;
+  return compare_VkImageViewUsageCreateInfo((VkImageViewUsageCreateInfo const *)s1,
+                                            (VkImageViewUsageCreateInfo const *)s2);
 }
 #endif
 
@@ -10647,7 +10691,9 @@ bool compare_VkPipelineTessellationDomainOriginStateCreateInfo(
 bool compare_VkPipelineTessellationDomainOriginStateCreateInfoKHR(
     VkPipelineTessellationDomainOriginStateCreateInfoKHR const *s1,
     VkPipelineTessellationDomainOriginStateCreateInfoKHR const *s2) {
-  return true;
+  return compare_VkPipelineTessellationDomainOriginStateCreateInfo(
+      (VkPipelineTessellationDomainOriginStateCreateInfo const *)s1,
+      (VkPipelineTessellationDomainOriginStateCreateInfo const *)s2);
 }
 #endif
 
@@ -10664,7 +10710,8 @@ bool compare_VkSamplerYcbcrConversionInfo(VkSamplerYcbcrConversionInfo const *s1
 #if (VK_KHR_sampler_ycbcr_conversion)
 bool compare_VkSamplerYcbcrConversionInfoKHR(VkSamplerYcbcrConversionInfoKHR const *s1,
                                              VkSamplerYcbcrConversionInfoKHR const *s2) {
-  return true;
+  return compare_VkSamplerYcbcrConversionInfo((VkSamplerYcbcrConversionInfo const *)s1,
+                                              (VkSamplerYcbcrConversionInfo const *)s2);
 }
 #endif
 
@@ -10687,7 +10734,8 @@ bool compare_VkSamplerYcbcrConversionCreateInfo(VkSamplerYcbcrConversionCreateIn
 bool compare_VkSamplerYcbcrConversionCreateInfoKHR(
     VkSamplerYcbcrConversionCreateInfoKHR const *s1,
     VkSamplerYcbcrConversionCreateInfoKHR const *s2) {
-  return true;
+  return compare_VkSamplerYcbcrConversionCreateInfo((VkSamplerYcbcrConversionCreateInfo const *)s1,
+                                                    (VkSamplerYcbcrConversionCreateInfo const *)s2);
 }
 #endif
 
@@ -10704,7 +10752,8 @@ bool compare_VkBindImagePlaneMemoryInfo(VkBindImagePlaneMemoryInfo const *s1,
 #if (VK_KHR_sampler_ycbcr_conversion)
 bool compare_VkBindImagePlaneMemoryInfoKHR(VkBindImagePlaneMemoryInfoKHR const *s1,
                                            VkBindImagePlaneMemoryInfoKHR const *s2) {
-  return true;
+  return compare_VkBindImagePlaneMemoryInfo((VkBindImagePlaneMemoryInfo const *)s1,
+                                            (VkBindImagePlaneMemoryInfo const *)s2);
 }
 #endif
 
@@ -10722,7 +10771,8 @@ bool compare_VkImagePlaneMemoryRequirementsInfo(VkImagePlaneMemoryRequirementsIn
 bool compare_VkImagePlaneMemoryRequirementsInfoKHR(
     VkImagePlaneMemoryRequirementsInfoKHR const *s1,
     VkImagePlaneMemoryRequirementsInfoKHR const *s2) {
-  return true;
+  return compare_VkImagePlaneMemoryRequirementsInfo((VkImagePlaneMemoryRequirementsInfo const *)s1,
+                                                    (VkImagePlaneMemoryRequirementsInfo const *)s2);
 }
 #endif
 
@@ -10741,7 +10791,9 @@ bool compare_VkPhysicalDeviceSamplerYcbcrConversionFeatures(
 bool compare_VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR(
     VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR const *s1,
     VkPhysicalDeviceSamplerYcbcrConversionFeaturesKHR const *s2) {
-  return true;
+  return compare_VkPhysicalDeviceSamplerYcbcrConversionFeatures(
+      (VkPhysicalDeviceSamplerYcbcrConversionFeatures const *)s1,
+      (VkPhysicalDeviceSamplerYcbcrConversionFeatures const *)s2);
 }
 #endif
 
@@ -10760,7 +10812,9 @@ bool compare_VkSamplerYcbcrConversionImageFormatProperties(
 bool compare_VkSamplerYcbcrConversionImageFormatPropertiesKHR(
     VkSamplerYcbcrConversionImageFormatPropertiesKHR const *s1,
     VkSamplerYcbcrConversionImageFormatPropertiesKHR const *s2) {
-  return true;
+  return compare_VkSamplerYcbcrConversionImageFormatProperties(
+      (VkSamplerYcbcrConversionImageFormatProperties const *)s1,
+      (VkSamplerYcbcrConversionImageFormatProperties const *)s2);
 }
 #endif
 
@@ -10855,11 +10909,9 @@ bool compare_VkPhysicalDeviceSamplerFilterMinmaxProperties(
 bool compare_VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT(
     VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT const *s1,
     VkPhysicalDeviceSamplerFilterMinmaxPropertiesEXT const *s2) {
-  if ((s1->filterMinmaxSingleComponentFormats != s2->filterMinmaxSingleComponentFormats) ||
-      (s1->filterMinmaxImageComponentMapping != s2->filterMinmaxImageComponentMapping) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceSamplerFilterMinmaxProperties(
+      (VkPhysicalDeviceSamplerFilterMinmaxProperties const *)s1,
+      (VkPhysicalDeviceSamplerFilterMinmaxProperties const *)s2);
 }
 #endif
 
@@ -10975,10 +11027,8 @@ bool compare_VkSamplerReductionModeCreateInfo(VkSamplerReductionModeCreateInfo c
 #if (VK_EXT_sampler_filter_minmax)
 bool compare_VkSamplerReductionModeCreateInfoEXT(VkSamplerReductionModeCreateInfoEXT const *s1,
                                                  VkSamplerReductionModeCreateInfoEXT const *s2) {
-  if ((s1->reductionMode != s2->reductionMode) || false)
-    return false;
-
-  return true;
+  return compare_VkSamplerReductionModeCreateInfo((VkSamplerReductionModeCreateInfo const *)s1,
+                                                  (VkSamplerReductionModeCreateInfo const *)s2);
 }
 #endif
 
@@ -11050,13 +11100,9 @@ bool compare_VkPhysicalDeviceInlineUniformBlockFeatures(
 bool compare_VkPhysicalDeviceInlineUniformBlockFeaturesEXT(
     VkPhysicalDeviceInlineUniformBlockFeaturesEXT const *s1,
     VkPhysicalDeviceInlineUniformBlockFeaturesEXT const *s2) {
-  if ((s1->inlineUniformBlock != s2->inlineUniformBlock) ||
-      (s1->descriptorBindingInlineUniformBlockUpdateAfterBind !=
-       s2->descriptorBindingInlineUniformBlockUpdateAfterBind) ||
-      false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceInlineUniformBlockFeatures(
+      (VkPhysicalDeviceInlineUniformBlockFeatures const *)s1,
+      (VkPhysicalDeviceInlineUniformBlockFeatures const *)s2);
 }
 #endif
 
@@ -11083,18 +11129,9 @@ bool compare_VkPhysicalDeviceInlineUniformBlockProperties(
 bool compare_VkPhysicalDeviceInlineUniformBlockPropertiesEXT(
     VkPhysicalDeviceInlineUniformBlockPropertiesEXT const *s1,
     VkPhysicalDeviceInlineUniformBlockPropertiesEXT const *s2) {
-  if ((s1->maxInlineUniformBlockSize != s2->maxInlineUniformBlockSize) ||
-      (s1->maxPerStageDescriptorInlineUniformBlocks !=
-       s2->maxPerStageDescriptorInlineUniformBlocks) ||
-      (s1->maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks !=
-       s2->maxPerStageDescriptorUpdateAfterBindInlineUniformBlocks) ||
-      (s1->maxDescriptorSetInlineUniformBlocks != s2->maxDescriptorSetInlineUniformBlocks) ||
-      (s1->maxDescriptorSetUpdateAfterBindInlineUniformBlocks !=
-       s2->maxDescriptorSetUpdateAfterBindInlineUniformBlocks) ||
-      false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceInlineUniformBlockProperties(
+      (VkPhysicalDeviceInlineUniformBlockProperties const *)s1,
+      (VkPhysicalDeviceInlineUniformBlockProperties const *)s2);
 }
 #endif
 
@@ -11113,10 +11150,9 @@ bool compare_VkWriteDescriptorSetInlineUniformBlock(
 bool compare_VkWriteDescriptorSetInlineUniformBlockEXT(
     VkWriteDescriptorSetInlineUniformBlockEXT const *s1,
     VkWriteDescriptorSetInlineUniformBlockEXT const *s2) {
-  if ((s1->dataSize != s2->dataSize) || false)
-    return false;
-
-  return true;
+  return compare_VkWriteDescriptorSetInlineUniformBlock(
+      (VkWriteDescriptorSetInlineUniformBlock const *)s1,
+      (VkWriteDescriptorSetInlineUniformBlock const *)s2);
 }
 #endif
 
@@ -11135,10 +11171,9 @@ bool compare_VkDescriptorPoolInlineUniformBlockCreateInfo(
 bool compare_VkDescriptorPoolInlineUniformBlockCreateInfoEXT(
     VkDescriptorPoolInlineUniformBlockCreateInfoEXT const *s1,
     VkDescriptorPoolInlineUniformBlockCreateInfoEXT const *s2) {
-  if ((s1->maxInlineUniformBlockBindings != s2->maxInlineUniformBlockBindings) || false)
-    return false;
-
-  return true;
+  return compare_VkDescriptorPoolInlineUniformBlockCreateInfo(
+      (VkDescriptorPoolInlineUniformBlockCreateInfo const *)s1,
+      (VkDescriptorPoolInlineUniformBlockCreateInfo const *)s2);
 }
 #endif
 
@@ -11168,10 +11203,8 @@ bool compare_VkImageFormatListCreateInfo(VkImageFormatListCreateInfo const *s1,
 #if (VK_KHR_image_format_list)
 bool compare_VkImageFormatListCreateInfoKHR(VkImageFormatListCreateInfoKHR const *s1,
                                             VkImageFormatListCreateInfoKHR const *s2) {
-  if ((s1->viewFormatCount != s2->viewFormatCount) || false)
-    return false;
-
-  return true;
+  return compare_VkImageFormatListCreateInfo((VkImageFormatListCreateInfo const *)s1,
+                                             (VkImageFormatListCreateInfo const *)s2);
 }
 #endif
 
@@ -11212,7 +11245,9 @@ bool compare_VkPhysicalDeviceMaintenance3Properties(
 bool compare_VkPhysicalDeviceMaintenance3PropertiesKHR(
     VkPhysicalDeviceMaintenance3PropertiesKHR const *s1,
     VkPhysicalDeviceMaintenance3PropertiesKHR const *s2) {
-  return true;
+  return compare_VkPhysicalDeviceMaintenance3Properties(
+      (VkPhysicalDeviceMaintenance3Properties const *)s1,
+      (VkPhysicalDeviceMaintenance3Properties const *)s2);
 }
 #endif
 
@@ -11230,10 +11265,9 @@ bool compare_VkPhysicalDeviceMaintenance4Features(VkPhysicalDeviceMaintenance4Fe
 bool compare_VkPhysicalDeviceMaintenance4FeaturesKHR(
     VkPhysicalDeviceMaintenance4FeaturesKHR const *s1,
     VkPhysicalDeviceMaintenance4FeaturesKHR const *s2) {
-  if ((s1->maintenance4 != s2->maintenance4) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceMaintenance4Features(
+      (VkPhysicalDeviceMaintenance4Features const *)s1,
+      (VkPhysicalDeviceMaintenance4Features const *)s2);
 }
 #endif
 
@@ -11252,10 +11286,9 @@ bool compare_VkPhysicalDeviceMaintenance4Properties(
 bool compare_VkPhysicalDeviceMaintenance4PropertiesKHR(
     VkPhysicalDeviceMaintenance4PropertiesKHR const *s1,
     VkPhysicalDeviceMaintenance4PropertiesKHR const *s2) {
-  if ((s1->maxBufferSize != s2->maxBufferSize) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceMaintenance4Properties(
+      (VkPhysicalDeviceMaintenance4Properties const *)s1,
+      (VkPhysicalDeviceMaintenance4Properties const *)s2);
 }
 #endif
 
@@ -11314,7 +11347,8 @@ bool compare_VkDescriptorSetLayoutSupport(VkDescriptorSetLayoutSupport const *s1
 #if (VK_KHR_maintenance3)
 bool compare_VkDescriptorSetLayoutSupportKHR(VkDescriptorSetLayoutSupportKHR const *s1,
                                              VkDescriptorSetLayoutSupportKHR const *s2) {
-  return true;
+  return compare_VkDescriptorSetLayoutSupport((VkDescriptorSetLayoutSupport const *)s1,
+                                              (VkDescriptorSetLayoutSupport const *)s2);
 }
 #endif
 
@@ -11333,10 +11367,9 @@ bool compare_VkPhysicalDeviceShaderDrawParametersFeatures(
 bool compare_VkPhysicalDeviceShaderDrawParameterFeatures(
     VkPhysicalDeviceShaderDrawParameterFeatures const *s1,
     VkPhysicalDeviceShaderDrawParameterFeatures const *s2) {
-  if ((s1->shaderDrawParameters != s2->shaderDrawParameters) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceShaderDrawParametersFeatures(
+      (VkPhysicalDeviceShaderDrawParametersFeatures const *)s1,
+      (VkPhysicalDeviceShaderDrawParametersFeatures const *)s2);
 }
 #endif
 
@@ -11355,10 +11388,9 @@ bool compare_VkPhysicalDeviceShaderFloat16Int8Features(
 bool compare_VkPhysicalDeviceShaderFloat16Int8FeaturesKHR(
     VkPhysicalDeviceShaderFloat16Int8FeaturesKHR const *s1,
     VkPhysicalDeviceShaderFloat16Int8FeaturesKHR const *s2) {
-  if ((s1->shaderFloat16 != s2->shaderFloat16) || (s1->shaderInt8 != s2->shaderInt8) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceShaderFloat16Int8Features(
+      (VkPhysicalDeviceShaderFloat16Int8Features const *)s1,
+      (VkPhysicalDeviceShaderFloat16Int8Features const *)s2);
 }
 #endif
 
@@ -11366,10 +11398,9 @@ bool compare_VkPhysicalDeviceShaderFloat16Int8FeaturesKHR(
 bool compare_VkPhysicalDeviceFloat16Int8FeaturesKHR(
     VkPhysicalDeviceFloat16Int8FeaturesKHR const *s1,
     VkPhysicalDeviceFloat16Int8FeaturesKHR const *s2) {
-  if ((s1->shaderFloat16 != s2->shaderFloat16) || (s1->shaderInt8 != s2->shaderInt8) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceShaderFloat16Int8Features(
+      (VkPhysicalDeviceShaderFloat16Int8Features const *)s1,
+      (VkPhysicalDeviceShaderFloat16Int8Features const *)s2);
 }
 #endif
 
@@ -11404,38 +11435,9 @@ bool compare_VkPhysicalDeviceFloatControlsProperties(
 bool compare_VkPhysicalDeviceFloatControlsPropertiesKHR(
     VkPhysicalDeviceFloatControlsPropertiesKHR const *s1,
     VkPhysicalDeviceFloatControlsPropertiesKHR const *s2) {
-  if (
-#if VK_HEADER_VERSION >= 116
-      (s1->denormBehaviorIndependence != s2->denormBehaviorIndependence) ||
-#endif
-#if VK_HEADER_VERSION >= 116
-      (s1->roundingModeIndependence != s2->roundingModeIndependence) ||
-#endif
-      (s1->shaderSignedZeroInfNanPreserveFloat16 != s2->shaderSignedZeroInfNanPreserveFloat16) ||
-      (s1->shaderSignedZeroInfNanPreserveFloat32 != s2->shaderSignedZeroInfNanPreserveFloat32) ||
-      (s1->shaderSignedZeroInfNanPreserveFloat64 != s2->shaderSignedZeroInfNanPreserveFloat64) ||
-      (s1->shaderDenormPreserveFloat16 != s2->shaderDenormPreserveFloat16) ||
-      (s1->shaderDenormPreserveFloat32 != s2->shaderDenormPreserveFloat32) ||
-      (s1->shaderDenormPreserveFloat64 != s2->shaderDenormPreserveFloat64) ||
-      (s1->shaderDenormFlushToZeroFloat16 != s2->shaderDenormFlushToZeroFloat16) ||
-      (s1->shaderDenormFlushToZeroFloat32 != s2->shaderDenormFlushToZeroFloat32) ||
-      (s1->shaderDenormFlushToZeroFloat64 != s2->shaderDenormFlushToZeroFloat64) ||
-      (s1->shaderRoundingModeRTEFloat16 != s2->shaderRoundingModeRTEFloat16) ||
-      (s1->shaderRoundingModeRTEFloat32 != s2->shaderRoundingModeRTEFloat32) ||
-      (s1->shaderRoundingModeRTEFloat64 != s2->shaderRoundingModeRTEFloat64) ||
-      (s1->shaderRoundingModeRTZFloat16 != s2->shaderRoundingModeRTZFloat16) ||
-      (s1->shaderRoundingModeRTZFloat32 != s2->shaderRoundingModeRTZFloat32) ||
-      (s1->shaderRoundingModeRTZFloat64 != s2->shaderRoundingModeRTZFloat64) ||
-#if VK_HEADER_VERSION <= 115
-      (s1->separateDenormSettings != s2->separateDenormSettings) ||
-#endif
-#if VK_HEADER_VERSION <= 115
-      (s1->separateRoundingModeSettings != s2->separateRoundingModeSettings) ||
-#endif
-      false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceFloatControlsProperties(
+      (VkPhysicalDeviceFloatControlsProperties const *)s1,
+      (VkPhysicalDeviceFloatControlsProperties const *)s2);
 }
 #endif
 
@@ -11454,10 +11456,9 @@ bool compare_VkPhysicalDeviceHostQueryResetFeatures(
 bool compare_VkPhysicalDeviceHostQueryResetFeaturesEXT(
     VkPhysicalDeviceHostQueryResetFeaturesEXT const *s1,
     VkPhysicalDeviceHostQueryResetFeaturesEXT const *s2) {
-  if ((s1->hostQueryReset != s2->hostQueryReset) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceHostQueryResetFeatures(
+      (VkPhysicalDeviceHostQueryResetFeatures const *)s1,
+      (VkPhysicalDeviceHostQueryResetFeatures const *)s2);
 }
 #endif
 
@@ -11554,10 +11555,9 @@ bool compare_VkDeviceQueueGlobalPriorityCreateInfoKHR(
 bool compare_VkDeviceQueueGlobalPriorityCreateInfoEXT(
     VkDeviceQueueGlobalPriorityCreateInfoEXT const *s1,
     VkDeviceQueueGlobalPriorityCreateInfoEXT const *s2) {
-  if ((s1->globalPriority != s2->globalPriority) || false)
-    return false;
-
-  return true;
+  return compare_VkDeviceQueueGlobalPriorityCreateInfoKHR(
+      (VkDeviceQueueGlobalPriorityCreateInfoKHR const *)s1,
+      (VkDeviceQueueGlobalPriorityCreateInfoKHR const *)s2);
 }
 #endif
 
@@ -11576,10 +11576,9 @@ bool compare_VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR(
 bool compare_VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT(
     VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT const *s1,
     VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT const *s2) {
-  if ((s1->globalPriorityQuery != s2->globalPriorityQuery) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR(
+      (VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR const *)s1,
+      (VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR const *)s2);
 }
 #endif
 
@@ -11603,15 +11602,9 @@ bool compare_VkQueueFamilyGlobalPriorityPropertiesKHR(
 bool compare_VkQueueFamilyGlobalPriorityPropertiesEXT(
     VkQueueFamilyGlobalPriorityPropertiesEXT const *s1,
     VkQueueFamilyGlobalPriorityPropertiesEXT const *s2) {
-  if ((s1->priorityCount != s2->priorityCount) || false)
-    return false;
-
-  for (uint32_t i = 0; i < VK_MAX_GLOBAL_PRIORITY_SIZE_EXT; ++i) {
-    if (s1->priorities[i] != s2->priorities[i])
-      return false;
-  }
-
-  return true;
+  return compare_VkQueueFamilyGlobalPriorityPropertiesKHR(
+      (VkQueueFamilyGlobalPriorityPropertiesKHR const *)s1,
+      (VkQueueFamilyGlobalPriorityPropertiesKHR const *)s2);
 }
 #endif
 
@@ -11869,47 +11862,9 @@ bool compare_VkPhysicalDeviceDescriptorIndexingFeatures(
 bool compare_VkPhysicalDeviceDescriptorIndexingFeaturesEXT(
     VkPhysicalDeviceDescriptorIndexingFeaturesEXT const *s1,
     VkPhysicalDeviceDescriptorIndexingFeaturesEXT const *s2) {
-  if ((s1->shaderInputAttachmentArrayDynamicIndexing !=
-       s2->shaderInputAttachmentArrayDynamicIndexing) ||
-      (s1->shaderUniformTexelBufferArrayDynamicIndexing !=
-       s2->shaderUniformTexelBufferArrayDynamicIndexing) ||
-      (s1->shaderStorageTexelBufferArrayDynamicIndexing !=
-       s2->shaderStorageTexelBufferArrayDynamicIndexing) ||
-      (s1->shaderUniformBufferArrayNonUniformIndexing !=
-       s2->shaderUniformBufferArrayNonUniformIndexing) ||
-      (s1->shaderSampledImageArrayNonUniformIndexing !=
-       s2->shaderSampledImageArrayNonUniformIndexing) ||
-      (s1->shaderStorageBufferArrayNonUniformIndexing !=
-       s2->shaderStorageBufferArrayNonUniformIndexing) ||
-      (s1->shaderStorageImageArrayNonUniformIndexing !=
-       s2->shaderStorageImageArrayNonUniformIndexing) ||
-      (s1->shaderInputAttachmentArrayNonUniformIndexing !=
-       s2->shaderInputAttachmentArrayNonUniformIndexing) ||
-      (s1->shaderUniformTexelBufferArrayNonUniformIndexing !=
-       s2->shaderUniformTexelBufferArrayNonUniformIndexing) ||
-      (s1->shaderStorageTexelBufferArrayNonUniformIndexing !=
-       s2->shaderStorageTexelBufferArrayNonUniformIndexing) ||
-      (s1->descriptorBindingUniformBufferUpdateAfterBind !=
-       s2->descriptorBindingUniformBufferUpdateAfterBind) ||
-      (s1->descriptorBindingSampledImageUpdateAfterBind !=
-       s2->descriptorBindingSampledImageUpdateAfterBind) ||
-      (s1->descriptorBindingStorageImageUpdateAfterBind !=
-       s2->descriptorBindingStorageImageUpdateAfterBind) ||
-      (s1->descriptorBindingStorageBufferUpdateAfterBind !=
-       s2->descriptorBindingStorageBufferUpdateAfterBind) ||
-      (s1->descriptorBindingUniformTexelBufferUpdateAfterBind !=
-       s2->descriptorBindingUniformTexelBufferUpdateAfterBind) ||
-      (s1->descriptorBindingStorageTexelBufferUpdateAfterBind !=
-       s2->descriptorBindingStorageTexelBufferUpdateAfterBind) ||
-      (s1->descriptorBindingUpdateUnusedWhilePending !=
-       s2->descriptorBindingUpdateUnusedWhilePending) ||
-      (s1->descriptorBindingPartiallyBound != s2->descriptorBindingPartiallyBound) ||
-      (s1->descriptorBindingVariableDescriptorCount !=
-       s2->descriptorBindingVariableDescriptorCount) ||
-      (s1->runtimeDescriptorArray != s2->runtimeDescriptorArray) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceDescriptorIndexingFeatures(
+      (VkPhysicalDeviceDescriptorIndexingFeatures const *)s1,
+      (VkPhysicalDeviceDescriptorIndexingFeatures const *)s2);
 }
 #endif
 
@@ -11971,53 +11926,9 @@ bool compare_VkPhysicalDeviceDescriptorIndexingProperties(
 bool compare_VkPhysicalDeviceDescriptorIndexingPropertiesEXT(
     VkPhysicalDeviceDescriptorIndexingPropertiesEXT const *s1,
     VkPhysicalDeviceDescriptorIndexingPropertiesEXT const *s2) {
-  if ((s1->maxUpdateAfterBindDescriptorsInAllPools !=
-       s2->maxUpdateAfterBindDescriptorsInAllPools) ||
-      (s1->shaderUniformBufferArrayNonUniformIndexingNative !=
-       s2->shaderUniformBufferArrayNonUniformIndexingNative) ||
-      (s1->shaderSampledImageArrayNonUniformIndexingNative !=
-       s2->shaderSampledImageArrayNonUniformIndexingNative) ||
-      (s1->shaderStorageBufferArrayNonUniformIndexingNative !=
-       s2->shaderStorageBufferArrayNonUniformIndexingNative) ||
-      (s1->shaderStorageImageArrayNonUniformIndexingNative !=
-       s2->shaderStorageImageArrayNonUniformIndexingNative) ||
-      (s1->shaderInputAttachmentArrayNonUniformIndexingNative !=
-       s2->shaderInputAttachmentArrayNonUniformIndexingNative) ||
-      (s1->robustBufferAccessUpdateAfterBind != s2->robustBufferAccessUpdateAfterBind) ||
-      (s1->quadDivergentImplicitLod != s2->quadDivergentImplicitLod) ||
-      (s1->maxPerStageDescriptorUpdateAfterBindSamplers !=
-       s2->maxPerStageDescriptorUpdateAfterBindSamplers) ||
-      (s1->maxPerStageDescriptorUpdateAfterBindUniformBuffers !=
-       s2->maxPerStageDescriptorUpdateAfterBindUniformBuffers) ||
-      (s1->maxPerStageDescriptorUpdateAfterBindStorageBuffers !=
-       s2->maxPerStageDescriptorUpdateAfterBindStorageBuffers) ||
-      (s1->maxPerStageDescriptorUpdateAfterBindSampledImages !=
-       s2->maxPerStageDescriptorUpdateAfterBindSampledImages) ||
-      (s1->maxPerStageDescriptorUpdateAfterBindStorageImages !=
-       s2->maxPerStageDescriptorUpdateAfterBindStorageImages) ||
-      (s1->maxPerStageDescriptorUpdateAfterBindInputAttachments !=
-       s2->maxPerStageDescriptorUpdateAfterBindInputAttachments) ||
-      (s1->maxPerStageUpdateAfterBindResources != s2->maxPerStageUpdateAfterBindResources) ||
-      (s1->maxDescriptorSetUpdateAfterBindSamplers !=
-       s2->maxDescriptorSetUpdateAfterBindSamplers) ||
-      (s1->maxDescriptorSetUpdateAfterBindUniformBuffers !=
-       s2->maxDescriptorSetUpdateAfterBindUniformBuffers) ||
-      (s1->maxDescriptorSetUpdateAfterBindUniformBuffersDynamic !=
-       s2->maxDescriptorSetUpdateAfterBindUniformBuffersDynamic) ||
-      (s1->maxDescriptorSetUpdateAfterBindStorageBuffers !=
-       s2->maxDescriptorSetUpdateAfterBindStorageBuffers) ||
-      (s1->maxDescriptorSetUpdateAfterBindStorageBuffersDynamic !=
-       s2->maxDescriptorSetUpdateAfterBindStorageBuffersDynamic) ||
-      (s1->maxDescriptorSetUpdateAfterBindSampledImages !=
-       s2->maxDescriptorSetUpdateAfterBindSampledImages) ||
-      (s1->maxDescriptorSetUpdateAfterBindStorageImages !=
-       s2->maxDescriptorSetUpdateAfterBindStorageImages) ||
-      (s1->maxDescriptorSetUpdateAfterBindInputAttachments !=
-       s2->maxDescriptorSetUpdateAfterBindInputAttachments) ||
-      false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceDescriptorIndexingProperties(
+      (VkPhysicalDeviceDescriptorIndexingProperties const *)s1,
+      (VkPhysicalDeviceDescriptorIndexingProperties const *)s2);
 }
 #endif
 
@@ -12036,10 +11947,9 @@ bool compare_VkDescriptorSetLayoutBindingFlagsCreateInfo(
 bool compare_VkDescriptorSetLayoutBindingFlagsCreateInfoEXT(
     VkDescriptorSetLayoutBindingFlagsCreateInfoEXT const *s1,
     VkDescriptorSetLayoutBindingFlagsCreateInfoEXT const *s2) {
-  if ((s1->bindingCount != s2->bindingCount) || false)
-    return false;
-
-  return true;
+  return compare_VkDescriptorSetLayoutBindingFlagsCreateInfo(
+      (VkDescriptorSetLayoutBindingFlagsCreateInfo const *)s1,
+      (VkDescriptorSetLayoutBindingFlagsCreateInfo const *)s2);
 }
 #endif
 
@@ -12058,10 +11968,9 @@ bool compare_VkDescriptorSetVariableDescriptorCountAllocateInfo(
 bool compare_VkDescriptorSetVariableDescriptorCountAllocateInfoEXT(
     VkDescriptorSetVariableDescriptorCountAllocateInfoEXT const *s1,
     VkDescriptorSetVariableDescriptorCountAllocateInfoEXT const *s2) {
-  if ((s1->descriptorSetCount != s2->descriptorSetCount) || false)
-    return false;
-
-  return true;
+  return compare_VkDescriptorSetVariableDescriptorCountAllocateInfo(
+      (VkDescriptorSetVariableDescriptorCountAllocateInfo const *)s1,
+      (VkDescriptorSetVariableDescriptorCountAllocateInfo const *)s2);
 }
 #endif
 
@@ -12080,10 +11989,9 @@ bool compare_VkDescriptorSetVariableDescriptorCountLayoutSupport(
 bool compare_VkDescriptorSetVariableDescriptorCountLayoutSupportEXT(
     VkDescriptorSetVariableDescriptorCountLayoutSupportEXT const *s1,
     VkDescriptorSetVariableDescriptorCountLayoutSupportEXT const *s2) {
-  if ((s1->maxVariableDescriptorCount != s2->maxVariableDescriptorCount) || false)
-    return false;
-
-  return true;
+  return compare_VkDescriptorSetVariableDescriptorCountLayoutSupport(
+      (VkDescriptorSetVariableDescriptorCountLayoutSupport const *)s1,
+      (VkDescriptorSetVariableDescriptorCountLayoutSupport const *)s2);
 }
 #endif
 
@@ -12103,13 +12011,8 @@ bool compare_VkAttachmentDescription2(VkAttachmentDescription2 const *s1,
 #if VK_HEADER_VERSION >= 80 && (VK_KHR_create_renderpass2)
 bool compare_VkAttachmentDescription2KHR(VkAttachmentDescription2KHR const *s1,
                                          VkAttachmentDescription2KHR const *s2) {
-  if ((s1->flags != s2->flags) || (s1->format != s2->format) || (s1->samples != s2->samples) ||
-      (s1->loadOp != s2->loadOp) || (s1->storeOp != s2->storeOp) ||
-      (s1->stencilLoadOp != s2->stencilLoadOp) || (s1->stencilStoreOp != s2->stencilStoreOp) ||
-      (s1->initialLayout != s2->initialLayout) || (s1->finalLayout != s2->finalLayout) || false)
-    return false;
-
-  return true;
+  return compare_VkAttachmentDescription2((VkAttachmentDescription2 const *)s1,
+                                          (VkAttachmentDescription2 const *)s2);
 }
 #endif
 
@@ -12127,11 +12030,8 @@ bool compare_VkAttachmentReference2(VkAttachmentReference2 const *s1,
 #if VK_HEADER_VERSION >= 80 && (VK_KHR_create_renderpass2)
 bool compare_VkAttachmentReference2KHR(VkAttachmentReference2KHR const *s1,
                                        VkAttachmentReference2KHR const *s2) {
-  if ((s1->attachment != s2->attachment) || (s1->layout != s2->layout) ||
-      (s1->aspectMask != s2->aspectMask) || false)
-    return false;
-
-  return true;
+  return compare_VkAttachmentReference2((VkAttachmentReference2 const *)s1,
+                                        (VkAttachmentReference2 const *)s2);
 }
 #endif
 
@@ -12151,13 +12051,8 @@ bool compare_VkSubpassDescription2(VkSubpassDescription2 const *s1,
 #if VK_HEADER_VERSION >= 80 && (VK_KHR_create_renderpass2)
 bool compare_VkSubpassDescription2KHR(VkSubpassDescription2KHR const *s1,
                                       VkSubpassDescription2KHR const *s2) {
-  if ((s1->flags != s2->flags) || (s1->pipelineBindPoint != s2->pipelineBindPoint) ||
-      (s1->viewMask != s2->viewMask) || (s1->inputAttachmentCount != s2->inputAttachmentCount) ||
-      (s1->colorAttachmentCount != s2->colorAttachmentCount) ||
-      (s1->preserveAttachmentCount != s2->preserveAttachmentCount) || false)
-    return false;
-
-  return true;
+  return compare_VkSubpassDescription2((VkSubpassDescription2 const *)s1,
+                                       (VkSubpassDescription2 const *)s2);
 }
 #endif
 
@@ -12176,13 +12071,8 @@ bool compare_VkSubpassDependency2(VkSubpassDependency2 const *s1, VkSubpassDepen
 #if VK_HEADER_VERSION >= 80 && (VK_KHR_create_renderpass2)
 bool compare_VkSubpassDependency2KHR(VkSubpassDependency2KHR const *s1,
                                      VkSubpassDependency2KHR const *s2) {
-  if ((s1->srcSubpass != s2->srcSubpass) || (s1->dstSubpass != s2->dstSubpass) ||
-      (s1->srcStageMask != s2->srcStageMask) || (s1->dstStageMask != s2->dstStageMask) ||
-      (s1->srcAccessMask != s2->srcAccessMask) || (s1->dstAccessMask != s2->dstAccessMask) ||
-      (s1->dependencyFlags != s2->dependencyFlags) || (s1->viewOffset != s2->viewOffset) || false)
-    return false;
-
-  return true;
+  return compare_VkSubpassDependency2((VkSubpassDependency2 const *)s1,
+                                      (VkSubpassDependency2 const *)s2);
 }
 #endif
 
@@ -12201,12 +12091,8 @@ bool compare_VkRenderPassCreateInfo2(VkRenderPassCreateInfo2 const *s1,
 #if VK_HEADER_VERSION >= 80 && (VK_KHR_create_renderpass2)
 bool compare_VkRenderPassCreateInfo2KHR(VkRenderPassCreateInfo2KHR const *s1,
                                         VkRenderPassCreateInfo2KHR const *s2) {
-  if ((s1->flags != s2->flags) || (s1->attachmentCount != s2->attachmentCount) ||
-      (s1->subpassCount != s2->subpassCount) || (s1->dependencyCount != s2->dependencyCount) ||
-      (s1->correlatedViewMaskCount != s2->correlatedViewMaskCount) || false)
-    return false;
-
-  return true;
+  return compare_VkRenderPassCreateInfo2((VkRenderPassCreateInfo2 const *)s1,
+                                         (VkRenderPassCreateInfo2 const *)s2);
 }
 #endif
 
@@ -12222,10 +12108,7 @@ bool compare_VkSubpassBeginInfo(VkSubpassBeginInfo const *s1, VkSubpassBeginInfo
 #if VK_HEADER_VERSION >= 80 && (VK_KHR_create_renderpass2)
 bool compare_VkSubpassBeginInfoKHR(VkSubpassBeginInfoKHR const *s1,
                                    VkSubpassBeginInfoKHR const *s2) {
-  if ((s1->contents != s2->contents) || false)
-    return false;
-
-  return true;
+  return compare_VkSubpassBeginInfo((VkSubpassBeginInfo const *)s1, (VkSubpassBeginInfo const *)s2);
 }
 #endif
 
@@ -12237,7 +12120,7 @@ bool compare_VkSubpassEndInfo(VkSubpassEndInfo const *s1, VkSubpassEndInfo const
 
 #if VK_HEADER_VERSION >= 80 && (VK_KHR_create_renderpass2)
 bool compare_VkSubpassEndInfoKHR(VkSubpassEndInfoKHR const *s1, VkSubpassEndInfoKHR const *s2) {
-  return true;
+  return compare_VkSubpassEndInfo((VkSubpassEndInfo const *)s1, (VkSubpassEndInfo const *)s2);
 }
 #endif
 
@@ -12256,10 +12139,9 @@ bool compare_VkPhysicalDeviceTimelineSemaphoreFeatures(
 bool compare_VkPhysicalDeviceTimelineSemaphoreFeaturesKHR(
     VkPhysicalDeviceTimelineSemaphoreFeaturesKHR const *s1,
     VkPhysicalDeviceTimelineSemaphoreFeaturesKHR const *s2) {
-  if ((s1->timelineSemaphore != s2->timelineSemaphore) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceTimelineSemaphoreFeatures(
+      (VkPhysicalDeviceTimelineSemaphoreFeatures const *)s1,
+      (VkPhysicalDeviceTimelineSemaphoreFeatures const *)s2);
 }
 #endif
 
@@ -12278,10 +12160,9 @@ bool compare_VkPhysicalDeviceTimelineSemaphoreProperties(
 bool compare_VkPhysicalDeviceTimelineSemaphorePropertiesKHR(
     VkPhysicalDeviceTimelineSemaphorePropertiesKHR const *s1,
     VkPhysicalDeviceTimelineSemaphorePropertiesKHR const *s2) {
-  if ((s1->maxTimelineSemaphoreValueDifference != s2->maxTimelineSemaphoreValueDifference) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceTimelineSemaphoreProperties(
+      (VkPhysicalDeviceTimelineSemaphoreProperties const *)s1,
+      (VkPhysicalDeviceTimelineSemaphoreProperties const *)s2);
 }
 #endif
 
@@ -12298,10 +12179,8 @@ bool compare_VkSemaphoreTypeCreateInfo(VkSemaphoreTypeCreateInfo const *s1,
 #if VK_HEADER_VERSION >= 124 && (VK_KHR_timeline_semaphore)
 bool compare_VkSemaphoreTypeCreateInfoKHR(VkSemaphoreTypeCreateInfoKHR const *s1,
                                           VkSemaphoreTypeCreateInfoKHR const *s2) {
-  if ((s1->semaphoreType != s2->semaphoreType) || (s1->initialValue != s2->initialValue) || false)
-    return false;
-
-  return true;
+  return compare_VkSemaphoreTypeCreateInfo((VkSemaphoreTypeCreateInfo const *)s1,
+                                           (VkSemaphoreTypeCreateInfo const *)s2);
 }
 #endif
 
@@ -12319,11 +12198,8 @@ bool compare_VkTimelineSemaphoreSubmitInfo(VkTimelineSemaphoreSubmitInfo const *
 #if VK_HEADER_VERSION >= 124 && (VK_KHR_timeline_semaphore)
 bool compare_VkTimelineSemaphoreSubmitInfoKHR(VkTimelineSemaphoreSubmitInfoKHR const *s1,
                                               VkTimelineSemaphoreSubmitInfoKHR const *s2) {
-  if ((s1->waitSemaphoreValueCount != s2->waitSemaphoreValueCount) ||
-      (s1->signalSemaphoreValueCount != s2->signalSemaphoreValueCount) || false)
-    return false;
-
-  return true;
+  return compare_VkTimelineSemaphoreSubmitInfo((VkTimelineSemaphoreSubmitInfo const *)s1,
+                                               (VkTimelineSemaphoreSubmitInfo const *)s2);
 }
 #endif
 
@@ -12339,10 +12215,8 @@ bool compare_VkSemaphoreWaitInfo(VkSemaphoreWaitInfo const *s1, VkSemaphoreWaitI
 #if VK_HEADER_VERSION >= 124 && (VK_KHR_timeline_semaphore)
 bool compare_VkSemaphoreWaitInfoKHR(VkSemaphoreWaitInfoKHR const *s1,
                                     VkSemaphoreWaitInfoKHR const *s2) {
-  if ((s1->flags != s2->flags) || (s1->semaphoreCount != s2->semaphoreCount) || false)
-    return false;
-
-  return true;
+  return compare_VkSemaphoreWaitInfo((VkSemaphoreWaitInfo const *)s1,
+                                     (VkSemaphoreWaitInfo const *)s2);
 }
 #endif
 
@@ -12359,10 +12233,8 @@ bool compare_VkSemaphoreSignalInfo(VkSemaphoreSignalInfo const *s1,
 #if VK_HEADER_VERSION >= 124 && (VK_KHR_timeline_semaphore)
 bool compare_VkSemaphoreSignalInfoKHR(VkSemaphoreSignalInfoKHR const *s1,
                                       VkSemaphoreSignalInfoKHR const *s2) {
-  if ((s1->semaphore != s2->semaphore) || (s1->value != s2->value) || false)
-    return false;
-
-  return true;
+  return compare_VkSemaphoreSignalInfo((VkSemaphoreSignalInfo const *)s1,
+                                       (VkSemaphoreSignalInfo const *)s2);
 }
 #endif
 
@@ -12507,12 +12379,9 @@ bool compare_VkPhysicalDevice8BitStorageFeatures(VkPhysicalDevice8BitStorageFeat
 bool compare_VkPhysicalDevice8BitStorageFeaturesKHR(
     VkPhysicalDevice8BitStorageFeaturesKHR const *s1,
     VkPhysicalDevice8BitStorageFeaturesKHR const *s2) {
-  if ((s1->storageBuffer8BitAccess != s2->storageBuffer8BitAccess) ||
-      (s1->uniformAndStorageBuffer8BitAccess != s2->uniformAndStorageBuffer8BitAccess) ||
-      (s1->storagePushConstant8 != s2->storagePushConstant8) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDevice8BitStorageFeatures(
+      (VkPhysicalDevice8BitStorageFeatures const *)s1,
+      (VkPhysicalDevice8BitStorageFeatures const *)s2);
 }
 #endif
 
@@ -12547,16 +12416,9 @@ bool compare_VkPhysicalDeviceVulkanMemoryModelFeatures(
 bool compare_VkPhysicalDeviceVulkanMemoryModelFeaturesKHR(
     VkPhysicalDeviceVulkanMemoryModelFeaturesKHR const *s1,
     VkPhysicalDeviceVulkanMemoryModelFeaturesKHR const *s2) {
-  if ((s1->vulkanMemoryModel != s2->vulkanMemoryModel) ||
-      (s1->vulkanMemoryModelDeviceScope != s2->vulkanMemoryModelDeviceScope) ||
-#if VK_HEADER_VERSION >= 98
-      (s1->vulkanMemoryModelAvailabilityVisibilityChains !=
-       s2->vulkanMemoryModelAvailabilityVisibilityChains) ||
-#endif
-      false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceVulkanMemoryModelFeatures(
+      (VkPhysicalDeviceVulkanMemoryModelFeatures const *)s1,
+      (VkPhysicalDeviceVulkanMemoryModelFeatures const *)s2);
 }
 #endif
 
@@ -12576,11 +12438,9 @@ bool compare_VkPhysicalDeviceShaderAtomicInt64Features(
 bool compare_VkPhysicalDeviceShaderAtomicInt64FeaturesKHR(
     VkPhysicalDeviceShaderAtomicInt64FeaturesKHR const *s1,
     VkPhysicalDeviceShaderAtomicInt64FeaturesKHR const *s2) {
-  if ((s1->shaderBufferInt64Atomics != s2->shaderBufferInt64Atomics) ||
-      (s1->shaderSharedInt64Atomics != s2->shaderSharedInt64Atomics) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceShaderAtomicInt64Features(
+      (VkPhysicalDeviceShaderAtomicInt64Features const *)s1,
+      (VkPhysicalDeviceShaderAtomicInt64Features const *)s2);
 }
 #endif
 
@@ -12678,13 +12538,9 @@ bool compare_VkPhysicalDeviceDepthStencilResolveProperties(
 bool compare_VkPhysicalDeviceDepthStencilResolvePropertiesKHR(
     VkPhysicalDeviceDepthStencilResolvePropertiesKHR const *s1,
     VkPhysicalDeviceDepthStencilResolvePropertiesKHR const *s2) {
-  if ((s1->supportedDepthResolveModes != s2->supportedDepthResolveModes) ||
-      (s1->supportedStencilResolveModes != s2->supportedStencilResolveModes) ||
-      (s1->independentResolveNone != s2->independentResolveNone) ||
-      (s1->independentResolve != s2->independentResolve) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceDepthStencilResolveProperties(
+      (VkPhysicalDeviceDepthStencilResolveProperties const *)s1,
+      (VkPhysicalDeviceDepthStencilResolveProperties const *)s2);
 }
 #endif
 
@@ -12704,11 +12560,9 @@ bool compare_VkSubpassDescriptionDepthStencilResolve(
 bool compare_VkSubpassDescriptionDepthStencilResolveKHR(
     VkSubpassDescriptionDepthStencilResolveKHR const *s1,
     VkSubpassDescriptionDepthStencilResolveKHR const *s2) {
-  if ((s1->depthResolveMode != s2->depthResolveMode) ||
-      (s1->stencilResolveMode != s2->stencilResolveMode) || false)
-    return false;
-
-  return true;
+  return compare_VkSubpassDescriptionDepthStencilResolve(
+      (VkSubpassDescriptionDepthStencilResolve const *)s1,
+      (VkSubpassDescriptionDepthStencilResolve const *)s2);
 }
 #endif
 
@@ -12848,10 +12702,9 @@ bool compare_VkPhysicalDeviceComputeShaderDerivativesFeaturesNV(
 bool compare_VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV(
     VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV const *s1,
     VkPhysicalDeviceFragmentShaderBarycentricFeaturesNV const *s2) {
-  if ((s1->fragmentShaderBarycentric != s2->fragmentShaderBarycentric) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR(
+      (VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR const *)s1,
+      (VkPhysicalDeviceFragmentShaderBarycentricFeaturesKHR const *)s2);
 }
 #endif
 
@@ -13559,10 +13412,8 @@ bool compare_VkImageStencilUsageCreateInfo(VkImageStencilUsageCreateInfo const *
 #if VK_HEADER_VERSION >= 93 && (VK_EXT_separate_stencil_usage)
 bool compare_VkImageStencilUsageCreateInfoEXT(VkImageStencilUsageCreateInfoEXT const *s1,
                                               VkImageStencilUsageCreateInfoEXT const *s2) {
-  if ((s1->stencilUsage != s2->stencilUsage) || false)
-    return false;
-
-  return true;
+  return compare_VkImageStencilUsageCreateInfo((VkImageStencilUsageCreateInfo const *)s1,
+                                               (VkImageStencilUsageCreateInfo const *)s2);
 }
 #endif
 
@@ -13693,10 +13544,9 @@ bool compare_VkPhysicalDeviceScalarBlockLayoutFeatures(
 bool compare_VkPhysicalDeviceScalarBlockLayoutFeaturesEXT(
     VkPhysicalDeviceScalarBlockLayoutFeaturesEXT const *s1,
     VkPhysicalDeviceScalarBlockLayoutFeaturesEXT const *s2) {
-  if ((s1->scalarBlockLayout != s2->scalarBlockLayout) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceScalarBlockLayoutFeatures(
+      (VkPhysicalDeviceScalarBlockLayoutFeatures const *)s1,
+      (VkPhysicalDeviceScalarBlockLayoutFeatures const *)s2);
 }
 #endif
 
@@ -13725,10 +13575,9 @@ bool compare_VkPhysicalDeviceUniformBufferStandardLayoutFeatures(
 bool compare_VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR(
     VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR const *s1,
     VkPhysicalDeviceUniformBufferStandardLayoutFeaturesKHR const *s2) {
-  if ((s1->uniformBufferStandardLayout != s2->uniformBufferStandardLayout) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceUniformBufferStandardLayoutFeatures(
+      (VkPhysicalDeviceUniformBufferStandardLayoutFeatures const *)s1,
+      (VkPhysicalDeviceUniformBufferStandardLayoutFeatures const *)s2);
 }
 #endif
 
@@ -13820,12 +13669,9 @@ bool compare_VkPhysicalDeviceBufferDeviceAddressFeatures(
 bool compare_VkPhysicalDeviceBufferDeviceAddressFeaturesKHR(
     VkPhysicalDeviceBufferDeviceAddressFeaturesKHR const *s1,
     VkPhysicalDeviceBufferDeviceAddressFeaturesKHR const *s2) {
-  if ((s1->bufferDeviceAddress != s2->bufferDeviceAddress) ||
-      (s1->bufferDeviceAddressCaptureReplay != s2->bufferDeviceAddressCaptureReplay) ||
-      (s1->bufferDeviceAddressMultiDevice != s2->bufferDeviceAddressMultiDevice) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceBufferDeviceAddressFeatures(
+      (VkPhysicalDeviceBufferDeviceAddressFeatures const *)s1,
+      (VkPhysicalDeviceBufferDeviceAddressFeatures const *)s2);
 }
 #endif
 
@@ -13846,12 +13692,9 @@ bool compare_VkPhysicalDeviceBufferDeviceAddressFeaturesEXT(
 bool compare_VkPhysicalDeviceBufferAddressFeaturesEXT(
     VkPhysicalDeviceBufferAddressFeaturesEXT const *s1,
     VkPhysicalDeviceBufferAddressFeaturesEXT const *s2) {
-  if ((s1->bufferDeviceAddress != s2->bufferDeviceAddress) ||
-      (s1->bufferDeviceAddressCaptureReplay != s2->bufferDeviceAddressCaptureReplay) ||
-      (s1->bufferDeviceAddressMultiDevice != s2->bufferDeviceAddressMultiDevice) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceBufferDeviceAddressFeaturesEXT(
+      (VkPhysicalDeviceBufferDeviceAddressFeaturesEXT const *)s1,
+      (VkPhysicalDeviceBufferDeviceAddressFeaturesEXT const *)s2);
 }
 #endif
 
@@ -13868,20 +13711,16 @@ bool compare_VkBufferDeviceAddressInfo(VkBufferDeviceAddressInfo const *s1,
 #if VK_HEADER_VERSION >= 129 && (VK_KHR_buffer_device_address)
 bool compare_VkBufferDeviceAddressInfoKHR(VkBufferDeviceAddressInfoKHR const *s1,
                                           VkBufferDeviceAddressInfoKHR const *s2) {
-  if ((s1->buffer != s2->buffer) || false)
-    return false;
-
-  return true;
+  return compare_VkBufferDeviceAddressInfo((VkBufferDeviceAddressInfo const *)s1,
+                                           (VkBufferDeviceAddressInfo const *)s2);
 }
 #endif
 
 #if VK_HEADER_VERSION >= 97 && (VK_EXT_buffer_device_address)
 bool compare_VkBufferDeviceAddressInfoEXT(VkBufferDeviceAddressInfoEXT const *s1,
                                           VkBufferDeviceAddressInfoEXT const *s2) {
-  if ((s1->buffer != s2->buffer) || false)
-    return false;
-
-  return true;
+  return compare_VkBufferDeviceAddressInfo((VkBufferDeviceAddressInfo const *)s1,
+                                           (VkBufferDeviceAddressInfo const *)s2);
 }
 #endif
 
@@ -13900,10 +13739,9 @@ bool compare_VkBufferOpaqueCaptureAddressCreateInfo(
 bool compare_VkBufferOpaqueCaptureAddressCreateInfoKHR(
     VkBufferOpaqueCaptureAddressCreateInfoKHR const *s1,
     VkBufferOpaqueCaptureAddressCreateInfoKHR const *s2) {
-  if ((s1->opaqueCaptureAddress != s2->opaqueCaptureAddress) || false)
-    return false;
-
-  return true;
+  return compare_VkBufferOpaqueCaptureAddressCreateInfo(
+      (VkBufferOpaqueCaptureAddressCreateInfo const *)s1,
+      (VkBufferOpaqueCaptureAddressCreateInfo const *)s2);
 }
 #endif
 
@@ -13955,10 +13793,9 @@ bool compare_VkPhysicalDeviceImagelessFramebufferFeatures(
 bool compare_VkPhysicalDeviceImagelessFramebufferFeaturesKHR(
     VkPhysicalDeviceImagelessFramebufferFeaturesKHR const *s1,
     VkPhysicalDeviceImagelessFramebufferFeaturesKHR const *s2) {
-  if ((s1->imagelessFramebuffer != s2->imagelessFramebuffer) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceImagelessFramebufferFeatures(
+      (VkPhysicalDeviceImagelessFramebufferFeatures const *)s1,
+      (VkPhysicalDeviceImagelessFramebufferFeatures const *)s2);
 }
 #endif
 
@@ -13976,10 +13813,8 @@ bool compare_VkFramebufferAttachmentsCreateInfo(VkFramebufferAttachmentsCreateIn
 bool compare_VkFramebufferAttachmentsCreateInfoKHR(
     VkFramebufferAttachmentsCreateInfoKHR const *s1,
     VkFramebufferAttachmentsCreateInfoKHR const *s2) {
-  if ((s1->attachmentImageInfoCount != s2->attachmentImageInfoCount) || false)
-    return false;
-
-  return true;
+  return compare_VkFramebufferAttachmentsCreateInfo((VkFramebufferAttachmentsCreateInfo const *)s1,
+                                                    (VkFramebufferAttachmentsCreateInfo const *)s2);
 }
 #endif
 
@@ -13998,12 +13833,8 @@ bool compare_VkFramebufferAttachmentImageInfo(VkFramebufferAttachmentImageInfo c
 #if VK_HEADER_VERSION >= 114 && (VK_KHR_imageless_framebuffer)
 bool compare_VkFramebufferAttachmentImageInfoKHR(VkFramebufferAttachmentImageInfoKHR const *s1,
                                                  VkFramebufferAttachmentImageInfoKHR const *s2) {
-  if ((s1->flags != s2->flags) || (s1->usage != s2->usage) || (s1->width != s2->width) ||
-      (s1->height != s2->height) || (s1->layerCount != s2->layerCount) ||
-      (s1->viewFormatCount != s2->viewFormatCount) || false)
-    return false;
-
-  return true;
+  return compare_VkFramebufferAttachmentImageInfo((VkFramebufferAttachmentImageInfo const *)s1,
+                                                  (VkFramebufferAttachmentImageInfo const *)s2);
 }
 #endif
 
@@ -14020,10 +13851,8 @@ bool compare_VkRenderPassAttachmentBeginInfo(VkRenderPassAttachmentBeginInfo con
 #if VK_HEADER_VERSION >= 114 && (VK_KHR_imageless_framebuffer)
 bool compare_VkRenderPassAttachmentBeginInfoKHR(VkRenderPassAttachmentBeginInfoKHR const *s1,
                                                 VkRenderPassAttachmentBeginInfoKHR const *s2) {
-  if ((s1->attachmentCount != s2->attachmentCount) || false)
-    return false;
-
-  return true;
+  return compare_VkRenderPassAttachmentBeginInfo((VkRenderPassAttachmentBeginInfo const *)s1,
+                                                 (VkRenderPassAttachmentBeginInfo const *)s2);
 }
 #endif
 
@@ -14042,10 +13871,9 @@ bool compare_VkPhysicalDeviceTextureCompressionASTCHDRFeatures(
 bool compare_VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT(
     VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT const *s1,
     VkPhysicalDeviceTextureCompressionASTCHDRFeaturesEXT const *s2) {
-  if ((s1->textureCompressionASTC_HDR != s2->textureCompressionASTC_HDR) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceTextureCompressionASTCHDRFeatures(
+      (VkPhysicalDeviceTextureCompressionASTCHDRFeatures const *)s1,
+      (VkPhysicalDeviceTextureCompressionASTCHDRFeatures const *)s2);
 }
 #endif
 
@@ -14139,10 +13967,8 @@ bool compare_VkPipelineCreationFeedback(VkPipelineCreationFeedback const *s1,
 #if VK_HEADER_VERSION >= 104 && (VK_EXT_pipeline_creation_feedback)
 bool compare_VkPipelineCreationFeedbackEXT(VkPipelineCreationFeedbackEXT const *s1,
                                            VkPipelineCreationFeedbackEXT const *s2) {
-  if ((s1->flags != s2->flags) || (s1->duration != s2->duration) || false)
-    return false;
-
-  return true;
+  return compare_VkPipelineCreationFeedback((VkPipelineCreationFeedback const *)s1,
+                                            (VkPipelineCreationFeedback const *)s2);
 }
 #endif
 
@@ -14160,10 +13986,9 @@ bool compare_VkPipelineCreationFeedbackCreateInfo(VkPipelineCreationFeedbackCrea
 bool compare_VkPipelineCreationFeedbackCreateInfoEXT(
     VkPipelineCreationFeedbackCreateInfoEXT const *s1,
     VkPipelineCreationFeedbackCreateInfoEXT const *s2) {
-  if ((s1->pipelineStageCreationFeedbackCount != s2->pipelineStageCreationFeedbackCount) || false)
-    return false;
-
-  return true;
+  return compare_VkPipelineCreationFeedbackCreateInfo(
+      (VkPipelineCreationFeedbackCreateInfo const *)s1,
+      (VkPipelineCreationFeedbackCreateInfo const *)s2);
 }
 #endif
 
@@ -14413,10 +14238,9 @@ bool compare_VkQueryPoolPerformanceQueryCreateInfoINTEL(
 #if VK_HEADER_VERSION >= 109 && (VK_INTEL_performance_query)
 bool compare_VkQueryPoolCreateInfoINTEL(VkQueryPoolCreateInfoINTEL const *s1,
                                         VkQueryPoolCreateInfoINTEL const *s2) {
-  if ((s1->performanceCountersSampling != s2->performanceCountersSampling) || false)
-    return false;
-
-  return true;
+  return compare_VkQueryPoolPerformanceQueryCreateInfoINTEL(
+      (VkQueryPoolPerformanceQueryCreateInfoINTEL const *)s1,
+      (VkQueryPoolPerformanceQueryCreateInfoINTEL const *)s2);
 }
 #endif
 
@@ -14536,10 +14360,9 @@ bool compare_VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures(
 bool compare_VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR(
     VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR const *s1,
     VkPhysicalDeviceSeparateDepthStencilLayoutsFeaturesKHR const *s2) {
-  if ((s1->separateDepthStencilLayouts != s2->separateDepthStencilLayouts) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures(
+      (VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures const *)s1,
+      (VkPhysicalDeviceSeparateDepthStencilLayoutsFeatures const *)s2);
 }
 #endif
 
@@ -14569,10 +14392,8 @@ bool compare_VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT(
 bool compare_VkAttachmentReferenceStencilLayoutKHR(
     VkAttachmentReferenceStencilLayoutKHR const *s1,
     VkAttachmentReferenceStencilLayoutKHR const *s2) {
-  if ((s1->stencilLayout != s2->stencilLayout) || false)
-    return false;
-
-  return true;
+  return compare_VkAttachmentReferenceStencilLayout((VkAttachmentReferenceStencilLayout const *)s1,
+                                                    (VkAttachmentReferenceStencilLayout const *)s2);
 }
 #endif
 
@@ -14591,11 +14412,9 @@ bool compare_VkAttachmentDescriptionStencilLayout(VkAttachmentDescriptionStencil
 bool compare_VkAttachmentDescriptionStencilLayoutKHR(
     VkAttachmentDescriptionStencilLayoutKHR const *s1,
     VkAttachmentDescriptionStencilLayoutKHR const *s2) {
-  if ((s1->stencilInitialLayout != s2->stencilInitialLayout) ||
-      (s1->stencilFinalLayout != s2->stencilFinalLayout) || false)
-    return false;
-
-  return true;
+  return compare_VkAttachmentDescriptionStencilLayout(
+      (VkAttachmentDescriptionStencilLayout const *)s1,
+      (VkAttachmentDescriptionStencilLayout const *)s2);
 }
 #endif
 
@@ -14621,7 +14440,7 @@ bool compare_VkPipelineInfoKHR(VkPipelineInfoKHR const *s1, VkPipelineInfoKHR co
 
 #if VK_HEADER_VERSION >= 213 && (VK_EXT_pipeline_properties)
 bool compare_VkPipelineInfoEXT(VkPipelineInfoEXT const *s1, VkPipelineInfoEXT const *s2) {
-  return true;
+  return compare_VkPipelineInfoKHR((VkPipelineInfoKHR const *)s1, (VkPipelineInfoKHR const *)s2);
 }
 #endif
 
@@ -14689,10 +14508,9 @@ bool compare_VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures(
 bool compare_VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT(
     VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT const *s1,
     VkPhysicalDeviceShaderDemoteToHelperInvocationFeaturesEXT const *s2) {
-  if ((s1->shaderDemoteToHelperInvocation != s2->shaderDemoteToHelperInvocation) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures(
+      (VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures const *)s1,
+      (VkPhysicalDeviceShaderDemoteToHelperInvocationFeatures const *)s2);
 }
 #endif
 
@@ -14728,16 +14546,9 @@ bool compare_VkPhysicalDeviceTexelBufferAlignmentProperties(
 bool compare_VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT(
     VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT const *s1,
     VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT const *s2) {
-  if ((s1->storageTexelBufferOffsetAlignmentBytes != s2->storageTexelBufferOffsetAlignmentBytes) ||
-      (s1->storageTexelBufferOffsetSingleTexelAlignment !=
-       s2->storageTexelBufferOffsetSingleTexelAlignment) ||
-      (s1->uniformTexelBufferOffsetAlignmentBytes != s2->uniformTexelBufferOffsetAlignmentBytes) ||
-      (s1->uniformTexelBufferOffsetSingleTexelAlignment !=
-       s2->uniformTexelBufferOffsetSingleTexelAlignment) ||
-      false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceTexelBufferAlignmentProperties(
+      (VkPhysicalDeviceTexelBufferAlignmentProperties const *)s1,
+      (VkPhysicalDeviceTexelBufferAlignmentProperties const *)s2);
 }
 #endif
 
@@ -14757,11 +14568,9 @@ bool compare_VkPhysicalDeviceSubgroupSizeControlFeatures(
 bool compare_VkPhysicalDeviceSubgroupSizeControlFeaturesEXT(
     VkPhysicalDeviceSubgroupSizeControlFeaturesEXT const *s1,
     VkPhysicalDeviceSubgroupSizeControlFeaturesEXT const *s2) {
-  if ((s1->subgroupSizeControl != s2->subgroupSizeControl) ||
-      (s1->computeFullSubgroups != s2->computeFullSubgroups) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceSubgroupSizeControlFeatures(
+      (VkPhysicalDeviceSubgroupSizeControlFeatures const *)s1,
+      (VkPhysicalDeviceSubgroupSizeControlFeatures const *)s2);
 }
 #endif
 
@@ -14783,13 +14592,9 @@ bool compare_VkPhysicalDeviceSubgroupSizeControlProperties(
 bool compare_VkPhysicalDeviceSubgroupSizeControlPropertiesEXT(
     VkPhysicalDeviceSubgroupSizeControlPropertiesEXT const *s1,
     VkPhysicalDeviceSubgroupSizeControlPropertiesEXT const *s2) {
-  if ((s1->minSubgroupSize != s2->minSubgroupSize) ||
-      (s1->maxSubgroupSize != s2->maxSubgroupSize) ||
-      (s1->maxComputeWorkgroupSubgroups != s2->maxComputeWorkgroupSubgroups) ||
-      (s1->requiredSubgroupSizeStages != s2->requiredSubgroupSizeStages) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceSubgroupSizeControlProperties(
+      (VkPhysicalDeviceSubgroupSizeControlProperties const *)s1,
+      (VkPhysicalDeviceSubgroupSizeControlProperties const *)s2);
 }
 #endif
 
@@ -14808,10 +14613,9 @@ bool compare_VkPipelineShaderStageRequiredSubgroupSizeCreateInfo(
 bool compare_VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT(
     VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT const *s1,
     VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT const *s2) {
-  if ((s1->requiredSubgroupSize != s2->requiredSubgroupSize) || false)
-    return false;
-
-  return true;
+  return compare_VkPipelineShaderStageRequiredSubgroupSizeCreateInfo(
+      (VkPipelineShaderStageRequiredSubgroupSizeCreateInfo const *)s1,
+      (VkPipelineShaderStageRequiredSubgroupSizeCreateInfo const *)s2);
 }
 #endif
 
@@ -14819,7 +14623,9 @@ bool compare_VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT(
 bool compare_VkShaderRequiredSubgroupSizeCreateInfoEXT(
     VkShaderRequiredSubgroupSizeCreateInfoEXT const *s1,
     VkShaderRequiredSubgroupSizeCreateInfoEXT const *s2) {
-  return true;
+  return compare_VkPipelineShaderStageRequiredSubgroupSizeCreateInfo(
+      (VkPipelineShaderStageRequiredSubgroupSizeCreateInfo const *)s1,
+      (VkPipelineShaderStageRequiredSubgroupSizeCreateInfo const *)s2);
 }
 #endif
 
@@ -14886,10 +14692,9 @@ bool compare_VkMemoryOpaqueCaptureAddressAllocateInfo(
 bool compare_VkMemoryOpaqueCaptureAddressAllocateInfoKHR(
     VkMemoryOpaqueCaptureAddressAllocateInfoKHR const *s1,
     VkMemoryOpaqueCaptureAddressAllocateInfoKHR const *s2) {
-  if ((s1->opaqueCaptureAddress != s2->opaqueCaptureAddress) || false)
-    return false;
-
-  return true;
+  return compare_VkMemoryOpaqueCaptureAddressAllocateInfo(
+      (VkMemoryOpaqueCaptureAddressAllocateInfo const *)s1,
+      (VkMemoryOpaqueCaptureAddressAllocateInfo const *)s2);
 }
 #endif
 
@@ -14908,10 +14713,9 @@ bool compare_VkDeviceMemoryOpaqueCaptureAddressInfo(
 bool compare_VkDeviceMemoryOpaqueCaptureAddressInfoKHR(
     VkDeviceMemoryOpaqueCaptureAddressInfoKHR const *s1,
     VkDeviceMemoryOpaqueCaptureAddressInfoKHR const *s2) {
-  if ((s1->memory != s2->memory) || false)
-    return false;
-
-  return true;
+  return compare_VkDeviceMemoryOpaqueCaptureAddressInfo(
+      (VkDeviceMemoryOpaqueCaptureAddressInfo const *)s1,
+      (VkDeviceMemoryOpaqueCaptureAddressInfo const *)s2);
 }
 #endif
 
@@ -14970,10 +14774,9 @@ bool compare_VkPhysicalDevicePipelineCreationCacheControlFeatures(
 bool compare_VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT(
     VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT const *s1,
     VkPhysicalDevicePipelineCreationCacheControlFeaturesEXT const *s2) {
-  if ((s1->pipelineCreationCacheControl != s2->pipelineCreationCacheControl) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDevicePipelineCreationCacheControlFeatures(
+      (VkPhysicalDevicePipelineCreationCacheControlFeatures const *)s1,
+      (VkPhysicalDevicePipelineCreationCacheControlFeatures const *)s2);
 }
 #endif
 
@@ -15375,27 +15178,8 @@ bool compare_VkPhysicalDeviceToolProperties(VkPhysicalDeviceToolProperties const
 #if VK_HEADER_VERSION >= 130 && (VK_EXT_tooling_info)
 bool compare_VkPhysicalDeviceToolPropertiesEXT(VkPhysicalDeviceToolPropertiesEXT const *s1,
                                                VkPhysicalDeviceToolPropertiesEXT const *s2) {
-  if ((s1->purposes != s2->purposes) || false)
-    return false;
-
-  for (uint32_t i = 0; i < VK_MAX_EXTENSION_NAME_SIZE; ++i) {
-    if (s1->name[i] != s2->name[i])
-      return false;
-  }
-  for (uint32_t i = 0; i < VK_MAX_EXTENSION_NAME_SIZE; ++i) {
-    if (s1->version[i] != s2->version[i])
-      return false;
-  }
-  for (uint32_t i = 0; i < VK_MAX_DESCRIPTION_SIZE; ++i) {
-    if (s1->description[i] != s2->description[i])
-      return false;
-  }
-  for (uint32_t i = 0; i < VK_MAX_EXTENSION_NAME_SIZE; ++i) {
-    if (s1->layer[i] != s2->layer[i])
-      return false;
-  }
-
-  return true;
+  return compare_VkPhysicalDeviceToolProperties((VkPhysicalDeviceToolProperties const *)s1,
+                                                (VkPhysicalDeviceToolProperties const *)s2);
 }
 #endif
 
@@ -15503,7 +15287,7 @@ bool compare_VkAabbPositionsKHR(VkAabbPositionsKHR const *s1, VkAabbPositionsKHR
 
 #if VK_HEADER_VERSION >= 135 && (VK_NV_ray_tracing)
 bool compare_VkAabbPositionsNV(VkAabbPositionsNV const *s1, VkAabbPositionsNV const *s2) {
-  return true;
+  return compare_VkAabbPositionsKHR((VkAabbPositionsKHR const *)s1, (VkAabbPositionsKHR const *)s2);
 }
 #endif
 
@@ -15520,7 +15304,8 @@ bool compare_VkTransformMatrixKHR(VkTransformMatrixKHR const *s1, VkTransformMat
 
 #if VK_HEADER_VERSION >= 135 && (VK_NV_ray_tracing)
 bool compare_VkTransformMatrixNV(VkTransformMatrixNV const *s1, VkTransformMatrixNV const *s2) {
-  return true;
+  return compare_VkTransformMatrixKHR((VkTransformMatrixKHR const *)s1,
+                                      (VkTransformMatrixKHR const *)s2);
 }
 #endif
 
@@ -15541,7 +15326,8 @@ bool compare_VkAccelerationStructureInstanceKHR(VkAccelerationStructureInstanceK
 #if VK_HEADER_VERSION >= 135 && (VK_NV_ray_tracing)
 bool compare_VkAccelerationStructureInstanceNV(VkAccelerationStructureInstanceNV const *s1,
                                                VkAccelerationStructureInstanceNV const *s2) {
-  return true;
+  return compare_VkAccelerationStructureInstanceKHR((VkAccelerationStructureInstanceKHR const *)s1,
+                                                    (VkAccelerationStructureInstanceKHR const *)s2);
 }
 #endif
 
@@ -15844,10 +15630,9 @@ bool compare_VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures(
 bool compare_VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR(
     VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR const *s1,
     VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeaturesKHR const *s2) {
-  if ((s1->shaderZeroInitializeWorkgroupMemory != s2->shaderZeroInitializeWorkgroupMemory) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures(
+      (VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures const *)s1,
+      (VkPhysicalDeviceZeroInitializeWorkgroupMemoryFeatures const *)s2);
 }
 #endif
 
@@ -15903,10 +15688,9 @@ bool compare_VkPhysicalDeviceImageRobustnessFeatures(
 bool compare_VkPhysicalDeviceImageRobustnessFeaturesEXT(
     VkPhysicalDeviceImageRobustnessFeaturesEXT const *s1,
     VkPhysicalDeviceImageRobustnessFeaturesEXT const *s2) {
-  if ((s1->robustImageAccess != s2->robustImageAccess) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceImageRobustnessFeatures(
+      (VkPhysicalDeviceImageRobustnessFeatures const *)s1,
+      (VkPhysicalDeviceImageRobustnessFeatures const *)s2);
 }
 #endif
 
@@ -16012,11 +15796,7 @@ bool compare_VkBufferCopy2(VkBufferCopy2 const *s1, VkBufferCopy2 const *s2) {
 
 #if VK_HEADER_VERSION >= 154 && (VK_KHR_copy_commands2)
 bool compare_VkBufferCopy2KHR(VkBufferCopy2KHR const *s1, VkBufferCopy2KHR const *s2) {
-  if ((s1->srcOffset != s2->srcOffset) || (s1->dstOffset != s2->dstOffset) ||
-      (s1->size != s2->size) || false)
-    return false;
-
-  return true;
+  return compare_VkBufferCopy2((VkBufferCopy2 const *)s1, (VkBufferCopy2 const *)s2);
 }
 #endif
 
@@ -16035,14 +15815,7 @@ bool compare_VkImageCopy2(VkImageCopy2 const *s1, VkImageCopy2 const *s2) {
 
 #if VK_HEADER_VERSION >= 154 && (VK_KHR_copy_commands2)
 bool compare_VkImageCopy2KHR(VkImageCopy2KHR const *s1, VkImageCopy2KHR const *s2) {
-  if (!compare_VkImageSubresourceLayers(&s1->srcSubresource, &s2->srcSubresource) ||
-      !compare_VkOffset3D(&s1->srcOffset, &s2->srcOffset) ||
-      !compare_VkImageSubresourceLayers(&s1->dstSubresource, &s2->dstSubresource) ||
-      !compare_VkOffset3D(&s1->dstOffset, &s2->dstOffset) ||
-      !compare_VkExtent3D(&s1->extent, &s2->extent) || false)
-    return false;
-
-  return true;
+  return compare_VkImageCopy2((VkImageCopy2 const *)s1, (VkImageCopy2 const *)s2);
 }
 #endif
 
@@ -16067,20 +15840,7 @@ bool compare_VkImageBlit2(VkImageBlit2 const *s1, VkImageBlit2 const *s2) {
 
 #if VK_HEADER_VERSION >= 154 && (VK_KHR_copy_commands2)
 bool compare_VkImageBlit2KHR(VkImageBlit2KHR const *s1, VkImageBlit2KHR const *s2) {
-  if (!compare_VkImageSubresourceLayers(&s1->srcSubresource, &s2->srcSubresource) ||
-      !compare_VkImageSubresourceLayers(&s1->dstSubresource, &s2->dstSubresource) || false)
-    return false;
-
-  for (uint32_t i = 0; i < 2; ++i) {
-    if (compare_VkOffset3D(&s1->srcOffsets[i], &s2->srcOffsets[i]))
-      return false;
-  }
-  for (uint32_t i = 0; i < 2; ++i) {
-    if (compare_VkOffset3D(&s1->dstOffsets[i], &s2->dstOffsets[i]))
-      return false;
-  }
-
-  return true;
+  return compare_VkImageBlit2((VkImageBlit2 const *)s1, (VkImageBlit2 const *)s2);
 }
 #endif
 
@@ -16100,14 +15860,7 @@ bool compare_VkBufferImageCopy2(VkBufferImageCopy2 const *s1, VkBufferImageCopy2
 #if VK_HEADER_VERSION >= 154 && (VK_KHR_copy_commands2)
 bool compare_VkBufferImageCopy2KHR(VkBufferImageCopy2KHR const *s1,
                                    VkBufferImageCopy2KHR const *s2) {
-  if ((s1->bufferOffset != s2->bufferOffset) || (s1->bufferRowLength != s2->bufferRowLength) ||
-      (s1->bufferImageHeight != s2->bufferImageHeight) ||
-      !compare_VkImageSubresourceLayers(&s1->imageSubresource, &s2->imageSubresource) ||
-      !compare_VkOffset3D(&s1->imageOffset, &s2->imageOffset) ||
-      !compare_VkExtent3D(&s1->imageExtent, &s2->imageExtent) || false)
-    return false;
-
-  return true;
+  return compare_VkBufferImageCopy2((VkBufferImageCopy2 const *)s1, (VkBufferImageCopy2 const *)s2);
 }
 #endif
 
@@ -16126,14 +15879,7 @@ bool compare_VkImageResolve2(VkImageResolve2 const *s1, VkImageResolve2 const *s
 
 #if VK_HEADER_VERSION >= 154 && (VK_KHR_copy_commands2)
 bool compare_VkImageResolve2KHR(VkImageResolve2KHR const *s1, VkImageResolve2KHR const *s2) {
-  if (!compare_VkImageSubresourceLayers(&s1->srcSubresource, &s2->srcSubresource) ||
-      !compare_VkOffset3D(&s1->srcOffset, &s2->srcOffset) ||
-      !compare_VkImageSubresourceLayers(&s1->dstSubresource, &s2->dstSubresource) ||
-      !compare_VkOffset3D(&s1->dstOffset, &s2->dstOffset) ||
-      !compare_VkExtent3D(&s1->extent, &s2->extent) || false)
-    return false;
-
-  return true;
+  return compare_VkImageResolve2((VkImageResolve2 const *)s1, (VkImageResolve2 const *)s2);
 }
 #endif
 
@@ -16149,11 +15895,7 @@ bool compare_VkCopyBufferInfo2(VkCopyBufferInfo2 const *s1, VkCopyBufferInfo2 co
 
 #if VK_HEADER_VERSION >= 154 && (VK_KHR_copy_commands2)
 bool compare_VkCopyBufferInfo2KHR(VkCopyBufferInfo2KHR const *s1, VkCopyBufferInfo2KHR const *s2) {
-  if ((s1->srcBuffer != s2->srcBuffer) || (s1->dstBuffer != s2->dstBuffer) ||
-      (s1->regionCount != s2->regionCount) || false)
-    return false;
-
-  return true;
+  return compare_VkCopyBufferInfo2((VkCopyBufferInfo2 const *)s1, (VkCopyBufferInfo2 const *)s2);
 }
 #endif
 
@@ -16170,12 +15912,7 @@ bool compare_VkCopyImageInfo2(VkCopyImageInfo2 const *s1, VkCopyImageInfo2 const
 
 #if VK_HEADER_VERSION >= 154 && (VK_KHR_copy_commands2)
 bool compare_VkCopyImageInfo2KHR(VkCopyImageInfo2KHR const *s1, VkCopyImageInfo2KHR const *s2) {
-  if ((s1->srcImage != s2->srcImage) || (s1->srcImageLayout != s2->srcImageLayout) ||
-      (s1->dstImage != s2->dstImage) || (s1->dstImageLayout != s2->dstImageLayout) ||
-      (s1->regionCount != s2->regionCount) || false)
-    return false;
-
-  return true;
+  return compare_VkCopyImageInfo2((VkCopyImageInfo2 const *)s1, (VkCopyImageInfo2 const *)s2);
 }
 #endif
 
@@ -16192,12 +15929,7 @@ bool compare_VkBlitImageInfo2(VkBlitImageInfo2 const *s1, VkBlitImageInfo2 const
 
 #if VK_HEADER_VERSION >= 154 && (VK_KHR_copy_commands2)
 bool compare_VkBlitImageInfo2KHR(VkBlitImageInfo2KHR const *s1, VkBlitImageInfo2KHR const *s2) {
-  if ((s1->srcImage != s2->srcImage) || (s1->srcImageLayout != s2->srcImageLayout) ||
-      (s1->dstImage != s2->dstImage) || (s1->dstImageLayout != s2->dstImageLayout) ||
-      (s1->regionCount != s2->regionCount) || (s1->filter != s2->filter) || false)
-    return false;
-
-  return true;
+  return compare_VkBlitImageInfo2((VkBlitImageInfo2 const *)s1, (VkBlitImageInfo2 const *)s2);
 }
 #endif
 
@@ -16215,11 +15947,8 @@ bool compare_VkCopyBufferToImageInfo2(VkCopyBufferToImageInfo2 const *s1,
 #if VK_HEADER_VERSION >= 154 && (VK_KHR_copy_commands2)
 bool compare_VkCopyBufferToImageInfo2KHR(VkCopyBufferToImageInfo2KHR const *s1,
                                          VkCopyBufferToImageInfo2KHR const *s2) {
-  if ((s1->srcBuffer != s2->srcBuffer) || (s1->dstImage != s2->dstImage) ||
-      (s1->dstImageLayout != s2->dstImageLayout) || (s1->regionCount != s2->regionCount) || false)
-    return false;
-
-  return true;
+  return compare_VkCopyBufferToImageInfo2((VkCopyBufferToImageInfo2 const *)s1,
+                                          (VkCopyBufferToImageInfo2 const *)s2);
 }
 #endif
 
@@ -16237,11 +15966,8 @@ bool compare_VkCopyImageToBufferInfo2(VkCopyImageToBufferInfo2 const *s1,
 #if VK_HEADER_VERSION >= 154 && (VK_KHR_copy_commands2)
 bool compare_VkCopyImageToBufferInfo2KHR(VkCopyImageToBufferInfo2KHR const *s1,
                                          VkCopyImageToBufferInfo2KHR const *s2) {
-  if ((s1->srcImage != s2->srcImage) || (s1->srcImageLayout != s2->srcImageLayout) ||
-      (s1->dstBuffer != s2->dstBuffer) || (s1->regionCount != s2->regionCount) || false)
-    return false;
-
-  return true;
+  return compare_VkCopyImageToBufferInfo2((VkCopyImageToBufferInfo2 const *)s1,
+                                          (VkCopyImageToBufferInfo2 const *)s2);
 }
 #endif
 
@@ -16259,12 +15985,8 @@ bool compare_VkResolveImageInfo2(VkResolveImageInfo2 const *s1, VkResolveImageIn
 #if VK_HEADER_VERSION >= 154 && (VK_KHR_copy_commands2)
 bool compare_VkResolveImageInfo2KHR(VkResolveImageInfo2KHR const *s1,
                                     VkResolveImageInfo2KHR const *s2) {
-  if ((s1->srcImage != s2->srcImage) || (s1->srcImageLayout != s2->srcImageLayout) ||
-      (s1->dstImage != s2->dstImage) || (s1->dstImageLayout != s2->dstImageLayout) ||
-      (s1->regionCount != s2->regionCount) || false)
-    return false;
-
-  return true;
+  return compare_VkResolveImageInfo2((VkResolveImageInfo2 const *)s1,
+                                     (VkResolveImageInfo2 const *)s2);
 }
 #endif
 
@@ -16389,10 +16111,9 @@ bool compare_VkPhysicalDeviceShaderTerminateInvocationFeatures(
 bool compare_VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR(
     VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR const *s1,
     VkPhysicalDeviceShaderTerminateInvocationFeaturesKHR const *s2) {
-  if ((s1->shaderTerminateInvocation != s2->shaderTerminateInvocation) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceShaderTerminateInvocationFeatures(
+      (VkPhysicalDeviceShaderTerminateInvocationFeatures const *)s1,
+      (VkPhysicalDeviceShaderTerminateInvocationFeatures const *)s2);
 }
 #endif
 
@@ -16499,10 +16220,9 @@ bool compare_VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT(
 bool compare_VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE(
     VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE const *s1,
     VkPhysicalDeviceMutableDescriptorTypeFeaturesVALVE const *s2) {
-  if ((s1->mutableDescriptorType != s2->mutableDescriptorType) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT(
+      (VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT const *)s1,
+      (VkPhysicalDeviceMutableDescriptorTypeFeaturesEXT const *)s2);
 }
 #endif
 
@@ -16519,10 +16239,8 @@ bool compare_VkMutableDescriptorTypeListEXT(VkMutableDescriptorTypeListEXT const
 #if VK_HEADER_VERSION >= 164 && (VK_VALVE_mutable_descriptor_type)
 bool compare_VkMutableDescriptorTypeListVALVE(VkMutableDescriptorTypeListVALVE const *s1,
                                               VkMutableDescriptorTypeListVALVE const *s2) {
-  if ((s1->descriptorTypeCount != s2->descriptorTypeCount) || false)
-    return false;
-
-  return true;
+  return compare_VkMutableDescriptorTypeListEXT((VkMutableDescriptorTypeListEXT const *)s1,
+                                                (VkMutableDescriptorTypeListEXT const *)s2);
 }
 #endif
 
@@ -16540,10 +16258,9 @@ bool compare_VkMutableDescriptorTypeCreateInfoEXT(VkMutableDescriptorTypeCreateI
 bool compare_VkMutableDescriptorTypeCreateInfoVALVE(
     VkMutableDescriptorTypeCreateInfoVALVE const *s1,
     VkMutableDescriptorTypeCreateInfoVALVE const *s2) {
-  if ((s1->mutableDescriptorTypeListCount != s2->mutableDescriptorTypeListCount) || false)
-    return false;
-
-  return true;
+  return compare_VkMutableDescriptorTypeCreateInfoEXT(
+      (VkMutableDescriptorTypeCreateInfoEXT const *)s1,
+      (VkMutableDescriptorTypeCreateInfoEXT const *)s2);
 }
 #endif
 
@@ -16647,11 +16364,7 @@ bool compare_VkMemoryBarrier2(VkMemoryBarrier2 const *s1, VkMemoryBarrier2 const
 
 #if VK_HEADER_VERSION >= 170 && (VK_KHR_synchronization2)
 bool compare_VkMemoryBarrier2KHR(VkMemoryBarrier2KHR const *s1, VkMemoryBarrier2KHR const *s2) {
-  if ((s1->srcStageMask != s2->srcStageMask) || (s1->srcAccessMask != s2->srcAccessMask) ||
-      (s1->dstStageMask != s2->dstStageMask) || (s1->dstAccessMask != s2->dstAccessMask) || false)
-    return false;
-
-  return true;
+  return compare_VkMemoryBarrier2((VkMemoryBarrier2 const *)s1, (VkMemoryBarrier2 const *)s2);
 }
 #endif
 
@@ -16673,15 +16386,8 @@ bool compare_VkImageMemoryBarrier2(VkImageMemoryBarrier2 const *s1,
 #if VK_HEADER_VERSION >= 170 && (VK_KHR_synchronization2)
 bool compare_VkImageMemoryBarrier2KHR(VkImageMemoryBarrier2KHR const *s1,
                                       VkImageMemoryBarrier2KHR const *s2) {
-  if ((s1->srcStageMask != s2->srcStageMask) || (s1->srcAccessMask != s2->srcAccessMask) ||
-      (s1->dstStageMask != s2->dstStageMask) || (s1->dstAccessMask != s2->dstAccessMask) ||
-      (s1->oldLayout != s2->oldLayout) || (s1->newLayout != s2->newLayout) ||
-      (s1->srcQueueFamilyIndex != s2->srcQueueFamilyIndex) ||
-      (s1->dstQueueFamilyIndex != s2->dstQueueFamilyIndex) || (s1->image != s2->image) ||
-      !compare_VkImageSubresourceRange(&s1->subresourceRange, &s2->subresourceRange) || false)
-    return false;
-
-  return true;
+  return compare_VkImageMemoryBarrier2((VkImageMemoryBarrier2 const *)s1,
+                                       (VkImageMemoryBarrier2 const *)s2);
 }
 #endif
 
@@ -16702,14 +16408,8 @@ bool compare_VkBufferMemoryBarrier2(VkBufferMemoryBarrier2 const *s1,
 #if VK_HEADER_VERSION >= 170 && (VK_KHR_synchronization2)
 bool compare_VkBufferMemoryBarrier2KHR(VkBufferMemoryBarrier2KHR const *s1,
                                        VkBufferMemoryBarrier2KHR const *s2) {
-  if ((s1->srcStageMask != s2->srcStageMask) || (s1->srcAccessMask != s2->srcAccessMask) ||
-      (s1->dstStageMask != s2->dstStageMask) || (s1->dstAccessMask != s2->dstAccessMask) ||
-      (s1->srcQueueFamilyIndex != s2->srcQueueFamilyIndex) ||
-      (s1->dstQueueFamilyIndex != s2->dstQueueFamilyIndex) || (s1->buffer != s2->buffer) ||
-      (s1->offset != s2->offset) || (s1->size != s2->size) || false)
-    return false;
-
-  return true;
+  return compare_VkBufferMemoryBarrier2((VkBufferMemoryBarrier2 const *)s1,
+                                        (VkBufferMemoryBarrier2 const *)s2);
 }
 #endif
 
@@ -16727,13 +16427,7 @@ bool compare_VkDependencyInfo(VkDependencyInfo const *s1, VkDependencyInfo const
 
 #if VK_HEADER_VERSION >= 170 && (VK_KHR_synchronization2)
 bool compare_VkDependencyInfoKHR(VkDependencyInfoKHR const *s1, VkDependencyInfoKHR const *s2) {
-  if ((s1->dependencyFlags != s2->dependencyFlags) ||
-      (s1->memoryBarrierCount != s2->memoryBarrierCount) ||
-      (s1->bufferMemoryBarrierCount != s2->bufferMemoryBarrierCount) ||
-      (s1->imageMemoryBarrierCount != s2->imageMemoryBarrierCount) || false)
-    return false;
-
-  return true;
+  return compare_VkDependencyInfo((VkDependencyInfo const *)s1, (VkDependencyInfo const *)s2);
 }
 #endif
 
@@ -16751,11 +16445,8 @@ bool compare_VkSemaphoreSubmitInfo(VkSemaphoreSubmitInfo const *s1,
 #if VK_HEADER_VERSION >= 170 && (VK_KHR_synchronization2)
 bool compare_VkSemaphoreSubmitInfoKHR(VkSemaphoreSubmitInfoKHR const *s1,
                                       VkSemaphoreSubmitInfoKHR const *s2) {
-  if ((s1->semaphore != s2->semaphore) || (s1->value != s2->value) ||
-      (s1->stageMask != s2->stageMask) || (s1->deviceIndex != s2->deviceIndex) || false)
-    return false;
-
-  return true;
+  return compare_VkSemaphoreSubmitInfo((VkSemaphoreSubmitInfo const *)s1,
+                                       (VkSemaphoreSubmitInfo const *)s2);
 }
 #endif
 
@@ -16772,10 +16463,8 @@ bool compare_VkCommandBufferSubmitInfo(VkCommandBufferSubmitInfo const *s1,
 #if VK_HEADER_VERSION >= 170 && (VK_KHR_synchronization2)
 bool compare_VkCommandBufferSubmitInfoKHR(VkCommandBufferSubmitInfoKHR const *s1,
                                           VkCommandBufferSubmitInfoKHR const *s2) {
-  if ((s1->commandBuffer != s2->commandBuffer) || (s1->deviceMask != s2->deviceMask) || false)
-    return false;
-
-  return true;
+  return compare_VkCommandBufferSubmitInfo((VkCommandBufferSubmitInfo const *)s1,
+                                           (VkCommandBufferSubmitInfo const *)s2);
 }
 #endif
 
@@ -16792,12 +16481,7 @@ bool compare_VkSubmitInfo2(VkSubmitInfo2 const *s1, VkSubmitInfo2 const *s2) {
 
 #if VK_HEADER_VERSION >= 170 && (VK_KHR_synchronization2)
 bool compare_VkSubmitInfo2KHR(VkSubmitInfo2KHR const *s1, VkSubmitInfo2KHR const *s2) {
-  if ((s1->flags != s2->flags) || (s1->waitSemaphoreInfoCount != s2->waitSemaphoreInfoCount) ||
-      (s1->commandBufferInfoCount != s2->commandBufferInfoCount) ||
-      (s1->signalSemaphoreInfoCount != s2->signalSemaphoreInfoCount) || false)
-    return false;
-
-  return true;
+  return compare_VkSubmitInfo2((VkSubmitInfo2 const *)s1, (VkSubmitInfo2 const *)s2);
 }
 #endif
 
@@ -16835,10 +16519,9 @@ bool compare_VkPhysicalDeviceSynchronization2Features(
 bool compare_VkPhysicalDeviceSynchronization2FeaturesKHR(
     VkPhysicalDeviceSynchronization2FeaturesKHR const *s1,
     VkPhysicalDeviceSynchronization2FeaturesKHR const *s2) {
-  if ((s1->synchronization2 != s2->synchronization2) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceSynchronization2Features(
+      (VkPhysicalDeviceSynchronization2Features const *)s1,
+      (VkPhysicalDeviceSynchronization2Features const *)s2);
 }
 #endif
 
@@ -18799,10 +18482,9 @@ bool compare_VkPhysicalDeviceShaderIntegerDotProductFeatures(
 bool compare_VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR(
     VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR const *s1,
     VkPhysicalDeviceShaderIntegerDotProductFeaturesKHR const *s2) {
-  if ((s1->shaderIntegerDotProduct != s2->shaderIntegerDotProduct) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceShaderIntegerDotProductFeatures(
+      (VkPhysicalDeviceShaderIntegerDotProductFeatures const *)s1,
+      (VkPhysicalDeviceShaderIntegerDotProductFeatures const *)s2);
 }
 #endif
 
@@ -18880,69 +18562,9 @@ bool compare_VkPhysicalDeviceShaderIntegerDotProductProperties(
 bool compare_VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR(
     VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR const *s1,
     VkPhysicalDeviceShaderIntegerDotProductPropertiesKHR const *s2) {
-  if ((s1->integerDotProduct8BitUnsignedAccelerated !=
-       s2->integerDotProduct8BitUnsignedAccelerated) ||
-      (s1->integerDotProduct8BitSignedAccelerated != s2->integerDotProduct8BitSignedAccelerated) ||
-      (s1->integerDotProduct8BitMixedSignednessAccelerated !=
-       s2->integerDotProduct8BitMixedSignednessAccelerated) ||
-      (s1->integerDotProduct4x8BitPackedUnsignedAccelerated !=
-       s2->integerDotProduct4x8BitPackedUnsignedAccelerated) ||
-      (s1->integerDotProduct4x8BitPackedSignedAccelerated !=
-       s2->integerDotProduct4x8BitPackedSignedAccelerated) ||
-      (s1->integerDotProduct4x8BitPackedMixedSignednessAccelerated !=
-       s2->integerDotProduct4x8BitPackedMixedSignednessAccelerated) ||
-      (s1->integerDotProduct16BitUnsignedAccelerated !=
-       s2->integerDotProduct16BitUnsignedAccelerated) ||
-      (s1->integerDotProduct16BitSignedAccelerated !=
-       s2->integerDotProduct16BitSignedAccelerated) ||
-      (s1->integerDotProduct16BitMixedSignednessAccelerated !=
-       s2->integerDotProduct16BitMixedSignednessAccelerated) ||
-      (s1->integerDotProduct32BitUnsignedAccelerated !=
-       s2->integerDotProduct32BitUnsignedAccelerated) ||
-      (s1->integerDotProduct32BitSignedAccelerated !=
-       s2->integerDotProduct32BitSignedAccelerated) ||
-      (s1->integerDotProduct32BitMixedSignednessAccelerated !=
-       s2->integerDotProduct32BitMixedSignednessAccelerated) ||
-      (s1->integerDotProduct64BitUnsignedAccelerated !=
-       s2->integerDotProduct64BitUnsignedAccelerated) ||
-      (s1->integerDotProduct64BitSignedAccelerated !=
-       s2->integerDotProduct64BitSignedAccelerated) ||
-      (s1->integerDotProduct64BitMixedSignednessAccelerated !=
-       s2->integerDotProduct64BitMixedSignednessAccelerated) ||
-      (s1->integerDotProductAccumulatingSaturating8BitUnsignedAccelerated !=
-       s2->integerDotProductAccumulatingSaturating8BitUnsignedAccelerated) ||
-      (s1->integerDotProductAccumulatingSaturating8BitSignedAccelerated !=
-       s2->integerDotProductAccumulatingSaturating8BitSignedAccelerated) ||
-      (s1->integerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated !=
-       s2->integerDotProductAccumulatingSaturating8BitMixedSignednessAccelerated) ||
-      (s1->integerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated !=
-       s2->integerDotProductAccumulatingSaturating4x8BitPackedUnsignedAccelerated) ||
-      (s1->integerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated !=
-       s2->integerDotProductAccumulatingSaturating4x8BitPackedSignedAccelerated) ||
-      (s1->integerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated !=
-       s2->integerDotProductAccumulatingSaturating4x8BitPackedMixedSignednessAccelerated) ||
-      (s1->integerDotProductAccumulatingSaturating16BitUnsignedAccelerated !=
-       s2->integerDotProductAccumulatingSaturating16BitUnsignedAccelerated) ||
-      (s1->integerDotProductAccumulatingSaturating16BitSignedAccelerated !=
-       s2->integerDotProductAccumulatingSaturating16BitSignedAccelerated) ||
-      (s1->integerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated !=
-       s2->integerDotProductAccumulatingSaturating16BitMixedSignednessAccelerated) ||
-      (s1->integerDotProductAccumulatingSaturating32BitUnsignedAccelerated !=
-       s2->integerDotProductAccumulatingSaturating32BitUnsignedAccelerated) ||
-      (s1->integerDotProductAccumulatingSaturating32BitSignedAccelerated !=
-       s2->integerDotProductAccumulatingSaturating32BitSignedAccelerated) ||
-      (s1->integerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated !=
-       s2->integerDotProductAccumulatingSaturating32BitMixedSignednessAccelerated) ||
-      (s1->integerDotProductAccumulatingSaturating64BitUnsignedAccelerated !=
-       s2->integerDotProductAccumulatingSaturating64BitUnsignedAccelerated) ||
-      (s1->integerDotProductAccumulatingSaturating64BitSignedAccelerated !=
-       s2->integerDotProductAccumulatingSaturating64BitSignedAccelerated) ||
-      (s1->integerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated !=
-       s2->integerDotProductAccumulatingSaturating64BitMixedSignednessAccelerated) ||
-      false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceShaderIntegerDotProductProperties(
+      (VkPhysicalDeviceShaderIntegerDotProductProperties const *)s1,
+      (VkPhysicalDeviceShaderIntegerDotProductProperties const *)s2);
 }
 #endif
 
@@ -19245,12 +18867,8 @@ bool compare_VkFormatProperties3(VkFormatProperties3 const *s1, VkFormatProperti
 #if VK_HEADER_VERSION >= 195 && (VK_KHR_format_feature_flags2)
 bool compare_VkFormatProperties3KHR(VkFormatProperties3KHR const *s1,
                                     VkFormatProperties3KHR const *s2) {
-  if ((s1->linearTilingFeatures != s2->linearTilingFeatures) ||
-      (s1->optimalTilingFeatures != s2->optimalTilingFeatures) ||
-      (s1->bufferFeatures != s2->bufferFeatures) || false)
-    return false;
-
-  return true;
+  return compare_VkFormatProperties3((VkFormatProperties3 const *)s1,
+                                     (VkFormatProperties3 const *)s2);
 }
 #endif
 
@@ -19311,12 +18929,8 @@ bool compare_VkPipelineRenderingCreateInfo(VkPipelineRenderingCreateInfo const *
 #if VK_HEADER_VERSION >= 197 && (VK_KHR_dynamic_rendering)
 bool compare_VkPipelineRenderingCreateInfoKHR(VkPipelineRenderingCreateInfoKHR const *s1,
                                               VkPipelineRenderingCreateInfoKHR const *s2) {
-  if ((s1->viewMask != s2->viewMask) || (s1->colorAttachmentCount != s2->colorAttachmentCount) ||
-      (s1->depthAttachmentFormat != s2->depthAttachmentFormat) ||
-      (s1->stencilAttachmentFormat != s2->stencilAttachmentFormat) || false)
-    return false;
-
-  return true;
+  return compare_VkPipelineRenderingCreateInfo((VkPipelineRenderingCreateInfo const *)s1,
+                                               (VkPipelineRenderingCreateInfo const *)s2);
 }
 #endif
 
@@ -19334,12 +18948,7 @@ bool compare_VkRenderingInfo(VkRenderingInfo const *s1, VkRenderingInfo const *s
 #if VK_HEADER_VERSION >= 197 &&                                                                    \
     ((VK_KHR_dynamic_rendering) || (VK_QCOM_tile_properties && VK_KHR_dynamic_rendering))
 bool compare_VkRenderingInfoKHR(VkRenderingInfoKHR const *s1, VkRenderingInfoKHR const *s2) {
-  if ((s1->flags != s2->flags) || !compare_VkRect2D(&s1->renderArea, &s2->renderArea) ||
-      (s1->layerCount != s2->layerCount) || (s1->viewMask != s2->viewMask) ||
-      (s1->colorAttachmentCount != s2->colorAttachmentCount) || false)
-    return false;
-
-  return true;
+  return compare_VkRenderingInfo((VkRenderingInfo const *)s1, (VkRenderingInfo const *)s2);
 }
 #endif
 
@@ -19383,10 +18992,9 @@ bool compare_VkPhysicalDeviceDynamicRenderingFeatures(
 bool compare_VkPhysicalDeviceDynamicRenderingFeaturesKHR(
     VkPhysicalDeviceDynamicRenderingFeaturesKHR const *s1,
     VkPhysicalDeviceDynamicRenderingFeaturesKHR const *s2) {
-  if ((s1->dynamicRendering != s2->dynamicRendering) || false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceDynamicRenderingFeatures(
+      (VkPhysicalDeviceDynamicRenderingFeatures const *)s1,
+      (VkPhysicalDeviceDynamicRenderingFeatures const *)s2);
 }
 #endif
 
@@ -19409,14 +19017,9 @@ bool compare_VkCommandBufferInheritanceRenderingInfo(
 bool compare_VkCommandBufferInheritanceRenderingInfoKHR(
     VkCommandBufferInheritanceRenderingInfoKHR const *s1,
     VkCommandBufferInheritanceRenderingInfoKHR const *s2) {
-  if ((s1->flags != s2->flags) || (s1->viewMask != s2->viewMask) ||
-      (s1->colorAttachmentCount != s2->colorAttachmentCount) ||
-      (s1->depthAttachmentFormat != s2->depthAttachmentFormat) ||
-      (s1->stencilAttachmentFormat != s2->stencilAttachmentFormat) ||
-      (s1->rasterizationSamples != s2->rasterizationSamples) || false)
-    return false;
-
-  return true;
+  return compare_VkCommandBufferInheritanceRenderingInfo(
+      (VkCommandBufferInheritanceRenderingInfo const *)s1,
+      (VkCommandBufferInheritanceRenderingInfo const *)s2);
 }
 #endif
 
@@ -19434,7 +19037,8 @@ bool compare_VkAttachmentSampleCountInfoAMD(VkAttachmentSampleCountInfoAMD const
 #if VK_HEADER_VERSION >= 197 && (VK_KHR_dynamic_rendering && VK_NV_framebuffer_mixed_samples)
 bool compare_VkAttachmentSampleCountInfoNV(VkAttachmentSampleCountInfoNV const *s1,
                                            VkAttachmentSampleCountInfoNV const *s2) {
-  return true;
+  return compare_VkAttachmentSampleCountInfoAMD((VkAttachmentSampleCountInfoAMD const *)s1,
+                                                (VkAttachmentSampleCountInfoAMD const *)s2);
 }
 #endif
 
@@ -19491,16 +19095,9 @@ bool compare_VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT(
 bool compare_VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM(
     VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM const *s1,
     VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesARM const *s2) {
-  if ((s1->rasterizationOrderColorAttachmentAccess !=
-       s2->rasterizationOrderColorAttachmentAccess) ||
-      (s1->rasterizationOrderDepthAttachmentAccess !=
-       s2->rasterizationOrderDepthAttachmentAccess) ||
-      (s1->rasterizationOrderStencilAttachmentAccess !=
-       s2->rasterizationOrderStencilAttachmentAccess) ||
-      false)
-    return false;
-
-  return true;
+  return compare_VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT(
+      (VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT const *)s1,
+      (VkPhysicalDeviceRasterizationOrderAttachmentAccessFeaturesEXT const *)s2);
 }
 #endif
 
@@ -19715,10 +19312,8 @@ bool compare_VkImageSubresource2KHR(VkImageSubresource2KHR const *s1,
 #if VK_HEADER_VERSION >= 213 && ((VK_EXT_host_image_copy) || (VK_EXT_image_compression_control))
 bool compare_VkImageSubresource2EXT(VkImageSubresource2EXT const *s1,
                                     VkImageSubresource2EXT const *s2) {
-  if (!compare_VkImageSubresource(&s1->imageSubresource, &s2->imageSubresource) || false)
-    return false;
-
-  return true;
+  return compare_VkImageSubresource2KHR((VkImageSubresource2KHR const *)s1,
+                                        (VkImageSubresource2KHR const *)s2);
 }
 #endif
 
@@ -19735,10 +19330,8 @@ bool compare_VkSubresourceLayout2KHR(VkSubresourceLayout2KHR const *s1,
 #if VK_HEADER_VERSION >= 213 && ((VK_EXT_host_image_copy) || (VK_EXT_image_compression_control))
 bool compare_VkSubresourceLayout2EXT(VkSubresourceLayout2EXT const *s1,
                                      VkSubresourceLayout2EXT const *s2) {
-  if (!compare_VkSubresourceLayout(&s1->subresourceLayout, &s2->subresourceLayout) || false)
-    return false;
-
-  return true;
+  return compare_VkSubresourceLayout2KHR((VkSubresourceLayout2KHR const *)s1,
+                                         (VkSubresourceLayout2KHR const *)s2);
 }
 #endif
 

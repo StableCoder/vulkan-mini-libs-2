@@ -175,64 +175,70 @@ extern "C" {
         outFile.write(
             'bool compare_{0}({0} const *s1, {0} const* s2) {{'.format(structName))
 
-        # First, rule out the basic types (no pointers/sType/arrays)
-        started = False
-        membersNode = struct.find('members')
-        members = struct.findall('members/')
-        for member in members:
-            memberName = member.tag
-            memberType = member.find('type').text
-            memberTypeSuffix = member.find('type').get('suffix')
-            memberSuffix = member.get('suffix')
+        # If this is an alias struct, defer to that function instead
+        if struct.get('alias') != None:
+            outFile.write('\n  return compare_{0}(({0} const *)s1, ({0} const *)s2);\n'.format(struct.get('alias')))
+        else:
+            # First, rule out the basic types (no pointers/sType/arrays)
+            started = False
+            membersNode = struct.find('members')
+            members = struct.findall('members/')
+            for member in members:
+                memberName = member.tag
+                memberType = member.find('type').text
+                memberTypeSuffix = member.find('type').get('suffix')
+                memberSuffix = member.get('suffix')
 
-            if (memberTypeSuffix and '*' in memberTypeSuffix) or (memberSuffix and '[' in memberSuffix):
-                continue
+                if (memberTypeSuffix and '*' in memberTypeSuffix) or (memberSuffix and '[' in memberSuffix):
+                    continue
 
-            if memberName == 'sType' or memberName == 'pNext':
-                continue
+                if memberName == 'sType' or memberName == 'pNext':
+                    continue
 
-            if not started:
-                outFile.write('\n  if (\n')
+                if not started:
+                    outFile.write('\n  if (\n')
 
-            guardedMember = guardStruct(member, membersNode.get(
-                'first'), membersNode.get('last'), outFile)
-            memberStruct = dataRoot.findall('structs/{}/'.format(memberType))
-            if memberStruct:
+                guardedMember = guardStruct(member, membersNode.get(
+                    'first'), membersNode.get('last'), outFile)
+                memberStruct = dataRoot.findall('structs/{}/'.format(memberType))
+                if memberStruct:
+                    outFile.write(
+                        '!compare_{0}(&s1->{1}, &s2->{1}) ||\n'.format(memberType, memberName))
+                else:
+                    outFile.write('(s1->{0} != s2->{0}) ||\n'.format(memberName))
+                if guardedMember:
+                    outFile.write('#endif\n')
+                started = True
+            if started:
+                outFile.write('false)\n    return false;\n\n')
+
+            # Now for local arrays
+            for member in members:
+                memberName = member.tag
+                memberType = member.find('type').text
+                memberSuffix = member.get('suffix')
+
+                if not memberSuffix or not '[' in memberSuffix:
+                    continue
+
+                # For cases where the array is multi-dimensional
+                memberSuffix = memberSuffix.replace('][', '*')
+
                 outFile.write(
-                    '!compare_{0}(&s1->{1}, &s2->{1}) ||\n'.format(memberType, memberName))
-            else:
-                outFile.write('(s1->{0} != s2->{0}) ||\n'.format(memberName))
-            if guardedMember:
-                outFile.write('#endif\n')
-            started = True
-        if started:
-            outFile.write('false)\n    return false;\n\n')
+                    '  for (uint32_t i = 0; i < {}; ++i) {{\n'.format(memberSuffix[1:-1]))
 
-        # Now for local arrays
-        for member in members:
-            memberName = member.tag
-            memberType = member.find('type').text
-            memberSuffix = member.get('suffix')
+                if dataRoot.findall('structs/{}/'.format(memberType)):
+                    outFile.write(
+                        '    if(compare_{0}(&s1->{1}[i], &s2->{1}[i]))\n'.format(memberType, memberName))
+                else:
+                    outFile.write(
+                        '    if(s1->{0}[i] != s2->{0}[i])\n'.format(memberName))
+                outFile.write('      return false;\n')
+                outFile.write('  }\n')
 
-            if not memberSuffix or not '[' in memberSuffix:
-                continue
+            outFile.write('\n  return true;\n')
 
-            # For cases where the array is multi-dimensional
-            memberSuffix = memberSuffix.replace('][', '*')
-
-            outFile.write(
-                '  for (uint32_t i = 0; i < {}; ++i) {{\n'.format(memberSuffix[1:-1]))
-
-            if dataRoot.findall('structs/{}/'.format(memberType)):
-                outFile.write(
-                    '    if(compare_{0}(&s1->{1}[i], &s2->{1}[i]))\n'.format(memberType, memberName))
-            else:
-                outFile.write(
-                    '    if(s1->{0}[i] != s2->{0}[i])\n'.format(memberName))
-            outFile.write('      return false;\n')
-            outFile.write('  }\n')
-
-        outFile.write('\n  return true;\n')
+        # Close up the function/guarded area
         outFile.write('}\n')
         if guarded:
             outFile.write("#endif\n")
