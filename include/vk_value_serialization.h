@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 272,
-              "VK_HEADER_VERSION is from after the maximum supported version of v272.");
+static_assert(VK_HEADER_VERSION <= 273,
+              "VK_HEADER_VERSION is from after the maximum supported version of v273.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 272,
-               "VK_HEADER_VERSION is from after the maximum supported version of v272.");
+_Static_assert(VK_HEADER_VERSION <= 273,
+               "VK_HEADER_VERSION is from after the maximum supported version of v273.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -2622,11 +2622,15 @@ EnumValueSet const VkQueueGlobalPriorityKHRSets[] = {
     {"HIGH_EXT", 512, true},   {"REALTIME_EXT", 1024, true},
 };
 
-EnumValueSet const VkTimeDomainEXTSets[] = {
+EnumValueSet const VkTimeDomainKHRSets[] = {
     {"DEVICE", 0, false},
     {"CLOCK_MONOTONIC", 1, false},
     {"CLOCK_MONOTONIC_RAW", 2, false},
     {"QUERY_PERFORMANCE_COUNTER", 3, false},
+    {"DEVICE_EXT", 0, true},
+    {"CLOCK_MONOTONIC_EXT", 1, true},
+    {"CLOCK_MONOTONIC_RAW_EXT", 2, true},
+    {"QUERY_PERFORMANCE_COUNTER_EXT", 3, true},
 };
 
 EnumValueSet const VkConservativeRasterizationModeEXTSets[] = {
@@ -3674,7 +3678,7 @@ EnumType const cEnumTypes[348] = {
     {"VkValidationCacheHeaderVersionEXT", VkValidationCacheHeaderVersionEXTSets, 1},
     {"VkShaderInfoTypeAMD", VkShaderInfoTypeAMDSets, 3},
     {"VkQueueGlobalPriorityKHR", VkQueueGlobalPriorityKHRSets, 8},
-    {"VkTimeDomainEXT", VkTimeDomainEXTSets, 4},
+    {"VkTimeDomainKHR", VkTimeDomainKHRSets, 8},
     {"VkConservativeRasterizationModeEXT", VkConservativeRasterizationModeEXTSets, 3},
     {"VkSemaphoreType", VkSemaphoreTypeSets, 4},
     {"VkBuildAccelerationStructureModeKHR", VkBuildAccelerationStructureModeKHRSets, 2},

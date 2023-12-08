@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 272,
-              "VK_HEADER_VERSION is from after the maximum supported version of v272.");
+static_assert(VK_HEADER_VERSION <= 273,
+              "VK_HEADER_VERSION is from after the maximum supported version of v273.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 272,
-               "VK_HEADER_VERSION is from after the maximum supported version of v272.");
+_Static_assert(VK_HEADER_VERSION <= 273,
+               "VK_HEADER_VERSION is from after the maximum supported version of v273.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -2284,7 +2284,12 @@ bool compare_VkPhysicalDeviceConservativeRasterizationPropertiesEXT(
     VkPhysicalDeviceConservativeRasterizationPropertiesEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 88 && (VK_EXT_calibrated_timestamps)
+#if VK_HEADER_VERSION >= 273 && (VK_KHR_calibrated_timestamps)
+bool compare_VkCalibratedTimestampInfoKHR(VkCalibratedTimestampInfoKHR const *s1,
+                                          VkCalibratedTimestampInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 273 && (VK_EXT_calibrated_timestamps)
 bool compare_VkCalibratedTimestampInfoEXT(VkCalibratedTimestampInfoEXT const *s1,
                                           VkCalibratedTimestampInfoEXT const *s2);
 #endif
@@ -2496,13 +2501,25 @@ bool compare_VkSemaphoreSignalInfoKHR(VkSemaphoreSignalInfoKHR const *s1,
                                       VkSemaphoreSignalInfoKHR const *s2);
 #endif
 
-#if (VK_EXT_vertex_attribute_divisor)
+#if VK_HEADER_VERSION >= 273 && (VK_KHR_vertex_attribute_divisor)
+bool compare_VkVertexInputBindingDivisorDescriptionKHR(
+    VkVertexInputBindingDivisorDescriptionKHR const *s1,
+    VkVertexInputBindingDivisorDescriptionKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 273 && (VK_EXT_vertex_attribute_divisor)
 bool compare_VkVertexInputBindingDivisorDescriptionEXT(
     VkVertexInputBindingDivisorDescriptionEXT const *s1,
     VkVertexInputBindingDivisorDescriptionEXT const *s2);
 #endif
 
-#if (VK_EXT_vertex_attribute_divisor)
+#if VK_HEADER_VERSION >= 273 && (VK_KHR_vertex_attribute_divisor)
+bool compare_VkPipelineVertexInputDivisorStateCreateInfoKHR(
+    VkPipelineVertexInputDivisorStateCreateInfoKHR const *s1,
+    VkPipelineVertexInputDivisorStateCreateInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 273 && (VK_EXT_vertex_attribute_divisor)
 bool compare_VkPipelineVertexInputDivisorStateCreateInfoEXT(
     VkPipelineVertexInputDivisorStateCreateInfoEXT const *s1,
     VkPipelineVertexInputDivisorStateCreateInfoEXT const *s2);
@@ -2512,6 +2529,12 @@ bool compare_VkPipelineVertexInputDivisorStateCreateInfoEXT(
 bool compare_VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT(
     VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT const *s1,
     VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 273 && (VK_KHR_vertex_attribute_divisor)
+bool compare_VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR(
+    VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR const *s1,
+    VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 96 && (VK_EXT_pci_bus_info)
@@ -2613,7 +2636,13 @@ bool compare_VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT(
     VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 84 && (VK_EXT_vertex_attribute_divisor)
+#if VK_HEADER_VERSION >= 273 && (VK_KHR_vertex_attribute_divisor)
+bool compare_VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR(
+    VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR const *s1,
+    VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 273 && (VK_EXT_vertex_attribute_divisor)
 bool compare_VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT(
     VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const *s1,
     VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const *s2);
@@ -6166,6 +6195,29 @@ bool compare_VkRenderPassStripeBeginInfoARM(VkRenderPassStripeBeginInfoARM const
 #if VK_HEADER_VERSION >= 272 && (VK_ARM_render_pass_striped)
 bool compare_VkRenderPassStripeSubmitInfoARM(VkRenderPassStripeSubmitInfoARM const *s1,
                                              VkRenderPassStripeSubmitInfoARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 88 && VK_HEADER_VERSION <= 272 && (VK_EXT_calibrated_timestamps)
+bool compare_VkCalibratedTimestampInfoEXT(VkCalibratedTimestampInfoEXT const *s1,
+                                          VkCalibratedTimestampInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION <= 272 && (VK_EXT_vertex_attribute_divisor)
+bool compare_VkVertexInputBindingDivisorDescriptionEXT(
+    VkVertexInputBindingDivisorDescriptionEXT const *s1,
+    VkVertexInputBindingDivisorDescriptionEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION <= 272 && (VK_EXT_vertex_attribute_divisor)
+bool compare_VkPipelineVertexInputDivisorStateCreateInfoEXT(
+    VkPipelineVertexInputDivisorStateCreateInfoEXT const *s1,
+    VkPipelineVertexInputDivisorStateCreateInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 84 && VK_HEADER_VERSION <= 272 && (VK_EXT_vertex_attribute_divisor)
+bool compare_VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT(
+    VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const *s1,
+    VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 266 && VK_HEADER_VERSION <= 270 && (VK_NV_low_latency2)
@@ -13021,13 +13073,21 @@ bool compare_VkPhysicalDeviceConservativeRasterizationPropertiesEXT(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 88 && (VK_EXT_calibrated_timestamps)
-bool compare_VkCalibratedTimestampInfoEXT(VkCalibratedTimestampInfoEXT const *s1,
-                                          VkCalibratedTimestampInfoEXT const *s2) {
+#if VK_HEADER_VERSION >= 273 && (VK_KHR_calibrated_timestamps)
+bool compare_VkCalibratedTimestampInfoKHR(VkCalibratedTimestampInfoKHR const *s1,
+                                          VkCalibratedTimestampInfoKHR const *s2) {
   if ((s1->timeDomain != s2->timeDomain) || false)
     return false;
 
   return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 273 && (VK_EXT_calibrated_timestamps)
+bool compare_VkCalibratedTimestampInfoEXT(VkCalibratedTimestampInfoEXT const *s1,
+                                          VkCalibratedTimestampInfoEXT const *s2) {
+  return compare_VkCalibratedTimestampInfoKHR((VkCalibratedTimestampInfoKHR const *)s1,
+                                              (VkCalibratedTimestampInfoKHR const *)s2);
 }
 #endif
 
@@ -13506,10 +13566,10 @@ bool compare_VkSemaphoreSignalInfoKHR(VkSemaphoreSignalInfoKHR const *s1,
 }
 #endif
 
-#if (VK_EXT_vertex_attribute_divisor)
-bool compare_VkVertexInputBindingDivisorDescriptionEXT(
-    VkVertexInputBindingDivisorDescriptionEXT const *s1,
-    VkVertexInputBindingDivisorDescriptionEXT const *s2) {
+#if VK_HEADER_VERSION >= 273 && (VK_KHR_vertex_attribute_divisor)
+bool compare_VkVertexInputBindingDivisorDescriptionKHR(
+    VkVertexInputBindingDivisorDescriptionKHR const *s1,
+    VkVertexInputBindingDivisorDescriptionKHR const *s2) {
   if ((s1->binding != s2->binding) || (s1->divisor != s2->divisor) || false)
     return false;
 
@@ -13517,14 +13577,34 @@ bool compare_VkVertexInputBindingDivisorDescriptionEXT(
 }
 #endif
 
-#if (VK_EXT_vertex_attribute_divisor)
-bool compare_VkPipelineVertexInputDivisorStateCreateInfoEXT(
-    VkPipelineVertexInputDivisorStateCreateInfoEXT const *s1,
-    VkPipelineVertexInputDivisorStateCreateInfoEXT const *s2) {
+#if VK_HEADER_VERSION >= 273 && (VK_EXT_vertex_attribute_divisor)
+bool compare_VkVertexInputBindingDivisorDescriptionEXT(
+    VkVertexInputBindingDivisorDescriptionEXT const *s1,
+    VkVertexInputBindingDivisorDescriptionEXT const *s2) {
+  return compare_VkVertexInputBindingDivisorDescriptionKHR(
+      (VkVertexInputBindingDivisorDescriptionKHR const *)s1,
+      (VkVertexInputBindingDivisorDescriptionKHR const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 273 && (VK_KHR_vertex_attribute_divisor)
+bool compare_VkPipelineVertexInputDivisorStateCreateInfoKHR(
+    VkPipelineVertexInputDivisorStateCreateInfoKHR const *s1,
+    VkPipelineVertexInputDivisorStateCreateInfoKHR const *s2) {
   if ((s1->vertexBindingDivisorCount != s2->vertexBindingDivisorCount) || false)
     return false;
 
   return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 273 && (VK_EXT_vertex_attribute_divisor)
+bool compare_VkPipelineVertexInputDivisorStateCreateInfoEXT(
+    VkPipelineVertexInputDivisorStateCreateInfoEXT const *s1,
+    VkPipelineVertexInputDivisorStateCreateInfoEXT const *s2) {
+  return compare_VkPipelineVertexInputDivisorStateCreateInfoKHR(
+      (VkPipelineVertexInputDivisorStateCreateInfoKHR const *)s1,
+      (VkPipelineVertexInputDivisorStateCreateInfoKHR const *)s2);
 }
 #endif
 
@@ -13533,6 +13613,18 @@ bool compare_VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT(
     VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT const *s1,
     VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT const *s2) {
   if ((s1->maxVertexAttribDivisor != s2->maxVertexAttribDivisor) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 273 && (VK_KHR_vertex_attribute_divisor)
+bool compare_VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR(
+    VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR const *s1,
+    VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR const *s2) {
+  if ((s1->maxVertexAttribDivisor != s2->maxVertexAttribDivisor) ||
+      (s1->supportsNonZeroFirstInstance != s2->supportsNonZeroFirstInstance) || false)
     return false;
 
   return true;
@@ -13756,16 +13848,26 @@ bool compare_VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 84 && (VK_EXT_vertex_attribute_divisor)
-bool compare_VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT(
-    VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const *s1,
-    VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const *s2) {
+#if VK_HEADER_VERSION >= 273 && (VK_KHR_vertex_attribute_divisor)
+bool compare_VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR(
+    VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR const *s1,
+    VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR const *s2) {
   if ((s1->vertexAttributeInstanceRateDivisor != s2->vertexAttributeInstanceRateDivisor) ||
       (s1->vertexAttributeInstanceRateZeroDivisor != s2->vertexAttributeInstanceRateZeroDivisor) ||
       false)
     return false;
 
   return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 273 && (VK_EXT_vertex_attribute_divisor)
+bool compare_VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT(
+    VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const *s1,
+    VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const *s2) {
+  return compare_VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR(
+      (VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR const *)s1,
+      (VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR const *)s2);
 }
 #endif
 
@@ -21785,6 +21887,51 @@ bool compare_VkRenderPassStripeBeginInfoARM(VkRenderPassStripeBeginInfoARM const
 bool compare_VkRenderPassStripeSubmitInfoARM(VkRenderPassStripeSubmitInfoARM const *s1,
                                              VkRenderPassStripeSubmitInfoARM const *s2) {
   if ((s1->stripeSemaphoreInfoCount != s2->stripeSemaphoreInfoCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 88 && VK_HEADER_VERSION <= 272 && (VK_EXT_calibrated_timestamps)
+bool compare_VkCalibratedTimestampInfoEXT(VkCalibratedTimestampInfoEXT const *s1,
+                                          VkCalibratedTimestampInfoEXT const *s2) {
+  if ((s1->timeDomain != s2->timeDomain) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION <= 272 && (VK_EXT_vertex_attribute_divisor)
+bool compare_VkVertexInputBindingDivisorDescriptionEXT(
+    VkVertexInputBindingDivisorDescriptionEXT const *s1,
+    VkVertexInputBindingDivisorDescriptionEXT const *s2) {
+  if ((s1->binding != s2->binding) || (s1->divisor != s2->divisor) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION <= 272 && (VK_EXT_vertex_attribute_divisor)
+bool compare_VkPipelineVertexInputDivisorStateCreateInfoEXT(
+    VkPipelineVertexInputDivisorStateCreateInfoEXT const *s1,
+    VkPipelineVertexInputDivisorStateCreateInfoEXT const *s2) {
+  if ((s1->vertexBindingDivisorCount != s2->vertexBindingDivisorCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 84 && VK_HEADER_VERSION <= 272 && (VK_EXT_vertex_attribute_divisor)
+bool compare_VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT(
+    VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const *s1,
+    VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const *s2) {
+  if ((s1->vertexAttributeInstanceRateDivisor != s2->vertexAttributeInstanceRateDivisor) ||
+      (s1->vertexAttributeInstanceRateZeroDivisor != s2->vertexAttributeInstanceRateZeroDivisor) ||
+      false)
     return false;
 
   return true;

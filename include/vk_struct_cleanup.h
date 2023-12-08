@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 272,
-              "VK_HEADER_VERSION is from after the maximum supported version of v272.");
+static_assert(VK_HEADER_VERSION <= 273,
+              "VK_HEADER_VERSION is from after the maximum supported version of v273.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 272,
-               "VK_HEADER_VERSION is from after the maximum supported version of v272.");
+_Static_assert(VK_HEADER_VERSION <= 273,
+               "VK_HEADER_VERSION is from after the maximum supported version of v273.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -1294,16 +1294,6 @@ void cleanup_VkPipelineRasterizationConservativeStateCreateInfoEXT(
 #endif
 
 #if (VK_EXT_vertex_attribute_divisor)
-void cleanup_VkVertexInputBindingDivisorDescriptionEXT(
-    VkVertexInputBindingDivisorDescriptionEXT const *pData);
-#endif
-
-#if (VK_EXT_vertex_attribute_divisor)
-void cleanup_VkPipelineVertexInputDivisorStateCreateInfoEXT(
-    VkPipelineVertexInputDivisorStateCreateInfoEXT const *pData);
-#endif
-
-#if (VK_EXT_vertex_attribute_divisor)
 void cleanup_VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT(
     VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT const *pData);
 #endif
@@ -1334,6 +1324,16 @@ void cleanup_VkAndroidHardwareBufferFormatPropertiesANDROID(
 
 #if (VK_ANDROID_external_memory_android_hardware_buffer)
 void cleanup_VkExternalFormatANDROID(VkExternalFormatANDROID const *pData);
+#endif
+
+#if VK_HEADER_VERSION <= 272 && (VK_EXT_vertex_attribute_divisor)
+void cleanup_VkVertexInputBindingDivisorDescriptionEXT(
+    VkVertexInputBindingDivisorDescriptionEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION <= 272 && (VK_EXT_vertex_attribute_divisor)
+void cleanup_VkPipelineVertexInputDivisorStateCreateInfoEXT(
+    VkPipelineVertexInputDivisorStateCreateInfoEXT const *pData);
 #endif
 
 #if VK_HEADER_VERSION <= 203 && (VK_EXT_global_priority)
@@ -1535,11 +1535,6 @@ void cleanup_VkQueueFamilyCheckpointPropertiesNV(VkQueueFamilyCheckpointProperti
 void cleanup_VkCheckpointDataNV(VkCheckpointDataNV const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 84 && (VK_EXT_vertex_attribute_divisor)
-void cleanup_VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT(
-    VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const *pData);
-#endif
-
 #if VK_HEADER_VERSION >= 84 && (VK_EXT_astc_decode_mode)
 void cleanup_VkImageViewASTCDecodeModeEXT(VkImageViewASTCDecodeModeEXT const *pData);
 #endif
@@ -1547,6 +1542,11 @@ void cleanup_VkImageViewASTCDecodeModeEXT(VkImageViewASTCDecodeModeEXT const *pD
 #if VK_HEADER_VERSION >= 84 && (VK_EXT_astc_decode_mode)
 void cleanup_VkPhysicalDeviceASTCDecodeFeaturesEXT(
     VkPhysicalDeviceASTCDecodeFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 84 && VK_HEADER_VERSION <= 272 && (VK_EXT_vertex_attribute_divisor)
+void cleanup_VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT(
+    VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const *pData);
 #endif
 
 #if VK_HEADER_VERSION >= 84 && VK_HEADER_VERSION <= 203 && (VK_EXT_inline_uniform_block)
@@ -1751,10 +1751,6 @@ void cleanup_VkPhysicalDeviceImageDrmFormatModifierInfoEXT(
 void cleanup_VkImagePipeSurfaceCreateInfoFUCHSIA(VkImagePipeSurfaceCreateInfoFUCHSIA const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 88 && (VK_EXT_calibrated_timestamps)
-void cleanup_VkCalibratedTimestampInfoEXT(VkCalibratedTimestampInfoEXT const *pData);
-#endif
-
 #if VK_HEADER_VERSION >= 88 && (VK_EXT_transform_feedback)
 void cleanup_VkPhysicalDeviceTransformFeedbackFeaturesEXT(
     VkPhysicalDeviceTransformFeedbackFeaturesEXT const *pData);
@@ -1773,6 +1769,10 @@ void cleanup_VkPipelineRasterizationStateStreamCreateInfoEXT(
 #if VK_HEADER_VERSION >= 88 && (VK_EXT_image_drm_format_modifier)
 void cleanup_VkPhysicalDeviceImageDrmFormatModifierInfoEXT(
     VkPhysicalDeviceImageDrmFormatModifierInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 88 && VK_HEADER_VERSION <= 272 && (VK_EXT_calibrated_timestamps)
+void cleanup_VkCalibratedTimestampInfoEXT(VkCalibratedTimestampInfoEXT const *pData);
 #endif
 
 #if VK_HEADER_VERSION >= 88 && VK_HEADER_VERSION <= 130 && (VK_KHR_driver_properties)
@@ -6593,6 +6593,49 @@ void cleanup_VkRenderPassStripeBeginInfoARM(VkRenderPassStripeBeginInfoARM const
 void cleanup_VkRenderPassStripeSubmitInfoARM(VkRenderPassStripeSubmitInfoARM const *pData);
 #endif
 
+#if VK_HEADER_VERSION >= 273 && (VK_KHR_calibrated_timestamps)
+void cleanup_VkCalibratedTimestampInfoKHR(VkCalibratedTimestampInfoKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 273 && (VK_EXT_calibrated_timestamps)
+void cleanup_VkCalibratedTimestampInfoEXT(VkCalibratedTimestampInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 273 && (VK_KHR_vertex_attribute_divisor)
+void cleanup_VkVertexInputBindingDivisorDescriptionKHR(
+    VkVertexInputBindingDivisorDescriptionKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 273 && (VK_EXT_vertex_attribute_divisor)
+void cleanup_VkVertexInputBindingDivisorDescriptionEXT(
+    VkVertexInputBindingDivisorDescriptionEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 273 && (VK_KHR_vertex_attribute_divisor)
+void cleanup_VkPipelineVertexInputDivisorStateCreateInfoKHR(
+    VkPipelineVertexInputDivisorStateCreateInfoKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 273 && (VK_EXT_vertex_attribute_divisor)
+void cleanup_VkPipelineVertexInputDivisorStateCreateInfoEXT(
+    VkPipelineVertexInputDivisorStateCreateInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 273 && (VK_KHR_vertex_attribute_divisor)
+void cleanup_VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR(
+    VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 273 && (VK_KHR_vertex_attribute_divisor)
+void cleanup_VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR(
+    VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 273 && (VK_EXT_vertex_attribute_divisor)
+void cleanup_VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT(
+    VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const *pData);
+#endif
+
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
 
 #include <stdlib.h>
@@ -7938,14 +7981,6 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if (VK_EXT_vertex_attribute_divisor)
-  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_EXT) {
-    cleanup_VkPipelineVertexInputDivisorStateCreateInfoEXT(
-        (VkPipelineVertexInputDivisorStateCreateInfoEXT const *)pData);
-    return;
-  }
-#endif
-
-#if (VK_EXT_vertex_attribute_divisor)
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_EXT) {
     cleanup_VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT(
         (VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT const *)pData);
@@ -7995,6 +8030,14 @@ void cleanup_vk_struct(void const *pData) {
 #if (VK_ANDROID_external_memory_android_hardware_buffer)
   if (pTemp->sType == VK_STRUCTURE_TYPE_EXTERNAL_FORMAT_ANDROID) {
     cleanup_VkExternalFormatANDROID((VkExternalFormatANDROID const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION <= 272 && (VK_EXT_vertex_attribute_divisor)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_EXT) {
+    cleanup_VkPipelineVertexInputDivisorStateCreateInfoEXT(
+        (VkPipelineVertexInputDivisorStateCreateInfoEXT const *)pData);
     return;
   }
 #endif
@@ -8274,14 +8317,6 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
-#if VK_HEADER_VERSION >= 84 && (VK_EXT_vertex_attribute_divisor)
-  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT) {
-    cleanup_VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT(
-        (VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const *)pData);
-    return;
-  }
-#endif
-
 #if VK_HEADER_VERSION >= 84 && (VK_EXT_astc_decode_mode)
   if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_VIEW_ASTC_DECODE_MODE_EXT) {
     cleanup_VkImageViewASTCDecodeModeEXT((VkImageViewASTCDecodeModeEXT const *)pData);
@@ -8293,6 +8328,14 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ASTC_DECODE_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceASTCDecodeFeaturesEXT(
         (VkPhysicalDeviceASTCDecodeFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 84 && VK_HEADER_VERSION <= 272 && (VK_EXT_vertex_attribute_divisor)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_EXT) {
+    cleanup_VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT(
+        (VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const *)pData);
     return;
   }
 #endif
@@ -8581,13 +8624,6 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
-#if VK_HEADER_VERSION >= 88 && (VK_EXT_calibrated_timestamps)
-  if (pTemp->sType == VK_STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_EXT) {
-    cleanup_VkCalibratedTimestampInfoEXT((VkCalibratedTimestampInfoEXT const *)pData);
-    return;
-  }
-#endif
-
 #if VK_HEADER_VERSION >= 88 && (VK_EXT_transform_feedback)
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TRANSFORM_FEEDBACK_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceTransformFeedbackFeaturesEXT(
@@ -8616,6 +8652,13 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_DRM_FORMAT_MODIFIER_INFO_EXT) {
     cleanup_VkPhysicalDeviceImageDrmFormatModifierInfoEXT(
         (VkPhysicalDeviceImageDrmFormatModifierInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 88 && VK_HEADER_VERSION <= 272 && (VK_EXT_calibrated_timestamps)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_EXT) {
+    cleanup_VkCalibratedTimestampInfoEXT((VkCalibratedTimestampInfoEXT const *)pData);
     return;
   }
 #endif
@@ -15297,6 +15340,37 @@ void cleanup_vk_struct(void const *pData) {
     return;
   }
 #endif
+
+#if VK_HEADER_VERSION >= 273 && (VK_KHR_calibrated_timestamps)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_CALIBRATED_TIMESTAMP_INFO_KHR) {
+    cleanup_VkCalibratedTimestampInfoKHR((VkCalibratedTimestampInfoKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 273 && (VK_KHR_vertex_attribute_divisor)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_VERTEX_INPUT_DIVISOR_STATE_CREATE_INFO_KHR) {
+    cleanup_VkPipelineVertexInputDivisorStateCreateInfoKHR(
+        (VkPipelineVertexInputDivisorStateCreateInfoKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 273 && (VK_KHR_vertex_attribute_divisor)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_PROPERTIES_KHR) {
+    cleanup_VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR(
+        (VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 273 && (VK_KHR_vertex_attribute_divisor)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VERTEX_ATTRIBUTE_DIVISOR_FEATURES_KHR) {
+    cleanup_VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR(
+        (VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR const *)pData);
+    return;
+  }
+#endif
 }
 
 void cleanup_VkOffset2D(VkOffset2D const *pData) {}
@@ -18320,28 +18394,6 @@ void cleanup_VkPipelineRasterizationConservativeStateCreateInfoEXT(
 #endif
 
 #if (VK_EXT_vertex_attribute_divisor)
-void cleanup_VkVertexInputBindingDivisorDescriptionEXT(
-    VkVertexInputBindingDivisorDescriptionEXT const *pData) {}
-#endif
-
-#if (VK_EXT_vertex_attribute_divisor)
-void cleanup_VkPipelineVertexInputDivisorStateCreateInfoEXT(
-    VkPipelineVertexInputDivisorStateCreateInfoEXT const *pData) {
-  // pNext
-  if (pData->pNext != NULL)
-    cleanup_vk_struct(pData->pNext);
-  free((void *)pData->pNext);
-
-  // pVertexBindingDivisors - vertexBindingDivisorCount
-  if (pData->pVertexBindingDivisors != NULL) {
-    for (uint32_t i = 0; i < pData->vertexBindingDivisorCount; ++i)
-      cleanup_VkVertexInputBindingDivisorDescriptionEXT(&pData->pVertexBindingDivisors[i]);
-  }
-  free((void *)pData->pVertexBindingDivisors);
-}
-#endif
-
-#if (VK_EXT_vertex_attribute_divisor)
 void cleanup_VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT(
     VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT const *pData) {
   // pNext
@@ -18409,6 +18461,28 @@ void cleanup_VkExternalFormatANDROID(VkExternalFormatANDROID const *pData) {
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION <= 272 && (VK_EXT_vertex_attribute_divisor)
+void cleanup_VkVertexInputBindingDivisorDescriptionEXT(
+    VkVertexInputBindingDivisorDescriptionEXT const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION <= 272 && (VK_EXT_vertex_attribute_divisor)
+void cleanup_VkPipelineVertexInputDivisorStateCreateInfoEXT(
+    VkPipelineVertexInputDivisorStateCreateInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pVertexBindingDivisors - vertexBindingDivisorCount
+  if (pData->pVertexBindingDivisors != NULL) {
+    for (uint32_t i = 0; i < pData->vertexBindingDivisorCount; ++i)
+      cleanup_VkVertexInputBindingDivisorDescriptionEXT(&pData->pVertexBindingDivisors[i]);
+  }
+  free((void *)pData->pVertexBindingDivisors);
 }
 #endif
 
@@ -18896,16 +18970,6 @@ void cleanup_VkCheckpointDataNV(VkCheckpointDataNV const *pData) {
 }
 #endif
 
-#if VK_HEADER_VERSION >= 84 && (VK_EXT_vertex_attribute_divisor)
-void cleanup_VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT(
-    VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const *pData) {
-  // pNext
-  if (pData->pNext != NULL)
-    cleanup_vk_struct(pData->pNext);
-  free((void *)pData->pNext);
-}
-#endif
-
 #if VK_HEADER_VERSION >= 84 && (VK_EXT_astc_decode_mode)
 void cleanup_VkImageViewASTCDecodeModeEXT(VkImageViewASTCDecodeModeEXT const *pData) {
   // pNext
@@ -18918,6 +18982,16 @@ void cleanup_VkImageViewASTCDecodeModeEXT(VkImageViewASTCDecodeModeEXT const *pD
 #if VK_HEADER_VERSION >= 84 && (VK_EXT_astc_decode_mode)
 void cleanup_VkPhysicalDeviceASTCDecodeFeaturesEXT(
     VkPhysicalDeviceASTCDecodeFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 84 && VK_HEADER_VERSION <= 272 && (VK_EXT_vertex_attribute_divisor)
+void cleanup_VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT(
+    VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
@@ -19381,15 +19455,6 @@ void cleanup_VkImagePipeSurfaceCreateInfoFUCHSIA(VkImagePipeSurfaceCreateInfoFUC
 }
 #endif
 
-#if VK_HEADER_VERSION >= 88 && (VK_EXT_calibrated_timestamps)
-void cleanup_VkCalibratedTimestampInfoEXT(VkCalibratedTimestampInfoEXT const *pData) {
-  // pNext
-  if (pData->pNext != NULL)
-    cleanup_vk_struct(pData->pNext);
-  free((void *)pData->pNext);
-}
-#endif
-
 #if VK_HEADER_VERSION >= 88 && (VK_EXT_transform_feedback)
 void cleanup_VkPhysicalDeviceTransformFeedbackFeaturesEXT(
     VkPhysicalDeviceTransformFeedbackFeaturesEXT const *pData) {
@@ -19430,6 +19495,15 @@ void cleanup_VkPhysicalDeviceImageDrmFormatModifierInfoEXT(
 
   // pQueueFamilyIndices - queueFamilyIndexCount
   free((void *)pData->pQueueFamilyIndices);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 88 && VK_HEADER_VERSION <= 272 && (VK_EXT_calibrated_timestamps)
+void cleanup_VkCalibratedTimestampInfoEXT(VkCalibratedTimestampInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
 }
 #endif
 
@@ -30674,6 +30748,87 @@ void cleanup_VkRenderPassStripeSubmitInfoARM(VkRenderPassStripeSubmitInfoARM con
       cleanup_VkSemaphoreSubmitInfo(&pData->pStripeSemaphoreInfos[i]);
   }
   free((void *)pData->pStripeSemaphoreInfos);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 273 && (VK_KHR_calibrated_timestamps)
+void cleanup_VkCalibratedTimestampInfoKHR(VkCalibratedTimestampInfoKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 273 && (VK_EXT_calibrated_timestamps)
+void cleanup_VkCalibratedTimestampInfoEXT(VkCalibratedTimestampInfoEXT const *pData) {
+  cleanup_VkCalibratedTimestampInfoKHR((VkCalibratedTimestampInfoKHR const *)pData);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 273 && (VK_KHR_vertex_attribute_divisor)
+void cleanup_VkVertexInputBindingDivisorDescriptionKHR(
+    VkVertexInputBindingDivisorDescriptionKHR const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 273 && (VK_EXT_vertex_attribute_divisor)
+void cleanup_VkVertexInputBindingDivisorDescriptionEXT(
+    VkVertexInputBindingDivisorDescriptionEXT const *pData) {
+  cleanup_VkVertexInputBindingDivisorDescriptionKHR(
+      (VkVertexInputBindingDivisorDescriptionKHR const *)pData);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 273 && (VK_KHR_vertex_attribute_divisor)
+void cleanup_VkPipelineVertexInputDivisorStateCreateInfoKHR(
+    VkPipelineVertexInputDivisorStateCreateInfoKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pVertexBindingDivisors - vertexBindingDivisorCount
+  if (pData->pVertexBindingDivisors != NULL) {
+    for (uint32_t i = 0; i < pData->vertexBindingDivisorCount; ++i)
+      cleanup_VkVertexInputBindingDivisorDescriptionKHR(&pData->pVertexBindingDivisors[i]);
+  }
+  free((void *)pData->pVertexBindingDivisors);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 273 && (VK_EXT_vertex_attribute_divisor)
+void cleanup_VkPipelineVertexInputDivisorStateCreateInfoEXT(
+    VkPipelineVertexInputDivisorStateCreateInfoEXT const *pData) {
+  cleanup_VkPipelineVertexInputDivisorStateCreateInfoKHR(
+      (VkPipelineVertexInputDivisorStateCreateInfoKHR const *)pData);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 273 && (VK_KHR_vertex_attribute_divisor)
+void cleanup_VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR(
+    VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 273 && (VK_KHR_vertex_attribute_divisor)
+void cleanup_VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR(
+    VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 273 && (VK_EXT_vertex_attribute_divisor)
+void cleanup_VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT(
+    VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const *pData) {
+  cleanup_VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR(
+      (VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR const *)pData);
 }
 #endif
 
