@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) >= 0,
               "openxr header version is from before the minimum supported version of v0.");
-static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 31,
-              "openxr header version is from after the maximum supported version of v31.");
+static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 32,
+              "openxr header version is from after the maximum supported version of v32.");
 #else
 _Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) >= 0,
                "openxr header version is from before the minimum supported version of v0.");
-_Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 31,
-               "openxr header version is from after the maximum supported version of v31.");
+_Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 32,
+               "openxr header version is from after the maximum supported version of v32.");
 #endif
 
 /// Returns a string representing the given VkResult parameter. If there is no known representation,
@@ -51,6 +51,58 @@ char const *XrResult_to_string(XrResult result) {
   // Check in descending order to get the 'latest' version of the error code text available.
   // Also, because codes have been re-used over time, can't use a switch and have to do this large
   // set of ifs. Luckily this *should* be a relatively rare call.
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 32 && XR_ML_marker_understanding
+  if (result == XR_ERROR_MARKER_DETECTOR_PERMISSION_DENIED_ML)
+    return "XR_ERROR_MARKER_DETECTOR_PERMISSION_DENIED_ML";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 32 && XR_ML_marker_understanding
+  if (result == XR_ERROR_MARKER_DETECTOR_LOCATE_FAILED_ML)
+    return "XR_ERROR_MARKER_DETECTOR_LOCATE_FAILED_ML";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 32 && XR_ML_marker_understanding
+  if (result == XR_ERROR_MARKER_DETECTOR_INVALID_DATA_QUERY_ML)
+    return "XR_ERROR_MARKER_DETECTOR_INVALID_DATA_QUERY_ML";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 32 && XR_ML_marker_understanding
+  if (result == XR_ERROR_MARKER_DETECTOR_INVALID_CREATE_INFO_ML)
+    return "XR_ERROR_MARKER_DETECTOR_INVALID_CREATE_INFO_ML";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 32 && XR_ML_marker_understanding
+  if (result == XR_ERROR_MARKER_INVALID_ML)
+    return "XR_ERROR_MARKER_INVALID_ML";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 32 && XR_ML_localization_map
+  if (result == XR_ERROR_LOCALIZATION_MAP_INCOMPATIBLE_ML)
+    return "XR_ERROR_LOCALIZATION_MAP_INCOMPATIBLE_ML";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 32 && XR_ML_localization_map
+  if (result == XR_ERROR_LOCALIZATION_MAP_UNAVAILABLE_ML)
+    return "XR_ERROR_LOCALIZATION_MAP_UNAVAILABLE_ML";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 32 && XR_ML_localization_map
+  if (result == XR_ERROR_LOCALIZATION_MAP_FAIL_ML)
+    return "XR_ERROR_LOCALIZATION_MAP_FAIL_ML";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 32 && XR_ML_localization_map
+  if (result == XR_ERROR_LOCALIZATION_MAP_IMPORT_EXPORT_PERMISSION_DENIED_ML)
+    return "XR_ERROR_LOCALIZATION_MAP_IMPORT_EXPORT_PERMISSION_DENIED_ML";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 32 && XR_ML_localization_map
+  if (result == XR_ERROR_LOCALIZATION_MAP_PERMISSION_DENIED_ML)
+    return "XR_ERROR_LOCALIZATION_MAP_PERMISSION_DENIED_ML";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 32 && XR_ML_localization_map
+  if (result == XR_ERROR_LOCALIZATION_MAP_ALREADY_EXISTS_ML)
+    return "XR_ERROR_LOCALIZATION_MAP_ALREADY_EXISTS_ML";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 32 && XR_ML_localization_map
+  if (result == XR_ERROR_LOCALIZATION_MAP_CANNOT_EXPORT_CLOUD_MAP_ML)
+    return "XR_ERROR_LOCALIZATION_MAP_CANNOT_EXPORT_CLOUD_MAP_ML";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 32 && XR_HTC_anchor
+  if (result == XR_ERROR_NOT_AN_ANCHOR_HTC)
+    return "XR_ERROR_NOT_AN_ANCHOR_HTC";
+#endif
 #if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 31 && XR_MSFT_scene_marker
   if (result == XR_SCENE_MARKER_DATA_NOT_STRING_MSFT)
     return "XR_SCENE_MARKER_DATA_NOT_STRING_MSFT";
