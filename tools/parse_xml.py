@@ -342,7 +342,7 @@ def processExtensionStruct(extension, structData, apiVersion):
 
                 platform = platforms.find(extName)
                 if require.get('depends'):
-                    dependencies = require.get('depends').split(',')
+                    dependencies = require.get('depends').replace('+', ',').split(',')
                     for dependency in dependencies:
                         depend = platform.find(dependency)
                         if depend is None:
