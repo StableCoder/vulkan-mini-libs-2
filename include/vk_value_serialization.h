@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 273,
-              "VK_HEADER_VERSION is from after the maximum supported version of v273.");
+static_assert(VK_HEADER_VERSION <= 274,
+              "VK_HEADER_VERSION is from after the maximum supported version of v274.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 273,
-               "VK_HEADER_VERSION is from after the maximum supported version of v273.");
+_Static_assert(VK_HEADER_VERSION <= 274,
+               "VK_HEADER_VERSION is from after the maximum supported version of v274.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -228,6 +228,7 @@ EnumValueSet const VkDescriptorSetLayoutCreateFlagsSets[] = {
     {"DESCRIPTOR_BUFFER_BIT_EXT", 0x00000010, false},
     {"EMBEDDED_IMMUTABLE_SAMPLERS_BIT_EXT", 0x00000020, false},
     {"INDIRECT_BINDABLE_BIT_NV", 0x00000080, false},
+    {"PER_STAGE_BIT_NV", 0x00000040, false},
 };
 
 EnumValueSet const VkInstanceCreateFlagsSets[] = {
@@ -350,6 +351,7 @@ EnumValueSet const VkBufferCreateFlagsSets[] = {
     {"DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR", 0x00000010, true},
     {"DEVICE_ADDRESS_CAPTURE_REPLAY", 0x00000010, false},
     {"DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT", 0x00000020, false},
+    {"VIDEO_PROFILE_INDEPENDENT_BIT_KHR", 0x00000040, false},
 };
 
 EnumValueSet const VkShaderStageFlagsSets[] = {
@@ -438,6 +440,7 @@ EnumValueSet const VkImageCreateFlagsSets[] = {
     {"2D_VIEW_COMPATIBLE_BIT_EXT", 0x00020000, false},
     {"MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_BIT_EXT", 0x00040000, false},
     {"DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT", 0x00010000, false},
+    {"VIDEO_PROFILE_INDEPENDENT_BIT_KHR", 0x00100000, false},
 };
 
 EnumValueSet const VkImageViewCreateFlagsSets[] = {
@@ -1481,6 +1484,7 @@ EnumValueSet const VkVideoCodecOperationFlagsKHRSets[] = {
     {"DECODE_H265_BIT_EXT", 0x00000002, false}, {"INVALID", 0, false},
     {"ENCODE_H265_BIT_EXT", 0x00020000, false}, {"NONE", 0, false},
     {"DECODE_H264", 0x00000001, false},         {"DECODE_H265", 0x00000002, false},
+    {"ENCODE_H264", 0x00010000, false},         {"ENCODE_H265", 0x00020000, false},
 };
 
 EnumValueSet const VkVideoCapabilityFlagsKHRSets[] = {
@@ -1492,6 +1496,7 @@ EnumValueSet const VkVideoSessionCreateFlagsKHRSets[] = {
     {"PROTECTED_CONTENT", 0x00000001, false},
     {"DEFAULT", 0, false},
     {"ALLOW_ENCODE_PARAMETER_OPTIMIZATIONS", 0x00000002, false},
+    {"INLINE_QUERIES", 0x00000004, false},
 };
 
 EnumValueSet const VkVideoCodingControlFlagsKHRSets[] = {
@@ -1581,45 +1586,19 @@ EnumValueSet const VkVideoComponentBitDepthFlagsKHRSets[] = {
     {"12", 0x00000010, false},
 };
 
-EnumValueSet const VkVideoEncodeH264CapabilityFlagsEXTSets[] = {
-    {"CHROMA_QP_OFFSET", 0x00000040, false},
-    {"SECOND_CHROMA_QP_OFFSET", 0x00000080, false},
-    {"TRANSFORM_8X8", 0x00002000, false},
-    {"CABAC", 0x00004000, false},
-    {"CAVLC", 0x00008000, false},
-    {"DEBLOCKING_FILTER_DISABLED", 0x00010000, false},
-    {"DEBLOCKING_FILTER_ENABLED", 0x00020000, false},
-    {"DEBLOCKING_FILTER_PARTIAL", 0x00040000, false},
-    {"MULTIPLE_SLICE_PER_FRAME", 0x00100000, false},
-    {"WEIGHTED_BI_PRED_IMPLICIT", 0x00000004, false},
-    {"EVENLY_DISTRIBUTED_SLICE_SIZE", 0x00000400, false},
-    {"OPTIONAL_RC_EXTENSION_STRUCT", 0x00000800, false},
+EnumValueSet const VkVideoEncodeH264CapabilityFlagsKHRSets[] = {
     {"HRD_COMPLIANCE", 0x00000001, false},
+    {"PREDICTION_WEIGHT_TABLE_GENERATED", 0x00000002, false},
     {"ROW_UNALIGNED_SLICE", 0x00000004, false},
     {"DIFFERENT_SLICE_TYPE", 0x00000008, false},
-    {"SEPARATE_COLOUR_PLANE", 0x00000004, false},
-    {"QPPRIME_Y_ZERO_TRANSFORM_BYPASS", 0x00000008, false},
-    {"SCALING_LISTS", 0x00000010, false},
-    {"PIC_INIT_QP_MINUS26", 0x00000100, false},
-    {"WEIGHTED_PRED", 0x00000200, false},
-    {"WEIGHTED_BIPRED_EXPLICIT", 0x00000400, false},
-    {"WEIGHTED_BIPRED_IMPLICIT", 0x00000800, false},
-    {"WEIGHTED_PRED_NO_TABLE", 0x00001000, false},
-    {"DISABLE_DIRECT_SPATIAL_MV_PRED", 0x00080000, false},
-    {"SLICE_MB_COUNT", 0x00200000, false},
-    {"DIRECT_8X8_INFERENCE", 0x00000001, false},
-    {"B_FRAME_IN_L1_LIST", 0x00000020, false},
-    {"DIRECT_8X8_INFERENCE_ENABLED", 0x00000001, false},
-    {"DIRECT_8X8_INFERENCE_DISABLED", 0x00000002, false},
-    {"DIFFERENT_REFERENCE_FINAL_LISTS", 0x02000000, false},
-    {"PREDICTION_WEIGHT_TABLE_GENERATED", 0x00000002, false},
     {"B_FRAME_IN_L0_LIST", 0x00000010, false},
+    {"B_FRAME_IN_L1_LIST", 0x00000020, false},
     {"PER_PICTURE_TYPE_MIN_MAX_QP", 0x00000040, false},
     {"PER_SLICE_CONSTANT_QP", 0x00000080, false},
     {"GENERATE_PREFIX_NALU", 0x00000100, false},
 };
 
-EnumValueSet const VkVideoEncodeH264StdFlagsEXTSets[] = {
+EnumValueSet const VkVideoEncodeH264StdFlagsKHRSets[] = {
     {"SEPARATE_COLOR_PLANE_FLAG_SET", 0x00000001, false},
     {"QPPRIME_Y_ZERO_TRANSFORM_BYPASS_FLAG_SET", 0x00000002, false},
     {"SCALING_MATRIX_PRESENT_FLAG_SET", 0x00000004, false},
@@ -1642,7 +1621,7 @@ EnumValueSet const VkVideoEncodeH264StdFlagsEXTSets[] = {
     {"DIFFERENT_SLICE_QP_DELTA", 0x00100000, false},
 };
 
-EnumValueSet const VkVideoEncodeH264RateControlFlagsEXTSets[] = {
+EnumValueSet const VkVideoEncodeH264RateControlFlagsKHRSets[] = {
     {"ATTEMPT_HRD_COMPLIANCE", 0x00000001, false},
     {"REGULAR_GOP", 0x00000002, false},
     {"REFERENCE_PATTERN_FLAT", 0x00000004, false},
@@ -1650,53 +1629,20 @@ EnumValueSet const VkVideoEncodeH264RateControlFlagsEXTSets[] = {
     {"TEMPORAL_LAYER_PATTERN_DYADIC", 0x00000010, false},
 };
 
-EnumValueSet const VkVideoEncodeH265CapabilityFlagsEXTSets[] = {
-    {"WEIGHTED_BI_PRED_IMPLICIT", 0x00000001, false},
-    {"TRANSFORM_8X8", 0x00000002, false},
-    {"CHROMA_QP_OFFSET", 0x00000004, false},
-    {"SECOND_CHROMA_QP_OFFSET", 0x00000008, false},
-    {"DEBLOCKING_FILTER_DISABLED", 0x00000010, false},
-    {"DEBLOCKING_FILTER_ENABLED", 0x00000020, false},
-    {"DEBLOCKING_FILTER_PARTIAL", 0x00000040, false},
-    {"MULTIPLE_SLICE_PER_FRAME", 0x00000080, false},
-    {"EVENLY_DISTRIBUTED_SLICE_SIZE", 0x00000100, false},
+EnumValueSet const VkVideoEncodeH265CapabilityFlagsKHRSets[] = {
     {"HRD_COMPLIANCE", 0x00000001, false},
-    {"ROW_UNALIGNED_SLICE_SEGMENT", 0x00000004, false},
-    {"SEPARATE_COLOUR_PLANE", 0x00000001, false},
-    {"SCALING_LISTS", 0x00000002, false},
-    {"SAMPLE_ADAPTIVE_OFFSET_ENABLED", 0x00000004, false},
-    {"PCM_ENABLE", 0x00000008, false},
-    {"SPS_TEMPORAL_MVP_ENABLED", 0x00000010, false},
-    {"INIT_QP_MINUS26", 0x00000040, false},
-    {"LOG2_PARALLEL_MERGE_LEVEL_MINUS2", 0x00000080, false},
-    {"SIGN_DATA_HIDING_ENABLED", 0x00000100, false},
-    {"TRANSFORM_SKIP_ENABLED", 0x00000200, false},
-    {"PPS_SLICE_CHROMA_QP_OFFSETS_PRESENT", 0x00000800, false},
-    {"WEIGHTED_PRED", 0x00001000, false},
-    {"WEIGHTED_BIPRED", 0x00002000, false},
-    {"WEIGHTED_PRED_NO_TABLE", 0x00004000, false},
-    {"TRANSQUANT_BYPASS_ENABLED", 0x00008000, false},
-    {"ENTROPY_CODING_SYNC_ENABLED", 0x00010000, false},
-    {"DEBLOCKING_FILTER_OVERRIDE_ENABLED", 0x00020000, false},
-    {"MULTIPLE_TILE_PER_FRAME", 0x00040000, false},
-    {"MULTIPLE_SLICE_PER_TILE", 0x00080000, false},
-    {"MULTIPLE_TILE_PER_SLICE", 0x00100000, false},
-    {"SLICE_SEGMENT_CTB_COUNT", 0x00200000, false},
-    {"DEPENDENT_SLICE_SEGMENT", 0x00800000, false},
-    {"DIFFERENT_SLICE_TYPE", 0x01000000, false},
-    {"B_FRAME_IN_L1_LIST", 0x00000020, false},
-    {"TRANSFORM_SKIP_DISABLED", 0x00000400, false},
-    {"DIFFERENT_REFERENCE_FINAL_LISTS", 0x04000000, false},
     {"PREDICTION_WEIGHT_TABLE_GENERATED", 0x00000002, false},
+    {"ROW_UNALIGNED_SLICE_SEGMENT", 0x00000004, false},
     {"DIFFERENT_SLICE_SEGMENT_TYPE", 0x00000008, false},
     {"B_FRAME_IN_L0_LIST", 0x00000010, false},
+    {"B_FRAME_IN_L1_LIST", 0x00000020, false},
     {"PER_PICTURE_TYPE_MIN_MAX_QP", 0x00000040, false},
     {"PER_SLICE_SEGMENT_CONSTANT_QP", 0x00000080, false},
     {"MULTIPLE_TILES_PER_SLICE_SEGMENT", 0x00000100, false},
     {"MULTIPLE_SLICE_SEGMENTS_PER_TILE", 0x00000200, false},
 };
 
-EnumValueSet const VkVideoEncodeH265StdFlagsEXTSets[] = {
+EnumValueSet const VkVideoEncodeH265StdFlagsKHRSets[] = {
     {"SEPARATE_COLOR_PLANE_FLAG_SET", 0x00000001, false},
     {"SAMPLE_ADAPTIVE_OFFSET_ENABLED_FLAG_SET", 0x00000002, false},
     {"SCALING_LIST_DATA_PRESENT_FLAG_SET", 0x00000004, false},
@@ -1720,7 +1666,7 @@ EnumValueSet const VkVideoEncodeH265StdFlagsEXTSets[] = {
     {"DIFFERENT_SLICE_QP_DELTA", 0x00100000, false},
 };
 
-EnumValueSet const VkVideoEncodeH265RateControlFlagsEXTSets[] = {
+EnumValueSet const VkVideoEncodeH265RateControlFlagsKHRSets[] = {
     {"ATTEMPT_HRD_COMPLIANCE", 0x00000001, false},
     {"REGULAR_GOP", 0x00000002, false},
     {"REFERENCE_PATTERN_FLAT", 0x00000004, false},
@@ -1728,14 +1674,13 @@ EnumValueSet const VkVideoEncodeH265RateControlFlagsEXTSets[] = {
     {"TEMPORAL_SUB_LAYER_PATTERN_DYADIC", 0x00000010, false},
 };
 
-EnumValueSet const VkVideoEncodeH265CtbSizeFlagsEXTSets[] = {
+EnumValueSet const VkVideoEncodeH265CtbSizeFlagsKHRSets[] = {
     {"16", 0x00000001, false},
     {"32", 0x00000002, false},
     {"64", 0x00000004, false},
-    {"8", 0x00000001, false},
 };
 
-EnumValueSet const VkVideoEncodeH265TransformBlockSizeFlagsEXTSets[] = {
+EnumValueSet const VkVideoEncodeH265TransformBlockSizeFlagsKHRSets[] = {
     {"4", 0x00000001, false},
     {"8", 0x00000002, false},
     {"16", 0x00000004, false},
@@ -3280,6 +3225,167 @@ EnumValueSet const VkAccelerationStructureMotionInstanceTypeNVSets[] = {
     {"SRT_MOTION", 2, false},
 };
 
+EnumValueSet const VkVideoEncodeH264CapabilityFlagsEXTSets[] = {
+    {"CHROMA_QP_OFFSET", 0x00000040, false},
+    {"SECOND_CHROMA_QP_OFFSET", 0x00000080, false},
+    {"TRANSFORM_8X8", 0x00002000, false},
+    {"CABAC", 0x00004000, false},
+    {"CAVLC", 0x00008000, false},
+    {"DEBLOCKING_FILTER_DISABLED", 0x00010000, false},
+    {"DEBLOCKING_FILTER_ENABLED", 0x00020000, false},
+    {"DEBLOCKING_FILTER_PARTIAL", 0x00040000, false},
+    {"MULTIPLE_SLICE_PER_FRAME", 0x00100000, false},
+    {"WEIGHTED_BI_PRED_IMPLICIT", 0x00000004, false},
+    {"EVENLY_DISTRIBUTED_SLICE_SIZE", 0x00000400, false},
+    {"OPTIONAL_RC_EXTENSION_STRUCT", 0x00000800, false},
+    {"HRD_COMPLIANCE", 0x00000001, false},
+    {"ROW_UNALIGNED_SLICE", 0x00000004, false},
+    {"DIFFERENT_SLICE_TYPE", 0x00000008, false},
+    {"SEPARATE_COLOUR_PLANE", 0x00000004, false},
+    {"QPPRIME_Y_ZERO_TRANSFORM_BYPASS", 0x00000008, false},
+    {"SCALING_LISTS", 0x00000010, false},
+    {"PIC_INIT_QP_MINUS26", 0x00000100, false},
+    {"WEIGHTED_PRED", 0x00000200, false},
+    {"WEIGHTED_BIPRED_EXPLICIT", 0x00000400, false},
+    {"WEIGHTED_BIPRED_IMPLICIT", 0x00000800, false},
+    {"WEIGHTED_PRED_NO_TABLE", 0x00001000, false},
+    {"DISABLE_DIRECT_SPATIAL_MV_PRED", 0x00080000, false},
+    {"SLICE_MB_COUNT", 0x00200000, false},
+    {"DIRECT_8X8_INFERENCE", 0x00000001, false},
+    {"B_FRAME_IN_L1_LIST", 0x00000020, false},
+    {"DIRECT_8X8_INFERENCE_ENABLED", 0x00000001, false},
+    {"DIRECT_8X8_INFERENCE_DISABLED", 0x00000002, false},
+    {"DIFFERENT_REFERENCE_FINAL_LISTS", 0x02000000, false},
+    {"PREDICTION_WEIGHT_TABLE_GENERATED", 0x00000002, false},
+    {"B_FRAME_IN_L0_LIST", 0x00000010, false},
+    {"PER_PICTURE_TYPE_MIN_MAX_QP", 0x00000040, false},
+    {"PER_SLICE_CONSTANT_QP", 0x00000080, false},
+    {"GENERATE_PREFIX_NALU", 0x00000100, false},
+};
+
+EnumValueSet const VkVideoEncodeH264StdFlagsEXTSets[] = {
+    {"SEPARATE_COLOR_PLANE_FLAG_SET", 0x00000001, false},
+    {"QPPRIME_Y_ZERO_TRANSFORM_BYPASS_FLAG_SET", 0x00000002, false},
+    {"SCALING_MATRIX_PRESENT_FLAG_SET", 0x00000004, false},
+    {"CHROMA_QP_INDEX_OFFSET", 0x00000008, false},
+    {"SECOND_CHROMA_QP_INDEX_OFFSET", 0x00000010, false},
+    {"PIC_INIT_QP_MINUS26", 0x00000020, false},
+    {"WEIGHTED_PRED_FLAG_SET", 0x00000040, false},
+    {"WEIGHTED_BIPRED_IDC_EXPLICIT", 0x00000080, false},
+    {"WEIGHTED_BIPRED_IDC_IMPLICIT", 0x00000100, false},
+    {"TRANSFORM_8X8_MODE_FLAG_SET", 0x00000200, false},
+    {"DIRECT_SPATIAL_MV_PRED_FLAG_UNSET", 0x00000400, false},
+    {"ENTROPY_CODING_MODE_FLAG_UNSET", 0x00000800, false},
+    {"ENTROPY_CODING_MODE_FLAG_SET", 0x00001000, false},
+    {"DIRECT_8X8_INFERENCE_FLAG_UNSET", 0x00002000, false},
+    {"CONSTRAINED_INTRA_PRED_FLAG_SET", 0x00004000, false},
+    {"DEBLOCKING_FILTER_DISABLED", 0x00008000, false},
+    {"DEBLOCKING_FILTER_ENABLED", 0x00010000, false},
+    {"DEBLOCKING_FILTER_PARTIAL", 0x00020000, false},
+    {"SLICE_QP_DELTA", 0x00080000, false},
+    {"DIFFERENT_SLICE_QP_DELTA", 0x00100000, false},
+};
+
+EnumValueSet const VkVideoEncodeH264RateControlFlagsEXTSets[] = {
+    {"ATTEMPT_HRD_COMPLIANCE", 0x00000001, false},
+    {"REGULAR_GOP", 0x00000002, false},
+    {"REFERENCE_PATTERN_FLAT", 0x00000004, false},
+    {"REFERENCE_PATTERN_DYADIC", 0x00000008, false},
+    {"TEMPORAL_LAYER_PATTERN_DYADIC", 0x00000010, false},
+};
+
+EnumValueSet const VkVideoEncodeH265CapabilityFlagsEXTSets[] = {
+    {"WEIGHTED_BI_PRED_IMPLICIT", 0x00000001, false},
+    {"TRANSFORM_8X8", 0x00000002, false},
+    {"CHROMA_QP_OFFSET", 0x00000004, false},
+    {"SECOND_CHROMA_QP_OFFSET", 0x00000008, false},
+    {"DEBLOCKING_FILTER_DISABLED", 0x00000010, false},
+    {"DEBLOCKING_FILTER_ENABLED", 0x00000020, false},
+    {"DEBLOCKING_FILTER_PARTIAL", 0x00000040, false},
+    {"MULTIPLE_SLICE_PER_FRAME", 0x00000080, false},
+    {"EVENLY_DISTRIBUTED_SLICE_SIZE", 0x00000100, false},
+    {"HRD_COMPLIANCE", 0x00000001, false},
+    {"ROW_UNALIGNED_SLICE_SEGMENT", 0x00000004, false},
+    {"SEPARATE_COLOUR_PLANE", 0x00000001, false},
+    {"SCALING_LISTS", 0x00000002, false},
+    {"SAMPLE_ADAPTIVE_OFFSET_ENABLED", 0x00000004, false},
+    {"PCM_ENABLE", 0x00000008, false},
+    {"SPS_TEMPORAL_MVP_ENABLED", 0x00000010, false},
+    {"INIT_QP_MINUS26", 0x00000040, false},
+    {"LOG2_PARALLEL_MERGE_LEVEL_MINUS2", 0x00000080, false},
+    {"SIGN_DATA_HIDING_ENABLED", 0x00000100, false},
+    {"TRANSFORM_SKIP_ENABLED", 0x00000200, false},
+    {"PPS_SLICE_CHROMA_QP_OFFSETS_PRESENT", 0x00000800, false},
+    {"WEIGHTED_PRED", 0x00001000, false},
+    {"WEIGHTED_BIPRED", 0x00002000, false},
+    {"WEIGHTED_PRED_NO_TABLE", 0x00004000, false},
+    {"TRANSQUANT_BYPASS_ENABLED", 0x00008000, false},
+    {"ENTROPY_CODING_SYNC_ENABLED", 0x00010000, false},
+    {"DEBLOCKING_FILTER_OVERRIDE_ENABLED", 0x00020000, false},
+    {"MULTIPLE_TILE_PER_FRAME", 0x00040000, false},
+    {"MULTIPLE_SLICE_PER_TILE", 0x00080000, false},
+    {"MULTIPLE_TILE_PER_SLICE", 0x00100000, false},
+    {"SLICE_SEGMENT_CTB_COUNT", 0x00200000, false},
+    {"DEPENDENT_SLICE_SEGMENT", 0x00800000, false},
+    {"DIFFERENT_SLICE_TYPE", 0x01000000, false},
+    {"B_FRAME_IN_L1_LIST", 0x00000020, false},
+    {"TRANSFORM_SKIP_DISABLED", 0x00000400, false},
+    {"DIFFERENT_REFERENCE_FINAL_LISTS", 0x04000000, false},
+    {"PREDICTION_WEIGHT_TABLE_GENERATED", 0x00000002, false},
+    {"DIFFERENT_SLICE_SEGMENT_TYPE", 0x00000008, false},
+    {"B_FRAME_IN_L0_LIST", 0x00000010, false},
+    {"PER_PICTURE_TYPE_MIN_MAX_QP", 0x00000040, false},
+    {"PER_SLICE_SEGMENT_CONSTANT_QP", 0x00000080, false},
+    {"MULTIPLE_TILES_PER_SLICE_SEGMENT", 0x00000100, false},
+    {"MULTIPLE_SLICE_SEGMENTS_PER_TILE", 0x00000200, false},
+};
+
+EnumValueSet const VkVideoEncodeH265StdFlagsEXTSets[] = {
+    {"SEPARATE_COLOR_PLANE_FLAG_SET", 0x00000001, false},
+    {"SAMPLE_ADAPTIVE_OFFSET_ENABLED_FLAG_SET", 0x00000002, false},
+    {"SCALING_LIST_DATA_PRESENT_FLAG_SET", 0x00000004, false},
+    {"PCM_ENABLED_FLAG_SET", 0x00000008, false},
+    {"SPS_TEMPORAL_MVP_ENABLED_FLAG_SET", 0x00000010, false},
+    {"INIT_QP_MINUS26", 0x00000020, false},
+    {"WEIGHTED_PRED_FLAG_SET", 0x00000040, false},
+    {"WEIGHTED_BIPRED_FLAG_SET", 0x00000080, false},
+    {"LOG2_PARALLEL_MERGE_LEVEL_MINUS2", 0x00000100, false},
+    {"SIGN_DATA_HIDING_ENABLED_FLAG_SET", 0x00000200, false},
+    {"TRANSFORM_SKIP_ENABLED_FLAG_SET", 0x00000400, false},
+    {"TRANSFORM_SKIP_ENABLED_FLAG_UNSET", 0x00000800, false},
+    {"PPS_SLICE_CHROMA_QP_OFFSETS_PRESENT_FLAG_SET", 0x00001000, false},
+    {"TRANSQUANT_BYPASS_ENABLED_FLAG_SET", 0x00002000, false},
+    {"CONSTRAINED_INTRA_PRED_FLAG_SET", 0x00004000, false},
+    {"ENTROPY_CODING_SYNC_ENABLED_FLAG_SET", 0x00008000, false},
+    {"DEBLOCKING_FILTER_OVERRIDE_ENABLED_FLAG_SET", 0x00010000, false},
+    {"DEPENDENT_SLICE_SEGMENTS_ENABLED_FLAG_SET", 0x00020000, false},
+    {"DEPENDENT_SLICE_SEGMENT_FLAG_SET", 0x00040000, false},
+    {"SLICE_QP_DELTA", 0x00080000, false},
+    {"DIFFERENT_SLICE_QP_DELTA", 0x00100000, false},
+};
+
+EnumValueSet const VkVideoEncodeH265RateControlFlagsEXTSets[] = {
+    {"ATTEMPT_HRD_COMPLIANCE", 0x00000001, false},
+    {"REGULAR_GOP", 0x00000002, false},
+    {"REFERENCE_PATTERN_FLAT", 0x00000004, false},
+    {"REFERENCE_PATTERN_DYADIC", 0x00000008, false},
+    {"TEMPORAL_SUB_LAYER_PATTERN_DYADIC", 0x00000010, false},
+};
+
+EnumValueSet const VkVideoEncodeH265CtbSizeFlagsEXTSets[] = {
+    {"16", 0x00000001, false},
+    {"32", 0x00000002, false},
+    {"64", 0x00000004, false},
+    {"8", 0x00000001, false},
+};
+
+EnumValueSet const VkVideoEncodeH265TransformBlockSizeFlagsEXTSets[] = {
+    {"4", 0x00000001, false},
+    {"8", 0x00000002, false},
+    {"16", 0x00000004, false},
+    {"32", 0x00000008, false},
+};
+
 EnumValueSet const VkVideoEncodeH264RateControlStructureEXTSets[] = {
     {"UNKNOWN", 0, false},
     {"FLAT", 1, false},
@@ -3441,7 +3547,7 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[348] = {
+EnumType const cEnumTypes[356] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", NULL, 0},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 1},
@@ -3458,7 +3564,7 @@ EnumType const cEnumTypes[348] = {
     {"VkPipelineInputAssemblyStateCreateFlags", NULL, 0},
     {"VkPipelineVertexInputStateCreateFlags", NULL, 0},
     {"VkPipelineShaderStageCreateFlags", VkPipelineShaderStageCreateFlagsSets, 4},
-    {"VkDescriptorSetLayoutCreateFlags", VkDescriptorSetLayoutCreateFlagsSets, 8},
+    {"VkDescriptorSetLayoutCreateFlags", VkDescriptorSetLayoutCreateFlagsSets, 9},
     {"VkBufferViewCreateFlags", NULL, 0},
     {"VkInstanceCreateFlags", VkInstanceCreateFlagsSets, 1},
     {"VkDeviceCreateFlags", NULL, 0},
@@ -3468,10 +3574,10 @@ EnumType const cEnumTypes[348] = {
     {"VkMemoryHeapFlags", VkMemoryHeapFlagsSets, 3},
     {"VkAccessFlags", VkAccessFlagsSets, 37},
     {"VkBufferUsageFlags", VkBufferUsageFlagsSets, 31},
-    {"VkBufferCreateFlags", VkBufferCreateFlagsSets, 8},
+    {"VkBufferCreateFlags", VkBufferCreateFlagsSets, 9},
     {"VkShaderStageFlags", VkShaderStageFlagsSets, 32},
     {"VkImageUsageFlags", VkImageUsageFlagsSets, 22},
-    {"VkImageCreateFlags", VkImageCreateFlagsSets, 25},
+    {"VkImageCreateFlags", VkImageCreateFlagsSets, 26},
     {"VkImageViewCreateFlags", VkImageViewCreateFlagsSets, 3},
     {"VkPipelineCreateFlags", VkPipelineCreateFlagsSets, 39},
     {"VkColorComponentFlags", VkColorComponentFlagsSets, 4},
@@ -3604,9 +3710,9 @@ EnumType const cEnumTypes[348] = {
     {"VkShaderCreateFlagsEXT", VkShaderCreateFlagsEXTSets, 7},
     {"VkPhysicalDeviceSchedulingControlsFlagsARM", VkPhysicalDeviceSchedulingControlsFlagsARMSets,
      1},
-    {"VkVideoCodecOperationFlagsKHR", VkVideoCodecOperationFlagsKHRSets, 8},
+    {"VkVideoCodecOperationFlagsKHR", VkVideoCodecOperationFlagsKHRSets, 10},
     {"VkVideoCapabilityFlagsKHR", VkVideoCapabilityFlagsKHRSets, 2},
-    {"VkVideoSessionCreateFlagsKHR", VkVideoSessionCreateFlagsKHRSets, 3},
+    {"VkVideoSessionCreateFlagsKHR", VkVideoSessionCreateFlagsKHRSets, 4},
     {"VkVideoSessionParametersCreateFlagsKHR", NULL, 0},
     {"VkVideoBeginCodingFlagsKHR", NULL, 0},
     {"VkVideoEndCodingFlagsKHR", NULL, 0},
@@ -3624,14 +3730,14 @@ EnumType const cEnumTypes[348] = {
     {"VkVideoEncodeRateControlModeFlagsKHR", VkVideoEncodeRateControlModeFlagsKHRSets, 5},
     {"VkVideoChromaSubsamplingFlagsKHR", VkVideoChromaSubsamplingFlagsKHRSets, 6},
     {"VkVideoComponentBitDepthFlagsKHR", VkVideoComponentBitDepthFlagsKHRSets, 4},
-    {"VkVideoEncodeH264CapabilityFlagsEXT", VkVideoEncodeH264CapabilityFlagsEXTSets, 35},
-    {"VkVideoEncodeH264StdFlagsEXT", VkVideoEncodeH264StdFlagsEXTSets, 20},
-    {"VkVideoEncodeH264RateControlFlagsEXT", VkVideoEncodeH264RateControlFlagsEXTSets, 5},
-    {"VkVideoEncodeH265CapabilityFlagsEXT", VkVideoEncodeH265CapabilityFlagsEXTSets, 43},
-    {"VkVideoEncodeH265StdFlagsEXT", VkVideoEncodeH265StdFlagsEXTSets, 21},
-    {"VkVideoEncodeH265RateControlFlagsEXT", VkVideoEncodeH265RateControlFlagsEXTSets, 5},
-    {"VkVideoEncodeH265CtbSizeFlagsEXT", VkVideoEncodeH265CtbSizeFlagsEXTSets, 4},
-    {"VkVideoEncodeH265TransformBlockSizeFlagsEXT", VkVideoEncodeH265TransformBlockSizeFlagsEXTSets,
+    {"VkVideoEncodeH264CapabilityFlagsKHR", VkVideoEncodeH264CapabilityFlagsKHRSets, 9},
+    {"VkVideoEncodeH264StdFlagsKHR", VkVideoEncodeH264StdFlagsKHRSets, 20},
+    {"VkVideoEncodeH264RateControlFlagsKHR", VkVideoEncodeH264RateControlFlagsKHRSets, 5},
+    {"VkVideoEncodeH265CapabilityFlagsKHR", VkVideoEncodeH265CapabilityFlagsKHRSets, 10},
+    {"VkVideoEncodeH265StdFlagsKHR", VkVideoEncodeH265StdFlagsKHRSets, 21},
+    {"VkVideoEncodeH265RateControlFlagsKHR", VkVideoEncodeH265RateControlFlagsKHRSets, 5},
+    {"VkVideoEncodeH265CtbSizeFlagsKHR", VkVideoEncodeH265CtbSizeFlagsKHRSets, 3},
+    {"VkVideoEncodeH265TransformBlockSizeFlagsKHR", VkVideoEncodeH265TransformBlockSizeFlagsKHRSets,
      4},
     {"VkAttachmentLoadOp", VkAttachmentLoadOpSets, 4},
     {"VkAttachmentStoreOp", VkAttachmentStoreOpSets, 6},
@@ -3765,6 +3871,15 @@ EnumType const cEnumTypes[348] = {
     {"VkVideoEncodeTuningModeKHR", VkVideoEncodeTuningModeKHRSets, 5},
     {"VkAccelerationStructureMotionInstanceTypeNV", VkAccelerationStructureMotionInstanceTypeNVSets,
      3},
+    {"VkVideoEncodeH264CapabilityFlagsEXT", VkVideoEncodeH264CapabilityFlagsEXTSets, 35},
+    {"VkVideoEncodeH264StdFlagsEXT", VkVideoEncodeH264StdFlagsEXTSets, 20},
+    {"VkVideoEncodeH264RateControlFlagsEXT", VkVideoEncodeH264RateControlFlagsEXTSets, 5},
+    {"VkVideoEncodeH265CapabilityFlagsEXT", VkVideoEncodeH265CapabilityFlagsEXTSets, 43},
+    {"VkVideoEncodeH265StdFlagsEXT", VkVideoEncodeH265StdFlagsEXTSets, 21},
+    {"VkVideoEncodeH265RateControlFlagsEXT", VkVideoEncodeH265RateControlFlagsEXTSets, 5},
+    {"VkVideoEncodeH265CtbSizeFlagsEXT", VkVideoEncodeH265CtbSizeFlagsEXTSets, 4},
+    {"VkVideoEncodeH265TransformBlockSizeFlagsEXT", VkVideoEncodeH265TransformBlockSizeFlagsEXTSets,
+     4},
     {"VkVideoEncodeH264RateControlStructureEXT", VkVideoEncodeH264RateControlStructureEXTSets, 3},
     {"VkVideoEncodeH265RateControlStructureEXT", VkVideoEncodeH265RateControlStructureEXTSets, 3},
     {"VkVideoEncodeH264InputModeFlagsEXT", VkVideoEncodeH264InputModeFlagsEXTSets, 3},
