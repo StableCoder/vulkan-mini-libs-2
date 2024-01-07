@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2021-2023 George Cave - gcave@stablecoder.ca
+    Copyright (C) 2021-2024 George Cave - gcave@stablecoder.ca
 
     SPDX-License-Identifier: Apache-2.0
 
@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "vulkan header version is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 274,
-              "vulkan header version is from after the maximum supported version of v274.");
+static_assert(VK_HEADER_VERSION <= 275,
+              "vulkan header version is from after the maximum supported version of v275.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "vulkan header version is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 274,
-               "vulkan header version is from after the maximum supported version of v274.");
+_Static_assert(VK_HEADER_VERSION <= 275,
+               "vulkan header version is from after the maximum supported version of v275.");
 #endif
 
 /// Returns a string representing the given VkResult parameter. If there is no known representation,
