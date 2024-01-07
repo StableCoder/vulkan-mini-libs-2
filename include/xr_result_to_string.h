@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2021-2023 George Cave - gcave@stablecoder.ca
+    Copyright (C) 2021-2024 George Cave - gcave@stablecoder.ca
 
     SPDX-License-Identifier: Apache-2.0
 
@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) >= 0,
               "openxr header version is from before the minimum supported version of v0.");
-static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 32,
-              "openxr header version is from after the maximum supported version of v32.");
+static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 33,
+              "openxr header version is from after the maximum supported version of v33.");
 #else
 _Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) >= 0,
                "openxr header version is from before the minimum supported version of v0.");
-_Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 32,
-               "openxr header version is from after the maximum supported version of v32.");
+_Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 33,
+               "openxr header version is from after the maximum supported version of v33.");
 #endif
 
 /// Returns a string representing the given VkResult parameter. If there is no known representation,
