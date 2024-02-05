@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 275,
-              "VK_HEADER_VERSION is from after the maximum supported version of v275.");
+static_assert(VK_HEADER_VERSION <= 276,
+              "VK_HEADER_VERSION is from after the maximum supported version of v276.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 275,
-               "VK_HEADER_VERSION is from after the maximum supported version of v275.");
+_Static_assert(VK_HEADER_VERSION <= 276,
+               "VK_HEADER_VERSION is from after the maximum supported version of v276.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -1691,7 +1691,8 @@ EnumValueSet const VkAttachmentLoadOpSets[] = {
     {"LOAD", 0, false},
     {"CLEAR", 1, false},
     {"DONT_CARE", 2, false},
-    {"NONE_EXT", 1000400000, false},
+    {"NONE_EXT", 1000400000, true},
+    {"NONE_KHR", 1000400000, false},
 };
 
 EnumValueSet const VkAttachmentStoreOpSets[] = {
@@ -1850,7 +1851,7 @@ EnumValueSet const VkDynamicStateSets[] = {
     {"VIEWPORT_SHADING_RATE_PALETTE_NV", 1000164004, false},
     {"VIEWPORT_COARSE_SAMPLE_ORDER_NV", 1000164006, false},
     {"EXCLUSIVE_SCISSOR_NV", 1000205001, false},
-    {"LINE_STIPPLE_EXT", 1000259000, false},
+    {"LINE_STIPPLE_EXT", 1000259000, true},
     {"CULL_MODE_EXT", 1000267000, true},
     {"FRONT_FACE_EXT", 1000267001, true},
     {"PRIMITIVE_TOPOLOGY_EXT", 1000267002, true},
@@ -1887,7 +1888,6 @@ EnumValueSet const VkDynamicStateSets[] = {
     {"RASTERIZER_DISCARD_ENABLE", 1000377001, false},
     {"DEPTH_BIAS_ENABLE", 1000377002, false},
     {"PRIMITIVE_RESTART_ENABLE", 1000377004, false},
-    {"TESSELLATION_DOMAIN_ORIGIN_EXT", 1000455002, false},
     {"DEPTH_CLAMP_ENABLE_EXT", 1000455003, false},
     {"POLYGON_MODE_EXT", 1000455004, false},
     {"RASTERIZATION_SAMPLES_EXT", 1000455005, false},
@@ -1898,6 +1898,7 @@ EnumValueSet const VkDynamicStateSets[] = {
     {"COLOR_BLEND_ENABLE_EXT", 1000455010, false},
     {"COLOR_BLEND_EQUATION_EXT", 1000455011, false},
     {"COLOR_WRITE_MASK_EXT", 1000455012, false},
+    {"TESSELLATION_DOMAIN_ORIGIN_EXT", 1000455002, false},
     {"RASTERIZATION_STREAM_EXT", 1000455013, false},
     {"CONSERVATIVE_RASTERIZATION_MODE_EXT", 1000455014, false},
     {"EXTRA_PRIMITIVE_OVERESTIMATION_SIZE_EXT", 1000455015, false},
@@ -1922,6 +1923,7 @@ EnumValueSet const VkDynamicStateSets[] = {
     {"DISCARD_RECTANGLE_MODE_EXT", 1000099002, false},
     {"EXCLUSIVE_SCISSOR_ENABLE_NV", 1000205000, false},
     {"ATTACHMENT_FEEDBACK_LOOP_ENABLE_EXT", 1000524000, false},
+    {"LINE_STIPPLE_KHR", 1000259000, false},
 };
 
 EnumValueSet const VkPolygonModeSets[] = {
@@ -2281,6 +2283,7 @@ EnumValueSet const VkImageLayoutSets[] = {
     {"READ_ONLY_OPTIMAL", 1000314000, false},
     {"ATTACHMENT_OPTIMAL", 1000314001, false},
     {"ATTACHMENT_FEEDBACK_LOOP_OPTIMAL_EXT", 1000339000, false},
+    {"RENDERING_LOCAL_READ_KHR", 1000232000, false},
 };
 
 EnumValueSet const VkImageTilingSets[] = {
@@ -2309,8 +2312,9 @@ EnumValueSet const VkIndexTypeSets[] = {
     {"UINT16", 0, false},
     {"UINT32", 1, false},
     {"NONE_NV", 1000165000, true},
-    {"UINT8_EXT", 1000265000, false},
+    {"UINT8_EXT", 1000265000, true},
     {"NONE_KHR", 1000165000, false},
+    {"UINT8_KHR", 1000265000, false},
 };
 
 EnumValueSet const VkLogicOpSets[] = {
@@ -2701,11 +2705,15 @@ EnumValueSet const VkPerformanceValueTypeINTELSets[] = {
     {"BOOL", 3, false},   {"STRING", 4, false},
 };
 
-EnumValueSet const VkLineRasterizationModeEXTSets[] = {
+EnumValueSet const VkLineRasterizationModeKHRSets[] = {
     {"DEFAULT", 0, false},
+    {"DEFAULT_EXT", 0, true},
     {"RECTANGULAR", 1, false},
+    {"RECTANGULAR_EXT", 1, true},
     {"BRESENHAM", 2, false},
+    {"BRESENHAM_EXT", 2, true},
     {"RECTANGULAR_SMOOTH", 3, false},
+    {"RECTANGULAR_SMOOTH_EXT", 3, true},
 };
 
 EnumValueSet const VkFaultLevelSets[] = {
@@ -3739,7 +3747,7 @@ EnumType const cEnumTypes[356] = {
     {"VkVideoEncodeH265CtbSizeFlagsKHR", VkVideoEncodeH265CtbSizeFlagsKHRSets, 3},
     {"VkVideoEncodeH265TransformBlockSizeFlagsKHR", VkVideoEncodeH265TransformBlockSizeFlagsKHRSets,
      4},
-    {"VkAttachmentLoadOp", VkAttachmentLoadOpSets, 4},
+    {"VkAttachmentLoadOp", VkAttachmentLoadOpSets, 5},
     {"VkAttachmentStoreOp", VkAttachmentStoreOpSets, 6},
     {"VkBlendFactor", VkBlendFactorSets, 19},
     {"VkBlendOp", VkBlendOpSets, 51},
@@ -3749,16 +3757,16 @@ EnumType const cEnumTypes[356] = {
     {"VkCommandBufferLevel", VkCommandBufferLevelSets, 2},
     {"VkCompareOp", VkCompareOpSets, 8},
     {"VkDescriptorType", VkDescriptorTypeSets, 20},
-    {"VkDynamicState", VkDynamicStateSets, 87},
+    {"VkDynamicState", VkDynamicStateSets, 88},
     {"VkPolygonMode", VkPolygonModeSets, 4},
     {"VkFormat", VkFormatSets, 304},
     {"VkFrontFace", VkFrontFaceSets, 2},
-    {"VkImageLayout", VkImageLayoutSets, 37},
+    {"VkImageLayout", VkImageLayoutSets, 38},
     {"VkImageTiling", VkImageTilingSets, 3},
     {"VkImageType", VkImageTypeSets, 3},
     {"VkImageViewType", VkImageViewTypeSets, 7},
     {"VkSharingMode", VkSharingModeSets, 2},
-    {"VkIndexType", VkIndexTypeSets, 5},
+    {"VkIndexType", VkIndexTypeSets, 6},
     {"VkLogicOp", VkLogicOpSets, 16},
     {"VkPhysicalDeviceType", VkPhysicalDeviceTypeSets, 5},
     {"VkPipelineBindPoint", VkPipelineBindPointSets, 7},
@@ -3806,7 +3814,7 @@ EnumType const cEnumTypes[356] = {
     {"VkPerformanceOverrideTypeINTEL", VkPerformanceOverrideTypeINTELSets, 2},
     {"VkPerformanceParameterTypeINTEL", VkPerformanceParameterTypeINTELSets, 2},
     {"VkPerformanceValueTypeINTEL", VkPerformanceValueTypeINTELSets, 5},
-    {"VkLineRasterizationModeEXT", VkLineRasterizationModeEXTSets, 4},
+    {"VkLineRasterizationModeKHR", VkLineRasterizationModeKHRSets, 8},
     {"VkFaultLevel", VkFaultLevelSets, 4},
     {"VkFaultType", VkFaultTypeSets, 7},
     {"VkFaultQueryBehavior", VkFaultQueryBehaviorSets, 1},
