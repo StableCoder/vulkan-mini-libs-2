@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 276,
-              "VK_HEADER_VERSION is from after the maximum supported version of v276.");
+static_assert(VK_HEADER_VERSION <= 277,
+              "VK_HEADER_VERSION is from after the maximum supported version of v277.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 276,
-               "VK_HEADER_VERSION is from after the maximum supported version of v276.");
+_Static_assert(VK_HEADER_VERSION <= 277,
+               "VK_HEADER_VERSION is from after the maximum supported version of v277.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -4668,6 +4668,32 @@ bool compare_VkVideoDecodeH265PictureInfoKHR(VkVideoDecodeH265PictureInfoKHR con
 #if VK_HEADER_VERSION >= 238 && (VK_KHR_video_decode_h265)
 bool compare_VkVideoDecodeH265DpbSlotInfoKHR(VkVideoDecodeH265DpbSlotInfoKHR const *s1,
                                              VkVideoDecodeH265DpbSlotInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 277 && (VK_KHR_video_decode_av1)
+bool compare_VkVideoDecodeAV1ProfileInfoKHR(VkVideoDecodeAV1ProfileInfoKHR const *s1,
+                                            VkVideoDecodeAV1ProfileInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 277 && (VK_KHR_video_decode_av1)
+bool compare_VkVideoDecodeAV1CapabilitiesKHR(VkVideoDecodeAV1CapabilitiesKHR const *s1,
+                                             VkVideoDecodeAV1CapabilitiesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 277 && (VK_KHR_video_decode_av1)
+bool compare_VkVideoDecodeAV1SessionParametersCreateInfoKHR(
+    VkVideoDecodeAV1SessionParametersCreateInfoKHR const *s1,
+    VkVideoDecodeAV1SessionParametersCreateInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 277 && (VK_KHR_video_decode_av1)
+bool compare_VkVideoDecodeAV1PictureInfoKHR(VkVideoDecodeAV1PictureInfoKHR const *s1,
+                                            VkVideoDecodeAV1PictureInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 277 && (VK_KHR_video_decode_av1)
+bool compare_VkVideoDecodeAV1DpbSlotInfoKHR(VkVideoDecodeAV1DpbSlotInfoKHR const *s1,
+                                            VkVideoDecodeAV1DpbSlotInfoKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 229 && (VK_KHR_video_queue)
@@ -18874,6 +18900,56 @@ bool compare_VkVideoDecodeH265PictureInfoKHR(VkVideoDecodeH265PictureInfoKHR con
 #if VK_HEADER_VERSION >= 238 && (VK_KHR_video_decode_h265)
 bool compare_VkVideoDecodeH265DpbSlotInfoKHR(VkVideoDecodeH265DpbSlotInfoKHR const *s1,
                                              VkVideoDecodeH265DpbSlotInfoKHR const *s2) {
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 277 && (VK_KHR_video_decode_av1)
+bool compare_VkVideoDecodeAV1ProfileInfoKHR(VkVideoDecodeAV1ProfileInfoKHR const *s1,
+                                            VkVideoDecodeAV1ProfileInfoKHR const *s2) {
+  if ((s1->stdProfile != s2->stdProfile) || (s1->filmGrainSupport != s2->filmGrainSupport) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 277 && (VK_KHR_video_decode_av1)
+bool compare_VkVideoDecodeAV1CapabilitiesKHR(VkVideoDecodeAV1CapabilitiesKHR const *s1,
+                                             VkVideoDecodeAV1CapabilitiesKHR const *s2) {
+  if ((s1->maxLevel != s2->maxLevel) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 277 && (VK_KHR_video_decode_av1)
+bool compare_VkVideoDecodeAV1SessionParametersCreateInfoKHR(
+    VkVideoDecodeAV1SessionParametersCreateInfoKHR const *s1,
+    VkVideoDecodeAV1SessionParametersCreateInfoKHR const *s2) {
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 277 && (VK_KHR_video_decode_av1)
+bool compare_VkVideoDecodeAV1PictureInfoKHR(VkVideoDecodeAV1PictureInfoKHR const *s1,
+                                            VkVideoDecodeAV1PictureInfoKHR const *s2) {
+  if ((s1->frameHeaderOffset != s2->frameHeaderOffset) || (s1->tileCount != s2->tileCount) || false)
+    return false;
+
+  for (uint32_t i = 0; i < VK_MAX_VIDEO_AV1_REFERENCES_PER_FRAME_KHR; ++i) {
+    if (s1->referenceNameSlotIndices[i] != s2->referenceNameSlotIndices[i])
+      return false;
+  }
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 277 && (VK_KHR_video_decode_av1)
+bool compare_VkVideoDecodeAV1DpbSlotInfoKHR(VkVideoDecodeAV1DpbSlotInfoKHR const *s1,
+                                            VkVideoDecodeAV1DpbSlotInfoKHR const *s2) {
   return true;
 }
 #endif

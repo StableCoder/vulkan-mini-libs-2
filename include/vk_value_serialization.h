@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 276,
-              "VK_HEADER_VERSION is from after the maximum supported version of v276.");
+static_assert(VK_HEADER_VERSION <= 277,
+              "VK_HEADER_VERSION is from after the maximum supported version of v277.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 276,
-               "VK_HEADER_VERSION is from after the maximum supported version of v276.");
+_Static_assert(VK_HEADER_VERSION <= 277,
+               "VK_HEADER_VERSION is from after the maximum supported version of v277.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -735,6 +735,8 @@ EnumValueSet const VkSubgroupFeatureFlagsSets[] = {
     {"CLUSTERED", 0x00000040, false},
     {"QUAD", 0x00000080, false},
     {"PARTITIONED_BIT_NV", 0x00000100, false},
+    {"ROTATE_BIT_KHR", 0x00000200, false},
+    {"ROTATE_CLUSTERED_BIT_KHR", 0x00000400, false},
 };
 
 EnumValueSet const VkIndirectCommandsLayoutUsageFlagsNVSets[] = {
@@ -1485,6 +1487,7 @@ EnumValueSet const VkVideoCodecOperationFlagsKHRSets[] = {
     {"ENCODE_H265_BIT_EXT", 0x00020000, false}, {"NONE", 0, false},
     {"DECODE_H264", 0x00000001, false},         {"DECODE_H265", 0x00000002, false},
     {"ENCODE_H264", 0x00010000, false},         {"ENCODE_H265", 0x00020000, false},
+    {"DECODE_AV1", 0x00000004, false},
 };
 
 EnumValueSet const VkVideoCapabilityFlagsKHRSets[] = {
@@ -3615,7 +3618,7 @@ EnumType const cEnumTypes[356] = {
     {"VkDescriptorPoolCreateFlags", VkDescriptorPoolCreateFlagsSets, 7},
     {"VkDescriptorPoolResetFlags", NULL, 0},
     {"VkDependencyFlags", VkDependencyFlagsSets, 6},
-    {"VkSubgroupFeatureFlags", VkSubgroupFeatureFlagsSets, 9},
+    {"VkSubgroupFeatureFlags", VkSubgroupFeatureFlagsSets, 11},
     {"VkIndirectCommandsLayoutUsageFlagsNV", VkIndirectCommandsLayoutUsageFlagsNVSets, 3},
     {"VkIndirectStateFlagsNV", VkIndirectStateFlagsNVSets, 1},
     {"VkGeometryFlagsKHR", VkGeometryFlagsKHRSets, 4},
@@ -3718,7 +3721,7 @@ EnumType const cEnumTypes[356] = {
     {"VkShaderCreateFlagsEXT", VkShaderCreateFlagsEXTSets, 7},
     {"VkPhysicalDeviceSchedulingControlsFlagsARM", VkPhysicalDeviceSchedulingControlsFlagsARMSets,
      1},
-    {"VkVideoCodecOperationFlagsKHR", VkVideoCodecOperationFlagsKHRSets, 10},
+    {"VkVideoCodecOperationFlagsKHR", VkVideoCodecOperationFlagsKHRSets, 11},
     {"VkVideoCapabilityFlagsKHR", VkVideoCapabilityFlagsKHRSets, 2},
     {"VkVideoSessionCreateFlagsKHR", VkVideoSessionCreateFlagsKHRSets, 4},
     {"VkVideoSessionParametersCreateFlagsKHR", NULL, 0},
