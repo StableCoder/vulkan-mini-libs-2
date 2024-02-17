@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 277,
-              "VK_HEADER_VERSION is from after the maximum supported version of v277.");
+static_assert(VK_HEADER_VERSION <= 278,
+              "VK_HEADER_VERSION is from after the maximum supported version of v278.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 277,
-               "VK_HEADER_VERSION is from after the maximum supported version of v277.");
+_Static_assert(VK_HEADER_VERSION <= 278,
+               "VK_HEADER_VERSION is from after the maximum supported version of v278.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -6934,6 +6934,25 @@ void cleanup_VkVideoDecodeAV1PictureInfoKHR(VkVideoDecodeAV1PictureInfoKHR const
 
 #if VK_HEADER_VERSION >= 277 && (VK_KHR_video_decode_av1)
 void cleanup_VkVideoDecodeAV1DpbSlotInfoKHR(VkVideoDecodeAV1DpbSlotInfoKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 278 && (VK_NV_shader_atomic_float16_vector)
+void cleanup_VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV(
+    VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 278 && (VK_EXT_map_memory_placed)
+void cleanup_VkPhysicalDeviceMapMemoryPlacedFeaturesEXT(
+    VkPhysicalDeviceMapMemoryPlacedFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 278 && (VK_EXT_map_memory_placed)
+void cleanup_VkPhysicalDeviceMapMemoryPlacedPropertiesEXT(
+    VkPhysicalDeviceMapMemoryPlacedPropertiesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 278 && (VK_EXT_map_memory_placed)
+void cleanup_VkMemoryMapPlacedInfoEXT(VkMemoryMapPlacedInfoEXT const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -16103,6 +16122,37 @@ void cleanup_vk_struct(void const *pData) {
 #if VK_HEADER_VERSION >= 277 && (VK_KHR_video_decode_av1)
   if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_DPB_SLOT_INFO_KHR) {
     cleanup_VkVideoDecodeAV1DpbSlotInfoKHR((VkVideoDecodeAV1DpbSlotInfoKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 278 && (VK_NV_shader_atomic_float16_vector)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_ATOMIC_FLOAT16_VECTOR_FEATURES_NV) {
+    cleanup_VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV(
+        (VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 278 && (VK_EXT_map_memory_placed)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAP_MEMORY_PLACED_FEATURES_EXT) {
+    cleanup_VkPhysicalDeviceMapMemoryPlacedFeaturesEXT(
+        (VkPhysicalDeviceMapMemoryPlacedFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 278 && (VK_EXT_map_memory_placed)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAP_MEMORY_PLACED_PROPERTIES_EXT) {
+    cleanup_VkPhysicalDeviceMapMemoryPlacedPropertiesEXT(
+        (VkPhysicalDeviceMapMemoryPlacedPropertiesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 278 && (VK_EXT_map_memory_placed)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_MAP_PLACED_INFO_EXT) {
+    cleanup_VkMemoryMapPlacedInfoEXT((VkMemoryMapPlacedInfoEXT const *)pData);
     return;
   }
 #endif
@@ -32273,6 +32323,48 @@ void cleanup_VkVideoDecodeAV1DpbSlotInfoKHR(VkVideoDecodeAV1DpbSlotInfoKHR const
 
   // pStdReferenceInfo
   free((void *)pData->pStdReferenceInfo);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 278 && (VK_NV_shader_atomic_float16_vector)
+void cleanup_VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV(
+    VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 278 && (VK_EXT_map_memory_placed)
+void cleanup_VkPhysicalDeviceMapMemoryPlacedFeaturesEXT(
+    VkPhysicalDeviceMapMemoryPlacedFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 278 && (VK_EXT_map_memory_placed)
+void cleanup_VkPhysicalDeviceMapMemoryPlacedPropertiesEXT(
+    VkPhysicalDeviceMapMemoryPlacedPropertiesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 278 && (VK_EXT_map_memory_placed)
+void cleanup_VkMemoryMapPlacedInfoEXT(VkMemoryMapPlacedInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pPlacedAddress
+  free((void *)pData->pPlacedAddress);
 }
 #endif
 

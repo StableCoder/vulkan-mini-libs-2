@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 277,
-              "VK_HEADER_VERSION is from after the maximum supported version of v277.");
+static_assert(VK_HEADER_VERSION <= 278,
+              "VK_HEADER_VERSION is from after the maximum supported version of v278.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 277,
-               "VK_HEADER_VERSION is from after the maximum supported version of v277.");
+_Static_assert(VK_HEADER_VERSION <= 278,
+               "VK_HEADER_VERSION is from after the maximum supported version of v278.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -602,6 +602,14 @@ EnumValueSet const VkQueryPipelineStatisticFlagsSets[] = {
     {"TASK_SHADER_INVOCATIONS_BIT_EXT", 0x00000800, false},
     {"MESH_SHADER_INVOCATIONS_BIT_EXT", 0x00001000, false},
     {"CLUSTER_CULLING_SHADER_INVOCATIONS_BIT_HUAWEI", 0x00002000, false},
+};
+
+EnumValueSet const VkMemoryMapFlagsSets[] = {
+    {"PLACED_BIT_EXT", 0x00000001, false},
+};
+
+EnumValueSet const VkMemoryUnmapFlagsKHRSets[] = {
+    {"RESERVE_BIT_EXT", 0x00000001, false},
 };
 
 EnumValueSet const VkImageAspectFlagsSets[] = {
@@ -3604,8 +3612,8 @@ EnumType const cEnumTypes[356] = {
     {"VkCommandBufferResetFlags", VkCommandBufferResetFlagsSets, 1},
     {"VkCommandBufferUsageFlags", VkCommandBufferUsageFlagsSets, 3},
     {"VkQueryPipelineStatisticFlags", VkQueryPipelineStatisticFlagsSets, 14},
-    {"VkMemoryMapFlags", NULL, 0},
-    {"VkMemoryUnmapFlagsKHR", NULL, 0},
+    {"VkMemoryMapFlags", VkMemoryMapFlagsSets, 1},
+    {"VkMemoryUnmapFlagsKHR", VkMemoryUnmapFlagsKHRSets, 1},
     {"VkImageAspectFlags", VkImageAspectFlagsSets, 16},
     {"VkSparseMemoryBindFlags", VkSparseMemoryBindFlagsSets, 1},
     {"VkSparseImageFormatFlags", VkSparseImageFormatFlagsSets, 3},

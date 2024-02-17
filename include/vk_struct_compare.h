@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 277,
-              "VK_HEADER_VERSION is from after the maximum supported version of v277.");
+static_assert(VK_HEADER_VERSION <= 278,
+              "VK_HEADER_VERSION is from after the maximum supported version of v278.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 277,
-               "VK_HEADER_VERSION is from after the maximum supported version of v277.");
+_Static_assert(VK_HEADER_VERSION <= 278,
+               "VK_HEADER_VERSION is from after the maximum supported version of v278.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -6358,6 +6358,29 @@ bool compare_VkRenderingInputAttachmentIndexInfoKHR(
 bool compare_VkPhysicalDeviceShaderQuadControlFeaturesKHR(
     VkPhysicalDeviceShaderQuadControlFeaturesKHR const *s1,
     VkPhysicalDeviceShaderQuadControlFeaturesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 278 && (VK_NV_shader_atomic_float16_vector)
+bool compare_VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV(
+    VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV const *s1,
+    VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 278 && (VK_EXT_map_memory_placed)
+bool compare_VkPhysicalDeviceMapMemoryPlacedFeaturesEXT(
+    VkPhysicalDeviceMapMemoryPlacedFeaturesEXT const *s1,
+    VkPhysicalDeviceMapMemoryPlacedFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 278 && (VK_EXT_map_memory_placed)
+bool compare_VkPhysicalDeviceMapMemoryPlacedPropertiesEXT(
+    VkPhysicalDeviceMapMemoryPlacedPropertiesEXT const *s1,
+    VkPhysicalDeviceMapMemoryPlacedPropertiesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 278 && (VK_EXT_map_memory_placed)
+bool compare_VkMemoryMapPlacedInfoEXT(VkMemoryMapPlacedInfoEXT const *s1,
+                                      VkMemoryMapPlacedInfoEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 117 && VK_HEADER_VERSION <= 275 && (VK_EXT_index_type_uint8)
@@ -22564,6 +22587,48 @@ bool compare_VkPhysicalDeviceShaderQuadControlFeaturesKHR(
   if ((s1->shaderQuadControl != s2->shaderQuadControl) || false)
     return false;
 
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 278 && (VK_NV_shader_atomic_float16_vector)
+bool compare_VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV(
+    VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV const *s1,
+    VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV const *s2) {
+  if ((s1->shaderFloat16VectorAtomics != s2->shaderFloat16VectorAtomics) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 278 && (VK_EXT_map_memory_placed)
+bool compare_VkPhysicalDeviceMapMemoryPlacedFeaturesEXT(
+    VkPhysicalDeviceMapMemoryPlacedFeaturesEXT const *s1,
+    VkPhysicalDeviceMapMemoryPlacedFeaturesEXT const *s2) {
+  if ((s1->memoryMapPlaced != s2->memoryMapPlaced) ||
+      (s1->memoryMapRangePlaced != s2->memoryMapRangePlaced) ||
+      (s1->memoryUnmapReserve != s2->memoryUnmapReserve) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 278 && (VK_EXT_map_memory_placed)
+bool compare_VkPhysicalDeviceMapMemoryPlacedPropertiesEXT(
+    VkPhysicalDeviceMapMemoryPlacedPropertiesEXT const *s1,
+    VkPhysicalDeviceMapMemoryPlacedPropertiesEXT const *s2) {
+  if ((s1->minPlacedMemoryMapAlignment != s2->minPlacedMemoryMapAlignment) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 278 && (VK_EXT_map_memory_placed)
+bool compare_VkMemoryMapPlacedInfoEXT(VkMemoryMapPlacedInfoEXT const *s1,
+                                      VkMemoryMapPlacedInfoEXT const *s2) {
   return true;
 }
 #endif
