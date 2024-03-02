@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 278,
-              "VK_HEADER_VERSION is from after the maximum supported version of v278.");
+static_assert(VK_HEADER_VERSION <= 279,
+              "VK_HEADER_VERSION is from after the maximum supported version of v279.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 278,
-               "VK_HEADER_VERSION is from after the maximum supported version of v278.");
+_Static_assert(VK_HEADER_VERSION <= 279,
+               "VK_HEADER_VERSION is from after the maximum supported version of v279.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -6381,6 +6381,12 @@ bool compare_VkPhysicalDeviceMapMemoryPlacedPropertiesEXT(
 #if VK_HEADER_VERSION >= 278 && (VK_EXT_map_memory_placed)
 bool compare_VkMemoryMapPlacedInfoEXT(VkMemoryMapPlacedInfoEXT const *s1,
                                       VkMemoryMapPlacedInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 279 && (VK_NV_raw_access_chains)
+bool compare_VkPhysicalDeviceRawAccessChainsFeaturesNV(
+    VkPhysicalDeviceRawAccessChainsFeaturesNV const *s1,
+    VkPhysicalDeviceRawAccessChainsFeaturesNV const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 117 && VK_HEADER_VERSION <= 275 && (VK_EXT_index_type_uint8)
@@ -22629,6 +22635,17 @@ bool compare_VkPhysicalDeviceMapMemoryPlacedPropertiesEXT(
 #if VK_HEADER_VERSION >= 278 && (VK_EXT_map_memory_placed)
 bool compare_VkMemoryMapPlacedInfoEXT(VkMemoryMapPlacedInfoEXT const *s1,
                                       VkMemoryMapPlacedInfoEXT const *s2) {
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 279 && (VK_NV_raw_access_chains)
+bool compare_VkPhysicalDeviceRawAccessChainsFeaturesNV(
+    VkPhysicalDeviceRawAccessChainsFeaturesNV const *s1,
+    VkPhysicalDeviceRawAccessChainsFeaturesNV const *s2) {
+  if ((s1->shaderRawAccessChains != s2->shaderRawAccessChains) || false)
+    return false;
+
   return true;
 }
 #endif

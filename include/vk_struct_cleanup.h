@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 278,
-              "VK_HEADER_VERSION is from after the maximum supported version of v278.");
+static_assert(VK_HEADER_VERSION <= 279,
+              "VK_HEADER_VERSION is from after the maximum supported version of v279.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 278,
-               "VK_HEADER_VERSION is from after the maximum supported version of v278.");
+_Static_assert(VK_HEADER_VERSION <= 279,
+               "VK_HEADER_VERSION is from after the maximum supported version of v279.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -6953,6 +6953,11 @@ void cleanup_VkPhysicalDeviceMapMemoryPlacedPropertiesEXT(
 
 #if VK_HEADER_VERSION >= 278 && (VK_EXT_map_memory_placed)
 void cleanup_VkMemoryMapPlacedInfoEXT(VkMemoryMapPlacedInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 279 && (VK_NV_raw_access_chains)
+void cleanup_VkPhysicalDeviceRawAccessChainsFeaturesNV(
+    VkPhysicalDeviceRawAccessChainsFeaturesNV const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -16153,6 +16158,14 @@ void cleanup_vk_struct(void const *pData) {
 #if VK_HEADER_VERSION >= 278 && (VK_EXT_map_memory_placed)
   if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_MAP_PLACED_INFO_EXT) {
     cleanup_VkMemoryMapPlacedInfoEXT((VkMemoryMapPlacedInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 279 && (VK_NV_raw_access_chains)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAW_ACCESS_CHAINS_FEATURES_NV) {
+    cleanup_VkPhysicalDeviceRawAccessChainsFeaturesNV(
+        (VkPhysicalDeviceRawAccessChainsFeaturesNV const *)pData);
     return;
   }
 #endif
@@ -32365,6 +32378,16 @@ void cleanup_VkMemoryMapPlacedInfoEXT(VkMemoryMapPlacedInfoEXT const *pData) {
 
   // pPlacedAddress
   free((void *)pData->pPlacedAddress);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 279 && (VK_NV_raw_access_chains)
+void cleanup_VkPhysicalDeviceRawAccessChainsFeaturesNV(
+    VkPhysicalDeviceRawAccessChainsFeaturesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
 }
 #endif
 
