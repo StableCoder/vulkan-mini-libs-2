@@ -269,7 +269,7 @@ def processStruct(structNode, structData, api, apiVersion):
 
         if len(structNode.findall('./member')) != 0:
             members = struct.find('members')
-            if members:
+            if members is not None:
                 members.set('first', apiVersion)
             else:
                 members = ET.SubElement(struct, 'members', {
@@ -278,7 +278,7 @@ def processStruct(structNode, structData, api, apiVersion):
             for member in structNode.findall('./member'):
                 nameNode = member.find('name')
                 node = members.find(nameNode.text)
-                if node:
+                if node is not None:
                     node.set('first', apiVersion)
                     continue
 
