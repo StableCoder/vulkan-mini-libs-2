@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 279,
-              "VK_HEADER_VERSION is from after the maximum supported version of v279.");
+static_assert(VK_HEADER_VERSION <= 280,
+              "VK_HEADER_VERSION is from after the maximum supported version of v280.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 279,
-               "VK_HEADER_VERSION is from after the maximum supported version of v279.");
+_Static_assert(VK_HEADER_VERSION <= 280,
+               "VK_HEADER_VERSION is from after the maximum supported version of v280.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -5123,6 +5123,12 @@ bool compare_VkPhysicalDeviceFragmentShaderBarycentricPropertiesKHR(
 bool compare_VkPhysicalDeviceRayTracingMotionBlurFeaturesNV(
     VkPhysicalDeviceRayTracingMotionBlurFeaturesNV const *s1,
     VkPhysicalDeviceRayTracingMotionBlurFeaturesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 280 && (VK_NV_ray_tracing_validation)
+bool compare_VkPhysicalDeviceRayTracingValidationFeaturesNV(
+    VkPhysicalDeviceRayTracingValidationFeaturesNV const *s1,
+    VkPhysicalDeviceRayTracingValidationFeaturesNV const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 182 && (VK_NV_ray_tracing_motion_blur)
@@ -20002,6 +20008,17 @@ bool compare_VkPhysicalDeviceRayTracingMotionBlurFeaturesNV(
       (s1->rayTracingMotionBlurPipelineTraceRaysIndirect !=
        s2->rayTracingMotionBlurPipelineTraceRaysIndirect) ||
       false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 280 && (VK_NV_ray_tracing_validation)
+bool compare_VkPhysicalDeviceRayTracingValidationFeaturesNV(
+    VkPhysicalDeviceRayTracingValidationFeaturesNV const *s1,
+    VkPhysicalDeviceRayTracingValidationFeaturesNV const *s2) {
+  if ((s1->rayTracingValidation != s2->rayTracingValidation) || false)
     return false;
 
   return true;

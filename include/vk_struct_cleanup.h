@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 279,
-              "VK_HEADER_VERSION is from after the maximum supported version of v279.");
+static_assert(VK_HEADER_VERSION <= 280,
+              "VK_HEADER_VERSION is from after the maximum supported version of v280.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 279,
-               "VK_HEADER_VERSION is from after the maximum supported version of v279.");
+_Static_assert(VK_HEADER_VERSION <= 280,
+               "VK_HEADER_VERSION is from after the maximum supported version of v280.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -6958,6 +6958,11 @@ void cleanup_VkMemoryMapPlacedInfoEXT(VkMemoryMapPlacedInfoEXT const *pData);
 #if VK_HEADER_VERSION >= 279 && (VK_NV_raw_access_chains)
 void cleanup_VkPhysicalDeviceRawAccessChainsFeaturesNV(
     VkPhysicalDeviceRawAccessChainsFeaturesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 280 && (VK_NV_ray_tracing_validation)
+void cleanup_VkPhysicalDeviceRayTracingValidationFeaturesNV(
+    VkPhysicalDeviceRayTracingValidationFeaturesNV const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -16166,6 +16171,14 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAW_ACCESS_CHAINS_FEATURES_NV) {
     cleanup_VkPhysicalDeviceRawAccessChainsFeaturesNV(
         (VkPhysicalDeviceRawAccessChainsFeaturesNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 280 && (VK_NV_ray_tracing_validation)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_VALIDATION_FEATURES_NV) {
+    cleanup_VkPhysicalDeviceRayTracingValidationFeaturesNV(
+        (VkPhysicalDeviceRayTracingValidationFeaturesNV const *)pData);
     return;
   }
 #endif
@@ -32384,6 +32397,16 @@ void cleanup_VkMemoryMapPlacedInfoEXT(VkMemoryMapPlacedInfoEXT const *pData) {
 #if VK_HEADER_VERSION >= 279 && (VK_NV_raw_access_chains)
 void cleanup_VkPhysicalDeviceRawAccessChainsFeaturesNV(
     VkPhysicalDeviceRawAccessChainsFeaturesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 280 && (VK_NV_ray_tracing_validation)
+void cleanup_VkPhysicalDeviceRayTracingValidationFeaturesNV(
+    VkPhysicalDeviceRayTracingValidationFeaturesNV const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
