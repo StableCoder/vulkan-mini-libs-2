@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 280,
-              "VK_HEADER_VERSION is from after the maximum supported version of v280.");
+static_assert(VK_HEADER_VERSION <= 281,
+              "VK_HEADER_VERSION is from after the maximum supported version of v281.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 280,
-               "VK_HEADER_VERSION is from after the maximum supported version of v280.");
+_Static_assert(VK_HEADER_VERSION <= 281,
+               "VK_HEADER_VERSION is from after the maximum supported version of v281.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -1015,8 +1015,8 @@ void cleanup_VkMemoryRequirements2(VkMemoryRequirements2 const *pData);
 #endif
 
 #if ((VK_KHR_get_memory_requirements2) ||                                                          \
-     (VK_NV_ray_tracing && VK_KHR_get_memory_requirements2) || (VK_VERSION_1_1) ||                 \
-     (VK_NVX_raytracing))
+     (VK_NV_ray_tracing && VK_KHR_get_memory_requirements2 && VK_VERSION_1_1) ||                   \
+     (VK_VERSION_1_1) || (VK_NVX_raytracing))
 void cleanup_VkMemoryRequirements2KHR(VkMemoryRequirements2KHR const *pData);
 #endif
 
@@ -3925,7 +3925,8 @@ void cleanup_VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT(
     VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 195 && (VK_EXT_image_drm_format_modifier && VK_KHR_format_feature_flags2)
+#if VK_HEADER_VERSION >= 195 &&                                                                    \
+    (VK_EXT_image_drm_format_modifier && VK_KHR_format_feature_flags2 && VK_VERSION_1_3)
 void cleanup_VkDrmFormatModifierPropertiesList2EXT(
     VkDrmFormatModifierPropertiesList2EXT const *pData);
 #endif
@@ -4625,12 +4626,13 @@ void cleanup_VkFormatProperties3(VkFormatProperties3 const *pData);
 void cleanup_VkFormatProperties3KHR(VkFormatProperties3KHR const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 204 && (VK_EXT_image_drm_format_modifier && VK_KHR_format_feature_flags2)
+#if VK_HEADER_VERSION >= 204 &&                                                                    \
+    (VK_EXT_image_drm_format_modifier && VK_KHR_format_feature_flags2 && VK_VERSION_1_3)
 void cleanup_VkDrmFormatModifierProperties2EXT(VkDrmFormatModifierProperties2EXT const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 204 &&                                                                    \
-    (VK_ANDROID_external_memory_android_hardware_buffer && VK_KHR_format_feature_flags2)
+#if VK_HEADER_VERSION >= 204 && (VK_ANDROID_external_memory_android_hardware_buffer &&             \
+                                 VK_KHR_format_feature_flags2 && VK_VERSION_1_3)
 void cleanup_VkAndroidHardwareBufferFormatProperties2ANDROID(
     VkAndroidHardwareBufferFormatProperties2ANDROID const *pData);
 #endif
@@ -4648,7 +4650,8 @@ void cleanup_VkRenderingInfo(VkRenderingInfo const *pData);
 #endif
 
 #if VK_HEADER_VERSION >= 204 &&                                                                    \
-    ((VK_KHR_dynamic_rendering) || (VK_QCOM_tile_properties && VK_KHR_dynamic_rendering))
+    ((VK_KHR_dynamic_rendering) ||                                                                 \
+     (VK_QCOM_tile_properties && VK_KHR_dynamic_rendering && VK_VERSION_1_3))
 void cleanup_VkRenderingInfoKHR(VkRenderingInfoKHR const *pData);
 #endif
 
@@ -11904,7 +11907,8 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
-#if VK_HEADER_VERSION >= 195 && (VK_EXT_image_drm_format_modifier && VK_KHR_format_feature_flags2)
+#if VK_HEADER_VERSION >= 195 &&                                                                    \
+    (VK_EXT_image_drm_format_modifier && VK_KHR_format_feature_flags2 && VK_VERSION_1_3)
   if (pTemp->sType == VK_STRUCTURE_TYPE_DRM_FORMAT_MODIFIER_PROPERTIES_LIST_2_EXT) {
     cleanup_VkDrmFormatModifierPropertiesList2EXT(
         (VkDrmFormatModifierPropertiesList2EXT const *)pData);
@@ -12659,8 +12663,8 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
-#if VK_HEADER_VERSION >= 204 &&                                                                    \
-    (VK_ANDROID_external_memory_android_hardware_buffer && VK_KHR_format_feature_flags2)
+#if VK_HEADER_VERSION >= 204 && (VK_ANDROID_external_memory_android_hardware_buffer &&             \
+                                 VK_KHR_format_feature_flags2 && VK_VERSION_1_3)
   if (pTemp->sType == VK_STRUCTURE_TYPE_ANDROID_HARDWARE_BUFFER_FORMAT_PROPERTIES_2_ANDROID) {
     cleanup_VkAndroidHardwareBufferFormatProperties2ANDROID(
         (VkAndroidHardwareBufferFormatProperties2ANDROID const *)pData);
@@ -18612,8 +18616,8 @@ void cleanup_VkMemoryRequirements2(VkMemoryRequirements2 const *pData) {
 #endif
 
 #if ((VK_KHR_get_memory_requirements2) ||                                                          \
-     (VK_NV_ray_tracing && VK_KHR_get_memory_requirements2) || (VK_VERSION_1_1) ||                 \
-     (VK_NVX_raytracing))
+     (VK_NV_ray_tracing && VK_KHR_get_memory_requirements2 && VK_VERSION_1_1) ||                   \
+     (VK_VERSION_1_1) || (VK_NVX_raytracing))
 void cleanup_VkMemoryRequirements2KHR(VkMemoryRequirements2KHR const *pData) {
   cleanup_VkMemoryRequirements2((VkMemoryRequirements2 const *)pData);
 }
@@ -25172,7 +25176,8 @@ void cleanup_VkPhysicalDeviceRGBA10X6FormatsFeaturesEXT(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 195 && (VK_EXT_image_drm_format_modifier && VK_KHR_format_feature_flags2)
+#if VK_HEADER_VERSION >= 195 &&                                                                    \
+    (VK_EXT_image_drm_format_modifier && VK_KHR_format_feature_flags2 && VK_VERSION_1_3)
 void cleanup_VkDrmFormatModifierPropertiesList2EXT(
     VkDrmFormatModifierPropertiesList2EXT const *pData) {
   // pNext
@@ -26756,12 +26761,13 @@ void cleanup_VkFormatProperties3KHR(VkFormatProperties3KHR const *pData) {
 }
 #endif
 
-#if VK_HEADER_VERSION >= 204 && (VK_EXT_image_drm_format_modifier && VK_KHR_format_feature_flags2)
+#if VK_HEADER_VERSION >= 204 &&                                                                    \
+    (VK_EXT_image_drm_format_modifier && VK_KHR_format_feature_flags2 && VK_VERSION_1_3)
 void cleanup_VkDrmFormatModifierProperties2EXT(VkDrmFormatModifierProperties2EXT const *pData) {}
 #endif
 
-#if VK_HEADER_VERSION >= 204 &&                                                                    \
-    (VK_ANDROID_external_memory_android_hardware_buffer && VK_KHR_format_feature_flags2)
+#if VK_HEADER_VERSION >= 204 && (VK_ANDROID_external_memory_android_hardware_buffer &&             \
+                                 VK_KHR_format_feature_flags2 && VK_VERSION_1_3)
 void cleanup_VkAndroidHardwareBufferFormatProperties2ANDROID(
     VkAndroidHardwareBufferFormatProperties2ANDROID const *pData) {
   // pNext
@@ -26816,7 +26822,8 @@ void cleanup_VkRenderingInfo(VkRenderingInfo const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 204 &&                                                                    \
-    ((VK_KHR_dynamic_rendering) || (VK_QCOM_tile_properties && VK_KHR_dynamic_rendering))
+    ((VK_KHR_dynamic_rendering) ||                                                                 \
+     (VK_QCOM_tile_properties && VK_KHR_dynamic_rendering && VK_VERSION_1_3))
 void cleanup_VkRenderingInfoKHR(VkRenderingInfoKHR const *pData) {
   cleanup_VkRenderingInfo((VkRenderingInfo const *)pData);
 }

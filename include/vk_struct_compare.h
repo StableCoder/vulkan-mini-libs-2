@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 280,
-              "VK_HEADER_VERSION is from after the maximum supported version of v280.");
+static_assert(VK_HEADER_VERSION <= 281,
+              "VK_HEADER_VERSION is from after the maximum supported version of v281.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 280,
-               "VK_HEADER_VERSION is from after the maximum supported version of v280.");
+_Static_assert(VK_HEADER_VERSION <= 281,
+               "VK_HEADER_VERSION is from after the maximum supported version of v281.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -1700,8 +1700,8 @@ bool compare_VkMemoryRequirements2(VkMemoryRequirements2 const *s1,
 #endif
 
 #if ((VK_KHR_get_memory_requirements2) ||                                                          \
-     (VK_NV_ray_tracing && VK_KHR_get_memory_requirements2) || (VK_VERSION_1_1) ||                 \
-     (VK_NVX_raytracing))
+     (VK_NV_ray_tracing && VK_KHR_get_memory_requirements2 && VK_VERSION_1_1) ||                   \
+     (VK_VERSION_1_1) || (VK_NVX_raytracing))
 bool compare_VkMemoryRequirements2KHR(VkMemoryRequirements2KHR const *s1,
                                       VkMemoryRequirements2KHR const *s2);
 #endif
@@ -5239,18 +5239,20 @@ bool compare_VkFormatProperties3KHR(VkFormatProperties3KHR const *s1,
                                     VkFormatProperties3KHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 195 && (VK_EXT_image_drm_format_modifier && VK_KHR_format_feature_flags2)
+#if VK_HEADER_VERSION >= 195 &&                                                                    \
+    (VK_EXT_image_drm_format_modifier && VK_KHR_format_feature_flags2 && VK_VERSION_1_3)
 bool compare_VkDrmFormatModifierPropertiesList2EXT(VkDrmFormatModifierPropertiesList2EXT const *s1,
                                                    VkDrmFormatModifierPropertiesList2EXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 204 && (VK_EXT_image_drm_format_modifier && VK_KHR_format_feature_flags2)
+#if VK_HEADER_VERSION >= 204 &&                                                                    \
+    (VK_EXT_image_drm_format_modifier && VK_KHR_format_feature_flags2 && VK_VERSION_1_3)
 bool compare_VkDrmFormatModifierProperties2EXT(VkDrmFormatModifierProperties2EXT const *s1,
                                                VkDrmFormatModifierProperties2EXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 204 &&                                                                    \
-    (VK_ANDROID_external_memory_android_hardware_buffer && VK_KHR_format_feature_flags2)
+#if VK_HEADER_VERSION >= 204 && (VK_ANDROID_external_memory_android_hardware_buffer &&             \
+                                 VK_KHR_format_feature_flags2 && VK_VERSION_1_3)
 bool compare_VkAndroidHardwareBufferFormatProperties2ANDROID(
     VkAndroidHardwareBufferFormatProperties2ANDROID const *s1,
     VkAndroidHardwareBufferFormatProperties2ANDROID const *s2);
@@ -5271,7 +5273,8 @@ bool compare_VkRenderingInfo(VkRenderingInfo const *s1, VkRenderingInfo const *s
 #endif
 
 #if VK_HEADER_VERSION >= 204 &&                                                                    \
-    ((VK_KHR_dynamic_rendering) || (VK_QCOM_tile_properties && VK_KHR_dynamic_rendering))
+    ((VK_KHR_dynamic_rendering) ||                                                                 \
+     (VK_QCOM_tile_properties && VK_KHR_dynamic_rendering && VK_VERSION_1_3))
 bool compare_VkRenderingInfoKHR(VkRenderingInfoKHR const *s1, VkRenderingInfoKHR const *s2);
 #endif
 
@@ -12282,8 +12285,8 @@ bool compare_VkMemoryRequirements2(VkMemoryRequirements2 const *s1,
 #endif
 
 #if ((VK_KHR_get_memory_requirements2) ||                                                          \
-     (VK_NV_ray_tracing && VK_KHR_get_memory_requirements2) || (VK_VERSION_1_1) ||                 \
-     (VK_NVX_raytracing))
+     (VK_NV_ray_tracing && VK_KHR_get_memory_requirements2 && VK_VERSION_1_1) ||                   \
+     (VK_VERSION_1_1) || (VK_NVX_raytracing))
 bool compare_VkMemoryRequirements2KHR(VkMemoryRequirements2KHR const *s1,
                                       VkMemoryRequirements2KHR const *s2) {
   return compare_VkMemoryRequirements2((VkMemoryRequirements2 const *)s1,
@@ -20279,7 +20282,8 @@ bool compare_VkFormatProperties3KHR(VkFormatProperties3KHR const *s1,
 }
 #endif
 
-#if VK_HEADER_VERSION >= 195 && (VK_EXT_image_drm_format_modifier && VK_KHR_format_feature_flags2)
+#if VK_HEADER_VERSION >= 195 &&                                                                    \
+    (VK_EXT_image_drm_format_modifier && VK_KHR_format_feature_flags2 && VK_VERSION_1_3)
 bool compare_VkDrmFormatModifierPropertiesList2EXT(
     VkDrmFormatModifierPropertiesList2EXT const *s1,
     VkDrmFormatModifierPropertiesList2EXT const *s2) {
@@ -20290,7 +20294,8 @@ bool compare_VkDrmFormatModifierPropertiesList2EXT(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 204 && (VK_EXT_image_drm_format_modifier && VK_KHR_format_feature_flags2)
+#if VK_HEADER_VERSION >= 204 &&                                                                    \
+    (VK_EXT_image_drm_format_modifier && VK_KHR_format_feature_flags2 && VK_VERSION_1_3)
 bool compare_VkDrmFormatModifierProperties2EXT(VkDrmFormatModifierProperties2EXT const *s1,
                                                VkDrmFormatModifierProperties2EXT const *s2) {
   if ((s1->drmFormatModifier != s2->drmFormatModifier) ||
@@ -20302,8 +20307,8 @@ bool compare_VkDrmFormatModifierProperties2EXT(VkDrmFormatModifierProperties2EXT
 }
 #endif
 
-#if VK_HEADER_VERSION >= 204 &&                                                                    \
-    (VK_ANDROID_external_memory_android_hardware_buffer && VK_KHR_format_feature_flags2)
+#if VK_HEADER_VERSION >= 204 && (VK_ANDROID_external_memory_android_hardware_buffer &&             \
+                                 VK_KHR_format_feature_flags2 && VK_VERSION_1_3)
 bool compare_VkAndroidHardwareBufferFormatProperties2ANDROID(
     VkAndroidHardwareBufferFormatProperties2ANDROID const *s1,
     VkAndroidHardwareBufferFormatProperties2ANDROID const *s2) {
@@ -20353,7 +20358,8 @@ bool compare_VkRenderingInfo(VkRenderingInfo const *s1, VkRenderingInfo const *s
 #endif
 
 #if VK_HEADER_VERSION >= 204 &&                                                                    \
-    ((VK_KHR_dynamic_rendering) || (VK_QCOM_tile_properties && VK_KHR_dynamic_rendering))
+    ((VK_KHR_dynamic_rendering) ||                                                                 \
+     (VK_QCOM_tile_properties && VK_KHR_dynamic_rendering && VK_VERSION_1_3))
 bool compare_VkRenderingInfoKHR(VkRenderingInfoKHR const *s1, VkRenderingInfoKHR const *s2) {
   return compare_VkRenderingInfo((VkRenderingInfo const *)s1, (VkRenderingInfo const *)s2);
 }
