@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 284,
-              "VK_HEADER_VERSION is from after the maximum supported version of v284.");
+static_assert(VK_HEADER_VERSION <= 285,
+              "VK_HEADER_VERSION is from after the maximum supported version of v285.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 284,
-               "VK_HEADER_VERSION is from after the maximum supported version of v284.");
+_Static_assert(VK_HEADER_VERSION <= 285,
+               "VK_HEADER_VERSION is from after the maximum supported version of v285.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -6408,6 +6408,23 @@ bool compare_VkMemoryMapPlacedInfoEXT(VkMemoryMapPlacedInfoEXT const *s1,
 bool compare_VkPhysicalDeviceRawAccessChainsFeaturesNV(
     VkPhysicalDeviceRawAccessChainsFeaturesNV const *s1,
     VkPhysicalDeviceRawAccessChainsFeaturesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 285 && (VK_MESA_image_alignment_control)
+bool compare_VkPhysicalDeviceImageAlignmentControlFeaturesMESA(
+    VkPhysicalDeviceImageAlignmentControlFeaturesMESA const *s1,
+    VkPhysicalDeviceImageAlignmentControlFeaturesMESA const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 285 && (VK_MESA_image_alignment_control)
+bool compare_VkPhysicalDeviceImageAlignmentControlPropertiesMESA(
+    VkPhysicalDeviceImageAlignmentControlPropertiesMESA const *s1,
+    VkPhysicalDeviceImageAlignmentControlPropertiesMESA const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 285 && (VK_MESA_image_alignment_control)
+bool compare_VkImageAlignmentControlCreateInfoMESA(VkImageAlignmentControlCreateInfoMESA const *s1,
+                                                   VkImageAlignmentControlCreateInfoMESA const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 117 && VK_HEADER_VERSION <= 275 && (VK_EXT_index_type_uint8)
@@ -22701,6 +22718,39 @@ bool compare_VkPhysicalDeviceRawAccessChainsFeaturesNV(
     VkPhysicalDeviceRawAccessChainsFeaturesNV const *s1,
     VkPhysicalDeviceRawAccessChainsFeaturesNV const *s2) {
   if ((s1->shaderRawAccessChains != s2->shaderRawAccessChains) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 285 && (VK_MESA_image_alignment_control)
+bool compare_VkPhysicalDeviceImageAlignmentControlFeaturesMESA(
+    VkPhysicalDeviceImageAlignmentControlFeaturesMESA const *s1,
+    VkPhysicalDeviceImageAlignmentControlFeaturesMESA const *s2) {
+  if ((s1->imageAlignmentControl != s2->imageAlignmentControl) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 285 && (VK_MESA_image_alignment_control)
+bool compare_VkPhysicalDeviceImageAlignmentControlPropertiesMESA(
+    VkPhysicalDeviceImageAlignmentControlPropertiesMESA const *s1,
+    VkPhysicalDeviceImageAlignmentControlPropertiesMESA const *s2) {
+  if ((s1->supportedImageAlignmentMask != s2->supportedImageAlignmentMask) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 285 && (VK_MESA_image_alignment_control)
+bool compare_VkImageAlignmentControlCreateInfoMESA(
+    VkImageAlignmentControlCreateInfoMESA const *s1,
+    VkImageAlignmentControlCreateInfoMESA const *s2) {
+  if ((s1->maximumRequestedAlignment != s2->maximumRequestedAlignment) || false)
     return false;
 
   return true;
