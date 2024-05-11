@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 282,
-              "VK_HEADER_VERSION is from after the maximum supported version of v282.");
+static_assert(VK_HEADER_VERSION <= 283,
+              "VK_HEADER_VERSION is from after the maximum supported version of v283.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 282,
-               "VK_HEADER_VERSION is from after the maximum supported version of v282.");
+_Static_assert(VK_HEADER_VERSION <= 283,
+               "VK_HEADER_VERSION is from after the maximum supported version of v283.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -1123,6 +1123,7 @@ EnumValueSet const VkPipelineCreateFlags2KHRSets[] = {
     {"PROTECTED_ACCESS_ONLY_BIT_EXT", 0x40000000, false},
     {"RAY_TRACING_DISPLACEMENT_MICROMAP_BIT_NV", 0x10000000, false},
     {"DESCRIPTOR_BUFFER_BIT_EXT", 0x20000000, false},
+    {"ENABLE_LEGACY_DITHERING_BIT_EXT", 0x400000000, false},
 };
 
 EnumValueSet const VkBufferUsageFlags2KHRSets[] = {
@@ -3654,7 +3655,7 @@ EnumType const cEnumTypes[356] = {
     {"VkBuildMicromapFlagsEXT", VkBuildMicromapFlagsEXTSets, 3},
     {"VkMicromapCreateFlagsEXT", VkMicromapCreateFlagsEXTSets, 1},
     {"VkDirectDriverLoadingFlagsLUNARG", NULL, 0},
-    {"VkPipelineCreateFlags2KHR", VkPipelineCreateFlags2KHRSets, 44},
+    {"VkPipelineCreateFlags2KHR", VkPipelineCreateFlags2KHRSets, 45},
     {"VkBufferUsageFlags2KHR", VkBufferUsageFlags2KHRSets, 36},
     {"VkCompositeAlphaFlagsKHR", VkCompositeAlphaFlagsKHRSets, 4},
     {"VkDisplayPlaneAlphaFlagsKHR", VkDisplayPlaneAlphaFlagsKHRSets, 4},
