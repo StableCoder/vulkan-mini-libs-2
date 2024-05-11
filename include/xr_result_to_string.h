@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) >= 0,
               "openxr header version is from before the minimum supported version of v0.");
-static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 34,
-              "openxr header version is from after the maximum supported version of v34.");
+static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 36,
+              "openxr header version is from after the maximum supported version of v36.");
 #else
 _Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) >= 0,
                "openxr header version is from before the minimum supported version of v0.");
-_Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 34,
-               "openxr header version is from after the maximum supported version of v34.");
+_Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 36,
+               "openxr header version is from after the maximum supported version of v36.");
 #endif
 
 /// Returns a string representing the given VkResult parameter. If there is no known representation,
@@ -51,6 +51,34 @@ char const *XrResult_to_string(XrResult result) {
   // Check in descending order to get the 'latest' version of the error code text available.
   // Also, because codes have been re-used over time, can't use a switch and have to do this large
   // set of ifs. Luckily this *should* be a relatively rare call.
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 36
+  if (result == XR_ERROR_EXTENSION_DEPENDENCY_NOT_ENABLED)
+    return "XR_ERROR_EXTENSION_DEPENDENCY_NOT_ENABLED";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 36
+  if (result == XR_ERROR_PERMISSION_INSUFFICIENT)
+    return "XR_ERROR_PERMISSION_INSUFFICIENT";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 36 && XR_META_environment_depth
+  if (result == XR_ENVIRONMENT_DEPTH_NOT_AVAILABLE_META)
+    return "XR_ENVIRONMENT_DEPTH_NOT_AVAILABLE_META";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 36 && XR_EXT_future
+  if (result == XR_ERROR_FUTURE_PENDING_EXT)
+    return "XR_ERROR_FUTURE_PENDING_EXT";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 36 && XR_EXT_future
+  if (result == XR_ERROR_FUTURE_INVALID_EXT)
+    return "XR_ERROR_FUTURE_INVALID_EXT";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 36 && XR_KHR_maintenance1
+  if (result == XR_ERROR_EXTENSION_DEPENDENCY_NOT_ENABLED_KHR)
+    return "XR_ERROR_EXTENSION_DEPENDENCY_NOT_ENABLED_KHR";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 36 && XR_KHR_maintenance1
+  if (result == XR_ERROR_PERMISSION_INSUFFICIENT_KHR)
+    return "XR_ERROR_PERMISSION_INSUFFICIENT_KHR";
+#endif
 #if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 32 && XR_ML_marker_understanding
   if (result == XR_ERROR_MARKER_DETECTOR_PERMISSION_DENIED_ML)
     return "XR_ERROR_MARKER_DETECTOR_PERMISSION_DENIED_ML";
