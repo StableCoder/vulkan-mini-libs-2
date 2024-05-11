@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 281,
-              "VK_HEADER_VERSION is from after the maximum supported version of v281.");
+static_assert(VK_HEADER_VERSION <= 282,
+              "VK_HEADER_VERSION is from after the maximum supported version of v282.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 281,
-               "VK_HEADER_VERSION is from after the maximum supported version of v281.");
+_Static_assert(VK_HEADER_VERSION <= 282,
+               "VK_HEADER_VERSION is from after the maximum supported version of v282.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -2246,9 +2246,10 @@ EnumValueSet const VkFormatSets[] = {
     {"ASTC_10x10_SFLOAT_BLOCK", 1000066011, false},
     {"ASTC_12x10_SFLOAT_BLOCK", 1000066012, false},
     {"ASTC_12x12_SFLOAT_BLOCK", 1000066013, false},
-    {"R16G16_S10_5_NV", 1000464000, false},
+    {"R16G16_S10_5_NV", 1000464000, true},
     {"A1B5G5R5_UNORM_PACK16_KHR", 1000470000, false},
     {"A8_UNORM_KHR", 1000470001, false},
+    {"R16G16_SFIXED5_NV", 1000464000, false},
 };
 
 EnumValueSet const VkFrontFaceSets[] = {
@@ -3770,7 +3771,7 @@ EnumType const cEnumTypes[356] = {
     {"VkDescriptorType", VkDescriptorTypeSets, 20},
     {"VkDynamicState", VkDynamicStateSets, 88},
     {"VkPolygonMode", VkPolygonModeSets, 4},
-    {"VkFormat", VkFormatSets, 304},
+    {"VkFormat", VkFormatSets, 305},
     {"VkFrontFace", VkFrontFaceSets, 2},
     {"VkImageLayout", VkImageLayoutSets, 38},
     {"VkImageTiling", VkImageTilingSets, 3},
