@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 283,
-              "VK_HEADER_VERSION is from after the maximum supported version of v283.");
+static_assert(VK_HEADER_VERSION <= 284,
+              "VK_HEADER_VERSION is from after the maximum supported version of v284.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 283,
-               "VK_HEADER_VERSION is from after the maximum supported version of v283.");
+_Static_assert(VK_HEADER_VERSION <= 284,
+               "VK_HEADER_VERSION is from after the maximum supported version of v284.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -4242,6 +4242,18 @@ bool compare_VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT(
 bool compare_VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT(
     VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT const *s1,
     VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 284 && (VK_EXT_legacy_vertex_attributes)
+bool compare_VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT(
+    VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT const *s1,
+    VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 284 && (VK_EXT_legacy_vertex_attributes)
+bool compare_VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT(
+    VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT const *s1,
+    VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 228 && (VK_EXT_mutable_descriptor_type)
@@ -17991,6 +18003,28 @@ bool compare_VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT(
     VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT const *s1,
     VkPhysicalDeviceAttachmentFeedbackLoopDynamicStateFeaturesEXT const *s2) {
   if ((s1->attachmentFeedbackLoopDynamicState != s2->attachmentFeedbackLoopDynamicState) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 284 && (VK_EXT_legacy_vertex_attributes)
+bool compare_VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT(
+    VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT const *s1,
+    VkPhysicalDeviceLegacyVertexAttributesFeaturesEXT const *s2) {
+  if ((s1->legacyVertexAttributes != s2->legacyVertexAttributes) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 284 && (VK_EXT_legacy_vertex_attributes)
+bool compare_VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT(
+    VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT const *s1,
+    VkPhysicalDeviceLegacyVertexAttributesPropertiesEXT const *s2) {
+  if ((s1->nativeUnalignedPerformance != s2->nativeUnalignedPerformance) || false)
     return false;
 
   return true;
