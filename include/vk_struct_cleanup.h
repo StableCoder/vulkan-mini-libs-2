@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 285,
-              "VK_HEADER_VERSION is from after the maximum supported version of v285.");
+static_assert(VK_HEADER_VERSION <= 286,
+              "VK_HEADER_VERSION is from after the maximum supported version of v286.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 285,
-               "VK_HEADER_VERSION is from after the maximum supported version of v285.");
+_Static_assert(VK_HEADER_VERSION <= 286,
+               "VK_HEADER_VERSION is from after the maximum supported version of v286.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -6991,6 +6991,11 @@ void cleanup_VkPhysicalDeviceImageAlignmentControlPropertiesMESA(
 #if VK_HEADER_VERSION >= 285 && (VK_MESA_image_alignment_control)
 void cleanup_VkImageAlignmentControlCreateInfoMESA(
     VkImageAlignmentControlCreateInfoMESA const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 286 && (VK_EXT_shader_replicated_composites)
+void cleanup_VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT(
+    VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -16248,6 +16253,14 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_ALIGNMENT_CONTROL_CREATE_INFO_MESA) {
     cleanup_VkImageAlignmentControlCreateInfoMESA(
         (VkImageAlignmentControlCreateInfoMESA const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 286 && (VK_EXT_shader_replicated_composites)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_REPLICATED_COMPOSITES_FEATURES_EXT) {
+    cleanup_VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT(
+        (VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT const *)pData);
     return;
   }
 #endif
@@ -32529,6 +32542,16 @@ void cleanup_VkPhysicalDeviceImageAlignmentControlPropertiesMESA(
 #if VK_HEADER_VERSION >= 285 && (VK_MESA_image_alignment_control)
 void cleanup_VkImageAlignmentControlCreateInfoMESA(
     VkImageAlignmentControlCreateInfoMESA const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 286 && (VK_EXT_shader_replicated_composites)
+void cleanup_VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT(
+    VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

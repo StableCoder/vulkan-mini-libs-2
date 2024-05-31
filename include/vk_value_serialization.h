@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 285,
-              "VK_HEADER_VERSION is from after the maximum supported version of v285.");
+static_assert(VK_HEADER_VERSION <= 286,
+              "VK_HEADER_VERSION is from after the maximum supported version of v286.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 285,
-               "VK_HEADER_VERSION is from after the maximum supported version of v285.");
+_Static_assert(VK_HEADER_VERSION <= 286,
+               "VK_HEADER_VERSION is from after the maximum supported version of v286.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -3153,9 +3153,9 @@ EnumValueSet const VkOutOfBandQueueTypeNVSets[] = {
 };
 
 EnumValueSet const VkVendorIdSets[] = {
-    {"VIV", 0x10001, false},      {"VSI", 0x10002, false},  {"KAZAN", 0x10003, false},
-    {"CODEPLAY", 0x10004, false}, {"MESA", 0x10005, false}, {"POCL", 0x10006, false},
-    {"MOBILEYE", 0x10007, false},
+    {"VIV", 0x10001, false},      {"VSI", 0x10002, false},     {"KAZAN", 0x10003, false},
+    {"CODEPLAY", 0x10004, false}, {"MESA", 0x10005, false},    {"POCL", 0x10006, false},
+    {"MOBILEYE", 0x10007, false}, {"KHRONOS", 0x10000, false},
 };
 
 EnumValueSet const VkDriverIdSets[] = {
@@ -3197,6 +3197,7 @@ EnumValueSet const VkDriverIdSets[] = {
     {"MESA_NVK", 24, false},
     {"IMAGINATION_OPEN_SOURCE_MESA", 25, false},
     {"MESA_AGXV", 26, false},
+    {"RESERVED_27", 27, false},
 };
 
 EnumValueSet const VkShadingRatePaletteEntryNVSets[] = {
@@ -3883,8 +3884,8 @@ EnumType const cEnumTypes[356] = {
     {"VkLayerSettingTypeEXT", VkLayerSettingTypeEXTSets, 8},
     {"VkLatencyMarkerNV", VkLatencyMarkerNVSets, 12},
     {"VkOutOfBandQueueTypeNV", VkOutOfBandQueueTypeNVSets, 2},
-    {"VkVendorId", VkVendorIdSets, 7},
-    {"VkDriverId", VkDriverIdSets, 38},
+    {"VkVendorId", VkVendorIdSets, 8},
+    {"VkDriverId", VkDriverIdSets, 39},
     {"VkShadingRatePaletteEntryNV", VkShadingRatePaletteEntryNVSets, 12},
     {"VkCoarseSampleOrderTypeNV", VkCoarseSampleOrderTypeNVSets, 4},
     {"VkPipelineExecutableStatisticFormatKHR", VkPipelineExecutableStatisticFormatKHRSets, 4},
