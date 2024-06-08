@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 286,
-              "VK_HEADER_VERSION is from after the maximum supported version of v286.");
+static_assert(VK_HEADER_VERSION <= 287,
+              "VK_HEADER_VERSION is from after the maximum supported version of v287.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 286,
-               "VK_HEADER_VERSION is from after the maximum supported version of v286.");
+_Static_assert(VK_HEADER_VERSION <= 287,
+               "VK_HEADER_VERSION is from after the maximum supported version of v287.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -3198,6 +3198,7 @@ EnumValueSet const VkDriverIdSets[] = {
     {"IMAGINATION_OPEN_SOURCE_MESA", 25, false},
     {"MESA_AGXV", 26, false},
     {"RESERVED_27", 27, false},
+    {"MESA_HONEYKRISP", 26, false},
 };
 
 EnumValueSet const VkShadingRatePaletteEntryNVSets[] = {
@@ -3885,7 +3886,7 @@ EnumType const cEnumTypes[356] = {
     {"VkLatencyMarkerNV", VkLatencyMarkerNVSets, 12},
     {"VkOutOfBandQueueTypeNV", VkOutOfBandQueueTypeNVSets, 2},
     {"VkVendorId", VkVendorIdSets, 8},
-    {"VkDriverId", VkDriverIdSets, 39},
+    {"VkDriverId", VkDriverIdSets, 40},
     {"VkShadingRatePaletteEntryNV", VkShadingRatePaletteEntryNVSets, 12},
     {"VkCoarseSampleOrderTypeNV", VkCoarseSampleOrderTypeNVSets, 4},
     {"VkPipelineExecutableStatisticFormatKHR", VkPipelineExecutableStatisticFormatKHRSets, 4},
