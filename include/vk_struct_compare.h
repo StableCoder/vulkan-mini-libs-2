@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 287,
-              "VK_HEADER_VERSION is from after the maximum supported version of v287.");
+static_assert(VK_HEADER_VERSION <= 288,
+              "VK_HEADER_VERSION is from after the maximum supported version of v288.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 287,
-               "VK_HEADER_VERSION is from after the maximum supported version of v287.");
+_Static_assert(VK_HEADER_VERSION <= 288,
+               "VK_HEADER_VERSION is from after the maximum supported version of v288.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -4311,6 +4311,12 @@ bool compare_VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT(
 bool compare_VkPhysicalDeviceExternalMemoryRDMAFeaturesNV(
     VkPhysicalDeviceExternalMemoryRDMAFeaturesNV const *s1,
     VkPhysicalDeviceExternalMemoryRDMAFeaturesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 288 && (VK_KHR_shader_relaxed_extended_instruction)
+bool compare_VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR(
+    VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR const *s1,
+    VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 175 && ((VK_EXT_vertex_input_dynamic_state) || (VK_EXT_shader_object))
@@ -18151,6 +18157,17 @@ bool compare_VkPhysicalDeviceExternalMemoryRDMAFeaturesNV(
     VkPhysicalDeviceExternalMemoryRDMAFeaturesNV const *s1,
     VkPhysicalDeviceExternalMemoryRDMAFeaturesNV const *s2) {
   if ((s1->externalMemoryRDMA != s2->externalMemoryRDMA) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 288 && (VK_KHR_shader_relaxed_extended_instruction)
+bool compare_VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR(
+    VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR const *s1,
+    VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR const *s2) {
+  if ((s1->shaderRelaxedExtendedInstruction != s2->shaderRelaxedExtendedInstruction) || false)
     return false;
 
   return true;
