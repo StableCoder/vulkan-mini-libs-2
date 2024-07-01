@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 288,
-              "VK_HEADER_VERSION is from after the maximum supported version of v288.");
+static_assert(VK_HEADER_VERSION <= 289,
+              "VK_HEADER_VERSION is from after the maximum supported version of v289.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 288,
-               "VK_HEADER_VERSION is from after the maximum supported version of v288.");
+_Static_assert(VK_HEADER_VERSION <= 289,
+               "VK_HEADER_VERSION is from after the maximum supported version of v289.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -2095,6 +2095,36 @@ bool compare_VkPhysicalDeviceMaintenance6FeaturesKHR(
 bool compare_VkPhysicalDeviceMaintenance6PropertiesKHR(
     VkPhysicalDeviceMaintenance6PropertiesKHR const *s1,
     VkPhysicalDeviceMaintenance6PropertiesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 289 && (VK_KHR_maintenance7)
+bool compare_VkPhysicalDeviceMaintenance7FeaturesKHR(
+    VkPhysicalDeviceMaintenance7FeaturesKHR const *s1,
+    VkPhysicalDeviceMaintenance7FeaturesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 289 && (VK_KHR_maintenance7)
+bool compare_VkPhysicalDeviceMaintenance7PropertiesKHR(
+    VkPhysicalDeviceMaintenance7PropertiesKHR const *s1,
+    VkPhysicalDeviceMaintenance7PropertiesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 289 && (VK_KHR_maintenance7)
+bool compare_VkPhysicalDeviceLayeredApiPropertiesListKHR(
+    VkPhysicalDeviceLayeredApiPropertiesListKHR const *s1,
+    VkPhysicalDeviceLayeredApiPropertiesListKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 289 && (VK_KHR_maintenance7)
+bool compare_VkPhysicalDeviceLayeredApiPropertiesKHR(
+    VkPhysicalDeviceLayeredApiPropertiesKHR const *s1,
+    VkPhysicalDeviceLayeredApiPropertiesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 289 && (VK_KHR_maintenance7)
+bool compare_VkPhysicalDeviceLayeredApiVulkanPropertiesKHR(
+    VkPhysicalDeviceLayeredApiVulkanPropertiesKHR const *s1,
+    VkPhysicalDeviceLayeredApiVulkanPropertiesKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
@@ -13105,6 +13135,81 @@ bool compare_VkPhysicalDeviceMaintenance6PropertiesKHR(
       (s1->maxCombinedImageSamplerDescriptorCount != s2->maxCombinedImageSamplerDescriptorCount) ||
       (s1->fragmentShadingRateClampCombinerInputs != s2->fragmentShadingRateClampCombinerInputs) ||
       false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 289 && (VK_KHR_maintenance7)
+bool compare_VkPhysicalDeviceMaintenance7FeaturesKHR(
+    VkPhysicalDeviceMaintenance7FeaturesKHR const *s1,
+    VkPhysicalDeviceMaintenance7FeaturesKHR const *s2) {
+  if ((s1->maintenance7 != s2->maintenance7) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 289 && (VK_KHR_maintenance7)
+bool compare_VkPhysicalDeviceMaintenance7PropertiesKHR(
+    VkPhysicalDeviceMaintenance7PropertiesKHR const *s1,
+    VkPhysicalDeviceMaintenance7PropertiesKHR const *s2) {
+  if ((s1->robustFragmentShadingRateAttachmentAccess !=
+       s2->robustFragmentShadingRateAttachmentAccess) ||
+      (s1->separateDepthStencilAttachmentAccess != s2->separateDepthStencilAttachmentAccess) ||
+      (s1->maxDescriptorSetTotalUniformBuffersDynamic !=
+       s2->maxDescriptorSetTotalUniformBuffersDynamic) ||
+      (s1->maxDescriptorSetTotalStorageBuffersDynamic !=
+       s2->maxDescriptorSetTotalStorageBuffersDynamic) ||
+      (s1->maxDescriptorSetTotalBuffersDynamic != s2->maxDescriptorSetTotalBuffersDynamic) ||
+      (s1->maxDescriptorSetUpdateAfterBindTotalUniformBuffersDynamic !=
+       s2->maxDescriptorSetUpdateAfterBindTotalUniformBuffersDynamic) ||
+      (s1->maxDescriptorSetUpdateAfterBindTotalStorageBuffersDynamic !=
+       s2->maxDescriptorSetUpdateAfterBindTotalStorageBuffersDynamic) ||
+      (s1->maxDescriptorSetUpdateAfterBindTotalBuffersDynamic !=
+       s2->maxDescriptorSetUpdateAfterBindTotalBuffersDynamic) ||
+      false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 289 && (VK_KHR_maintenance7)
+bool compare_VkPhysicalDeviceLayeredApiPropertiesListKHR(
+    VkPhysicalDeviceLayeredApiPropertiesListKHR const *s1,
+    VkPhysicalDeviceLayeredApiPropertiesListKHR const *s2) {
+  if ((s1->layeredApiCount != s2->layeredApiCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 289 && (VK_KHR_maintenance7)
+bool compare_VkPhysicalDeviceLayeredApiPropertiesKHR(
+    VkPhysicalDeviceLayeredApiPropertiesKHR const *s1,
+    VkPhysicalDeviceLayeredApiPropertiesKHR const *s2) {
+  if ((s1->vendorID != s2->vendorID) || (s1->deviceID != s2->deviceID) ||
+      (s1->layeredAPI != s2->layeredAPI) || false)
+    return false;
+
+  for (uint32_t i = 0; i < VK_MAX_PHYSICAL_DEVICE_NAME_SIZE; ++i) {
+    if (s1->deviceName[i] != s2->deviceName[i])
+      return false;
+  }
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 289 && (VK_KHR_maintenance7)
+bool compare_VkPhysicalDeviceLayeredApiVulkanPropertiesKHR(
+    VkPhysicalDeviceLayeredApiVulkanPropertiesKHR const *s1,
+    VkPhysicalDeviceLayeredApiVulkanPropertiesKHR const *s2) {
+  if (!compare_VkPhysicalDeviceProperties2(&s1->properties, &s2->properties) || false)
     return false;
 
   return true;

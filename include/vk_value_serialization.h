@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 288,
-              "VK_HEADER_VERSION is from after the maximum supported version of v288.");
+static_assert(VK_HEADER_VERSION <= 289,
+              "VK_HEADER_VERSION is from after the maximum supported version of v289.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 288,
-               "VK_HEADER_VERSION is from after the maximum supported version of v288.");
+_Static_assert(VK_HEADER_VERSION <= 289,
+               "VK_HEADER_VERSION is from after the maximum supported version of v289.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -1061,7 +1061,8 @@ EnumValueSet const VkRenderingFlagsSets[] = {
     {"RESUMING", 0x00000004, false},
     {"RESUMING_BIT_KHR", 0x00000004, true},
     {"ENABLE_LEGACY_DITHERING_BIT_EXT", 0x00000008, false},
-    {"CONTENTS_INLINE_BIT_EXT", 0x00000010, false},
+    {"CONTENTS_INLINE_BIT_EXT", 0x00000010, true},
+    {"CONTENTS_INLINE_BIT_KHR", 0x00000010, false},
 };
 
 EnumValueSet const VkMemoryDecompressionMethodFlagsNVSets[] = {
@@ -2404,7 +2405,8 @@ EnumValueSet const VkQueryTypeSets[] = {
 EnumValueSet const VkSubpassContentsSets[] = {
     {"INLINE", 0, false},
     {"SECONDARY_COMMAND_BUFFERS", 1, false},
-    {"INLINE_AND_SECONDARY_COMMAND_BUFFERS_EXT", 1000451000, false},
+    {"INLINE_AND_SECONDARY_COMMAND_BUFFERS_EXT", 1000451000, true},
+    {"INLINE_AND_SECONDARY_COMMAND_BUFFERS_KHR", 1000451000, false},
 };
 
 EnumValueSet const VkStencilOpSets[] = {
@@ -2907,6 +2909,11 @@ EnumValueSet const VkBlockMatchWindowCompareModeQCOMSets[] = {
 EnumValueSet const VkLayeredDriverUnderlyingApiMSFTSets[] = {
     {"NONE", 0, false},
     {"D3D12", 1, false},
+};
+
+EnumValueSet const VkPhysicalDeviceLayeredApiKHRSets[] = {
+    {"VULKAN", 0, false}, {"D3D12", 1, false},    {"METAL", 2, false},
+    {"OPENGL", 3, false}, {"OPENGLES", 4, false},
 };
 
 EnumValueSet const VkColorSpaceKHRSets[] = {
@@ -3570,7 +3577,7 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[356] = {
+EnumType const cEnumTypes[357] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", NULL, 0},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 1},
@@ -3652,7 +3659,7 @@ EnumType const cEnumTypes[356] = {
     {"VkAccelerationStructureMotionInfoFlagsNV", NULL, 0},
     {"VkAccelerationStructureMotionInstanceFlagsNV", NULL, 0},
     {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Sets, 70},
-    {"VkRenderingFlags", VkRenderingFlagsSets, 8},
+    {"VkRenderingFlags", VkRenderingFlagsSets, 9},
     {"VkMemoryDecompressionMethodFlagsNV", VkMemoryDecompressionMethodFlagsNVSets, 1},
     {"VkBuildMicromapFlagsEXT", VkBuildMicromapFlagsEXTSets, 3},
     {"VkMicromapCreateFlagsEXT", VkMicromapCreateFlagsEXTSets, 1},
@@ -3787,7 +3794,7 @@ EnumType const cEnumTypes[356] = {
     {"VkPipelineBindPoint", VkPipelineBindPointSets, 7},
     {"VkPrimitiveTopology", VkPrimitiveTopologySets, 11},
     {"VkQueryType", VkQueryTypeSets, 19},
-    {"VkSubpassContents", VkSubpassContentsSets, 3},
+    {"VkSubpassContents", VkSubpassContentsSets, 4},
     {"VkStencilOp", VkStencilOpSets, 8},
     {"VkSystemAllocationScope", VkSystemAllocationScopeSets, 5},
     {"VkInternalAllocationType", VkInternalAllocationTypeSets, 1},
@@ -3859,6 +3866,7 @@ EnumType const cEnumTypes[356] = {
     {"VkCubicFilterWeightsQCOM", VkCubicFilterWeightsQCOMSets, 4},
     {"VkBlockMatchWindowCompareModeQCOM", VkBlockMatchWindowCompareModeQCOMSets, 2},
     {"VkLayeredDriverUnderlyingApiMSFT", VkLayeredDriverUnderlyingApiMSFTSets, 2},
+    {"VkPhysicalDeviceLayeredApiKHR", VkPhysicalDeviceLayeredApiKHRSets, 5},
     {"VkColorSpaceKHR", VkColorSpaceKHRSets, 18},
     {"VkPresentModeKHR", VkPresentModeKHRSets, 6},
     {"VkDebugReportObjectTypeEXT", VkDebugReportObjectTypeEXTSets, 50},

@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 288,
-              "VK_HEADER_VERSION is from after the maximum supported version of v288.");
+static_assert(VK_HEADER_VERSION <= 289,
+              "VK_HEADER_VERSION is from after the maximum supported version of v289.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 288,
-               "VK_HEADER_VERSION is from after the maximum supported version of v288.");
+_Static_assert(VK_HEADER_VERSION <= 289,
+               "VK_HEADER_VERSION is from after the maximum supported version of v289.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -7001,6 +7001,31 @@ void cleanup_VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT(
 #if VK_HEADER_VERSION >= 288 && (VK_KHR_shader_relaxed_extended_instruction)
 void cleanup_VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR(
     VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 289 && (VK_KHR_maintenance7)
+void cleanup_VkPhysicalDeviceMaintenance7FeaturesKHR(
+    VkPhysicalDeviceMaintenance7FeaturesKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 289 && (VK_KHR_maintenance7)
+void cleanup_VkPhysicalDeviceMaintenance7PropertiesKHR(
+    VkPhysicalDeviceMaintenance7PropertiesKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 289 && (VK_KHR_maintenance7)
+void cleanup_VkPhysicalDeviceLayeredApiPropertiesListKHR(
+    VkPhysicalDeviceLayeredApiPropertiesListKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 289 && (VK_KHR_maintenance7)
+void cleanup_VkPhysicalDeviceLayeredApiPropertiesKHR(
+    VkPhysicalDeviceLayeredApiPropertiesKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 289 && (VK_KHR_maintenance7)
+void cleanup_VkPhysicalDeviceLayeredApiVulkanPropertiesKHR(
+    VkPhysicalDeviceLayeredApiVulkanPropertiesKHR const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -16275,6 +16300,46 @@ void cleanup_vk_struct(void const *pData) {
       VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_RELAXED_EXTENDED_INSTRUCTION_FEATURES_KHR) {
     cleanup_VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR(
         (VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 289 && (VK_KHR_maintenance7)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_7_FEATURES_KHR) {
+    cleanup_VkPhysicalDeviceMaintenance7FeaturesKHR(
+        (VkPhysicalDeviceMaintenance7FeaturesKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 289 && (VK_KHR_maintenance7)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MAINTENANCE_7_PROPERTIES_KHR) {
+    cleanup_VkPhysicalDeviceMaintenance7PropertiesKHR(
+        (VkPhysicalDeviceMaintenance7PropertiesKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 289 && (VK_KHR_maintenance7)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_LIST_KHR) {
+    cleanup_VkPhysicalDeviceLayeredApiPropertiesListKHR(
+        (VkPhysicalDeviceLayeredApiPropertiesListKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 289 && (VK_KHR_maintenance7)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_PROPERTIES_KHR) {
+    cleanup_VkPhysicalDeviceLayeredApiPropertiesKHR(
+        (VkPhysicalDeviceLayeredApiPropertiesKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 289 && (VK_KHR_maintenance7)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_VULKAN_PROPERTIES_KHR) {
+    cleanup_VkPhysicalDeviceLayeredApiVulkanPropertiesKHR(
+        (VkPhysicalDeviceLayeredApiVulkanPropertiesKHR const *)pData);
     return;
   }
 #endif
@@ -32576,6 +32641,63 @@ void cleanup_VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT(
 #if VK_HEADER_VERSION >= 288 && (VK_KHR_shader_relaxed_extended_instruction)
 void cleanup_VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR(
     VkPhysicalDeviceShaderRelaxedExtendedInstructionFeaturesKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 289 && (VK_KHR_maintenance7)
+void cleanup_VkPhysicalDeviceMaintenance7FeaturesKHR(
+    VkPhysicalDeviceMaintenance7FeaturesKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 289 && (VK_KHR_maintenance7)
+void cleanup_VkPhysicalDeviceMaintenance7PropertiesKHR(
+    VkPhysicalDeviceMaintenance7PropertiesKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 289 && (VK_KHR_maintenance7)
+void cleanup_VkPhysicalDeviceLayeredApiPropertiesListKHR(
+    VkPhysicalDeviceLayeredApiPropertiesListKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pLayeredApis - layeredApiCount
+  if (pData->pLayeredApis != NULL) {
+    for (uint32_t i = 0; i < pData->layeredApiCount; ++i)
+      cleanup_VkPhysicalDeviceLayeredApiPropertiesKHR(&pData->pLayeredApis[i]);
+  }
+  free((void *)pData->pLayeredApis);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 289 && (VK_KHR_maintenance7)
+void cleanup_VkPhysicalDeviceLayeredApiPropertiesKHR(
+    VkPhysicalDeviceLayeredApiPropertiesKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 289 && (VK_KHR_maintenance7)
+void cleanup_VkPhysicalDeviceLayeredApiVulkanPropertiesKHR(
+    VkPhysicalDeviceLayeredApiVulkanPropertiesKHR const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
