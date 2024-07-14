@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 289,
-              "VK_HEADER_VERSION is from after the maximum supported version of v289.");
+static_assert(VK_HEADER_VERSION <= 290,
+              "VK_HEADER_VERSION is from after the maximum supported version of v290.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 289,
-               "VK_HEADER_VERSION is from after the maximum supported version of v289.");
+_Static_assert(VK_HEADER_VERSION <= 290,
+               "VK_HEADER_VERSION is from after the maximum supported version of v290.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
