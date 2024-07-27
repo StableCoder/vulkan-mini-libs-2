@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 290,
-              "VK_HEADER_VERSION is from after the maximum supported version of v290.");
+static_assert(VK_HEADER_VERSION <= 291,
+              "VK_HEADER_VERSION is from after the maximum supported version of v291.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 290,
-               "VK_HEADER_VERSION is from after the maximum supported version of v290.");
+_Static_assert(VK_HEADER_VERSION <= 291,
+               "VK_HEADER_VERSION is from after the maximum supported version of v291.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -7026,6 +7026,18 @@ void cleanup_VkPhysicalDeviceLayeredApiPropertiesKHR(
 #if VK_HEADER_VERSION >= 289 && (VK_KHR_maintenance7)
 void cleanup_VkPhysicalDeviceLayeredApiVulkanPropertiesKHR(
     VkPhysicalDeviceLayeredApiVulkanPropertiesKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 291 && (VK_AMD_anti_lag)
+void cleanup_VkPhysicalDeviceAntiLagFeaturesAMD(VkPhysicalDeviceAntiLagFeaturesAMD const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 291 && (VK_AMD_anti_lag)
+void cleanup_VkAntiLagDataAMD(VkAntiLagDataAMD const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 291 && (VK_AMD_anti_lag)
+void cleanup_VkAntiLagPresentationInfoAMD(VkAntiLagPresentationInfoAMD const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -16340,6 +16352,27 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LAYERED_API_VULKAN_PROPERTIES_KHR) {
     cleanup_VkPhysicalDeviceLayeredApiVulkanPropertiesKHR(
         (VkPhysicalDeviceLayeredApiVulkanPropertiesKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 291 && (VK_AMD_anti_lag)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ANTI_LAG_FEATURES_AMD) {
+    cleanup_VkPhysicalDeviceAntiLagFeaturesAMD((VkPhysicalDeviceAntiLagFeaturesAMD const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 291 && (VK_AMD_anti_lag)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ANTI_LAG_DATA_AMD) {
+    cleanup_VkAntiLagDataAMD((VkAntiLagDataAMD const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 291 && (VK_AMD_anti_lag)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ANTI_LAG_PRESENTATION_INFO_AMD) {
+    cleanup_VkAntiLagPresentationInfoAMD((VkAntiLagPresentationInfoAMD const *)pData);
     return;
   }
 #endif
@@ -32698,6 +32731,38 @@ void cleanup_VkPhysicalDeviceLayeredApiPropertiesKHR(
 #if VK_HEADER_VERSION >= 289 && (VK_KHR_maintenance7)
 void cleanup_VkPhysicalDeviceLayeredApiVulkanPropertiesKHR(
     VkPhysicalDeviceLayeredApiVulkanPropertiesKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 291 && (VK_AMD_anti_lag)
+void cleanup_VkPhysicalDeviceAntiLagFeaturesAMD(VkPhysicalDeviceAntiLagFeaturesAMD const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 291 && (VK_AMD_anti_lag)
+void cleanup_VkAntiLagDataAMD(VkAntiLagDataAMD const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pPresentationInfo
+  if (pData->pPresentationInfo != NULL)
+    cleanup_VkAntiLagPresentationInfoAMD(pData->pPresentationInfo);
+  free((void *)pData->pPresentationInfo);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 291 && (VK_AMD_anti_lag)
+void cleanup_VkAntiLagPresentationInfoAMD(VkAntiLagPresentationInfoAMD const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

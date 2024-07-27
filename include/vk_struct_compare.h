@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 290,
-              "VK_HEADER_VERSION is from after the maximum supported version of v290.");
+static_assert(VK_HEADER_VERSION <= 291,
+              "VK_HEADER_VERSION is from after the maximum supported version of v291.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 290,
-               "VK_HEADER_VERSION is from after the maximum supported version of v290.");
+_Static_assert(VK_HEADER_VERSION <= 291,
+               "VK_HEADER_VERSION is from after the maximum supported version of v291.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -6136,6 +6136,20 @@ bool compare_VkDispatchGraphInfoAMDX(VkDispatchGraphInfoAMDX const *s1,
 #if VK_HEADER_VERSION >= 260 && (VK_AMDX_shader_enqueue)
 bool compare_VkDispatchGraphCountInfoAMDX(VkDispatchGraphCountInfoAMDX const *s1,
                                           VkDispatchGraphCountInfoAMDX const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 291 && (VK_AMD_anti_lag)
+bool compare_VkPhysicalDeviceAntiLagFeaturesAMD(VkPhysicalDeviceAntiLagFeaturesAMD const *s1,
+                                                VkPhysicalDeviceAntiLagFeaturesAMD const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 291 && (VK_AMD_anti_lag)
+bool compare_VkAntiLagDataAMD(VkAntiLagDataAMD const *s1, VkAntiLagDataAMD const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 291 && (VK_AMD_anti_lag)
+bool compare_VkAntiLagPresentationInfoAMD(VkAntiLagPresentationInfoAMD const *s1,
+                                          VkAntiLagPresentationInfoAMD const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 274 && (VK_KHR_maintenance6)
@@ -22239,6 +22253,35 @@ bool compare_VkDispatchGraphInfoAMDX(VkDispatchGraphInfoAMDX const *s1,
 bool compare_VkDispatchGraphCountInfoAMDX(VkDispatchGraphCountInfoAMDX const *s1,
                                           VkDispatchGraphCountInfoAMDX const *s2) {
   if ((s1->count != s2->count) || (s1->infos != s2->infos) || (s1->stride != s2->stride) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 291 && (VK_AMD_anti_lag)
+bool compare_VkPhysicalDeviceAntiLagFeaturesAMD(VkPhysicalDeviceAntiLagFeaturesAMD const *s1,
+                                                VkPhysicalDeviceAntiLagFeaturesAMD const *s2) {
+  if ((s1->antiLag != s2->antiLag) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 291 && (VK_AMD_anti_lag)
+bool compare_VkAntiLagDataAMD(VkAntiLagDataAMD const *s1, VkAntiLagDataAMD const *s2) {
+  if ((s1->mode != s2->mode) || (s1->maxFPS != s2->maxFPS) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 291 && (VK_AMD_anti_lag)
+bool compare_VkAntiLagPresentationInfoAMD(VkAntiLagPresentationInfoAMD const *s1,
+                                          VkAntiLagPresentationInfoAMD const *s2) {
+  if ((s1->stage != s2->stage) || (s1->frameIndex != s2->frameIndex) || false)
     return false;
 
   return true;

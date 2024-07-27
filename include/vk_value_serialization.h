@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 290,
-              "VK_HEADER_VERSION is from after the maximum supported version of v290.");
+static_assert(VK_HEADER_VERSION <= 291,
+              "VK_HEADER_VERSION is from after the maximum supported version of v291.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 290,
-               "VK_HEADER_VERSION is from after the maximum supported version of v290.");
+_Static_assert(VK_HEADER_VERSION <= 291,
+               "VK_HEADER_VERSION is from after the maximum supported version of v291.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -2866,6 +2866,17 @@ EnumValueSet const VkDirectDriverLoadingModeLUNARGSets[] = {
     {"INCLUSIVE", 1, false},
 };
 
+EnumValueSet const VkAntiLagModeAMDSets[] = {
+    {"DRIVER_CONTROL", 0, false},
+    {"ON", 1, false},
+    {"OFF", 2, false},
+};
+
+EnumValueSet const VkAntiLagStageAMDSets[] = {
+    {"INPUT", 0, false},
+    {"PRESENT", 1, false},
+};
+
 EnumValueSet const VkDisplacementMicromapFormatNVSets[] = {
     {"64_TRIANGLES_64_BYTES", 1, false},
     {"256_TRIANGLES_128_BYTES", 2, false},
@@ -3577,7 +3588,7 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[357] = {
+EnumType const cEnumTypes[359] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", NULL, 0},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 1},
@@ -3859,6 +3870,8 @@ EnumType const cEnumTypes[357] = {
     {"VkDeviceFaultVendorBinaryHeaderVersionEXT", VkDeviceFaultVendorBinaryHeaderVersionEXTSets, 1},
     {"VkDepthBiasRepresentationEXT", VkDepthBiasRepresentationEXTSets, 3},
     {"VkDirectDriverLoadingModeLUNARG", VkDirectDriverLoadingModeLUNARGSets, 2},
+    {"VkAntiLagModeAMD", VkAntiLagModeAMDSets, 3},
+    {"VkAntiLagStageAMD", VkAntiLagStageAMDSets, 2},
     {"VkDisplacementMicromapFormatNV", VkDisplacementMicromapFormatNVSets, 3},
     {"VkShaderCodeTypeEXT", VkShaderCodeTypeEXTSets, 2},
     {"VkScopeKHR", VkScopeKHRSets, 8},
