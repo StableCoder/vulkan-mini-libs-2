@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 292,
-              "VK_HEADER_VERSION is from after the maximum supported version of v292.");
+static_assert(VK_HEADER_VERSION <= 293,
+              "VK_HEADER_VERSION is from after the maximum supported version of v293.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 292,
-               "VK_HEADER_VERSION is from after the maximum supported version of v292.");
+_Static_assert(VK_HEADER_VERSION <= 293,
+               "VK_HEADER_VERSION is from after the maximum supported version of v293.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -7038,6 +7038,11 @@ void cleanup_VkAntiLagDataAMD(VkAntiLagDataAMD const *pData);
 
 #if VK_HEADER_VERSION >= 291 && (VK_AMD_anti_lag)
 void cleanup_VkAntiLagPresentationInfoAMD(VkAntiLagPresentationInfoAMD const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 293 && (VK_NV_command_buffer_inheritance)
+void cleanup_VkPhysicalDeviceCommandBufferInheritanceFeaturesNV(
+    VkPhysicalDeviceCommandBufferInheritanceFeaturesNV const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -16373,6 +16378,14 @@ void cleanup_vk_struct(void const *pData) {
 #if VK_HEADER_VERSION >= 291 && (VK_AMD_anti_lag)
   if (pTemp->sType == VK_STRUCTURE_TYPE_ANTI_LAG_PRESENTATION_INFO_AMD) {
     cleanup_VkAntiLagPresentationInfoAMD((VkAntiLagPresentationInfoAMD const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 293 && (VK_NV_command_buffer_inheritance)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMMAND_BUFFER_INHERITANCE_FEATURES_NV) {
+    cleanup_VkPhysicalDeviceCommandBufferInheritanceFeaturesNV(
+        (VkPhysicalDeviceCommandBufferInheritanceFeaturesNV const *)pData);
     return;
   }
 #endif
@@ -32763,6 +32776,16 @@ void cleanup_VkAntiLagDataAMD(VkAntiLagDataAMD const *pData) {
 
 #if VK_HEADER_VERSION >= 291 && (VK_AMD_anti_lag)
 void cleanup_VkAntiLagPresentationInfoAMD(VkAntiLagPresentationInfoAMD const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 293 && (VK_NV_command_buffer_inheritance)
+void cleanup_VkPhysicalDeviceCommandBufferInheritanceFeaturesNV(
+    VkPhysicalDeviceCommandBufferInheritanceFeaturesNV const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

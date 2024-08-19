@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 292,
-              "VK_HEADER_VERSION is from after the maximum supported version of v292.");
+static_assert(VK_HEADER_VERSION <= 293,
+              "VK_HEADER_VERSION is from after the maximum supported version of v293.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 292,
-               "VK_HEADER_VERSION is from after the maximum supported version of v292.");
+_Static_assert(VK_HEADER_VERSION <= 293,
+               "VK_HEADER_VERSION is from after the maximum supported version of v293.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -6458,6 +6458,12 @@ bool compare_VkMemoryMapPlacedInfoEXT(VkMemoryMapPlacedInfoEXT const *s1,
 bool compare_VkPhysicalDeviceRawAccessChainsFeaturesNV(
     VkPhysicalDeviceRawAccessChainsFeaturesNV const *s1,
     VkPhysicalDeviceRawAccessChainsFeaturesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 293 && (VK_NV_command_buffer_inheritance)
+bool compare_VkPhysicalDeviceCommandBufferInheritanceFeaturesNV(
+    VkPhysicalDeviceCommandBufferInheritanceFeaturesNV const *s1,
+    VkPhysicalDeviceCommandBufferInheritanceFeaturesNV const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 285 && (VK_MESA_image_alignment_control)
@@ -22889,6 +22895,17 @@ bool compare_VkPhysicalDeviceRawAccessChainsFeaturesNV(
     VkPhysicalDeviceRawAccessChainsFeaturesNV const *s1,
     VkPhysicalDeviceRawAccessChainsFeaturesNV const *s2) {
   if ((s1->shaderRawAccessChains != s2->shaderRawAccessChains) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 293 && (VK_NV_command_buffer_inheritance)
+bool compare_VkPhysicalDeviceCommandBufferInheritanceFeaturesNV(
+    VkPhysicalDeviceCommandBufferInheritanceFeaturesNV const *s1,
+    VkPhysicalDeviceCommandBufferInheritanceFeaturesNV const *s2) {
+  if ((s1->commandBufferInheritance != s2->commandBufferInheritance) || false)
     return false;
 
   return true;
