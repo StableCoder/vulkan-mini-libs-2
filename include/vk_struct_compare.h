@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 293,
-              "VK_HEADER_VERSION is from after the maximum supported version of v293.");
+static_assert(VK_HEADER_VERSION <= 294,
+              "VK_HEADER_VERSION is from after the maximum supported version of v294.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 293,
-               "VK_HEADER_VERSION is from after the maximum supported version of v293.");
+_Static_assert(VK_HEADER_VERSION <= 294,
+               "VK_HEADER_VERSION is from after the maximum supported version of v294.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -297,6 +297,51 @@ bool compare_VkPipelineCacheHeaderVersionSafetyCriticalOne(
 #endif
 
 bool compare_VkPushConstantRange(VkPushConstantRange const *s1, VkPushConstantRange const *s2);
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+bool compare_VkPipelineBinaryCreateInfoKHR(VkPipelineBinaryCreateInfoKHR const *s1,
+                                           VkPipelineBinaryCreateInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+bool compare_VkPipelineBinaryHandlesInfoKHR(VkPipelineBinaryHandlesInfoKHR const *s1,
+                                            VkPipelineBinaryHandlesInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+bool compare_VkPipelineBinaryDataKHR(VkPipelineBinaryDataKHR const *s1,
+                                     VkPipelineBinaryDataKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+bool compare_VkPipelineBinaryKeysAndDataKHR(VkPipelineBinaryKeysAndDataKHR const *s1,
+                                            VkPipelineBinaryKeysAndDataKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+bool compare_VkPipelineBinaryKeyKHR(VkPipelineBinaryKeyKHR const *s1,
+                                    VkPipelineBinaryKeyKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+bool compare_VkPipelineBinaryInfoKHR(VkPipelineBinaryInfoKHR const *s1,
+                                     VkPipelineBinaryInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+bool compare_VkReleaseCapturedPipelineDataInfoKHR(VkReleaseCapturedPipelineDataInfoKHR const *s1,
+                                                  VkReleaseCapturedPipelineDataInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+bool compare_VkPipelineBinaryDataInfoKHR(VkPipelineBinaryDataInfoKHR const *s1,
+                                         VkPipelineBinaryDataInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+bool compare_VkPipelineCreateInfoKHR(VkPipelineCreateInfoKHR const *s1,
+                                     VkPipelineCreateInfoKHR const *s2);
+#endif
 
 bool compare_VkPipelineLayoutCreateInfo(VkPipelineLayoutCreateInfo const *s1,
                                         VkPipelineLayoutCreateInfo const *s2);
@@ -5412,6 +5457,24 @@ bool compare_VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT(
     VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+bool compare_VkPhysicalDevicePipelineBinaryFeaturesKHR(
+    VkPhysicalDevicePipelineBinaryFeaturesKHR const *s1,
+    VkPhysicalDevicePipelineBinaryFeaturesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+bool compare_VkDevicePipelineBinaryInternalCacheControlKHR(
+    VkDevicePipelineBinaryInternalCacheControlKHR const *s1,
+    VkDevicePipelineBinaryInternalCacheControlKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+bool compare_VkPhysicalDevicePipelineBinaryPropertiesKHR(
+    VkPhysicalDevicePipelineBinaryPropertiesKHR const *s1,
+    VkPhysicalDevicePipelineBinaryPropertiesKHR const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 210 && (VK_EXT_graphics_pipeline_library)
 bool compare_VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT(
     VkPhysicalDeviceGraphicsPipelineLibraryPropertiesEXT const *s1,
@@ -9221,6 +9284,98 @@ bool compare_VkPushConstantRange(VkPushConstantRange const *s1, VkPushConstantRa
 
   return true;
 }
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+bool compare_VkPipelineBinaryCreateInfoKHR(VkPipelineBinaryCreateInfoKHR const *s1,
+                                           VkPipelineBinaryCreateInfoKHR const *s2) {
+  if ((s1->pipeline != s2->pipeline) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+bool compare_VkPipelineBinaryHandlesInfoKHR(VkPipelineBinaryHandlesInfoKHR const *s1,
+                                            VkPipelineBinaryHandlesInfoKHR const *s2) {
+  if ((s1->pipelineBinaryCount != s2->pipelineBinaryCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+bool compare_VkPipelineBinaryDataKHR(VkPipelineBinaryDataKHR const *s1,
+                                     VkPipelineBinaryDataKHR const *s2) {
+  if ((s1->dataSize != s2->dataSize) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+bool compare_VkPipelineBinaryKeysAndDataKHR(VkPipelineBinaryKeysAndDataKHR const *s1,
+                                            VkPipelineBinaryKeysAndDataKHR const *s2) {
+  if ((s1->binaryCount != s2->binaryCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+bool compare_VkPipelineBinaryKeyKHR(VkPipelineBinaryKeyKHR const *s1,
+                                    VkPipelineBinaryKeyKHR const *s2) {
+  if ((s1->keySize != s2->keySize) || false)
+    return false;
+
+  for (uint32_t i = 0; i < VK_MAX_PIPELINE_BINARY_KEY_SIZE_KHR; ++i) {
+    if (s1->key[i] != s2->key[i])
+      return false;
+  }
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+bool compare_VkPipelineBinaryInfoKHR(VkPipelineBinaryInfoKHR const *s1,
+                                     VkPipelineBinaryInfoKHR const *s2) {
+  if ((s1->binaryCount != s2->binaryCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+bool compare_VkReleaseCapturedPipelineDataInfoKHR(VkReleaseCapturedPipelineDataInfoKHR const *s1,
+                                                  VkReleaseCapturedPipelineDataInfoKHR const *s2) {
+  if ((s1->pipeline != s2->pipeline) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+bool compare_VkPipelineBinaryDataInfoKHR(VkPipelineBinaryDataInfoKHR const *s1,
+                                         VkPipelineBinaryDataInfoKHR const *s2) {
+  if ((s1->pipelineBinary != s2->pipelineBinary) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+bool compare_VkPipelineCreateInfoKHR(VkPipelineCreateInfoKHR const *s1,
+                                     VkPipelineCreateInfoKHR const *s2) {
+  return true;
+}
+#endif
 
 bool compare_VkPipelineLayoutCreateInfo(VkPipelineLayoutCreateInfo const *s1,
                                         VkPipelineLayoutCreateInfo const *s2) {
@@ -20729,6 +20884,43 @@ bool compare_VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT(
     VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT const *s1,
     VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT const *s2) {
   if ((s1->graphicsPipelineLibrary != s2->graphicsPipelineLibrary) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+bool compare_VkPhysicalDevicePipelineBinaryFeaturesKHR(
+    VkPhysicalDevicePipelineBinaryFeaturesKHR const *s1,
+    VkPhysicalDevicePipelineBinaryFeaturesKHR const *s2) {
+  if ((s1->pipelineBinaries != s2->pipelineBinaries) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+bool compare_VkDevicePipelineBinaryInternalCacheControlKHR(
+    VkDevicePipelineBinaryInternalCacheControlKHR const *s1,
+    VkDevicePipelineBinaryInternalCacheControlKHR const *s2) {
+  if ((s1->disableInternalCache != s2->disableInternalCache) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+bool compare_VkPhysicalDevicePipelineBinaryPropertiesKHR(
+    VkPhysicalDevicePipelineBinaryPropertiesKHR const *s1,
+    VkPhysicalDevicePipelineBinaryPropertiesKHR const *s2) {
+  if ((s1->pipelineBinaryInternalCache != s2->pipelineBinaryInternalCache) ||
+      (s1->pipelineBinaryInternalCacheControl != s2->pipelineBinaryInternalCacheControl) ||
+      (s1->pipelineBinaryPrefersInternalCache != s2->pipelineBinaryPrefersInternalCache) ||
+      (s1->pipelineBinaryPrecompiledInternalCache != s2->pipelineBinaryPrecompiledInternalCache) ||
+      (s1->pipelineBinaryCompressedData != s2->pipelineBinaryCompressedData) || false)
     return false;
 
   return true;

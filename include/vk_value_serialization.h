@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 293,
-              "VK_HEADER_VERSION is from after the maximum supported version of v293.");
+static_assert(VK_HEADER_VERSION <= 294,
+              "VK_HEADER_VERSION is from after the maximum supported version of v294.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 293,
-               "VK_HEADER_VERSION is from after the maximum supported version of v293.");
+_Static_assert(VK_HEADER_VERSION <= 294,
+               "VK_HEADER_VERSION is from after the maximum supported version of v294.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -1125,6 +1125,7 @@ EnumValueSet const VkPipelineCreateFlags2KHRSets[] = {
     {"RAY_TRACING_DISPLACEMENT_MICROMAP_BIT_NV", 0x10000000, false},
     {"DESCRIPTOR_BUFFER_BIT_EXT", 0x20000000, false},
     {"ENABLE_LEGACY_DITHERING_BIT_EXT", 0x400000000, false},
+    {"CAPTURE_DATA", 0x80000000, false},
 };
 
 EnumValueSet const VkBufferUsageFlags2KHRSets[] = {
@@ -2513,6 +2514,7 @@ EnumValueSet const VkObjectTypeSets[] = {
     {"SHADER_EXT", 1000482000, false},
     {"CUDA_MODULE_NV", 1000307000, false},
     {"CUDA_FUNCTION_NV", 1000307001, false},
+    {"PIPELINE_BINARY_KHR", 1000483000, false},
 };
 
 EnumValueSet const VkRayTracingInvocationReorderModeNVSets[] = {
@@ -3675,7 +3677,7 @@ EnumType const cEnumTypes[359] = {
     {"VkBuildMicromapFlagsEXT", VkBuildMicromapFlagsEXTSets, 3},
     {"VkMicromapCreateFlagsEXT", VkMicromapCreateFlagsEXTSets, 1},
     {"VkDirectDriverLoadingFlagsLUNARG", NULL, 0},
-    {"VkPipelineCreateFlags2KHR", VkPipelineCreateFlags2KHRSets, 45},
+    {"VkPipelineCreateFlags2KHR", VkPipelineCreateFlags2KHRSets, 46},
     {"VkBufferUsageFlags2KHR", VkBufferUsageFlags2KHRSets, 36},
     {"VkCompositeAlphaFlagsKHR", VkCompositeAlphaFlagsKHRSets, 4},
     {"VkDisplayPlaneAlphaFlagsKHR", VkDisplayPlaneAlphaFlagsKHRSets, 4},
@@ -3813,7 +3815,7 @@ EnumType const cEnumTypes[359] = {
     {"VkFilter", VkFilterSets, 4},
     {"VkSamplerMipmapMode", VkSamplerMipmapModeSets, 2},
     {"VkVertexInputRate", VkVertexInputRateSets, 2},
-    {"VkObjectType", VkObjectTypeSets, 57},
+    {"VkObjectType", VkObjectTypeSets, 58},
     {"VkRayTracingInvocationReorderModeNV", VkRayTracingInvocationReorderModeNVSets, 2},
     {"VkIndirectCommandsTokenTypeNV", VkIndirectCommandsTokenTypeNVSets, 11},
     {"VkDescriptorUpdateTemplateType", VkDescriptorUpdateTemplateTypeSets, 3},

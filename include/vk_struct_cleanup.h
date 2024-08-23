@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 293,
-              "VK_HEADER_VERSION is from after the maximum supported version of v293.");
+static_assert(VK_HEADER_VERSION <= 294,
+              "VK_HEADER_VERSION is from after the maximum supported version of v294.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 293,
-               "VK_HEADER_VERSION is from after the maximum supported version of v293.");
+_Static_assert(VK_HEADER_VERSION <= 294,
+               "VK_HEADER_VERSION is from after the maximum supported version of v294.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -7043,6 +7043,58 @@ void cleanup_VkAntiLagPresentationInfoAMD(VkAntiLagPresentationInfoAMD const *pD
 #if VK_HEADER_VERSION >= 293 && (VK_NV_command_buffer_inheritance)
 void cleanup_VkPhysicalDeviceCommandBufferInheritanceFeaturesNV(
     VkPhysicalDeviceCommandBufferInheritanceFeaturesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+void cleanup_VkPipelineBinaryCreateInfoKHR(VkPipelineBinaryCreateInfoKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+void cleanup_VkPipelineBinaryHandlesInfoKHR(VkPipelineBinaryHandlesInfoKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+void cleanup_VkPipelineBinaryDataKHR(VkPipelineBinaryDataKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+void cleanup_VkPipelineBinaryKeysAndDataKHR(VkPipelineBinaryKeysAndDataKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+void cleanup_VkPipelineBinaryKeyKHR(VkPipelineBinaryKeyKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+void cleanup_VkPipelineBinaryInfoKHR(VkPipelineBinaryInfoKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+void cleanup_VkReleaseCapturedPipelineDataInfoKHR(
+    VkReleaseCapturedPipelineDataInfoKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+void cleanup_VkPipelineBinaryDataInfoKHR(VkPipelineBinaryDataInfoKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+void cleanup_VkPipelineCreateInfoKHR(VkPipelineCreateInfoKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+void cleanup_VkPhysicalDevicePipelineBinaryFeaturesKHR(
+    VkPhysicalDevicePipelineBinaryFeaturesKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+void cleanup_VkDevicePipelineBinaryInternalCacheControlKHR(
+    VkDevicePipelineBinaryInternalCacheControlKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+void cleanup_VkPhysicalDevicePipelineBinaryPropertiesKHR(
+    VkPhysicalDevicePipelineBinaryPropertiesKHR const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -16386,6 +16438,80 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMMAND_BUFFER_INHERITANCE_FEATURES_NV) {
     cleanup_VkPhysicalDeviceCommandBufferInheritanceFeaturesNV(
         (VkPhysicalDeviceCommandBufferInheritanceFeaturesNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_BINARY_CREATE_INFO_KHR) {
+    cleanup_VkPipelineBinaryCreateInfoKHR((VkPipelineBinaryCreateInfoKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_BINARY_HANDLES_INFO_KHR) {
+    cleanup_VkPipelineBinaryHandlesInfoKHR((VkPipelineBinaryHandlesInfoKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_BINARY_KEY_KHR) {
+    cleanup_VkPipelineBinaryKeyKHR((VkPipelineBinaryKeyKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_BINARY_INFO_KHR) {
+    cleanup_VkPipelineBinaryInfoKHR((VkPipelineBinaryInfoKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RELEASE_CAPTURED_PIPELINE_DATA_INFO_KHR) {
+    cleanup_VkReleaseCapturedPipelineDataInfoKHR(
+        (VkReleaseCapturedPipelineDataInfoKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_BINARY_DATA_INFO_KHR) {
+    cleanup_VkPipelineBinaryDataInfoKHR((VkPipelineBinaryDataInfoKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_CREATE_INFO_KHR) {
+    cleanup_VkPipelineCreateInfoKHR((VkPipelineCreateInfoKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_BINARY_FEATURES_KHR) {
+    cleanup_VkPhysicalDevicePipelineBinaryFeaturesKHR(
+        (VkPhysicalDevicePipelineBinaryFeaturesKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DEVICE_PIPELINE_BINARY_INTERNAL_CACHE_CONTROL_KHR) {
+    cleanup_VkDevicePipelineBinaryInternalCacheControlKHR(
+        (VkDevicePipelineBinaryInternalCacheControlKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PIPELINE_BINARY_PROPERTIES_KHR) {
+    cleanup_VkPhysicalDevicePipelineBinaryPropertiesKHR(
+        (VkPhysicalDevicePipelineBinaryPropertiesKHR const *)pData);
     return;
   }
 #endif
@@ -32786,6 +32912,141 @@ void cleanup_VkAntiLagPresentationInfoAMD(VkAntiLagPresentationInfoAMD const *pD
 #if VK_HEADER_VERSION >= 293 && (VK_NV_command_buffer_inheritance)
 void cleanup_VkPhysicalDeviceCommandBufferInheritanceFeaturesNV(
     VkPhysicalDeviceCommandBufferInheritanceFeaturesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+void cleanup_VkPipelineBinaryCreateInfoKHR(VkPipelineBinaryCreateInfoKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pKeysAndDataInfo
+  if (pData->pKeysAndDataInfo != NULL)
+    cleanup_VkPipelineBinaryKeysAndDataKHR(pData->pKeysAndDataInfo);
+  free((void *)pData->pKeysAndDataInfo);
+
+  // pPipelineCreateInfo
+  if (pData->pPipelineCreateInfo != NULL)
+    cleanup_VkPipelineCreateInfoKHR(pData->pPipelineCreateInfo);
+  free((void *)pData->pPipelineCreateInfo);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+void cleanup_VkPipelineBinaryHandlesInfoKHR(VkPipelineBinaryHandlesInfoKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pPipelineBinaries - pipelineBinaryCount
+  free((void *)pData->pPipelineBinaries);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+void cleanup_VkPipelineBinaryDataKHR(VkPipelineBinaryDataKHR const *pData) {
+  // pData - dataSize
+  free((void *)pData->pData);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+void cleanup_VkPipelineBinaryKeysAndDataKHR(VkPipelineBinaryKeysAndDataKHR const *pData) {
+  // pPipelineBinaryKeys - binaryCount
+  if (pData->pPipelineBinaryKeys != NULL) {
+    for (uint32_t i = 0; i < pData->binaryCount; ++i)
+      cleanup_VkPipelineBinaryKeyKHR(&pData->pPipelineBinaryKeys[i]);
+  }
+  free((void *)pData->pPipelineBinaryKeys);
+
+  // pPipelineBinaryData - binaryCount
+  if (pData->pPipelineBinaryData != NULL) {
+    for (uint32_t i = 0; i < pData->binaryCount; ++i)
+      cleanup_VkPipelineBinaryDataKHR(&pData->pPipelineBinaryData[i]);
+  }
+  free((void *)pData->pPipelineBinaryData);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+void cleanup_VkPipelineBinaryKeyKHR(VkPipelineBinaryKeyKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+void cleanup_VkPipelineBinaryInfoKHR(VkPipelineBinaryInfoKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pPipelineBinaries - binaryCount
+  free((void *)pData->pPipelineBinaries);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+void cleanup_VkReleaseCapturedPipelineDataInfoKHR(
+    VkReleaseCapturedPipelineDataInfoKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+void cleanup_VkPipelineBinaryDataInfoKHR(VkPipelineBinaryDataInfoKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+void cleanup_VkPipelineCreateInfoKHR(VkPipelineCreateInfoKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+void cleanup_VkPhysicalDevicePipelineBinaryFeaturesKHR(
+    VkPhysicalDevicePipelineBinaryFeaturesKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+void cleanup_VkDevicePipelineBinaryInternalCacheControlKHR(
+    VkDevicePipelineBinaryInternalCacheControlKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
+void cleanup_VkPhysicalDevicePipelineBinaryPropertiesKHR(
+    VkPhysicalDevicePipelineBinaryPropertiesKHR const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

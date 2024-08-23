@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "vulkan header version is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 293,
-              "vulkan header version is from after the maximum supported version of v293.");
+static_assert(VK_HEADER_VERSION <= 294,
+              "vulkan header version is from after the maximum supported version of v294.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "vulkan header version is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 293,
-               "vulkan header version is from after the maximum supported version of v293.");
+_Static_assert(VK_HEADER_VERSION <= 294,
+               "vulkan header version is from after the maximum supported version of v294.");
 #endif
 
 /// Returns a string representing the given VkResult parameter. If there is no known representation,
@@ -55,6 +55,14 @@ char const *VkResult_to_string(VkResult result) {
   // Check in descending order to get the 'latest' version of the error code text available.
   // Also, because codes have been re-used over time, can't use a switch and have to do this large
   // set of ifs. Luckily this *should* be a relatively rare call.
+#if VK_HEADER_VERSION >= 294 && VK_KHR_pipeline_binary
+  if (result == VK_PIPELINE_BINARY_MISSING_KHR)
+    return "VK_PIPELINE_BINARY_MISSING_KHR";
+#endif
+#if VK_HEADER_VERSION >= 294 && VK_KHR_pipeline_binary
+  if (result == VK_ERROR_NOT_ENOUGH_SPACE_KHR)
+    return "VK_ERROR_NOT_ENOUGH_SPACE_KHR";
+#endif
 #if VK_HEADER_VERSION >= 278 && VK_EXT_shader_object
   if (result == VK_INCOMPATIBLE_SHADER_BINARY_EXT)
     return "VK_INCOMPATIBLE_SHADER_BINARY_EXT";
