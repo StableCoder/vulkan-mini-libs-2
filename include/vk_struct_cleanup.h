@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 294,
-              "VK_HEADER_VERSION is from after the maximum supported version of v294.");
+static_assert(VK_HEADER_VERSION <= 295,
+              "VK_HEADER_VERSION is from after the maximum supported version of v295.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 294,
-               "VK_HEADER_VERSION is from after the maximum supported version of v294.");
+_Static_assert(VK_HEADER_VERSION <= 295,
+               "VK_HEADER_VERSION is from after the maximum supported version of v295.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -1599,11 +1599,6 @@ void cleanup_VkPhysicalDeviceCornerSampledImageFeaturesNV(
     VkPhysicalDeviceCornerSampledImageFeaturesNV const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 85 && (VK_NV_compute_shader_derivatives)
-void cleanup_VkPhysicalDeviceComputeShaderDerivativesFeaturesNV(
-    VkPhysicalDeviceComputeShaderDerivativesFeaturesNV const *pData);
-#endif
-
 #if VK_HEADER_VERSION >= 85 && (VK_NV_shader_image_footprint)
 void cleanup_VkPhysicalDeviceShaderImageFootprintFeaturesNV(
     VkPhysicalDeviceShaderImageFootprintFeaturesNV const *pData);
@@ -1653,6 +1648,11 @@ void cleanup_VkPhysicalDeviceMeshShaderPropertiesNV(
 
 #if VK_HEADER_VERSION >= 85 && (VK_NV_mesh_shader)
 void cleanup_VkDrawMeshTasksIndirectCommandNV(VkDrawMeshTasksIndirectCommandNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 85 && VK_HEADER_VERSION <= 294 && (VK_NV_compute_shader_derivatives)
+void cleanup_VkPhysicalDeviceComputeShaderDerivativesFeaturesNV(
+    VkPhysicalDeviceComputeShaderDerivativesFeaturesNV const *pData);
 #endif
 
 #if VK_HEADER_VERSION >= 85 && VK_HEADER_VERSION <= 214 && (VK_NV_fragment_shader_barycentric)
@@ -7097,6 +7097,21 @@ void cleanup_VkPhysicalDevicePipelineBinaryPropertiesKHR(
     VkPhysicalDevicePipelineBinaryPropertiesKHR const *pData);
 #endif
 
+#if VK_HEADER_VERSION >= 295 && (VK_KHR_compute_shader_derivatives)
+void cleanup_VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR(
+    VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 295 && (VK_NV_compute_shader_derivatives)
+void cleanup_VkPhysicalDeviceComputeShaderDerivativesFeaturesNV(
+    VkPhysicalDeviceComputeShaderDerivativesFeaturesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 295 && (VK_KHR_compute_shader_derivatives)
+void cleanup_VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR(
+    VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR const *pData);
+#endif
+
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
 
 #include <stdlib.h>
@@ -8882,14 +8897,6 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
-#if VK_HEADER_VERSION >= 85 && (VK_NV_compute_shader_derivatives)
-  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_NV) {
-    cleanup_VkPhysicalDeviceComputeShaderDerivativesFeaturesNV(
-        (VkPhysicalDeviceComputeShaderDerivativesFeaturesNV const *)pData);
-    return;
-  }
-#endif
-
 #if VK_HEADER_VERSION >= 85 && (VK_NV_shader_image_footprint)
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_IMAGE_FOOTPRINT_FEATURES_NV) {
     cleanup_VkPhysicalDeviceShaderImageFootprintFeaturesNV(
@@ -8943,6 +8950,14 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_MESH_SHADER_PROPERTIES_NV) {
     cleanup_VkPhysicalDeviceMeshShaderPropertiesNV(
         (VkPhysicalDeviceMeshShaderPropertiesNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 85 && VK_HEADER_VERSION <= 294 && (VK_NV_compute_shader_derivatives)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_NV) {
+    cleanup_VkPhysicalDeviceComputeShaderDerivativesFeaturesNV(
+        (VkPhysicalDeviceComputeShaderDerivativesFeaturesNV const *)pData);
     return;
   }
 #endif
@@ -16515,6 +16530,22 @@ void cleanup_vk_struct(void const *pData) {
     return;
   }
 #endif
+
+#if VK_HEADER_VERSION >= 295 && (VK_KHR_compute_shader_derivatives)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_FEATURES_KHR) {
+    cleanup_VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR(
+        (VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 295 && (VK_KHR_compute_shader_derivatives)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_PROPERTIES_KHR) {
+    cleanup_VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR(
+        (VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR const *)pData);
+    return;
+  }
+#endif
 }
 
 void cleanup_VkOffset2D(VkOffset2D const *pData) {}
@@ -20253,16 +20284,6 @@ void cleanup_VkPhysicalDeviceCornerSampledImageFeaturesNV(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 85 && (VK_NV_compute_shader_derivatives)
-void cleanup_VkPhysicalDeviceComputeShaderDerivativesFeaturesNV(
-    VkPhysicalDeviceComputeShaderDerivativesFeaturesNV const *pData) {
-  // pNext
-  if (pData->pNext != NULL)
-    cleanup_vk_struct(pData->pNext);
-  free((void *)pData->pNext);
-}
-#endif
-
 #if VK_HEADER_VERSION >= 85 && (VK_NV_shader_image_footprint)
 void cleanup_VkPhysicalDeviceShaderImageFootprintFeaturesNV(
     VkPhysicalDeviceShaderImageFootprintFeaturesNV const *pData) {
@@ -20371,6 +20392,16 @@ void cleanup_VkPhysicalDeviceMeshShaderPropertiesNV(
 
 #if VK_HEADER_VERSION >= 85 && (VK_NV_mesh_shader)
 void cleanup_VkDrawMeshTasksIndirectCommandNV(VkDrawMeshTasksIndirectCommandNV const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 85 && VK_HEADER_VERSION <= 294 && (VK_NV_compute_shader_derivatives)
+void cleanup_VkPhysicalDeviceComputeShaderDerivativesFeaturesNV(
+    VkPhysicalDeviceComputeShaderDerivativesFeaturesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
 #endif
 
 #if VK_HEADER_VERSION >= 85 && VK_HEADER_VERSION <= 214 && (VK_NV_fragment_shader_barycentric)
@@ -33047,6 +33078,34 @@ void cleanup_VkDevicePipelineBinaryInternalCacheControlKHR(
 #if VK_HEADER_VERSION >= 294 && (VK_KHR_pipeline_binary)
 void cleanup_VkPhysicalDevicePipelineBinaryPropertiesKHR(
     VkPhysicalDevicePipelineBinaryPropertiesKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 295 && (VK_KHR_compute_shader_derivatives)
+void cleanup_VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR(
+    VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 295 && (VK_NV_compute_shader_derivatives)
+void cleanup_VkPhysicalDeviceComputeShaderDerivativesFeaturesNV(
+    VkPhysicalDeviceComputeShaderDerivativesFeaturesNV const *pData) {
+  cleanup_VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR(
+      (VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR const *)pData);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 295 && (VK_KHR_compute_shader_derivatives)
+void cleanup_VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR(
+    VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

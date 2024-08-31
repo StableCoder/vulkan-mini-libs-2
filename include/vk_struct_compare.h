@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 294,
-              "VK_HEADER_VERSION is from after the maximum supported version of v294.");
+static_assert(VK_HEADER_VERSION <= 295,
+              "VK_HEADER_VERSION is from after the maximum supported version of v295.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 294,
-               "VK_HEADER_VERSION is from after the maximum supported version of v294.");
+_Static_assert(VK_HEADER_VERSION <= 295,
+               "VK_HEADER_VERSION is from after the maximum supported version of v295.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -2826,10 +2826,22 @@ bool compare_VkPhysicalDeviceCornerSampledImageFeaturesNV(
     VkPhysicalDeviceCornerSampledImageFeaturesNV const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 85 && (VK_NV_compute_shader_derivatives)
+#if VK_HEADER_VERSION >= 295 && (VK_KHR_compute_shader_derivatives)
+bool compare_VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR(
+    VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR const *s1,
+    VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 295 && (VK_NV_compute_shader_derivatives)
 bool compare_VkPhysicalDeviceComputeShaderDerivativesFeaturesNV(
     VkPhysicalDeviceComputeShaderDerivativesFeaturesNV const *s1,
     VkPhysicalDeviceComputeShaderDerivativesFeaturesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 295 && (VK_KHR_compute_shader_derivatives)
+bool compare_VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR(
+    VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR const *s1,
+    VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 215 && (VK_NV_fragment_shader_barycentric)
@@ -6550,6 +6562,12 @@ bool compare_VkImageAlignmentControlCreateInfoMESA(VkImageAlignmentControlCreate
 bool compare_VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT(
     VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT const *s1,
     VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 85 && VK_HEADER_VERSION <= 294 && (VK_NV_compute_shader_derivatives)
+bool compare_VkPhysicalDeviceComputeShaderDerivativesFeaturesNV(
+    VkPhysicalDeviceComputeShaderDerivativesFeaturesNV const *s1,
+    VkPhysicalDeviceComputeShaderDerivativesFeaturesNV const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 117 && VK_HEADER_VERSION <= 275 && (VK_EXT_index_type_uint8)
@@ -14802,12 +14820,33 @@ bool compare_VkPhysicalDeviceCornerSampledImageFeaturesNV(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 85 && (VK_NV_compute_shader_derivatives)
+#if VK_HEADER_VERSION >= 295 && (VK_KHR_compute_shader_derivatives)
+bool compare_VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR(
+    VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR const *s1,
+    VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR const *s2) {
+  if ((s1->computeDerivativeGroupQuads != s2->computeDerivativeGroupQuads) ||
+      (s1->computeDerivativeGroupLinear != s2->computeDerivativeGroupLinear) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 295 && (VK_NV_compute_shader_derivatives)
 bool compare_VkPhysicalDeviceComputeShaderDerivativesFeaturesNV(
     VkPhysicalDeviceComputeShaderDerivativesFeaturesNV const *s1,
     VkPhysicalDeviceComputeShaderDerivativesFeaturesNV const *s2) {
-  if ((s1->computeDerivativeGroupQuads != s2->computeDerivativeGroupQuads) ||
-      (s1->computeDerivativeGroupLinear != s2->computeDerivativeGroupLinear) || false)
+  return compare_VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR(
+      (VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR const *)s1,
+      (VkPhysicalDeviceComputeShaderDerivativesFeaturesKHR const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 295 && (VK_KHR_compute_shader_derivatives)
+bool compare_VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR(
+    VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR const *s1,
+    VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR const *s2) {
+  if ((s1->meshAndTaskShaderDerivatives != s2->meshAndTaskShaderDerivatives) || false)
     return false;
 
   return true;
@@ -23142,6 +23181,18 @@ bool compare_VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT(
     VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT const *s1,
     VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT const *s2) {
   if ((s1->shaderReplicatedComposites != s2->shaderReplicatedComposites) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 85 && VK_HEADER_VERSION <= 294 && (VK_NV_compute_shader_derivatives)
+bool compare_VkPhysicalDeviceComputeShaderDerivativesFeaturesNV(
+    VkPhysicalDeviceComputeShaderDerivativesFeaturesNV const *s1,
+    VkPhysicalDeviceComputeShaderDerivativesFeaturesNV const *s2) {
+  if ((s1->computeDerivativeGroupQuads != s2->computeDerivativeGroupQuads) ||
+      (s1->computeDerivativeGroupLinear != s2->computeDerivativeGroupLinear) || false)
     return false;
 
   return true;
