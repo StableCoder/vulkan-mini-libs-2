@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 295,
-              "VK_HEADER_VERSION is from after the maximum supported version of v295.");
+static_assert(VK_HEADER_VERSION <= 296,
+              "VK_HEADER_VERSION is from after the maximum supported version of v296.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 295,
-               "VK_HEADER_VERSION is from after the maximum supported version of v295.");
+_Static_assert(VK_HEADER_VERSION <= 296,
+               "VK_HEADER_VERSION is from after the maximum supported version of v296.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -4382,10 +4382,135 @@ bool compare_VkPhysicalDeviceDepthClipControlFeaturesEXT(
     VkPhysicalDeviceDepthClipControlFeaturesEXT const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT(
+    VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT const *s1,
+    VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT(
+    VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT const *s1,
+    VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkGeneratedCommandsPipelineInfoEXT(VkGeneratedCommandsPipelineInfoEXT const *s1,
+                                                VkGeneratedCommandsPipelineInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkGeneratedCommandsShaderInfoEXT(VkGeneratedCommandsShaderInfoEXT const *s1,
+                                              VkGeneratedCommandsShaderInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkGeneratedCommandsMemoryRequirementsInfoEXT(
+    VkGeneratedCommandsMemoryRequirementsInfoEXT const *s1,
+    VkGeneratedCommandsMemoryRequirementsInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkIndirectExecutionSetPipelineInfoEXT(VkIndirectExecutionSetPipelineInfoEXT const *s1,
+                                                   VkIndirectExecutionSetPipelineInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkIndirectExecutionSetShaderLayoutInfoEXT(
+    VkIndirectExecutionSetShaderLayoutInfoEXT const *s1,
+    VkIndirectExecutionSetShaderLayoutInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkIndirectExecutionSetShaderInfoEXT(VkIndirectExecutionSetShaderInfoEXT const *s1,
+                                                 VkIndirectExecutionSetShaderInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkIndirectExecutionSetCreateInfoEXT(VkIndirectExecutionSetCreateInfoEXT const *s1,
+                                                 VkIndirectExecutionSetCreateInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkGeneratedCommandsInfoEXT(VkGeneratedCommandsInfoEXT const *s1,
+                                        VkGeneratedCommandsInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkWriteIndirectExecutionSetPipelineEXT(
+    VkWriteIndirectExecutionSetPipelineEXT const *s1,
+    VkWriteIndirectExecutionSetPipelineEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands && VK_EXT_shader_object)
+bool compare_VkWriteIndirectExecutionSetShaderEXT(VkWriteIndirectExecutionSetShaderEXT const *s1,
+                                                  VkWriteIndirectExecutionSetShaderEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkIndirectCommandsLayoutCreateInfoEXT(VkIndirectCommandsLayoutCreateInfoEXT const *s1,
+                                                   VkIndirectCommandsLayoutCreateInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkIndirectCommandsLayoutTokenEXT(VkIndirectCommandsLayoutTokenEXT const *s1,
+                                              VkIndirectCommandsLayoutTokenEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkDrawIndirectCountIndirectCommandEXT(VkDrawIndirectCountIndirectCommandEXT const *s1,
+                                                   VkDrawIndirectCountIndirectCommandEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkIndirectCommandsVertexBufferTokenEXT(
+    VkIndirectCommandsVertexBufferTokenEXT const *s1,
+    VkIndirectCommandsVertexBufferTokenEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkBindVertexBufferIndirectCommandEXT(VkBindVertexBufferIndirectCommandEXT const *s1,
+                                                  VkBindVertexBufferIndirectCommandEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkIndirectCommandsIndexBufferTokenEXT(VkIndirectCommandsIndexBufferTokenEXT const *s1,
+                                                   VkIndirectCommandsIndexBufferTokenEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkBindIndexBufferIndirectCommandEXT(VkBindIndexBufferIndirectCommandEXT const *s1,
+                                                 VkBindIndexBufferIndirectCommandEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkIndirectCommandsPushConstantTokenEXT(
+    VkIndirectCommandsPushConstantTokenEXT const *s1,
+    VkIndirectCommandsPushConstantTokenEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkIndirectCommandsExecutionSetTokenEXT(
+    VkIndirectCommandsExecutionSetTokenEXT const *s1,
+    VkIndirectCommandsExecutionSetTokenEXT const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 200 && (VK_EXT_depth_clip_control)
 bool compare_VkPipelineViewportDepthClipControlCreateInfoEXT(
     VkPipelineViewportDepthClipControlCreateInfoEXT const *s1,
     VkPipelineViewportDepthClipControlCreateInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_depth_clamp_control)
+bool compare_VkPhysicalDeviceDepthClampControlFeaturesEXT(
+    VkPhysicalDeviceDepthClampControlFeaturesEXT const *s1,
+    VkPhysicalDeviceDepthClampControlFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_depth_clamp_control)
+bool compare_VkPipelineViewportDepthClampControlCreateInfoEXT(
+    VkPipelineViewportDepthClampControlCreateInfoEXT const *s1,
+    VkPipelineViewportDepthClampControlCreateInfoEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 175 && (VK_EXT_vertex_input_dynamic_state)
@@ -6562,6 +6687,10 @@ bool compare_VkImageAlignmentControlCreateInfoMESA(VkImageAlignmentControlCreate
 bool compare_VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT(
     VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT const *s1,
     VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_depth_clamp_control)
+bool compare_VkDepthClampRangeEXT(VkDepthClampRangeEXT const *s1, VkDepthClampRangeEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 85 && VK_HEADER_VERSION <= 294 && (VK_NV_compute_shader_derivatives)
@@ -18449,11 +18578,291 @@ bool compare_VkPhysicalDeviceDepthClipControlFeaturesEXT(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT(
+    VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT const *s1,
+    VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT const *s2) {
+  if ((s1->deviceGeneratedCommands != s2->deviceGeneratedCommands) ||
+      (s1->dynamicGeneratedPipelineLayout != s2->dynamicGeneratedPipelineLayout) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT(
+    VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT const *s1,
+    VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT const *s2) {
+  if ((s1->maxIndirectPipelineCount != s2->maxIndirectPipelineCount) ||
+      (s1->maxIndirectShaderObjectCount != s2->maxIndirectShaderObjectCount) ||
+      (s1->maxIndirectSequenceCount != s2->maxIndirectSequenceCount) ||
+      (s1->maxIndirectCommandsTokenCount != s2->maxIndirectCommandsTokenCount) ||
+      (s1->maxIndirectCommandsTokenOffset != s2->maxIndirectCommandsTokenOffset) ||
+      (s1->maxIndirectCommandsIndirectStride != s2->maxIndirectCommandsIndirectStride) ||
+      (s1->supportedIndirectCommandsInputModes != s2->supportedIndirectCommandsInputModes) ||
+      (s1->supportedIndirectCommandsShaderStages != s2->supportedIndirectCommandsShaderStages) ||
+      (s1->supportedIndirectCommandsShaderStagesPipelineBinding !=
+       s2->supportedIndirectCommandsShaderStagesPipelineBinding) ||
+      (s1->supportedIndirectCommandsShaderStagesShaderBinding !=
+       s2->supportedIndirectCommandsShaderStagesShaderBinding) ||
+      (s1->deviceGeneratedCommandsTransformFeedback !=
+       s2->deviceGeneratedCommandsTransformFeedback) ||
+      (s1->deviceGeneratedCommandsMultiDrawIndirectCount !=
+       s2->deviceGeneratedCommandsMultiDrawIndirectCount) ||
+      false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkGeneratedCommandsPipelineInfoEXT(VkGeneratedCommandsPipelineInfoEXT const *s1,
+                                                VkGeneratedCommandsPipelineInfoEXT const *s2) {
+  if ((s1->pipeline != s2->pipeline) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkGeneratedCommandsShaderInfoEXT(VkGeneratedCommandsShaderInfoEXT const *s1,
+                                              VkGeneratedCommandsShaderInfoEXT const *s2) {
+  if ((s1->shaderCount != s2->shaderCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkGeneratedCommandsMemoryRequirementsInfoEXT(
+    VkGeneratedCommandsMemoryRequirementsInfoEXT const *s1,
+    VkGeneratedCommandsMemoryRequirementsInfoEXT const *s2) {
+  if ((s1->indirectExecutionSet != s2->indirectExecutionSet) ||
+      (s1->indirectCommandsLayout != s2->indirectCommandsLayout) ||
+      (s1->maxSequenceCount != s2->maxSequenceCount) || (s1->maxDrawCount != s2->maxDrawCount) ||
+      false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkIndirectExecutionSetPipelineInfoEXT(
+    VkIndirectExecutionSetPipelineInfoEXT const *s1,
+    VkIndirectExecutionSetPipelineInfoEXT const *s2) {
+  if ((s1->initialPipeline != s2->initialPipeline) ||
+      (s1->maxPipelineCount != s2->maxPipelineCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkIndirectExecutionSetShaderLayoutInfoEXT(
+    VkIndirectExecutionSetShaderLayoutInfoEXT const *s1,
+    VkIndirectExecutionSetShaderLayoutInfoEXT const *s2) {
+  if ((s1->setLayoutCount != s2->setLayoutCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkIndirectExecutionSetShaderInfoEXT(VkIndirectExecutionSetShaderInfoEXT const *s1,
+                                                 VkIndirectExecutionSetShaderInfoEXT const *s2) {
+  if ((s1->shaderCount != s2->shaderCount) || (s1->maxShaderCount != s2->maxShaderCount) ||
+      (s1->pushConstantRangeCount != s2->pushConstantRangeCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkIndirectExecutionSetCreateInfoEXT(VkIndirectExecutionSetCreateInfoEXT const *s1,
+                                                 VkIndirectExecutionSetCreateInfoEXT const *s2) {
+  if ((s1->type != s2->type) || (s1->info != s2->info) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkGeneratedCommandsInfoEXT(VkGeneratedCommandsInfoEXT const *s1,
+                                        VkGeneratedCommandsInfoEXT const *s2) {
+  if ((s1->shaderStages != s2->shaderStages) ||
+      (s1->indirectExecutionSet != s2->indirectExecutionSet) ||
+      (s1->indirectCommandsLayout != s2->indirectCommandsLayout) ||
+      (s1->indirectAddress != s2->indirectAddress) ||
+      (s1->indirectAddressSize != s2->indirectAddressSize) ||
+      (s1->preprocessAddress != s2->preprocessAddress) ||
+      (s1->preprocessSize != s2->preprocessSize) ||
+      (s1->maxSequenceCount != s2->maxSequenceCount) ||
+      (s1->sequenceCountAddress != s2->sequenceCountAddress) ||
+      (s1->maxDrawCount != s2->maxDrawCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkWriteIndirectExecutionSetPipelineEXT(
+    VkWriteIndirectExecutionSetPipelineEXT const *s1,
+    VkWriteIndirectExecutionSetPipelineEXT const *s2) {
+  if ((s1->index != s2->index) || (s1->pipeline != s2->pipeline) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands && VK_EXT_shader_object)
+bool compare_VkWriteIndirectExecutionSetShaderEXT(VkWriteIndirectExecutionSetShaderEXT const *s1,
+                                                  VkWriteIndirectExecutionSetShaderEXT const *s2) {
+  if ((s1->index != s2->index) || (s1->shader != s2->shader) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkIndirectCommandsLayoutCreateInfoEXT(
+    VkIndirectCommandsLayoutCreateInfoEXT const *s1,
+    VkIndirectCommandsLayoutCreateInfoEXT const *s2) {
+  if ((s1->flags != s2->flags) || (s1->shaderStages != s2->shaderStages) ||
+      (s1->indirectStride != s2->indirectStride) || (s1->pipelineLayout != s2->pipelineLayout) ||
+      (s1->tokenCount != s2->tokenCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkIndirectCommandsLayoutTokenEXT(VkIndirectCommandsLayoutTokenEXT const *s1,
+                                              VkIndirectCommandsLayoutTokenEXT const *s2) {
+  if ((s1->type != s2->type) || (s1->data != s2->data) || (s1->offset != s2->offset) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkDrawIndirectCountIndirectCommandEXT(
+    VkDrawIndirectCountIndirectCommandEXT const *s1,
+    VkDrawIndirectCountIndirectCommandEXT const *s2) {
+  if ((s1->bufferAddress != s2->bufferAddress) || (s1->stride != s2->stride) ||
+      (s1->commandCount != s2->commandCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkIndirectCommandsVertexBufferTokenEXT(
+    VkIndirectCommandsVertexBufferTokenEXT const *s1,
+    VkIndirectCommandsVertexBufferTokenEXT const *s2) {
+  if ((s1->vertexBindingUnit != s2->vertexBindingUnit) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkBindVertexBufferIndirectCommandEXT(VkBindVertexBufferIndirectCommandEXT const *s1,
+                                                  VkBindVertexBufferIndirectCommandEXT const *s2) {
+  if ((s1->bufferAddress != s2->bufferAddress) || (s1->size != s2->size) ||
+      (s1->stride != s2->stride) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkIndirectCommandsIndexBufferTokenEXT(
+    VkIndirectCommandsIndexBufferTokenEXT const *s1,
+    VkIndirectCommandsIndexBufferTokenEXT const *s2) {
+  if ((s1->mode != s2->mode) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkBindIndexBufferIndirectCommandEXT(VkBindIndexBufferIndirectCommandEXT const *s1,
+                                                 VkBindIndexBufferIndirectCommandEXT const *s2) {
+  if ((s1->bufferAddress != s2->bufferAddress) || (s1->size != s2->size) ||
+      (s1->indexType != s2->indexType) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkIndirectCommandsPushConstantTokenEXT(
+    VkIndirectCommandsPushConstantTokenEXT const *s1,
+    VkIndirectCommandsPushConstantTokenEXT const *s2) {
+  if (!compare_VkPushConstantRange(&s1->updateRange, &s2->updateRange) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+bool compare_VkIndirectCommandsExecutionSetTokenEXT(
+    VkIndirectCommandsExecutionSetTokenEXT const *s1,
+    VkIndirectCommandsExecutionSetTokenEXT const *s2) {
+  if ((s1->type != s2->type) || (s1->shaderStages != s2->shaderStages) || false)
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 200 && (VK_EXT_depth_clip_control)
 bool compare_VkPipelineViewportDepthClipControlCreateInfoEXT(
     VkPipelineViewportDepthClipControlCreateInfoEXT const *s1,
     VkPipelineViewportDepthClipControlCreateInfoEXT const *s2) {
   if ((s1->negativeOneToOne != s2->negativeOneToOne) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_depth_clamp_control)
+bool compare_VkPhysicalDeviceDepthClampControlFeaturesEXT(
+    VkPhysicalDeviceDepthClampControlFeaturesEXT const *s1,
+    VkPhysicalDeviceDepthClampControlFeaturesEXT const *s2) {
+  if ((s1->depthClampControl != s2->depthClampControl) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_depth_clamp_control)
+bool compare_VkPipelineViewportDepthClampControlCreateInfoEXT(
+    VkPipelineViewportDepthClampControlCreateInfoEXT const *s1,
+    VkPipelineViewportDepthClampControlCreateInfoEXT const *s2) {
+  if ((s1->depthClampMode != s2->depthClampMode) || false)
     return false;
 
   return true;
@@ -23181,6 +23590,15 @@ bool compare_VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT(
     VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT const *s1,
     VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT const *s2) {
   if ((s1->shaderReplicatedComposites != s2->shaderReplicatedComposites) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_depth_clamp_control)
+bool compare_VkDepthClampRangeEXT(VkDepthClampRangeEXT const *s1, VkDepthClampRangeEXT const *s2) {
+  if ((s1->minDepthClamp != s2->minDepthClamp) || (s1->maxDepthClamp != s2->maxDepthClamp) || false)
     return false;
 
   return true;

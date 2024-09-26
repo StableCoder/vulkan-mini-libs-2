@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 295,
-              "VK_HEADER_VERSION is from after the maximum supported version of v295.");
+static_assert(VK_HEADER_VERSION <= 296,
+              "VK_HEADER_VERSION is from after the maximum supported version of v296.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 295,
-               "VK_HEADER_VERSION is from after the maximum supported version of v295.");
+_Static_assert(VK_HEADER_VERSION <= 296,
+               "VK_HEADER_VERSION is from after the maximum supported version of v296.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -7110,6 +7110,118 @@ void cleanup_VkPhysicalDeviceComputeShaderDerivativesFeaturesNV(
 #if VK_HEADER_VERSION >= 295 && (VK_KHR_compute_shader_derivatives)
 void cleanup_VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR(
     VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT(
+    VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT(
+    VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkGeneratedCommandsPipelineInfoEXT(VkGeneratedCommandsPipelineInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkGeneratedCommandsShaderInfoEXT(VkGeneratedCommandsShaderInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkGeneratedCommandsMemoryRequirementsInfoEXT(
+    VkGeneratedCommandsMemoryRequirementsInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkIndirectExecutionSetPipelineInfoEXT(
+    VkIndirectExecutionSetPipelineInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkIndirectExecutionSetShaderLayoutInfoEXT(
+    VkIndirectExecutionSetShaderLayoutInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkIndirectExecutionSetShaderInfoEXT(VkIndirectExecutionSetShaderInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkIndirectExecutionSetCreateInfoEXT(VkIndirectExecutionSetCreateInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkGeneratedCommandsInfoEXT(VkGeneratedCommandsInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkWriteIndirectExecutionSetPipelineEXT(
+    VkWriteIndirectExecutionSetPipelineEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands && VK_EXT_shader_object)
+void cleanup_VkWriteIndirectExecutionSetShaderEXT(
+    VkWriteIndirectExecutionSetShaderEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkIndirectCommandsLayoutCreateInfoEXT(
+    VkIndirectCommandsLayoutCreateInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkIndirectCommandsLayoutTokenEXT(VkIndirectCommandsLayoutTokenEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkDrawIndirectCountIndirectCommandEXT(
+    VkDrawIndirectCountIndirectCommandEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkIndirectCommandsVertexBufferTokenEXT(
+    VkIndirectCommandsVertexBufferTokenEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkBindVertexBufferIndirectCommandEXT(
+    VkBindVertexBufferIndirectCommandEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkIndirectCommandsIndexBufferTokenEXT(
+    VkIndirectCommandsIndexBufferTokenEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkBindIndexBufferIndirectCommandEXT(VkBindIndexBufferIndirectCommandEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkIndirectCommandsPushConstantTokenEXT(
+    VkIndirectCommandsPushConstantTokenEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkIndirectCommandsExecutionSetTokenEXT(
+    VkIndirectCommandsExecutionSetTokenEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_depth_clamp_control)
+void cleanup_VkPhysicalDeviceDepthClampControlFeaturesEXT(
+    VkPhysicalDeviceDepthClampControlFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_depth_clamp_control)
+void cleanup_VkPipelineViewportDepthClampControlCreateInfoEXT(
+    VkPipelineViewportDepthClampControlCreateInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_depth_clamp_control)
+void cleanup_VkDepthClampRangeEXT(VkDepthClampRangeEXT const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -16543,6 +16655,128 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_SHADER_DERIVATIVES_PROPERTIES_KHR) {
     cleanup_VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR(
         (VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_FEATURES_EXT) {
+    cleanup_VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT(
+        (VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEVICE_GENERATED_COMMANDS_PROPERTIES_EXT) {
+    cleanup_VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT(
+        (VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_GENERATED_COMMANDS_PIPELINE_INFO_EXT) {
+    cleanup_VkGeneratedCommandsPipelineInfoEXT((VkGeneratedCommandsPipelineInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_GENERATED_COMMANDS_SHADER_INFO_EXT) {
+    cleanup_VkGeneratedCommandsShaderInfoEXT((VkGeneratedCommandsShaderInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_GENERATED_COMMANDS_MEMORY_REQUIREMENTS_INFO_EXT) {
+    cleanup_VkGeneratedCommandsMemoryRequirementsInfoEXT(
+        (VkGeneratedCommandsMemoryRequirementsInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_PIPELINE_INFO_EXT) {
+    cleanup_VkIndirectExecutionSetPipelineInfoEXT(
+        (VkIndirectExecutionSetPipelineInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_SHADER_LAYOUT_INFO_EXT) {
+    cleanup_VkIndirectExecutionSetShaderLayoutInfoEXT(
+        (VkIndirectExecutionSetShaderLayoutInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_SHADER_INFO_EXT) {
+    cleanup_VkIndirectExecutionSetShaderInfoEXT((VkIndirectExecutionSetShaderInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_CREATE_INFO_EXT) {
+    cleanup_VkIndirectExecutionSetCreateInfoEXT((VkIndirectExecutionSetCreateInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_GENERATED_COMMANDS_INFO_EXT) {
+    cleanup_VkGeneratedCommandsInfoEXT((VkGeneratedCommandsInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_WRITE_INDIRECT_EXECUTION_SET_PIPELINE_EXT) {
+    cleanup_VkWriteIndirectExecutionSetPipelineEXT(
+        (VkWriteIndirectExecutionSetPipelineEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands && VK_EXT_shader_object)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_WRITE_INDIRECT_EXECUTION_SET_SHADER_EXT) {
+    cleanup_VkWriteIndirectExecutionSetShaderEXT(
+        (VkWriteIndirectExecutionSetShaderEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_EXT) {
+    cleanup_VkIndirectCommandsLayoutCreateInfoEXT(
+        (VkIndirectCommandsLayoutCreateInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_EXT) {
+    cleanup_VkIndirectCommandsLayoutTokenEXT((VkIndirectCommandsLayoutTokenEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_depth_clamp_control)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_CONTROL_FEATURES_EXT) {
+    cleanup_VkPhysicalDeviceDepthClampControlFeaturesEXT(
+        (VkPhysicalDeviceDepthClampControlFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_depth_clamp_control)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_DEPTH_CLAMP_CONTROL_CREATE_INFO_EXT) {
+    cleanup_VkPipelineViewportDepthClampControlCreateInfoEXT(
+        (VkPipelineViewportDepthClampControlCreateInfoEXT const *)pData);
     return;
   }
 #endif
@@ -33111,6 +33345,234 @@ void cleanup_VkPhysicalDeviceComputeShaderDerivativesPropertiesKHR(
     cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 }
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT(
+    VkPhysicalDeviceDeviceGeneratedCommandsFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT(
+    VkPhysicalDeviceDeviceGeneratedCommandsPropertiesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkGeneratedCommandsPipelineInfoEXT(VkGeneratedCommandsPipelineInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkGeneratedCommandsShaderInfoEXT(VkGeneratedCommandsShaderInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pShaders - shaderCount
+  free((void *)pData->pShaders);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkGeneratedCommandsMemoryRequirementsInfoEXT(
+    VkGeneratedCommandsMemoryRequirementsInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkIndirectExecutionSetPipelineInfoEXT(
+    VkIndirectExecutionSetPipelineInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkIndirectExecutionSetShaderLayoutInfoEXT(
+    VkIndirectExecutionSetShaderLayoutInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pSetLayouts - setLayoutCount
+  free((void *)pData->pSetLayouts);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkIndirectExecutionSetShaderInfoEXT(VkIndirectExecutionSetShaderInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pInitialShaders - shaderCount
+  free((void *)pData->pInitialShaders);
+
+  // pSetLayoutInfos - shaderCount
+  if (pData->pSetLayoutInfos != NULL) {
+    for (uint32_t i = 0; i < pData->shaderCount; ++i)
+      cleanup_VkIndirectExecutionSetShaderLayoutInfoEXT(&pData->pSetLayoutInfos[i]);
+  }
+  free((void *)pData->pSetLayoutInfos);
+
+  // pPushConstantRanges - pushConstantRangeCount
+  if (pData->pPushConstantRanges != NULL) {
+    for (uint32_t i = 0; i < pData->pushConstantRangeCount; ++i)
+      cleanup_VkPushConstantRange(&pData->pPushConstantRanges[i]);
+  }
+  free((void *)pData->pPushConstantRanges);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkIndirectExecutionSetCreateInfoEXT(VkIndirectExecutionSetCreateInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkGeneratedCommandsInfoEXT(VkGeneratedCommandsInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkWriteIndirectExecutionSetPipelineEXT(
+    VkWriteIndirectExecutionSetPipelineEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands && VK_EXT_shader_object)
+void cleanup_VkWriteIndirectExecutionSetShaderEXT(
+    VkWriteIndirectExecutionSetShaderEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkIndirectCommandsLayoutCreateInfoEXT(
+    VkIndirectCommandsLayoutCreateInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pTokens - tokenCount
+  if (pData->pTokens != NULL) {
+    for (uint32_t i = 0; i < pData->tokenCount; ++i)
+      cleanup_VkIndirectCommandsLayoutTokenEXT(&pData->pTokens[i]);
+  }
+  free((void *)pData->pTokens);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkIndirectCommandsLayoutTokenEXT(VkIndirectCommandsLayoutTokenEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkDrawIndirectCountIndirectCommandEXT(
+    VkDrawIndirectCountIndirectCommandEXT const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkIndirectCommandsVertexBufferTokenEXT(
+    VkIndirectCommandsVertexBufferTokenEXT const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkBindVertexBufferIndirectCommandEXT(
+    VkBindVertexBufferIndirectCommandEXT const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkIndirectCommandsIndexBufferTokenEXT(
+    VkIndirectCommandsIndexBufferTokenEXT const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkBindIndexBufferIndirectCommandEXT(VkBindIndexBufferIndirectCommandEXT const *pData) {
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkIndirectCommandsPushConstantTokenEXT(
+    VkIndirectCommandsPushConstantTokenEXT const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
+void cleanup_VkIndirectCommandsExecutionSetTokenEXT(
+    VkIndirectCommandsExecutionSetTokenEXT const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_depth_clamp_control)
+void cleanup_VkPhysicalDeviceDepthClampControlFeaturesEXT(
+    VkPhysicalDeviceDepthClampControlFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_depth_clamp_control)
+void cleanup_VkPipelineViewportDepthClampControlCreateInfoEXT(
+    VkPipelineViewportDepthClampControlCreateInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pDepthClampRange
+  if (pData->pDepthClampRange != NULL)
+    cleanup_VkDepthClampRangeEXT(pData->pDepthClampRange);
+  free((void *)pData->pDepthClampRange);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 296 && (VK_EXT_depth_clamp_control)
+void cleanup_VkDepthClampRangeEXT(VkDepthClampRangeEXT const *pData) {}
 #endif
 
 #endif // VK_STRUCT_CLEANUP_CONFIG_MAIN
