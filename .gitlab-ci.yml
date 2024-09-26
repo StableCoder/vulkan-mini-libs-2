@@ -8,7 +8,7 @@ stages:
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
-  CTEST_OUTPUT_ON_FAILURE: '1'
+  CTEST_OUTPUT_ON_FAILURE: "1"
 
 # Platform Tests
 
@@ -24,10 +24,11 @@ variables:
 
 .platform_windows_template: &platform_windows_template
   stage: Windows
-  image: docker.io/stabletec/build-foe:windows-2019
+  image: docker.io/stabletec/build-foe:windows-ltsc2022
   tags:
     - container
     - windows
+    - ltsc2022
     - amd64
   needs: []
   dependencies: []
@@ -50,7 +51,7 @@ variables:
 Arch/GCC:
   parallel:
     matrix:
-    - ARCH: [amd64]
+      - ARCH: [amd64]
   image: docker.io/stabletec/build-foe:arch
   tags:
     - container
@@ -64,7 +65,7 @@ Arch/GCC:
 Arch/Clang:
   parallel:
     matrix:
-    - ARCH: [amd64]
+      - ARCH: [amd64]
   image: docker.io/stabletec/build-foe:arch
   tags:
     - container
@@ -78,7 +79,7 @@ Arch/Clang:
 Fedora/GCC:
   parallel:
     matrix:
-    - ARCH: [amd64, arm64, ppc64le]
+      - ARCH: [amd64, arm64, ppc64le]
   image: docker.io/stabletec/build-foe:fedora
   tags:
     - container
@@ -92,7 +93,7 @@ Fedora/GCC:
 Fedora/Clang:
   parallel:
     matrix:
-    - ARCH: [amd64, arm64, ppc64le]
+      - ARCH: [amd64, arm64, ppc64le]
   image: docker.io/stabletec/build-foe:fedora
   tags:
     - container
@@ -106,7 +107,7 @@ Fedora/Clang:
 Ubuntu/GCC:
   parallel:
     matrix:
-    - ARCH: [amd64, arm64, ppc64le]
+      - ARCH: [amd64, arm64, ppc64le]
   image: docker.io/stabletec/build-foe:ubuntu
   tags:
     - container
@@ -120,7 +121,7 @@ Ubuntu/GCC:
 Ubuntu/Clang:
   parallel:
     matrix:
-    - ARCH: [amd64, arm64, ppc64le]
+      - ARCH: [amd64, arm64, ppc64le]
   image: docker.io/stabletec/build-foe:ubuntu
   tags:
     - container
@@ -135,7 +136,7 @@ Debian 10/GCC (Old v97):
   stage: Linux
   parallel:
     matrix:
-    - ARCH: [amd64]
+      - ARCH: [amd64]
   image: docker.io/stabletec/build-core:debian-10
   tags:
     - container
@@ -155,7 +156,7 @@ Debian 10/Clang (Old v97):
   stage: Linux
   parallel:
     matrix:
-    - ARCH: [amd64]
+      - ARCH: [amd64]
   image: docker.io/stabletec/build-core:debian-10
   tags:
     - container
@@ -174,13 +175,13 @@ Debian 10/Clang (Old v97):
 Windows/MSVC:
   parallel:
     matrix:
-    - ARCH: [amd64]
+      - ARCH: [amd64]
   <<: *platform_windows_template
 
 Windows/Clang:
   parallel:
     matrix:
-    - ARCH: [amd64]
+      - ARCH: [amd64]
   variables:
     CC: clang
     CXX: clang
@@ -189,7 +190,7 @@ Windows/Clang:
 Windows/Clang-cl:
   parallel:
     matrix:
-    - ARCH: [amd64]
+      - ARCH: [amd64]
   variables:
     CC: clang-cl
     CXX: clang-cl
@@ -198,7 +199,7 @@ Windows/Clang-cl:
 macOS/AppleClang:
   parallel:
     matrix:
-    - ARCH: [arm64]
+      - ARCH: [arm64]
   tags:
     - macos
     - ${ARCH}
@@ -207,7 +208,7 @@ macOS/AppleClang:
 macOS/Clang:
   parallel:
     matrix:
-    - ARCH: [arm64]
+      - ARCH: [arm64]
   tags:
     - macos
     - ${ARCH}
@@ -225,8 +226,8 @@ Code Coverage:
     - linux
     - amd64
   needs:
-  - "Arch/GCC: [amd64]"
-  - "Arch/Clang: [amd64]"
+    - "Arch/GCC: [amd64]"
+    - "Arch/Clang: [amd64]"
   dependencies: []
   variables:
     CC: clang
@@ -239,7 +240,7 @@ Code Coverage:
     - ninja ccov-report-VkSerializationTests
   artifacts:
     name: CodeCoverage
-    paths: 
+    paths:
       - build/ccov
     expire_in: 1 day
 
@@ -251,8 +252,8 @@ Code Coverage:
     - linux
     - amd64
   needs:
-  - "Arch/GCC: [amd64]"
-  - "Arch/Clang: [amd64]"
+    - "Arch/GCC: [amd64]"
+    - "Arch/Clang: [amd64]"
   dependencies: []
   script:
     - mkdir build && cd build
