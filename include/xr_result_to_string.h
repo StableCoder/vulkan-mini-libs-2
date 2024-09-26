@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) >= 0,
               "openxr header version is from before the minimum supported version of v0.");
-static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 40,
-              "openxr header version is from after the maximum supported version of v40.");
+static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 41,
+              "openxr header version is from after the maximum supported version of v41.");
 #else
 _Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) >= 0,
                "openxr header version is from before the minimum supported version of v0.");
-_Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 40,
-               "openxr header version is from after the maximum supported version of v40.");
+_Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 41,
+               "openxr header version is from after the maximum supported version of v41.");
 #endif
 
 /// Returns a string representing the given VkResult parameter. If there is no known representation,
@@ -51,6 +51,42 @@ char const *XrResult_to_string(XrResult result) {
   // Check in descending order to get the 'latest' version of the error code text available.
   // Also, because codes have been re-used over time, can't use a switch and have to do this large
   // set of ifs. Luckily this *should* be a relatively rare call.
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 41 && XR_ML_spatial_anchors
+  if (result == XR_ERROR_SPATIAL_ANCHORS_PERMISSION_DENIED_ML)
+    return "XR_ERROR_SPATIAL_ANCHORS_PERMISSION_DENIED_ML";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 41 && XR_ML_spatial_anchors
+  if (result == XR_ERROR_SPATIAL_ANCHORS_NOT_LOCALIZED_ML)
+    return "XR_ERROR_SPATIAL_ANCHORS_NOT_LOCALIZED_ML";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 41 && XR_ML_spatial_anchors
+  if (result == XR_ERROR_SPATIAL_ANCHORS_OUT_OF_MAP_BOUNDS_ML)
+    return "XR_ERROR_SPATIAL_ANCHORS_OUT_OF_MAP_BOUNDS_ML";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 41 && XR_ML_spatial_anchors
+  if (result == XR_ERROR_SPATIAL_ANCHORS_SPACE_NOT_LOCATABLE_ML)
+    return "XR_ERROR_SPATIAL_ANCHORS_SPACE_NOT_LOCATABLE_ML";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 41 && XR_ML_spatial_anchors_storage
+  if (result == XR_ERROR_SPATIAL_ANCHORS_ANCHOR_NOT_FOUND_ML)
+    return "XR_ERROR_SPATIAL_ANCHORS_ANCHOR_NOT_FOUND_ML";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 41 && XR_ML_system_notifications
+  if (result == XR_ERROR_SYSTEM_NOTIFICATION_PERMISSION_DENIED_ML)
+    return "XR_ERROR_SYSTEM_NOTIFICATION_PERMISSION_DENIED_ML";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 41 && XR_ML_system_notifications
+  if (result == XR_ERROR_SYSTEM_NOTIFICATION_INCOMPATIBLE_SKU_ML)
+    return "XR_ERROR_SYSTEM_NOTIFICATION_INCOMPATIBLE_SKU_ML";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 41 && XR_ML_world_mesh_detection
+  if (result == XR_ERROR_WORLD_MESH_DETECTOR_PERMISSION_DENIED_ML)
+    return "XR_ERROR_WORLD_MESH_DETECTOR_PERMISSION_DENIED_ML";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 41 && XR_ML_world_mesh_detection
+  if (result == XR_ERROR_WORLD_MESH_DETECTOR_SPACE_NOT_LOCATABLE_ML)
+    return "XR_ERROR_WORLD_MESH_DETECTOR_SPACE_NOT_LOCATABLE_ML";
+#endif
 #if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 36
   if (result == XR_ERROR_EXTENSION_DEPENDENCY_NOT_ENABLED)
     return "XR_ERROR_EXTENSION_DEPENDENCY_NOT_ENABLED";
