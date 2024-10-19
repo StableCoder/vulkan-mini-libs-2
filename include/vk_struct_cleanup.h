@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 296,
-              "VK_HEADER_VERSION is from after the maximum supported version of v296.");
+static_assert(VK_HEADER_VERSION <= 297,
+              "VK_HEADER_VERSION is from after the maximum supported version of v297.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 296,
-               "VK_HEADER_VERSION is from after the maximum supported version of v296.");
+_Static_assert(VK_HEADER_VERSION <= 297,
+               "VK_HEADER_VERSION is from after the maximum supported version of v297.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -7222,6 +7222,11 @@ void cleanup_VkPipelineViewportDepthClampControlCreateInfoEXT(
 
 #if VK_HEADER_VERSION >= 296 && (VK_EXT_depth_clamp_control)
 void cleanup_VkDepthClampRangeEXT(VkDepthClampRangeEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 297 && (VK_EXT_present_mode_fifo_latest_ready)
+void cleanup_VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT(
+    VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -16777,6 +16782,15 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_DEPTH_CLAMP_CONTROL_CREATE_INFO_EXT) {
     cleanup_VkPipelineViewportDepthClampControlCreateInfoEXT(
         (VkPipelineViewportDepthClampControlCreateInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 297 && (VK_EXT_present_mode_fifo_latest_ready)
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_MODE_FIFO_LATEST_READY_FEATURES_EXT) {
+    cleanup_VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT(
+        (VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT const *)pData);
     return;
   }
 #endif
@@ -33573,6 +33587,16 @@ void cleanup_VkPipelineViewportDepthClampControlCreateInfoEXT(
 
 #if VK_HEADER_VERSION >= 296 && (VK_EXT_depth_clamp_control)
 void cleanup_VkDepthClampRangeEXT(VkDepthClampRangeEXT const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 297 && (VK_EXT_present_mode_fifo_latest_ready)
+void cleanup_VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT(
+    VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
 #endif
 
 #endif // VK_STRUCT_CLEANUP_CONFIG_MAIN

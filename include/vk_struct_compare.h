@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 296,
-              "VK_HEADER_VERSION is from after the maximum supported version of v296.");
+static_assert(VK_HEADER_VERSION <= 297,
+              "VK_HEADER_VERSION is from after the maximum supported version of v297.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 296,
-               "VK_HEADER_VERSION is from after the maximum supported version of v296.");
+_Static_assert(VK_HEADER_VERSION <= 297,
+               "VK_HEADER_VERSION is from after the maximum supported version of v297.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -6687,6 +6687,12 @@ bool compare_VkImageAlignmentControlCreateInfoMESA(VkImageAlignmentControlCreate
 bool compare_VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT(
     VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT const *s1,
     VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 297 && (VK_EXT_present_mode_fifo_latest_ready)
+bool compare_VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT(
+    VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT const *s1,
+    VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 296 && (VK_EXT_depth_clamp_control)
@@ -23590,6 +23596,17 @@ bool compare_VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT(
     VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT const *s1,
     VkPhysicalDeviceShaderReplicatedCompositesFeaturesEXT const *s2) {
   if ((s1->shaderReplicatedComposites != s2->shaderReplicatedComposites) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 297 && (VK_EXT_present_mode_fifo_latest_ready)
+bool compare_VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT(
+    VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT const *s1,
+    VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT const *s2) {
+  if ((s1->presentModeFifoLatestReady != s2->presentModeFifoLatestReady) || false)
     return false;
 
   return true;

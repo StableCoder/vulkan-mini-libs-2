@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 296,
-              "VK_HEADER_VERSION is from after the maximum supported version of v296.");
+static_assert(VK_HEADER_VERSION <= 297,
+              "VK_HEADER_VERSION is from after the maximum supported version of v297.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 296,
-               "VK_HEADER_VERSION is from after the maximum supported version of v296.");
+_Static_assert(VK_HEADER_VERSION <= 297,
+               "VK_HEADER_VERSION is from after the maximum supported version of v297.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -3007,6 +3007,7 @@ EnumValueSet const VkPresentModeKHRSets[] = {
     {"FIFO_RELAXED", 3, false},
     {"SHARED_DEMAND_REFRESH", 1000111000, false},
     {"SHARED_CONTINUOUS_REFRESH", 1000111001, false},
+    {"FIFO_LATEST_READY_EXT", 1000361000, false},
 };
 
 EnumValueSet const VkDebugReportObjectTypeEXTSets[] = {
@@ -3938,7 +3939,7 @@ EnumType const cEnumTypes[364] = {
     {"VkPhysicalDeviceLayeredApiKHR", VkPhysicalDeviceLayeredApiKHRSets, 5},
     {"VkDepthClampModeEXT", VkDepthClampModeEXTSets, 2},
     {"VkColorSpaceKHR", VkColorSpaceKHRSets, 18},
-    {"VkPresentModeKHR", VkPresentModeKHRSets, 6},
+    {"VkPresentModeKHR", VkPresentModeKHRSets, 7},
     {"VkDebugReportObjectTypeEXT", VkDebugReportObjectTypeEXTSets, 50},
     {"VkDeviceMemoryReportEventTypeEXT", VkDeviceMemoryReportEventTypeEXTSets, 5},
     {"VkRasterizationOrderAMD", VkRasterizationOrderAMDSets, 2},
