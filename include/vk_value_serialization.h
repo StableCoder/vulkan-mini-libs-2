@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 297,
-              "VK_HEADER_VERSION is from after the maximum supported version of v297.");
+static_assert(VK_HEADER_VERSION <= 298,
+              "VK_HEADER_VERSION is from after the maximum supported version of v298.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 297,
-               "VK_HEADER_VERSION is from after the maximum supported version of v297.");
+_Static_assert(VK_HEADER_VERSION <= 298,
+               "VK_HEADER_VERSION is from after the maximum supported version of v298.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -1143,6 +1143,7 @@ EnumValueSet const VkPipelineCreateFlags2KHRSets[] = {
     {"ENABLE_LEGACY_DITHERING_BIT_EXT", 0x400000000, false},
     {"CAPTURE_DATA", 0x80000000, false},
     {"INDIRECT_BINDABLE_BIT_EXT", 0x4000000000, false},
+    {"EXECUTION_GRAPH_BIT_AMDX", 0x100000000, false},
 };
 
 EnumValueSet const VkBufferUsageFlags2KHRSets[] = {
@@ -3730,7 +3731,7 @@ EnumType const cEnumTypes[364] = {
     {"VkIndirectCommandsLayoutUsageFlagsEXT", VkIndirectCommandsLayoutUsageFlagsEXTSets, 2},
     {"VkIndirectCommandsInputModeFlagsEXT", VkIndirectCommandsInputModeFlagsEXTSets, 2},
     {"VkDirectDriverLoadingFlagsLUNARG", NULL, 0},
-    {"VkPipelineCreateFlags2KHR", VkPipelineCreateFlags2KHRSets, 47},
+    {"VkPipelineCreateFlags2KHR", VkPipelineCreateFlags2KHRSets, 48},
     {"VkBufferUsageFlags2KHR", VkBufferUsageFlags2KHRSets, 37},
     {"VkCompositeAlphaFlagsKHR", VkCompositeAlphaFlagsKHRSets, 4},
     {"VkDisplayPlaneAlphaFlagsKHR", VkDisplayPlaneAlphaFlagsKHRSets, 4},

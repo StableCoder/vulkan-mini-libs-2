@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 297,
-              "VK_HEADER_VERSION is from after the maximum supported version of v297.");
+static_assert(VK_HEADER_VERSION <= 298,
+              "VK_HEADER_VERSION is from after the maximum supported version of v298.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 297,
-               "VK_HEADER_VERSION is from after the maximum supported version of v297.");
+_Static_assert(VK_HEADER_VERSION <= 298,
+               "VK_HEADER_VERSION is from after the maximum supported version of v298.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -6298,13 +6298,13 @@ bool compare_VkPhysicalDeviceCooperativeMatrixPropertiesKHR(
     VkPhysicalDeviceCooperativeMatrixPropertiesKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 260 && (VK_AMDX_shader_enqueue)
+#if VK_HEADER_VERSION >= 298 && (VK_AMDX_shader_enqueue)
 bool compare_VkPhysicalDeviceShaderEnqueuePropertiesAMDX(
     VkPhysicalDeviceShaderEnqueuePropertiesAMDX const *s1,
     VkPhysicalDeviceShaderEnqueuePropertiesAMDX const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 260 && (VK_AMDX_shader_enqueue)
+#if VK_HEADER_VERSION >= 298 && (VK_AMDX_shader_enqueue)
 bool compare_VkPhysicalDeviceShaderEnqueueFeaturesAMDX(
     VkPhysicalDeviceShaderEnqueueFeaturesAMDX const *s1,
     VkPhysicalDeviceShaderEnqueueFeaturesAMDX const *s2);
@@ -6322,7 +6322,7 @@ bool compare_VkPipelineShaderStageNodeCreateInfoAMDX(
     VkPipelineShaderStageNodeCreateInfoAMDX const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 260 && (VK_AMDX_shader_enqueue)
+#if VK_HEADER_VERSION >= 298 && (VK_AMDX_shader_enqueue)
 bool compare_VkExecutionGraphPipelineScratchSizeAMDX(
     VkExecutionGraphPipelineScratchSizeAMDX const *s1,
     VkExecutionGraphPipelineScratchSizeAMDX const *s2);
@@ -6697,6 +6697,24 @@ bool compare_VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT(
 
 #if VK_HEADER_VERSION >= 296 && (VK_EXT_depth_clamp_control)
 bool compare_VkDepthClampRangeEXT(VkDepthClampRangeEXT const *s1, VkDepthClampRangeEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 260 && VK_HEADER_VERSION <= 297 && (VK_AMDX_shader_enqueue)
+bool compare_VkPhysicalDeviceShaderEnqueuePropertiesAMDX(
+    VkPhysicalDeviceShaderEnqueuePropertiesAMDX const *s1,
+    VkPhysicalDeviceShaderEnqueuePropertiesAMDX const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 260 && VK_HEADER_VERSION <= 297 && (VK_AMDX_shader_enqueue)
+bool compare_VkPhysicalDeviceShaderEnqueueFeaturesAMDX(
+    VkPhysicalDeviceShaderEnqueueFeaturesAMDX const *s1,
+    VkPhysicalDeviceShaderEnqueueFeaturesAMDX const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 260 && VK_HEADER_VERSION <= 297 && (VK_AMDX_shader_enqueue)
+bool compare_VkExecutionGraphPipelineScratchSizeAMDX(
+    VkExecutionGraphPipelineScratchSizeAMDX const *s1,
+    VkExecutionGraphPipelineScratchSizeAMDX const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 85 && VK_HEADER_VERSION <= 294 && (VK_NV_compute_shader_derivatives)
@@ -22828,7 +22846,7 @@ bool compare_VkPhysicalDeviceCooperativeMatrixPropertiesKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 260 && (VK_AMDX_shader_enqueue)
+#if VK_HEADER_VERSION >= 298 && (VK_AMDX_shader_enqueue)
 bool compare_VkPhysicalDeviceShaderEnqueuePropertiesAMDX(
     VkPhysicalDeviceShaderEnqueuePropertiesAMDX const *s1,
     VkPhysicalDeviceShaderEnqueuePropertiesAMDX const *s2) {
@@ -22837,18 +22855,24 @@ bool compare_VkPhysicalDeviceShaderEnqueuePropertiesAMDX(
       (s1->maxExecutionGraphShaderPayloadSize != s2->maxExecutionGraphShaderPayloadSize) ||
       (s1->maxExecutionGraphShaderPayloadCount != s2->maxExecutionGraphShaderPayloadCount) ||
       (s1->executionGraphDispatchAddressAlignment != s2->executionGraphDispatchAddressAlignment) ||
-      false)
+      (s1->maxExecutionGraphWorkgroups != s2->maxExecutionGraphWorkgroups) || false)
     return false;
+
+  for (uint32_t i = 0; i < 3; ++i) {
+    if (s1->maxExecutionGraphWorkgroupCount[i] != s2->maxExecutionGraphWorkgroupCount[i])
+      return false;
+  }
 
   return true;
 }
 #endif
 
-#if VK_HEADER_VERSION >= 260 && (VK_AMDX_shader_enqueue)
+#if VK_HEADER_VERSION >= 298 && (VK_AMDX_shader_enqueue)
 bool compare_VkPhysicalDeviceShaderEnqueueFeaturesAMDX(
     VkPhysicalDeviceShaderEnqueueFeaturesAMDX const *s1,
     VkPhysicalDeviceShaderEnqueueFeaturesAMDX const *s2) {
-  if ((s1->shaderEnqueue != s2->shaderEnqueue) || false)
+  if ((s1->shaderEnqueue != s2->shaderEnqueue) ||
+      (s1->shaderMeshEnqueue != s2->shaderMeshEnqueue) || false)
     return false;
 
   return true;
@@ -22879,11 +22903,12 @@ bool compare_VkPipelineShaderStageNodeCreateInfoAMDX(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 260 && (VK_AMDX_shader_enqueue)
+#if VK_HEADER_VERSION >= 298 && (VK_AMDX_shader_enqueue)
 bool compare_VkExecutionGraphPipelineScratchSizeAMDX(
     VkExecutionGraphPipelineScratchSizeAMDX const *s1,
     VkExecutionGraphPipelineScratchSizeAMDX const *s2) {
-  if ((s1->size != s2->size) || false)
+  if ((s1->minSize != s2->minSize) || (s1->maxSize != s2->maxSize) ||
+      (s1->sizeGranularity != s2->sizeGranularity) || false)
     return false;
 
   return true;
@@ -23616,6 +23641,44 @@ bool compare_VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT(
 #if VK_HEADER_VERSION >= 296 && (VK_EXT_depth_clamp_control)
 bool compare_VkDepthClampRangeEXT(VkDepthClampRangeEXT const *s1, VkDepthClampRangeEXT const *s2) {
   if ((s1->minDepthClamp != s2->minDepthClamp) || (s1->maxDepthClamp != s2->maxDepthClamp) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 260 && VK_HEADER_VERSION <= 297 && (VK_AMDX_shader_enqueue)
+bool compare_VkPhysicalDeviceShaderEnqueuePropertiesAMDX(
+    VkPhysicalDeviceShaderEnqueuePropertiesAMDX const *s1,
+    VkPhysicalDeviceShaderEnqueuePropertiesAMDX const *s2) {
+  if ((s1->maxExecutionGraphDepth != s2->maxExecutionGraphDepth) ||
+      (s1->maxExecutionGraphShaderOutputNodes != s2->maxExecutionGraphShaderOutputNodes) ||
+      (s1->maxExecutionGraphShaderPayloadSize != s2->maxExecutionGraphShaderPayloadSize) ||
+      (s1->maxExecutionGraphShaderPayloadCount != s2->maxExecutionGraphShaderPayloadCount) ||
+      (s1->executionGraphDispatchAddressAlignment != s2->executionGraphDispatchAddressAlignment) ||
+      false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 260 && VK_HEADER_VERSION <= 297 && (VK_AMDX_shader_enqueue)
+bool compare_VkPhysicalDeviceShaderEnqueueFeaturesAMDX(
+    VkPhysicalDeviceShaderEnqueueFeaturesAMDX const *s1,
+    VkPhysicalDeviceShaderEnqueueFeaturesAMDX const *s2) {
+  if ((s1->shaderEnqueue != s2->shaderEnqueue) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 260 && VK_HEADER_VERSION <= 297 && (VK_AMDX_shader_enqueue)
+bool compare_VkExecutionGraphPipelineScratchSizeAMDX(
+    VkExecutionGraphPipelineScratchSizeAMDX const *s1,
+    VkExecutionGraphPipelineScratchSizeAMDX const *s2) {
+  if ((s1->size != s2->size) || false)
     return false;
 
   return true;
