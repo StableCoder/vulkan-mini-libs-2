@@ -8,7 +8,6 @@ stages:
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
-  CTEST_OUTPUT_ON_FAILURE: "1"
 
 # Platform Tests
 
@@ -17,10 +16,9 @@ variables:
   needs: []
   dependencies: []
   script:
-    - mkdir build && cd build
-    - cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DBUILD_EXAMPLES=ON -DBUILD_TESTS=ON
-    - ninja
-    - ctest
+    - cmake -S . -B build -G Ninja -D CMAKE_BUILD_TYPE=Release -D BUILD_EXAMPLES=ON -D BUILD_TESTS=ON
+    - cmake --build build
+    - ctest --test-dir build --output-on-failure
 
 .platform_windows_template: &platform_windows_template
   stage: Windows
@@ -33,20 +31,18 @@ variables:
   needs: []
   dependencies: []
   script:
-    - mkdir build; cd build
-    - cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DBUILD_EXAMPLES=ON -DBUILD_TESTS=ON
-    - ninja
-    - ninja test
+    - cmake -S . -B build -G Ninja -D CMAKE_BUILD_TYPE=Release -D BUILD_EXAMPLES=ON -D BUILD_TESTS=ON -D CMAKE_PREFIX_PATH="C:\"
+    - cmake --build build
+    - ctest --test-dir build --output-on-failure
 
 .platform_macos_template: &platform_macos_template
   stage: macOS
   needs: []
   dependencies: []
   script:
-    - mkdir build && cd build
-    - cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DBUILD_EXAMPLES=ON -DBUILD_TESTS=ON
-    - ninja
-    - ctest
+    - cmake -S . -B build -G Ninja -D CMAKE_BUILD_TYPE=Release -D BUILD_EXAMPLES=ON -D BUILD_TESTS=ON
+    - cmake --build build
+    - ctest --test-dir build --output-on-failure
 
 Arch/GCC:
   parallel:
@@ -132,46 +128,6 @@ Ubuntu/Clang:
     CXX: clang++
   <<: *platform_unix_template
 
-Debian 10/GCC (Old v97):
-  stage: Linux
-  parallel:
-    matrix:
-      - ARCH: [amd64]
-  image: docker.io/stabletec/build-core:debian-10
-  tags:
-    - container
-    - linux
-    - ${ARCH}
-  variables:
-    CC: gcc
-    CXX: g++
-  script:
-    - apt update && apt install -y libvulkan-dev
-    - mkdir build && cd build
-    - cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DBUILD_EXAMPLES=ON -DBUILD_TESTS=ON
-    - ninja
-    - ctest
-
-Debian 10/Clang (Old v97):
-  stage: Linux
-  parallel:
-    matrix:
-      - ARCH: [amd64]
-  image: docker.io/stabletec/build-core:debian-10
-  tags:
-    - container
-    - linux
-    - ${ARCH}
-  variables:
-    CC: clang
-    CXX: clang++
-  script:
-    - apt update && apt install -y libvulkan-dev
-    - mkdir build && cd build
-    - cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DBUILD_EXAMPLES=ON -DBUILD_TESTS=ON
-    - ninja
-    - ctest
-
 Windows/MSVC:
   parallel:
     matrix:
@@ -233,11 +189,10 @@ Code Coverage:
     CC: clang
     CXX: clang++
   script:
-    - mkdir build && cd build
-    - cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DCODE_COVERAGE=ON -DBUILD_TESTS=ON
-    - ninja
-    - ninja ccov-VkSerializationTests
-    - ninja ccov-report-VkSerializationTests
+    - cmake -S . -B build -G Ninja -D CMAKE_BUILD_TYPE=Release -D CODE_COVERAGE=ON -D BUILD_TESTS=ON
+    - cmake --build build
+    - cmake --build build --target ccov-VkSerializationTests
+    - cmake --build build --target ccov-report-VkSerializationTests
   artifacts:
     name: CodeCoverage
     paths:
@@ -256,28 +211,27 @@ Code Coverage:
     - "Arch/Clang: [amd64]"
   dependencies: []
   script:
-    - mkdir build && cd build
-    - cmake .. -GNinja -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=ON ${CMAKE_OPTIONS}
-    - ninja
-    - ninja test
+    - cmake -S . -B build -G Ninja -D CMAKE_BUILD_TYPE=Release -D BUILD_TESTS=ON ${CMAKE_OPTIONS}
+    - cmake --build build
+    - ctest --test-dir build --output-on-failure
 
 AddressSanitizer:
   variables:
     CC: clang
     CXX: clang++
-    CMAKE_OPTIONS: -DUSE_SANITIZER=Address
+    CMAKE_OPTIONS: -D USE_SANITIZER=Address
   <<: *analysis_template
 
 LeakSanitizer:
   variables:
     CC: clang
     CXX: clang++
-    CMAKE_OPTIONS: -DUSE_SANITIZER=Leak
+    CMAKE_OPTIONS: -D USE_SANITIZER=Leak
   <<: *analysis_template
 
 UndefinedSanitizer:
   variables:
     CC: clang
     CXX: clang++
-    CMAKE_OPTIONS: -DUSE_SANITIZER=Undefined
+    CMAKE_OPTIONS: -D USE_SANITIZER=Undefined
   <<: *analysis_template
