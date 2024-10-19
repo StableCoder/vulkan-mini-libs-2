@@ -1,17 +1,13 @@
-// Copyright (C) 2020 George Cave - gcave@stablecoder.ca
+// Copyright (C) 2020-2024 George Cave - gcave@stablecoder.ca
 //
 // SPDX-License-Identifier: Apache-2.0
 
-#include <catch.hpp>
+#include <catch2/catch_test_macros.hpp>
 #include <vk_value_serialization.hpp>
 #include <vulkan/vulkan.h>
 
-#include <string>
-#include <string_view>
-
 #include <cstring>
 #include <string>
-#include <string_view>
 
 namespace {
 std::string cDummyStr = "AAABBBCCC";
@@ -184,7 +180,7 @@ TEST_CASE("Serialize: Bitmask") {
                            VK_DEBUG_REPORT_DEBUG_BIT_EXT | VK_DEBUG_REPORT_ERROR_BIT_EXT,
                            &serializedLength, testStr) == STEC_VK_SERIALIZATION_RESULT_SUCCESS);
       CHECK(serializedLength == 13);
-      CHECK(std::string_view{testStr, serializedLength} == "DEBUG | ERROR");
+      CHECK(std::string{testStr, serializedLength} == "DEBUG | ERROR");
     }
     SECTION(
         "Passing in more the precisely required returns success and the serialized length of 13") {
@@ -193,7 +189,7 @@ TEST_CASE("Serialize: Bitmask") {
                            VK_DEBUG_REPORT_DEBUG_BIT_EXT | VK_DEBUG_REPORT_ERROR_BIT_EXT,
                            &serializedLength, testStr) == STEC_VK_SERIALIZATION_RESULT_SUCCESS);
       CHECK(serializedLength == 13);
-      CHECK(std::string_view{testStr, serializedLength} == "DEBUG | ERROR");
+      CHECK(std::string{testStr, serializedLength} == "DEBUG | ERROR");
     }
     SECTION("Passing in just under the rrequired returns incomplete data") {
       uint32_t serializedLength = 8;
@@ -202,7 +198,7 @@ TEST_CASE("Serialize: Bitmask") {
                            &serializedLength,
                            testStr) == STEC_VK_SERIALIZATION_RESULT_ERROR_INCOMPLETE);
       CHECK(serializedLength == 8);
-      CHECK(std::string_view{testStr, serializedLength} == "DEBUG | ");
+      CHECK(std::string{testStr, serializedLength} == "DEBUG | ");
     }
     SECTION("Passing in just under the rrequired returns incomplete data") {
       uint32_t serializedLength = 6;
@@ -211,7 +207,7 @@ TEST_CASE("Serialize: Bitmask") {
                            &serializedLength,
                            testStr) == STEC_VK_SERIALIZATION_RESULT_ERROR_INCOMPLETE);
       CHECK(serializedLength == 6);
-      CHECK(std::string_view{testStr, serializedLength} == "DEBUG ");
+      CHECK(std::string{testStr, serializedLength} == "DEBUG ");
     }
     SECTION("Passing in just under the rrequired returns incomplete data") {
       uint32_t serializedLength = 5;
@@ -220,7 +216,7 @@ TEST_CASE("Serialize: Bitmask") {
                            &serializedLength,
                            testStr) == STEC_VK_SERIALIZATION_RESULT_ERROR_INCOMPLETE);
       CHECK(serializedLength == 5);
-      CHECK(std::string_view{testStr, serializedLength} == "DEBUG");
+      CHECK(std::string{testStr, serializedLength} == "DEBUG");
     }
     SECTION("Passing in a zero-sized length returns incomplete and no written data") {
       uint32_t serializedLength = 0;
@@ -237,7 +233,7 @@ TEST_CASE("Serialize: Bitmask") {
       CHECK(vk_serialize32("VkImageType", VK_IMAGE_TYPE_3D, &serializedLength, testStr) ==
             STEC_VK_SERIALIZATION_RESULT_ERROR_INCOMPLETE);
       CHECK(serializedLength == 1);
-      CHECK(std::string_view{testStr, serializedLength} == "3");
+      CHECK(std::string{testStr, serializedLength} == "3");
     }
   }
 }
