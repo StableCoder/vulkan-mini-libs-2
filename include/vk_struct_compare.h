@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 298,
-              "VK_HEADER_VERSION is from after the maximum supported version of v298.");
+static_assert(VK_HEADER_VERSION <= 299,
+              "VK_HEADER_VERSION is from after the maximum supported version of v299.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 298,
-               "VK_HEADER_VERSION is from after the maximum supported version of v298.");
+_Static_assert(VK_HEADER_VERSION <= 299,
+               "VK_HEADER_VERSION is from after the maximum supported version of v299.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -4616,12 +4616,16 @@ bool compare_VkSubmitInfo2(VkSubmitInfo2 const *s1, VkSubmitInfo2 const *s2);
 bool compare_VkSubmitInfo2KHR(VkSubmitInfo2KHR const *s1, VkSubmitInfo2KHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 204 && (VK_KHR_synchronization2 && VK_NV_device_diagnostic_checkpoints)
+#if VK_HEADER_VERSION >= 204 &&                                                                    \
+    ((VK_NV_device_diagnostic_checkpoints && VK_VERSION_1_3 && VK_KHR_synchronization2) ||         \
+     (VK_KHR_synchronization2 && VK_NV_device_diagnostic_checkpoints))
 bool compare_VkQueueFamilyCheckpointProperties2NV(VkQueueFamilyCheckpointProperties2NV const *s1,
                                                   VkQueueFamilyCheckpointProperties2NV const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 204 && (VK_KHR_synchronization2 && VK_NV_device_diagnostic_checkpoints)
+#if VK_HEADER_VERSION >= 204 &&                                                                    \
+    ((VK_NV_device_diagnostic_checkpoints && VK_VERSION_1_3 && VK_KHR_synchronization2) ||         \
+     (VK_KHR_synchronization2 && VK_NV_device_diagnostic_checkpoints))
 bool compare_VkCheckpointData2NV(VkCheckpointData2NV const *s1, VkCheckpointData2NV const *s2);
 #endif
 
@@ -5508,13 +5512,17 @@ bool compare_VkRenderingInfo(VkRenderingInfo const *s1, VkRenderingInfo const *s
 bool compare_VkRenderingInfoKHR(VkRenderingInfoKHR const *s1, VkRenderingInfoKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 197 && (VK_KHR_dynamic_rendering && VK_KHR_fragment_shading_rate)
+#if VK_HEADER_VERSION >= 197 &&                                                                    \
+    ((VK_KHR_fragment_shading_rate && VK_VERSION_1_3 && VK_KHR_dynamic_rendering) ||               \
+     (VK_KHR_dynamic_rendering && VK_KHR_fragment_shading_rate))
 bool compare_VkRenderingFragmentShadingRateAttachmentInfoKHR(
     VkRenderingFragmentShadingRateAttachmentInfoKHR const *s1,
     VkRenderingFragmentShadingRateAttachmentInfoKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 197 && (VK_KHR_dynamic_rendering && VK_EXT_fragment_density_map)
+#if VK_HEADER_VERSION >= 197 &&                                                                    \
+    ((VK_EXT_fragment_density_map && VK_VERSION_1_3 && VK_KHR_dynamic_rendering) ||                \
+     (VK_KHR_dynamic_rendering && VK_EXT_fragment_density_map))
 bool compare_VkRenderingFragmentDensityMapAttachmentInfoEXT(
     VkRenderingFragmentDensityMapAttachmentInfoEXT const *s1,
     VkRenderingFragmentDensityMapAttachmentInfoEXT const *s2);
@@ -5544,17 +5552,23 @@ bool compare_VkCommandBufferInheritanceRenderingInfoKHR(
     VkCommandBufferInheritanceRenderingInfoKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 197 && (VK_KHR_dynamic_rendering && VK_AMD_mixed_attachment_samples)
+#if VK_HEADER_VERSION >= 197 &&                                                                    \
+    ((VK_AMD_mixed_attachment_samples && VK_VERSION_1_3 && VK_KHR_dynamic_rendering) ||            \
+     (VK_KHR_dynamic_rendering && VK_AMD_mixed_attachment_samples))
 bool compare_VkAttachmentSampleCountInfoAMD(VkAttachmentSampleCountInfoAMD const *s1,
                                             VkAttachmentSampleCountInfoAMD const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 197 && (VK_KHR_dynamic_rendering && VK_NV_framebuffer_mixed_samples)
+#if VK_HEADER_VERSION >= 197 &&                                                                    \
+    ((VK_NV_framebuffer_mixed_samples && VK_VERSION_1_3 && VK_KHR_dynamic_rendering) ||            \
+     (VK_KHR_dynamic_rendering && VK_NV_framebuffer_mixed_samples))
 bool compare_VkAttachmentSampleCountInfoNV(VkAttachmentSampleCountInfoNV const *s1,
                                            VkAttachmentSampleCountInfoNV const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 197 && (VK_KHR_dynamic_rendering && VK_NVX_multiview_per_view_attributes)
+#if VK_HEADER_VERSION >= 197 &&                                                                    \
+    ((VK_NVX_multiview_per_view_attributes && VK_VERSION_1_3 && VK_KHR_dynamic_rendering) ||       \
+     (VK_KHR_dynamic_rendering && VK_NVX_multiview_per_view_attributes))
 bool compare_VkMultiviewPerViewAttributesInfoNVX(VkMultiviewPerViewAttributesInfoNVX const *s1,
                                                  VkMultiviewPerViewAttributesInfoNVX const *s2);
 #endif
@@ -19103,7 +19117,9 @@ bool compare_VkSubmitInfo2KHR(VkSubmitInfo2KHR const *s1, VkSubmitInfo2KHR const
 }
 #endif
 
-#if VK_HEADER_VERSION >= 204 && (VK_KHR_synchronization2 && VK_NV_device_diagnostic_checkpoints)
+#if VK_HEADER_VERSION >= 204 &&                                                                    \
+    ((VK_NV_device_diagnostic_checkpoints && VK_VERSION_1_3 && VK_KHR_synchronization2) ||         \
+     (VK_KHR_synchronization2 && VK_NV_device_diagnostic_checkpoints))
 bool compare_VkQueueFamilyCheckpointProperties2NV(VkQueueFamilyCheckpointProperties2NV const *s1,
                                                   VkQueueFamilyCheckpointProperties2NV const *s2) {
   if ((s1->checkpointExecutionStageMask != s2->checkpointExecutionStageMask) || false)
@@ -19113,7 +19129,9 @@ bool compare_VkQueueFamilyCheckpointProperties2NV(VkQueueFamilyCheckpointPropert
 }
 #endif
 
-#if VK_HEADER_VERSION >= 204 && (VK_KHR_synchronization2 && VK_NV_device_diagnostic_checkpoints)
+#if VK_HEADER_VERSION >= 204 &&                                                                    \
+    ((VK_NV_device_diagnostic_checkpoints && VK_VERSION_1_3 && VK_KHR_synchronization2) ||         \
+     (VK_KHR_synchronization2 && VK_NV_device_diagnostic_checkpoints))
 bool compare_VkCheckpointData2NV(VkCheckpointData2NV const *s1, VkCheckpointData2NV const *s2) {
   if ((s1->stage != s2->stage) || false)
     return false;
@@ -21191,7 +21209,9 @@ bool compare_VkRenderingInfoKHR(VkRenderingInfoKHR const *s1, VkRenderingInfoKHR
 }
 #endif
 
-#if VK_HEADER_VERSION >= 197 && (VK_KHR_dynamic_rendering && VK_KHR_fragment_shading_rate)
+#if VK_HEADER_VERSION >= 197 &&                                                                    \
+    ((VK_KHR_fragment_shading_rate && VK_VERSION_1_3 && VK_KHR_dynamic_rendering) ||               \
+     (VK_KHR_dynamic_rendering && VK_KHR_fragment_shading_rate))
 bool compare_VkRenderingFragmentShadingRateAttachmentInfoKHR(
     VkRenderingFragmentShadingRateAttachmentInfoKHR const *s1,
     VkRenderingFragmentShadingRateAttachmentInfoKHR const *s2) {
@@ -21205,7 +21225,9 @@ bool compare_VkRenderingFragmentShadingRateAttachmentInfoKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 197 && (VK_KHR_dynamic_rendering && VK_EXT_fragment_density_map)
+#if VK_HEADER_VERSION >= 197 &&                                                                    \
+    ((VK_EXT_fragment_density_map && VK_VERSION_1_3 && VK_KHR_dynamic_rendering) ||                \
+     (VK_KHR_dynamic_rendering && VK_EXT_fragment_density_map))
 bool compare_VkRenderingFragmentDensityMapAttachmentInfoEXT(
     VkRenderingFragmentDensityMapAttachmentInfoEXT const *s1,
     VkRenderingFragmentDensityMapAttachmentInfoEXT const *s2) {
@@ -21262,7 +21284,9 @@ bool compare_VkCommandBufferInheritanceRenderingInfoKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 197 && (VK_KHR_dynamic_rendering && VK_AMD_mixed_attachment_samples)
+#if VK_HEADER_VERSION >= 197 &&                                                                    \
+    ((VK_AMD_mixed_attachment_samples && VK_VERSION_1_3 && VK_KHR_dynamic_rendering) ||            \
+     (VK_KHR_dynamic_rendering && VK_AMD_mixed_attachment_samples))
 bool compare_VkAttachmentSampleCountInfoAMD(VkAttachmentSampleCountInfoAMD const *s1,
                                             VkAttachmentSampleCountInfoAMD const *s2) {
   if ((s1->colorAttachmentCount != s2->colorAttachmentCount) ||
@@ -21273,7 +21297,9 @@ bool compare_VkAttachmentSampleCountInfoAMD(VkAttachmentSampleCountInfoAMD const
 }
 #endif
 
-#if VK_HEADER_VERSION >= 197 && (VK_KHR_dynamic_rendering && VK_NV_framebuffer_mixed_samples)
+#if VK_HEADER_VERSION >= 197 &&                                                                    \
+    ((VK_NV_framebuffer_mixed_samples && VK_VERSION_1_3 && VK_KHR_dynamic_rendering) ||            \
+     (VK_KHR_dynamic_rendering && VK_NV_framebuffer_mixed_samples))
 bool compare_VkAttachmentSampleCountInfoNV(VkAttachmentSampleCountInfoNV const *s1,
                                            VkAttachmentSampleCountInfoNV const *s2) {
   return compare_VkAttachmentSampleCountInfoAMD((VkAttachmentSampleCountInfoAMD const *)s1,
@@ -21281,7 +21307,9 @@ bool compare_VkAttachmentSampleCountInfoNV(VkAttachmentSampleCountInfoNV const *
 }
 #endif
 
-#if VK_HEADER_VERSION >= 197 && (VK_KHR_dynamic_rendering && VK_NVX_multiview_per_view_attributes)
+#if VK_HEADER_VERSION >= 197 &&                                                                    \
+    ((VK_NVX_multiview_per_view_attributes && VK_VERSION_1_3 && VK_KHR_dynamic_rendering) ||       \
+     (VK_KHR_dynamic_rendering && VK_NVX_multiview_per_view_attributes))
 bool compare_VkMultiviewPerViewAttributesInfoNVX(VkMultiviewPerViewAttributesInfoNVX const *s1,
                                                  VkMultiviewPerViewAttributesInfoNVX const *s2) {
   if ((s1->perViewAttributes != s2->perViewAttributes) ||

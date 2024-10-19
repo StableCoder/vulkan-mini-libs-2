@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 298,
-              "VK_HEADER_VERSION is from after the maximum supported version of v298.");
+static_assert(VK_HEADER_VERSION <= 299,
+              "VK_HEADER_VERSION is from after the maximum supported version of v299.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 298,
-               "VK_HEADER_VERSION is from after the maximum supported version of v298.");
+_Static_assert(VK_HEADER_VERSION <= 299,
+               "VK_HEADER_VERSION is from after the maximum supported version of v299.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -476,12 +476,12 @@ EnumValueSet const VkPipelineCreateFlagsSets[] = {
     {"EARLY_RETURN_ON_FAILURE_BIT_EXT", 0x00000200, true},
     {"RAY_TRACING_SHADER_GROUP_HANDLE_CAPTURE_REPLAY_BIT_KHR", 0x00080000, false},
     {"RAY_TRACING_ALLOW_MOTION_BIT_NV", 0x00100000, false},
-    {"VK_PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR", 0x00200000,
-     true},
     {"VK_PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT", 0x00400000,
      true},
-    {"RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR", 0x00200000, false},
+    {"VK_PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR", 0x00200000,
+     true},
     {"RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT", 0x00400000, false},
+    {"RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR", 0x00200000, false},
     {"FAIL_ON_PIPELINE_COMPILE_REQUIRED", 0x00000100, false},
     {"EARLY_RETURN_ON_FAILURE", 0x00000200, false},
     {"RETAIN_LINK_TIME_OPTIMIZATION_INFO_BIT_EXT", 0x00800000, false},
