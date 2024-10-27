@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 299,
-              "VK_HEADER_VERSION is from after the maximum supported version of v299.");
+static_assert(VK_HEADER_VERSION <= 300,
+              "VK_HEADER_VERSION is from after the maximum supported version of v300.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 299,
-               "VK_HEADER_VERSION is from after the maximum supported version of v299.");
+_Static_assert(VK_HEADER_VERSION <= 300,
+               "VK_HEADER_VERSION is from after the maximum supported version of v300.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -7256,6 +7256,21 @@ void cleanup_VkPhysicalDeviceShaderEnqueueFeaturesAMDX(
 #if VK_HEADER_VERSION >= 298 && (VK_AMDX_shader_enqueue)
 void cleanup_VkExecutionGraphPipelineScratchSizeAMDX(
     VkExecutionGraphPipelineScratchSizeAMDX const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 300 && (VK_NV_cooperative_matrix2)
+void cleanup_VkPhysicalDeviceCooperativeMatrix2FeaturesNV(
+    VkPhysicalDeviceCooperativeMatrix2FeaturesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 300 && (VK_NV_cooperative_matrix2)
+void cleanup_VkPhysicalDeviceCooperativeMatrix2PropertiesNV(
+    VkPhysicalDeviceCooperativeMatrix2PropertiesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 300 && (VK_NV_cooperative_matrix2)
+void cleanup_VkCooperativeMatrixFlexibleDimensionsPropertiesNV(
+    VkCooperativeMatrixFlexibleDimensionsPropertiesNV const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -16856,6 +16871,30 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_EXECUTION_GRAPH_PIPELINE_SCRATCH_SIZE_AMDX) {
     cleanup_VkExecutionGraphPipelineScratchSizeAMDX(
         (VkExecutionGraphPipelineScratchSizeAMDX const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 300 && (VK_NV_cooperative_matrix2)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_FEATURES_NV) {
+    cleanup_VkPhysicalDeviceCooperativeMatrix2FeaturesNV(
+        (VkPhysicalDeviceCooperativeMatrix2FeaturesNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 300 && (VK_NV_cooperative_matrix2)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_PROPERTIES_NV) {
+    cleanup_VkPhysicalDeviceCooperativeMatrix2PropertiesNV(
+        (VkPhysicalDeviceCooperativeMatrix2PropertiesNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 300 && (VK_NV_cooperative_matrix2)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_COOPERATIVE_MATRIX_FLEXIBLE_DIMENSIONS_PROPERTIES_NV) {
+    cleanup_VkCooperativeMatrixFlexibleDimensionsPropertiesNV(
+        (VkCooperativeMatrixFlexibleDimensionsPropertiesNV const *)pData);
     return;
   }
 #endif
@@ -33701,6 +33740,36 @@ void cleanup_VkPhysicalDeviceShaderEnqueueFeaturesAMDX(
 #if VK_HEADER_VERSION >= 298 && (VK_AMDX_shader_enqueue)
 void cleanup_VkExecutionGraphPipelineScratchSizeAMDX(
     VkExecutionGraphPipelineScratchSizeAMDX const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 300 && (VK_NV_cooperative_matrix2)
+void cleanup_VkPhysicalDeviceCooperativeMatrix2FeaturesNV(
+    VkPhysicalDeviceCooperativeMatrix2FeaturesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 300 && (VK_NV_cooperative_matrix2)
+void cleanup_VkPhysicalDeviceCooperativeMatrix2PropertiesNV(
+    VkPhysicalDeviceCooperativeMatrix2PropertiesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 300 && (VK_NV_cooperative_matrix2)
+void cleanup_VkCooperativeMatrixFlexibleDimensionsPropertiesNV(
+    VkCooperativeMatrixFlexibleDimensionsPropertiesNV const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

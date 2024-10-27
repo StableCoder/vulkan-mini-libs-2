@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 299,
-              "VK_HEADER_VERSION is from after the maximum supported version of v299.");
+static_assert(VK_HEADER_VERSION <= 300,
+              "VK_HEADER_VERSION is from after the maximum supported version of v300.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 299,
-               "VK_HEADER_VERSION is from after the maximum supported version of v299.");
+_Static_assert(VK_HEADER_VERSION <= 300,
+               "VK_HEADER_VERSION is from after the maximum supported version of v300.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -6711,6 +6711,24 @@ bool compare_VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT(
 
 #if VK_HEADER_VERSION >= 296 && (VK_EXT_depth_clamp_control)
 bool compare_VkDepthClampRangeEXT(VkDepthClampRangeEXT const *s1, VkDepthClampRangeEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 300 && (VK_NV_cooperative_matrix2)
+bool compare_VkPhysicalDeviceCooperativeMatrix2FeaturesNV(
+    VkPhysicalDeviceCooperativeMatrix2FeaturesNV const *s1,
+    VkPhysicalDeviceCooperativeMatrix2FeaturesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 300 && (VK_NV_cooperative_matrix2)
+bool compare_VkPhysicalDeviceCooperativeMatrix2PropertiesNV(
+    VkPhysicalDeviceCooperativeMatrix2PropertiesNV const *s1,
+    VkPhysicalDeviceCooperativeMatrix2PropertiesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 300 && (VK_NV_cooperative_matrix2)
+bool compare_VkCooperativeMatrixFlexibleDimensionsPropertiesNV(
+    VkCooperativeMatrixFlexibleDimensionsPropertiesNV const *s1,
+    VkCooperativeMatrixFlexibleDimensionsPropertiesNV const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 260 && VK_HEADER_VERSION <= 297 && (VK_AMDX_shader_enqueue)
@@ -23669,6 +23687,55 @@ bool compare_VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT(
 #if VK_HEADER_VERSION >= 296 && (VK_EXT_depth_clamp_control)
 bool compare_VkDepthClampRangeEXT(VkDepthClampRangeEXT const *s1, VkDepthClampRangeEXT const *s2) {
   if ((s1->minDepthClamp != s2->minDepthClamp) || (s1->maxDepthClamp != s2->maxDepthClamp) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 300 && (VK_NV_cooperative_matrix2)
+bool compare_VkPhysicalDeviceCooperativeMatrix2FeaturesNV(
+    VkPhysicalDeviceCooperativeMatrix2FeaturesNV const *s1,
+    VkPhysicalDeviceCooperativeMatrix2FeaturesNV const *s2) {
+  if ((s1->cooperativeMatrixWorkgroupScope != s2->cooperativeMatrixWorkgroupScope) ||
+      (s1->cooperativeMatrixFlexibleDimensions != s2->cooperativeMatrixFlexibleDimensions) ||
+      (s1->cooperativeMatrixReductions != s2->cooperativeMatrixReductions) ||
+      (s1->cooperativeMatrixConversions != s2->cooperativeMatrixConversions) ||
+      (s1->cooperativeMatrixPerElementOperations != s2->cooperativeMatrixPerElementOperations) ||
+      (s1->cooperativeMatrixTensorAddressing != s2->cooperativeMatrixTensorAddressing) ||
+      (s1->cooperativeMatrixBlockLoads != s2->cooperativeMatrixBlockLoads) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 300 && (VK_NV_cooperative_matrix2)
+bool compare_VkPhysicalDeviceCooperativeMatrix2PropertiesNV(
+    VkPhysicalDeviceCooperativeMatrix2PropertiesNV const *s1,
+    VkPhysicalDeviceCooperativeMatrix2PropertiesNV const *s2) {
+  if ((s1->cooperativeMatrixWorkgroupScopeMaxWorkgroupSize !=
+       s2->cooperativeMatrixWorkgroupScopeMaxWorkgroupSize) ||
+      (s1->cooperativeMatrixFlexibleDimensionsMaxDimension !=
+       s2->cooperativeMatrixFlexibleDimensionsMaxDimension) ||
+      (s1->cooperativeMatrixWorkgroupScopeReservedSharedMemory !=
+       s2->cooperativeMatrixWorkgroupScopeReservedSharedMemory) ||
+      false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 300 && (VK_NV_cooperative_matrix2)
+bool compare_VkCooperativeMatrixFlexibleDimensionsPropertiesNV(
+    VkCooperativeMatrixFlexibleDimensionsPropertiesNV const *s1,
+    VkCooperativeMatrixFlexibleDimensionsPropertiesNV const *s2) {
+  if ((s1->MGranularity != s2->MGranularity) || (s1->NGranularity != s2->NGranularity) ||
+      (s1->KGranularity != s2->KGranularity) || (s1->AType != s2->AType) ||
+      (s1->BType != s2->BType) || (s1->CType != s2->CType) || (s1->ResultType != s2->ResultType) ||
+      (s1->saturatingAccumulation != s2->saturatingAccumulation) || (s1->scope != s2->scope) ||
+      (s1->workgroupInvocations != s2->workgroupInvocations) || false)
     return false;
 
   return true;
