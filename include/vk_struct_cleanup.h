@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 300,
-              "VK_HEADER_VERSION is from after the maximum supported version of v300.");
+static_assert(VK_HEADER_VERSION <= 301,
+              "VK_HEADER_VERSION is from after the maximum supported version of v301.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 300,
-               "VK_HEADER_VERSION is from after the maximum supported version of v300.");
+_Static_assert(VK_HEADER_VERSION <= 301,
+               "VK_HEADER_VERSION is from after the maximum supported version of v301.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -7164,10 +7164,6 @@ void cleanup_VkIndirectExecutionSetShaderInfoEXT(VkIndirectExecutionSetShaderInf
 #endif
 
 #if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
-void cleanup_VkIndirectExecutionSetCreateInfoEXT(VkIndirectExecutionSetCreateInfoEXT const *pData);
-#endif
-
-#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
 void cleanup_VkGeneratedCommandsInfoEXT(VkGeneratedCommandsInfoEXT const *pData);
 #endif
 
@@ -7179,15 +7175,6 @@ void cleanup_VkWriteIndirectExecutionSetPipelineEXT(
 #if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands && VK_EXT_shader_object)
 void cleanup_VkWriteIndirectExecutionSetShaderEXT(
     VkWriteIndirectExecutionSetShaderEXT const *pData);
-#endif
-
-#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
-void cleanup_VkIndirectCommandsLayoutCreateInfoEXT(
-    VkIndirectCommandsLayoutCreateInfoEXT const *pData);
-#endif
-
-#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
-void cleanup_VkIndirectCommandsLayoutTokenEXT(VkIndirectCommandsLayoutTokenEXT const *pData);
 #endif
 
 #if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
@@ -7271,6 +7258,15 @@ void cleanup_VkPhysicalDeviceCooperativeMatrix2PropertiesNV(
 #if VK_HEADER_VERSION >= 300 && (VK_NV_cooperative_matrix2)
 void cleanup_VkCooperativeMatrixFlexibleDimensionsPropertiesNV(
     VkCooperativeMatrixFlexibleDimensionsPropertiesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 301 && (VK_HUAWEI_hdr_vivid)
+void cleanup_VkHdrVividDynamicMetadataHUAWEI(VkHdrVividDynamicMetadataHUAWEI const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 301 && (VK_HUAWEI_hdr_vivid)
+void cleanup_VkPhysicalDeviceHdrVividFeaturesHUAWEI(
+    VkPhysicalDeviceHdrVividFeaturesHUAWEI const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -16782,13 +16778,6 @@ void cleanup_vk_struct(void const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
-  if (pTemp->sType == VK_STRUCTURE_TYPE_INDIRECT_EXECUTION_SET_CREATE_INFO_EXT) {
-    cleanup_VkIndirectExecutionSetCreateInfoEXT((VkIndirectExecutionSetCreateInfoEXT const *)pData);
-    return;
-  }
-#endif
-
-#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
   if (pTemp->sType == VK_STRUCTURE_TYPE_GENERATED_COMMANDS_INFO_EXT) {
     cleanup_VkGeneratedCommandsInfoEXT((VkGeneratedCommandsInfoEXT const *)pData);
     return;
@@ -16807,21 +16796,6 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_WRITE_INDIRECT_EXECUTION_SET_SHADER_EXT) {
     cleanup_VkWriteIndirectExecutionSetShaderEXT(
         (VkWriteIndirectExecutionSetShaderEXT const *)pData);
-    return;
-  }
-#endif
-
-#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
-  if (pTemp->sType == VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_CREATE_INFO_EXT) {
-    cleanup_VkIndirectCommandsLayoutCreateInfoEXT(
-        (VkIndirectCommandsLayoutCreateInfoEXT const *)pData);
-    return;
-  }
-#endif
-
-#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
-  if (pTemp->sType == VK_STRUCTURE_TYPE_INDIRECT_COMMANDS_LAYOUT_TOKEN_EXT) {
-    cleanup_VkIndirectCommandsLayoutTokenEXT((VkIndirectCommandsLayoutTokenEXT const *)pData);
     return;
   }
 #endif
@@ -16895,6 +16869,21 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_COOPERATIVE_MATRIX_FLEXIBLE_DIMENSIONS_PROPERTIES_NV) {
     cleanup_VkCooperativeMatrixFlexibleDimensionsPropertiesNV(
         (VkCooperativeMatrixFlexibleDimensionsPropertiesNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 301 && (VK_HUAWEI_hdr_vivid)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_HDR_VIVID_DYNAMIC_METADATA_HUAWEI) {
+    cleanup_VkHdrVividDynamicMetadataHUAWEI((VkHdrVividDynamicMetadataHUAWEI const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 301 && (VK_HUAWEI_hdr_vivid)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_HDR_VIVID_FEATURES_HUAWEI) {
+    cleanup_VkPhysicalDeviceHdrVividFeaturesHUAWEI(
+        (VkPhysicalDeviceHdrVividFeaturesHUAWEI const *)pData);
     return;
   }
 #endif
@@ -33580,15 +33569,6 @@ void cleanup_VkIndirectExecutionSetShaderInfoEXT(VkIndirectExecutionSetShaderInf
 #endif
 
 #if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
-void cleanup_VkIndirectExecutionSetCreateInfoEXT(VkIndirectExecutionSetCreateInfoEXT const *pData) {
-  // pNext
-  if (pData->pNext != NULL)
-    cleanup_vk_struct(pData->pNext);
-  free((void *)pData->pNext);
-}
-#endif
-
-#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
 void cleanup_VkGeneratedCommandsInfoEXT(VkGeneratedCommandsInfoEXT const *pData) {
   // pNext
   if (pData->pNext != NULL)
@@ -33610,32 +33590,6 @@ void cleanup_VkWriteIndirectExecutionSetPipelineEXT(
 #if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands && VK_EXT_shader_object)
 void cleanup_VkWriteIndirectExecutionSetShaderEXT(
     VkWriteIndirectExecutionSetShaderEXT const *pData) {
-  // pNext
-  if (pData->pNext != NULL)
-    cleanup_vk_struct(pData->pNext);
-  free((void *)pData->pNext);
-}
-#endif
-
-#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
-void cleanup_VkIndirectCommandsLayoutCreateInfoEXT(
-    VkIndirectCommandsLayoutCreateInfoEXT const *pData) {
-  // pNext
-  if (pData->pNext != NULL)
-    cleanup_vk_struct(pData->pNext);
-  free((void *)pData->pNext);
-
-  // pTokens - tokenCount
-  if (pData->pTokens != NULL) {
-    for (uint32_t i = 0; i < pData->tokenCount; ++i)
-      cleanup_VkIndirectCommandsLayoutTokenEXT(&pData->pTokens[i]);
-  }
-  free((void *)pData->pTokens);
-}
-#endif
-
-#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
-void cleanup_VkIndirectCommandsLayoutTokenEXT(VkIndirectCommandsLayoutTokenEXT const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
@@ -33770,6 +33724,28 @@ void cleanup_VkPhysicalDeviceCooperativeMatrix2PropertiesNV(
 #if VK_HEADER_VERSION >= 300 && (VK_NV_cooperative_matrix2)
 void cleanup_VkCooperativeMatrixFlexibleDimensionsPropertiesNV(
     VkCooperativeMatrixFlexibleDimensionsPropertiesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 301 && (VK_HUAWEI_hdr_vivid)
+void cleanup_VkHdrVividDynamicMetadataHUAWEI(VkHdrVividDynamicMetadataHUAWEI const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pDynamicMetadata - dynamicMetadataSize
+  free((void *)pData->pDynamicMetadata);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 301 && (VK_HUAWEI_hdr_vivid)
+void cleanup_VkPhysicalDeviceHdrVividFeaturesHUAWEI(
+    VkPhysicalDeviceHdrVividFeaturesHUAWEI const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

@@ -1,3 +1,6 @@
 VkAccelerationStructureBuildGeometryInfoKHR:
 VkMicromapBuildInfoEXT:
 VkAccelerationStructureTrianglesOpacityMicromapEXT:
+VkIndirectExecutionSetCreateInfoEXT:
+VkIndirectCommandsLayoutTokenEXT:
+VkIndirectCommandsLayoutCreateInfoEXT:

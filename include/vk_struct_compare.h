@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 300,
-              "VK_HEADER_VERSION is from after the maximum supported version of v300.");
+static_assert(VK_HEADER_VERSION <= 301,
+              "VK_HEADER_VERSION is from after the maximum supported version of v301.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 300,
-               "VK_HEADER_VERSION is from after the maximum supported version of v300.");
+_Static_assert(VK_HEADER_VERSION <= 301,
+               "VK_HEADER_VERSION is from after the maximum supported version of v301.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -1508,6 +1508,11 @@ bool compare_VkPhysicalDevicePresentWaitFeaturesKHR(
 
 #if (VK_EXT_hdr_metadata)
 bool compare_VkHdrMetadataEXT(VkHdrMetadataEXT const *s1, VkHdrMetadataEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 301 && (VK_HUAWEI_hdr_vivid)
+bool compare_VkHdrVividDynamicMetadataHUAWEI(VkHdrVividDynamicMetadataHUAWEI const *s1,
+                                             VkHdrVividDynamicMetadataHUAWEI const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 104 && (VK_AMD_display_native_hdr)
@@ -4427,11 +4432,6 @@ bool compare_VkIndirectExecutionSetShaderInfoEXT(VkIndirectExecutionSetShaderInf
 #endif
 
 #if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
-bool compare_VkIndirectExecutionSetCreateInfoEXT(VkIndirectExecutionSetCreateInfoEXT const *s1,
-                                                 VkIndirectExecutionSetCreateInfoEXT const *s2);
-#endif
-
-#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
 bool compare_VkGeneratedCommandsInfoEXT(VkGeneratedCommandsInfoEXT const *s1,
                                         VkGeneratedCommandsInfoEXT const *s2);
 #endif
@@ -4445,16 +4445,6 @@ bool compare_VkWriteIndirectExecutionSetPipelineEXT(
 #if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands && VK_EXT_shader_object)
 bool compare_VkWriteIndirectExecutionSetShaderEXT(VkWriteIndirectExecutionSetShaderEXT const *s1,
                                                   VkWriteIndirectExecutionSetShaderEXT const *s2);
-#endif
-
-#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
-bool compare_VkIndirectCommandsLayoutCreateInfoEXT(VkIndirectCommandsLayoutCreateInfoEXT const *s1,
-                                                   VkIndirectCommandsLayoutCreateInfoEXT const *s2);
-#endif
-
-#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
-bool compare_VkIndirectCommandsLayoutTokenEXT(VkIndirectCommandsLayoutTokenEXT const *s1,
-                                              VkIndirectCommandsLayoutTokenEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
@@ -6729,6 +6719,12 @@ bool compare_VkPhysicalDeviceCooperativeMatrix2PropertiesNV(
 bool compare_VkCooperativeMatrixFlexibleDimensionsPropertiesNV(
     VkCooperativeMatrixFlexibleDimensionsPropertiesNV const *s1,
     VkCooperativeMatrixFlexibleDimensionsPropertiesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 301 && (VK_HUAWEI_hdr_vivid)
+bool compare_VkPhysicalDeviceHdrVividFeaturesHUAWEI(
+    VkPhysicalDeviceHdrVividFeaturesHUAWEI const *s1,
+    VkPhysicalDeviceHdrVividFeaturesHUAWEI const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 260 && VK_HEADER_VERSION <= 297 && (VK_AMDX_shader_enqueue)
@@ -12268,6 +12264,16 @@ bool compare_VkHdrMetadataEXT(VkHdrMetadataEXT const *s1, VkHdrMetadataEXT const
       (s1->maxLuminance != s2->maxLuminance) || (s1->minLuminance != s2->minLuminance) ||
       (s1->maxContentLightLevel != s2->maxContentLightLevel) ||
       (s1->maxFrameAverageLightLevel != s2->maxFrameAverageLightLevel) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 301 && (VK_HUAWEI_hdr_vivid)
+bool compare_VkHdrVividDynamicMetadataHUAWEI(VkHdrVividDynamicMetadataHUAWEI const *s1,
+                                             VkHdrVividDynamicMetadataHUAWEI const *s2) {
+  if ((s1->dynamicMetadataSize != s2->dynamicMetadataSize) || false)
     return false;
 
   return true;
@@ -18742,16 +18748,6 @@ bool compare_VkIndirectExecutionSetShaderInfoEXT(VkIndirectExecutionSetShaderInf
 #endif
 
 #if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
-bool compare_VkIndirectExecutionSetCreateInfoEXT(VkIndirectExecutionSetCreateInfoEXT const *s1,
-                                                 VkIndirectExecutionSetCreateInfoEXT const *s2) {
-  if ((s1->type != s2->type) || (s1->info != s2->info) || false)
-    return false;
-
-  return true;
-}
-#endif
-
-#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
 bool compare_VkGeneratedCommandsInfoEXT(VkGeneratedCommandsInfoEXT const *s1,
                                         VkGeneratedCommandsInfoEXT const *s2) {
   if ((s1->shaderStages != s2->shaderStages) ||
@@ -18785,29 +18781,6 @@ bool compare_VkWriteIndirectExecutionSetPipelineEXT(
 bool compare_VkWriteIndirectExecutionSetShaderEXT(VkWriteIndirectExecutionSetShaderEXT const *s1,
                                                   VkWriteIndirectExecutionSetShaderEXT const *s2) {
   if ((s1->index != s2->index) || (s1->shader != s2->shader) || false)
-    return false;
-
-  return true;
-}
-#endif
-
-#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
-bool compare_VkIndirectCommandsLayoutCreateInfoEXT(
-    VkIndirectCommandsLayoutCreateInfoEXT const *s1,
-    VkIndirectCommandsLayoutCreateInfoEXT const *s2) {
-  if ((s1->flags != s2->flags) || (s1->shaderStages != s2->shaderStages) ||
-      (s1->indirectStride != s2->indirectStride) || (s1->pipelineLayout != s2->pipelineLayout) ||
-      (s1->tokenCount != s2->tokenCount) || false)
-    return false;
-
-  return true;
-}
-#endif
-
-#if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
-bool compare_VkIndirectCommandsLayoutTokenEXT(VkIndirectCommandsLayoutTokenEXT const *s1,
-                                              VkIndirectCommandsLayoutTokenEXT const *s2) {
-  if ((s1->type != s2->type) || (s1->data != s2->data) || (s1->offset != s2->offset) || false)
     return false;
 
   return true;
@@ -23736,6 +23709,17 @@ bool compare_VkCooperativeMatrixFlexibleDimensionsPropertiesNV(
       (s1->BType != s2->BType) || (s1->CType != s2->CType) || (s1->ResultType != s2->ResultType) ||
       (s1->saturatingAccumulation != s2->saturatingAccumulation) || (s1->scope != s2->scope) ||
       (s1->workgroupInvocations != s2->workgroupInvocations) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 301 && (VK_HUAWEI_hdr_vivid)
+bool compare_VkPhysicalDeviceHdrVividFeaturesHUAWEI(
+    VkPhysicalDeviceHdrVividFeaturesHUAWEI const *s1,
+    VkPhysicalDeviceHdrVividFeaturesHUAWEI const *s2) {
+  if ((s1->hdrVivid != s2->hdrVivid) || false)
     return false;
 
   return true;
