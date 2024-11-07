@@ -2,7 +2,7 @@
 .clangd/
 .vscode/
 auto-gen/
-build/
+build*/
 *-Docs/
 compile_commands.json
 *.xml
