@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 301,
-              "VK_HEADER_VERSION is from after the maximum supported version of v301.");
+static_assert(VK_HEADER_VERSION <= 302,
+              "VK_HEADER_VERSION is from after the maximum supported version of v302.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 301,
-               "VK_HEADER_VERSION is from after the maximum supported version of v301.");
+_Static_assert(VK_HEADER_VERSION <= 302,
+               "VK_HEADER_VERSION is from after the maximum supported version of v302.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -414,6 +414,8 @@ EnumValueSet const VkImageUsageFlagsSets[] = {
     {"SAMPLE_BLOCK_MATCH_BIT_QCOM", 0x00200000, false},
     {"ATTACHMENT_FEEDBACK_LOOP_BIT_EXT", 0x00080000, false},
     {"HOST_TRANSFER_BIT_EXT", 0x00400000, false},
+    {"VIDEO_ENCODE_QUANTIZATION_DELTA_MAP_BIT_KHR", 0x02000000, false},
+    {"VIDEO_ENCODE_EMPHASIS_MAP_BIT_KHR", 0x04000000, false},
 };
 
 EnumValueSet const VkImageCreateFlagsSets[] = {
@@ -1057,6 +1059,8 @@ EnumValueSet const VkFormatFeatureFlags2Sets[] = {
     {"OPTICAL_FLOW_VECTOR_BIT_NV", 0x20000000000, false},
     {"OPTICAL_FLOW_COST_BIT_NV", 0x40000000000, false},
     {"HOST_IMAGE_TRANSFER_BIT_EXT", 0x400000000000, false},
+    {"VIDEO_ENCODE_QUANTIZATION_DELTA_MAP_BIT_KHR", 0x2000000000000, false},
+    {"VIDEO_ENCODE_EMPHASIS_MAP_BIT_KHR", 0x4000000000000, false},
 };
 
 EnumValueSet const VkRenderingFlagsSets[] = {
@@ -1518,7 +1522,7 @@ EnumValueSet const VkVideoCodecOperationFlagsKHRSets[] = {
     {"ENCODE_H265_BIT_EXT", 0x00020000, false}, {"NONE", 0, false},
     {"DECODE_H264", 0x00000001, false},         {"DECODE_H265", 0x00000002, false},
     {"ENCODE_H264", 0x00010000, false},         {"ENCODE_H265", 0x00020000, false},
-    {"DECODE_AV1", 0x00000004, false},
+    {"DECODE_AV1", 0x00000004, false},          {"ENCODE_AV1", 0x00040000, false},
 };
 
 EnumValueSet const VkVideoCapabilityFlagsKHRSets[] = {
@@ -1531,6 +1535,12 @@ EnumValueSet const VkVideoSessionCreateFlagsKHRSets[] = {
     {"DEFAULT", 0, false},
     {"ALLOW_ENCODE_PARAMETER_OPTIMIZATIONS", 0x00000002, false},
     {"INLINE_QUERIES", 0x00000004, false},
+    {"ALLOW_ENCODE_QUANTIZATION_DELTA_MAP", 0x00000008, false},
+    {"ALLOW_ENCODE_EMPHASIS_MAP", 0x00000010, false},
+};
+
+EnumValueSet const VkVideoSessionParametersCreateFlagsKHRSets[] = {
+    {"QUANTIZATION_MAP_COMPATIBLE", 0x00000001, false},
 };
 
 EnumValueSet const VkVideoCodingControlFlagsKHRSets[] = {
@@ -1568,6 +1578,8 @@ EnumValueSet const VkVideoDecodeH264PictureLayoutFlagsKHRSets[] = {
 EnumValueSet const VkVideoEncodeFlagsKHRSets[] = {
     {"DEFAULT", 0, false},
     {"RESERVED_0", 0x00000001, false},
+    {"WITH_QUANTIZATION_DELTA_MAP", 0x00000001, false},
+    {"WITH_EMPHASIS_MAP", 0x00000002, false},
 };
 
 EnumValueSet const VkVideoEncodeUsageFlagsKHRSets[] = {
@@ -1589,6 +1601,8 @@ EnumValueSet const VkVideoEncodeCapabilityFlagsKHRSets[] = {
     {"PRECEDING_EXTERNALLY_ENCODED_BYTES", 0x00000001, false},
     {"DEFAULT", 0, false},
     {"INSUFFICIENT_BITSTREAM_BUFFER_RANGE_DETECTION", 0x00000002, false},
+    {"QUANTIZATION_DELTA_MAP", 0x00000004, false},
+    {"EMPHASIS_MAP", 0x00000008, false},
 };
 
 EnumValueSet const VkVideoEncodeFeedbackFlagsKHRSets[] = {
@@ -1630,6 +1644,7 @@ EnumValueSet const VkVideoEncodeH264CapabilityFlagsKHRSets[] = {
     {"PER_PICTURE_TYPE_MIN_MAX_QP", 0x00000040, false},
     {"PER_SLICE_CONSTANT_QP", 0x00000080, false},
     {"GENERATE_PREFIX_NALU", 0x00000100, false},
+    {"MB_QP_DIFF_WRAPAROUND", 0x00000200, false},
 };
 
 EnumValueSet const VkVideoEncodeH264StdFlagsKHRSets[] = {
@@ -1674,6 +1689,7 @@ EnumValueSet const VkVideoEncodeH265CapabilityFlagsKHRSets[] = {
     {"PER_SLICE_SEGMENT_CONSTANT_QP", 0x00000080, false},
     {"MULTIPLE_TILES_PER_SLICE_SEGMENT", 0x00000100, false},
     {"MULTIPLE_SLICE_SEGMENTS_PER_TILE", 0x00000200, false},
+    {"CU_QP_DIFF_WRAPAROUND", 0x00000400, false},
 };
 
 EnumValueSet const VkVideoEncodeH265StdFlagsKHRSets[] = {
@@ -1719,6 +1735,33 @@ EnumValueSet const VkVideoEncodeH265TransformBlockSizeFlagsKHRSets[] = {
     {"8", 0x00000002, false},
     {"16", 0x00000004, false},
     {"32", 0x00000008, false},
+};
+
+EnumValueSet const VkVideoEncodeAV1CapabilityFlagsKHRSets[] = {
+    {"VK_VIDEO_ENCODE_AV1_CAPABILITY_PER_RATE_CONTROL_GROUP_MIN_MAX_Q_INDEX", 0x00000001, false},
+    {"VK_VIDEO_ENCODE_AV1_CAPABILITY_GENERATE_OBU_EXTENSION_HEADER", 0x00000002, false},
+    {"VK_VIDEO_ENCODE_AV1_CAPABILITY_PRIMARY_REFERENCE_CDF_ONLY", 0x00000004, false},
+    {"VK_VIDEO_ENCODE_AV1_CAPABILITY_FRAME_SIZE_OVERRIDE", 0x00000008, false},
+    {"VK_VIDEO_ENCODE_AV1_CAPABILITY_MOTION_VECTOR_SCALING", 0x00000010, false},
+};
+
+EnumValueSet const VkVideoEncodeAV1StdFlagsKHRSets[] = {
+    {"VK_VIDEO_ENCODE_AV1_STD_UNIFORM_TILE_SPACING_FLAG_SET", 0x00000001, false},
+    {"VK_VIDEO_ENCODE_AV1_STD_SKIP_MODE_PRESENT_UNSET", 0x00000002, false},
+    {"VK_VIDEO_ENCODE_AV1_STD_PRIMARY_REF_FRAME", 0x00000004, false},
+    {"VK_VIDEO_ENCODE_AV1_STD_DELTA_Q", 0x00000008, false},
+};
+
+EnumValueSet const VkVideoEncodeAV1RateControlFlagsKHRSets[] = {
+    {"VK_VIDEO_ENCODE_AV1_RATE_CONTROL_REGULAR_GOP", 0x00000001, false},
+    {"VK_VIDEO_ENCODE_AV1_RATE_CONTROL_TEMPORAL_LAYER_PATTERN_DYADIC", 0x00000002, false},
+    {"VK_VIDEO_ENCODE_AV1_RATE_CONTROL_REFERENCE_PATTERN_FLAT", 0x00000004, false},
+    {"VK_VIDEO_ENCODE_AV1_RATE_CONTROL_REFERENCE_PATTERN_DYADIC", 0x00000008, false},
+};
+
+EnumValueSet const VkVideoEncodeAV1SuperblockSizeFlagsKHRSets[] = {
+    {"VK_VIDEO_ENCODE_AV1_SUPERBLOCK_SIZE_64", 0x00000001, false},
+    {"VK_VIDEO_ENCODE_AV1_SUPERBLOCK_SIZE_128", 0x00000002, false},
 };
 
 EnumValueSet const VkAttachmentLoadOpSets[] = {
@@ -2320,6 +2363,7 @@ EnumValueSet const VkImageLayoutSets[] = {
     {"ATTACHMENT_OPTIMAL", 1000314001, false},
     {"ATTACHMENT_FEEDBACK_LOOP_OPTIMAL_EXT", 1000339000, false},
     {"RENDERING_LOCAL_READ_KHR", 1000232000, false},
+    {"VIDEO_ENCODE_QUANTIZATION_MAP_KHR", 1000553000, false},
 };
 
 EnumValueSet const VkImageTilingSets[] = {
@@ -3011,6 +3055,13 @@ EnumValueSet const VkPresentModeKHRSets[] = {
     {"FIFO_LATEST_READY_EXT", 1000361000, false},
 };
 
+EnumValueSet const VkDisplaySurfaceStereoTypeNVSets[] = {
+    {"NONE", 0, false},
+    {"ONBOARD_DIN", 1, false},
+    {"HDMI_3D", 2, false},
+    {"INBAND_DISPLAYPORT", 3, false},
+};
+
 EnumValueSet const VkDebugReportObjectTypeEXTSets[] = {
     {"UNKNOWN", 0, false},
     {"INSTANCE", 1, false},
@@ -3312,6 +3363,19 @@ EnumValueSet const VkQueryResultStatusKHRSets[] = {
 EnumValueSet const VkVideoEncodeTuningModeKHRSets[] = {
     {"DEFAULT", 0, false},           {"HIGH_QUALITY", 1, false}, {"LOW_LATENCY", 2, false},
     {"ULTRA_LOW_LATENCY", 3, false}, {"LOSSLESS", 4, false},
+};
+
+EnumValueSet const VkVideoEncodeAV1PredictionModeKHRSets[] = {
+    {"VK_VIDEO_ENCODE_AV1_PREDICTION_MODE_INTRA_ONLY", 0, false},
+    {"VK_VIDEO_ENCODE_AV1_PREDICTION_MODE_SINGLE_REFERENCE", 1, false},
+    {"VK_VIDEO_ENCODE_AV1_PREDICTION_MODE_UNIDIRECTIONAL_COMPOUND", 2, false},
+    {"VK_VIDEO_ENCODE_AV1_PREDICTION_MODE_BIDIRECTIONAL_COMPOUND", 3, false},
+};
+
+EnumValueSet const VkVideoEncodeAV1RateControlGroupKHRSets[] = {
+    {"VK_VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_INTRA", 0, false},
+    {"VK_VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_PREDICTIVE", 1, false},
+    {"VK_VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_BIPREDICTIVE", 2, false},
 };
 
 EnumValueSet const VkAccelerationStructureMotionInstanceTypeNVSets[] = {
@@ -3642,7 +3706,7 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[364] = {
+EnumType const cEnumTypes[371] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", NULL, 0},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 1},
@@ -3671,7 +3735,7 @@ EnumType const cEnumTypes[364] = {
     {"VkBufferUsageFlags", VkBufferUsageFlagsSets, 31},
     {"VkBufferCreateFlags", VkBufferCreateFlagsSets, 9},
     {"VkShaderStageFlags", VkShaderStageFlagsSets, 32},
-    {"VkImageUsageFlags", VkImageUsageFlagsSets, 22},
+    {"VkImageUsageFlags", VkImageUsageFlagsSets, 24},
     {"VkImageCreateFlags", VkImageCreateFlagsSets, 26},
     {"VkImageViewCreateFlags", VkImageViewCreateFlagsSets, 3},
     {"VkPipelineCreateFlags", VkPipelineCreateFlagsSets, 39},
@@ -3723,7 +3787,7 @@ EnumType const cEnumTypes[364] = {
     {"VkPipelineStageFlags2", VkPipelineStageFlags2Sets, 76},
     {"VkAccelerationStructureMotionInfoFlagsNV", NULL, 0},
     {"VkAccelerationStructureMotionInstanceFlagsNV", NULL, 0},
-    {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Sets, 70},
+    {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Sets, 72},
     {"VkRenderingFlags", VkRenderingFlagsSets, 9},
     {"VkMemoryDecompressionMethodFlagsNV", VkMemoryDecompressionMethodFlagsNVSets, 1},
     {"VkBuildMicromapFlagsEXT", VkBuildMicromapFlagsEXTSets, 3},
@@ -3807,10 +3871,10 @@ EnumType const cEnumTypes[364] = {
     {"VkShaderCreateFlagsEXT", VkShaderCreateFlagsEXTSets, 8},
     {"VkPhysicalDeviceSchedulingControlsFlagsARM", VkPhysicalDeviceSchedulingControlsFlagsARMSets,
      1},
-    {"VkVideoCodecOperationFlagsKHR", VkVideoCodecOperationFlagsKHRSets, 11},
+    {"VkVideoCodecOperationFlagsKHR", VkVideoCodecOperationFlagsKHRSets, 12},
     {"VkVideoCapabilityFlagsKHR", VkVideoCapabilityFlagsKHRSets, 2},
-    {"VkVideoSessionCreateFlagsKHR", VkVideoSessionCreateFlagsKHRSets, 4},
-    {"VkVideoSessionParametersCreateFlagsKHR", NULL, 0},
+    {"VkVideoSessionCreateFlagsKHR", VkVideoSessionCreateFlagsKHRSets, 6},
+    {"VkVideoSessionParametersCreateFlagsKHR", VkVideoSessionParametersCreateFlagsKHRSets, 1},
     {"VkVideoBeginCodingFlagsKHR", NULL, 0},
     {"VkVideoEndCodingFlagsKHR", NULL, 0},
     {"VkVideoCodingControlFlagsKHR", VkVideoCodingControlFlagsKHRSets, 5},
@@ -3818,24 +3882,28 @@ EnumType const cEnumTypes[364] = {
     {"VkVideoDecodeCapabilityFlagsKHR", VkVideoDecodeCapabilityFlagsKHRSets, 3},
     {"VkVideoDecodeFlagsKHR", VkVideoDecodeFlagsKHRSets, 2},
     {"VkVideoDecodeH264PictureLayoutFlagsKHR", VkVideoDecodeH264PictureLayoutFlagsKHRSets, 3},
-    {"VkVideoEncodeFlagsKHR", VkVideoEncodeFlagsKHRSets, 2},
+    {"VkVideoEncodeFlagsKHR", VkVideoEncodeFlagsKHRSets, 4},
     {"VkVideoEncodeUsageFlagsKHR", VkVideoEncodeUsageFlagsKHRSets, 5},
     {"VkVideoEncodeContentFlagsKHR", VkVideoEncodeContentFlagsKHRSets, 4},
-    {"VkVideoEncodeCapabilityFlagsKHR", VkVideoEncodeCapabilityFlagsKHRSets, 3},
+    {"VkVideoEncodeCapabilityFlagsKHR", VkVideoEncodeCapabilityFlagsKHRSets, 5},
     {"VkVideoEncodeFeedbackFlagsKHR", VkVideoEncodeFeedbackFlagsKHRSets, 3},
     {"VkVideoEncodeRateControlFlagsKHR", VkVideoEncodeRateControlFlagsKHRSets, 3},
     {"VkVideoEncodeRateControlModeFlagsKHR", VkVideoEncodeRateControlModeFlagsKHRSets, 5},
     {"VkVideoChromaSubsamplingFlagsKHR", VkVideoChromaSubsamplingFlagsKHRSets, 6},
     {"VkVideoComponentBitDepthFlagsKHR", VkVideoComponentBitDepthFlagsKHRSets, 4},
-    {"VkVideoEncodeH264CapabilityFlagsKHR", VkVideoEncodeH264CapabilityFlagsKHRSets, 9},
+    {"VkVideoEncodeH264CapabilityFlagsKHR", VkVideoEncodeH264CapabilityFlagsKHRSets, 10},
     {"VkVideoEncodeH264StdFlagsKHR", VkVideoEncodeH264StdFlagsKHRSets, 20},
     {"VkVideoEncodeH264RateControlFlagsKHR", VkVideoEncodeH264RateControlFlagsKHRSets, 5},
-    {"VkVideoEncodeH265CapabilityFlagsKHR", VkVideoEncodeH265CapabilityFlagsKHRSets, 10},
+    {"VkVideoEncodeH265CapabilityFlagsKHR", VkVideoEncodeH265CapabilityFlagsKHRSets, 11},
     {"VkVideoEncodeH265StdFlagsKHR", VkVideoEncodeH265StdFlagsKHRSets, 21},
     {"VkVideoEncodeH265RateControlFlagsKHR", VkVideoEncodeH265RateControlFlagsKHRSets, 5},
     {"VkVideoEncodeH265CtbSizeFlagsKHR", VkVideoEncodeH265CtbSizeFlagsKHRSets, 3},
     {"VkVideoEncodeH265TransformBlockSizeFlagsKHR", VkVideoEncodeH265TransformBlockSizeFlagsKHRSets,
      4},
+    {"VkVideoEncodeAV1CapabilityFlagsKHR", VkVideoEncodeAV1CapabilityFlagsKHRSets, 5},
+    {"VkVideoEncodeAV1StdFlagsKHR", VkVideoEncodeAV1StdFlagsKHRSets, 4},
+    {"VkVideoEncodeAV1RateControlFlagsKHR", VkVideoEncodeAV1RateControlFlagsKHRSets, 4},
+    {"VkVideoEncodeAV1SuperblockSizeFlagsKHR", VkVideoEncodeAV1SuperblockSizeFlagsKHRSets, 2},
     {"VkAttachmentLoadOp", VkAttachmentLoadOpSets, 5},
     {"VkAttachmentStoreOp", VkAttachmentStoreOpSets, 6},
     {"VkBlendFactor", VkBlendFactorSets, 19},
@@ -3850,7 +3918,7 @@ EnumType const cEnumTypes[364] = {
     {"VkPolygonMode", VkPolygonModeSets, 4},
     {"VkFormat", VkFormatSets, 305},
     {"VkFrontFace", VkFrontFaceSets, 2},
-    {"VkImageLayout", VkImageLayoutSets, 38},
+    {"VkImageLayout", VkImageLayoutSets, 39},
     {"VkImageTiling", VkImageTilingSets, 3},
     {"VkImageType", VkImageTypeSets, 3},
     {"VkImageViewType", VkImageViewTypeSets, 7},
@@ -3941,6 +4009,7 @@ EnumType const cEnumTypes[364] = {
     {"VkDepthClampModeEXT", VkDepthClampModeEXTSets, 2},
     {"VkColorSpaceKHR", VkColorSpaceKHRSets, 18},
     {"VkPresentModeKHR", VkPresentModeKHRSets, 7},
+    {"VkDisplaySurfaceStereoTypeNV", VkDisplaySurfaceStereoTypeNVSets, 4},
     {"VkDebugReportObjectTypeEXT", VkDebugReportObjectTypeEXTSets, 50},
     {"VkDeviceMemoryReportEventTypeEXT", VkDeviceMemoryReportEventTypeEXTSets, 5},
     {"VkRasterizationOrderAMD", VkRasterizationOrderAMDSets, 2},
@@ -3972,6 +4041,8 @@ EnumType const cEnumTypes[364] = {
     {"VkPipelineExecutableStatisticFormatKHR", VkPipelineExecutableStatisticFormatKHRSets, 4},
     {"VkQueryResultStatusKHR", VkQueryResultStatusKHRSets, 4},
     {"VkVideoEncodeTuningModeKHR", VkVideoEncodeTuningModeKHRSets, 5},
+    {"VkVideoEncodeAV1PredictionModeKHR", VkVideoEncodeAV1PredictionModeKHRSets, 4},
+    {"VkVideoEncodeAV1RateControlGroupKHR", VkVideoEncodeAV1RateControlGroupKHRSets, 3},
     {"VkAccelerationStructureMotionInstanceTypeNV", VkAccelerationStructureMotionInstanceTypeNVSets,
      3},
     {"VkVideoEncodeH264CapabilityFlagsEXT", VkVideoEncodeH264CapabilityFlagsEXTSets, 35},

@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 301,
-              "VK_HEADER_VERSION is from after the maximum supported version of v301.");
+static_assert(VK_HEADER_VERSION <= 302,
+              "VK_HEADER_VERSION is from after the maximum supported version of v302.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 301,
-               "VK_HEADER_VERSION is from after the maximum supported version of v301.");
+_Static_assert(VK_HEADER_VERSION <= 302,
+               "VK_HEADER_VERSION is from after the maximum supported version of v302.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -454,6 +454,11 @@ bool compare_VkDisplayPlaneCapabilitiesKHR(VkDisplayPlaneCapabilitiesKHR const *
 #if (VK_KHR_display)
 bool compare_VkDisplaySurfaceCreateInfoKHR(VkDisplaySurfaceCreateInfoKHR const *s1,
                                            VkDisplaySurfaceCreateInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_NV_display_stereo)
+bool compare_VkDisplaySurfaceStereoCreateInfoNV(VkDisplaySurfaceStereoCreateInfoNV const *s1,
+                                                VkDisplaySurfaceStereoCreateInfoNV const *s2);
 #endif
 
 #if (VK_KHR_display_swapchain)
@@ -1648,6 +1653,11 @@ bool compare_VkDisplayPlaneProperties2KHR(VkDisplayPlaneProperties2KHR const *s1
 #if VK_HEADER_VERSION >= 76 && (VK_KHR_get_display_properties2)
 bool compare_VkDisplayModeProperties2KHR(VkDisplayModeProperties2KHR const *s1,
                                          VkDisplayModeProperties2KHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_NV_display_stereo)
+bool compare_VkDisplayModeStereoPropertiesNV(VkDisplayModeStereoPropertiesNV const *s1,
+                                             VkDisplayModeStereoPropertiesNV const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 76 && (VK_KHR_get_display_properties2)
@@ -4775,6 +4785,48 @@ bool compare_VkVideoFormatPropertiesKHR(VkVideoFormatPropertiesKHR const *s1,
                                         VkVideoFormatPropertiesKHR const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_quantization_map)
+bool compare_VkVideoEncodeQuantizationMapCapabilitiesKHR(
+    VkVideoEncodeQuantizationMapCapabilitiesKHR const *s1,
+    VkVideoEncodeQuantizationMapCapabilitiesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_quantization_map && VK_KHR_video_encode_h264)
+bool compare_VkVideoEncodeH264QuantizationMapCapabilitiesKHR(
+    VkVideoEncodeH264QuantizationMapCapabilitiesKHR const *s1,
+    VkVideoEncodeH264QuantizationMapCapabilitiesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_quantization_map && VK_KHR_video_encode_h265)
+bool compare_VkVideoEncodeH265QuantizationMapCapabilitiesKHR(
+    VkVideoEncodeH265QuantizationMapCapabilitiesKHR const *s1,
+    VkVideoEncodeH265QuantizationMapCapabilitiesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_quantization_map && VK_KHR_video_encode_av1)
+bool compare_VkVideoEncodeAV1QuantizationMapCapabilitiesKHR(
+    VkVideoEncodeAV1QuantizationMapCapabilitiesKHR const *s1,
+    VkVideoEncodeAV1QuantizationMapCapabilitiesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_quantization_map)
+bool compare_VkVideoFormatQuantizationMapPropertiesKHR(
+    VkVideoFormatQuantizationMapPropertiesKHR const *s1,
+    VkVideoFormatQuantizationMapPropertiesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_quantization_map && VK_KHR_video_encode_h265)
+bool compare_VkVideoFormatH265QuantizationMapPropertiesKHR(
+    VkVideoFormatH265QuantizationMapPropertiesKHR const *s1,
+    VkVideoFormatH265QuantizationMapPropertiesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_quantization_map && VK_KHR_video_encode_av1)
+bool compare_VkVideoFormatAV1QuantizationMapPropertiesKHR(
+    VkVideoFormatAV1QuantizationMapPropertiesKHR const *s1,
+    VkVideoFormatAV1QuantizationMapPropertiesKHR const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 225 && (VK_KHR_video_queue)
 bool compare_VkVideoProfileInfoKHR(VkVideoProfileInfoKHR const *s1,
                                    VkVideoProfileInfoKHR const *s2);
@@ -4969,6 +5021,23 @@ bool compare_VkVideoEncodeUsageInfoKHR(VkVideoEncodeUsageInfoKHR const *s1,
 
 #if VK_HEADER_VERSION >= 253 && (VK_KHR_video_encode_queue)
 bool compare_VkVideoEncodeInfoKHR(VkVideoEncodeInfoKHR const *s1, VkVideoEncodeInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_quantization_map)
+bool compare_VkVideoEncodeQuantizationMapInfoKHR(VkVideoEncodeQuantizationMapInfoKHR const *s1,
+                                                 VkVideoEncodeQuantizationMapInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_quantization_map)
+bool compare_VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR(
+    VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR const *s1,
+    VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_quantization_map)
+bool compare_VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR(
+    VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR const *s1,
+    VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 243 && (VK_KHR_video_encode_queue)
@@ -5184,6 +5253,76 @@ bool compare_VkVideoEncodeH265DpbSlotInfoKHR(VkVideoEncodeH265DpbSlotInfoKHR con
                                              VkVideoEncodeH265DpbSlotInfoKHR const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_av1)
+bool compare_VkVideoEncodeAV1CapabilitiesKHR(VkVideoEncodeAV1CapabilitiesKHR const *s1,
+                                             VkVideoEncodeAV1CapabilitiesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_av1)
+bool compare_VkVideoEncodeAV1QualityLevelPropertiesKHR(
+    VkVideoEncodeAV1QualityLevelPropertiesKHR const *s1,
+    VkVideoEncodeAV1QualityLevelPropertiesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_av1)
+bool compare_VkPhysicalDeviceVideoEncodeAV1FeaturesKHR(
+    VkPhysicalDeviceVideoEncodeAV1FeaturesKHR const *s1,
+    VkPhysicalDeviceVideoEncodeAV1FeaturesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_av1)
+bool compare_VkVideoEncodeAV1SessionCreateInfoKHR(VkVideoEncodeAV1SessionCreateInfoKHR const *s1,
+                                                  VkVideoEncodeAV1SessionCreateInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_av1)
+bool compare_VkVideoEncodeAV1SessionParametersCreateInfoKHR(
+    VkVideoEncodeAV1SessionParametersCreateInfoKHR const *s1,
+    VkVideoEncodeAV1SessionParametersCreateInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_av1)
+bool compare_VkVideoEncodeAV1DpbSlotInfoKHR(VkVideoEncodeAV1DpbSlotInfoKHR const *s1,
+                                            VkVideoEncodeAV1DpbSlotInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_av1)
+bool compare_VkVideoEncodeAV1PictureInfoKHR(VkVideoEncodeAV1PictureInfoKHR const *s1,
+                                            VkVideoEncodeAV1PictureInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_av1)
+bool compare_VkVideoEncodeAV1ProfileInfoKHR(VkVideoEncodeAV1ProfileInfoKHR const *s1,
+                                            VkVideoEncodeAV1ProfileInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_av1)
+bool compare_VkVideoEncodeAV1RateControlInfoKHR(VkVideoEncodeAV1RateControlInfoKHR const *s1,
+                                                VkVideoEncodeAV1RateControlInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_av1)
+bool compare_VkVideoEncodeAV1QIndexKHR(VkVideoEncodeAV1QIndexKHR const *s1,
+                                       VkVideoEncodeAV1QIndexKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_av1)
+bool compare_VkVideoEncodeAV1FrameSizeKHR(VkVideoEncodeAV1FrameSizeKHR const *s1,
+                                          VkVideoEncodeAV1FrameSizeKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_av1)
+bool compare_VkVideoEncodeAV1GopRemainingFrameInfoKHR(
+    VkVideoEncodeAV1GopRemainingFrameInfoKHR const *s1,
+    VkVideoEncodeAV1GopRemainingFrameInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_av1)
+bool compare_VkVideoEncodeAV1RateControlLayerInfoKHR(
+    VkVideoEncodeAV1RateControlLayerInfoKHR const *s1,
+    VkVideoEncodeAV1RateControlLayerInfoKHR const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 175 && (VK_NV_inherited_viewport_scissor)
 bool compare_VkPhysicalDeviceInheritedViewportScissorFeaturesNV(
     VkPhysicalDeviceInheritedViewportScissorFeaturesNV const *s1,
@@ -5223,6 +5362,11 @@ bool compare_VkPipelineRasterizationProvokingVertexStateCreateInfoEXT(
 #if VK_HEADER_VERSION >= 178 && (VK_NVX_binary_import)
 bool compare_VkCuModuleCreateInfoNVX(VkCuModuleCreateInfoNVX const *s1,
                                      VkCuModuleCreateInfoNVX const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_NVX_binary_import)
+bool compare_VkCuModuleTexturingModeCreateInfoNVX(VkCuModuleTexturingModeCreateInfoNVX const *s1,
+                                                  VkCuModuleTexturingModeCreateInfoNVX const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 178 && (VK_NVX_binary_import)
@@ -6725,6 +6869,12 @@ bool compare_VkCooperativeMatrixFlexibleDimensionsPropertiesNV(
 bool compare_VkPhysicalDeviceHdrVividFeaturesHUAWEI(
     VkPhysicalDeviceHdrVividFeaturesHUAWEI const *s1,
     VkPhysicalDeviceHdrVividFeaturesHUAWEI const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_EXT_vertex_attribute_robustness)
+bool compare_VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT(
+    VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT const *s1,
+    VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 260 && VK_HEADER_VERSION <= 297 && (VK_AMDX_shader_enqueue)
@@ -10100,6 +10250,16 @@ bool compare_VkDisplaySurfaceCreateInfoKHR(VkDisplaySurfaceCreateInfoKHR const *
 }
 #endif
 
+#if VK_HEADER_VERSION >= 302 && (VK_NV_display_stereo)
+bool compare_VkDisplaySurfaceStereoCreateInfoNV(VkDisplaySurfaceStereoCreateInfoNV const *s1,
+                                                VkDisplaySurfaceStereoCreateInfoNV const *s2) {
+  if ((s1->stereoType != s2->stereoType) || false)
+    return false;
+
+  return true;
+}
+#endif
+
 #if (VK_KHR_display_swapchain)
 bool compare_VkDisplayPresentInfoKHR(VkDisplayPresentInfoKHR const *s1,
                                      VkDisplayPresentInfoKHR const *s2) {
@@ -12547,6 +12707,16 @@ bool compare_VkDisplayModeProperties2KHR(VkDisplayModeProperties2KHR const *s1,
                                          VkDisplayModeProperties2KHR const *s2) {
   if (!compare_VkDisplayModePropertiesKHR(&s1->displayModeProperties, &s2->displayModeProperties) ||
       false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_NV_display_stereo)
+bool compare_VkDisplayModeStereoPropertiesNV(VkDisplayModeStereoPropertiesNV const *s1,
+                                             VkDisplayModeStereoPropertiesNV const *s2) {
+  if ((s1->hdmi3DSupported != s2->hdmi3DSupported) || false)
     return false;
 
   return true;
@@ -19526,6 +19696,84 @@ bool compare_VkVideoFormatPropertiesKHR(VkVideoFormatPropertiesKHR const *s1,
 }
 #endif
 
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_quantization_map)
+bool compare_VkVideoEncodeQuantizationMapCapabilitiesKHR(
+    VkVideoEncodeQuantizationMapCapabilitiesKHR const *s1,
+    VkVideoEncodeQuantizationMapCapabilitiesKHR const *s2) {
+  if (!compare_VkExtent2D(&s1->maxQuantizationMapExtent, &s2->maxQuantizationMapExtent) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_quantization_map && VK_KHR_video_encode_h264)
+bool compare_VkVideoEncodeH264QuantizationMapCapabilitiesKHR(
+    VkVideoEncodeH264QuantizationMapCapabilitiesKHR const *s1,
+    VkVideoEncodeH264QuantizationMapCapabilitiesKHR const *s2) {
+  if ((s1->minQpDelta != s2->minQpDelta) || (s1->maxQpDelta != s2->maxQpDelta) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_quantization_map && VK_KHR_video_encode_h265)
+bool compare_VkVideoEncodeH265QuantizationMapCapabilitiesKHR(
+    VkVideoEncodeH265QuantizationMapCapabilitiesKHR const *s1,
+    VkVideoEncodeH265QuantizationMapCapabilitiesKHR const *s2) {
+  if ((s1->minQpDelta != s2->minQpDelta) || (s1->maxQpDelta != s2->maxQpDelta) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_quantization_map && VK_KHR_video_encode_av1)
+bool compare_VkVideoEncodeAV1QuantizationMapCapabilitiesKHR(
+    VkVideoEncodeAV1QuantizationMapCapabilitiesKHR const *s1,
+    VkVideoEncodeAV1QuantizationMapCapabilitiesKHR const *s2) {
+  if ((s1->minQIndexDelta != s2->minQIndexDelta) || (s1->maxQIndexDelta != s2->maxQIndexDelta) ||
+      false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_quantization_map)
+bool compare_VkVideoFormatQuantizationMapPropertiesKHR(
+    VkVideoFormatQuantizationMapPropertiesKHR const *s1,
+    VkVideoFormatQuantizationMapPropertiesKHR const *s2) {
+  if (!compare_VkExtent2D(&s1->quantizationMapTexelSize, &s2->quantizationMapTexelSize) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_quantization_map && VK_KHR_video_encode_h265)
+bool compare_VkVideoFormatH265QuantizationMapPropertiesKHR(
+    VkVideoFormatH265QuantizationMapPropertiesKHR const *s1,
+    VkVideoFormatH265QuantizationMapPropertiesKHR const *s2) {
+  if ((s1->compatibleCtbSizes != s2->compatibleCtbSizes) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_quantization_map && VK_KHR_video_encode_av1)
+bool compare_VkVideoFormatAV1QuantizationMapPropertiesKHR(
+    VkVideoFormatAV1QuantizationMapPropertiesKHR const *s1,
+    VkVideoFormatAV1QuantizationMapPropertiesKHR const *s2) {
+  if ((s1->compatibleSuperblockSizes != s2->compatibleSuperblockSizes) || false)
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 225 && (VK_KHR_video_queue)
 bool compare_VkVideoProfileInfoKHR(VkVideoProfileInfoKHR const *s1,
                                    VkVideoProfileInfoKHR const *s2) {
@@ -19939,6 +20187,39 @@ bool compare_VkVideoEncodeInfoKHR(VkVideoEncodeInfoKHR const *s1, VkVideoEncodeI
       !compare_VkVideoPictureResourceInfoKHR(&s1->srcPictureResource, &s2->srcPictureResource) ||
       (s1->referenceSlotCount != s2->referenceSlotCount) ||
       (s1->precedingExternallyEncodedBytes != s2->precedingExternallyEncodedBytes) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_quantization_map)
+bool compare_VkVideoEncodeQuantizationMapInfoKHR(VkVideoEncodeQuantizationMapInfoKHR const *s1,
+                                                 VkVideoEncodeQuantizationMapInfoKHR const *s2) {
+  if ((s1->quantizationMap != s2->quantizationMap) ||
+      !compare_VkExtent2D(&s1->quantizationMapExtent, &s2->quantizationMapExtent) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_quantization_map)
+bool compare_VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR(
+    VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR const *s1,
+    VkVideoEncodeQuantizationMapSessionParametersCreateInfoKHR const *s2) {
+  if (!compare_VkExtent2D(&s1->quantizationMapTexelSize, &s2->quantizationMapTexelSize) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_quantization_map)
+bool compare_VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR(
+    VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR const *s1,
+    VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR const *s2) {
+  if ((s1->videoEncodeQuantizationMap != s2->videoEncodeQuantizationMap) || false)
     return false;
 
   return true;
@@ -20424,6 +20705,211 @@ bool compare_VkVideoEncodeH265DpbSlotInfoKHR(VkVideoEncodeH265DpbSlotInfoKHR con
 }
 #endif
 
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_av1)
+bool compare_VkVideoEncodeAV1CapabilitiesKHR(VkVideoEncodeAV1CapabilitiesKHR const *s1,
+                                             VkVideoEncodeAV1CapabilitiesKHR const *s2) {
+  if ((s1->flags != s2->flags) || (s1->maxLevel != s2->maxLevel) ||
+      !compare_VkExtent2D(&s1->codedPictureAlignment, &s2->codedPictureAlignment) ||
+      !compare_VkExtent2D(&s1->maxTiles, &s2->maxTiles) ||
+      !compare_VkExtent2D(&s1->minTileSize, &s2->minTileSize) ||
+      !compare_VkExtent2D(&s1->maxTileSize, &s2->maxTileSize) ||
+      (s1->superblockSizes != s2->superblockSizes) ||
+      (s1->maxSingleReferenceCount != s2->maxSingleReferenceCount) ||
+      (s1->singleReferenceNameMask != s2->singleReferenceNameMask) ||
+      (s1->maxUnidirectionalCompoundReferenceCount !=
+       s2->maxUnidirectionalCompoundReferenceCount) ||
+      (s1->maxUnidirectionalCompoundGroup1ReferenceCount !=
+       s2->maxUnidirectionalCompoundGroup1ReferenceCount) ||
+      (s1->unidirectionalCompoundReferenceNameMask !=
+       s2->unidirectionalCompoundReferenceNameMask) ||
+      (s1->maxBidirectionalCompoundReferenceCount != s2->maxBidirectionalCompoundReferenceCount) ||
+      (s1->maxBidirectionalCompoundGroup1ReferenceCount !=
+       s2->maxBidirectionalCompoundGroup1ReferenceCount) ||
+      (s1->maxBidirectionalCompoundGroup2ReferenceCount !=
+       s2->maxBidirectionalCompoundGroup2ReferenceCount) ||
+      (s1->bidirectionalCompoundReferenceNameMask != s2->bidirectionalCompoundReferenceNameMask) ||
+      (s1->maxTemporalLayerCount != s2->maxTemporalLayerCount) ||
+      (s1->maxSpatialLayerCount != s2->maxSpatialLayerCount) ||
+      (s1->maxOperatingPoints != s2->maxOperatingPoints) || (s1->minQIndex != s2->minQIndex) ||
+      (s1->maxQIndex != s2->maxQIndex) ||
+      (s1->prefersGopRemainingFrames != s2->prefersGopRemainingFrames) ||
+      (s1->requiresGopRemainingFrames != s2->requiresGopRemainingFrames) ||
+      (s1->stdSyntaxFlags != s2->stdSyntaxFlags) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_av1)
+bool compare_VkVideoEncodeAV1QualityLevelPropertiesKHR(
+    VkVideoEncodeAV1QualityLevelPropertiesKHR const *s1,
+    VkVideoEncodeAV1QualityLevelPropertiesKHR const *s2) {
+  if ((s1->preferredRateControlFlags != s2->preferredRateControlFlags) ||
+      (s1->preferredGopFrameCount != s2->preferredGopFrameCount) ||
+      (s1->preferredKeyFramePeriod != s2->preferredKeyFramePeriod) ||
+      (s1->preferredConsecutiveBipredictiveFrameCount !=
+       s2->preferredConsecutiveBipredictiveFrameCount) ||
+      (s1->preferredTemporalLayerCount != s2->preferredTemporalLayerCount) ||
+      !compare_VkVideoEncodeAV1QIndexKHR(&s1->preferredConstantQIndex,
+                                         &s2->preferredConstantQIndex) ||
+      (s1->preferredMaxSingleReferenceCount != s2->preferredMaxSingleReferenceCount) ||
+      (s1->preferredSingleReferenceNameMask != s2->preferredSingleReferenceNameMask) ||
+      (s1->preferredMaxUnidirectionalCompoundReferenceCount !=
+       s2->preferredMaxUnidirectionalCompoundReferenceCount) ||
+      (s1->preferredMaxUnidirectionalCompoundGroup1ReferenceCount !=
+       s2->preferredMaxUnidirectionalCompoundGroup1ReferenceCount) ||
+      (s1->preferredUnidirectionalCompoundReferenceNameMask !=
+       s2->preferredUnidirectionalCompoundReferenceNameMask) ||
+      (s1->preferredMaxBidirectionalCompoundReferenceCount !=
+       s2->preferredMaxBidirectionalCompoundReferenceCount) ||
+      (s1->preferredMaxBidirectionalCompoundGroup1ReferenceCount !=
+       s2->preferredMaxBidirectionalCompoundGroup1ReferenceCount) ||
+      (s1->preferredMaxBidirectionalCompoundGroup2ReferenceCount !=
+       s2->preferredMaxBidirectionalCompoundGroup2ReferenceCount) ||
+      (s1->preferredBidirectionalCompoundReferenceNameMask !=
+       s2->preferredBidirectionalCompoundReferenceNameMask) ||
+      false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_av1)
+bool compare_VkPhysicalDeviceVideoEncodeAV1FeaturesKHR(
+    VkPhysicalDeviceVideoEncodeAV1FeaturesKHR const *s1,
+    VkPhysicalDeviceVideoEncodeAV1FeaturesKHR const *s2) {
+  if ((s1->videoEncodeAV1 != s2->videoEncodeAV1) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_av1)
+bool compare_VkVideoEncodeAV1SessionCreateInfoKHR(VkVideoEncodeAV1SessionCreateInfoKHR const *s1,
+                                                  VkVideoEncodeAV1SessionCreateInfoKHR const *s2) {
+  if ((s1->useMaxLevel != s2->useMaxLevel) || (s1->maxLevel != s2->maxLevel) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_av1)
+bool compare_VkVideoEncodeAV1SessionParametersCreateInfoKHR(
+    VkVideoEncodeAV1SessionParametersCreateInfoKHR const *s1,
+    VkVideoEncodeAV1SessionParametersCreateInfoKHR const *s2) {
+  if ((s1->stdOperatingPointCount != s2->stdOperatingPointCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_av1)
+bool compare_VkVideoEncodeAV1DpbSlotInfoKHR(VkVideoEncodeAV1DpbSlotInfoKHR const *s1,
+                                            VkVideoEncodeAV1DpbSlotInfoKHR const *s2) {
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_av1)
+bool compare_VkVideoEncodeAV1PictureInfoKHR(VkVideoEncodeAV1PictureInfoKHR const *s1,
+                                            VkVideoEncodeAV1PictureInfoKHR const *s2) {
+  if ((s1->predictionMode != s2->predictionMode) ||
+      (s1->rateControlGroup != s2->rateControlGroup) ||
+      (s1->constantQIndex != s2->constantQIndex) ||
+      (s1->primaryReferenceCdfOnly != s2->primaryReferenceCdfOnly) ||
+      (s1->generateObuExtensionHeader != s2->generateObuExtensionHeader) || false)
+    return false;
+
+  for (uint32_t i = 0; i < VK_MAX_VIDEO_AV1_REFERENCES_PER_FRAME_KHR; ++i) {
+    if (s1->referenceNameSlotIndices[i] != s2->referenceNameSlotIndices[i])
+      return false;
+  }
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_av1)
+bool compare_VkVideoEncodeAV1ProfileInfoKHR(VkVideoEncodeAV1ProfileInfoKHR const *s1,
+                                            VkVideoEncodeAV1ProfileInfoKHR const *s2) {
+  if ((s1->stdProfile != s2->stdProfile) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_av1)
+bool compare_VkVideoEncodeAV1RateControlInfoKHR(VkVideoEncodeAV1RateControlInfoKHR const *s1,
+                                                VkVideoEncodeAV1RateControlInfoKHR const *s2) {
+  if ((s1->flags != s2->flags) || (s1->gopFrameCount != s2->gopFrameCount) ||
+      (s1->keyFramePeriod != s2->keyFramePeriod) ||
+      (s1->consecutiveBipredictiveFrameCount != s2->consecutiveBipredictiveFrameCount) ||
+      (s1->temporalLayerCount != s2->temporalLayerCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_av1)
+bool compare_VkVideoEncodeAV1QIndexKHR(VkVideoEncodeAV1QIndexKHR const *s1,
+                                       VkVideoEncodeAV1QIndexKHR const *s2) {
+  if ((s1->intraQIndex != s2->intraQIndex) || (s1->predictiveQIndex != s2->predictiveQIndex) ||
+      (s1->bipredictiveQIndex != s2->bipredictiveQIndex) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_av1)
+bool compare_VkVideoEncodeAV1FrameSizeKHR(VkVideoEncodeAV1FrameSizeKHR const *s1,
+                                          VkVideoEncodeAV1FrameSizeKHR const *s2) {
+  if ((s1->intraFrameSize != s2->intraFrameSize) ||
+      (s1->predictiveFrameSize != s2->predictiveFrameSize) ||
+      (s1->bipredictiveFrameSize != s2->bipredictiveFrameSize) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_av1)
+bool compare_VkVideoEncodeAV1GopRemainingFrameInfoKHR(
+    VkVideoEncodeAV1GopRemainingFrameInfoKHR const *s1,
+    VkVideoEncodeAV1GopRemainingFrameInfoKHR const *s2) {
+  if ((s1->useGopRemainingFrames != s2->useGopRemainingFrames) ||
+      (s1->gopRemainingIntra != s2->gopRemainingIntra) ||
+      (s1->gopRemainingPredictive != s2->gopRemainingPredictive) ||
+      (s1->gopRemainingBipredictive != s2->gopRemainingBipredictive) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_KHR_video_encode_av1)
+bool compare_VkVideoEncodeAV1RateControlLayerInfoKHR(
+    VkVideoEncodeAV1RateControlLayerInfoKHR const *s1,
+    VkVideoEncodeAV1RateControlLayerInfoKHR const *s2) {
+  if ((s1->useMinQIndex != s2->useMinQIndex) ||
+      !compare_VkVideoEncodeAV1QIndexKHR(&s1->minQIndex, &s2->minQIndex) ||
+      (s1->useMaxQIndex != s2->useMaxQIndex) ||
+      !compare_VkVideoEncodeAV1QIndexKHR(&s1->maxQIndex, &s2->maxQIndex) ||
+      (s1->useMaxFrameSize != s2->useMaxFrameSize) ||
+      !compare_VkVideoEncodeAV1FrameSizeKHR(&s1->maxFrameSize, &s2->maxFrameSize) || false)
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 175 && (VK_NV_inherited_viewport_scissor)
 bool compare_VkPhysicalDeviceInheritedViewportScissorFeaturesNV(
     VkPhysicalDeviceInheritedViewportScissorFeaturesNV const *s1,
@@ -20501,6 +20987,16 @@ bool compare_VkPipelineRasterizationProvokingVertexStateCreateInfoEXT(
 bool compare_VkCuModuleCreateInfoNVX(VkCuModuleCreateInfoNVX const *s1,
                                      VkCuModuleCreateInfoNVX const *s2) {
   if ((s1->dataSize != s2->dataSize) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_NVX_binary_import)
+bool compare_VkCuModuleTexturingModeCreateInfoNVX(VkCuModuleTexturingModeCreateInfoNVX const *s1,
+                                                  VkCuModuleTexturingModeCreateInfoNVX const *s2) {
+  if ((s1->use64bitTexturing != s2->use64bitTexturing) || false)
     return false;
 
   return true;
@@ -23720,6 +24216,17 @@ bool compare_VkPhysicalDeviceHdrVividFeaturesHUAWEI(
     VkPhysicalDeviceHdrVividFeaturesHUAWEI const *s1,
     VkPhysicalDeviceHdrVividFeaturesHUAWEI const *s2) {
   if ((s1->hdrVivid != s2->hdrVivid) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 302 && (VK_EXT_vertex_attribute_robustness)
+bool compare_VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT(
+    VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT const *s1,
+    VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT const *s2) {
+  if ((s1->vertexAttributeRobustness != s2->vertexAttributeRobustness) || false)
     return false;
 
   return true;
