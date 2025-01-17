@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2021-2024 George Cave - gcave@stablecoder.ca
+    Copyright (C) 2021-2025 George Cave - gcave@stablecoder.ca
 
     SPDX-License-Identifier: Apache-2.0
 
@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) >= 0,
               "openxr header version is from before the minimum supported version of v0.");
-static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 42,
-              "openxr header version is from after the maximum supported version of v42.");
+static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 43,
+              "openxr header version is from after the maximum supported version of v43.");
 #else
 _Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) >= 0,
                "openxr header version is from before the minimum supported version of v0.");
-_Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 42,
-               "openxr header version is from after the maximum supported version of v42.");
+_Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) <= 43,
+               "openxr header version is from after the maximum supported version of v43.");
 #endif
 
 /// Returns a string representing the given VkResult parameter. If there is no known representation,
@@ -51,6 +51,30 @@ char const *XrResult_to_string(XrResult result) {
   // Check in descending order to get the 'latest' version of the error code text available.
   // Also, because codes have been re-used over time, can't use a switch and have to do this large
   // set of ifs. Luckily this *should* be a relatively rare call.
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 43 && XR_ML_facial_expression
+  if (result == XR_ERROR_FACIAL_EXPRESSION_PERMISSION_DENIED_ML)
+    return "XR_ERROR_FACIAL_EXPRESSION_PERMISSION_DENIED_ML";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 43 && XR_META_colocation_discovery
+  if (result == XR_ERROR_COLOCATION_DISCOVERY_NETWORK_FAILED_META)
+    return "XR_ERROR_COLOCATION_DISCOVERY_NETWORK_FAILED_META";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 43 && XR_META_colocation_discovery
+  if (result == XR_ERROR_COLOCATION_DISCOVERY_NO_DISCOVERY_METHOD_META)
+    return "XR_ERROR_COLOCATION_DISCOVERY_NO_DISCOVERY_METHOD_META";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 43 && XR_META_colocation_discovery
+  if (result == XR_COLOCATION_DISCOVERY_ALREADY_ADVERTISING_META)
+    return "XR_COLOCATION_DISCOVERY_ALREADY_ADVERTISING_META";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 43 && XR_META_colocation_discovery
+  if (result == XR_COLOCATION_DISCOVERY_ALREADY_DISCOVERING_META)
+    return "XR_COLOCATION_DISCOVERY_ALREADY_DISCOVERING_META";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 43 && XR_META_spatial_entity_group_sharing
+  if (result == XR_ERROR_SPACE_GROUP_NOT_FOUND_META)
+    return "XR_ERROR_SPACE_GROUP_NOT_FOUND_META";
+#endif
 #if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 41 && XR_ML_spatial_anchors
   if (result == XR_ERROR_SPATIAL_ANCHORS_PERMISSION_DENIED_ML)
     return "XR_ERROR_SPATIAL_ANCHORS_PERMISSION_DENIED_ML";
