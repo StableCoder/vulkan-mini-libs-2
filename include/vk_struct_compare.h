@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2021-2024 George Cave - gcave@stablecoder.ca
+    Copyright (C) 2021-2025 George Cave - gcave@stablecoder.ca
 
     SPDX-License-Identifier: Apache-2.0
 
@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 302,
-              "VK_HEADER_VERSION is from after the maximum supported version of v302.");
+static_assert(VK_HEADER_VERSION <= 303,
+              "VK_HEADER_VERSION is from after the maximum supported version of v303.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 302,
-               "VK_HEADER_VERSION is from after the maximum supported version of v302.");
+_Static_assert(VK_HEADER_VERSION <= 303,
+               "VK_HEADER_VERSION is from after the maximum supported version of v303.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -121,7 +121,12 @@ bool compare_VkWriteDescriptorSet(VkWriteDescriptorSet const *s1, VkWriteDescrip
 
 bool compare_VkCopyDescriptorSet(VkCopyDescriptorSet const *s1, VkCopyDescriptorSet const *s2);
 
-#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkBufferUsageFlags2CreateInfo(VkBufferUsageFlags2CreateInfo const *s1,
+                                           VkBufferUsageFlags2CreateInfo const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_maintenance5)
 bool compare_VkBufferUsageFlags2CreateInfoKHR(VkBufferUsageFlags2CreateInfoKHR const *s1,
                                               VkBufferUsageFlags2CreateInfoKHR const *s2);
 #endif
@@ -222,7 +227,12 @@ bool compare_VkComputePipelineIndirectBufferInfoNV(VkComputePipelineIndirectBuff
                                                    VkComputePipelineIndirectBufferInfoNV const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPipelineCreateFlags2CreateInfo(VkPipelineCreateFlags2CreateInfo const *s1,
+                                              VkPipelineCreateFlags2CreateInfo const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_maintenance5)
 bool compare_VkPipelineCreateFlags2CreateInfoKHR(VkPipelineCreateFlags2CreateInfoKHR const *s1,
                                                  VkPipelineCreateFlags2CreateInfoKHR const *s2);
 #endif
@@ -877,7 +887,13 @@ bool compare_VkPhysicalDeviceSparseImageFormatInfo2KHR(
     VkPhysicalDeviceSparseImageFormatInfo2KHR const *s2);
 #endif
 
-#if (VK_KHR_push_descriptor)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDevicePushDescriptorProperties(
+    VkPhysicalDevicePushDescriptorProperties const *s1,
+    VkPhysicalDevicePushDescriptorProperties const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_push_descriptor)
 bool compare_VkPhysicalDevicePushDescriptorPropertiesKHR(
     VkPhysicalDevicePushDescriptorPropertiesKHR const *s1,
     VkPhysicalDevicePushDescriptorPropertiesKHR const *s2);
@@ -2133,25 +2149,47 @@ bool compare_VkPhysicalDeviceMaintenance4PropertiesKHR(
     VkPhysicalDeviceMaintenance4PropertiesKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceMaintenance5Features(VkPhysicalDeviceMaintenance5Features const *s1,
+                                                  VkPhysicalDeviceMaintenance5Features const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_maintenance5)
 bool compare_VkPhysicalDeviceMaintenance5FeaturesKHR(
     VkPhysicalDeviceMaintenance5FeaturesKHR const *s1,
     VkPhysicalDeviceMaintenance5FeaturesKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceMaintenance5Properties(
+    VkPhysicalDeviceMaintenance5Properties const *s1,
+    VkPhysicalDeviceMaintenance5Properties const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_maintenance5)
 bool compare_VkPhysicalDeviceMaintenance5PropertiesKHR(
     VkPhysicalDeviceMaintenance5PropertiesKHR const *s1,
     VkPhysicalDeviceMaintenance5PropertiesKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 274 && (VK_KHR_maintenance6)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceMaintenance6Features(VkPhysicalDeviceMaintenance6Features const *s1,
+                                                  VkPhysicalDeviceMaintenance6Features const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_maintenance6)
 bool compare_VkPhysicalDeviceMaintenance6FeaturesKHR(
     VkPhysicalDeviceMaintenance6FeaturesKHR const *s1,
     VkPhysicalDeviceMaintenance6FeaturesKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 274 && (VK_KHR_maintenance6)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceMaintenance6Properties(
+    VkPhysicalDeviceMaintenance6Properties const *s1,
+    VkPhysicalDeviceMaintenance6Properties const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_maintenance6)
 bool compare_VkPhysicalDeviceMaintenance6PropertiesKHR(
     VkPhysicalDeviceMaintenance6PropertiesKHR const *s1,
     VkPhysicalDeviceMaintenance6PropertiesKHR const *s2);
@@ -2187,7 +2225,11 @@ bool compare_VkPhysicalDeviceLayeredApiVulkanPropertiesKHR(
     VkPhysicalDeviceLayeredApiVulkanPropertiesKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkRenderingAreaInfo(VkRenderingAreaInfo const *s1, VkRenderingAreaInfo const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_maintenance5)
 bool compare_VkRenderingAreaInfoKHR(VkRenderingAreaInfoKHR const *s1,
                                     VkRenderingAreaInfoKHR const *s2);
 #endif
@@ -2287,37 +2329,53 @@ bool compare_VkShaderStatisticsInfoAMD(VkShaderStatisticsInfoAMD const *s1,
                                        VkShaderStatisticsInfoAMD const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 204 && (VK_KHR_global_priority)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkDeviceQueueGlobalPriorityCreateInfo(VkDeviceQueueGlobalPriorityCreateInfo const *s1,
+                                                   VkDeviceQueueGlobalPriorityCreateInfo const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_global_priority)
 bool compare_VkDeviceQueueGlobalPriorityCreateInfoKHR(
     VkDeviceQueueGlobalPriorityCreateInfoKHR const *s1,
     VkDeviceQueueGlobalPriorityCreateInfoKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 204 && (VK_EXT_global_priority)
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_global_priority)
 bool compare_VkDeviceQueueGlobalPriorityCreateInfoEXT(
     VkDeviceQueueGlobalPriorityCreateInfoEXT const *s1,
     VkDeviceQueueGlobalPriorityCreateInfoEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 204 && (VK_KHR_global_priority)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceGlobalPriorityQueryFeatures(
+    VkPhysicalDeviceGlobalPriorityQueryFeatures const *s1,
+    VkPhysicalDeviceGlobalPriorityQueryFeatures const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_global_priority)
 bool compare_VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR(
     VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR const *s1,
     VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 204 && (VK_EXT_global_priority_query)
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_global_priority_query)
 bool compare_VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT(
     VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT const *s1,
     VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 204 && (VK_KHR_global_priority)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkQueueFamilyGlobalPriorityProperties(VkQueueFamilyGlobalPriorityProperties const *s1,
+                                                   VkQueueFamilyGlobalPriorityProperties const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_global_priority)
 bool compare_VkQueueFamilyGlobalPriorityPropertiesKHR(
     VkQueueFamilyGlobalPriorityPropertiesKHR const *s1,
     VkQueueFamilyGlobalPriorityPropertiesKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 204 && (VK_EXT_global_priority_query)
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_global_priority_query)
 bool compare_VkQueueFamilyGlobalPriorityPropertiesEXT(
     VkQueueFamilyGlobalPriorityPropertiesEXT const *s1,
     VkQueueFamilyGlobalPriorityPropertiesEXT const *s2);
@@ -2603,25 +2661,37 @@ bool compare_VkSemaphoreSignalInfoKHR(VkSemaphoreSignalInfoKHR const *s1,
                                       VkSemaphoreSignalInfoKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 273 && (VK_KHR_vertex_attribute_divisor)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkVertexInputBindingDivisorDescription(
+    VkVertexInputBindingDivisorDescription const *s1,
+    VkVertexInputBindingDivisorDescription const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_vertex_attribute_divisor)
 bool compare_VkVertexInputBindingDivisorDescriptionKHR(
     VkVertexInputBindingDivisorDescriptionKHR const *s1,
     VkVertexInputBindingDivisorDescriptionKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 273 && (VK_EXT_vertex_attribute_divisor)
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_vertex_attribute_divisor)
 bool compare_VkVertexInputBindingDivisorDescriptionEXT(
     VkVertexInputBindingDivisorDescriptionEXT const *s1,
     VkVertexInputBindingDivisorDescriptionEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 273 && (VK_KHR_vertex_attribute_divisor)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPipelineVertexInputDivisorStateCreateInfo(
+    VkPipelineVertexInputDivisorStateCreateInfo const *s1,
+    VkPipelineVertexInputDivisorStateCreateInfo const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_vertex_attribute_divisor)
 bool compare_VkPipelineVertexInputDivisorStateCreateInfoKHR(
     VkPipelineVertexInputDivisorStateCreateInfoKHR const *s1,
     VkPipelineVertexInputDivisorStateCreateInfoKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 273 && (VK_EXT_vertex_attribute_divisor)
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_vertex_attribute_divisor)
 bool compare_VkPipelineVertexInputDivisorStateCreateInfoEXT(
     VkPipelineVertexInputDivisorStateCreateInfoEXT const *s1,
     VkPipelineVertexInputDivisorStateCreateInfoEXT const *s2);
@@ -2633,7 +2703,13 @@ bool compare_VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT(
     VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 273 && (VK_KHR_vertex_attribute_divisor)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceVertexAttributeDivisorProperties(
+    VkPhysicalDeviceVertexAttributeDivisorProperties const *s1,
+    VkPhysicalDeviceVertexAttributeDivisorProperties const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_vertex_attribute_divisor)
 bool compare_VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR(
     VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR const *s1,
     VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR const *s2);
@@ -2738,13 +2814,19 @@ bool compare_VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT(
     VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 273 && (VK_KHR_vertex_attribute_divisor)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceVertexAttributeDivisorFeatures(
+    VkPhysicalDeviceVertexAttributeDivisorFeatures const *s1,
+    VkPhysicalDeviceVertexAttributeDivisorFeatures const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_vertex_attribute_divisor)
 bool compare_VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR(
     VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR const *s1,
     VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 273 && (VK_EXT_vertex_attribute_divisor)
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_vertex_attribute_divisor)
 bool compare_VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT(
     VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const *s1,
     VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const *s2);
@@ -3594,13 +3676,19 @@ bool compare_VkPhysicalDeviceShaderClockFeaturesKHR(
     VkPhysicalDeviceShaderClockFeaturesKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 276 && (VK_KHR_index_type_uint8)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceIndexTypeUint8Features(
+    VkPhysicalDeviceIndexTypeUint8Features const *s1,
+    VkPhysicalDeviceIndexTypeUint8Features const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_index_type_uint8)
 bool compare_VkPhysicalDeviceIndexTypeUint8FeaturesKHR(
     VkPhysicalDeviceIndexTypeUint8FeaturesKHR const *s1,
     VkPhysicalDeviceIndexTypeUint8FeaturesKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 276 && (VK_EXT_index_type_uint8)
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_index_type_uint8)
 bool compare_VkPhysicalDeviceIndexTypeUint8FeaturesEXT(
     VkPhysicalDeviceIndexTypeUint8FeaturesEXT const *s1,
     VkPhysicalDeviceIndexTypeUint8FeaturesEXT const *s2);
@@ -3807,37 +3895,55 @@ bool compare_VkDeviceMemoryOpaqueCaptureAddressInfoKHR(
     VkDeviceMemoryOpaqueCaptureAddressInfoKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 276 && (VK_KHR_line_rasterization)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceLineRasterizationFeatures(
+    VkPhysicalDeviceLineRasterizationFeatures const *s1,
+    VkPhysicalDeviceLineRasterizationFeatures const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_line_rasterization)
 bool compare_VkPhysicalDeviceLineRasterizationFeaturesKHR(
     VkPhysicalDeviceLineRasterizationFeaturesKHR const *s1,
     VkPhysicalDeviceLineRasterizationFeaturesKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 276 && (VK_EXT_line_rasterization)
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_line_rasterization)
 bool compare_VkPhysicalDeviceLineRasterizationFeaturesEXT(
     VkPhysicalDeviceLineRasterizationFeaturesEXT const *s1,
     VkPhysicalDeviceLineRasterizationFeaturesEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 276 && (VK_KHR_line_rasterization)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceLineRasterizationProperties(
+    VkPhysicalDeviceLineRasterizationProperties const *s1,
+    VkPhysicalDeviceLineRasterizationProperties const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_line_rasterization)
 bool compare_VkPhysicalDeviceLineRasterizationPropertiesKHR(
     VkPhysicalDeviceLineRasterizationPropertiesKHR const *s1,
     VkPhysicalDeviceLineRasterizationPropertiesKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 276 && (VK_EXT_line_rasterization)
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_line_rasterization)
 bool compare_VkPhysicalDeviceLineRasterizationPropertiesEXT(
     VkPhysicalDeviceLineRasterizationPropertiesEXT const *s1,
     VkPhysicalDeviceLineRasterizationPropertiesEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 276 && (VK_KHR_line_rasterization)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPipelineRasterizationLineStateCreateInfo(
+    VkPipelineRasterizationLineStateCreateInfo const *s1,
+    VkPipelineRasterizationLineStateCreateInfo const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_line_rasterization)
 bool compare_VkPipelineRasterizationLineStateCreateInfoKHR(
     VkPipelineRasterizationLineStateCreateInfoKHR const *s1,
     VkPipelineRasterizationLineStateCreateInfoKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 276 && (VK_EXT_line_rasterization)
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_line_rasterization)
 bool compare_VkPipelineRasterizationLineStateCreateInfoEXT(
     VkPipelineRasterizationLineStateCreateInfoEXT const *s1,
     VkPipelineRasterizationLineStateCreateInfoEXT const *s2);
@@ -3883,6 +3989,16 @@ bool compare_VkPhysicalDeviceVulkan13Features(VkPhysicalDeviceVulkan13Features c
 #if VK_HEADER_VERSION >= 204 && (VK_VERSION_1_3)
 bool compare_VkPhysicalDeviceVulkan13Properties(VkPhysicalDeviceVulkan13Properties const *s1,
                                                 VkPhysicalDeviceVulkan13Properties const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceVulkan14Features(VkPhysicalDeviceVulkan14Features const *s1,
+                                              VkPhysicalDeviceVulkan14Features const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceVulkan14Properties(VkPhysicalDeviceVulkan14Properties const *s1,
+                                                VkPhysicalDeviceVulkan14Properties const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 118 && (VK_AMD_pipeline_compiler_control)
@@ -4641,54 +4757,103 @@ bool compare_VkPhysicalDeviceSynchronization2FeaturesKHR(
     VkPhysicalDeviceSynchronization2FeaturesKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceHostImageCopyFeatures(VkPhysicalDeviceHostImageCopyFeatures const *s1,
+                                                   VkPhysicalDeviceHostImageCopyFeatures const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_host_image_copy)
 bool compare_VkPhysicalDeviceHostImageCopyFeaturesEXT(
     VkPhysicalDeviceHostImageCopyFeaturesEXT const *s1,
     VkPhysicalDeviceHostImageCopyFeaturesEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceHostImageCopyProperties(
+    VkPhysicalDeviceHostImageCopyProperties const *s1,
+    VkPhysicalDeviceHostImageCopyProperties const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_host_image_copy)
 bool compare_VkPhysicalDeviceHostImageCopyPropertiesEXT(
     VkPhysicalDeviceHostImageCopyPropertiesEXT const *s1,
     VkPhysicalDeviceHostImageCopyPropertiesEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkMemoryToImageCopy(VkMemoryToImageCopy const *s1, VkMemoryToImageCopy const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_host_image_copy)
 bool compare_VkMemoryToImageCopyEXT(VkMemoryToImageCopyEXT const *s1,
                                     VkMemoryToImageCopyEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkImageToMemoryCopy(VkImageToMemoryCopy const *s1, VkImageToMemoryCopy const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_host_image_copy)
 bool compare_VkImageToMemoryCopyEXT(VkImageToMemoryCopyEXT const *s1,
                                     VkImageToMemoryCopyEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkCopyMemoryToImageInfo(VkCopyMemoryToImageInfo const *s1,
+                                     VkCopyMemoryToImageInfo const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_host_image_copy)
 bool compare_VkCopyMemoryToImageInfoEXT(VkCopyMemoryToImageInfoEXT const *s1,
                                         VkCopyMemoryToImageInfoEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkCopyImageToMemoryInfo(VkCopyImageToMemoryInfo const *s1,
+                                     VkCopyImageToMemoryInfo const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_host_image_copy)
 bool compare_VkCopyImageToMemoryInfoEXT(VkCopyImageToMemoryInfoEXT const *s1,
                                         VkCopyImageToMemoryInfoEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkCopyImageToImageInfo(VkCopyImageToImageInfo const *s1,
+                                    VkCopyImageToImageInfo const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_host_image_copy)
 bool compare_VkCopyImageToImageInfoEXT(VkCopyImageToImageInfoEXT const *s1,
                                        VkCopyImageToImageInfoEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkHostImageLayoutTransitionInfo(VkHostImageLayoutTransitionInfo const *s1,
+                                             VkHostImageLayoutTransitionInfo const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_host_image_copy)
 bool compare_VkHostImageLayoutTransitionInfoEXT(VkHostImageLayoutTransitionInfoEXT const *s1,
                                                 VkHostImageLayoutTransitionInfoEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkSubresourceHostMemcpySize(VkSubresourceHostMemcpySize const *s1,
+                                         VkSubresourceHostMemcpySize const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_host_image_copy)
 bool compare_VkSubresourceHostMemcpySizeEXT(VkSubresourceHostMemcpySizeEXT const *s1,
                                             VkSubresourceHostMemcpySizeEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkHostImageCopyDevicePerformanceQuery(VkHostImageCopyDevicePerformanceQuery const *s1,
+                                                   VkHostImageCopyDevicePerformanceQuery const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_host_image_copy)
 bool compare_VkHostImageCopyDevicePerformanceQueryEXT(
     VkHostImageCopyDevicePerformanceQueryEXT const *s1,
     VkHostImageCopyDevicePerformanceQueryEXT const *s2);
@@ -4753,7 +4918,13 @@ bool compare_VkMultisampledRenderToSingleSampledInfoEXT(
     VkMultisampledRenderToSingleSampledInfoEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 230 && (VK_EXT_pipeline_protected_access)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDevicePipelineProtectedAccessFeatures(
+    VkPhysicalDevicePipelineProtectedAccessFeatures const *s1,
+    VkPhysicalDevicePipelineProtectedAccessFeatures const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_pipeline_protected_access)
 bool compare_VkPhysicalDevicePipelineProtectedAccessFeaturesEXT(
     VkPhysicalDevicePipelineProtectedAccessFeaturesEXT const *s1,
     VkPhysicalDevicePipelineProtectedAccessFeaturesEXT const *s2);
@@ -5846,22 +6017,30 @@ bool compare_VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT(
     VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkImageSubresource2(VkImageSubresource2 const *s1, VkImageSubresource2 const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_maintenance5)
 bool compare_VkImageSubresource2KHR(VkImageSubresource2KHR const *s1,
                                     VkImageSubresource2KHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 260 && ((VK_EXT_host_image_copy) || (VK_EXT_image_compression_control))
+#if VK_HEADER_VERSION >= 303 && ((VK_EXT_host_image_copy) || (VK_EXT_image_compression_control))
 bool compare_VkImageSubresource2EXT(VkImageSubresource2EXT const *s1,
                                     VkImageSubresource2EXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkSubresourceLayout2(VkSubresourceLayout2 const *s1, VkSubresourceLayout2 const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_maintenance5)
 bool compare_VkSubresourceLayout2KHR(VkSubresourceLayout2KHR const *s1,
                                      VkSubresourceLayout2KHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 260 && ((VK_EXT_host_image_copy) || (VK_EXT_image_compression_control))
+#if VK_HEADER_VERSION >= 303 && ((VK_EXT_host_image_copy) || (VK_EXT_image_compression_control))
 bool compare_VkSubresourceLayout2EXT(VkSubresourceLayout2EXT const *s1,
                                      VkSubresourceLayout2EXT const *s2);
 #endif
@@ -6046,18 +6225,35 @@ bool compare_VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT(
     VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 221 && (VK_EXT_pipeline_robustness)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDevicePipelineRobustnessFeatures(
+    VkPhysicalDevicePipelineRobustnessFeatures const *s1,
+    VkPhysicalDevicePipelineRobustnessFeatures const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_pipeline_robustness)
 bool compare_VkPhysicalDevicePipelineRobustnessFeaturesEXT(
     VkPhysicalDevicePipelineRobustnessFeaturesEXT const *s1,
     VkPhysicalDevicePipelineRobustnessFeaturesEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 221 && (VK_EXT_pipeline_robustness)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPipelineRobustnessCreateInfo(VkPipelineRobustnessCreateInfo const *s1,
+                                            VkPipelineRobustnessCreateInfo const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_pipeline_robustness)
 bool compare_VkPipelineRobustnessCreateInfoEXT(VkPipelineRobustnessCreateInfoEXT const *s1,
                                                VkPipelineRobustnessCreateInfoEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 221 && (VK_EXT_pipeline_robustness)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDevicePipelineRobustnessProperties(
+    VkPhysicalDevicePipelineRobustnessProperties const *s1,
+    VkPhysicalDevicePipelineRobustnessProperties const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_pipeline_robustness)
 bool compare_VkPhysicalDevicePipelineRobustnessPropertiesEXT(
     VkPhysicalDevicePipelineRobustnessPropertiesEXT const *s1,
     VkPhysicalDevicePipelineRobustnessPropertiesEXT const *s2);
@@ -6339,7 +6535,12 @@ bool compare_VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR(
     VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkDeviceImageSubresourceInfo(VkDeviceImageSubresourceInfo const *s1,
+                                          VkDeviceImageSubresourceInfo const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_maintenance5)
 bool compare_VkDeviceImageSubresourceInfoKHR(VkDeviceImageSubresourceInfoKHR const *s1,
                                              VkDeviceImageSubresourceInfoKHR const *s2);
 #endif
@@ -6367,11 +6568,19 @@ bool compare_VkQueryLowLatencySupportNV(VkQueryLowLatencySupportNV const *s1,
                                         VkQueryLowLatencySupportNV const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 244 && (VK_KHR_map_memory2)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkMemoryMapInfo(VkMemoryMapInfo const *s1, VkMemoryMapInfo const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_map_memory2)
 bool compare_VkMemoryMapInfoKHR(VkMemoryMapInfoKHR const *s1, VkMemoryMapInfoKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 244 && (VK_KHR_map_memory2)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkMemoryUnmapInfo(VkMemoryUnmapInfo const *s1, VkMemoryUnmapInfo const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_map_memory2)
 bool compare_VkMemoryUnmapInfoKHR(VkMemoryUnmapInfoKHR const *s1, VkMemoryUnmapInfoKHR const *s2);
 #endif
 
@@ -6500,27 +6709,50 @@ bool compare_VkAntiLagPresentationInfoAMD(VkAntiLagPresentationInfoAMD const *s1
                                           VkAntiLagPresentationInfoAMD const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 274 && (VK_KHR_maintenance6)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkBindMemoryStatus(VkBindMemoryStatus const *s1, VkBindMemoryStatus const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_maintenance6)
 bool compare_VkBindMemoryStatusKHR(VkBindMemoryStatusKHR const *s1,
                                    VkBindMemoryStatusKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 274 && (VK_KHR_maintenance6)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkBindDescriptorSetsInfo(VkBindDescriptorSetsInfo const *s1,
+                                      VkBindDescriptorSetsInfo const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_maintenance6)
 bool compare_VkBindDescriptorSetsInfoKHR(VkBindDescriptorSetsInfoKHR const *s1,
                                          VkBindDescriptorSetsInfoKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 274 && (VK_KHR_maintenance6)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPushConstantsInfo(VkPushConstantsInfo const *s1, VkPushConstantsInfo const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_maintenance6)
 bool compare_VkPushConstantsInfoKHR(VkPushConstantsInfoKHR const *s1,
                                     VkPushConstantsInfoKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 274 && (VK_KHR_maintenance6 && VK_KHR_push_descriptor)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPushDescriptorSetInfo(VkPushDescriptorSetInfo const *s1,
+                                     VkPushDescriptorSetInfo const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_maintenance6 && VK_KHR_push_descriptor)
 bool compare_VkPushDescriptorSetInfoKHR(VkPushDescriptorSetInfoKHR const *s1,
                                         VkPushDescriptorSetInfoKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 274 && (VK_KHR_maintenance6 && VK_KHR_push_descriptor && VK_VERSION_1_1)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPushDescriptorSetWithTemplateInfo(VkPushDescriptorSetWithTemplateInfo const *s1,
+                                                 VkPushDescriptorSetWithTemplateInfo const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_maintenance6 && VK_KHR_push_descriptor && VK_VERSION_1_1)
 bool compare_VkPushDescriptorSetWithTemplateInfoKHR(
     VkPushDescriptorSetWithTemplateInfoKHR const *s1,
     VkPushDescriptorSetWithTemplateInfoKHR const *s2);
@@ -6738,36 +6970,70 @@ bool compare_VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR(
     VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 276 && (VK_KHR_shader_subgroup_rotate)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceShaderSubgroupRotateFeatures(
+    VkPhysicalDeviceShaderSubgroupRotateFeatures const *s1,
+    VkPhysicalDeviceShaderSubgroupRotateFeatures const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_shader_subgroup_rotate)
 bool compare_VkPhysicalDeviceShaderSubgroupRotateFeaturesKHR(
     VkPhysicalDeviceShaderSubgroupRotateFeaturesKHR const *s1,
     VkPhysicalDeviceShaderSubgroupRotateFeaturesKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 276 && (VK_KHR_shader_expect_assume)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceShaderExpectAssumeFeatures(
+    VkPhysicalDeviceShaderExpectAssumeFeatures const *s1,
+    VkPhysicalDeviceShaderExpectAssumeFeatures const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_shader_expect_assume)
 bool compare_VkPhysicalDeviceShaderExpectAssumeFeaturesKHR(
     VkPhysicalDeviceShaderExpectAssumeFeaturesKHR const *s1,
     VkPhysicalDeviceShaderExpectAssumeFeaturesKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 276 && (VK_KHR_shader_float_controls2)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceShaderFloatControls2Features(
+    VkPhysicalDeviceShaderFloatControls2Features const *s1,
+    VkPhysicalDeviceShaderFloatControls2Features const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_shader_float_controls2)
 bool compare_VkPhysicalDeviceShaderFloatControls2FeaturesKHR(
     VkPhysicalDeviceShaderFloatControls2FeaturesKHR const *s1,
     VkPhysicalDeviceShaderFloatControls2FeaturesKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 276 && (VK_KHR_dynamic_rendering_local_read)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceDynamicRenderingLocalReadFeatures(
+    VkPhysicalDeviceDynamicRenderingLocalReadFeatures const *s1,
+    VkPhysicalDeviceDynamicRenderingLocalReadFeatures const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_dynamic_rendering_local_read)
 bool compare_VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR(
     VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR const *s1,
     VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 276 && (VK_KHR_dynamic_rendering_local_read)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkRenderingAttachmentLocationInfo(VkRenderingAttachmentLocationInfo const *s1,
+                                               VkRenderingAttachmentLocationInfo const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_dynamic_rendering_local_read)
 bool compare_VkRenderingAttachmentLocationInfoKHR(VkRenderingAttachmentLocationInfoKHR const *s1,
                                                   VkRenderingAttachmentLocationInfoKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 276 && (VK_KHR_dynamic_rendering_local_read)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkRenderingInputAttachmentIndexInfo(VkRenderingInputAttachmentIndexInfo const *s1,
+                                                 VkRenderingInputAttachmentIndexInfo const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_dynamic_rendering_local_read)
 bool compare_VkRenderingInputAttachmentIndexInfoKHR(
     VkRenderingInputAttachmentIndexInfoKHR const *s1,
     VkRenderingInputAttachmentIndexInfoKHR const *s2);
@@ -6875,6 +7141,351 @@ bool compare_VkPhysicalDeviceHdrVividFeaturesHUAWEI(
 bool compare_VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT(
     VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT const *s1,
     VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 260 && VK_HEADER_VERSION <= 302 && (VK_KHR_maintenance5)
+bool compare_VkBufferUsageFlags2CreateInfoKHR(VkBufferUsageFlags2CreateInfoKHR const *s1,
+                                              VkBufferUsageFlags2CreateInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 260 && VK_HEADER_VERSION <= 302 && (VK_KHR_maintenance5)
+bool compare_VkPipelineCreateFlags2CreateInfoKHR(VkPipelineCreateFlags2CreateInfoKHR const *s1,
+                                                 VkPipelineCreateFlags2CreateInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION <= 302 && (VK_KHR_push_descriptor)
+bool compare_VkPhysicalDevicePushDescriptorPropertiesKHR(
+    VkPhysicalDevicePushDescriptorPropertiesKHR const *s1,
+    VkPhysicalDevicePushDescriptorPropertiesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 260 && VK_HEADER_VERSION <= 302 && (VK_KHR_maintenance5)
+bool compare_VkPhysicalDeviceMaintenance5FeaturesKHR(
+    VkPhysicalDeviceMaintenance5FeaturesKHR const *s1,
+    VkPhysicalDeviceMaintenance5FeaturesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 260 && VK_HEADER_VERSION <= 302 && (VK_KHR_maintenance5)
+bool compare_VkPhysicalDeviceMaintenance5PropertiesKHR(
+    VkPhysicalDeviceMaintenance5PropertiesKHR const *s1,
+    VkPhysicalDeviceMaintenance5PropertiesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 274 && VK_HEADER_VERSION <= 302 && (VK_KHR_maintenance6)
+bool compare_VkPhysicalDeviceMaintenance6FeaturesKHR(
+    VkPhysicalDeviceMaintenance6FeaturesKHR const *s1,
+    VkPhysicalDeviceMaintenance6FeaturesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 274 && VK_HEADER_VERSION <= 302 && (VK_KHR_maintenance6)
+bool compare_VkPhysicalDeviceMaintenance6PropertiesKHR(
+    VkPhysicalDeviceMaintenance6PropertiesKHR const *s1,
+    VkPhysicalDeviceMaintenance6PropertiesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 260 && VK_HEADER_VERSION <= 302 && (VK_KHR_maintenance5)
+bool compare_VkRenderingAreaInfoKHR(VkRenderingAreaInfoKHR const *s1,
+                                    VkRenderingAreaInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 204 && VK_HEADER_VERSION <= 302 && (VK_KHR_global_priority)
+bool compare_VkDeviceQueueGlobalPriorityCreateInfoKHR(
+    VkDeviceQueueGlobalPriorityCreateInfoKHR const *s1,
+    VkDeviceQueueGlobalPriorityCreateInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 204 && VK_HEADER_VERSION <= 302 && (VK_EXT_global_priority)
+bool compare_VkDeviceQueueGlobalPriorityCreateInfoEXT(
+    VkDeviceQueueGlobalPriorityCreateInfoEXT const *s1,
+    VkDeviceQueueGlobalPriorityCreateInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 204 && VK_HEADER_VERSION <= 302 && (VK_KHR_global_priority)
+bool compare_VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR(
+    VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR const *s1,
+    VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 204 && VK_HEADER_VERSION <= 302 && (VK_EXT_global_priority_query)
+bool compare_VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT(
+    VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT const *s1,
+    VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 204 && VK_HEADER_VERSION <= 302 && (VK_KHR_global_priority)
+bool compare_VkQueueFamilyGlobalPriorityPropertiesKHR(
+    VkQueueFamilyGlobalPriorityPropertiesKHR const *s1,
+    VkQueueFamilyGlobalPriorityPropertiesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 204 && VK_HEADER_VERSION <= 302 && (VK_EXT_global_priority_query)
+bool compare_VkQueueFamilyGlobalPriorityPropertiesEXT(
+    VkQueueFamilyGlobalPriorityPropertiesEXT const *s1,
+    VkQueueFamilyGlobalPriorityPropertiesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 273 && VK_HEADER_VERSION <= 302 && (VK_KHR_vertex_attribute_divisor)
+bool compare_VkVertexInputBindingDivisorDescriptionKHR(
+    VkVertexInputBindingDivisorDescriptionKHR const *s1,
+    VkVertexInputBindingDivisorDescriptionKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 273 && VK_HEADER_VERSION <= 302 && (VK_EXT_vertex_attribute_divisor)
+bool compare_VkVertexInputBindingDivisorDescriptionEXT(
+    VkVertexInputBindingDivisorDescriptionEXT const *s1,
+    VkVertexInputBindingDivisorDescriptionEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 273 && VK_HEADER_VERSION <= 302 && (VK_KHR_vertex_attribute_divisor)
+bool compare_VkPipelineVertexInputDivisorStateCreateInfoKHR(
+    VkPipelineVertexInputDivisorStateCreateInfoKHR const *s1,
+    VkPipelineVertexInputDivisorStateCreateInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 273 && VK_HEADER_VERSION <= 302 && (VK_EXT_vertex_attribute_divisor)
+bool compare_VkPipelineVertexInputDivisorStateCreateInfoEXT(
+    VkPipelineVertexInputDivisorStateCreateInfoEXT const *s1,
+    VkPipelineVertexInputDivisorStateCreateInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 273 && VK_HEADER_VERSION <= 302 && (VK_KHR_vertex_attribute_divisor)
+bool compare_VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR(
+    VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR const *s1,
+    VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 273 && VK_HEADER_VERSION <= 302 && (VK_KHR_vertex_attribute_divisor)
+bool compare_VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR(
+    VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR const *s1,
+    VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 273 && VK_HEADER_VERSION <= 302 && (VK_EXT_vertex_attribute_divisor)
+bool compare_VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT(
+    VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const *s1,
+    VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 276 && VK_HEADER_VERSION <= 302 && (VK_KHR_index_type_uint8)
+bool compare_VkPhysicalDeviceIndexTypeUint8FeaturesKHR(
+    VkPhysicalDeviceIndexTypeUint8FeaturesKHR const *s1,
+    VkPhysicalDeviceIndexTypeUint8FeaturesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 276 && VK_HEADER_VERSION <= 302 && (VK_EXT_index_type_uint8)
+bool compare_VkPhysicalDeviceIndexTypeUint8FeaturesEXT(
+    VkPhysicalDeviceIndexTypeUint8FeaturesEXT const *s1,
+    VkPhysicalDeviceIndexTypeUint8FeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 276 && VK_HEADER_VERSION <= 302 && (VK_KHR_line_rasterization)
+bool compare_VkPhysicalDeviceLineRasterizationFeaturesKHR(
+    VkPhysicalDeviceLineRasterizationFeaturesKHR const *s1,
+    VkPhysicalDeviceLineRasterizationFeaturesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 276 && VK_HEADER_VERSION <= 302 && (VK_EXT_line_rasterization)
+bool compare_VkPhysicalDeviceLineRasterizationFeaturesEXT(
+    VkPhysicalDeviceLineRasterizationFeaturesEXT const *s1,
+    VkPhysicalDeviceLineRasterizationFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 276 && VK_HEADER_VERSION <= 302 && (VK_KHR_line_rasterization)
+bool compare_VkPhysicalDeviceLineRasterizationPropertiesKHR(
+    VkPhysicalDeviceLineRasterizationPropertiesKHR const *s1,
+    VkPhysicalDeviceLineRasterizationPropertiesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 276 && VK_HEADER_VERSION <= 302 && (VK_EXT_line_rasterization)
+bool compare_VkPhysicalDeviceLineRasterizationPropertiesEXT(
+    VkPhysicalDeviceLineRasterizationPropertiesEXT const *s1,
+    VkPhysicalDeviceLineRasterizationPropertiesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 276 && VK_HEADER_VERSION <= 302 && (VK_KHR_line_rasterization)
+bool compare_VkPipelineRasterizationLineStateCreateInfoKHR(
+    VkPipelineRasterizationLineStateCreateInfoKHR const *s1,
+    VkPipelineRasterizationLineStateCreateInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 276 && VK_HEADER_VERSION <= 302 && (VK_EXT_line_rasterization)
+bool compare_VkPipelineRasterizationLineStateCreateInfoEXT(
+    VkPipelineRasterizationLineStateCreateInfoEXT const *s1,
+    VkPipelineRasterizationLineStateCreateInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 258 && VK_HEADER_VERSION <= 302 && (VK_EXT_host_image_copy)
+bool compare_VkPhysicalDeviceHostImageCopyFeaturesEXT(
+    VkPhysicalDeviceHostImageCopyFeaturesEXT const *s1,
+    VkPhysicalDeviceHostImageCopyFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 258 && VK_HEADER_VERSION <= 302 && (VK_EXT_host_image_copy)
+bool compare_VkPhysicalDeviceHostImageCopyPropertiesEXT(
+    VkPhysicalDeviceHostImageCopyPropertiesEXT const *s1,
+    VkPhysicalDeviceHostImageCopyPropertiesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 258 && VK_HEADER_VERSION <= 302 && (VK_EXT_host_image_copy)
+bool compare_VkMemoryToImageCopyEXT(VkMemoryToImageCopyEXT const *s1,
+                                    VkMemoryToImageCopyEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 258 && VK_HEADER_VERSION <= 302 && (VK_EXT_host_image_copy)
+bool compare_VkImageToMemoryCopyEXT(VkImageToMemoryCopyEXT const *s1,
+                                    VkImageToMemoryCopyEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 258 && VK_HEADER_VERSION <= 302 && (VK_EXT_host_image_copy)
+bool compare_VkCopyMemoryToImageInfoEXT(VkCopyMemoryToImageInfoEXT const *s1,
+                                        VkCopyMemoryToImageInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 258 && VK_HEADER_VERSION <= 302 && (VK_EXT_host_image_copy)
+bool compare_VkCopyImageToMemoryInfoEXT(VkCopyImageToMemoryInfoEXT const *s1,
+                                        VkCopyImageToMemoryInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 258 && VK_HEADER_VERSION <= 302 && (VK_EXT_host_image_copy)
+bool compare_VkCopyImageToImageInfoEXT(VkCopyImageToImageInfoEXT const *s1,
+                                       VkCopyImageToImageInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 258 && VK_HEADER_VERSION <= 302 && (VK_EXT_host_image_copy)
+bool compare_VkHostImageLayoutTransitionInfoEXT(VkHostImageLayoutTransitionInfoEXT const *s1,
+                                                VkHostImageLayoutTransitionInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 258 && VK_HEADER_VERSION <= 302 && (VK_EXT_host_image_copy)
+bool compare_VkSubresourceHostMemcpySizeEXT(VkSubresourceHostMemcpySizeEXT const *s1,
+                                            VkSubresourceHostMemcpySizeEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 258 && VK_HEADER_VERSION <= 302 && (VK_EXT_host_image_copy)
+bool compare_VkHostImageCopyDevicePerformanceQueryEXT(
+    VkHostImageCopyDevicePerformanceQueryEXT const *s1,
+    VkHostImageCopyDevicePerformanceQueryEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_HEADER_VERSION <= 302 && (VK_EXT_pipeline_protected_access)
+bool compare_VkPhysicalDevicePipelineProtectedAccessFeaturesEXT(
+    VkPhysicalDevicePipelineProtectedAccessFeaturesEXT const *s1,
+    VkPhysicalDevicePipelineProtectedAccessFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 260 && VK_HEADER_VERSION <= 302 && (VK_KHR_maintenance5)
+bool compare_VkImageSubresource2KHR(VkImageSubresource2KHR const *s1,
+                                    VkImageSubresource2KHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 260 && VK_HEADER_VERSION <= 302 &&                                        \
+    ((VK_EXT_host_image_copy) || (VK_EXT_image_compression_control))
+bool compare_VkImageSubresource2EXT(VkImageSubresource2EXT const *s1,
+                                    VkImageSubresource2EXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 260 && VK_HEADER_VERSION <= 302 && (VK_KHR_maintenance5)
+bool compare_VkSubresourceLayout2KHR(VkSubresourceLayout2KHR const *s1,
+                                     VkSubresourceLayout2KHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 260 && VK_HEADER_VERSION <= 302 &&                                        \
+    ((VK_EXT_host_image_copy) || (VK_EXT_image_compression_control))
+bool compare_VkSubresourceLayout2EXT(VkSubresourceLayout2EXT const *s1,
+                                     VkSubresourceLayout2EXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 221 && VK_HEADER_VERSION <= 302 && (VK_EXT_pipeline_robustness)
+bool compare_VkPhysicalDevicePipelineRobustnessFeaturesEXT(
+    VkPhysicalDevicePipelineRobustnessFeaturesEXT const *s1,
+    VkPhysicalDevicePipelineRobustnessFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 221 && VK_HEADER_VERSION <= 302 && (VK_EXT_pipeline_robustness)
+bool compare_VkPipelineRobustnessCreateInfoEXT(VkPipelineRobustnessCreateInfoEXT const *s1,
+                                               VkPipelineRobustnessCreateInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 221 && VK_HEADER_VERSION <= 302 && (VK_EXT_pipeline_robustness)
+bool compare_VkPhysicalDevicePipelineRobustnessPropertiesEXT(
+    VkPhysicalDevicePipelineRobustnessPropertiesEXT const *s1,
+    VkPhysicalDevicePipelineRobustnessPropertiesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 260 && VK_HEADER_VERSION <= 302 && (VK_KHR_maintenance5)
+bool compare_VkDeviceImageSubresourceInfoKHR(VkDeviceImageSubresourceInfoKHR const *s1,
+                                             VkDeviceImageSubresourceInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 244 && VK_HEADER_VERSION <= 302 && (VK_KHR_map_memory2)
+bool compare_VkMemoryMapInfoKHR(VkMemoryMapInfoKHR const *s1, VkMemoryMapInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 244 && VK_HEADER_VERSION <= 302 && (VK_KHR_map_memory2)
+bool compare_VkMemoryUnmapInfoKHR(VkMemoryUnmapInfoKHR const *s1, VkMemoryUnmapInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 274 && VK_HEADER_VERSION <= 302 && (VK_KHR_maintenance6)
+bool compare_VkBindMemoryStatusKHR(VkBindMemoryStatusKHR const *s1,
+                                   VkBindMemoryStatusKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 274 && VK_HEADER_VERSION <= 302 && (VK_KHR_maintenance6)
+bool compare_VkBindDescriptorSetsInfoKHR(VkBindDescriptorSetsInfoKHR const *s1,
+                                         VkBindDescriptorSetsInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 274 && VK_HEADER_VERSION <= 302 && (VK_KHR_maintenance6)
+bool compare_VkPushConstantsInfoKHR(VkPushConstantsInfoKHR const *s1,
+                                    VkPushConstantsInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 274 && VK_HEADER_VERSION <= 302 &&                                        \
+    (VK_KHR_maintenance6 && VK_KHR_push_descriptor)
+bool compare_VkPushDescriptorSetInfoKHR(VkPushDescriptorSetInfoKHR const *s1,
+                                        VkPushDescriptorSetInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 274 && VK_HEADER_VERSION <= 302 &&                                        \
+    (VK_KHR_maintenance6 && VK_KHR_push_descriptor && VK_VERSION_1_1)
+bool compare_VkPushDescriptorSetWithTemplateInfoKHR(
+    VkPushDescriptorSetWithTemplateInfoKHR const *s1,
+    VkPushDescriptorSetWithTemplateInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 276 && VK_HEADER_VERSION <= 302 && (VK_KHR_shader_subgroup_rotate)
+bool compare_VkPhysicalDeviceShaderSubgroupRotateFeaturesKHR(
+    VkPhysicalDeviceShaderSubgroupRotateFeaturesKHR const *s1,
+    VkPhysicalDeviceShaderSubgroupRotateFeaturesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 276 && VK_HEADER_VERSION <= 302 && (VK_KHR_shader_expect_assume)
+bool compare_VkPhysicalDeviceShaderExpectAssumeFeaturesKHR(
+    VkPhysicalDeviceShaderExpectAssumeFeaturesKHR const *s1,
+    VkPhysicalDeviceShaderExpectAssumeFeaturesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 276 && VK_HEADER_VERSION <= 302 && (VK_KHR_shader_float_controls2)
+bool compare_VkPhysicalDeviceShaderFloatControls2FeaturesKHR(
+    VkPhysicalDeviceShaderFloatControls2FeaturesKHR const *s1,
+    VkPhysicalDeviceShaderFloatControls2FeaturesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 276 && VK_HEADER_VERSION <= 302 && (VK_KHR_dynamic_rendering_local_read)
+bool compare_VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR(
+    VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR const *s1,
+    VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 276 && VK_HEADER_VERSION <= 302 && (VK_KHR_dynamic_rendering_local_read)
+bool compare_VkRenderingAttachmentLocationInfoKHR(VkRenderingAttachmentLocationInfoKHR const *s1,
+                                                  VkRenderingAttachmentLocationInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 276 && VK_HEADER_VERSION <= 302 && (VK_KHR_dynamic_rendering_local_read)
+bool compare_VkRenderingInputAttachmentIndexInfoKHR(
+    VkRenderingInputAttachmentIndexInfoKHR const *s1,
+    VkRenderingInputAttachmentIndexInfoKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 260 && VK_HEADER_VERSION <= 297 && (VK_AMDX_shader_enqueue)
@@ -9038,13 +9649,21 @@ bool compare_VkCopyDescriptorSet(VkCopyDescriptorSet const *s1, VkCopyDescriptor
   return true;
 }
 
-#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
-bool compare_VkBufferUsageFlags2CreateInfoKHR(VkBufferUsageFlags2CreateInfoKHR const *s1,
-                                              VkBufferUsageFlags2CreateInfoKHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkBufferUsageFlags2CreateInfo(VkBufferUsageFlags2CreateInfo const *s1,
+                                           VkBufferUsageFlags2CreateInfo const *s2) {
   if ((s1->usage != s2->usage) || false)
     return false;
 
   return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_maintenance5)
+bool compare_VkBufferUsageFlags2CreateInfoKHR(VkBufferUsageFlags2CreateInfoKHR const *s1,
+                                              VkBufferUsageFlags2CreateInfoKHR const *s2) {
+  return compare_VkBufferUsageFlags2CreateInfo((VkBufferUsageFlags2CreateInfo const *)s1,
+                                               (VkBufferUsageFlags2CreateInfo const *)s2);
 }
 #endif
 
@@ -9388,13 +10007,21 @@ bool compare_VkComputePipelineIndirectBufferInfoNV(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
-bool compare_VkPipelineCreateFlags2CreateInfoKHR(VkPipelineCreateFlags2CreateInfoKHR const *s1,
-                                                 VkPipelineCreateFlags2CreateInfoKHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPipelineCreateFlags2CreateInfo(VkPipelineCreateFlags2CreateInfo const *s1,
+                                              VkPipelineCreateFlags2CreateInfo const *s2) {
   if ((s1->flags != s2->flags) || false)
     return false;
 
   return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_maintenance5)
+bool compare_VkPipelineCreateFlags2CreateInfoKHR(VkPipelineCreateFlags2CreateInfoKHR const *s1,
+                                                 VkPipelineCreateFlags2CreateInfoKHR const *s2) {
+  return compare_VkPipelineCreateFlags2CreateInfo((VkPipelineCreateFlags2CreateInfo const *)s1,
+                                                  (VkPipelineCreateFlags2CreateInfo const *)s2);
 }
 #endif
 
@@ -11127,14 +11754,24 @@ bool compare_VkPhysicalDeviceSparseImageFormatInfo2KHR(
 }
 #endif
 
-#if (VK_KHR_push_descriptor)
-bool compare_VkPhysicalDevicePushDescriptorPropertiesKHR(
-    VkPhysicalDevicePushDescriptorPropertiesKHR const *s1,
-    VkPhysicalDevicePushDescriptorPropertiesKHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDevicePushDescriptorProperties(
+    VkPhysicalDevicePushDescriptorProperties const *s1,
+    VkPhysicalDevicePushDescriptorProperties const *s2) {
   if ((s1->maxPushDescriptors != s2->maxPushDescriptors) || false)
     return false;
 
   return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_push_descriptor)
+bool compare_VkPhysicalDevicePushDescriptorPropertiesKHR(
+    VkPhysicalDevicePushDescriptorPropertiesKHR const *s1,
+    VkPhysicalDevicePushDescriptorPropertiesKHR const *s2) {
+  return compare_VkPhysicalDevicePushDescriptorProperties(
+      (VkPhysicalDevicePushDescriptorProperties const *)s1,
+      (VkPhysicalDevicePushDescriptorProperties const *)s2);
 }
 #endif
 
@@ -13640,10 +14277,9 @@ bool compare_VkPhysicalDeviceMaintenance4PropertiesKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
-bool compare_VkPhysicalDeviceMaintenance5FeaturesKHR(
-    VkPhysicalDeviceMaintenance5FeaturesKHR const *s1,
-    VkPhysicalDeviceMaintenance5FeaturesKHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceMaintenance5Features(VkPhysicalDeviceMaintenance5Features const *s1,
+                                                  VkPhysicalDeviceMaintenance5Features const *s2) {
   if ((s1->maintenance5 != s2->maintenance5) || false)
     return false;
 
@@ -13651,10 +14287,20 @@ bool compare_VkPhysicalDeviceMaintenance5FeaturesKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
-bool compare_VkPhysicalDeviceMaintenance5PropertiesKHR(
-    VkPhysicalDeviceMaintenance5PropertiesKHR const *s1,
-    VkPhysicalDeviceMaintenance5PropertiesKHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_maintenance5)
+bool compare_VkPhysicalDeviceMaintenance5FeaturesKHR(
+    VkPhysicalDeviceMaintenance5FeaturesKHR const *s1,
+    VkPhysicalDeviceMaintenance5FeaturesKHR const *s2) {
+  return compare_VkPhysicalDeviceMaintenance5Features(
+      (VkPhysicalDeviceMaintenance5Features const *)s1,
+      (VkPhysicalDeviceMaintenance5Features const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceMaintenance5Properties(
+    VkPhysicalDeviceMaintenance5Properties const *s1,
+    VkPhysicalDeviceMaintenance5Properties const *s2) {
   if ((s1->earlyFragmentMultisampleCoverageAfterSampleCounting !=
        s2->earlyFragmentMultisampleCoverageAfterSampleCounting) ||
       (s1->earlyFragmentSampleMaskTestBeforeSampleCounting !=
@@ -13670,10 +14316,19 @@ bool compare_VkPhysicalDeviceMaintenance5PropertiesKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 274 && (VK_KHR_maintenance6)
-bool compare_VkPhysicalDeviceMaintenance6FeaturesKHR(
-    VkPhysicalDeviceMaintenance6FeaturesKHR const *s1,
-    VkPhysicalDeviceMaintenance6FeaturesKHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_maintenance5)
+bool compare_VkPhysicalDeviceMaintenance5PropertiesKHR(
+    VkPhysicalDeviceMaintenance5PropertiesKHR const *s1,
+    VkPhysicalDeviceMaintenance5PropertiesKHR const *s2) {
+  return compare_VkPhysicalDeviceMaintenance5Properties(
+      (VkPhysicalDeviceMaintenance5Properties const *)s1,
+      (VkPhysicalDeviceMaintenance5Properties const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceMaintenance6Features(VkPhysicalDeviceMaintenance6Features const *s1,
+                                                  VkPhysicalDeviceMaintenance6Features const *s2) {
   if ((s1->maintenance6 != s2->maintenance6) || false)
     return false;
 
@@ -13681,10 +14336,20 @@ bool compare_VkPhysicalDeviceMaintenance6FeaturesKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 274 && (VK_KHR_maintenance6)
-bool compare_VkPhysicalDeviceMaintenance6PropertiesKHR(
-    VkPhysicalDeviceMaintenance6PropertiesKHR const *s1,
-    VkPhysicalDeviceMaintenance6PropertiesKHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_maintenance6)
+bool compare_VkPhysicalDeviceMaintenance6FeaturesKHR(
+    VkPhysicalDeviceMaintenance6FeaturesKHR const *s1,
+    VkPhysicalDeviceMaintenance6FeaturesKHR const *s2) {
+  return compare_VkPhysicalDeviceMaintenance6Features(
+      (VkPhysicalDeviceMaintenance6Features const *)s1,
+      (VkPhysicalDeviceMaintenance6Features const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceMaintenance6Properties(
+    VkPhysicalDeviceMaintenance6Properties const *s1,
+    VkPhysicalDeviceMaintenance6Properties const *s2) {
   if ((s1->blockTexelViewCompatibleMultipleLayers != s2->blockTexelViewCompatibleMultipleLayers) ||
       (s1->maxCombinedImageSamplerDescriptorCount != s2->maxCombinedImageSamplerDescriptorCount) ||
       (s1->fragmentShadingRateClampCombinerInputs != s2->fragmentShadingRateClampCombinerInputs) ||
@@ -13692,6 +14357,16 @@ bool compare_VkPhysicalDeviceMaintenance6PropertiesKHR(
     return false;
 
   return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_maintenance6)
+bool compare_VkPhysicalDeviceMaintenance6PropertiesKHR(
+    VkPhysicalDeviceMaintenance6PropertiesKHR const *s1,
+    VkPhysicalDeviceMaintenance6PropertiesKHR const *s2) {
+  return compare_VkPhysicalDeviceMaintenance6Properties(
+      (VkPhysicalDeviceMaintenance6Properties const *)s1,
+      (VkPhysicalDeviceMaintenance6Properties const *)s2);
 }
 #endif
 
@@ -13770,15 +14445,22 @@ bool compare_VkPhysicalDeviceLayeredApiVulkanPropertiesKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
-bool compare_VkRenderingAreaInfoKHR(VkRenderingAreaInfoKHR const *s1,
-                                    VkRenderingAreaInfoKHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkRenderingAreaInfo(VkRenderingAreaInfo const *s1, VkRenderingAreaInfo const *s2) {
   if ((s1->viewMask != s2->viewMask) || (s1->colorAttachmentCount != s2->colorAttachmentCount) ||
       (s1->depthAttachmentFormat != s2->depthAttachmentFormat) ||
       (s1->stencilAttachmentFormat != s2->stencilAttachmentFormat) || false)
     return false;
 
   return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_maintenance5)
+bool compare_VkRenderingAreaInfoKHR(VkRenderingAreaInfoKHR const *s1,
+                                    VkRenderingAreaInfoKHR const *s2) {
+  return compare_VkRenderingAreaInfo((VkRenderingAreaInfo const *)s1,
+                                     (VkRenderingAreaInfo const *)s2);
 }
 #endif
 
@@ -13985,10 +14667,10 @@ bool compare_VkShaderStatisticsInfoAMD(VkShaderStatisticsInfoAMD const *s1,
 }
 #endif
 
-#if VK_HEADER_VERSION >= 204 && (VK_KHR_global_priority)
-bool compare_VkDeviceQueueGlobalPriorityCreateInfoKHR(
-    VkDeviceQueueGlobalPriorityCreateInfoKHR const *s1,
-    VkDeviceQueueGlobalPriorityCreateInfoKHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkDeviceQueueGlobalPriorityCreateInfo(
+    VkDeviceQueueGlobalPriorityCreateInfo const *s1,
+    VkDeviceQueueGlobalPriorityCreateInfo const *s2) {
   if ((s1->globalPriority != s2->globalPriority) || false)
     return false;
 
@@ -13996,20 +14678,30 @@ bool compare_VkDeviceQueueGlobalPriorityCreateInfoKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 204 && (VK_EXT_global_priority)
-bool compare_VkDeviceQueueGlobalPriorityCreateInfoEXT(
-    VkDeviceQueueGlobalPriorityCreateInfoEXT const *s1,
-    VkDeviceQueueGlobalPriorityCreateInfoEXT const *s2) {
-  return compare_VkDeviceQueueGlobalPriorityCreateInfoKHR(
-      (VkDeviceQueueGlobalPriorityCreateInfoKHR const *)s1,
-      (VkDeviceQueueGlobalPriorityCreateInfoKHR const *)s2);
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_global_priority)
+bool compare_VkDeviceQueueGlobalPriorityCreateInfoKHR(
+    VkDeviceQueueGlobalPriorityCreateInfoKHR const *s1,
+    VkDeviceQueueGlobalPriorityCreateInfoKHR const *s2) {
+  return compare_VkDeviceQueueGlobalPriorityCreateInfo(
+      (VkDeviceQueueGlobalPriorityCreateInfo const *)s1,
+      (VkDeviceQueueGlobalPriorityCreateInfo const *)s2);
 }
 #endif
 
-#if VK_HEADER_VERSION >= 204 && (VK_KHR_global_priority)
-bool compare_VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR(
-    VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR const *s1,
-    VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_global_priority)
+bool compare_VkDeviceQueueGlobalPriorityCreateInfoEXT(
+    VkDeviceQueueGlobalPriorityCreateInfoEXT const *s1,
+    VkDeviceQueueGlobalPriorityCreateInfoEXT const *s2) {
+  return compare_VkDeviceQueueGlobalPriorityCreateInfo(
+      (VkDeviceQueueGlobalPriorityCreateInfo const *)s1,
+      (VkDeviceQueueGlobalPriorityCreateInfo const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceGlobalPriorityQueryFeatures(
+    VkPhysicalDeviceGlobalPriorityQueryFeatures const *s1,
+    VkPhysicalDeviceGlobalPriorityQueryFeatures const *s2) {
   if ((s1->globalPriorityQuery != s2->globalPriorityQuery) || false)
     return false;
 
@@ -14017,24 +14709,34 @@ bool compare_VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 204 && (VK_EXT_global_priority_query)
-bool compare_VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT(
-    VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT const *s1,
-    VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT const *s2) {
-  return compare_VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR(
-      (VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR const *)s1,
-      (VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR const *)s2);
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_global_priority)
+bool compare_VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR(
+    VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR const *s1,
+    VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR const *s2) {
+  return compare_VkPhysicalDeviceGlobalPriorityQueryFeatures(
+      (VkPhysicalDeviceGlobalPriorityQueryFeatures const *)s1,
+      (VkPhysicalDeviceGlobalPriorityQueryFeatures const *)s2);
 }
 #endif
 
-#if VK_HEADER_VERSION >= 204 && (VK_KHR_global_priority)
-bool compare_VkQueueFamilyGlobalPriorityPropertiesKHR(
-    VkQueueFamilyGlobalPriorityPropertiesKHR const *s1,
-    VkQueueFamilyGlobalPriorityPropertiesKHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_global_priority_query)
+bool compare_VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT(
+    VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT const *s1,
+    VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT const *s2) {
+  return compare_VkPhysicalDeviceGlobalPriorityQueryFeatures(
+      (VkPhysicalDeviceGlobalPriorityQueryFeatures const *)s1,
+      (VkPhysicalDeviceGlobalPriorityQueryFeatures const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkQueueFamilyGlobalPriorityProperties(
+    VkQueueFamilyGlobalPriorityProperties const *s1,
+    VkQueueFamilyGlobalPriorityProperties const *s2) {
   if ((s1->priorityCount != s2->priorityCount) || false)
     return false;
 
-  for (uint32_t i = 0; i < VK_MAX_GLOBAL_PRIORITY_SIZE_KHR; ++i) {
+  for (uint32_t i = 0; i < VK_MAX_GLOBAL_PRIORITY_SIZE; ++i) {
     if (s1->priorities[i] != s2->priorities[i])
       return false;
   }
@@ -14043,13 +14745,23 @@ bool compare_VkQueueFamilyGlobalPriorityPropertiesKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 204 && (VK_EXT_global_priority_query)
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_global_priority)
+bool compare_VkQueueFamilyGlobalPriorityPropertiesKHR(
+    VkQueueFamilyGlobalPriorityPropertiesKHR const *s1,
+    VkQueueFamilyGlobalPriorityPropertiesKHR const *s2) {
+  return compare_VkQueueFamilyGlobalPriorityProperties(
+      (VkQueueFamilyGlobalPriorityProperties const *)s1,
+      (VkQueueFamilyGlobalPriorityProperties const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_global_priority_query)
 bool compare_VkQueueFamilyGlobalPriorityPropertiesEXT(
     VkQueueFamilyGlobalPriorityPropertiesEXT const *s1,
     VkQueueFamilyGlobalPriorityPropertiesEXT const *s2) {
-  return compare_VkQueueFamilyGlobalPriorityPropertiesKHR(
-      (VkQueueFamilyGlobalPriorityPropertiesKHR const *)s1,
-      (VkQueueFamilyGlobalPriorityPropertiesKHR const *)s2);
+  return compare_VkQueueFamilyGlobalPriorityProperties(
+      (VkQueueFamilyGlobalPriorityProperties const *)s1,
+      (VkQueueFamilyGlobalPriorityProperties const *)s2);
 }
 #endif
 
@@ -14691,10 +15403,10 @@ bool compare_VkSemaphoreSignalInfoKHR(VkSemaphoreSignalInfoKHR const *s1,
 }
 #endif
 
-#if VK_HEADER_VERSION >= 273 && (VK_KHR_vertex_attribute_divisor)
-bool compare_VkVertexInputBindingDivisorDescriptionKHR(
-    VkVertexInputBindingDivisorDescriptionKHR const *s1,
-    VkVertexInputBindingDivisorDescriptionKHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkVertexInputBindingDivisorDescription(
+    VkVertexInputBindingDivisorDescription const *s1,
+    VkVertexInputBindingDivisorDescription const *s2) {
   if ((s1->binding != s2->binding) || (s1->divisor != s2->divisor) || false)
     return false;
 
@@ -14702,20 +15414,30 @@ bool compare_VkVertexInputBindingDivisorDescriptionKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 273 && (VK_EXT_vertex_attribute_divisor)
-bool compare_VkVertexInputBindingDivisorDescriptionEXT(
-    VkVertexInputBindingDivisorDescriptionEXT const *s1,
-    VkVertexInputBindingDivisorDescriptionEXT const *s2) {
-  return compare_VkVertexInputBindingDivisorDescriptionKHR(
-      (VkVertexInputBindingDivisorDescriptionKHR const *)s1,
-      (VkVertexInputBindingDivisorDescriptionKHR const *)s2);
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_vertex_attribute_divisor)
+bool compare_VkVertexInputBindingDivisorDescriptionKHR(
+    VkVertexInputBindingDivisorDescriptionKHR const *s1,
+    VkVertexInputBindingDivisorDescriptionKHR const *s2) {
+  return compare_VkVertexInputBindingDivisorDescription(
+      (VkVertexInputBindingDivisorDescription const *)s1,
+      (VkVertexInputBindingDivisorDescription const *)s2);
 }
 #endif
 
-#if VK_HEADER_VERSION >= 273 && (VK_KHR_vertex_attribute_divisor)
-bool compare_VkPipelineVertexInputDivisorStateCreateInfoKHR(
-    VkPipelineVertexInputDivisorStateCreateInfoKHR const *s1,
-    VkPipelineVertexInputDivisorStateCreateInfoKHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_vertex_attribute_divisor)
+bool compare_VkVertexInputBindingDivisorDescriptionEXT(
+    VkVertexInputBindingDivisorDescriptionEXT const *s1,
+    VkVertexInputBindingDivisorDescriptionEXT const *s2) {
+  return compare_VkVertexInputBindingDivisorDescription(
+      (VkVertexInputBindingDivisorDescription const *)s1,
+      (VkVertexInputBindingDivisorDescription const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPipelineVertexInputDivisorStateCreateInfo(
+    VkPipelineVertexInputDivisorStateCreateInfo const *s1,
+    VkPipelineVertexInputDivisorStateCreateInfo const *s2) {
   if ((s1->vertexBindingDivisorCount != s2->vertexBindingDivisorCount) || false)
     return false;
 
@@ -14723,13 +15445,23 @@ bool compare_VkPipelineVertexInputDivisorStateCreateInfoKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 273 && (VK_EXT_vertex_attribute_divisor)
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_vertex_attribute_divisor)
+bool compare_VkPipelineVertexInputDivisorStateCreateInfoKHR(
+    VkPipelineVertexInputDivisorStateCreateInfoKHR const *s1,
+    VkPipelineVertexInputDivisorStateCreateInfoKHR const *s2) {
+  return compare_VkPipelineVertexInputDivisorStateCreateInfo(
+      (VkPipelineVertexInputDivisorStateCreateInfo const *)s1,
+      (VkPipelineVertexInputDivisorStateCreateInfo const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_vertex_attribute_divisor)
 bool compare_VkPipelineVertexInputDivisorStateCreateInfoEXT(
     VkPipelineVertexInputDivisorStateCreateInfoEXT const *s1,
     VkPipelineVertexInputDivisorStateCreateInfoEXT const *s2) {
-  return compare_VkPipelineVertexInputDivisorStateCreateInfoKHR(
-      (VkPipelineVertexInputDivisorStateCreateInfoKHR const *)s1,
-      (VkPipelineVertexInputDivisorStateCreateInfoKHR const *)s2);
+  return compare_VkPipelineVertexInputDivisorStateCreateInfo(
+      (VkPipelineVertexInputDivisorStateCreateInfo const *)s1,
+      (VkPipelineVertexInputDivisorStateCreateInfo const *)s2);
 }
 #endif
 
@@ -14744,15 +15476,25 @@ bool compare_VkPhysicalDeviceVertexAttributeDivisorPropertiesEXT(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 273 && (VK_KHR_vertex_attribute_divisor)
-bool compare_VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR(
-    VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR const *s1,
-    VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceVertexAttributeDivisorProperties(
+    VkPhysicalDeviceVertexAttributeDivisorProperties const *s1,
+    VkPhysicalDeviceVertexAttributeDivisorProperties const *s2) {
   if ((s1->maxVertexAttribDivisor != s2->maxVertexAttribDivisor) ||
       (s1->supportsNonZeroFirstInstance != s2->supportsNonZeroFirstInstance) || false)
     return false;
 
   return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_vertex_attribute_divisor)
+bool compare_VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR(
+    VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR const *s1,
+    VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR const *s2) {
+  return compare_VkPhysicalDeviceVertexAttributeDivisorProperties(
+      (VkPhysicalDeviceVertexAttributeDivisorProperties const *)s1,
+      (VkPhysicalDeviceVertexAttributeDivisorProperties const *)s2);
 }
 #endif
 
@@ -14973,10 +15715,10 @@ bool compare_VkPhysicalDeviceShaderAtomicFloat2FeaturesEXT(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 273 && (VK_KHR_vertex_attribute_divisor)
-bool compare_VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR(
-    VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR const *s1,
-    VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceVertexAttributeDivisorFeatures(
+    VkPhysicalDeviceVertexAttributeDivisorFeatures const *s1,
+    VkPhysicalDeviceVertexAttributeDivisorFeatures const *s2) {
   if ((s1->vertexAttributeInstanceRateDivisor != s2->vertexAttributeInstanceRateDivisor) ||
       (s1->vertexAttributeInstanceRateZeroDivisor != s2->vertexAttributeInstanceRateZeroDivisor) ||
       false)
@@ -14986,13 +15728,23 @@ bool compare_VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 273 && (VK_EXT_vertex_attribute_divisor)
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_vertex_attribute_divisor)
+bool compare_VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR(
+    VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR const *s1,
+    VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR const *s2) {
+  return compare_VkPhysicalDeviceVertexAttributeDivisorFeatures(
+      (VkPhysicalDeviceVertexAttributeDivisorFeatures const *)s1,
+      (VkPhysicalDeviceVertexAttributeDivisorFeatures const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_vertex_attribute_divisor)
 bool compare_VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT(
     VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const *s1,
     VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const *s2) {
-  return compare_VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR(
-      (VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR const *)s1,
-      (VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR const *)s2);
+  return compare_VkPhysicalDeviceVertexAttributeDivisorFeatures(
+      (VkPhysicalDeviceVertexAttributeDivisorFeatures const *)s1,
+      (VkPhysicalDeviceVertexAttributeDivisorFeatures const *)s2);
 }
 #endif
 
@@ -16799,10 +17551,10 @@ bool compare_VkPhysicalDeviceShaderClockFeaturesKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 276 && (VK_KHR_index_type_uint8)
-bool compare_VkPhysicalDeviceIndexTypeUint8FeaturesKHR(
-    VkPhysicalDeviceIndexTypeUint8FeaturesKHR const *s1,
-    VkPhysicalDeviceIndexTypeUint8FeaturesKHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceIndexTypeUint8Features(
+    VkPhysicalDeviceIndexTypeUint8Features const *s1,
+    VkPhysicalDeviceIndexTypeUint8Features const *s2) {
   if ((s1->indexTypeUint8 != s2->indexTypeUint8) || false)
     return false;
 
@@ -16810,13 +17562,23 @@ bool compare_VkPhysicalDeviceIndexTypeUint8FeaturesKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 276 && (VK_EXT_index_type_uint8)
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_index_type_uint8)
+bool compare_VkPhysicalDeviceIndexTypeUint8FeaturesKHR(
+    VkPhysicalDeviceIndexTypeUint8FeaturesKHR const *s1,
+    VkPhysicalDeviceIndexTypeUint8FeaturesKHR const *s2) {
+  return compare_VkPhysicalDeviceIndexTypeUint8Features(
+      (VkPhysicalDeviceIndexTypeUint8Features const *)s1,
+      (VkPhysicalDeviceIndexTypeUint8Features const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_index_type_uint8)
 bool compare_VkPhysicalDeviceIndexTypeUint8FeaturesEXT(
     VkPhysicalDeviceIndexTypeUint8FeaturesEXT const *s1,
     VkPhysicalDeviceIndexTypeUint8FeaturesEXT const *s2) {
-  return compare_VkPhysicalDeviceIndexTypeUint8FeaturesKHR(
-      (VkPhysicalDeviceIndexTypeUint8FeaturesKHR const *)s1,
-      (VkPhysicalDeviceIndexTypeUint8FeaturesKHR const *)s2);
+  return compare_VkPhysicalDeviceIndexTypeUint8Features(
+      (VkPhysicalDeviceIndexTypeUint8Features const *)s1,
+      (VkPhysicalDeviceIndexTypeUint8Features const *)s2);
 }
 #endif
 
@@ -17227,10 +17989,10 @@ bool compare_VkDeviceMemoryOpaqueCaptureAddressInfoKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 276 && (VK_KHR_line_rasterization)
-bool compare_VkPhysicalDeviceLineRasterizationFeaturesKHR(
-    VkPhysicalDeviceLineRasterizationFeaturesKHR const *s1,
-    VkPhysicalDeviceLineRasterizationFeaturesKHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceLineRasterizationFeatures(
+    VkPhysicalDeviceLineRasterizationFeatures const *s1,
+    VkPhysicalDeviceLineRasterizationFeatures const *s2) {
   if ((s1->rectangularLines != s2->rectangularLines) ||
       (s1->bresenhamLines != s2->bresenhamLines) || (s1->smoothLines != s2->smoothLines) ||
       (s1->stippledRectangularLines != s2->stippledRectangularLines) ||
@@ -17242,20 +18004,30 @@ bool compare_VkPhysicalDeviceLineRasterizationFeaturesKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 276 && (VK_EXT_line_rasterization)
-bool compare_VkPhysicalDeviceLineRasterizationFeaturesEXT(
-    VkPhysicalDeviceLineRasterizationFeaturesEXT const *s1,
-    VkPhysicalDeviceLineRasterizationFeaturesEXT const *s2) {
-  return compare_VkPhysicalDeviceLineRasterizationFeaturesKHR(
-      (VkPhysicalDeviceLineRasterizationFeaturesKHR const *)s1,
-      (VkPhysicalDeviceLineRasterizationFeaturesKHR const *)s2);
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_line_rasterization)
+bool compare_VkPhysicalDeviceLineRasterizationFeaturesKHR(
+    VkPhysicalDeviceLineRasterizationFeaturesKHR const *s1,
+    VkPhysicalDeviceLineRasterizationFeaturesKHR const *s2) {
+  return compare_VkPhysicalDeviceLineRasterizationFeatures(
+      (VkPhysicalDeviceLineRasterizationFeatures const *)s1,
+      (VkPhysicalDeviceLineRasterizationFeatures const *)s2);
 }
 #endif
 
-#if VK_HEADER_VERSION >= 276 && (VK_KHR_line_rasterization)
-bool compare_VkPhysicalDeviceLineRasterizationPropertiesKHR(
-    VkPhysicalDeviceLineRasterizationPropertiesKHR const *s1,
-    VkPhysicalDeviceLineRasterizationPropertiesKHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_line_rasterization)
+bool compare_VkPhysicalDeviceLineRasterizationFeaturesEXT(
+    VkPhysicalDeviceLineRasterizationFeaturesEXT const *s1,
+    VkPhysicalDeviceLineRasterizationFeaturesEXT const *s2) {
+  return compare_VkPhysicalDeviceLineRasterizationFeatures(
+      (VkPhysicalDeviceLineRasterizationFeatures const *)s1,
+      (VkPhysicalDeviceLineRasterizationFeatures const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceLineRasterizationProperties(
+    VkPhysicalDeviceLineRasterizationProperties const *s1,
+    VkPhysicalDeviceLineRasterizationProperties const *s2) {
   if ((s1->lineSubPixelPrecisionBits != s2->lineSubPixelPrecisionBits) || false)
     return false;
 
@@ -17263,20 +18035,30 @@ bool compare_VkPhysicalDeviceLineRasterizationPropertiesKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 276 && (VK_EXT_line_rasterization)
-bool compare_VkPhysicalDeviceLineRasterizationPropertiesEXT(
-    VkPhysicalDeviceLineRasterizationPropertiesEXT const *s1,
-    VkPhysicalDeviceLineRasterizationPropertiesEXT const *s2) {
-  return compare_VkPhysicalDeviceLineRasterizationPropertiesKHR(
-      (VkPhysicalDeviceLineRasterizationPropertiesKHR const *)s1,
-      (VkPhysicalDeviceLineRasterizationPropertiesKHR const *)s2);
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_line_rasterization)
+bool compare_VkPhysicalDeviceLineRasterizationPropertiesKHR(
+    VkPhysicalDeviceLineRasterizationPropertiesKHR const *s1,
+    VkPhysicalDeviceLineRasterizationPropertiesKHR const *s2) {
+  return compare_VkPhysicalDeviceLineRasterizationProperties(
+      (VkPhysicalDeviceLineRasterizationProperties const *)s1,
+      (VkPhysicalDeviceLineRasterizationProperties const *)s2);
 }
 #endif
 
-#if VK_HEADER_VERSION >= 276 && (VK_KHR_line_rasterization)
-bool compare_VkPipelineRasterizationLineStateCreateInfoKHR(
-    VkPipelineRasterizationLineStateCreateInfoKHR const *s1,
-    VkPipelineRasterizationLineStateCreateInfoKHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_line_rasterization)
+bool compare_VkPhysicalDeviceLineRasterizationPropertiesEXT(
+    VkPhysicalDeviceLineRasterizationPropertiesEXT const *s1,
+    VkPhysicalDeviceLineRasterizationPropertiesEXT const *s2) {
+  return compare_VkPhysicalDeviceLineRasterizationProperties(
+      (VkPhysicalDeviceLineRasterizationProperties const *)s1,
+      (VkPhysicalDeviceLineRasterizationProperties const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPipelineRasterizationLineStateCreateInfo(
+    VkPipelineRasterizationLineStateCreateInfo const *s1,
+    VkPipelineRasterizationLineStateCreateInfo const *s2) {
   if ((s1->lineRasterizationMode != s2->lineRasterizationMode) ||
       (s1->stippledLineEnable != s2->stippledLineEnable) ||
       (s1->lineStippleFactor != s2->lineStippleFactor) ||
@@ -17287,13 +18069,23 @@ bool compare_VkPipelineRasterizationLineStateCreateInfoKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 276 && (VK_EXT_line_rasterization)
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_line_rasterization)
+bool compare_VkPipelineRasterizationLineStateCreateInfoKHR(
+    VkPipelineRasterizationLineStateCreateInfoKHR const *s1,
+    VkPipelineRasterizationLineStateCreateInfoKHR const *s2) {
+  return compare_VkPipelineRasterizationLineStateCreateInfo(
+      (VkPipelineRasterizationLineStateCreateInfo const *)s1,
+      (VkPipelineRasterizationLineStateCreateInfo const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_line_rasterization)
 bool compare_VkPipelineRasterizationLineStateCreateInfoEXT(
     VkPipelineRasterizationLineStateCreateInfoEXT const *s1,
     VkPipelineRasterizationLineStateCreateInfoEXT const *s2) {
-  return compare_VkPipelineRasterizationLineStateCreateInfoKHR(
-      (VkPipelineRasterizationLineStateCreateInfoKHR const *)s1,
-      (VkPipelineRasterizationLineStateCreateInfoKHR const *)s2);
+  return compare_VkPipelineRasterizationLineStateCreateInfo(
+      (VkPipelineRasterizationLineStateCreateInfo const *)s1,
+      (VkPipelineRasterizationLineStateCreateInfo const *)s2);
 }
 #endif
 
@@ -17641,6 +18433,75 @@ bool compare_VkPhysicalDeviceVulkan13Properties(VkPhysicalDeviceVulkan13Properti
        s2->uniformTexelBufferOffsetSingleTexelAlignment) ||
       (s1->maxBufferSize != s2->maxBufferSize) || false)
     return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceVulkan14Features(VkPhysicalDeviceVulkan14Features const *s1,
+                                              VkPhysicalDeviceVulkan14Features const *s2) {
+  if ((s1->globalPriorityQuery != s2->globalPriorityQuery) ||
+      (s1->shaderSubgroupRotate != s2->shaderSubgroupRotate) ||
+      (s1->shaderSubgroupRotateClustered != s2->shaderSubgroupRotateClustered) ||
+      (s1->shaderFloatControls2 != s2->shaderFloatControls2) ||
+      (s1->shaderExpectAssume != s2->shaderExpectAssume) ||
+      (s1->rectangularLines != s2->rectangularLines) ||
+      (s1->bresenhamLines != s2->bresenhamLines) || (s1->smoothLines != s2->smoothLines) ||
+      (s1->stippledRectangularLines != s2->stippledRectangularLines) ||
+      (s1->stippledBresenhamLines != s2->stippledBresenhamLines) ||
+      (s1->stippledSmoothLines != s2->stippledSmoothLines) ||
+      (s1->vertexAttributeInstanceRateDivisor != s2->vertexAttributeInstanceRateDivisor) ||
+      (s1->vertexAttributeInstanceRateZeroDivisor != s2->vertexAttributeInstanceRateZeroDivisor) ||
+      (s1->indexTypeUint8 != s2->indexTypeUint8) ||
+      (s1->dynamicRenderingLocalRead != s2->dynamicRenderingLocalRead) ||
+      (s1->maintenance5 != s2->maintenance5) || (s1->maintenance6 != s2->maintenance6) ||
+      (s1->pipelineProtectedAccess != s2->pipelineProtectedAccess) ||
+      (s1->pipelineRobustness != s2->pipelineRobustness) ||
+      (s1->hostImageCopy != s2->hostImageCopy) || (s1->pushDescriptor != s2->pushDescriptor) ||
+      false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceVulkan14Properties(VkPhysicalDeviceVulkan14Properties const *s1,
+                                                VkPhysicalDeviceVulkan14Properties const *s2) {
+  if ((s1->lineSubPixelPrecisionBits != s2->lineSubPixelPrecisionBits) ||
+      (s1->maxVertexAttribDivisor != s2->maxVertexAttribDivisor) ||
+      (s1->supportsNonZeroFirstInstance != s2->supportsNonZeroFirstInstance) ||
+      (s1->maxPushDescriptors != s2->maxPushDescriptors) ||
+      (s1->dynamicRenderingLocalReadDepthStencilAttachments !=
+       s2->dynamicRenderingLocalReadDepthStencilAttachments) ||
+      (s1->dynamicRenderingLocalReadMultisampledAttachments !=
+       s2->dynamicRenderingLocalReadMultisampledAttachments) ||
+      (s1->earlyFragmentMultisampleCoverageAfterSampleCounting !=
+       s2->earlyFragmentMultisampleCoverageAfterSampleCounting) ||
+      (s1->earlyFragmentSampleMaskTestBeforeSampleCounting !=
+       s2->earlyFragmentSampleMaskTestBeforeSampleCounting) ||
+      (s1->depthStencilSwizzleOneSupport != s2->depthStencilSwizzleOneSupport) ||
+      (s1->polygonModePointSize != s2->polygonModePointSize) ||
+      (s1->nonStrictSinglePixelWideLinesUseParallelogram !=
+       s2->nonStrictSinglePixelWideLinesUseParallelogram) ||
+      (s1->nonStrictWideLinesUseParallelogram != s2->nonStrictWideLinesUseParallelogram) ||
+      (s1->blockTexelViewCompatibleMultipleLayers != s2->blockTexelViewCompatibleMultipleLayers) ||
+      (s1->maxCombinedImageSamplerDescriptorCount != s2->maxCombinedImageSamplerDescriptorCount) ||
+      (s1->fragmentShadingRateClampCombinerInputs != s2->fragmentShadingRateClampCombinerInputs) ||
+      (s1->defaultRobustnessStorageBuffers != s2->defaultRobustnessStorageBuffers) ||
+      (s1->defaultRobustnessUniformBuffers != s2->defaultRobustnessUniformBuffers) ||
+      (s1->defaultRobustnessVertexInputs != s2->defaultRobustnessVertexInputs) ||
+      (s1->defaultRobustnessImages != s2->defaultRobustnessImages) ||
+      (s1->copySrcLayoutCount != s2->copySrcLayoutCount) ||
+      (s1->copyDstLayoutCount != s2->copyDstLayoutCount) ||
+      (s1->identicalMemoryTypeRequirements != s2->identicalMemoryTypeRequirements) || false)
+    return false;
+
+  for (uint32_t i = 0; i < VK_UUID_SIZE; ++i) {
+    if (s1->optimalTilingLayoutUUID[i] != s2->optimalTilingLayoutUUID[i])
+      return false;
+  }
 
   return true;
 }
@@ -19322,10 +20183,10 @@ bool compare_VkPhysicalDeviceSynchronization2FeaturesKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
-bool compare_VkPhysicalDeviceHostImageCopyFeaturesEXT(
-    VkPhysicalDeviceHostImageCopyFeaturesEXT const *s1,
-    VkPhysicalDeviceHostImageCopyFeaturesEXT const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceHostImageCopyFeatures(
+    VkPhysicalDeviceHostImageCopyFeatures const *s1,
+    VkPhysicalDeviceHostImageCopyFeatures const *s2) {
   if ((s1->hostImageCopy != s2->hostImageCopy) || false)
     return false;
 
@@ -19333,10 +20194,20 @@ bool compare_VkPhysicalDeviceHostImageCopyFeaturesEXT(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
-bool compare_VkPhysicalDeviceHostImageCopyPropertiesEXT(
-    VkPhysicalDeviceHostImageCopyPropertiesEXT const *s1,
-    VkPhysicalDeviceHostImageCopyPropertiesEXT const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_host_image_copy)
+bool compare_VkPhysicalDeviceHostImageCopyFeaturesEXT(
+    VkPhysicalDeviceHostImageCopyFeaturesEXT const *s1,
+    VkPhysicalDeviceHostImageCopyFeaturesEXT const *s2) {
+  return compare_VkPhysicalDeviceHostImageCopyFeatures(
+      (VkPhysicalDeviceHostImageCopyFeatures const *)s1,
+      (VkPhysicalDeviceHostImageCopyFeatures const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceHostImageCopyProperties(
+    VkPhysicalDeviceHostImageCopyProperties const *s1,
+    VkPhysicalDeviceHostImageCopyProperties const *s2) {
   if ((s1->copySrcLayoutCount != s2->copySrcLayoutCount) ||
       (s1->copyDstLayoutCount != s2->copyDstLayoutCount) ||
       (s1->identicalMemoryTypeRequirements != s2->identicalMemoryTypeRequirements) || false)
@@ -19351,9 +20222,39 @@ bool compare_VkPhysicalDeviceHostImageCopyPropertiesEXT(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_host_image_copy)
+bool compare_VkPhysicalDeviceHostImageCopyPropertiesEXT(
+    VkPhysicalDeviceHostImageCopyPropertiesEXT const *s1,
+    VkPhysicalDeviceHostImageCopyPropertiesEXT const *s2) {
+  return compare_VkPhysicalDeviceHostImageCopyProperties(
+      (VkPhysicalDeviceHostImageCopyProperties const *)s1,
+      (VkPhysicalDeviceHostImageCopyProperties const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkMemoryToImageCopy(VkMemoryToImageCopy const *s1, VkMemoryToImageCopy const *s2) {
+  if ((s1->memoryRowLength != s2->memoryRowLength) ||
+      (s1->memoryImageHeight != s2->memoryImageHeight) ||
+      !compare_VkImageSubresourceLayers(&s1->imageSubresource, &s2->imageSubresource) ||
+      !compare_VkOffset3D(&s1->imageOffset, &s2->imageOffset) ||
+      !compare_VkExtent3D(&s1->imageExtent, &s2->imageExtent) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_host_image_copy)
 bool compare_VkMemoryToImageCopyEXT(VkMemoryToImageCopyEXT const *s1,
                                     VkMemoryToImageCopyEXT const *s2) {
+  return compare_VkMemoryToImageCopy((VkMemoryToImageCopy const *)s1,
+                                     (VkMemoryToImageCopy const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkImageToMemoryCopy(VkImageToMemoryCopy const *s1, VkImageToMemoryCopy const *s2) {
   if ((s1->memoryRowLength != s2->memoryRowLength) ||
       (s1->memoryImageHeight != s2->memoryImageHeight) ||
       !compare_VkImageSubresourceLayers(&s1->imageSubresource, &s2->imageSubresource) ||
@@ -19365,23 +20266,17 @@ bool compare_VkMemoryToImageCopyEXT(VkMemoryToImageCopyEXT const *s1,
 }
 #endif
 
-#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_host_image_copy)
 bool compare_VkImageToMemoryCopyEXT(VkImageToMemoryCopyEXT const *s1,
                                     VkImageToMemoryCopyEXT const *s2) {
-  if ((s1->memoryRowLength != s2->memoryRowLength) ||
-      (s1->memoryImageHeight != s2->memoryImageHeight) ||
-      !compare_VkImageSubresourceLayers(&s1->imageSubresource, &s2->imageSubresource) ||
-      !compare_VkOffset3D(&s1->imageOffset, &s2->imageOffset) ||
-      !compare_VkExtent3D(&s1->imageExtent, &s2->imageExtent) || false)
-    return false;
-
-  return true;
+  return compare_VkImageToMemoryCopy((VkImageToMemoryCopy const *)s1,
+                                     (VkImageToMemoryCopy const *)s2);
 }
 #endif
 
-#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
-bool compare_VkCopyMemoryToImageInfoEXT(VkCopyMemoryToImageInfoEXT const *s1,
-                                        VkCopyMemoryToImageInfoEXT const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkCopyMemoryToImageInfo(VkCopyMemoryToImageInfo const *s1,
+                                     VkCopyMemoryToImageInfo const *s2) {
   if ((s1->flags != s2->flags) || (s1->dstImage != s2->dstImage) ||
       (s1->dstImageLayout != s2->dstImageLayout) || (s1->regionCount != s2->regionCount) || false)
     return false;
@@ -19390,9 +20285,17 @@ bool compare_VkCopyMemoryToImageInfoEXT(VkCopyMemoryToImageInfoEXT const *s1,
 }
 #endif
 
-#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
-bool compare_VkCopyImageToMemoryInfoEXT(VkCopyImageToMemoryInfoEXT const *s1,
-                                        VkCopyImageToMemoryInfoEXT const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_host_image_copy)
+bool compare_VkCopyMemoryToImageInfoEXT(VkCopyMemoryToImageInfoEXT const *s1,
+                                        VkCopyMemoryToImageInfoEXT const *s2) {
+  return compare_VkCopyMemoryToImageInfo((VkCopyMemoryToImageInfo const *)s1,
+                                         (VkCopyMemoryToImageInfo const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkCopyImageToMemoryInfo(VkCopyImageToMemoryInfo const *s1,
+                                     VkCopyImageToMemoryInfo const *s2) {
   if ((s1->flags != s2->flags) || (s1->srcImage != s2->srcImage) ||
       (s1->srcImageLayout != s2->srcImageLayout) || (s1->regionCount != s2->regionCount) || false)
     return false;
@@ -19401,9 +20304,17 @@ bool compare_VkCopyImageToMemoryInfoEXT(VkCopyImageToMemoryInfoEXT const *s1,
 }
 #endif
 
-#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
-bool compare_VkCopyImageToImageInfoEXT(VkCopyImageToImageInfoEXT const *s1,
-                                       VkCopyImageToImageInfoEXT const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_host_image_copy)
+bool compare_VkCopyImageToMemoryInfoEXT(VkCopyImageToMemoryInfoEXT const *s1,
+                                        VkCopyImageToMemoryInfoEXT const *s2) {
+  return compare_VkCopyImageToMemoryInfo((VkCopyImageToMemoryInfo const *)s1,
+                                         (VkCopyImageToMemoryInfo const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkCopyImageToImageInfo(VkCopyImageToImageInfo const *s1,
+                                    VkCopyImageToImageInfo const *s2) {
   if ((s1->flags != s2->flags) || (s1->srcImage != s2->srcImage) ||
       (s1->srcImageLayout != s2->srcImageLayout) || (s1->dstImage != s2->dstImage) ||
       (s1->dstImageLayout != s2->dstImageLayout) || (s1->regionCount != s2->regionCount) || false)
@@ -19413,9 +20324,17 @@ bool compare_VkCopyImageToImageInfoEXT(VkCopyImageToImageInfoEXT const *s1,
 }
 #endif
 
-#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
-bool compare_VkHostImageLayoutTransitionInfoEXT(VkHostImageLayoutTransitionInfoEXT const *s1,
-                                                VkHostImageLayoutTransitionInfoEXT const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_host_image_copy)
+bool compare_VkCopyImageToImageInfoEXT(VkCopyImageToImageInfoEXT const *s1,
+                                       VkCopyImageToImageInfoEXT const *s2) {
+  return compare_VkCopyImageToImageInfo((VkCopyImageToImageInfo const *)s1,
+                                        (VkCopyImageToImageInfo const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkHostImageLayoutTransitionInfo(VkHostImageLayoutTransitionInfo const *s1,
+                                             VkHostImageLayoutTransitionInfo const *s2) {
   if ((s1->image != s2->image) || (s1->oldLayout != s2->oldLayout) ||
       (s1->newLayout != s2->newLayout) ||
       !compare_VkImageSubresourceRange(&s1->subresourceRange, &s2->subresourceRange) || false)
@@ -19425,9 +20344,17 @@ bool compare_VkHostImageLayoutTransitionInfoEXT(VkHostImageLayoutTransitionInfoE
 }
 #endif
 
-#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
-bool compare_VkSubresourceHostMemcpySizeEXT(VkSubresourceHostMemcpySizeEXT const *s1,
-                                            VkSubresourceHostMemcpySizeEXT const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_host_image_copy)
+bool compare_VkHostImageLayoutTransitionInfoEXT(VkHostImageLayoutTransitionInfoEXT const *s1,
+                                                VkHostImageLayoutTransitionInfoEXT const *s2) {
+  return compare_VkHostImageLayoutTransitionInfo((VkHostImageLayoutTransitionInfo const *)s1,
+                                                 (VkHostImageLayoutTransitionInfo const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkSubresourceHostMemcpySize(VkSubresourceHostMemcpySize const *s1,
+                                         VkSubresourceHostMemcpySize const *s2) {
   if ((s1->size != s2->size) || false)
     return false;
 
@@ -19435,15 +20362,33 @@ bool compare_VkSubresourceHostMemcpySizeEXT(VkSubresourceHostMemcpySizeEXT const
 }
 #endif
 
-#if VK_HEADER_VERSION >= 258 && (VK_EXT_host_image_copy)
-bool compare_VkHostImageCopyDevicePerformanceQueryEXT(
-    VkHostImageCopyDevicePerformanceQueryEXT const *s1,
-    VkHostImageCopyDevicePerformanceQueryEXT const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_host_image_copy)
+bool compare_VkSubresourceHostMemcpySizeEXT(VkSubresourceHostMemcpySizeEXT const *s1,
+                                            VkSubresourceHostMemcpySizeEXT const *s2) {
+  return compare_VkSubresourceHostMemcpySize((VkSubresourceHostMemcpySize const *)s1,
+                                             (VkSubresourceHostMemcpySize const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkHostImageCopyDevicePerformanceQuery(
+    VkHostImageCopyDevicePerformanceQuery const *s1,
+    VkHostImageCopyDevicePerformanceQuery const *s2) {
   if ((s1->optimalDeviceAccess != s2->optimalDeviceAccess) ||
       (s1->identicalMemoryLayout != s2->identicalMemoryLayout) || false)
     return false;
 
   return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_host_image_copy)
+bool compare_VkHostImageCopyDevicePerformanceQueryEXT(
+    VkHostImageCopyDevicePerformanceQueryEXT const *s1,
+    VkHostImageCopyDevicePerformanceQueryEXT const *s2) {
+  return compare_VkHostImageCopyDevicePerformanceQuery(
+      (VkHostImageCopyDevicePerformanceQuery const *)s1,
+      (VkHostImageCopyDevicePerformanceQuery const *)s2);
 }
 #endif
 
@@ -19631,14 +20576,24 @@ bool compare_VkMultisampledRenderToSingleSampledInfoEXT(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 230 && (VK_EXT_pipeline_protected_access)
-bool compare_VkPhysicalDevicePipelineProtectedAccessFeaturesEXT(
-    VkPhysicalDevicePipelineProtectedAccessFeaturesEXT const *s1,
-    VkPhysicalDevicePipelineProtectedAccessFeaturesEXT const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDevicePipelineProtectedAccessFeatures(
+    VkPhysicalDevicePipelineProtectedAccessFeatures const *s1,
+    VkPhysicalDevicePipelineProtectedAccessFeatures const *s2) {
   if ((s1->pipelineProtectedAccess != s2->pipelineProtectedAccess) || false)
     return false;
 
   return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_pipeline_protected_access)
+bool compare_VkPhysicalDevicePipelineProtectedAccessFeaturesEXT(
+    VkPhysicalDevicePipelineProtectedAccessFeaturesEXT const *s1,
+    VkPhysicalDevicePipelineProtectedAccessFeaturesEXT const *s2) {
+  return compare_VkPhysicalDevicePipelineProtectedAccessFeatures(
+      (VkPhysicalDevicePipelineProtectedAccessFeatures const *)s1,
+      (VkPhysicalDevicePipelineProtectedAccessFeatures const *)s2);
 }
 #endif
 
@@ -22090,9 +23045,8 @@ bool compare_VkPhysicalDeviceImageCompressionControlSwapchainFeaturesEXT(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
-bool compare_VkImageSubresource2KHR(VkImageSubresource2KHR const *s1,
-                                    VkImageSubresource2KHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkImageSubresource2(VkImageSubresource2 const *s1, VkImageSubresource2 const *s2) {
   if (!compare_VkImageSubresource(&s1->imageSubresource, &s2->imageSubresource) || false)
     return false;
 
@@ -22100,17 +23054,24 @@ bool compare_VkImageSubresource2KHR(VkImageSubresource2KHR const *s1,
 }
 #endif
 
-#if VK_HEADER_VERSION >= 260 && ((VK_EXT_host_image_copy) || (VK_EXT_image_compression_control))
-bool compare_VkImageSubresource2EXT(VkImageSubresource2EXT const *s1,
-                                    VkImageSubresource2EXT const *s2) {
-  return compare_VkImageSubresource2KHR((VkImageSubresource2KHR const *)s1,
-                                        (VkImageSubresource2KHR const *)s2);
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_maintenance5)
+bool compare_VkImageSubresource2KHR(VkImageSubresource2KHR const *s1,
+                                    VkImageSubresource2KHR const *s2) {
+  return compare_VkImageSubresource2((VkImageSubresource2 const *)s1,
+                                     (VkImageSubresource2 const *)s2);
 }
 #endif
 
-#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
-bool compare_VkSubresourceLayout2KHR(VkSubresourceLayout2KHR const *s1,
-                                     VkSubresourceLayout2KHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && ((VK_EXT_host_image_copy) || (VK_EXT_image_compression_control))
+bool compare_VkImageSubresource2EXT(VkImageSubresource2EXT const *s1,
+                                    VkImageSubresource2EXT const *s2) {
+  return compare_VkImageSubresource2((VkImageSubresource2 const *)s1,
+                                     (VkImageSubresource2 const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkSubresourceLayout2(VkSubresourceLayout2 const *s1, VkSubresourceLayout2 const *s2) {
   if (!compare_VkSubresourceLayout(&s1->subresourceLayout, &s2->subresourceLayout) || false)
     return false;
 
@@ -22118,11 +23079,19 @@ bool compare_VkSubresourceLayout2KHR(VkSubresourceLayout2KHR const *s1,
 }
 #endif
 
-#if VK_HEADER_VERSION >= 260 && ((VK_EXT_host_image_copy) || (VK_EXT_image_compression_control))
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_maintenance5)
+bool compare_VkSubresourceLayout2KHR(VkSubresourceLayout2KHR const *s1,
+                                     VkSubresourceLayout2KHR const *s2) {
+  return compare_VkSubresourceLayout2((VkSubresourceLayout2 const *)s1,
+                                      (VkSubresourceLayout2 const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && ((VK_EXT_host_image_copy) || (VK_EXT_image_compression_control))
 bool compare_VkSubresourceLayout2EXT(VkSubresourceLayout2EXT const *s1,
                                      VkSubresourceLayout2EXT const *s2) {
-  return compare_VkSubresourceLayout2KHR((VkSubresourceLayout2KHR const *)s1,
-                                         (VkSubresourceLayout2KHR const *)s2);
+  return compare_VkSubresourceLayout2((VkSubresourceLayout2 const *)s1,
+                                      (VkSubresourceLayout2 const *)s2);
 }
 #endif
 
@@ -22494,10 +23463,10 @@ bool compare_VkPhysicalDeviceNonSeamlessCubeMapFeaturesEXT(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 221 && (VK_EXT_pipeline_robustness)
-bool compare_VkPhysicalDevicePipelineRobustnessFeaturesEXT(
-    VkPhysicalDevicePipelineRobustnessFeaturesEXT const *s1,
-    VkPhysicalDevicePipelineRobustnessFeaturesEXT const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDevicePipelineRobustnessFeatures(
+    VkPhysicalDevicePipelineRobustnessFeatures const *s1,
+    VkPhysicalDevicePipelineRobustnessFeatures const *s2) {
   if ((s1->pipelineRobustness != s2->pipelineRobustness) || false)
     return false;
 
@@ -22505,9 +23474,19 @@ bool compare_VkPhysicalDevicePipelineRobustnessFeaturesEXT(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 221 && (VK_EXT_pipeline_robustness)
-bool compare_VkPipelineRobustnessCreateInfoEXT(VkPipelineRobustnessCreateInfoEXT const *s1,
-                                               VkPipelineRobustnessCreateInfoEXT const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_pipeline_robustness)
+bool compare_VkPhysicalDevicePipelineRobustnessFeaturesEXT(
+    VkPhysicalDevicePipelineRobustnessFeaturesEXT const *s1,
+    VkPhysicalDevicePipelineRobustnessFeaturesEXT const *s2) {
+  return compare_VkPhysicalDevicePipelineRobustnessFeatures(
+      (VkPhysicalDevicePipelineRobustnessFeatures const *)s1,
+      (VkPhysicalDevicePipelineRobustnessFeatures const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPipelineRobustnessCreateInfo(VkPipelineRobustnessCreateInfo const *s1,
+                                            VkPipelineRobustnessCreateInfo const *s2) {
   if ((s1->storageBuffers != s2->storageBuffers) || (s1->uniformBuffers != s2->uniformBuffers) ||
       (s1->vertexInputs != s2->vertexInputs) || (s1->images != s2->images) || false)
     return false;
@@ -22516,10 +23495,18 @@ bool compare_VkPipelineRobustnessCreateInfoEXT(VkPipelineRobustnessCreateInfoEXT
 }
 #endif
 
-#if VK_HEADER_VERSION >= 221 && (VK_EXT_pipeline_robustness)
-bool compare_VkPhysicalDevicePipelineRobustnessPropertiesEXT(
-    VkPhysicalDevicePipelineRobustnessPropertiesEXT const *s1,
-    VkPhysicalDevicePipelineRobustnessPropertiesEXT const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_pipeline_robustness)
+bool compare_VkPipelineRobustnessCreateInfoEXT(VkPipelineRobustnessCreateInfoEXT const *s1,
+                                               VkPipelineRobustnessCreateInfoEXT const *s2) {
+  return compare_VkPipelineRobustnessCreateInfo((VkPipelineRobustnessCreateInfo const *)s1,
+                                                (VkPipelineRobustnessCreateInfo const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDevicePipelineRobustnessProperties(
+    VkPhysicalDevicePipelineRobustnessProperties const *s1,
+    VkPhysicalDevicePipelineRobustnessProperties const *s2) {
   if ((s1->defaultRobustnessStorageBuffers != s2->defaultRobustnessStorageBuffers) ||
       (s1->defaultRobustnessUniformBuffers != s2->defaultRobustnessUniformBuffers) ||
       (s1->defaultRobustnessVertexInputs != s2->defaultRobustnessVertexInputs) ||
@@ -22527,6 +23514,16 @@ bool compare_VkPhysicalDevicePipelineRobustnessPropertiesEXT(
     return false;
 
   return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_EXT_pipeline_robustness)
+bool compare_VkPhysicalDevicePipelineRobustnessPropertiesEXT(
+    VkPhysicalDevicePipelineRobustnessPropertiesEXT const *s1,
+    VkPhysicalDevicePipelineRobustnessPropertiesEXT const *s2) {
+  return compare_VkPhysicalDevicePipelineRobustnessProperties(
+      (VkPhysicalDevicePipelineRobustnessProperties const *)s1,
+      (VkPhysicalDevicePipelineRobustnessProperties const *)s2);
 }
 #endif
 
@@ -23133,10 +24130,18 @@ bool compare_VkPhysicalDeviceRayTracingPositionFetchFeaturesKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 260 && (VK_KHR_maintenance5)
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkDeviceImageSubresourceInfo(VkDeviceImageSubresourceInfo const *s1,
+                                          VkDeviceImageSubresourceInfo const *s2) {
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_maintenance5)
 bool compare_VkDeviceImageSubresourceInfoKHR(VkDeviceImageSubresourceInfoKHR const *s1,
                                              VkDeviceImageSubresourceInfoKHR const *s2) {
-  return true;
+  return compare_VkDeviceImageSubresourceInfo((VkDeviceImageSubresourceInfo const *)s1,
+                                              (VkDeviceImageSubresourceInfo const *)s2);
 }
 #endif
 
@@ -23181,8 +24186,8 @@ bool compare_VkQueryLowLatencySupportNV(VkQueryLowLatencySupportNV const *s1,
 }
 #endif
 
-#if VK_HEADER_VERSION >= 244 && (VK_KHR_map_memory2)
-bool compare_VkMemoryMapInfoKHR(VkMemoryMapInfoKHR const *s1, VkMemoryMapInfoKHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkMemoryMapInfo(VkMemoryMapInfo const *s1, VkMemoryMapInfo const *s2) {
   if ((s1->flags != s2->flags) || (s1->memory != s2->memory) || (s1->offset != s2->offset) ||
       (s1->size != s2->size) || false)
     return false;
@@ -23191,12 +24196,24 @@ bool compare_VkMemoryMapInfoKHR(VkMemoryMapInfoKHR const *s1, VkMemoryMapInfoKHR
 }
 #endif
 
-#if VK_HEADER_VERSION >= 244 && (VK_KHR_map_memory2)
-bool compare_VkMemoryUnmapInfoKHR(VkMemoryUnmapInfoKHR const *s1, VkMemoryUnmapInfoKHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_map_memory2)
+bool compare_VkMemoryMapInfoKHR(VkMemoryMapInfoKHR const *s1, VkMemoryMapInfoKHR const *s2) {
+  return compare_VkMemoryMapInfo((VkMemoryMapInfo const *)s1, (VkMemoryMapInfo const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkMemoryUnmapInfo(VkMemoryUnmapInfo const *s1, VkMemoryUnmapInfo const *s2) {
   if ((s1->flags != s2->flags) || (s1->memory != s2->memory) || false)
     return false;
 
   return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_map_memory2)
+bool compare_VkMemoryUnmapInfoKHR(VkMemoryUnmapInfoKHR const *s1, VkMemoryUnmapInfoKHR const *s2) {
+  return compare_VkMemoryUnmapInfo((VkMemoryUnmapInfo const *)s1, (VkMemoryUnmapInfo const *)s2);
 }
 #endif
 
@@ -23480,16 +24497,22 @@ bool compare_VkAntiLagPresentationInfoAMD(VkAntiLagPresentationInfoAMD const *s1
 }
 #endif
 
-#if VK_HEADER_VERSION >= 274 && (VK_KHR_maintenance6)
-bool compare_VkBindMemoryStatusKHR(VkBindMemoryStatusKHR const *s1,
-                                   VkBindMemoryStatusKHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkBindMemoryStatus(VkBindMemoryStatus const *s1, VkBindMemoryStatus const *s2) {
   return true;
 }
 #endif
 
-#if VK_HEADER_VERSION >= 274 && (VK_KHR_maintenance6)
-bool compare_VkBindDescriptorSetsInfoKHR(VkBindDescriptorSetsInfoKHR const *s1,
-                                         VkBindDescriptorSetsInfoKHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_maintenance6)
+bool compare_VkBindMemoryStatusKHR(VkBindMemoryStatusKHR const *s1,
+                                   VkBindMemoryStatusKHR const *s2) {
+  return compare_VkBindMemoryStatus((VkBindMemoryStatus const *)s1, (VkBindMemoryStatus const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkBindDescriptorSetsInfo(VkBindDescriptorSetsInfo const *s1,
+                                      VkBindDescriptorSetsInfo const *s2) {
   if ((s1->stageFlags != s2->stageFlags) || (s1->layout != s2->layout) ||
       (s1->firstSet != s2->firstSet) || (s1->descriptorSetCount != s2->descriptorSetCount) ||
       (s1->dynamicOffsetCount != s2->dynamicOffsetCount) || false)
@@ -23499,9 +24522,16 @@ bool compare_VkBindDescriptorSetsInfoKHR(VkBindDescriptorSetsInfoKHR const *s1,
 }
 #endif
 
-#if VK_HEADER_VERSION >= 274 && (VK_KHR_maintenance6)
-bool compare_VkPushConstantsInfoKHR(VkPushConstantsInfoKHR const *s1,
-                                    VkPushConstantsInfoKHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_maintenance6)
+bool compare_VkBindDescriptorSetsInfoKHR(VkBindDescriptorSetsInfoKHR const *s1,
+                                         VkBindDescriptorSetsInfoKHR const *s2) {
+  return compare_VkBindDescriptorSetsInfo((VkBindDescriptorSetsInfo const *)s1,
+                                          (VkBindDescriptorSetsInfo const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPushConstantsInfo(VkPushConstantsInfo const *s1, VkPushConstantsInfo const *s2) {
   if ((s1->layout != s2->layout) || (s1->stageFlags != s2->stageFlags) ||
       (s1->offset != s2->offset) || (s1->size != s2->size) || false)
     return false;
@@ -23510,9 +24540,17 @@ bool compare_VkPushConstantsInfoKHR(VkPushConstantsInfoKHR const *s1,
 }
 #endif
 
-#if VK_HEADER_VERSION >= 274 && (VK_KHR_maintenance6 && VK_KHR_push_descriptor)
-bool compare_VkPushDescriptorSetInfoKHR(VkPushDescriptorSetInfoKHR const *s1,
-                                        VkPushDescriptorSetInfoKHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_maintenance6)
+bool compare_VkPushConstantsInfoKHR(VkPushConstantsInfoKHR const *s1,
+                                    VkPushConstantsInfoKHR const *s2) {
+  return compare_VkPushConstantsInfo((VkPushConstantsInfo const *)s1,
+                                     (VkPushConstantsInfo const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPushDescriptorSetInfo(VkPushDescriptorSetInfo const *s1,
+                                     VkPushDescriptorSetInfo const *s2) {
   if ((s1->stageFlags != s2->stageFlags) || (s1->layout != s2->layout) || (s1->set != s2->set) ||
       (s1->descriptorWriteCount != s2->descriptorWriteCount) || false)
     return false;
@@ -23521,15 +24559,32 @@ bool compare_VkPushDescriptorSetInfoKHR(VkPushDescriptorSetInfoKHR const *s1,
 }
 #endif
 
-#if VK_HEADER_VERSION >= 274 && (VK_KHR_maintenance6 && VK_KHR_push_descriptor && VK_VERSION_1_1)
-bool compare_VkPushDescriptorSetWithTemplateInfoKHR(
-    VkPushDescriptorSetWithTemplateInfoKHR const *s1,
-    VkPushDescriptorSetWithTemplateInfoKHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_maintenance6 && VK_KHR_push_descriptor)
+bool compare_VkPushDescriptorSetInfoKHR(VkPushDescriptorSetInfoKHR const *s1,
+                                        VkPushDescriptorSetInfoKHR const *s2) {
+  return compare_VkPushDescriptorSetInfo((VkPushDescriptorSetInfo const *)s1,
+                                         (VkPushDescriptorSetInfo const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPushDescriptorSetWithTemplateInfo(VkPushDescriptorSetWithTemplateInfo const *s1,
+                                                 VkPushDescriptorSetWithTemplateInfo const *s2) {
   if ((s1->descriptorUpdateTemplate != s2->descriptorUpdateTemplate) ||
       (s1->layout != s2->layout) || (s1->set != s2->set) || false)
     return false;
 
   return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_maintenance6 && VK_KHR_push_descriptor && VK_VERSION_1_1)
+bool compare_VkPushDescriptorSetWithTemplateInfoKHR(
+    VkPushDescriptorSetWithTemplateInfoKHR const *s1,
+    VkPushDescriptorSetWithTemplateInfoKHR const *s2) {
+  return compare_VkPushDescriptorSetWithTemplateInfo(
+      (VkPushDescriptorSetWithTemplateInfo const *)s1,
+      (VkPushDescriptorSetWithTemplateInfo const *)s2);
 }
 #endif
 
@@ -23957,10 +25012,10 @@ bool compare_VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 276 && (VK_KHR_shader_subgroup_rotate)
-bool compare_VkPhysicalDeviceShaderSubgroupRotateFeaturesKHR(
-    VkPhysicalDeviceShaderSubgroupRotateFeaturesKHR const *s1,
-    VkPhysicalDeviceShaderSubgroupRotateFeaturesKHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceShaderSubgroupRotateFeatures(
+    VkPhysicalDeviceShaderSubgroupRotateFeatures const *s1,
+    VkPhysicalDeviceShaderSubgroupRotateFeatures const *s2) {
   if ((s1->shaderSubgroupRotate != s2->shaderSubgroupRotate) ||
       (s1->shaderSubgroupRotateClustered != s2->shaderSubgroupRotateClustered) || false)
     return false;
@@ -23969,10 +25024,20 @@ bool compare_VkPhysicalDeviceShaderSubgroupRotateFeaturesKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 276 && (VK_KHR_shader_expect_assume)
-bool compare_VkPhysicalDeviceShaderExpectAssumeFeaturesKHR(
-    VkPhysicalDeviceShaderExpectAssumeFeaturesKHR const *s1,
-    VkPhysicalDeviceShaderExpectAssumeFeaturesKHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_shader_subgroup_rotate)
+bool compare_VkPhysicalDeviceShaderSubgroupRotateFeaturesKHR(
+    VkPhysicalDeviceShaderSubgroupRotateFeaturesKHR const *s1,
+    VkPhysicalDeviceShaderSubgroupRotateFeaturesKHR const *s2) {
+  return compare_VkPhysicalDeviceShaderSubgroupRotateFeatures(
+      (VkPhysicalDeviceShaderSubgroupRotateFeatures const *)s1,
+      (VkPhysicalDeviceShaderSubgroupRotateFeatures const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceShaderExpectAssumeFeatures(
+    VkPhysicalDeviceShaderExpectAssumeFeatures const *s1,
+    VkPhysicalDeviceShaderExpectAssumeFeatures const *s2) {
   if ((s1->shaderExpectAssume != s2->shaderExpectAssume) || false)
     return false;
 
@@ -23980,10 +25045,20 @@ bool compare_VkPhysicalDeviceShaderExpectAssumeFeaturesKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 276 && (VK_KHR_shader_float_controls2)
-bool compare_VkPhysicalDeviceShaderFloatControls2FeaturesKHR(
-    VkPhysicalDeviceShaderFloatControls2FeaturesKHR const *s1,
-    VkPhysicalDeviceShaderFloatControls2FeaturesKHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_shader_expect_assume)
+bool compare_VkPhysicalDeviceShaderExpectAssumeFeaturesKHR(
+    VkPhysicalDeviceShaderExpectAssumeFeaturesKHR const *s1,
+    VkPhysicalDeviceShaderExpectAssumeFeaturesKHR const *s2) {
+  return compare_VkPhysicalDeviceShaderExpectAssumeFeatures(
+      (VkPhysicalDeviceShaderExpectAssumeFeatures const *)s1,
+      (VkPhysicalDeviceShaderExpectAssumeFeatures const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceShaderFloatControls2Features(
+    VkPhysicalDeviceShaderFloatControls2Features const *s1,
+    VkPhysicalDeviceShaderFloatControls2Features const *s2) {
   if ((s1->shaderFloatControls2 != s2->shaderFloatControls2) || false)
     return false;
 
@@ -23991,10 +25066,20 @@ bool compare_VkPhysicalDeviceShaderFloatControls2FeaturesKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 276 && (VK_KHR_dynamic_rendering_local_read)
-bool compare_VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR(
-    VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR const *s1,
-    VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_shader_float_controls2)
+bool compare_VkPhysicalDeviceShaderFloatControls2FeaturesKHR(
+    VkPhysicalDeviceShaderFloatControls2FeaturesKHR const *s1,
+    VkPhysicalDeviceShaderFloatControls2FeaturesKHR const *s2) {
+  return compare_VkPhysicalDeviceShaderFloatControls2Features(
+      (VkPhysicalDeviceShaderFloatControls2Features const *)s1,
+      (VkPhysicalDeviceShaderFloatControls2Features const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkPhysicalDeviceDynamicRenderingLocalReadFeatures(
+    VkPhysicalDeviceDynamicRenderingLocalReadFeatures const *s1,
+    VkPhysicalDeviceDynamicRenderingLocalReadFeatures const *s2) {
   if ((s1->dynamicRenderingLocalRead != s2->dynamicRenderingLocalRead) || false)
     return false;
 
@@ -24002,9 +25087,19 @@ bool compare_VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 276 && (VK_KHR_dynamic_rendering_local_read)
-bool compare_VkRenderingAttachmentLocationInfoKHR(VkRenderingAttachmentLocationInfoKHR const *s1,
-                                                  VkRenderingAttachmentLocationInfoKHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_dynamic_rendering_local_read)
+bool compare_VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR(
+    VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR const *s1,
+    VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR const *s2) {
+  return compare_VkPhysicalDeviceDynamicRenderingLocalReadFeatures(
+      (VkPhysicalDeviceDynamicRenderingLocalReadFeatures const *)s1,
+      (VkPhysicalDeviceDynamicRenderingLocalReadFeatures const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkRenderingAttachmentLocationInfo(VkRenderingAttachmentLocationInfo const *s1,
+                                               VkRenderingAttachmentLocationInfo const *s2) {
   if ((s1->colorAttachmentCount != s2->colorAttachmentCount) || false)
     return false;
 
@@ -24012,14 +25107,31 @@ bool compare_VkRenderingAttachmentLocationInfoKHR(VkRenderingAttachmentLocationI
 }
 #endif
 
-#if VK_HEADER_VERSION >= 276 && (VK_KHR_dynamic_rendering_local_read)
-bool compare_VkRenderingInputAttachmentIndexInfoKHR(
-    VkRenderingInputAttachmentIndexInfoKHR const *s1,
-    VkRenderingInputAttachmentIndexInfoKHR const *s2) {
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_dynamic_rendering_local_read)
+bool compare_VkRenderingAttachmentLocationInfoKHR(VkRenderingAttachmentLocationInfoKHR const *s1,
+                                                  VkRenderingAttachmentLocationInfoKHR const *s2) {
+  return compare_VkRenderingAttachmentLocationInfo((VkRenderingAttachmentLocationInfo const *)s1,
+                                                   (VkRenderingAttachmentLocationInfo const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
+bool compare_VkRenderingInputAttachmentIndexInfo(VkRenderingInputAttachmentIndexInfo const *s1,
+                                                 VkRenderingInputAttachmentIndexInfo const *s2) {
   if ((s1->colorAttachmentCount != s2->colorAttachmentCount) || false)
     return false;
 
   return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 303 && (VK_KHR_dynamic_rendering_local_read)
+bool compare_VkRenderingInputAttachmentIndexInfoKHR(
+    VkRenderingInputAttachmentIndexInfoKHR const *s1,
+    VkRenderingInputAttachmentIndexInfoKHR const *s2) {
+  return compare_VkRenderingInputAttachmentIndexInfo(
+      (VkRenderingInputAttachmentIndexInfo const *)s1,
+      (VkRenderingInputAttachmentIndexInfo const *)s2);
 }
 #endif
 
@@ -24227,6 +25339,697 @@ bool compare_VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT(
     VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT const *s1,
     VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT const *s2) {
   if ((s1->vertexAttributeRobustness != s2->vertexAttributeRobustness) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 260 && VK_HEADER_VERSION <= 302 && (VK_KHR_maintenance5)
+bool compare_VkBufferUsageFlags2CreateInfoKHR(VkBufferUsageFlags2CreateInfoKHR const *s1,
+                                              VkBufferUsageFlags2CreateInfoKHR const *s2) {
+  if ((s1->usage != s2->usage) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 260 && VK_HEADER_VERSION <= 302 && (VK_KHR_maintenance5)
+bool compare_VkPipelineCreateFlags2CreateInfoKHR(VkPipelineCreateFlags2CreateInfoKHR const *s1,
+                                                 VkPipelineCreateFlags2CreateInfoKHR const *s2) {
+  if ((s1->flags != s2->flags) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION <= 302 && (VK_KHR_push_descriptor)
+bool compare_VkPhysicalDevicePushDescriptorPropertiesKHR(
+    VkPhysicalDevicePushDescriptorPropertiesKHR const *s1,
+    VkPhysicalDevicePushDescriptorPropertiesKHR const *s2) {
+  if ((s1->maxPushDescriptors != s2->maxPushDescriptors) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 260 && VK_HEADER_VERSION <= 302 && (VK_KHR_maintenance5)
+bool compare_VkPhysicalDeviceMaintenance5FeaturesKHR(
+    VkPhysicalDeviceMaintenance5FeaturesKHR const *s1,
+    VkPhysicalDeviceMaintenance5FeaturesKHR const *s2) {
+  if ((s1->maintenance5 != s2->maintenance5) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 260 && VK_HEADER_VERSION <= 302 && (VK_KHR_maintenance5)
+bool compare_VkPhysicalDeviceMaintenance5PropertiesKHR(
+    VkPhysicalDeviceMaintenance5PropertiesKHR const *s1,
+    VkPhysicalDeviceMaintenance5PropertiesKHR const *s2) {
+  if ((s1->earlyFragmentMultisampleCoverageAfterSampleCounting !=
+       s2->earlyFragmentMultisampleCoverageAfterSampleCounting) ||
+      (s1->earlyFragmentSampleMaskTestBeforeSampleCounting !=
+       s2->earlyFragmentSampleMaskTestBeforeSampleCounting) ||
+      (s1->depthStencilSwizzleOneSupport != s2->depthStencilSwizzleOneSupport) ||
+      (s1->polygonModePointSize != s2->polygonModePointSize) ||
+      (s1->nonStrictSinglePixelWideLinesUseParallelogram !=
+       s2->nonStrictSinglePixelWideLinesUseParallelogram) ||
+      (s1->nonStrictWideLinesUseParallelogram != s2->nonStrictWideLinesUseParallelogram) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 274 && VK_HEADER_VERSION <= 302 && (VK_KHR_maintenance6)
+bool compare_VkPhysicalDeviceMaintenance6FeaturesKHR(
+    VkPhysicalDeviceMaintenance6FeaturesKHR const *s1,
+    VkPhysicalDeviceMaintenance6FeaturesKHR const *s2) {
+  if ((s1->maintenance6 != s2->maintenance6) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 274 && VK_HEADER_VERSION <= 302 && (VK_KHR_maintenance6)
+bool compare_VkPhysicalDeviceMaintenance6PropertiesKHR(
+    VkPhysicalDeviceMaintenance6PropertiesKHR const *s1,
+    VkPhysicalDeviceMaintenance6PropertiesKHR const *s2) {
+  if ((s1->blockTexelViewCompatibleMultipleLayers != s2->blockTexelViewCompatibleMultipleLayers) ||
+      (s1->maxCombinedImageSamplerDescriptorCount != s2->maxCombinedImageSamplerDescriptorCount) ||
+      (s1->fragmentShadingRateClampCombinerInputs != s2->fragmentShadingRateClampCombinerInputs) ||
+      false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 260 && VK_HEADER_VERSION <= 302 && (VK_KHR_maintenance5)
+bool compare_VkRenderingAreaInfoKHR(VkRenderingAreaInfoKHR const *s1,
+                                    VkRenderingAreaInfoKHR const *s2) {
+  if ((s1->viewMask != s2->viewMask) || (s1->colorAttachmentCount != s2->colorAttachmentCount) ||
+      (s1->depthAttachmentFormat != s2->depthAttachmentFormat) ||
+      (s1->stencilAttachmentFormat != s2->stencilAttachmentFormat) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 204 && VK_HEADER_VERSION <= 302 && (VK_KHR_global_priority)
+bool compare_VkDeviceQueueGlobalPriorityCreateInfoKHR(
+    VkDeviceQueueGlobalPriorityCreateInfoKHR const *s1,
+    VkDeviceQueueGlobalPriorityCreateInfoKHR const *s2) {
+  if ((s1->globalPriority != s2->globalPriority) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 204 && VK_HEADER_VERSION <= 302 && (VK_EXT_global_priority)
+bool compare_VkDeviceQueueGlobalPriorityCreateInfoEXT(
+    VkDeviceQueueGlobalPriorityCreateInfoEXT const *s1,
+    VkDeviceQueueGlobalPriorityCreateInfoEXT const *s2) {
+  return compare_VkDeviceQueueGlobalPriorityCreateInfoKHR(
+      (VkDeviceQueueGlobalPriorityCreateInfoKHR const *)s1,
+      (VkDeviceQueueGlobalPriorityCreateInfoKHR const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 204 && VK_HEADER_VERSION <= 302 && (VK_KHR_global_priority)
+bool compare_VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR(
+    VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR const *s1,
+    VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR const *s2) {
+  if ((s1->globalPriorityQuery != s2->globalPriorityQuery) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 204 && VK_HEADER_VERSION <= 302 && (VK_EXT_global_priority_query)
+bool compare_VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT(
+    VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT const *s1,
+    VkPhysicalDeviceGlobalPriorityQueryFeaturesEXT const *s2) {
+  return compare_VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR(
+      (VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR const *)s1,
+      (VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 204 && VK_HEADER_VERSION <= 302 && (VK_KHR_global_priority)
+bool compare_VkQueueFamilyGlobalPriorityPropertiesKHR(
+    VkQueueFamilyGlobalPriorityPropertiesKHR const *s1,
+    VkQueueFamilyGlobalPriorityPropertiesKHR const *s2) {
+  if ((s1->priorityCount != s2->priorityCount) || false)
+    return false;
+
+  for (uint32_t i = 0; i < VK_MAX_GLOBAL_PRIORITY_SIZE_KHR; ++i) {
+    if (s1->priorities[i] != s2->priorities[i])
+      return false;
+  }
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 204 && VK_HEADER_VERSION <= 302 && (VK_EXT_global_priority_query)
+bool compare_VkQueueFamilyGlobalPriorityPropertiesEXT(
+    VkQueueFamilyGlobalPriorityPropertiesEXT const *s1,
+    VkQueueFamilyGlobalPriorityPropertiesEXT const *s2) {
+  return compare_VkQueueFamilyGlobalPriorityPropertiesKHR(
+      (VkQueueFamilyGlobalPriorityPropertiesKHR const *)s1,
+      (VkQueueFamilyGlobalPriorityPropertiesKHR const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 273 && VK_HEADER_VERSION <= 302 && (VK_KHR_vertex_attribute_divisor)
+bool compare_VkVertexInputBindingDivisorDescriptionKHR(
+    VkVertexInputBindingDivisorDescriptionKHR const *s1,
+    VkVertexInputBindingDivisorDescriptionKHR const *s2) {
+  if ((s1->binding != s2->binding) || (s1->divisor != s2->divisor) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 273 && VK_HEADER_VERSION <= 302 && (VK_EXT_vertex_attribute_divisor)
+bool compare_VkVertexInputBindingDivisorDescriptionEXT(
+    VkVertexInputBindingDivisorDescriptionEXT const *s1,
+    VkVertexInputBindingDivisorDescriptionEXT const *s2) {
+  return compare_VkVertexInputBindingDivisorDescriptionKHR(
+      (VkVertexInputBindingDivisorDescriptionKHR const *)s1,
+      (VkVertexInputBindingDivisorDescriptionKHR const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 273 && VK_HEADER_VERSION <= 302 && (VK_KHR_vertex_attribute_divisor)
+bool compare_VkPipelineVertexInputDivisorStateCreateInfoKHR(
+    VkPipelineVertexInputDivisorStateCreateInfoKHR const *s1,
+    VkPipelineVertexInputDivisorStateCreateInfoKHR const *s2) {
+  if ((s1->vertexBindingDivisorCount != s2->vertexBindingDivisorCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 273 && VK_HEADER_VERSION <= 302 && (VK_EXT_vertex_attribute_divisor)
+bool compare_VkPipelineVertexInputDivisorStateCreateInfoEXT(
+    VkPipelineVertexInputDivisorStateCreateInfoEXT const *s1,
+    VkPipelineVertexInputDivisorStateCreateInfoEXT const *s2) {
+  return compare_VkPipelineVertexInputDivisorStateCreateInfoKHR(
+      (VkPipelineVertexInputDivisorStateCreateInfoKHR const *)s1,
+      (VkPipelineVertexInputDivisorStateCreateInfoKHR const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 273 && VK_HEADER_VERSION <= 302 && (VK_KHR_vertex_attribute_divisor)
+bool compare_VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR(
+    VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR const *s1,
+    VkPhysicalDeviceVertexAttributeDivisorPropertiesKHR const *s2) {
+  if ((s1->maxVertexAttribDivisor != s2->maxVertexAttribDivisor) ||
+      (s1->supportsNonZeroFirstInstance != s2->supportsNonZeroFirstInstance) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 273 && VK_HEADER_VERSION <= 302 && (VK_KHR_vertex_attribute_divisor)
+bool compare_VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR(
+    VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR const *s1,
+    VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR const *s2) {
+  if ((s1->vertexAttributeInstanceRateDivisor != s2->vertexAttributeInstanceRateDivisor) ||
+      (s1->vertexAttributeInstanceRateZeroDivisor != s2->vertexAttributeInstanceRateZeroDivisor) ||
+      false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 273 && VK_HEADER_VERSION <= 302 && (VK_EXT_vertex_attribute_divisor)
+bool compare_VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT(
+    VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const *s1,
+    VkPhysicalDeviceVertexAttributeDivisorFeaturesEXT const *s2) {
+  return compare_VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR(
+      (VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR const *)s1,
+      (VkPhysicalDeviceVertexAttributeDivisorFeaturesKHR const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 276 && VK_HEADER_VERSION <= 302 && (VK_KHR_index_type_uint8)
+bool compare_VkPhysicalDeviceIndexTypeUint8FeaturesKHR(
+    VkPhysicalDeviceIndexTypeUint8FeaturesKHR const *s1,
+    VkPhysicalDeviceIndexTypeUint8FeaturesKHR const *s2) {
+  if ((s1->indexTypeUint8 != s2->indexTypeUint8) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 276 && VK_HEADER_VERSION <= 302 && (VK_EXT_index_type_uint8)
+bool compare_VkPhysicalDeviceIndexTypeUint8FeaturesEXT(
+    VkPhysicalDeviceIndexTypeUint8FeaturesEXT const *s1,
+    VkPhysicalDeviceIndexTypeUint8FeaturesEXT const *s2) {
+  return compare_VkPhysicalDeviceIndexTypeUint8FeaturesKHR(
+      (VkPhysicalDeviceIndexTypeUint8FeaturesKHR const *)s1,
+      (VkPhysicalDeviceIndexTypeUint8FeaturesKHR const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 276 && VK_HEADER_VERSION <= 302 && (VK_KHR_line_rasterization)
+bool compare_VkPhysicalDeviceLineRasterizationFeaturesKHR(
+    VkPhysicalDeviceLineRasterizationFeaturesKHR const *s1,
+    VkPhysicalDeviceLineRasterizationFeaturesKHR const *s2) {
+  if ((s1->rectangularLines != s2->rectangularLines) ||
+      (s1->bresenhamLines != s2->bresenhamLines) || (s1->smoothLines != s2->smoothLines) ||
+      (s1->stippledRectangularLines != s2->stippledRectangularLines) ||
+      (s1->stippledBresenhamLines != s2->stippledBresenhamLines) ||
+      (s1->stippledSmoothLines != s2->stippledSmoothLines) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 276 && VK_HEADER_VERSION <= 302 && (VK_EXT_line_rasterization)
+bool compare_VkPhysicalDeviceLineRasterizationFeaturesEXT(
+    VkPhysicalDeviceLineRasterizationFeaturesEXT const *s1,
+    VkPhysicalDeviceLineRasterizationFeaturesEXT const *s2) {
+  return compare_VkPhysicalDeviceLineRasterizationFeaturesKHR(
+      (VkPhysicalDeviceLineRasterizationFeaturesKHR const *)s1,
+      (VkPhysicalDeviceLineRasterizationFeaturesKHR const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 276 && VK_HEADER_VERSION <= 302 && (VK_KHR_line_rasterization)
+bool compare_VkPhysicalDeviceLineRasterizationPropertiesKHR(
+    VkPhysicalDeviceLineRasterizationPropertiesKHR const *s1,
+    VkPhysicalDeviceLineRasterizationPropertiesKHR const *s2) {
+  if ((s1->lineSubPixelPrecisionBits != s2->lineSubPixelPrecisionBits) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 276 && VK_HEADER_VERSION <= 302 && (VK_EXT_line_rasterization)
+bool compare_VkPhysicalDeviceLineRasterizationPropertiesEXT(
+    VkPhysicalDeviceLineRasterizationPropertiesEXT const *s1,
+    VkPhysicalDeviceLineRasterizationPropertiesEXT const *s2) {
+  return compare_VkPhysicalDeviceLineRasterizationPropertiesKHR(
+      (VkPhysicalDeviceLineRasterizationPropertiesKHR const *)s1,
+      (VkPhysicalDeviceLineRasterizationPropertiesKHR const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 276 && VK_HEADER_VERSION <= 302 && (VK_KHR_line_rasterization)
+bool compare_VkPipelineRasterizationLineStateCreateInfoKHR(
+    VkPipelineRasterizationLineStateCreateInfoKHR const *s1,
+    VkPipelineRasterizationLineStateCreateInfoKHR const *s2) {
+  if ((s1->lineRasterizationMode != s2->lineRasterizationMode) ||
+      (s1->stippledLineEnable != s2->stippledLineEnable) ||
+      (s1->lineStippleFactor != s2->lineStippleFactor) ||
+      (s1->lineStipplePattern != s2->lineStipplePattern) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 276 && VK_HEADER_VERSION <= 302 && (VK_EXT_line_rasterization)
+bool compare_VkPipelineRasterizationLineStateCreateInfoEXT(
+    VkPipelineRasterizationLineStateCreateInfoEXT const *s1,
+    VkPipelineRasterizationLineStateCreateInfoEXT const *s2) {
+  return compare_VkPipelineRasterizationLineStateCreateInfoKHR(
+      (VkPipelineRasterizationLineStateCreateInfoKHR const *)s1,
+      (VkPipelineRasterizationLineStateCreateInfoKHR const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 258 && VK_HEADER_VERSION <= 302 && (VK_EXT_host_image_copy)
+bool compare_VkPhysicalDeviceHostImageCopyFeaturesEXT(
+    VkPhysicalDeviceHostImageCopyFeaturesEXT const *s1,
+    VkPhysicalDeviceHostImageCopyFeaturesEXT const *s2) {
+  if ((s1->hostImageCopy != s2->hostImageCopy) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 258 && VK_HEADER_VERSION <= 302 && (VK_EXT_host_image_copy)
+bool compare_VkPhysicalDeviceHostImageCopyPropertiesEXT(
+    VkPhysicalDeviceHostImageCopyPropertiesEXT const *s1,
+    VkPhysicalDeviceHostImageCopyPropertiesEXT const *s2) {
+  if ((s1->copySrcLayoutCount != s2->copySrcLayoutCount) ||
+      (s1->copyDstLayoutCount != s2->copyDstLayoutCount) ||
+      (s1->identicalMemoryTypeRequirements != s2->identicalMemoryTypeRequirements) || false)
+    return false;
+
+  for (uint32_t i = 0; i < VK_UUID_SIZE; ++i) {
+    if (s1->optimalTilingLayoutUUID[i] != s2->optimalTilingLayoutUUID[i])
+      return false;
+  }
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 258 && VK_HEADER_VERSION <= 302 && (VK_EXT_host_image_copy)
+bool compare_VkMemoryToImageCopyEXT(VkMemoryToImageCopyEXT const *s1,
+                                    VkMemoryToImageCopyEXT const *s2) {
+  if ((s1->memoryRowLength != s2->memoryRowLength) ||
+      (s1->memoryImageHeight != s2->memoryImageHeight) ||
+      !compare_VkImageSubresourceLayers(&s1->imageSubresource, &s2->imageSubresource) ||
+      !compare_VkOffset3D(&s1->imageOffset, &s2->imageOffset) ||
+      !compare_VkExtent3D(&s1->imageExtent, &s2->imageExtent) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 258 && VK_HEADER_VERSION <= 302 && (VK_EXT_host_image_copy)
+bool compare_VkImageToMemoryCopyEXT(VkImageToMemoryCopyEXT const *s1,
+                                    VkImageToMemoryCopyEXT const *s2) {
+  if ((s1->memoryRowLength != s2->memoryRowLength) ||
+      (s1->memoryImageHeight != s2->memoryImageHeight) ||
+      !compare_VkImageSubresourceLayers(&s1->imageSubresource, &s2->imageSubresource) ||
+      !compare_VkOffset3D(&s1->imageOffset, &s2->imageOffset) ||
+      !compare_VkExtent3D(&s1->imageExtent, &s2->imageExtent) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 258 && VK_HEADER_VERSION <= 302 && (VK_EXT_host_image_copy)
+bool compare_VkCopyMemoryToImageInfoEXT(VkCopyMemoryToImageInfoEXT const *s1,
+                                        VkCopyMemoryToImageInfoEXT const *s2) {
+  if ((s1->flags != s2->flags) || (s1->dstImage != s2->dstImage) ||
+      (s1->dstImageLayout != s2->dstImageLayout) || (s1->regionCount != s2->regionCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 258 && VK_HEADER_VERSION <= 302 && (VK_EXT_host_image_copy)
+bool compare_VkCopyImageToMemoryInfoEXT(VkCopyImageToMemoryInfoEXT const *s1,
+                                        VkCopyImageToMemoryInfoEXT const *s2) {
+  if ((s1->flags != s2->flags) || (s1->srcImage != s2->srcImage) ||
+      (s1->srcImageLayout != s2->srcImageLayout) || (s1->regionCount != s2->regionCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 258 && VK_HEADER_VERSION <= 302 && (VK_EXT_host_image_copy)
+bool compare_VkCopyImageToImageInfoEXT(VkCopyImageToImageInfoEXT const *s1,
+                                       VkCopyImageToImageInfoEXT const *s2) {
+  if ((s1->flags != s2->flags) || (s1->srcImage != s2->srcImage) ||
+      (s1->srcImageLayout != s2->srcImageLayout) || (s1->dstImage != s2->dstImage) ||
+      (s1->dstImageLayout != s2->dstImageLayout) || (s1->regionCount != s2->regionCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 258 && VK_HEADER_VERSION <= 302 && (VK_EXT_host_image_copy)
+bool compare_VkHostImageLayoutTransitionInfoEXT(VkHostImageLayoutTransitionInfoEXT const *s1,
+                                                VkHostImageLayoutTransitionInfoEXT const *s2) {
+  if ((s1->image != s2->image) || (s1->oldLayout != s2->oldLayout) ||
+      (s1->newLayout != s2->newLayout) ||
+      !compare_VkImageSubresourceRange(&s1->subresourceRange, &s2->subresourceRange) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 258 && VK_HEADER_VERSION <= 302 && (VK_EXT_host_image_copy)
+bool compare_VkSubresourceHostMemcpySizeEXT(VkSubresourceHostMemcpySizeEXT const *s1,
+                                            VkSubresourceHostMemcpySizeEXT const *s2) {
+  if ((s1->size != s2->size) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 258 && VK_HEADER_VERSION <= 302 && (VK_EXT_host_image_copy)
+bool compare_VkHostImageCopyDevicePerformanceQueryEXT(
+    VkHostImageCopyDevicePerformanceQueryEXT const *s1,
+    VkHostImageCopyDevicePerformanceQueryEXT const *s2) {
+  if ((s1->optimalDeviceAccess != s2->optimalDeviceAccess) ||
+      (s1->identicalMemoryLayout != s2->identicalMemoryLayout) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_HEADER_VERSION <= 302 && (VK_EXT_pipeline_protected_access)
+bool compare_VkPhysicalDevicePipelineProtectedAccessFeaturesEXT(
+    VkPhysicalDevicePipelineProtectedAccessFeaturesEXT const *s1,
+    VkPhysicalDevicePipelineProtectedAccessFeaturesEXT const *s2) {
+  if ((s1->pipelineProtectedAccess != s2->pipelineProtectedAccess) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 260 && VK_HEADER_VERSION <= 302 && (VK_KHR_maintenance5)
+bool compare_VkImageSubresource2KHR(VkImageSubresource2KHR const *s1,
+                                    VkImageSubresource2KHR const *s2) {
+  if (!compare_VkImageSubresource(&s1->imageSubresource, &s2->imageSubresource) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 260 && VK_HEADER_VERSION <= 302 &&                                        \
+    ((VK_EXT_host_image_copy) || (VK_EXT_image_compression_control))
+bool compare_VkImageSubresource2EXT(VkImageSubresource2EXT const *s1,
+                                    VkImageSubresource2EXT const *s2) {
+  return compare_VkImageSubresource2KHR((VkImageSubresource2KHR const *)s1,
+                                        (VkImageSubresource2KHR const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 260 && VK_HEADER_VERSION <= 302 && (VK_KHR_maintenance5)
+bool compare_VkSubresourceLayout2KHR(VkSubresourceLayout2KHR const *s1,
+                                     VkSubresourceLayout2KHR const *s2) {
+  if (!compare_VkSubresourceLayout(&s1->subresourceLayout, &s2->subresourceLayout) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 260 && VK_HEADER_VERSION <= 302 &&                                        \
+    ((VK_EXT_host_image_copy) || (VK_EXT_image_compression_control))
+bool compare_VkSubresourceLayout2EXT(VkSubresourceLayout2EXT const *s1,
+                                     VkSubresourceLayout2EXT const *s2) {
+  return compare_VkSubresourceLayout2KHR((VkSubresourceLayout2KHR const *)s1,
+                                         (VkSubresourceLayout2KHR const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 221 && VK_HEADER_VERSION <= 302 && (VK_EXT_pipeline_robustness)
+bool compare_VkPhysicalDevicePipelineRobustnessFeaturesEXT(
+    VkPhysicalDevicePipelineRobustnessFeaturesEXT const *s1,
+    VkPhysicalDevicePipelineRobustnessFeaturesEXT const *s2) {
+  if ((s1->pipelineRobustness != s2->pipelineRobustness) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 221 && VK_HEADER_VERSION <= 302 && (VK_EXT_pipeline_robustness)
+bool compare_VkPipelineRobustnessCreateInfoEXT(VkPipelineRobustnessCreateInfoEXT const *s1,
+                                               VkPipelineRobustnessCreateInfoEXT const *s2) {
+  if ((s1->storageBuffers != s2->storageBuffers) || (s1->uniformBuffers != s2->uniformBuffers) ||
+      (s1->vertexInputs != s2->vertexInputs) || (s1->images != s2->images) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 221 && VK_HEADER_VERSION <= 302 && (VK_EXT_pipeline_robustness)
+bool compare_VkPhysicalDevicePipelineRobustnessPropertiesEXT(
+    VkPhysicalDevicePipelineRobustnessPropertiesEXT const *s1,
+    VkPhysicalDevicePipelineRobustnessPropertiesEXT const *s2) {
+  if ((s1->defaultRobustnessStorageBuffers != s2->defaultRobustnessStorageBuffers) ||
+      (s1->defaultRobustnessUniformBuffers != s2->defaultRobustnessUniformBuffers) ||
+      (s1->defaultRobustnessVertexInputs != s2->defaultRobustnessVertexInputs) ||
+      (s1->defaultRobustnessImages != s2->defaultRobustnessImages) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 260 && VK_HEADER_VERSION <= 302 && (VK_KHR_maintenance5)
+bool compare_VkDeviceImageSubresourceInfoKHR(VkDeviceImageSubresourceInfoKHR const *s1,
+                                             VkDeviceImageSubresourceInfoKHR const *s2) {
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 244 && VK_HEADER_VERSION <= 302 && (VK_KHR_map_memory2)
+bool compare_VkMemoryMapInfoKHR(VkMemoryMapInfoKHR const *s1, VkMemoryMapInfoKHR const *s2) {
+  if ((s1->flags != s2->flags) || (s1->memory != s2->memory) || (s1->offset != s2->offset) ||
+      (s1->size != s2->size) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 244 && VK_HEADER_VERSION <= 302 && (VK_KHR_map_memory2)
+bool compare_VkMemoryUnmapInfoKHR(VkMemoryUnmapInfoKHR const *s1, VkMemoryUnmapInfoKHR const *s2) {
+  if ((s1->flags != s2->flags) || (s1->memory != s2->memory) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 274 && VK_HEADER_VERSION <= 302 && (VK_KHR_maintenance6)
+bool compare_VkBindMemoryStatusKHR(VkBindMemoryStatusKHR const *s1,
+                                   VkBindMemoryStatusKHR const *s2) {
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 274 && VK_HEADER_VERSION <= 302 && (VK_KHR_maintenance6)
+bool compare_VkBindDescriptorSetsInfoKHR(VkBindDescriptorSetsInfoKHR const *s1,
+                                         VkBindDescriptorSetsInfoKHR const *s2) {
+  if ((s1->stageFlags != s2->stageFlags) || (s1->layout != s2->layout) ||
+      (s1->firstSet != s2->firstSet) || (s1->descriptorSetCount != s2->descriptorSetCount) ||
+      (s1->dynamicOffsetCount != s2->dynamicOffsetCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 274 && VK_HEADER_VERSION <= 302 && (VK_KHR_maintenance6)
+bool compare_VkPushConstantsInfoKHR(VkPushConstantsInfoKHR const *s1,
+                                    VkPushConstantsInfoKHR const *s2) {
+  if ((s1->layout != s2->layout) || (s1->stageFlags != s2->stageFlags) ||
+      (s1->offset != s2->offset) || (s1->size != s2->size) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 274 && VK_HEADER_VERSION <= 302 &&                                        \
+    (VK_KHR_maintenance6 && VK_KHR_push_descriptor)
+bool compare_VkPushDescriptorSetInfoKHR(VkPushDescriptorSetInfoKHR const *s1,
+                                        VkPushDescriptorSetInfoKHR const *s2) {
+  if ((s1->stageFlags != s2->stageFlags) || (s1->layout != s2->layout) || (s1->set != s2->set) ||
+      (s1->descriptorWriteCount != s2->descriptorWriteCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 274 && VK_HEADER_VERSION <= 302 &&                                        \
+    (VK_KHR_maintenance6 && VK_KHR_push_descriptor && VK_VERSION_1_1)
+bool compare_VkPushDescriptorSetWithTemplateInfoKHR(
+    VkPushDescriptorSetWithTemplateInfoKHR const *s1,
+    VkPushDescriptorSetWithTemplateInfoKHR const *s2) {
+  if ((s1->descriptorUpdateTemplate != s2->descriptorUpdateTemplate) ||
+      (s1->layout != s2->layout) || (s1->set != s2->set) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 276 && VK_HEADER_VERSION <= 302 && (VK_KHR_shader_subgroup_rotate)
+bool compare_VkPhysicalDeviceShaderSubgroupRotateFeaturesKHR(
+    VkPhysicalDeviceShaderSubgroupRotateFeaturesKHR const *s1,
+    VkPhysicalDeviceShaderSubgroupRotateFeaturesKHR const *s2) {
+  if ((s1->shaderSubgroupRotate != s2->shaderSubgroupRotate) ||
+      (s1->shaderSubgroupRotateClustered != s2->shaderSubgroupRotateClustered) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 276 && VK_HEADER_VERSION <= 302 && (VK_KHR_shader_expect_assume)
+bool compare_VkPhysicalDeviceShaderExpectAssumeFeaturesKHR(
+    VkPhysicalDeviceShaderExpectAssumeFeaturesKHR const *s1,
+    VkPhysicalDeviceShaderExpectAssumeFeaturesKHR const *s2) {
+  if ((s1->shaderExpectAssume != s2->shaderExpectAssume) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 276 && VK_HEADER_VERSION <= 302 && (VK_KHR_shader_float_controls2)
+bool compare_VkPhysicalDeviceShaderFloatControls2FeaturesKHR(
+    VkPhysicalDeviceShaderFloatControls2FeaturesKHR const *s1,
+    VkPhysicalDeviceShaderFloatControls2FeaturesKHR const *s2) {
+  if ((s1->shaderFloatControls2 != s2->shaderFloatControls2) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 276 && VK_HEADER_VERSION <= 302 && (VK_KHR_dynamic_rendering_local_read)
+bool compare_VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR(
+    VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR const *s1,
+    VkPhysicalDeviceDynamicRenderingLocalReadFeaturesKHR const *s2) {
+  if ((s1->dynamicRenderingLocalRead != s2->dynamicRenderingLocalRead) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 276 && VK_HEADER_VERSION <= 302 && (VK_KHR_dynamic_rendering_local_read)
+bool compare_VkRenderingAttachmentLocationInfoKHR(VkRenderingAttachmentLocationInfoKHR const *s1,
+                                                  VkRenderingAttachmentLocationInfoKHR const *s2) {
+  if ((s1->colorAttachmentCount != s2->colorAttachmentCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 276 && VK_HEADER_VERSION <= 302 && (VK_KHR_dynamic_rendering_local_read)
+bool compare_VkRenderingInputAttachmentIndexInfoKHR(
+    VkRenderingInputAttachmentIndexInfoKHR const *s1,
+    VkRenderingInputAttachmentIndexInfoKHR const *s2) {
+  if ((s1->colorAttachmentCount != s2->colorAttachmentCount) || false)
     return false;
 
   return true;

@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2021-2024 George Cave - gcave@stablecoder.ca
+    Copyright (C) 2021-2025 George Cave - gcave@stablecoder.ca
 
     SPDX-License-Identifier: Apache-2.0
 
@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "vulkan header version is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 302,
-              "vulkan header version is from after the maximum supported version of v302.");
+static_assert(VK_HEADER_VERSION <= 303,
+              "vulkan header version is from after the maximum supported version of v303.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "vulkan header version is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 302,
-               "vulkan header version is from after the maximum supported version of v302.");
+_Static_assert(VK_HEADER_VERSION <= 303,
+               "vulkan header version is from after the maximum supported version of v303.");
 #endif
 
 /// Returns a string representing the given VkResult parameter. If there is no known representation,
@@ -55,6 +55,10 @@ char const *VkResult_to_string(VkResult result) {
   // Check in descending order to get the 'latest' version of the error code text available.
   // Also, because codes have been re-used over time, can't use a switch and have to do this large
   // set of ifs. Luckily this *should* be a relatively rare call.
+#if VK_HEADER_VERSION >= 303
+  if (result == VK_ERROR_NOT_PERMITTED)
+    return "VK_ERROR_NOT_PERMITTED";
+#endif
 #if VK_HEADER_VERSION >= 294 && VK_KHR_pipeline_binary
   if (result == VK_PIPELINE_BINARY_MISSING_KHR)
     return "VK_PIPELINE_BINARY_MISSING_KHR";
