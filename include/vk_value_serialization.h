@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 304,
-              "VK_HEADER_VERSION is from after the maximum supported version of v304.");
+static_assert(VK_HEADER_VERSION <= 305,
+              "VK_HEADER_VERSION is from after the maximum supported version of v305.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 304,
-               "VK_HEADER_VERSION is from after the maximum supported version of v304.");
+_Static_assert(VK_HEADER_VERSION <= 305,
+               "VK_HEADER_VERSION is from after the maximum supported version of v305.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -198,6 +198,7 @@ EnumValueSet const VkPipelineLayoutCreateFlagsSets[] = {
 EnumValueSet const VkPipelineCacheCreateFlagsSets[] = {
     {"EXTERNALLY_SYNCHRONIZED_BIT_EXT", 0x00000001, true},
     {"EXTERNALLY_SYNCHRONIZED", 0x00000001, false},
+    {"INTERNALLY_SYNCHRONIZED_MERGE_BIT_KHR", 0x00000008, false},
 };
 
 EnumValueSet const VkPipelineDepthStencilStateCreateFlagsSets[] = {
@@ -737,9 +738,13 @@ EnumValueSet const VkDescriptorPoolCreateFlagsSets[] = {
 };
 
 EnumValueSet const VkDependencyFlagsSets[] = {
-    {"BY_REGION", 0x00000001, false},           {"DEVICE_GROUP", 0x00000004, false},
-    {"VIEW_LOCAL", 0x00000002, false},          {"VIEW_LOCAL_BIT_KHR", 0x00000002, true},
-    {"DEVICE_GROUP_BIT_KHR", 0x00000004, true}, {"FEEDBACK_LOOP_BIT_EXT", 0x00000008, false},
+    {"BY_REGION", 0x00000001, false},
+    {"DEVICE_GROUP", 0x00000004, false},
+    {"VIEW_LOCAL", 0x00000002, false},
+    {"VIEW_LOCAL_BIT_KHR", 0x00000002, true},
+    {"DEVICE_GROUP_BIT_KHR", 0x00000004, true},
+    {"FEEDBACK_LOOP_BIT_EXT", 0x00000008, false},
+    {"QUEUE_FAMILY_OWNERSHIP_TRANSFER_USE_ALL_STAGES_BIT_KHR", 0x00000020, false},
 };
 
 EnumValueSet const VkSubgroupFeatureFlagsSets[] = {
@@ -1151,6 +1156,7 @@ EnumValueSet const VkPipelineCreateFlags2Sets[] = {
     {"DESCRIPTOR_BUFFER_BIT_EXT", 0x20000000, false},
     {"CAPTURE_DATA_BIT_KHR", 0x80000000, false},
     {"INDIRECT_BINDABLE_BIT_EXT", 0x4000000000, false},
+    {"DISALLOW_OPACITY_MICROMAP_BIT_ARM", 0x2000000000, false},
 };
 
 EnumValueSet const VkBufferUsageFlags2Sets[] = {
@@ -1767,6 +1773,10 @@ EnumValueSet const VkVideoEncodeAV1RateControlFlagsKHRSets[] = {
 EnumValueSet const VkVideoEncodeAV1SuperblockSizeFlagsKHRSets[] = {
     {"VK_VIDEO_ENCODE_AV1_SUPERBLOCK_SIZE_64", 0x00000001, false},
     {"VK_VIDEO_ENCODE_AV1_SUPERBLOCK_SIZE_128", 0x00000002, false},
+};
+
+EnumValueSet const VkAccessFlags3KHRSets[] = {
+    {"NONE", 0, false},
 };
 
 EnumValueSet const VkAttachmentLoadOpSets[] = {
@@ -3718,13 +3728,13 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[371] = {
+EnumType const cEnumTypes[372] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", NULL, 0},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 1},
     {"VkSamplerCreateFlags", VkSamplerCreateFlagsSets, 5},
     {"VkPipelineLayoutCreateFlags", VkPipelineLayoutCreateFlagsSets, 1},
-    {"VkPipelineCacheCreateFlags", VkPipelineCacheCreateFlagsSets, 2},
+    {"VkPipelineCacheCreateFlags", VkPipelineCacheCreateFlagsSets, 3},
     {"VkPipelineDepthStencilStateCreateFlags", VkPipelineDepthStencilStateCreateFlagsSets, 4},
     {"VkPipelineDynamicStateCreateFlags", NULL, 0},
     {"VkPipelineColorBlendStateCreateFlags", VkPipelineColorBlendStateCreateFlagsSets, 2},
@@ -3777,7 +3787,7 @@ EnumType const cEnumTypes[371] = {
     {"VkCullModeFlags", VkCullModeFlagsSets, 4},
     {"VkDescriptorPoolCreateFlags", VkDescriptorPoolCreateFlagsSets, 7},
     {"VkDescriptorPoolResetFlags", NULL, 0},
-    {"VkDependencyFlags", VkDependencyFlagsSets, 6},
+    {"VkDependencyFlags", VkDependencyFlagsSets, 7},
     {"VkSubgroupFeatureFlags", VkSubgroupFeatureFlagsSets, 13},
     {"VkIndirectCommandsLayoutUsageFlagsNV", VkIndirectCommandsLayoutUsageFlagsNVSets, 3},
     {"VkIndirectStateFlagsNV", VkIndirectStateFlagsNVSets, 1},
@@ -3807,7 +3817,7 @@ EnumType const cEnumTypes[371] = {
     {"VkIndirectCommandsLayoutUsageFlagsEXT", VkIndirectCommandsLayoutUsageFlagsEXTSets, 2},
     {"VkIndirectCommandsInputModeFlagsEXT", VkIndirectCommandsInputModeFlagsEXTSets, 2},
     {"VkDirectDriverLoadingFlagsLUNARG", NULL, 0},
-    {"VkPipelineCreateFlags2", VkPipelineCreateFlags2Sets, 44},
+    {"VkPipelineCreateFlags2", VkPipelineCreateFlags2Sets, 45},
     {"VkBufferUsageFlags2", VkBufferUsageFlags2Sets, 38},
     {"VkCompositeAlphaFlagsKHR", VkCompositeAlphaFlagsKHRSets, 4},
     {"VkDisplayPlaneAlphaFlagsKHR", VkDisplayPlaneAlphaFlagsKHRSets, 4},
@@ -3916,6 +3926,7 @@ EnumType const cEnumTypes[371] = {
     {"VkVideoEncodeAV1StdFlagsKHR", VkVideoEncodeAV1StdFlagsKHRSets, 4},
     {"VkVideoEncodeAV1RateControlFlagsKHR", VkVideoEncodeAV1RateControlFlagsKHRSets, 4},
     {"VkVideoEncodeAV1SuperblockSizeFlagsKHR", VkVideoEncodeAV1SuperblockSizeFlagsKHRSets, 2},
+    {"VkAccessFlags3KHR", VkAccessFlags3KHRSets, 1},
     {"VkAttachmentLoadOp", VkAttachmentLoadOpSets, 6},
     {"VkAttachmentStoreOp", VkAttachmentStoreOpSets, 6},
     {"VkBlendFactor", VkBlendFactorSets, 19},
