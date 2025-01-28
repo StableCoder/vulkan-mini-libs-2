@@ -33,13 +33,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 305,
-              "VK_HEADER_VERSION is from after the maximum supported version of v305.");
+static_assert(VK_HEADER_VERSION <= 306,
+              "VK_HEADER_VERSION is from after the maximum supported version of v306.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 305,
-               "VK_HEADER_VERSION is from after the maximum supported version of v305.");
+_Static_assert(VK_HEADER_VERSION <= 306,
+               "VK_HEADER_VERSION is from after the maximum supported version of v306.");
 #endif
 
 typedef enum STecVkSerializationResult {
@@ -1299,6 +1299,9 @@ EnumValueSet const VkExternalMemoryHandleTypeFlagsSets[] = {
     {"ZIRCON_VMO_BIT_FUCHSIA", 0x00000800, false},
     {"RDMA_ADDRESS_BIT_NV", 0x00001000, false},
     {"SCREEN_BUFFER_BIT_QNX", 0x00004000, false},
+    {"MTLBUFFER_BIT_EXT", 0x00010000, false},
+    {"MTLTEXTURE_BIT_EXT", 0x00020000, false},
+    {"MTLHEAP_BIT_EXT", 0x00040000, false},
 };
 
 EnumValueSet const VkExternalMemoryFeatureFlagsSets[] = {
@@ -1548,6 +1551,7 @@ EnumValueSet const VkVideoSessionCreateFlagsKHRSets[] = {
     {"INLINE_QUERIES", 0x00000004, false},
     {"ALLOW_ENCODE_QUANTIZATION_DELTA_MAP", 0x00000008, false},
     {"ALLOW_ENCODE_EMPHASIS_MAP", 0x00000010, false},
+    {"INLINE_SESSION_PARAMETERS", 0x00000020, false},
 };
 
 EnumValueSet const VkVideoSessionParametersCreateFlagsKHRSets[] = {
@@ -3846,7 +3850,7 @@ EnumType const cEnumTypes[372] = {
     {"VkCommandPoolTrimFlags", NULL, 0},
     {"VkExternalMemoryHandleTypeFlagsNV", VkExternalMemoryHandleTypeFlagsNVSets, 4},
     {"VkExternalMemoryFeatureFlagsNV", VkExternalMemoryFeatureFlagsNVSets, 3},
-    {"VkExternalMemoryHandleTypeFlags", VkExternalMemoryHandleTypeFlagsSets, 21},
+    {"VkExternalMemoryHandleTypeFlags", VkExternalMemoryHandleTypeFlagsSets, 24},
     {"VkExternalMemoryFeatureFlags", VkExternalMemoryFeatureFlagsSets, 6},
     {"VkExternalSemaphoreHandleTypeFlags", VkExternalSemaphoreHandleTypeFlagsSets, 12},
     {"VkExternalSemaphoreFeatureFlags", VkExternalSemaphoreFeatureFlagsSets, 4},
@@ -3895,7 +3899,7 @@ EnumType const cEnumTypes[372] = {
      1},
     {"VkVideoCodecOperationFlagsKHR", VkVideoCodecOperationFlagsKHRSets, 12},
     {"VkVideoCapabilityFlagsKHR", VkVideoCapabilityFlagsKHRSets, 2},
-    {"VkVideoSessionCreateFlagsKHR", VkVideoSessionCreateFlagsKHRSets, 6},
+    {"VkVideoSessionCreateFlagsKHR", VkVideoSessionCreateFlagsKHRSets, 7},
     {"VkVideoSessionParametersCreateFlagsKHR", VkVideoSessionParametersCreateFlagsKHRSets, 1},
     {"VkVideoBeginCodingFlagsKHR", NULL, 0},
     {"VkVideoEndCodingFlagsKHR", NULL, 0},

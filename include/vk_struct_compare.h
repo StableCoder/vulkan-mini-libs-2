@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 305,
-              "VK_HEADER_VERSION is from after the maximum supported version of v305.");
+static_assert(VK_HEADER_VERSION <= 306,
+              "VK_HEADER_VERSION is from after the maximum supported version of v306.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 305,
-               "VK_HEADER_VERSION is from after the maximum supported version of v305.");
+_Static_assert(VK_HEADER_VERSION <= 306,
+               "VK_HEADER_VERSION is from after the maximum supported version of v306.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -1100,6 +1100,21 @@ bool compare_VkMemoryGetFdInfoKHR(VkMemoryGetFdInfoKHR const *s1, VkMemoryGetFdI
 bool compare_VkWin32KeyedMutexAcquireReleaseInfoKHR(
     VkWin32KeyedMutexAcquireReleaseInfoKHR const *s1,
     VkWin32KeyedMutexAcquireReleaseInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 306 && (VK_EXT_external_memory_metal)
+bool compare_VkImportMemoryMetalHandleInfoEXT(VkImportMemoryMetalHandleInfoEXT const *s1,
+                                              VkImportMemoryMetalHandleInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 306 && (VK_EXT_external_memory_metal)
+bool compare_VkMemoryMetalHandlePropertiesEXT(VkMemoryMetalHandlePropertiesEXT const *s1,
+                                              VkMemoryMetalHandlePropertiesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 306 && (VK_EXT_external_memory_metal)
+bool compare_VkMemoryGetMetalHandleInfoEXT(VkMemoryGetMetalHandleInfoEXT const *s1,
+                                           VkMemoryGetMetalHandleInfoEXT const *s2);
 #endif
 
 #if (VK_VERSION_1_1)
@@ -5059,6 +5074,12 @@ bool compare_VkPhysicalDeviceVideoMaintenance1FeaturesKHR(
     VkPhysicalDeviceVideoMaintenance1FeaturesKHR const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 306 && (VK_KHR_video_maintenance2)
+bool compare_VkPhysicalDeviceVideoMaintenance2FeaturesKHR(
+    VkPhysicalDeviceVideoMaintenance2FeaturesKHR const *s1,
+    VkPhysicalDeviceVideoMaintenance2FeaturesKHR const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 274 && (VK_KHR_video_maintenance1)
 bool compare_VkVideoInlineQueryInfoKHR(VkVideoInlineQueryInfoKHR const *s1,
                                        VkVideoInlineQueryInfoKHR const *s2);
@@ -5084,6 +5105,12 @@ bool compare_VkVideoDecodeH264SessionParametersAddInfoKHR(
 bool compare_VkVideoDecodeH264SessionParametersCreateInfoKHR(
     VkVideoDecodeH264SessionParametersCreateInfoKHR const *s1,
     VkVideoDecodeH264SessionParametersCreateInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 306 && (VK_KHR_video_maintenance2 && VK_KHR_video_decode_h264)
+bool compare_VkVideoDecodeH264InlineSessionParametersInfoKHR(
+    VkVideoDecodeH264InlineSessionParametersInfoKHR const *s1,
+    VkVideoDecodeH264InlineSessionParametersInfoKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 238 && (VK_KHR_video_decode_h264)
@@ -5118,6 +5145,12 @@ bool compare_VkVideoDecodeH265SessionParametersCreateInfoKHR(
     VkVideoDecodeH265SessionParametersCreateInfoKHR const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 306 && (VK_KHR_video_maintenance2 && VK_KHR_video_decode_h265)
+bool compare_VkVideoDecodeH265InlineSessionParametersInfoKHR(
+    VkVideoDecodeH265InlineSessionParametersInfoKHR const *s1,
+    VkVideoDecodeH265InlineSessionParametersInfoKHR const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 238 && (VK_KHR_video_decode_h265)
 bool compare_VkVideoDecodeH265PictureInfoKHR(VkVideoDecodeH265PictureInfoKHR const *s1,
                                              VkVideoDecodeH265PictureInfoKHR const *s2);
@@ -5142,6 +5175,12 @@ bool compare_VkVideoDecodeAV1CapabilitiesKHR(VkVideoDecodeAV1CapabilitiesKHR con
 bool compare_VkVideoDecodeAV1SessionParametersCreateInfoKHR(
     VkVideoDecodeAV1SessionParametersCreateInfoKHR const *s1,
     VkVideoDecodeAV1SessionParametersCreateInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 306 && (VK_KHR_video_maintenance2 && VK_KHR_video_decode_av1)
+bool compare_VkVideoDecodeAV1InlineSessionParametersInfoKHR(
+    VkVideoDecodeAV1InlineSessionParametersInfoKHR const *s1,
+    VkVideoDecodeAV1InlineSessionParametersInfoKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 277 && (VK_KHR_video_decode_av1)
@@ -12215,6 +12254,36 @@ bool compare_VkWin32KeyedMutexAcquireReleaseInfoKHR(
     VkWin32KeyedMutexAcquireReleaseInfoKHR const *s1,
     VkWin32KeyedMutexAcquireReleaseInfoKHR const *s2) {
   if ((s1->acquireCount != s2->acquireCount) || (s1->releaseCount != s2->releaseCount) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 306 && (VK_EXT_external_memory_metal)
+bool compare_VkImportMemoryMetalHandleInfoEXT(VkImportMemoryMetalHandleInfoEXT const *s1,
+                                              VkImportMemoryMetalHandleInfoEXT const *s2) {
+  if ((s1->handleType != s2->handleType) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 306 && (VK_EXT_external_memory_metal)
+bool compare_VkMemoryMetalHandlePropertiesEXT(VkMemoryMetalHandlePropertiesEXT const *s1,
+                                              VkMemoryMetalHandlePropertiesEXT const *s2) {
+  if ((s1->memoryTypeBits != s2->memoryTypeBits) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 306 && (VK_EXT_external_memory_metal)
+bool compare_VkMemoryGetMetalHandleInfoEXT(VkMemoryGetMetalHandleInfoEXT const *s1,
+                                           VkMemoryGetMetalHandleInfoEXT const *s2) {
+  if ((s1->memory != s2->memory) || (s1->handleType != s2->handleType) || false)
     return false;
 
   return true;
@@ -20898,6 +20967,17 @@ bool compare_VkPhysicalDeviceVideoMaintenance1FeaturesKHR(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 306 && (VK_KHR_video_maintenance2)
+bool compare_VkPhysicalDeviceVideoMaintenance2FeaturesKHR(
+    VkPhysicalDeviceVideoMaintenance2FeaturesKHR const *s1,
+    VkPhysicalDeviceVideoMaintenance2FeaturesKHR const *s2) {
+  if ((s1->videoMaintenance2 != s2->videoMaintenance2) || false)
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 274 && (VK_KHR_video_maintenance1)
 bool compare_VkVideoInlineQueryInfoKHR(VkVideoInlineQueryInfoKHR const *s1,
                                        VkVideoInlineQueryInfoKHR const *s2) {
@@ -20949,6 +21029,14 @@ bool compare_VkVideoDecodeH264SessionParametersCreateInfoKHR(
       false)
     return false;
 
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 306 && (VK_KHR_video_maintenance2 && VK_KHR_video_decode_h264)
+bool compare_VkVideoDecodeH264InlineSessionParametersInfoKHR(
+    VkVideoDecodeH264InlineSessionParametersInfoKHR const *s1,
+    VkVideoDecodeH264InlineSessionParametersInfoKHR const *s2) {
   return true;
 }
 #endif
@@ -21014,6 +21102,14 @@ bool compare_VkVideoDecodeH265SessionParametersCreateInfoKHR(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 306 && (VK_KHR_video_maintenance2 && VK_KHR_video_decode_h265)
+bool compare_VkVideoDecodeH265InlineSessionParametersInfoKHR(
+    VkVideoDecodeH265InlineSessionParametersInfoKHR const *s1,
+    VkVideoDecodeH265InlineSessionParametersInfoKHR const *s2) {
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 238 && (VK_KHR_video_decode_h265)
 bool compare_VkVideoDecodeH265PictureInfoKHR(VkVideoDecodeH265PictureInfoKHR const *s1,
                                              VkVideoDecodeH265PictureInfoKHR const *s2) {
@@ -21055,6 +21151,14 @@ bool compare_VkVideoDecodeAV1CapabilitiesKHR(VkVideoDecodeAV1CapabilitiesKHR con
 bool compare_VkVideoDecodeAV1SessionParametersCreateInfoKHR(
     VkVideoDecodeAV1SessionParametersCreateInfoKHR const *s1,
     VkVideoDecodeAV1SessionParametersCreateInfoKHR const *s2) {
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 306 && (VK_KHR_video_maintenance2 && VK_KHR_video_decode_av1)
+bool compare_VkVideoDecodeAV1InlineSessionParametersInfoKHR(
+    VkVideoDecodeAV1InlineSessionParametersInfoKHR const *s1,
+    VkVideoDecodeAV1InlineSessionParametersInfoKHR const *s2) {
   return true;
 }
 #endif

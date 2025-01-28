@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 305,
-              "VK_HEADER_VERSION is from after the maximum supported version of v305.");
+static_assert(VK_HEADER_VERSION <= 306,
+              "VK_HEADER_VERSION is from after the maximum supported version of v306.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 305,
-               "VK_HEADER_VERSION is from after the maximum supported version of v305.");
+_Static_assert(VK_HEADER_VERSION <= 306,
+               "VK_HEADER_VERSION is from after the maximum supported version of v306.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -7933,6 +7933,38 @@ void cleanup_VkPhysicalDevicePipelineOpacityMicromapFeaturesARM(
 #if VK_HEADER_VERSION >= 305 && (VK_KHR_depth_clamp_zero_one)
 void cleanup_VkPhysicalDeviceDepthClampZeroOneFeaturesKHR(
     VkPhysicalDeviceDepthClampZeroOneFeaturesKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 306 && (VK_EXT_external_memory_metal)
+void cleanup_VkImportMemoryMetalHandleInfoEXT(VkImportMemoryMetalHandleInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 306 && (VK_EXT_external_memory_metal)
+void cleanup_VkMemoryMetalHandlePropertiesEXT(VkMemoryMetalHandlePropertiesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 306 && (VK_EXT_external_memory_metal)
+void cleanup_VkMemoryGetMetalHandleInfoEXT(VkMemoryGetMetalHandleInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 306 && (VK_KHR_video_maintenance2)
+void cleanup_VkPhysicalDeviceVideoMaintenance2FeaturesKHR(
+    VkPhysicalDeviceVideoMaintenance2FeaturesKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 306 && (VK_KHR_video_maintenance2 && VK_KHR_video_decode_h264)
+void cleanup_VkVideoDecodeH264InlineSessionParametersInfoKHR(
+    VkVideoDecodeH264InlineSessionParametersInfoKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 306 && (VK_KHR_video_maintenance2 && VK_KHR_video_decode_h265)
+void cleanup_VkVideoDecodeH265InlineSessionParametersInfoKHR(
+    VkVideoDecodeH265InlineSessionParametersInfoKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 306 && (VK_KHR_video_maintenance2 && VK_KHR_video_decode_av1)
+void cleanup_VkVideoDecodeAV1InlineSessionParametersInfoKHR(
+    VkVideoDecodeAV1InlineSessionParametersInfoKHR const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -18152,6 +18184,59 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEPTH_CLAMP_ZERO_ONE_FEATURES_KHR) {
     cleanup_VkPhysicalDeviceDepthClampZeroOneFeaturesKHR(
         (VkPhysicalDeviceDepthClampZeroOneFeaturesKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 306 && (VK_EXT_external_memory_metal)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMPORT_MEMORY_METAL_HANDLE_INFO_EXT) {
+    cleanup_VkImportMemoryMetalHandleInfoEXT((VkImportMemoryMetalHandleInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 306 && (VK_EXT_external_memory_metal)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_METAL_HANDLE_PROPERTIES_EXT) {
+    cleanup_VkMemoryMetalHandlePropertiesEXT((VkMemoryMetalHandlePropertiesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 306 && (VK_EXT_external_memory_metal)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_MEMORY_GET_METAL_HANDLE_INFO_EXT) {
+    cleanup_VkMemoryGetMetalHandleInfoEXT((VkMemoryGetMetalHandleInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 306 && (VK_KHR_video_maintenance2)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_MAINTENANCE_2_FEATURES_KHR) {
+    cleanup_VkPhysicalDeviceVideoMaintenance2FeaturesKHR(
+        (VkPhysicalDeviceVideoMaintenance2FeaturesKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 306 && (VK_KHR_video_maintenance2 && VK_KHR_video_decode_h264)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_H264_INLINE_SESSION_PARAMETERS_INFO_KHR) {
+    cleanup_VkVideoDecodeH264InlineSessionParametersInfoKHR(
+        (VkVideoDecodeH264InlineSessionParametersInfoKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 306 && (VK_KHR_video_maintenance2 && VK_KHR_video_decode_h265)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_H265_INLINE_SESSION_PARAMETERS_INFO_KHR) {
+    cleanup_VkVideoDecodeH265InlineSessionParametersInfoKHR(
+        (VkVideoDecodeH265InlineSessionParametersInfoKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 306 && (VK_KHR_video_maintenance2 && VK_KHR_video_decode_av1)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_INLINE_SESSION_PARAMETERS_INFO_KHR) {
+    cleanup_VkVideoDecodeAV1InlineSessionParametersInfoKHR(
+        (VkVideoDecodeAV1InlineSessionParametersInfoKHR const *)pData);
     return;
   }
 #endif
@@ -36346,6 +36431,94 @@ void cleanup_VkPhysicalDeviceDepthClampZeroOneFeaturesKHR(
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 306 && (VK_EXT_external_memory_metal)
+void cleanup_VkImportMemoryMetalHandleInfoEXT(VkImportMemoryMetalHandleInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // handle
+  free((void *)pData->handle);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 306 && (VK_EXT_external_memory_metal)
+void cleanup_VkMemoryMetalHandlePropertiesEXT(VkMemoryMetalHandlePropertiesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 306 && (VK_EXT_external_memory_metal)
+void cleanup_VkMemoryGetMetalHandleInfoEXT(VkMemoryGetMetalHandleInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 306 && (VK_KHR_video_maintenance2)
+void cleanup_VkPhysicalDeviceVideoMaintenance2FeaturesKHR(
+    VkPhysicalDeviceVideoMaintenance2FeaturesKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 306 && (VK_KHR_video_maintenance2 && VK_KHR_video_decode_h264)
+void cleanup_VkVideoDecodeH264InlineSessionParametersInfoKHR(
+    VkVideoDecodeH264InlineSessionParametersInfoKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pStdSPS
+  free((void *)pData->pStdSPS);
+
+  // pStdPPS
+  free((void *)pData->pStdPPS);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 306 && (VK_KHR_video_maintenance2 && VK_KHR_video_decode_h265)
+void cleanup_VkVideoDecodeH265InlineSessionParametersInfoKHR(
+    VkVideoDecodeH265InlineSessionParametersInfoKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pStdVPS
+  free((void *)pData->pStdVPS);
+
+  // pStdSPS
+  free((void *)pData->pStdSPS);
+
+  // pStdPPS
+  free((void *)pData->pStdPPS);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 306 && (VK_KHR_video_maintenance2 && VK_KHR_video_decode_av1)
+void cleanup_VkVideoDecodeAV1InlineSessionParametersInfoKHR(
+    VkVideoDecodeAV1InlineSessionParametersInfoKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pStdSequenceHeader
+  free((void *)pData->pStdSequenceHeader);
 }
 #endif
 
