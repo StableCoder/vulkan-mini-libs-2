@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 306,
-              "VK_HEADER_VERSION is from after the maximum supported version of v306.");
+static_assert(VK_HEADER_VERSION <= 307,
+              "VK_HEADER_VERSION is from after the maximum supported version of v307.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 306,
-               "VK_HEADER_VERSION is from after the maximum supported version of v306.");
+_Static_assert(VK_HEADER_VERSION <= 307,
+               "VK_HEADER_VERSION is from after the maximum supported version of v307.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -7965,6 +7965,165 @@ void cleanup_VkVideoDecodeH265InlineSessionParametersInfoKHR(
 #if VK_HEADER_VERSION >= 306 && (VK_KHR_video_maintenance2 && VK_KHR_video_decode_av1)
 void cleanup_VkVideoDecodeAV1InlineSessionParametersInfoKHR(
     VkVideoDecodeAV1InlineSessionParametersInfoKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+void cleanup_VkPhysicalDeviceClusterAccelerationStructureFeaturesNV(
+    VkPhysicalDeviceClusterAccelerationStructureFeaturesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+void cleanup_VkPhysicalDeviceClusterAccelerationStructurePropertiesNV(
+    VkPhysicalDeviceClusterAccelerationStructurePropertiesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+void cleanup_VkStridedDeviceAddressNV(VkStridedDeviceAddressNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 307 &&                                                                    \
+    (VK_NV_cluster_acceleration_structure && VK_KHR_ray_tracing_pipeline)
+void cleanup_VkRayTracingPipelineClusterAccelerationStructureCreateInfoNV(
+    VkRayTracingPipelineClusterAccelerationStructureCreateInfoNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+void cleanup_VkClusterAccelerationStructureGeometryIndexAndGeometryFlagsNV(
+    VkClusterAccelerationStructureGeometryIndexAndGeometryFlagsNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+void cleanup_VkClusterAccelerationStructureMoveObjectsInfoNV(
+    VkClusterAccelerationStructureMoveObjectsInfoNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+void cleanup_VkClusterAccelerationStructureBuildClustersBottomLevelInfoNV(
+    VkClusterAccelerationStructureBuildClustersBottomLevelInfoNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+void cleanup_VkClusterAccelerationStructureBuildTriangleClusterInfoNV(
+    VkClusterAccelerationStructureBuildTriangleClusterInfoNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+void cleanup_VkClusterAccelerationStructureBuildTriangleClusterTemplateInfoNV(
+    VkClusterAccelerationStructureBuildTriangleClusterTemplateInfoNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+void cleanup_VkClusterAccelerationStructureInstantiateClusterInfoNV(
+    VkClusterAccelerationStructureInstantiateClusterInfoNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+void cleanup_VkClusterAccelerationStructureClustersBottomLevelInputNV(
+    VkClusterAccelerationStructureClustersBottomLevelInputNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+void cleanup_VkClusterAccelerationStructureTriangleClusterInputNV(
+    VkClusterAccelerationStructureTriangleClusterInputNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+void cleanup_VkClusterAccelerationStructureMoveObjectsInputNV(
+    VkClusterAccelerationStructureMoveObjectsInputNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+void cleanup_VkClusterAccelerationStructureInputInfoNV(
+    VkClusterAccelerationStructureInputInfoNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+void cleanup_VkClusterAccelerationStructureCommandsInfoNV(
+    VkClusterAccelerationStructureCommandsInfoNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_ray_tracing_linear_swept_spheres)
+void cleanup_VkAccelerationStructureGeometryLinearSweptSpheresDataNV(
+    VkAccelerationStructureGeometryLinearSweptSpheresDataNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_ray_tracing_linear_swept_spheres)
+void cleanup_VkAccelerationStructureGeometrySpheresDataNV(
+    VkAccelerationStructureGeometrySpheresDataNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_partitioned_acceleration_structure)
+void cleanup_VkPhysicalDevicePartitionedAccelerationStructureFeaturesNV(
+    VkPhysicalDevicePartitionedAccelerationStructureFeaturesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_partitioned_acceleration_structure)
+void cleanup_VkPhysicalDevicePartitionedAccelerationStructurePropertiesNV(
+    VkPhysicalDevicePartitionedAccelerationStructurePropertiesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_partitioned_acceleration_structure)
+void cleanup_VkBuildPartitionedAccelerationStructureIndirectCommandNV(
+    VkBuildPartitionedAccelerationStructureIndirectCommandNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_partitioned_acceleration_structure)
+void cleanup_VkPartitionedAccelerationStructureFlagsNV(
+    VkPartitionedAccelerationStructureFlagsNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_partitioned_acceleration_structure)
+void cleanup_VkPartitionedAccelerationStructureWriteInstanceDataNV(
+    VkPartitionedAccelerationStructureWriteInstanceDataNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_partitioned_acceleration_structure)
+void cleanup_VkPartitionedAccelerationStructureUpdateInstanceDataNV(
+    VkPartitionedAccelerationStructureUpdateInstanceDataNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_partitioned_acceleration_structure)
+void cleanup_VkPartitionedAccelerationStructureWritePartitionTranslationDataNV(
+    VkPartitionedAccelerationStructureWritePartitionTranslationDataNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_partitioned_acceleration_structure)
+void cleanup_VkWriteDescriptorSetPartitionedAccelerationStructureNV(
+    VkWriteDescriptorSetPartitionedAccelerationStructureNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_partitioned_acceleration_structure)
+void cleanup_VkPartitionedAccelerationStructureInstancesInputNV(
+    VkPartitionedAccelerationStructureInstancesInputNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_partitioned_acceleration_structure)
+void cleanup_VkBuildPartitionedAccelerationStructureInfoNV(
+    VkBuildPartitionedAccelerationStructureInfoNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_ray_tracing_linear_swept_spheres)
+void cleanup_VkPhysicalDeviceRayTracingLinearSweptSpheresFeaturesNV(
+    VkPhysicalDeviceRayTracingLinearSweptSpheresFeaturesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cooperative_vector)
+void cleanup_VkPhysicalDeviceCooperativeVectorFeaturesNV(
+    VkPhysicalDeviceCooperativeVectorFeaturesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cooperative_vector)
+void cleanup_VkCooperativeVectorPropertiesNV(VkCooperativeVectorPropertiesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cooperative_vector)
+void cleanup_VkPhysicalDeviceCooperativeVectorPropertiesNV(
+    VkPhysicalDeviceCooperativeVectorPropertiesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cooperative_vector)
+void cleanup_VkConvertCooperativeVectorMatrixInfoNV(
+    VkConvertCooperativeVectorMatrixInfoNV const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -18237,6 +18396,183 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_DECODE_AV1_INLINE_SESSION_PARAMETERS_INFO_KHR) {
     cleanup_VkVideoDecodeAV1InlineSessionParametersInfoKHR(
         (VkVideoDecodeAV1InlineSessionParametersInfoKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CLUSTER_ACCELERATION_STRUCTURE_FEATURES_NV) {
+    cleanup_VkPhysicalDeviceClusterAccelerationStructureFeaturesNV(
+        (VkPhysicalDeviceClusterAccelerationStructureFeaturesNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_CLUSTER_ACCELERATION_STRUCTURE_PROPERTIES_NV) {
+    cleanup_VkPhysicalDeviceClusterAccelerationStructurePropertiesNV(
+        (VkPhysicalDeviceClusterAccelerationStructurePropertiesNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 307 &&                                                                    \
+    (VK_NV_cluster_acceleration_structure && VK_KHR_ray_tracing_pipeline)
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_RAY_TRACING_PIPELINE_CLUSTER_ACCELERATION_STRUCTURE_CREATE_INFO_NV) {
+    cleanup_VkRayTracingPipelineClusterAccelerationStructureCreateInfoNV(
+        (VkRayTracingPipelineClusterAccelerationStructureCreateInfoNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_CLUSTER_ACCELERATION_STRUCTURE_CLUSTERS_BOTTOM_LEVEL_INPUT_NV) {
+    cleanup_VkClusterAccelerationStructureClustersBottomLevelInputNV(
+        (VkClusterAccelerationStructureClustersBottomLevelInputNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_CLUSTER_ACCELERATION_STRUCTURE_TRIANGLE_CLUSTER_INPUT_NV) {
+    cleanup_VkClusterAccelerationStructureTriangleClusterInputNV(
+        (VkClusterAccelerationStructureTriangleClusterInputNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_CLUSTER_ACCELERATION_STRUCTURE_MOVE_OBJECTS_INPUT_NV) {
+    cleanup_VkClusterAccelerationStructureMoveObjectsInputNV(
+        (VkClusterAccelerationStructureMoveObjectsInputNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_CLUSTER_ACCELERATION_STRUCTURE_INPUT_INFO_NV) {
+    cleanup_VkClusterAccelerationStructureInputInfoNV(
+        (VkClusterAccelerationStructureInputInfoNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_CLUSTER_ACCELERATION_STRUCTURE_COMMANDS_INFO_NV) {
+    cleanup_VkClusterAccelerationStructureCommandsInfoNV(
+        (VkClusterAccelerationStructureCommandsInfoNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_ray_tracing_linear_swept_spheres)
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_LINEAR_SWEPT_SPHERES_DATA_NV) {
+    cleanup_VkAccelerationStructureGeometryLinearSweptSpheresDataNV(
+        (VkAccelerationStructureGeometryLinearSweptSpheresDataNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_ray_tracing_linear_swept_spheres)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_GEOMETRY_SPHERES_DATA_NV) {
+    cleanup_VkAccelerationStructureGeometrySpheresDataNV(
+        (VkAccelerationStructureGeometrySpheresDataNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_partitioned_acceleration_structure)
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PARTITIONED_ACCELERATION_STRUCTURE_FEATURES_NV) {
+    cleanup_VkPhysicalDevicePartitionedAccelerationStructureFeaturesNV(
+        (VkPhysicalDevicePartitionedAccelerationStructureFeaturesNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_partitioned_acceleration_structure)
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PARTITIONED_ACCELERATION_STRUCTURE_PROPERTIES_NV) {
+    cleanup_VkPhysicalDevicePartitionedAccelerationStructurePropertiesNV(
+        (VkPhysicalDevicePartitionedAccelerationStructurePropertiesNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_partitioned_acceleration_structure)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PARTITIONED_ACCELERATION_STRUCTURE_FLAGS_NV) {
+    cleanup_VkPartitionedAccelerationStructureFlagsNV(
+        (VkPartitionedAccelerationStructureFlagsNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_partitioned_acceleration_structure)
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET_PARTITIONED_ACCELERATION_STRUCTURE_NV) {
+    cleanup_VkWriteDescriptorSetPartitionedAccelerationStructureNV(
+        (VkWriteDescriptorSetPartitionedAccelerationStructureNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_partitioned_acceleration_structure)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PARTITIONED_ACCELERATION_STRUCTURE_INSTANCES_INPUT_NV) {
+    cleanup_VkPartitionedAccelerationStructureInstancesInputNV(
+        (VkPartitionedAccelerationStructureInstancesInputNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_partitioned_acceleration_structure)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BUILD_PARTITIONED_ACCELERATION_STRUCTURE_INFO_NV) {
+    cleanup_VkBuildPartitionedAccelerationStructureInfoNV(
+        (VkBuildPartitionedAccelerationStructureInfoNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_ray_tracing_linear_swept_spheres)
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_LINEAR_SWEPT_SPHERES_FEATURES_NV) {
+    cleanup_VkPhysicalDeviceRayTracingLinearSweptSpheresFeaturesNV(
+        (VkPhysicalDeviceRayTracingLinearSweptSpheresFeaturesNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cooperative_vector)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_VECTOR_FEATURES_NV) {
+    cleanup_VkPhysicalDeviceCooperativeVectorFeaturesNV(
+        (VkPhysicalDeviceCooperativeVectorFeaturesNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cooperative_vector)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_COOPERATIVE_VECTOR_PROPERTIES_NV) {
+    cleanup_VkCooperativeVectorPropertiesNV((VkCooperativeVectorPropertiesNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cooperative_vector)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_VECTOR_PROPERTIES_NV) {
+    cleanup_VkPhysicalDeviceCooperativeVectorPropertiesNV(
+        (VkPhysicalDeviceCooperativeVectorPropertiesNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cooperative_vector)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_CONVERT_COOPERATIVE_VECTOR_MATRIX_INFO_NV) {
+    cleanup_VkConvertCooperativeVectorMatrixInfoNV(
+        (VkConvertCooperativeVectorMatrixInfoNV const *)pData);
     return;
   }
 #endif
@@ -36519,6 +36855,276 @@ void cleanup_VkVideoDecodeAV1InlineSessionParametersInfoKHR(
 
   // pStdSequenceHeader
   free((void *)pData->pStdSequenceHeader);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+void cleanup_VkPhysicalDeviceClusterAccelerationStructureFeaturesNV(
+    VkPhysicalDeviceClusterAccelerationStructureFeaturesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+void cleanup_VkPhysicalDeviceClusterAccelerationStructurePropertiesNV(
+    VkPhysicalDeviceClusterAccelerationStructurePropertiesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+void cleanup_VkStridedDeviceAddressNV(VkStridedDeviceAddressNV const *pData){}
+#endif
+
+#if VK_HEADER_VERSION >= 307 &&                                                                    \
+    (VK_NV_cluster_acceleration_structure && VK_KHR_ray_tracing_pipeline)
+void cleanup_VkRayTracingPipelineClusterAccelerationStructureCreateInfoNV(
+    VkRayTracingPipelineClusterAccelerationStructureCreateInfoNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+void cleanup_VkClusterAccelerationStructureGeometryIndexAndGeometryFlagsNV(
+    VkClusterAccelerationStructureGeometryIndexAndGeometryFlagsNV const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+void cleanup_VkClusterAccelerationStructureMoveObjectsInfoNV(
+    VkClusterAccelerationStructureMoveObjectsInfoNV const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+void cleanup_VkClusterAccelerationStructureBuildClustersBottomLevelInfoNV(
+    VkClusterAccelerationStructureBuildClustersBottomLevelInfoNV const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+void cleanup_VkClusterAccelerationStructureBuildTriangleClusterInfoNV(
+    VkClusterAccelerationStructureBuildTriangleClusterInfoNV const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+void cleanup_VkClusterAccelerationStructureBuildTriangleClusterTemplateInfoNV(
+    VkClusterAccelerationStructureBuildTriangleClusterTemplateInfoNV const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+void cleanup_VkClusterAccelerationStructureInstantiateClusterInfoNV(
+    VkClusterAccelerationStructureInstantiateClusterInfoNV const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+void cleanup_VkClusterAccelerationStructureClustersBottomLevelInputNV(
+    VkClusterAccelerationStructureClustersBottomLevelInputNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+void cleanup_VkClusterAccelerationStructureTriangleClusterInputNV(
+    VkClusterAccelerationStructureTriangleClusterInputNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+void cleanup_VkClusterAccelerationStructureMoveObjectsInputNV(
+    VkClusterAccelerationStructureMoveObjectsInputNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+void cleanup_VkClusterAccelerationStructureInputInfoNV(
+    VkClusterAccelerationStructureInputInfoNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
+void cleanup_VkClusterAccelerationStructureCommandsInfoNV(
+    VkClusterAccelerationStructureCommandsInfoNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_ray_tracing_linear_swept_spheres)
+void cleanup_VkAccelerationStructureGeometryLinearSweptSpheresDataNV(
+    VkAccelerationStructureGeometryLinearSweptSpheresDataNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_ray_tracing_linear_swept_spheres)
+void cleanup_VkAccelerationStructureGeometrySpheresDataNV(
+    VkAccelerationStructureGeometrySpheresDataNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_partitioned_acceleration_structure)
+void cleanup_VkPhysicalDevicePartitionedAccelerationStructureFeaturesNV(
+    VkPhysicalDevicePartitionedAccelerationStructureFeaturesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_partitioned_acceleration_structure)
+void cleanup_VkPhysicalDevicePartitionedAccelerationStructurePropertiesNV(
+    VkPhysicalDevicePartitionedAccelerationStructurePropertiesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_partitioned_acceleration_structure)
+void cleanup_VkBuildPartitionedAccelerationStructureIndirectCommandNV(
+    VkBuildPartitionedAccelerationStructureIndirectCommandNV const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_partitioned_acceleration_structure)
+void cleanup_VkPartitionedAccelerationStructureFlagsNV(
+    VkPartitionedAccelerationStructureFlagsNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_partitioned_acceleration_structure)
+void cleanup_VkPartitionedAccelerationStructureWriteInstanceDataNV(
+    VkPartitionedAccelerationStructureWriteInstanceDataNV const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_partitioned_acceleration_structure)
+void cleanup_VkPartitionedAccelerationStructureUpdateInstanceDataNV(
+    VkPartitionedAccelerationStructureUpdateInstanceDataNV const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_partitioned_acceleration_structure)
+void cleanup_VkPartitionedAccelerationStructureWritePartitionTranslationDataNV(
+    VkPartitionedAccelerationStructureWritePartitionTranslationDataNV const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_partitioned_acceleration_structure)
+void cleanup_VkWriteDescriptorSetPartitionedAccelerationStructureNV(
+    VkWriteDescriptorSetPartitionedAccelerationStructureNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pAccelerationStructures - accelerationStructureCount
+  free((void *)pData->pAccelerationStructures);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_partitioned_acceleration_structure)
+void cleanup_VkPartitionedAccelerationStructureInstancesInputNV(
+    VkPartitionedAccelerationStructureInstancesInputNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_partitioned_acceleration_structure)
+void cleanup_VkBuildPartitionedAccelerationStructureInfoNV(
+    VkBuildPartitionedAccelerationStructureInfoNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_ray_tracing_linear_swept_spheres)
+void cleanup_VkPhysicalDeviceRayTracingLinearSweptSpheresFeaturesNV(
+    VkPhysicalDeviceRayTracingLinearSweptSpheresFeaturesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cooperative_vector)
+void cleanup_VkPhysicalDeviceCooperativeVectorFeaturesNV(
+    VkPhysicalDeviceCooperativeVectorFeaturesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cooperative_vector)
+void cleanup_VkCooperativeVectorPropertiesNV(VkCooperativeVectorPropertiesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cooperative_vector)
+void cleanup_VkPhysicalDeviceCooperativeVectorPropertiesNV(
+    VkPhysicalDeviceCooperativeVectorPropertiesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 307 && (VK_NV_cooperative_vector)
+void cleanup_VkConvertCooperativeVectorMatrixInfoNV(
+    VkConvertCooperativeVectorMatrixInfoNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pDstSize
+  free((void *)pData->pDstSize);
 }
 #endif
 
