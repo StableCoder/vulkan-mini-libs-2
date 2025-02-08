@@ -39,13 +39,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 307,
-              "VK_HEADER_VERSION is from after the maximum supported version of v307.");
+static_assert(VK_HEADER_VERSION <= 308,
+              "VK_HEADER_VERSION is from after the maximum supported version of v308.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 307,
-               "VK_HEADER_VERSION is from after the maximum supported version of v307.");
+_Static_assert(VK_HEADER_VERSION <= 308,
+               "VK_HEADER_VERSION is from after the maximum supported version of v308.");
 #endif
 
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
@@ -7394,6 +7394,16 @@ bool compare_VkPhysicalDeviceCooperativeVectorPropertiesNV(
 bool compare_VkConvertCooperativeVectorMatrixInfoNV(
     VkConvertCooperativeVectorMatrixInfoNV const *s1,
     VkConvertCooperativeVectorMatrixInfoNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 308 && (VK_NV_present_metering)
+bool compare_VkSetPresentConfigNV(VkSetPresentConfigNV const *s1, VkSetPresentConfigNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 308 && (VK_NV_present_metering)
+bool compare_VkPhysicalDevicePresentMeteringFeaturesNV(
+    VkPhysicalDevicePresentMeteringFeaturesNV const *s1,
+    VkPhysicalDevicePresentMeteringFeaturesNV const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 226 && VK_HEADER_VERSION <= 304 && (VK_EXT_depth_clamp_zero_one)
@@ -26166,6 +26176,27 @@ bool compare_VkConvertCooperativeVectorMatrixInfoNV(
       (s1->numColumns != s2->numColumns) || (s1->srcLayout != s2->srcLayout) ||
       (s1->srcStride != s2->srcStride) || (s1->dstLayout != s2->dstLayout) ||
       (s1->dstStride != s2->dstStride) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 308 && (VK_NV_present_metering)
+bool compare_VkSetPresentConfigNV(VkSetPresentConfigNV const *s1, VkSetPresentConfigNV const *s2) {
+  if ((s1->numFramesPerBatch != s2->numFramesPerBatch) ||
+      (s1->presentConfigFeedback != s2->presentConfigFeedback) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 308 && (VK_NV_present_metering)
+bool compare_VkPhysicalDevicePresentMeteringFeaturesNV(
+    VkPhysicalDevicePresentMeteringFeaturesNV const *s1,
+    VkPhysicalDevicePresentMeteringFeaturesNV const *s2) {
+  if ((s1->presentMetering != s2->presentMetering) || false)
     return false;
 
   return true;

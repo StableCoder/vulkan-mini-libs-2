@@ -32,13 +32,13 @@ extern "C" {
 #ifdef __cplusplus
 static_assert(VK_HEADER_VERSION >= 72,
               "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-static_assert(VK_HEADER_VERSION <= 307,
-              "VK_HEADER_VERSION is from after the maximum supported version of v307.");
+static_assert(VK_HEADER_VERSION <= 308,
+              "VK_HEADER_VERSION is from after the maximum supported version of v308.");
 #else
 _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is from before the minimum supported version of v72.");
-_Static_assert(VK_HEADER_VERSION <= 307,
-               "VK_HEADER_VERSION is from after the maximum supported version of v307.");
+_Static_assert(VK_HEADER_VERSION <= 308,
+               "VK_HEADER_VERSION is from after the maximum supported version of v308.");
 #endif
 
 void cleanup_vk_struct(void const *pData);
@@ -8124,6 +8124,15 @@ void cleanup_VkPhysicalDeviceCooperativeVectorPropertiesNV(
 #if VK_HEADER_VERSION >= 307 && (VK_NV_cooperative_vector)
 void cleanup_VkConvertCooperativeVectorMatrixInfoNV(
     VkConvertCooperativeVectorMatrixInfoNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 308 && (VK_NV_present_metering)
+void cleanup_VkSetPresentConfigNV(VkSetPresentConfigNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 308 && (VK_NV_present_metering)
+void cleanup_VkPhysicalDevicePresentMeteringFeaturesNV(
+    VkPhysicalDevicePresentMeteringFeaturesNV const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -18573,6 +18582,21 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_CONVERT_COOPERATIVE_VECTOR_MATRIX_INFO_NV) {
     cleanup_VkConvertCooperativeVectorMatrixInfoNV(
         (VkConvertCooperativeVectorMatrixInfoNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 308 && (VK_NV_present_metering)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SET_PRESENT_CONFIG_NV) {
+    cleanup_VkSetPresentConfigNV((VkSetPresentConfigNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 308 && (VK_NV_present_metering)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_METERING_FEATURES_NV) {
+    cleanup_VkPhysicalDevicePresentMeteringFeaturesNV(
+        (VkPhysicalDevicePresentMeteringFeaturesNV const *)pData);
     return;
   }
 #endif
@@ -37125,6 +37149,25 @@ void cleanup_VkConvertCooperativeVectorMatrixInfoNV(
 
   // pDstSize
   free((void *)pData->pDstSize);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 308 && (VK_NV_present_metering)
+void cleanup_VkSetPresentConfigNV(VkSetPresentConfigNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 308 && (VK_NV_present_metering)
+void cleanup_VkPhysicalDevicePresentMeteringFeaturesNV(
+    VkPhysicalDevicePresentMeteringFeaturesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
 }
 #endif
 
