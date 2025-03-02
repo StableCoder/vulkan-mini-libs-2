@@ -127,17 +127,22 @@ extern "C" {
 #include <stdbool.h>
 """)
 
-    # static_asserts
+    # static asserts
     outFile.write('\n#ifdef __cplusplus\n')
     outFile.write(
-        "static_assert(VK_HEADER_VERSION >= {0}, \"VK_HEADER_VERSION is from before the minimum supported version of v{0}.\");\n".format(firstVersion))
-    outFile.write(
-        "static_assert(VK_HEADER_VERSION <= {0}, \"VK_HEADER_VERSION is from after the maximum supported version of v{0}.\");\n".format(lastVersion))
+        "static_assert(VK_HEADER_VERSION >= {0}, \"VK_HEADER_VERSION is lower than the minimum supported version (v{0})\");\n".format(firstVersion))
     outFile.write('#else\n')
     outFile.write(
-        "_Static_assert(VK_HEADER_VERSION >= {0}, \"VK_HEADER_VERSION is from before the minimum supported version of v{0}.\");\n".format(firstVersion))
-    outFile.write(
-        "_Static_assert(VK_HEADER_VERSION <= {0}, \"VK_HEADER_VERSION is from after the maximum supported version of v{0}.\");\n".format(lastVersion))
+        "_Static_assert(VK_HEADER_VERSION >= {0}, \"VK_HEADER_VERSION  is lower than the minimum supported version (v{0})\");\n".format(firstVersion))
+    outFile.write('#endif\n')
+
+    # version warnings
+    outFile.write('\n#if VK_HEADER_VERSION > {0}\n'.format(lastVersion))
+    outFile.write('#if _MSC_VER\n')
+    outFile.write('#pragma message(__FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v{0})")\n'.format(lastVersion))
+    outFile.write('#else\n')
+    outFile.write('#warning "VK_HEADER_VERSION is higher than what the header fully supports (v{0})"\n'.format(lastVersion))
+    outFile.write('#endif\n')
     outFile.write('#endif\n')
 
     # Per-struct function declarations

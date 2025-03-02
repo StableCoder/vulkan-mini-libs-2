@@ -38,11 +38,13 @@ def main(argv):
 
     if args.api == 'vulkan':
         apiVersionStr = 'VK_HEADER_VERSION'
+        apiVersionDefine = 'VK_HEADER_VERSION'
         enumType = 'VkResult'
         header = '<vulkan/vulkan.h>'
         guard = 'VK_RESULT'
     elif args.api == 'openxr':
         apiVersionStr = '(XR_CURRENT_API_VERSION & 0xffffffffULL)'
+        apiVersionDefine = 'XR_CURRENT_API_VERSION'
         enumType = 'XrResult'
         header = '<openxr/openxr.h>'
         guard = 'XR_RESULT'
@@ -70,17 +72,22 @@ extern "C" {{
 
 """.format(guard, header))
 
-    # Static asserts
+    # static asserts
     outFile.write('\n#ifdef __cplusplus\n')
     outFile.write(
-        "static_assert({0} >= {1}, \"{2} header version is from before the minimum supported version of v{1}.\");\n".format(apiVersionStr, firstVersion, args.api))
-    outFile.write(
-        "static_assert({0} <= {1}, \"{2} header version is from after the maximum supported version of v{1}.\");\n".format(apiVersionStr, lastVersion, args.api))
+        "static_assert({0} >= {1}, \"{2} is lower than the minimum supported version (v{1})\");\n".format(apiVersionStr, firstVersion, apiVersionDefine))
     outFile.write('#else\n')
     outFile.write(
-        "_Static_assert({0} >= {1}, \"{2} header version is from before the minimum supported version of v{1}.\");\n".format(apiVersionStr, firstVersion, args.api))
-    outFile.write(
-        "_Static_assert({0} <= {1}, \"{2} header version is from after the maximum supported version of v{1}.\");\n".format(apiVersionStr, lastVersion, args.api))
+        "_Static_assert({0} >= {1}, \"{2} is lower than the minimum supported version (v{1})\");\n".format(apiVersionStr, firstVersion, apiVersionDefine))
+    outFile.write('#endif\n')
+
+    # version warnings
+    outFile.write('\n#if {0} > {1}\n'.format(apiVersionStr, lastVersion))
+    outFile.write('#if _MSC_VER\n')
+    outFile.write('#pragma message(__FILE__ ": warning: {} is higher than what the header fully supports (v{})")\n'.format(apiVersionDefine, lastVersion))
+    outFile.write('#else\n')
+    outFile.write('#warning "{} is higher than what the header fully supports (v{})"\n'.format(apiVersionDefine, lastVersion))
+    outFile.write('#endif\n')
     outFile.write('#endif\n')
 
     outFile.write("""
