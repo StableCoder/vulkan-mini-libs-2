@@ -22,11 +22,11 @@ variables:
 
 .platform_windows_template: &platform_windows_template
   stage: Windows
-  image: docker.io/stabletec/build-foe:windows-ltsc2022
+  image: docker.io/stabletec/build-foe:windows-ltsc2025
   tags:
     - container
     - windows
-    - ltsc2022
+    - ltsc2025
     - amd64
   needs: []
   dependencies: []
@@ -75,7 +75,7 @@ Arch/Clang:
 Fedora/GCC:
   parallel:
     matrix:
-      - ARCH: [amd64, arm64, ppc64le]
+      - ARCH: [amd64, arm64, ppc64le, s390x]
   image: docker.io/stabletec/build-foe:fedora
   tags:
     - container
@@ -89,7 +89,7 @@ Fedora/GCC:
 Fedora/Clang:
   parallel:
     matrix:
-      - ARCH: [amd64, arm64, ppc64le]
+      - ARCH: [amd64, arm64, ppc64le, s390x]
   image: docker.io/stabletec/build-foe:fedora
   tags:
     - container
@@ -103,7 +103,7 @@ Fedora/Clang:
 Ubuntu/GCC:
   parallel:
     matrix:
-      - ARCH: [amd64, arm64, ppc64le]
+      - ARCH: [amd64, arm64, ppc64le, s390x, riscv64]
   image: docker.io/stabletec/build-foe:ubuntu
   tags:
     - container
@@ -117,7 +117,7 @@ Ubuntu/GCC:
 Ubuntu/Clang:
   parallel:
     matrix:
-      - ARCH: [amd64, arm64, ppc64le]
+      - ARCH: [amd64, arm64, ppc64le, s390x, riscv64]
   image: docker.io/stabletec/build-foe:ubuntu
   tags:
     - container
@@ -176,14 +176,14 @@ macOS/Clang:
 # Analysis
 Code Coverage:
   stage: Analysis
-  image: docker.io/stabletec/build-foe:arch
+  image: docker.io/stabletec/build-foe:fedora
   tags:
     - container
     - linux
     - amd64
   needs:
-    - "Arch/GCC: [amd64]"
-    - "Arch/Clang: [amd64]"
+    - "Fedora/GCC"
+    - "Fedora/Clang"
   dependencies: []
   variables:
     CC: clang
@@ -201,14 +201,14 @@ Code Coverage:
 
 .analysis_template: &analysis_template
   stage: Analysis
-  image: docker.io/stabletec/build-foe:arch
+  image: docker.io/stabletec/build-foe:fedora
   tags:
     - container
     - linux
     - amd64
   needs:
-    - "Arch/GCC: [amd64]"
-    - "Arch/Clang: [amd64]"
+    - "Fedora/GCC"
+    - "Fedora/Clang"
   dependencies: []
   script:
     - cmake -S . -B build -G Ninja -D CMAKE_BUILD_TYPE=Release -D BUILD_TESTS=ON ${CMAKE_OPTIONS}
