@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 309
+#if VK_HEADER_VERSION > 310
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v309)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v310)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v309)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v310)"
 #endif
 #endif
 
@@ -308,13 +308,13 @@ EnumValueSet const VkAccessFlagsSets[] = {
     {"FRAGMENT_DENSITY_MAP_READ_BIT_EXT", 0x01000000, false},
     {"ACCELERATION_STRUCTURE_READ_BIT_KHR", 0x00200000, false},
     {"ACCELERATION_STRUCTURE_WRITE_BIT_KHR", 0x00400000, false},
-    {"COMMAND_PREPROCESS_READ_BIT_NV", 0x00020000, false},
-    {"COMMAND_PREPROCESS_WRITE_BIT_NV", 0x00040000, false},
+    {"COMMAND_PREPROCESS_READ_BIT_NV", 0x00020000, true},
+    {"COMMAND_PREPROCESS_WRITE_BIT_NV", 0x00040000, true},
     {"FRAGMENT_SHADING_RATE_ATTACHMENT_READ_BIT_KHR", 0x00800000, false},
     {"NONE_KHR", 0, true},
     {"NONE", 0, false},
-    {"COMMAND_PREPROCESS_READ_BIT_EXT", 0x00020000, true},
-    {"COMMAND_PREPROCESS_WRITE_BIT_EXT", 0x00040000, true},
+    {"COMMAND_PREPROCESS_READ_BIT_EXT", 0x00020000, false},
+    {"COMMAND_PREPROCESS_WRITE_BIT_EXT", 0x00040000, false},
 };
 
 EnumValueSet const VkBufferUsageFlagsSets[] = {
@@ -699,13 +699,13 @@ EnumValueSet const VkPipelineStageFlagsSets[] = {
     {"FRAGMENT_DENSITY_PROCESS_BIT_EXT", 0x00800000, false},
     {"ACCELERATION_STRUCTURE_BUILD_BIT_KHR", 0x02000000, false},
     {"RAY_TRACING_SHADER_BIT_KHR", 0x00200000, false},
-    {"COMMAND_PREPROCESS_BIT_NV", 0x00020000, false},
+    {"COMMAND_PREPROCESS_BIT_NV", 0x00020000, true},
     {"FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR", 0x00400000, false},
     {"NONE_KHR", 0, true},
     {"NONE", 0, false},
     {"TASK_SHADER_BIT_EXT", 0x00080000, false},
     {"MESH_SHADER_BIT_EXT", 0x00100000, false},
-    {"COMMAND_PREPROCESS_BIT_EXT", 0x00020000, true},
+    {"COMMAND_PREPROCESS_BIT_EXT", 0x00020000, false},
 };
 
 EnumValueSet const VkSampleCountFlagsSets[] = {
@@ -922,8 +922,8 @@ EnumValueSet const VkAccessFlags2Sets[] = {
     {"TRANSFORM_FEEDBACK_COUNTER_READ_BIT_EXT", 0x04000000, false},
     {"TRANSFORM_FEEDBACK_COUNTER_WRITE_BIT_EXT", 0x08000000, false},
     {"CONDITIONAL_RENDERING_READ_BIT_EXT", 0x00100000, false},
-    {"COMMAND_PREPROCESS_READ_BIT_NV", 0x00020000, false},
-    {"COMMAND_PREPROCESS_WRITE_BIT_NV", 0x00040000, false},
+    {"COMMAND_PREPROCESS_READ_BIT_NV", 0x00020000, true},
+    {"COMMAND_PREPROCESS_WRITE_BIT_NV", 0x00040000, true},
     {"FRAGMENT_SHADING_RATE_ATTACHMENT_READ_BIT_KHR", 0x00800000, false},
     {"SHADING_RATE_IMAGE_READ_BIT_NV", 0x00800000, true},
     {"ACCELERATION_STRUCTURE_READ_BIT_KHR", 0x00200000, false},
@@ -939,8 +939,8 @@ EnumValueSet const VkAccessFlags2Sets[] = {
     {"OPTICAL_FLOW_READ_BIT_NV", 0x40000000000, false},
     {"OPTICAL_FLOW_WRITE_BIT_NV", 0x80000000000, false},
     {"DESCRIPTOR_BUFFER_READ_BIT_EXT", 0x20000000000, false},
-    {"COMMAND_PREPROCESS_READ_BIT_EXT", 0x00020000, true},
-    {"COMMAND_PREPROCESS_WRITE_BIT_EXT", 0x00040000, true},
+    {"COMMAND_PREPROCESS_READ_BIT_EXT", 0x00020000, false},
+    {"COMMAND_PREPROCESS_WRITE_BIT_EXT", 0x00040000, false},
 };
 
 EnumValueSet const VkPipelineStageFlags2Sets[] = {
@@ -1000,7 +1000,7 @@ EnumValueSet const VkPipelineStageFlags2Sets[] = {
     {"PRE_RASTERIZATION_SHADERS_BIT_KHR", 0x4000000000, true},
     {"TRANSFORM_FEEDBACK_BIT_EXT", 0x01000000, false},
     {"CONDITIONAL_RENDERING_BIT_EXT", 0x00040000, false},
-    {"COMMAND_PREPROCESS_BIT_NV", 0x00020000, false},
+    {"COMMAND_PREPROCESS_BIT_NV", 0x00020000, true},
     {"FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR", 0x00400000, false},
     {"SHADING_RATE_IMAGE_BIT_NV", 0x00400000, true},
     {"ACCELERATION_STRUCTURE_BUILD_BIT_KHR", 0x02000000, false},
@@ -1019,7 +1019,7 @@ EnumValueSet const VkPipelineStageFlags2Sets[] = {
     {"OPTICAL_FLOW_BIT_NV", 0x20000000, false},
     {"CLUSTER_CULLING_SHADER_BIT_HUAWEI", 0x20000000000, false},
     {"SUBPASS_SHADER_BIT_HUAWEI", 0x8000000000, false},
-    {"COMMAND_PREPROCESS_BIT_EXT", 0x00020000, true},
+    {"COMMAND_PREPROCESS_BIT_EXT", 0x00020000, false},
     {"CONVERT_COOPERATIVE_VECTOR_MATRIX_BIT_NV", 0x100000000000, false},
 };
 

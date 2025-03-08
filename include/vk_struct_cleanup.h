@@ -37,12 +37,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 309
+#if VK_HEADER_VERSION > 310
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v309)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v310)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v309)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v310)"
 #endif
 #endif
 
@@ -27671,7 +27671,7 @@ void cleanup_VkFormatProperties3KHR(VkFormatProperties3KHR const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 195 && VK_HEADER_VERSION <= 203 && (VK_EXT_image_drm_format_modifier)
-void cleanup_VkDrmFormatModifierProperties2EXT(VkDrmFormatModifierProperties2EXT const *pData) {}
+void cleanup_VkDrmFormatModifierProperties2EXT(VkDrmFormatModifierProperties2EXT const *pData){}
 #endif
 
 #if VK_HEADER_VERSION >= 195 && VK_HEADER_VERSION <= 203 &&                                        \
@@ -36908,7 +36908,7 @@ void cleanup_VkPhysicalDeviceClusterAccelerationStructurePropertiesNV(
 #endif
 
 #if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
-void cleanup_VkStridedDeviceAddressNV(VkStridedDeviceAddressNV const *pData) {}
+void cleanup_VkStridedDeviceAddressNV(VkStridedDeviceAddressNV const *pData){}
 #endif
 
 #if VK_HEADER_VERSION >= 307 &&                                                                    \
