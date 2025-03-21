@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 310
+#if VK_HEADER_VERSION > 311
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v310)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v311)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v310)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v311)"
 #endif
 #endif
 
@@ -3364,7 +3364,13 @@ bool compare_VkPhysicalDeviceFragmentDensityMap2FeaturesEXT(
     VkPhysicalDeviceFragmentDensityMap2FeaturesEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 203 && (VK_QCOM_fragment_density_map_offset)
+#if VK_HEADER_VERSION >= 311 && (VK_EXT_fragment_density_map_offset)
+bool compare_VkPhysicalDeviceFragmentDensityMapOffsetFeaturesEXT(
+    VkPhysicalDeviceFragmentDensityMapOffsetFeaturesEXT const *s1,
+    VkPhysicalDeviceFragmentDensityMapOffsetFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 311 && (VK_QCOM_fragment_density_map_offset)
 bool compare_VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM(
     VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM const *s1,
     VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM const *s2);
@@ -3382,7 +3388,13 @@ bool compare_VkPhysicalDeviceFragmentDensityMap2PropertiesEXT(
     VkPhysicalDeviceFragmentDensityMap2PropertiesEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 203 && (VK_QCOM_fragment_density_map_offset)
+#if VK_HEADER_VERSION >= 311 && (VK_EXT_fragment_density_map_offset)
+bool compare_VkPhysicalDeviceFragmentDensityMapOffsetPropertiesEXT(
+    VkPhysicalDeviceFragmentDensityMapOffsetPropertiesEXT const *s1,
+    VkPhysicalDeviceFragmentDensityMapOffsetPropertiesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 311 && (VK_QCOM_fragment_density_map_offset)
 bool compare_VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM(
     VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM const *s1,
     VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM const *s2);
@@ -3394,7 +3406,13 @@ bool compare_VkRenderPassFragmentDensityMapCreateInfoEXT(
     VkRenderPassFragmentDensityMapCreateInfoEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 203 && (VK_QCOM_fragment_density_map_offset)
+#if VK_HEADER_VERSION >= 311 && (VK_EXT_fragment_density_map_offset)
+bool compare_VkRenderPassFragmentDensityMapOffsetEndInfoEXT(
+    VkRenderPassFragmentDensityMapOffsetEndInfoEXT const *s1,
+    VkRenderPassFragmentDensityMapOffsetEndInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 311 && (VK_QCOM_fragment_density_map_offset)
 bool compare_VkSubpassFragmentDensityMapOffsetEndInfoQCOM(
     VkSubpassFragmentDensityMapOffsetEndInfoQCOM const *s1,
     VkSubpassFragmentDensityMapOffsetEndInfoQCOM const *s2);
@@ -6040,6 +6058,11 @@ bool compare_VkRenderingInfo(VkRenderingInfo const *s1, VkRenderingInfo const *s
 bool compare_VkRenderingInfoKHR(VkRenderingInfoKHR const *s1, VkRenderingInfoKHR const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 311 && (VK_EXT_fragment_density_map_offset)
+bool compare_VkRenderingEndInfoEXT(VkRenderingEndInfoEXT const *s1,
+                                   VkRenderingEndInfoEXT const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 197 &&                                                                    \
     ((VK_KHR_fragment_shading_rate && VK_VERSION_1_3 && VK_KHR_dynamic_rendering) ||               \
      (VK_KHR_dynamic_rendering && VK_KHR_fragment_shading_rate))
@@ -7297,6 +7320,12 @@ bool compare_VkMemoryMapPlacedInfoEXT(VkMemoryMapPlacedInfoEXT const *s1,
                                       VkMemoryMapPlacedInfoEXT const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 311 && (VK_KHR_shader_bfloat16)
+bool compare_VkPhysicalDeviceShaderBfloat16FeaturesKHR(
+    VkPhysicalDeviceShaderBfloat16FeaturesKHR const *s1,
+    VkPhysicalDeviceShaderBfloat16FeaturesKHR const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 279 && (VK_NV_raw_access_chains)
 bool compare_VkPhysicalDeviceRawAccessChainsFeaturesNV(
     VkPhysicalDeviceRawAccessChainsFeaturesNV const *s1,
@@ -7409,6 +7438,24 @@ bool compare_VkSetPresentConfigNV(VkSetPresentConfigNV const *s1, VkSetPresentCo
 bool compare_VkPhysicalDevicePresentMeteringFeaturesNV(
     VkPhysicalDevicePresentMeteringFeaturesNV const *s1,
     VkPhysicalDevicePresentMeteringFeaturesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 203 && VK_HEADER_VERSION <= 310 && (VK_QCOM_fragment_density_map_offset)
+bool compare_VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM(
+    VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM const *s1,
+    VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 203 && VK_HEADER_VERSION <= 310 && (VK_QCOM_fragment_density_map_offset)
+bool compare_VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM(
+    VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM const *s1,
+    VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 203 && VK_HEADER_VERSION <= 310 && (VK_QCOM_fragment_density_map_offset)
+bool compare_VkSubpassFragmentDensityMapOffsetEndInfoQCOM(
+    VkSubpassFragmentDensityMapOffsetEndInfoQCOM const *s1,
+    VkSubpassFragmentDensityMapOffsetEndInfoQCOM const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 226 && VK_HEADER_VERSION <= 304 && (VK_EXT_depth_clamp_zero_one)
@@ -17247,14 +17294,24 @@ bool compare_VkPhysicalDeviceFragmentDensityMap2FeaturesEXT(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 203 && (VK_QCOM_fragment_density_map_offset)
-bool compare_VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM(
-    VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM const *s1,
-    VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM const *s2) {
+#if VK_HEADER_VERSION >= 311 && (VK_EXT_fragment_density_map_offset)
+bool compare_VkPhysicalDeviceFragmentDensityMapOffsetFeaturesEXT(
+    VkPhysicalDeviceFragmentDensityMapOffsetFeaturesEXT const *s1,
+    VkPhysicalDeviceFragmentDensityMapOffsetFeaturesEXT const *s2) {
   if ((s1->fragmentDensityMapOffset != s2->fragmentDensityMapOffset) || false)
     return false;
 
   return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 311 && (VK_QCOM_fragment_density_map_offset)
+bool compare_VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM(
+    VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM const *s1,
+    VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM const *s2) {
+  return compare_VkPhysicalDeviceFragmentDensityMapOffsetFeaturesEXT(
+      (VkPhysicalDeviceFragmentDensityMapOffsetFeaturesEXT const *)s1,
+      (VkPhysicalDeviceFragmentDensityMapOffsetFeaturesEXT const *)s2);
 }
 #endif
 
@@ -17286,16 +17343,26 @@ bool compare_VkPhysicalDeviceFragmentDensityMap2PropertiesEXT(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 203 && (VK_QCOM_fragment_density_map_offset)
-bool compare_VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM(
-    VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM const *s1,
-    VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM const *s2) {
+#if VK_HEADER_VERSION >= 311 && (VK_EXT_fragment_density_map_offset)
+bool compare_VkPhysicalDeviceFragmentDensityMapOffsetPropertiesEXT(
+    VkPhysicalDeviceFragmentDensityMapOffsetPropertiesEXT const *s1,
+    VkPhysicalDeviceFragmentDensityMapOffsetPropertiesEXT const *s2) {
   if (!compare_VkExtent2D(&s1->fragmentDensityOffsetGranularity,
                           &s2->fragmentDensityOffsetGranularity) ||
       false)
     return false;
 
   return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 311 && (VK_QCOM_fragment_density_map_offset)
+bool compare_VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM(
+    VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM const *s1,
+    VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM const *s2) {
+  return compare_VkPhysicalDeviceFragmentDensityMapOffsetPropertiesEXT(
+      (VkPhysicalDeviceFragmentDensityMapOffsetPropertiesEXT const *)s1,
+      (VkPhysicalDeviceFragmentDensityMapOffsetPropertiesEXT const *)s2);
 }
 #endif
 
@@ -17312,14 +17379,24 @@ bool compare_VkRenderPassFragmentDensityMapCreateInfoEXT(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 203 && (VK_QCOM_fragment_density_map_offset)
-bool compare_VkSubpassFragmentDensityMapOffsetEndInfoQCOM(
-    VkSubpassFragmentDensityMapOffsetEndInfoQCOM const *s1,
-    VkSubpassFragmentDensityMapOffsetEndInfoQCOM const *s2) {
+#if VK_HEADER_VERSION >= 311 && (VK_EXT_fragment_density_map_offset)
+bool compare_VkRenderPassFragmentDensityMapOffsetEndInfoEXT(
+    VkRenderPassFragmentDensityMapOffsetEndInfoEXT const *s1,
+    VkRenderPassFragmentDensityMapOffsetEndInfoEXT const *s2) {
   if ((s1->fragmentDensityOffsetCount != s2->fragmentDensityOffsetCount) || false)
     return false;
 
   return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 311 && (VK_QCOM_fragment_density_map_offset)
+bool compare_VkSubpassFragmentDensityMapOffsetEndInfoQCOM(
+    VkSubpassFragmentDensityMapOffsetEndInfoQCOM const *s1,
+    VkSubpassFragmentDensityMapOffsetEndInfoQCOM const *s2) {
+  return compare_VkRenderPassFragmentDensityMapOffsetEndInfoEXT(
+      (VkRenderPassFragmentDensityMapOffsetEndInfoEXT const *)s1,
+      (VkRenderPassFragmentDensityMapOffsetEndInfoEXT const *)s2);
 }
 #endif
 
@@ -23415,6 +23492,13 @@ bool compare_VkRenderingInfoKHR(VkRenderingInfoKHR const *s1, VkRenderingInfoKHR
 }
 #endif
 
+#if VK_HEADER_VERSION >= 311 && (VK_EXT_fragment_density_map_offset)
+bool compare_VkRenderingEndInfoEXT(VkRenderingEndInfoEXT const *s1,
+                                   VkRenderingEndInfoEXT const *s2) {
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 197 &&                                                                    \
     ((VK_KHR_fragment_shading_rate && VK_VERSION_1_3 && VK_KHR_dynamic_rendering) ||               \
      (VK_KHR_dynamic_rendering && VK_KHR_fragment_shading_rate))
@@ -25962,6 +26046,19 @@ bool compare_VkMemoryMapPlacedInfoEXT(VkMemoryMapPlacedInfoEXT const *s1,
 }
 #endif
 
+#if VK_HEADER_VERSION >= 311 && (VK_KHR_shader_bfloat16)
+bool compare_VkPhysicalDeviceShaderBfloat16FeaturesKHR(
+    VkPhysicalDeviceShaderBfloat16FeaturesKHR const *s1,
+    VkPhysicalDeviceShaderBfloat16FeaturesKHR const *s2) {
+  if ((s1->shaderBFloat16Type != s2->shaderBFloat16Type) ||
+      (s1->shaderBFloat16DotProduct != s2->shaderBFloat16DotProduct) ||
+      (s1->shaderBFloat16CooperativeMatrix != s2->shaderBFloat16CooperativeMatrix) || false)
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 279 && (VK_NV_raw_access_chains)
 bool compare_VkPhysicalDeviceRawAccessChainsFeaturesNV(
     VkPhysicalDeviceRawAccessChainsFeaturesNV const *s1,
@@ -26202,6 +26299,41 @@ bool compare_VkPhysicalDevicePresentMeteringFeaturesNV(
     VkPhysicalDevicePresentMeteringFeaturesNV const *s1,
     VkPhysicalDevicePresentMeteringFeaturesNV const *s2) {
   if ((s1->presentMetering != s2->presentMetering) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 203 && VK_HEADER_VERSION <= 310 && (VK_QCOM_fragment_density_map_offset)
+bool compare_VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM(
+    VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM const *s1,
+    VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM const *s2) {
+  if ((s1->fragmentDensityMapOffset != s2->fragmentDensityMapOffset) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 203 && VK_HEADER_VERSION <= 310 && (VK_QCOM_fragment_density_map_offset)
+bool compare_VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM(
+    VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM const *s1,
+    VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM const *s2) {
+  if (!compare_VkExtent2D(&s1->fragmentDensityOffsetGranularity,
+                          &s2->fragmentDensityOffsetGranularity) ||
+      false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 203 && VK_HEADER_VERSION <= 310 && (VK_QCOM_fragment_density_map_offset)
+bool compare_VkSubpassFragmentDensityMapOffsetEndInfoQCOM(
+    VkSubpassFragmentDensityMapOffsetEndInfoQCOM const *s1,
+    VkSubpassFragmentDensityMapOffsetEndInfoQCOM const *s2) {
+  if ((s1->fragmentDensityOffsetCount != s2->fragmentDensityOffsetCount) || false)
     return false;
 
   return true;

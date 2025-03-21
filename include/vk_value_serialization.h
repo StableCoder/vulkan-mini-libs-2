@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 310
+#if VK_HEADER_VERSION > 311
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v310)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v311)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v310)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v311)"
 #endif
 #endif
 
@@ -448,11 +448,12 @@ EnumValueSet const VkImageCreateFlagsSets[] = {
     {"ALIAS_BIT_KHR", 0x00000400, true},
     {"CORNER_SAMPLED_BIT_NV", 0x00002000, false},
     {"SUBSAMPLED_BIT_EXT", 0x00004000, false},
-    {"FRAGMENT_DENSITY_MAP_OFFSET_BIT_QCOM", 0x00008000, false},
+    {"FRAGMENT_DENSITY_MAP_OFFSET_BIT_QCOM", 0x00008000, true},
     {"2D_VIEW_COMPATIBLE_BIT_EXT", 0x00020000, false},
     {"MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_BIT_EXT", 0x00040000, false},
     {"DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT", 0x00010000, false},
     {"VIDEO_PROFILE_INDEPENDENT_BIT_KHR", 0x00100000, false},
+    {"FRAGMENT_DENSITY_MAP_OFFSET_BIT_EXT", 0x00008000, false},
 };
 
 EnumValueSet const VkImageViewCreateFlagsSets[] = {
@@ -3123,6 +3124,7 @@ EnumValueSet const VkComponentTypeKHRSets[] = {
     {"UINT8_PACKED_NV", 1000491001, false},
     {"FLOAT_E4M3_NV", 1000491002, false},
     {"FLOAT_E5M2_NV", 1000491003, false},
+    {"BFLOAT16", 1000141000, false},
 };
 
 EnumValueSet const VkCubicFilterWeightsQCOMSets[] = {
@@ -3872,7 +3874,7 @@ EnumType const cEnumTypes[384] = {
     {"VkBufferCreateFlags", VkBufferCreateFlagsSets, 9},
     {"VkShaderStageFlags", VkShaderStageFlagsSets, 32},
     {"VkImageUsageFlags", VkImageUsageFlagsSets, 25},
-    {"VkImageCreateFlags", VkImageCreateFlagsSets, 26},
+    {"VkImageCreateFlags", VkImageCreateFlagsSets, 27},
     {"VkImageViewCreateFlags", VkImageViewCreateFlagsSets, 3},
     {"VkPipelineCreateFlags", VkPipelineCreateFlagsSets, 41},
     {"VkColorComponentFlags", VkColorComponentFlagsSets, 4},
@@ -4155,7 +4157,7 @@ EnumType const cEnumTypes[384] = {
     {"VkDisplacementMicromapFormatNV", VkDisplacementMicromapFormatNVSets, 3},
     {"VkShaderCodeTypeEXT", VkShaderCodeTypeEXTSets, 2},
     {"VkScopeKHR", VkScopeKHRSets, 8},
-    {"VkComponentTypeKHR", VkComponentTypeKHRSets, 26},
+    {"VkComponentTypeKHR", VkComponentTypeKHRSets, 27},
     {"VkCubicFilterWeightsQCOM", VkCubicFilterWeightsQCOMSets, 4},
     {"VkBlockMatchWindowCompareModeQCOM", VkBlockMatchWindowCompareModeQCOMSets, 2},
     {"VkLayeredDriverUnderlyingApiMSFT", VkLayeredDriverUnderlyingApiMSFTSets, 2},

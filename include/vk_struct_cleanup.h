@@ -37,12 +37,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 310
+#if VK_HEADER_VERSION > 311
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v310)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v311)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v310)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v311)"
 #endif
 #endif
 
@@ -4152,24 +4152,24 @@ void cleanup_VkVideoEncodeH264RateControlInfoEXT(VkVideoEncodeH264RateControlInf
 void cleanup_VkVideoEncodeH265RateControlInfoEXT(VkVideoEncodeH265RateControlInfoEXT const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 203 && (VK_QCOM_fragment_density_map_offset)
+#if VK_HEADER_VERSION >= 203 && (VK_NV_linear_color_attachment)
+void cleanup_VkPhysicalDeviceLinearColorAttachmentFeaturesNV(
+    VkPhysicalDeviceLinearColorAttachmentFeaturesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 203 && VK_HEADER_VERSION <= 310 && (VK_QCOM_fragment_density_map_offset)
 void cleanup_VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM(
     VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 203 && (VK_QCOM_fragment_density_map_offset)
+#if VK_HEADER_VERSION >= 203 && VK_HEADER_VERSION <= 310 && (VK_QCOM_fragment_density_map_offset)
 void cleanup_VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM(
     VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 203 && (VK_QCOM_fragment_density_map_offset)
+#if VK_HEADER_VERSION >= 203 && VK_HEADER_VERSION <= 310 && (VK_QCOM_fragment_density_map_offset)
 void cleanup_VkSubpassFragmentDensityMapOffsetEndInfoQCOM(
     VkSubpassFragmentDensityMapOffsetEndInfoQCOM const *pData);
-#endif
-
-#if VK_HEADER_VERSION >= 203 && (VK_NV_linear_color_attachment)
-void cleanup_VkPhysicalDeviceLinearColorAttachmentFeaturesNV(
-    VkPhysicalDeviceLinearColorAttachmentFeaturesNV const *pData);
 #endif
 
 #if VK_HEADER_VERSION >= 203 && VK_HEADER_VERSION <= 224 && (VK_EXT_video_encode_h264)
@@ -8138,6 +8138,45 @@ void cleanup_VkSetPresentConfigNV(VkSetPresentConfigNV const *pData);
 #if VK_HEADER_VERSION >= 308 && (VK_NV_present_metering)
 void cleanup_VkPhysicalDevicePresentMeteringFeaturesNV(
     VkPhysicalDevicePresentMeteringFeaturesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 311 && (VK_EXT_fragment_density_map_offset)
+void cleanup_VkPhysicalDeviceFragmentDensityMapOffsetFeaturesEXT(
+    VkPhysicalDeviceFragmentDensityMapOffsetFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 311 && (VK_QCOM_fragment_density_map_offset)
+void cleanup_VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM(
+    VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 311 && (VK_EXT_fragment_density_map_offset)
+void cleanup_VkPhysicalDeviceFragmentDensityMapOffsetPropertiesEXT(
+    VkPhysicalDeviceFragmentDensityMapOffsetPropertiesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 311 && (VK_QCOM_fragment_density_map_offset)
+void cleanup_VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM(
+    VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 311 && (VK_EXT_fragment_density_map_offset)
+void cleanup_VkRenderPassFragmentDensityMapOffsetEndInfoEXT(
+    VkRenderPassFragmentDensityMapOffsetEndInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 311 && (VK_QCOM_fragment_density_map_offset)
+void cleanup_VkSubpassFragmentDensityMapOffsetEndInfoQCOM(
+    VkSubpassFragmentDensityMapOffsetEndInfoQCOM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 311 && (VK_EXT_fragment_density_map_offset)
+void cleanup_VkRenderingEndInfoEXT(VkRenderingEndInfoEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 311 && (VK_KHR_shader_bfloat16)
+void cleanup_VkPhysicalDeviceShaderBfloat16FeaturesKHR(
+    VkPhysicalDeviceShaderBfloat16FeaturesKHR const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -13399,7 +13438,15 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
-#if VK_HEADER_VERSION >= 203 && (VK_QCOM_fragment_density_map_offset)
+#if VK_HEADER_VERSION >= 203 && (VK_NV_linear_color_attachment)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV) {
+    cleanup_VkPhysicalDeviceLinearColorAttachmentFeaturesNV(
+        (VkPhysicalDeviceLinearColorAttachmentFeaturesNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 203 && VK_HEADER_VERSION <= 310 && (VK_QCOM_fragment_density_map_offset)
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_FEATURES_QCOM) {
     cleanup_VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM(
         (VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM const *)pData);
@@ -13407,7 +13454,7 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
-#if VK_HEADER_VERSION >= 203 && (VK_QCOM_fragment_density_map_offset)
+#if VK_HEADER_VERSION >= 203 && VK_HEADER_VERSION <= 310 && (VK_QCOM_fragment_density_map_offset)
   if (pTemp->sType ==
       VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_PROPERTIES_QCOM) {
     cleanup_VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM(
@@ -13416,18 +13463,10 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
-#if VK_HEADER_VERSION >= 203 && (VK_QCOM_fragment_density_map_offset)
+#if VK_HEADER_VERSION >= 203 && VK_HEADER_VERSION <= 310 && (VK_QCOM_fragment_density_map_offset)
   if (pTemp->sType == VK_STRUCTURE_TYPE_SUBPASS_FRAGMENT_DENSITY_MAP_OFFSET_END_INFO_QCOM) {
     cleanup_VkSubpassFragmentDensityMapOffsetEndInfoQCOM(
         (VkSubpassFragmentDensityMapOffsetEndInfoQCOM const *)pData);
-    return;
-  }
-#endif
-
-#if VK_HEADER_VERSION >= 203 && (VK_NV_linear_color_attachment)
-  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_LINEAR_COLOR_ATTACHMENT_FEATURES_NV) {
-    cleanup_VkPhysicalDeviceLinearColorAttachmentFeaturesNV(
-        (VkPhysicalDeviceLinearColorAttachmentFeaturesNV const *)pData);
     return;
   }
 #endif
@@ -18602,6 +18641,46 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRESENT_METERING_FEATURES_NV) {
     cleanup_VkPhysicalDevicePresentMeteringFeaturesNV(
         (VkPhysicalDevicePresentMeteringFeaturesNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 311 && (VK_EXT_fragment_density_map_offset)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_FEATURES_EXT) {
+    cleanup_VkPhysicalDeviceFragmentDensityMapOffsetFeaturesEXT(
+        (VkPhysicalDeviceFragmentDensityMapOffsetFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 311 && (VK_EXT_fragment_density_map_offset)
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_OFFSET_PROPERTIES_EXT) {
+    cleanup_VkPhysicalDeviceFragmentDensityMapOffsetPropertiesEXT(
+        (VkPhysicalDeviceFragmentDensityMapOffsetPropertiesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 311 && (VK_EXT_fragment_density_map_offset)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RENDER_PASS_FRAGMENT_DENSITY_MAP_OFFSET_END_INFO_EXT) {
+    cleanup_VkRenderPassFragmentDensityMapOffsetEndInfoEXT(
+        (VkRenderPassFragmentDensityMapOffsetEndInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 311 && (VK_EXT_fragment_density_map_offset)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_RENDERING_END_INFO_EXT) {
+    cleanup_VkRenderingEndInfoEXT((VkRenderingEndInfoEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 311 && (VK_KHR_shader_bfloat16)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_BFLOAT16_FEATURES_KHR) {
+    cleanup_VkPhysicalDeviceShaderBfloat16FeaturesKHR(
+        (VkPhysicalDeviceShaderBfloat16FeaturesKHR const *)pData);
     return;
   }
 #endif
@@ -28168,7 +28247,17 @@ void cleanup_VkVideoEncodeH265RateControlInfoEXT(VkVideoEncodeH265RateControlInf
 }
 #endif
 
-#if VK_HEADER_VERSION >= 203 && (VK_QCOM_fragment_density_map_offset)
+#if VK_HEADER_VERSION >= 203 && (VK_NV_linear_color_attachment)
+void cleanup_VkPhysicalDeviceLinearColorAttachmentFeaturesNV(
+    VkPhysicalDeviceLinearColorAttachmentFeaturesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 203 && VK_HEADER_VERSION <= 310 && (VK_QCOM_fragment_density_map_offset)
 void cleanup_VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM(
     VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM const *pData) {
   // pNext
@@ -28178,7 +28267,7 @@ void cleanup_VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 203 && (VK_QCOM_fragment_density_map_offset)
+#if VK_HEADER_VERSION >= 203 && VK_HEADER_VERSION <= 310 && (VK_QCOM_fragment_density_map_offset)
 void cleanup_VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM(
     VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM const *pData) {
   // pNext
@@ -28188,7 +28277,7 @@ void cleanup_VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 203 && (VK_QCOM_fragment_density_map_offset)
+#if VK_HEADER_VERSION >= 203 && VK_HEADER_VERSION <= 310 && (VK_QCOM_fragment_density_map_offset)
 void cleanup_VkSubpassFragmentDensityMapOffsetEndInfoQCOM(
     VkSubpassFragmentDensityMapOffsetEndInfoQCOM const *pData) {
   // pNext
@@ -28202,16 +28291,6 @@ void cleanup_VkSubpassFragmentDensityMapOffsetEndInfoQCOM(
       cleanup_VkOffset2D(&pData->pFragmentDensityOffsets[i]);
   }
   free((void *)pData->pFragmentDensityOffsets);
-}
-#endif
-
-#if VK_HEADER_VERSION >= 203 && (VK_NV_linear_color_attachment)
-void cleanup_VkPhysicalDeviceLinearColorAttachmentFeaturesNV(
-    VkPhysicalDeviceLinearColorAttachmentFeaturesNV const *pData) {
-  // pNext
-  if (pData->pNext != NULL)
-    cleanup_vk_struct(pData->pNext);
-  free((void *)pData->pNext);
 }
 #endif
 
@@ -37169,6 +37248,86 @@ void cleanup_VkSetPresentConfigNV(VkSetPresentConfigNV const *pData) {
 #if VK_HEADER_VERSION >= 308 && (VK_NV_present_metering)
 void cleanup_VkPhysicalDevicePresentMeteringFeaturesNV(
     VkPhysicalDevicePresentMeteringFeaturesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 311 && (VK_EXT_fragment_density_map_offset)
+void cleanup_VkPhysicalDeviceFragmentDensityMapOffsetFeaturesEXT(
+    VkPhysicalDeviceFragmentDensityMapOffsetFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 311 && (VK_QCOM_fragment_density_map_offset)
+void cleanup_VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM(
+    VkPhysicalDeviceFragmentDensityMapOffsetFeaturesQCOM const *pData) {
+  cleanup_VkPhysicalDeviceFragmentDensityMapOffsetFeaturesEXT(
+      (VkPhysicalDeviceFragmentDensityMapOffsetFeaturesEXT const *)pData);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 311 && (VK_EXT_fragment_density_map_offset)
+void cleanup_VkPhysicalDeviceFragmentDensityMapOffsetPropertiesEXT(
+    VkPhysicalDeviceFragmentDensityMapOffsetPropertiesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 311 && (VK_QCOM_fragment_density_map_offset)
+void cleanup_VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM(
+    VkPhysicalDeviceFragmentDensityMapOffsetPropertiesQCOM const *pData) {
+  cleanup_VkPhysicalDeviceFragmentDensityMapOffsetPropertiesEXT(
+      (VkPhysicalDeviceFragmentDensityMapOffsetPropertiesEXT const *)pData);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 311 && (VK_EXT_fragment_density_map_offset)
+void cleanup_VkRenderPassFragmentDensityMapOffsetEndInfoEXT(
+    VkRenderPassFragmentDensityMapOffsetEndInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pFragmentDensityOffsets - fragmentDensityOffsetCount
+  if (pData->pFragmentDensityOffsets != NULL) {
+    for (uint32_t i = 0; i < pData->fragmentDensityOffsetCount; ++i)
+      cleanup_VkOffset2D(&pData->pFragmentDensityOffsets[i]);
+  }
+  free((void *)pData->pFragmentDensityOffsets);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 311 && (VK_QCOM_fragment_density_map_offset)
+void cleanup_VkSubpassFragmentDensityMapOffsetEndInfoQCOM(
+    VkSubpassFragmentDensityMapOffsetEndInfoQCOM const *pData) {
+  cleanup_VkRenderPassFragmentDensityMapOffsetEndInfoEXT(
+      (VkRenderPassFragmentDensityMapOffsetEndInfoEXT const *)pData);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 311 && (VK_EXT_fragment_density_map_offset)
+void cleanup_VkRenderingEndInfoEXT(VkRenderingEndInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 311 && (VK_KHR_shader_bfloat16)
+void cleanup_VkPhysicalDeviceShaderBfloat16FeaturesKHR(
+    VkPhysicalDeviceShaderBfloat16FeaturesKHR const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
