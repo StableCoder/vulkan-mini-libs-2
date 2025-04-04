@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 311
+#if VK_HEADER_VERSION > 312
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v311)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v312)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v311)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v312)"
 #endif
 #endif
 
@@ -804,18 +804,6 @@ bool compare_VkClusterAccelerationStructureTriangleClusterInputNV(
 bool compare_VkClusterAccelerationStructureMoveObjectsInputNV(
     VkClusterAccelerationStructureMoveObjectsInputNV const *s1,
     VkClusterAccelerationStructureMoveObjectsInputNV const *s2);
-#endif
-
-#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
-bool compare_VkClusterAccelerationStructureInputInfoNV(
-    VkClusterAccelerationStructureInputInfoNV const *s1,
-    VkClusterAccelerationStructureInputInfoNV const *s2);
-#endif
-
-#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
-bool compare_VkClusterAccelerationStructureCommandsInfoNV(
-    VkClusterAccelerationStructureCommandsInfoNV const *s1,
-    VkClusterAccelerationStructureCommandsInfoNV const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 182 && (VK_EXT_multi_draw)
@@ -4189,18 +4177,6 @@ bool compare_VkPhysicalDeviceBorderColorSwizzleFeaturesEXT(
     VkPhysicalDeviceBorderColorSwizzleFeaturesEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 307 && (VK_NV_ray_tracing_linear_swept_spheres)
-bool compare_VkAccelerationStructureGeometryLinearSweptSpheresDataNV(
-    VkAccelerationStructureGeometryLinearSweptSpheresDataNV const *s1,
-    VkAccelerationStructureGeometryLinearSweptSpheresDataNV const *s2);
-#endif
-
-#if VK_HEADER_VERSION >= 307 && (VK_NV_ray_tracing_linear_swept_spheres)
-bool compare_VkAccelerationStructureGeometrySpheresDataNV(
-    VkAccelerationStructureGeometrySpheresDataNV const *s1,
-    VkAccelerationStructureGeometrySpheresDataNV const *s2);
-#endif
-
 #if VK_HEADER_VERSION >= 162 && (VK_KHR_acceleration_structure)
 bool compare_VkAccelerationStructureBuildRangeInfoKHR(
     VkAccelerationStructureBuildRangeInfoKHR const *s1,
@@ -7424,10 +7400,35 @@ bool compare_VkPhysicalDeviceCooperativeVectorPropertiesNV(
     VkPhysicalDeviceCooperativeVectorPropertiesNV const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 307 && (VK_NV_cooperative_vector)
-bool compare_VkConvertCooperativeVectorMatrixInfoNV(
-    VkConvertCooperativeVectorMatrixInfoNV const *s1,
-    VkConvertCooperativeVectorMatrixInfoNV const *s2);
+#if VK_HEADER_VERSION >= 312 && (VK_QCOM_tile_shading)
+bool compare_VkPhysicalDeviceTileShadingFeaturesQCOM(
+    VkPhysicalDeviceTileShadingFeaturesQCOM const *s1,
+    VkPhysicalDeviceTileShadingFeaturesQCOM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 312 && (VK_QCOM_tile_shading)
+bool compare_VkPhysicalDeviceTileShadingPropertiesQCOM(
+    VkPhysicalDeviceTileShadingPropertiesQCOM const *s1,
+    VkPhysicalDeviceTileShadingPropertiesQCOM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 312 && (VK_QCOM_tile_shading)
+bool compare_VkRenderPassTileShadingCreateInfoQCOM(VkRenderPassTileShadingCreateInfoQCOM const *s1,
+                                                   VkRenderPassTileShadingCreateInfoQCOM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 312 && (VK_QCOM_tile_shading)
+bool compare_VkPerTileBeginInfoQCOM(VkPerTileBeginInfoQCOM const *s1,
+                                    VkPerTileBeginInfoQCOM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 312 && (VK_QCOM_tile_shading)
+bool compare_VkPerTileEndInfoQCOM(VkPerTileEndInfoQCOM const *s1, VkPerTileEndInfoQCOM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 312 && (VK_QCOM_tile_shading)
+bool compare_VkDispatchTileInfoQCOM(VkDispatchTileInfoQCOM const *s1,
+                                    VkDispatchTileInfoQCOM const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 308 && (VK_NV_present_metering)
@@ -7438,6 +7439,28 @@ bool compare_VkSetPresentConfigNV(VkSetPresentConfigNV const *s1, VkSetPresentCo
 bool compare_VkPhysicalDevicePresentMeteringFeaturesNV(
     VkPhysicalDevicePresentMeteringFeaturesNV const *s1,
     VkPhysicalDevicePresentMeteringFeaturesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 312 && (VK_NV_external_compute_queue)
+bool compare_VkExternalComputeQueueDeviceCreateInfoNV(
+    VkExternalComputeQueueDeviceCreateInfoNV const *s1,
+    VkExternalComputeQueueDeviceCreateInfoNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 312 && (VK_NV_external_compute_queue)
+bool compare_VkExternalComputeQueueCreateInfoNV(VkExternalComputeQueueCreateInfoNV const *s1,
+                                                VkExternalComputeQueueCreateInfoNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 312 && (VK_NV_external_compute_queue)
+bool compare_VkExternalComputeQueueDataParamsNV(VkExternalComputeQueueDataParamsNV const *s1,
+                                                VkExternalComputeQueueDataParamsNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 312 && (VK_NV_external_compute_queue)
+bool compare_VkPhysicalDeviceExternalComputeQueuePropertiesNV(
+    VkPhysicalDeviceExternalComputeQueuePropertiesNV const *s1,
+    VkPhysicalDeviceExternalComputeQueuePropertiesNV const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 203 && VK_HEADER_VERSION <= 310 && (VK_QCOM_fragment_density_map_offset)
@@ -11930,36 +11953,6 @@ bool compare_VkClusterAccelerationStructureMoveObjectsInputNV(
     VkClusterAccelerationStructureMoveObjectsInputNV const *s2) {
   if ((s1->type != s2->type) || (s1->noMoveOverlap != s2->noMoveOverlap) ||
       (s1->maxMovedBytes != s2->maxMovedBytes) || false)
-    return false;
-
-  return true;
-}
-#endif
-
-#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
-bool compare_VkClusterAccelerationStructureInputInfoNV(
-    VkClusterAccelerationStructureInputInfoNV const *s1,
-    VkClusterAccelerationStructureInputInfoNV const *s2) {
-  if ((s1->maxAccelerationStructureCount != s2->maxAccelerationStructureCount) ||
-      (s1->flags != s2->flags) || (s1->opType != s2->opType) || (s1->opMode != s2->opMode) ||
-      (s1->opInput != s2->opInput) || false)
-    return false;
-
-  return true;
-}
-#endif
-
-#if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
-bool compare_VkClusterAccelerationStructureCommandsInfoNV(
-    VkClusterAccelerationStructureCommandsInfoNV const *s1,
-    VkClusterAccelerationStructureCommandsInfoNV const *s2) {
-  if (!compare_VkClusterAccelerationStructureInputInfoNV(&s1->input, &s2->input) ||
-      (s1->dstImplicitData != s2->dstImplicitData) || (s1->scratchData != s2->scratchData) ||
-      !compare_VkStridedDeviceAddressRegionKHR(&s1->dstAddressesArray, &s2->dstAddressesArray) ||
-      !compare_VkStridedDeviceAddressRegionKHR(&s1->dstSizesArray, &s2->dstSizesArray) ||
-      !compare_VkStridedDeviceAddressRegionKHR(&s1->srcInfosArray, &s2->srcInfosArray) ||
-      (s1->srcInfosCount != s2->srcInfosCount) ||
-      (s1->addressResolutionFlags != s2->addressResolutionFlags) || false)
     return false;
 
   return true;
@@ -19247,37 +19240,6 @@ bool compare_VkPhysicalDeviceBorderColorSwizzleFeaturesEXT(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 307 && (VK_NV_ray_tracing_linear_swept_spheres)
-bool compare_VkAccelerationStructureGeometryLinearSweptSpheresDataNV(
-    VkAccelerationStructureGeometryLinearSweptSpheresDataNV const *s1,
-    VkAccelerationStructureGeometryLinearSweptSpheresDataNV const *s2) {
-  if ((s1->vertexFormat != s2->vertexFormat) || (s1->vertexData != s2->vertexData) ||
-      (s1->vertexStride != s2->vertexStride) || (s1->radiusFormat != s2->radiusFormat) ||
-      (s1->radiusData != s2->radiusData) || (s1->radiusStride != s2->radiusStride) ||
-      (s1->indexType != s2->indexType) || (s1->indexData != s2->indexData) ||
-      (s1->indexStride != s2->indexStride) || (s1->indexingMode != s2->indexingMode) ||
-      (s1->endCapsMode != s2->endCapsMode) || false)
-    return false;
-
-  return true;
-}
-#endif
-
-#if VK_HEADER_VERSION >= 307 && (VK_NV_ray_tracing_linear_swept_spheres)
-bool compare_VkAccelerationStructureGeometrySpheresDataNV(
-    VkAccelerationStructureGeometrySpheresDataNV const *s1,
-    VkAccelerationStructureGeometrySpheresDataNV const *s2) {
-  if ((s1->vertexFormat != s2->vertexFormat) || (s1->vertexData != s2->vertexData) ||
-      (s1->vertexStride != s2->vertexStride) || (s1->radiusFormat != s2->radiusFormat) ||
-      (s1->radiusData != s2->radiusData) || (s1->radiusStride != s2->radiusStride) ||
-      (s1->indexType != s2->indexType) || (s1->indexData != s2->indexData) ||
-      (s1->indexStride != s2->indexStride) || false)
-    return false;
-
-  return true;
-}
-#endif
-
 #if VK_HEADER_VERSION >= 162 && (VK_KHR_acceleration_structure)
 bool compare_VkAccelerationStructureBuildRangeInfoKHR(
     VkAccelerationStructureBuildRangeInfoKHR const *s1,
@@ -26268,18 +26230,71 @@ bool compare_VkPhysicalDeviceCooperativeVectorPropertiesNV(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 307 && (VK_NV_cooperative_vector)
-bool compare_VkConvertCooperativeVectorMatrixInfoNV(
-    VkConvertCooperativeVectorMatrixInfoNV const *s1,
-    VkConvertCooperativeVectorMatrixInfoNV const *s2) {
-  if ((s1->srcSize != s2->srcSize) || (s1->srcData != s2->srcData) ||
-      (s1->dstData != s2->dstData) || (s1->srcComponentType != s2->srcComponentType) ||
-      (s1->dstComponentType != s2->dstComponentType) || (s1->numRows != s2->numRows) ||
-      (s1->numColumns != s2->numColumns) || (s1->srcLayout != s2->srcLayout) ||
-      (s1->srcStride != s2->srcStride) || (s1->dstLayout != s2->dstLayout) ||
-      (s1->dstStride != s2->dstStride) || false)
+#if VK_HEADER_VERSION >= 312 && (VK_QCOM_tile_shading)
+bool compare_VkPhysicalDeviceTileShadingFeaturesQCOM(
+    VkPhysicalDeviceTileShadingFeaturesQCOM const *s1,
+    VkPhysicalDeviceTileShadingFeaturesQCOM const *s2) {
+  if ((s1->tileShading != s2->tileShading) ||
+      (s1->tileShadingFragmentStage != s2->tileShadingFragmentStage) ||
+      (s1->tileShadingColorAttachments != s2->tileShadingColorAttachments) ||
+      (s1->tileShadingDepthAttachments != s2->tileShadingDepthAttachments) ||
+      (s1->tileShadingStencilAttachments != s2->tileShadingStencilAttachments) ||
+      (s1->tileShadingInputAttachments != s2->tileShadingInputAttachments) ||
+      (s1->tileShadingSampledAttachments != s2->tileShadingSampledAttachments) ||
+      (s1->tileShadingPerTileDraw != s2->tileShadingPerTileDraw) ||
+      (s1->tileShadingPerTileDispatch != s2->tileShadingPerTileDispatch) ||
+      (s1->tileShadingDispatchTile != s2->tileShadingDispatchTile) ||
+      (s1->tileShadingApron != s2->tileShadingApron) ||
+      (s1->tileShadingAnisotropicApron != s2->tileShadingAnisotropicApron) ||
+      (s1->tileShadingAtomicOps != s2->tileShadingAtomicOps) ||
+      (s1->tileShadingImageProcessing != s2->tileShadingImageProcessing) || false)
     return false;
 
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 312 && (VK_QCOM_tile_shading)
+bool compare_VkPhysicalDeviceTileShadingPropertiesQCOM(
+    VkPhysicalDeviceTileShadingPropertiesQCOM const *s1,
+    VkPhysicalDeviceTileShadingPropertiesQCOM const *s2) {
+  if ((s1->maxApronSize != s2->maxApronSize) || (s1->preferNonCoherent != s2->preferNonCoherent) ||
+      !compare_VkExtent2D(&s1->tileGranularity, &s2->tileGranularity) ||
+      !compare_VkExtent2D(&s1->maxTileShadingRate, &s2->maxTileShadingRate) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 312 && (VK_QCOM_tile_shading)
+bool compare_VkRenderPassTileShadingCreateInfoQCOM(
+    VkRenderPassTileShadingCreateInfoQCOM const *s1,
+    VkRenderPassTileShadingCreateInfoQCOM const *s2) {
+  if ((s1->flags != s2->flags) || !compare_VkExtent2D(&s1->tileApronSize, &s2->tileApronSize) ||
+      false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 312 && (VK_QCOM_tile_shading)
+bool compare_VkPerTileBeginInfoQCOM(VkPerTileBeginInfoQCOM const *s1,
+                                    VkPerTileBeginInfoQCOM const *s2) {
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 312 && (VK_QCOM_tile_shading)
+bool compare_VkPerTileEndInfoQCOM(VkPerTileEndInfoQCOM const *s1, VkPerTileEndInfoQCOM const *s2) {
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 312 && (VK_QCOM_tile_shading)
+bool compare_VkDispatchTileInfoQCOM(VkDispatchTileInfoQCOM const *s1,
+                                    VkDispatchTileInfoQCOM const *s2) {
   return true;
 }
 #endif
@@ -26299,6 +26314,49 @@ bool compare_VkPhysicalDevicePresentMeteringFeaturesNV(
     VkPhysicalDevicePresentMeteringFeaturesNV const *s1,
     VkPhysicalDevicePresentMeteringFeaturesNV const *s2) {
   if ((s1->presentMetering != s2->presentMetering) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 312 && (VK_NV_external_compute_queue)
+bool compare_VkExternalComputeQueueDeviceCreateInfoNV(
+    VkExternalComputeQueueDeviceCreateInfoNV const *s1,
+    VkExternalComputeQueueDeviceCreateInfoNV const *s2) {
+  if ((s1->reservedExternalQueues != s2->reservedExternalQueues) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 312 && (VK_NV_external_compute_queue)
+bool compare_VkExternalComputeQueueCreateInfoNV(VkExternalComputeQueueCreateInfoNV const *s1,
+                                                VkExternalComputeQueueCreateInfoNV const *s2) {
+  if ((s1->preferredQueue != s2->preferredQueue) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 312 && (VK_NV_external_compute_queue)
+bool compare_VkExternalComputeQueueDataParamsNV(VkExternalComputeQueueDataParamsNV const *s1,
+                                                VkExternalComputeQueueDataParamsNV const *s2) {
+  if ((s1->deviceIndex != s2->deviceIndex) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 312 && (VK_NV_external_compute_queue)
+bool compare_VkPhysicalDeviceExternalComputeQueuePropertiesNV(
+    VkPhysicalDeviceExternalComputeQueuePropertiesNV const *s1,
+    VkPhysicalDeviceExternalComputeQueuePropertiesNV const *s2) {
+  if ((s1->externalDataSize != s2->externalDataSize) ||
+      (s1->maxExternalQueues != s2->maxExternalQueues) || false)
     return false;
 
   return true;

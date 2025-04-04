@@ -4,3 +4,5 @@ VkAccelerationStructureTrianglesOpacityMicromapEXT:
 VkIndirectExecutionSetCreateInfoEXT:
 VkIndirectCommandsLayoutTokenEXT:
 VkIndirectCommandsLayoutCreateInfoEXT:
+VkPhysicalDevicePresentMeteringFeaturesNV:
+VkSetPresentConfigNV:

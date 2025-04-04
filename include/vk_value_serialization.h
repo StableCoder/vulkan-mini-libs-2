@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 311
+#if VK_HEADER_VERSION > 312
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v311)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v312)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v311)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v312)"
 #endif
 #endif
 
@@ -668,6 +668,7 @@ EnumValueSet const VkSubpassDescriptionFlagsSets[] = {
     {"RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_BIT_EXT", 0x00000020, false},
     {"RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_BIT_EXT", 0x00000040, false},
     {"ENABLE_LEGACY_DITHERING_BIT_EXT", 0x00000080, false},
+    {"TILE_SHADING_APRON_BIT_QCOM", 0x00000100, false},
 };
 
 EnumValueSet const VkPipelineStageFlagsSets[] = {
@@ -942,6 +943,8 @@ EnumValueSet const VkAccessFlags2Sets[] = {
     {"DESCRIPTOR_BUFFER_READ_BIT_EXT", 0x20000000000, false},
     {"COMMAND_PREPROCESS_READ_BIT_EXT", 0x00020000, false},
     {"COMMAND_PREPROCESS_WRITE_BIT_EXT", 0x00040000, false},
+    {"SHADER_TILE_ATTACHMENT_READ_BIT_QCOM", 0x8000000000000, false},
+    {"SHADER_TILE_ATTACHMENT_WRITE_BIT_QCOM", 0x10000000000000, false},
 };
 
 EnumValueSet const VkPipelineStageFlags2Sets[] = {
@@ -1567,6 +1570,11 @@ EnumValueSet const VkShaderCreateFlagsEXTSets[] = {
     {"FRAGMENT_SHADING_RATE_ATTACHMENT", 0x00000020, false},
     {"FRAGMENT_DENSITY_MAP_ATTACHMENT", 0x00000040, false},
     {"INDIRECT_BINDABLE", 0x00000080, false},
+};
+
+EnumValueSet const VkTileShadingRenderPassFlagsQCOMSets[] = {
+    {"ENABLE", 0x00000001, false},
+    {"PER_TILE_EXECUTION", 0x00000002, false},
 };
 
 EnumValueSet const VkPhysicalDeviceSchedulingControlsFlagsARMSets[] = {
@@ -2689,6 +2697,7 @@ EnumValueSet const VkObjectTypeSets[] = {
     {"PIPELINE_BINARY_KHR", 1000483000, false},
     {"INDIRECT_COMMANDS_LAYOUT_EXT", 1000572000, false},
     {"INDIRECT_EXECUTION_SET_EXT", 1000572001, false},
+    {"EXTERNAL_COMPUTE_QUEUE_NV", 1000556000, false},
 };
 
 EnumValueSet const VkRayTracingInvocationReorderModeNVSets[] = {
@@ -3844,7 +3853,7 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[384] = {
+EnumType const cEnumTypes[385] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", NULL, 0},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 1},
@@ -3895,7 +3904,7 @@ EnumType const cEnumTypes[384] = {
     {"VkImageAspectFlags", VkImageAspectFlagsSets, 16},
     {"VkSparseMemoryBindFlags", VkSparseMemoryBindFlagsSets, 1},
     {"VkSparseImageFormatFlags", VkSparseImageFormatFlagsSets, 3},
-    {"VkSubpassDescriptionFlags", VkSubpassDescriptionFlagsSets, 11},
+    {"VkSubpassDescriptionFlags", VkSubpassDescriptionFlagsSets, 12},
     {"VkPipelineStageFlags", VkPipelineStageFlagsSets, 36},
     {"VkSampleCountFlags", VkSampleCountFlagsSets, 7},
     {"VkAttachmentDescriptionFlags", VkAttachmentDescriptionFlagsSets, 1},
@@ -3927,7 +3936,7 @@ EnumType const cEnumTypes[384] = {
     {"VkShaderCorePropertiesFlagsAMD", NULL, 0},
     {"VkDeviceDiagnosticsConfigFlagsNV", VkDeviceDiagnosticsConfigFlagsNVSets, 4},
     {"VkRefreshObjectFlagsKHR", NULL, 0},
-    {"VkAccessFlags2", VkAccessFlags2Sets, 69},
+    {"VkAccessFlags2", VkAccessFlags2Sets, 71},
     {"VkPipelineStageFlags2", VkPipelineStageFlags2Sets, 77},
     {"VkAccelerationStructureMotionInfoFlagsNV", NULL, 0},
     {"VkAccelerationStructureMotionInstanceFlagsNV", NULL, 0},
@@ -4017,6 +4026,7 @@ EnumType const cEnumTypes[384] = {
     {"VkPresentScalingFlagsEXT", VkPresentScalingFlagsEXTSets, 3},
     {"VkPresentGravityFlagsEXT", VkPresentGravityFlagsEXTSets, 3},
     {"VkShaderCreateFlagsEXT", VkShaderCreateFlagsEXTSets, 8},
+    {"VkTileShadingRenderPassFlagsQCOM", VkTileShadingRenderPassFlagsQCOMSets, 2},
     {"VkPhysicalDeviceSchedulingControlsFlagsARM", VkPhysicalDeviceSchedulingControlsFlagsARMSets,
      1},
     {"VkVideoCodecOperationFlagsKHR", VkVideoCodecOperationFlagsKHRSets, 12},
@@ -4090,7 +4100,7 @@ EnumType const cEnumTypes[384] = {
     {"VkClusterAccelerationStructureTypeNV", VkClusterAccelerationStructureTypeNVSets, 3},
     {"VkClusterAccelerationStructureOpTypeNV", VkClusterAccelerationStructureOpTypeNVSets, 5},
     {"VkClusterAccelerationStructureOpModeNV", VkClusterAccelerationStructureOpModeNVSets, 3},
-    {"VkObjectType", VkObjectTypeSets, 60},
+    {"VkObjectType", VkObjectTypeSets, 61},
     {"VkRayTracingInvocationReorderModeNV", VkRayTracingInvocationReorderModeNVSets, 2},
     {"VkIndirectCommandsTokenTypeNV", VkIndirectCommandsTokenTypeNVSets, 11},
     {"VkDescriptorUpdateTemplateType", VkDescriptorUpdateTemplateTypeSets, 4},
