@@ -37,13 +37,13 @@ _Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) >= 0,
                "XR_CURRENT_API_VERSION is lower than the minimum supported version (v0)");
 #endif
 
-#if (XR_CURRENT_API_VERSION & 0xffffffffULL) > 46
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) > 47
 #if _MSC_VER
 #pragma message(                                                                                   \
     __FILE__                                                                                       \
-    ": warning: XR_CURRENT_API_VERSION is higher than what the header fully supports (v46)")
+    ": warning: XR_CURRENT_API_VERSION is higher than what the header fully supports (v47)")
 #else
-#warning "XR_CURRENT_API_VERSION is higher than what the header fully supports (v46)"
+#warning "XR_CURRENT_API_VERSION is higher than what the header fully supports (v47)"
 #endif
 #endif
 
@@ -57,6 +57,46 @@ char const *XrResult_to_string(XrResult result) {
   // Check in descending order to get the 'latest' version of the error code text available.
   // Also, because codes have been re-used over time, can't use a switch and have to do this large
   // set of ifs. Luckily this *should* be a relatively rare call.
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 47 && XR_BD_spatial_sensing
+  if (result == XR_ERROR_SPATIAL_ENTITY_ID_INVALID_BD)
+    return "XR_ERROR_SPATIAL_ENTITY_ID_INVALID_BD";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 47 && XR_BD_spatial_sensing
+  if (result == XR_ERROR_SPATIAL_SENSING_SERVICE_UNAVAILABLE_BD)
+    return "XR_ERROR_SPATIAL_SENSING_SERVICE_UNAVAILABLE_BD";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 47 && XR_BD_spatial_sensing
+  if (result == XR_ERROR_ANCHOR_NOT_SUPPORTED_FOR_ENTITY_BD)
+    return "XR_ERROR_ANCHOR_NOT_SUPPORTED_FOR_ENTITY_BD";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 47 && XR_BD_spatial_anchor
+  if (result == XR_ERROR_SPATIAL_ANCHOR_NOT_FOUND_BD)
+    return "XR_ERROR_SPATIAL_ANCHOR_NOT_FOUND_BD";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 47 && XR_BD_spatial_anchor_sharing
+  if (result == XR_ERROR_SPATIAL_ANCHOR_SHARING_NETWORK_TIMEOUT_BD)
+    return "XR_ERROR_SPATIAL_ANCHOR_SHARING_NETWORK_TIMEOUT_BD";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 47 && XR_BD_spatial_anchor_sharing
+  if (result == XR_ERROR_SPATIAL_ANCHOR_SHARING_AUTHENTICATION_FAILURE_BD)
+    return "XR_ERROR_SPATIAL_ANCHOR_SHARING_AUTHENTICATION_FAILURE_BD";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 47 && XR_BD_spatial_anchor_sharing
+  if (result == XR_ERROR_SPATIAL_ANCHOR_SHARING_NETWORK_FAILURE_BD)
+    return "XR_ERROR_SPATIAL_ANCHOR_SHARING_NETWORK_FAILURE_BD";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 47 && XR_BD_spatial_anchor_sharing
+  if (result == XR_ERROR_SPATIAL_ANCHOR_SHARING_LOCALIZATION_FAIL_BD)
+    return "XR_ERROR_SPATIAL_ANCHOR_SHARING_LOCALIZATION_FAIL_BD";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 47 && XR_BD_spatial_anchor_sharing
+  if (result == XR_ERROR_SPATIAL_ANCHOR_SHARING_MAP_INSUFFICIENT_BD)
+    return "XR_ERROR_SPATIAL_ANCHOR_SHARING_MAP_INSUFFICIENT_BD";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 47 && XR_BD_spatial_scene
+  if (result == XR_ERROR_SCENE_CAPTURE_FAILURE_BD)
+    return "XR_ERROR_SCENE_CAPTURE_FAILURE_BD";
+#endif
 #if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 43 && XR_ML_facial_expression
   if (result == XR_ERROR_FACIAL_EXPRESSION_PERMISSION_DENIED_ML)
     return "XR_ERROR_FACIAL_EXPRESSION_PERMISSION_DENIED_ML";
