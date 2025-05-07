@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 313
+#if VK_HEADER_VERSION > 314
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v313)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v314)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v313)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v314)"
 #endif
 #endif
 
@@ -4394,13 +4394,25 @@ bool compare_VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR(
     VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 139 && (VK_EXT_robustness2)
+#if VK_HEADER_VERSION >= 314 && (VK_KHR_robustness2)
+bool compare_VkPhysicalDeviceRobustness2FeaturesKHR(
+    VkPhysicalDeviceRobustness2FeaturesKHR const *s1,
+    VkPhysicalDeviceRobustness2FeaturesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 314 && (VK_EXT_robustness2)
 bool compare_VkPhysicalDeviceRobustness2FeaturesEXT(
     VkPhysicalDeviceRobustness2FeaturesEXT const *s1,
     VkPhysicalDeviceRobustness2FeaturesEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 139 && (VK_EXT_robustness2)
+#if VK_HEADER_VERSION >= 314 && (VK_KHR_robustness2)
+bool compare_VkPhysicalDeviceRobustness2PropertiesKHR(
+    VkPhysicalDeviceRobustness2PropertiesKHR const *s1,
+    VkPhysicalDeviceRobustness2PropertiesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 314 && (VK_EXT_robustness2)
 bool compare_VkPhysicalDeviceRobustness2PropertiesEXT(
     VkPhysicalDeviceRobustness2PropertiesEXT const *s1,
     VkPhysicalDeviceRobustness2PropertiesEXT const *s2);
@@ -7488,6 +7500,18 @@ bool compare_VkExternalComputeQueueDataParamsNV(VkExternalComputeQueueDataParams
 bool compare_VkPhysicalDeviceExternalComputeQueuePropertiesNV(
     VkPhysicalDeviceExternalComputeQueuePropertiesNV const *s1,
     VkPhysicalDeviceExternalComputeQueuePropertiesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 139 && VK_HEADER_VERSION <= 313 && (VK_EXT_robustness2)
+bool compare_VkPhysicalDeviceRobustness2FeaturesEXT(
+    VkPhysicalDeviceRobustness2FeaturesEXT const *s1,
+    VkPhysicalDeviceRobustness2FeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 139 && VK_HEADER_VERSION <= 313 && (VK_EXT_robustness2)
+bool compare_VkPhysicalDeviceRobustness2PropertiesEXT(
+    VkPhysicalDeviceRobustness2PropertiesEXT const *s1,
+    VkPhysicalDeviceRobustness2PropertiesEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 203 && VK_HEADER_VERSION <= 310 && (VK_QCOM_fragment_density_map_offset)
@@ -19783,10 +19807,10 @@ bool compare_VkPhysicalDeviceShaderSubgroupUniformControlFlowFeaturesKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 139 && (VK_EXT_robustness2)
-bool compare_VkPhysicalDeviceRobustness2FeaturesEXT(
-    VkPhysicalDeviceRobustness2FeaturesEXT const *s1,
-    VkPhysicalDeviceRobustness2FeaturesEXT const *s2) {
+#if VK_HEADER_VERSION >= 314 && (VK_KHR_robustness2)
+bool compare_VkPhysicalDeviceRobustness2FeaturesKHR(
+    VkPhysicalDeviceRobustness2FeaturesKHR const *s1,
+    VkPhysicalDeviceRobustness2FeaturesKHR const *s2) {
   if ((s1->robustBufferAccess2 != s2->robustBufferAccess2) ||
       (s1->robustImageAccess2 != s2->robustImageAccess2) ||
       (s1->nullDescriptor != s2->nullDescriptor) || false)
@@ -19796,16 +19820,36 @@ bool compare_VkPhysicalDeviceRobustness2FeaturesEXT(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 139 && (VK_EXT_robustness2)
-bool compare_VkPhysicalDeviceRobustness2PropertiesEXT(
-    VkPhysicalDeviceRobustness2PropertiesEXT const *s1,
-    VkPhysicalDeviceRobustness2PropertiesEXT const *s2) {
+#if VK_HEADER_VERSION >= 314 && (VK_EXT_robustness2)
+bool compare_VkPhysicalDeviceRobustness2FeaturesEXT(
+    VkPhysicalDeviceRobustness2FeaturesEXT const *s1,
+    VkPhysicalDeviceRobustness2FeaturesEXT const *s2) {
+  return compare_VkPhysicalDeviceRobustness2FeaturesKHR(
+      (VkPhysicalDeviceRobustness2FeaturesKHR const *)s1,
+      (VkPhysicalDeviceRobustness2FeaturesKHR const *)s2);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 314 && (VK_KHR_robustness2)
+bool compare_VkPhysicalDeviceRobustness2PropertiesKHR(
+    VkPhysicalDeviceRobustness2PropertiesKHR const *s1,
+    VkPhysicalDeviceRobustness2PropertiesKHR const *s2) {
   if ((s1->robustStorageBufferAccessSizeAlignment != s2->robustStorageBufferAccessSizeAlignment) ||
       (s1->robustUniformBufferAccessSizeAlignment != s2->robustUniformBufferAccessSizeAlignment) ||
       false)
     return false;
 
   return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 314 && (VK_EXT_robustness2)
+bool compare_VkPhysicalDeviceRobustness2PropertiesEXT(
+    VkPhysicalDeviceRobustness2PropertiesEXT const *s1,
+    VkPhysicalDeviceRobustness2PropertiesEXT const *s2) {
+  return compare_VkPhysicalDeviceRobustness2PropertiesKHR(
+      (VkPhysicalDeviceRobustness2PropertiesKHR const *)s1,
+      (VkPhysicalDeviceRobustness2PropertiesKHR const *)s2);
 }
 #endif
 
@@ -26437,6 +26481,32 @@ bool compare_VkPhysicalDeviceExternalComputeQueuePropertiesNV(
     VkPhysicalDeviceExternalComputeQueuePropertiesNV const *s2) {
   if ((s1->externalDataSize != s2->externalDataSize) ||
       (s1->maxExternalQueues != s2->maxExternalQueues) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 139 && VK_HEADER_VERSION <= 313 && (VK_EXT_robustness2)
+bool compare_VkPhysicalDeviceRobustness2FeaturesEXT(
+    VkPhysicalDeviceRobustness2FeaturesEXT const *s1,
+    VkPhysicalDeviceRobustness2FeaturesEXT const *s2) {
+  if ((s1->robustBufferAccess2 != s2->robustBufferAccess2) ||
+      (s1->robustImageAccess2 != s2->robustImageAccess2) ||
+      (s1->nullDescriptor != s2->nullDescriptor) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 139 && VK_HEADER_VERSION <= 313 && (VK_EXT_robustness2)
+bool compare_VkPhysicalDeviceRobustness2PropertiesEXT(
+    VkPhysicalDeviceRobustness2PropertiesEXT const *s1,
+    VkPhysicalDeviceRobustness2PropertiesEXT const *s2) {
+  if ((s1->robustStorageBufferAccessSizeAlignment != s2->robustStorageBufferAccessSizeAlignment) ||
+      (s1->robustUniformBufferAccessSizeAlignment != s2->robustUniformBufferAccessSizeAlignment) ||
+      false)
     return false;
 
   return true;

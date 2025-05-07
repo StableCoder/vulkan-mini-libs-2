@@ -37,12 +37,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 313
+#if VK_HEADER_VERSION > 314
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v313)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v314)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v313)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v314)"
 #endif
 #endif
 
@@ -3122,12 +3122,12 @@ void cleanup_VkImageViewAddressPropertiesNVX(VkImageViewAddressPropertiesNVX con
 void cleanup_VkAccelerationStructureInstanceKHR(VkAccelerationStructureInstanceKHR const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 139 && (VK_EXT_robustness2)
+#if VK_HEADER_VERSION >= 139 && VK_HEADER_VERSION <= 313 && (VK_EXT_robustness2)
 void cleanup_VkPhysicalDeviceRobustness2FeaturesEXT(
     VkPhysicalDeviceRobustness2FeaturesEXT const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 139 && (VK_EXT_robustness2)
+#if VK_HEADER_VERSION >= 139 && VK_HEADER_VERSION <= 313 && (VK_EXT_robustness2)
 void cleanup_VkPhysicalDeviceRobustness2PropertiesEXT(
     VkPhysicalDeviceRobustness2PropertiesEXT const *pData);
 #endif
@@ -8237,6 +8237,26 @@ void cleanup_VkTileMemorySizeInfoQCOM(VkTileMemorySizeInfoQCOM const *pData);
 void cleanup_VkTileMemoryRequirementsQCOM(VkTileMemoryRequirementsQCOM const *pData);
 #endif
 
+#if VK_HEADER_VERSION >= 314 && (VK_KHR_robustness2)
+void cleanup_VkPhysicalDeviceRobustness2FeaturesKHR(
+    VkPhysicalDeviceRobustness2FeaturesKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 314 && (VK_EXT_robustness2)
+void cleanup_VkPhysicalDeviceRobustness2FeaturesEXT(
+    VkPhysicalDeviceRobustness2FeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 314 && (VK_KHR_robustness2)
+void cleanup_VkPhysicalDeviceRobustness2PropertiesKHR(
+    VkPhysicalDeviceRobustness2PropertiesKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 314 && (VK_EXT_robustness2)
+void cleanup_VkPhysicalDeviceRobustness2PropertiesEXT(
+    VkPhysicalDeviceRobustness2PropertiesEXT const *pData);
+#endif
+
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
 
 #include <stdlib.h>
@@ -11903,7 +11923,7 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
-#if VK_HEADER_VERSION >= 139 && (VK_EXT_robustness2)
+#if VK_HEADER_VERSION >= 139 && VK_HEADER_VERSION <= 313 && (VK_EXT_robustness2)
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceRobustness2FeaturesEXT(
         (VkPhysicalDeviceRobustness2FeaturesEXT const *)pData);
@@ -11911,7 +11931,7 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
-#if VK_HEADER_VERSION >= 139 && (VK_EXT_robustness2)
+#if VK_HEADER_VERSION >= 139 && VK_HEADER_VERSION <= 313 && (VK_EXT_robustness2)
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_PROPERTIES_EXT) {
     cleanup_VkPhysicalDeviceRobustness2PropertiesEXT(
         (VkPhysicalDeviceRobustness2PropertiesEXT const *)pData);
@@ -18836,6 +18856,22 @@ void cleanup_vk_struct(void const *pData) {
 #if VK_HEADER_VERSION >= 313 && (VK_QCOM_tile_memory_heap)
   if (pTemp->sType == VK_STRUCTURE_TYPE_TILE_MEMORY_REQUIREMENTS_QCOM) {
     cleanup_VkTileMemoryRequirementsQCOM((VkTileMemoryRequirementsQCOM const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 314 && (VK_KHR_robustness2)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_FEATURES_KHR) {
+    cleanup_VkPhysicalDeviceRobustness2FeaturesKHR(
+        (VkPhysicalDeviceRobustness2FeaturesKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 314 && (VK_KHR_robustness2)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ROBUSTNESS_2_PROPERTIES_KHR) {
+    cleanup_VkPhysicalDeviceRobustness2PropertiesKHR(
+        (VkPhysicalDeviceRobustness2PropertiesKHR const *)pData);
     return;
   }
 #endif
@@ -25819,7 +25855,7 @@ void cleanup_VkImageViewAddressPropertiesNVX(VkImageViewAddressPropertiesNVX con
 void cleanup_VkAccelerationStructureInstanceKHR(VkAccelerationStructureInstanceKHR const *pData) {}
 #endif
 
-#if VK_HEADER_VERSION >= 139 && (VK_EXT_robustness2)
+#if VK_HEADER_VERSION >= 139 && VK_HEADER_VERSION <= 313 && (VK_EXT_robustness2)
 void cleanup_VkPhysicalDeviceRobustness2FeaturesEXT(
     VkPhysicalDeviceRobustness2FeaturesEXT const *pData) {
   // pNext
@@ -25829,7 +25865,7 @@ void cleanup_VkPhysicalDeviceRobustness2FeaturesEXT(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 139 && (VK_EXT_robustness2)
+#if VK_HEADER_VERSION >= 139 && VK_HEADER_VERSION <= 313 && (VK_EXT_robustness2)
 void cleanup_VkPhysicalDeviceRobustness2PropertiesEXT(
     VkPhysicalDeviceRobustness2PropertiesEXT const *pData) {
   // pNext
@@ -37610,6 +37646,42 @@ void cleanup_VkTileMemoryRequirementsQCOM(VkTileMemoryRequirementsQCOM const *pD
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 314 && (VK_KHR_robustness2)
+void cleanup_VkPhysicalDeviceRobustness2FeaturesKHR(
+    VkPhysicalDeviceRobustness2FeaturesKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 314 && (VK_EXT_robustness2)
+void cleanup_VkPhysicalDeviceRobustness2FeaturesEXT(
+    VkPhysicalDeviceRobustness2FeaturesEXT const *pData) {
+  cleanup_VkPhysicalDeviceRobustness2FeaturesKHR(
+      (VkPhysicalDeviceRobustness2FeaturesKHR const *)pData);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 314 && (VK_KHR_robustness2)
+void cleanup_VkPhysicalDeviceRobustness2PropertiesKHR(
+    VkPhysicalDeviceRobustness2PropertiesKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 314 && (VK_EXT_robustness2)
+void cleanup_VkPhysicalDeviceRobustness2PropertiesEXT(
+    VkPhysicalDeviceRobustness2PropertiesEXT const *pData) {
+  cleanup_VkPhysicalDeviceRobustness2PropertiesKHR(
+      (VkPhysicalDeviceRobustness2PropertiesKHR const *)pData);
 }
 #endif
 
