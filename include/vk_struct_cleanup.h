@@ -37,12 +37,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 312
+#if VK_HEADER_VERSION > 313
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v312)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v313)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v312)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v313)"
 #endif
 #endif
 
@@ -8213,6 +8213,28 @@ void cleanup_VkExternalComputeQueueDataParamsNV(VkExternalComputeQueueDataParams
 #if VK_HEADER_VERSION >= 312 && (VK_NV_external_compute_queue)
 void cleanup_VkPhysicalDeviceExternalComputeQueuePropertiesNV(
     VkPhysicalDeviceExternalComputeQueuePropertiesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 313 && (VK_QCOM_tile_memory_heap)
+void cleanup_VkTileMemoryBindInfoQCOM(VkTileMemoryBindInfoQCOM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 313 && (VK_QCOM_tile_memory_heap)
+void cleanup_VkPhysicalDeviceTileMemoryHeapFeaturesQCOM(
+    VkPhysicalDeviceTileMemoryHeapFeaturesQCOM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 313 && (VK_QCOM_tile_memory_heap)
+void cleanup_VkPhysicalDeviceTileMemoryHeapPropertiesQCOM(
+    VkPhysicalDeviceTileMemoryHeapPropertiesQCOM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 313 && (VK_QCOM_tile_memory_heap && VK_QCOM_tile_properties)
+void cleanup_VkTileMemorySizeInfoQCOM(VkTileMemorySizeInfoQCOM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 313 && (VK_QCOM_tile_memory_heap)
+void cleanup_VkTileMemoryRequirementsQCOM(VkTileMemoryRequirementsQCOM const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -18780,6 +18802,43 @@ void cleanup_vk_struct(void const *pData) {
     return;
   }
 #endif
+
+#if VK_HEADER_VERSION >= 313 && (VK_QCOM_tile_memory_heap)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_TILE_MEMORY_BIND_INFO_QCOM) {
+    cleanup_VkTileMemoryBindInfoQCOM((VkTileMemoryBindInfoQCOM const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 313 && (VK_QCOM_tile_memory_heap)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TILE_MEMORY_HEAP_FEATURES_QCOM) {
+    cleanup_VkPhysicalDeviceTileMemoryHeapFeaturesQCOM(
+        (VkPhysicalDeviceTileMemoryHeapFeaturesQCOM const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 313 && (VK_QCOM_tile_memory_heap)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TILE_MEMORY_HEAP_PROPERTIES_QCOM) {
+    cleanup_VkPhysicalDeviceTileMemoryHeapPropertiesQCOM(
+        (VkPhysicalDeviceTileMemoryHeapPropertiesQCOM const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 313 && (VK_QCOM_tile_memory_heap && VK_QCOM_tile_properties)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_TILE_MEMORY_SIZE_INFO_QCOM) {
+    cleanup_VkTileMemorySizeInfoQCOM((VkTileMemorySizeInfoQCOM const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 313 && (VK_QCOM_tile_memory_heap)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_TILE_MEMORY_REQUIREMENTS_QCOM) {
+    cleanup_VkTileMemoryRequirementsQCOM((VkTileMemoryRequirementsQCOM const *)pData);
+    return;
+  }
+#endif
 }
 
 void cleanup_VkOffset2D(VkOffset2D const *pData) {}
@@ -27846,7 +27905,7 @@ void cleanup_VkFormatProperties3KHR(VkFormatProperties3KHR const *pData) {
 #endif
 
 #if VK_HEADER_VERSION >= 195 && VK_HEADER_VERSION <= 203 && (VK_EXT_image_drm_format_modifier)
-void cleanup_VkDrmFormatModifierProperties2EXT(VkDrmFormatModifierProperties2EXT const *pData) {}
+void cleanup_VkDrmFormatModifierProperties2EXT(VkDrmFormatModifierProperties2EXT const *pData){}
 #endif
 
 #if VK_HEADER_VERSION >= 195 && VK_HEADER_VERSION <= 203 &&                                        \
@@ -37083,7 +37142,7 @@ void cleanup_VkPhysicalDeviceClusterAccelerationStructurePropertiesNV(
 #endif
 
 #if VK_HEADER_VERSION >= 307 && (VK_NV_cluster_acceleration_structure)
-void cleanup_VkStridedDeviceAddressNV(VkStridedDeviceAddressNV const *pData) {}
+void cleanup_VkStridedDeviceAddressNV(VkStridedDeviceAddressNV const *pData){}
 #endif
 
 #if VK_HEADER_VERSION >= 307 &&                                                                    \
@@ -37500,6 +37559,53 @@ void cleanup_VkExternalComputeQueueDataParamsNV(VkExternalComputeQueueDataParams
 #if VK_HEADER_VERSION >= 312 && (VK_NV_external_compute_queue)
 void cleanup_VkPhysicalDeviceExternalComputeQueuePropertiesNV(
     VkPhysicalDeviceExternalComputeQueuePropertiesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 313 && (VK_QCOM_tile_memory_heap)
+void cleanup_VkTileMemoryBindInfoQCOM(VkTileMemoryBindInfoQCOM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 313 && (VK_QCOM_tile_memory_heap)
+void cleanup_VkPhysicalDeviceTileMemoryHeapFeaturesQCOM(
+    VkPhysicalDeviceTileMemoryHeapFeaturesQCOM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 313 && (VK_QCOM_tile_memory_heap)
+void cleanup_VkPhysicalDeviceTileMemoryHeapPropertiesQCOM(
+    VkPhysicalDeviceTileMemoryHeapPropertiesQCOM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 313 && (VK_QCOM_tile_memory_heap && VK_QCOM_tile_properties)
+void cleanup_VkTileMemorySizeInfoQCOM(VkTileMemorySizeInfoQCOM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 313 && (VK_QCOM_tile_memory_heap)
+void cleanup_VkTileMemoryRequirementsQCOM(VkTileMemoryRequirementsQCOM const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

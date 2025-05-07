@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 312
+#if VK_HEADER_VERSION > 313
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v312)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v313)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v312)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v313)"
 #endif
 #endif
 
@@ -273,6 +273,7 @@ EnumValueSet const VkMemoryHeapFlagsSets[] = {
     {"DEVICE_LOCAL", 0x00000001, false},
     {"MULTI_INSTANCE", 0x00000002, false},
     {"MULTI_INSTANCE_BIT_KHR", 0x00000002, true},
+    {"TILE_MEMORY_BIT_QCOM", 0x00000008, false},
 };
 
 EnumValueSet const VkAccessFlagsSets[] = {
@@ -349,6 +350,7 @@ EnumValueSet const VkBufferUsageFlagsSets[] = {
     {"RESOURCE_DESCRIPTOR_BUFFER_BIT_EXT", 0x00400000, false},
     {"PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_BIT_EXT", 0x04000000, false},
     {"EXECUTION_GRAPH_SCRATCH_BIT_AMDX", 0x02000000, false},
+    {"TILE_MEMORY_QCOM", 0x08000000, false},
 };
 
 EnumValueSet const VkBufferCreateFlagsSets[] = {
@@ -424,6 +426,7 @@ EnumValueSet const VkImageUsageFlagsSets[] = {
     {"VIDEO_ENCODE_QUANTIZATION_DELTA_MAP_BIT_KHR", 0x02000000, false},
     {"VIDEO_ENCODE_EMPHASIS_MAP_BIT_KHR", 0x04000000, false},
     {"HOST_TRANSFER", 0x00400000, false},
+    {"TILE_MEMORY_QCOM", 0x08000000, false},
 };
 
 EnumValueSet const VkImageCreateFlagsSets[] = {
@@ -1230,6 +1233,7 @@ EnumValueSet const VkBufferUsageFlags2Sets[] = {
     {"MICROMAP_BUILD_INPUT_READ_ONLY_BIT_EXT", 0x00800000, false},
     {"MICROMAP_STORAGE_BIT_EXT", 0x01000000, false},
     {"PREPROCESS_BUFFER_BIT_EXT", 0x80000000, false},
+    {"TILE_MEMORY_QCOM", 0x08000000, false},
 };
 
 EnumValueSet const VkCompositeAlphaFlagsKHRSets[] = {
@@ -3877,12 +3881,12 @@ EnumType const cEnumTypes[385] = {
     {"VkDeviceQueueCreateFlags", VkDeviceQueueCreateFlagsSets, 1},
     {"VkQueueFlags", VkQueueFlagsSets, 8},
     {"VkMemoryPropertyFlags", VkMemoryPropertyFlagsSets, 9},
-    {"VkMemoryHeapFlags", VkMemoryHeapFlagsSets, 3},
+    {"VkMemoryHeapFlags", VkMemoryHeapFlagsSets, 4},
     {"VkAccessFlags", VkAccessFlagsSets, 39},
-    {"VkBufferUsageFlags", VkBufferUsageFlagsSets, 31},
+    {"VkBufferUsageFlags", VkBufferUsageFlagsSets, 32},
     {"VkBufferCreateFlags", VkBufferCreateFlagsSets, 9},
     {"VkShaderStageFlags", VkShaderStageFlagsSets, 32},
-    {"VkImageUsageFlags", VkImageUsageFlagsSets, 25},
+    {"VkImageUsageFlags", VkImageUsageFlagsSets, 26},
     {"VkImageCreateFlags", VkImageCreateFlagsSets, 27},
     {"VkImageViewCreateFlags", VkImageViewCreateFlagsSets, 3},
     {"VkPipelineCreateFlags", VkPipelineCreateFlagsSets, 41},
@@ -3949,7 +3953,7 @@ EnumType const cEnumTypes[385] = {
     {"VkIndirectCommandsInputModeFlagsEXT", VkIndirectCommandsInputModeFlagsEXTSets, 2},
     {"VkDirectDriverLoadingFlagsLUNARG", NULL, 0},
     {"VkPipelineCreateFlags2", VkPipelineCreateFlags2Sets, 47},
-    {"VkBufferUsageFlags2", VkBufferUsageFlags2Sets, 38},
+    {"VkBufferUsageFlags2", VkBufferUsageFlags2Sets, 39},
     {"VkCompositeAlphaFlagsKHR", VkCompositeAlphaFlagsKHRSets, 4},
     {"VkDisplayPlaneAlphaFlagsKHR", VkDisplayPlaneAlphaFlagsKHRSets, 4},
     {"VkSurfaceTransformFlagsKHR", VkSurfaceTransformFlagsKHRSets, 9},

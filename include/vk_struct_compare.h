@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 312
+#if VK_HEADER_VERSION > 313
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v312)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v313)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v312)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v313)"
 #endif
 #endif
 
@@ -6508,6 +6508,11 @@ bool compare_VkPhysicalDeviceTilePropertiesFeaturesQCOM(
 bool compare_VkTilePropertiesQCOM(VkTilePropertiesQCOM const *s1, VkTilePropertiesQCOM const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 313 && (VK_QCOM_tile_memory_heap)
+bool compare_VkTileMemoryBindInfoQCOM(VkTileMemoryBindInfoQCOM const *s1,
+                                      VkTileMemoryBindInfoQCOM const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 224 && (VK_SEC_amigo_profiling)
 bool compare_VkPhysicalDeviceAmigoProfilingFeaturesSEC(
     VkPhysicalDeviceAmigoProfilingFeaturesSEC const *s1,
@@ -6933,6 +6938,28 @@ bool compare_VkAntiLagPresentationInfoAMD(VkAntiLagPresentationInfoAMD const *s1
 
 #if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
 bool compare_VkBindMemoryStatus(VkBindMemoryStatus const *s1, VkBindMemoryStatus const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 313 && (VK_QCOM_tile_memory_heap)
+bool compare_VkPhysicalDeviceTileMemoryHeapFeaturesQCOM(
+    VkPhysicalDeviceTileMemoryHeapFeaturesQCOM const *s1,
+    VkPhysicalDeviceTileMemoryHeapFeaturesQCOM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 313 && (VK_QCOM_tile_memory_heap)
+bool compare_VkPhysicalDeviceTileMemoryHeapPropertiesQCOM(
+    VkPhysicalDeviceTileMemoryHeapPropertiesQCOM const *s1,
+    VkPhysicalDeviceTileMemoryHeapPropertiesQCOM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 313 && (VK_QCOM_tile_memory_heap && VK_QCOM_tile_properties)
+bool compare_VkTileMemorySizeInfoQCOM(VkTileMemorySizeInfoQCOM const *s1,
+                                      VkTileMemorySizeInfoQCOM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 313 && (VK_QCOM_tile_memory_heap)
+bool compare_VkTileMemoryRequirementsQCOM(VkTileMemoryRequirementsQCOM const *s1,
+                                          VkTileMemoryRequirementsQCOM const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 303 && (VK_KHR_maintenance6)
@@ -24399,6 +24426,16 @@ bool compare_VkTilePropertiesQCOM(VkTilePropertiesQCOM const *s1, VkTileProperti
 }
 #endif
 
+#if VK_HEADER_VERSION >= 313 && (VK_QCOM_tile_memory_heap)
+bool compare_VkTileMemoryBindInfoQCOM(VkTileMemoryBindInfoQCOM const *s1,
+                                      VkTileMemoryBindInfoQCOM const *s2) {
+  if ((s1->memory != s2->memory) || false)
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 224 && (VK_SEC_amigo_profiling)
 bool compare_VkPhysicalDeviceAmigoProfilingFeaturesSEC(
     VkPhysicalDeviceAmigoProfilingFeaturesSEC const *s1,
@@ -25308,6 +25345,49 @@ bool compare_VkAntiLagPresentationInfoAMD(VkAntiLagPresentationInfoAMD const *s1
 
 #if VK_HEADER_VERSION >= 303 && (VK_VERSION_1_4)
 bool compare_VkBindMemoryStatus(VkBindMemoryStatus const *s1, VkBindMemoryStatus const *s2) {
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 313 && (VK_QCOM_tile_memory_heap)
+bool compare_VkPhysicalDeviceTileMemoryHeapFeaturesQCOM(
+    VkPhysicalDeviceTileMemoryHeapFeaturesQCOM const *s1,
+    VkPhysicalDeviceTileMemoryHeapFeaturesQCOM const *s2) {
+  if ((s1->tileMemoryHeap != s2->tileMemoryHeap) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 313 && (VK_QCOM_tile_memory_heap)
+bool compare_VkPhysicalDeviceTileMemoryHeapPropertiesQCOM(
+    VkPhysicalDeviceTileMemoryHeapPropertiesQCOM const *s1,
+    VkPhysicalDeviceTileMemoryHeapPropertiesQCOM const *s2) {
+  if ((s1->queueSubmitBoundary != s2->queueSubmitBoundary) ||
+      (s1->tileBufferTransfers != s2->tileBufferTransfers) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 313 && (VK_QCOM_tile_memory_heap && VK_QCOM_tile_properties)
+bool compare_VkTileMemorySizeInfoQCOM(VkTileMemorySizeInfoQCOM const *s1,
+                                      VkTileMemorySizeInfoQCOM const *s2) {
+  if ((s1->size != s2->size) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 313 && (VK_QCOM_tile_memory_heap)
+bool compare_VkTileMemoryRequirementsQCOM(VkTileMemoryRequirementsQCOM const *s1,
+                                          VkTileMemoryRequirementsQCOM const *s2) {
+  if ((s1->size != s2->size) || (s1->alignment != s2->alignment) || false)
+    return false;
+
   return true;
 }
 #endif
