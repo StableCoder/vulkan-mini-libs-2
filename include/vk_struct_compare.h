@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 314
+#if VK_HEADER_VERSION > 315
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v314)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v315)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v314)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v315)"
 #endif
 #endif
 
@@ -4705,6 +4705,12 @@ bool compare_VkMutableDescriptorTypeCreateInfoVALVE(
 bool compare_VkPhysicalDeviceDepthClipControlFeaturesEXT(
     VkPhysicalDeviceDepthClipControlFeaturesEXT const *s1,
     VkPhysicalDeviceDepthClipControlFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 315 && (VK_EXT_zero_initialize_device_memory)
+bool compare_VkPhysicalDeviceZeroInitializeDeviceMemoryFeaturesEXT(
+    VkPhysicalDeviceZeroInitializeDeviceMemoryFeaturesEXT const *s1,
+    VkPhysicalDeviceZeroInitializeDeviceMemoryFeaturesEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 296 && (VK_EXT_device_generated_commands)
@@ -20482,6 +20488,17 @@ bool compare_VkPhysicalDeviceDepthClipControlFeaturesEXT(
     VkPhysicalDeviceDepthClipControlFeaturesEXT const *s1,
     VkPhysicalDeviceDepthClipControlFeaturesEXT const *s2) {
   if ((s1->depthClipControl != s2->depthClipControl) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 315 && (VK_EXT_zero_initialize_device_memory)
+bool compare_VkPhysicalDeviceZeroInitializeDeviceMemoryFeaturesEXT(
+    VkPhysicalDeviceZeroInitializeDeviceMemoryFeaturesEXT const *s1,
+    VkPhysicalDeviceZeroInitializeDeviceMemoryFeaturesEXT const *s2) {
+  if ((s1->zeroInitializeDeviceMemory != s2->zeroInitializeDeviceMemory) || false)
     return false;
 
   return true;

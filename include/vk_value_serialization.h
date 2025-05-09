@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 314
+#if VK_HEADER_VERSION > 315
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v314)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v315)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v314)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v315)"
 #endif
 #endif
 
@@ -351,6 +351,7 @@ EnumValueSet const VkBufferUsageFlagsSets[] = {
     {"PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_BIT_EXT", 0x04000000, false},
     {"EXECUTION_GRAPH_SCRATCH_BIT_AMDX", 0x02000000, false},
     {"TILE_MEMORY_QCOM", 0x08000000, false},
+    {"TILE_MEMORY_BIT_QCOM", 0x08000000, false},
 };
 
 EnumValueSet const VkBufferCreateFlagsSets[] = {
@@ -427,6 +428,7 @@ EnumValueSet const VkImageUsageFlagsSets[] = {
     {"VIDEO_ENCODE_EMPHASIS_MAP_BIT_KHR", 0x04000000, false},
     {"HOST_TRANSFER", 0x00400000, false},
     {"TILE_MEMORY_QCOM", 0x08000000, false},
+    {"TILE_MEMORY_BIT_QCOM", 0x08000000, false},
 };
 
 EnumValueSet const VkImageCreateFlagsSets[] = {
@@ -1234,6 +1236,7 @@ EnumValueSet const VkBufferUsageFlags2Sets[] = {
     {"MICROMAP_STORAGE_BIT_EXT", 0x01000000, false},
     {"PREPROCESS_BUFFER_BIT_EXT", 0x80000000, false},
     {"TILE_MEMORY_QCOM", 0x08000000, false},
+    {"TILE_MEMORY_BIT_QCOM", 0x08000000, false},
 };
 
 EnumValueSet const VkCompositeAlphaFlagsKHRSets[] = {
@@ -1283,6 +1286,7 @@ EnumValueSet const VkMemoryAllocateFlagsSets[] = {
     {"DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR", 0x00000004, true},
     {"DEVICE_ADDRESS", 0x00000002, false},
     {"DEVICE_ADDRESS_CAPTURE_REPLAY", 0x00000004, false},
+    {"ZERO_INITIALIZE_BIT_EXT", 0x00000008, false},
 };
 
 EnumValueSet const VkDeviceGroupPresentModeFlagsKHRSets[] = {
@@ -2444,6 +2448,7 @@ EnumValueSet const VkImageLayoutSets[] = {
     {"RENDERING_LOCAL_READ_KHR", 1000232000, true},
     {"VIDEO_ENCODE_QUANTIZATION_MAP_KHR", 1000553000, false},
     {"RENDERING_LOCAL_READ", 1000232000, false},
+    {"ZERO_INITIALIZED_EXT", 1000620000, false},
 };
 
 EnumValueSet const VkImageTilingSets[] = {
@@ -3883,10 +3888,10 @@ EnumType const cEnumTypes[385] = {
     {"VkMemoryPropertyFlags", VkMemoryPropertyFlagsSets, 9},
     {"VkMemoryHeapFlags", VkMemoryHeapFlagsSets, 4},
     {"VkAccessFlags", VkAccessFlagsSets, 39},
-    {"VkBufferUsageFlags", VkBufferUsageFlagsSets, 32},
+    {"VkBufferUsageFlags", VkBufferUsageFlagsSets, 33},
     {"VkBufferCreateFlags", VkBufferCreateFlagsSets, 9},
     {"VkShaderStageFlags", VkShaderStageFlagsSets, 32},
-    {"VkImageUsageFlags", VkImageUsageFlagsSets, 26},
+    {"VkImageUsageFlags", VkImageUsageFlagsSets, 27},
     {"VkImageCreateFlags", VkImageCreateFlagsSets, 27},
     {"VkImageViewCreateFlags", VkImageViewCreateFlagsSets, 3},
     {"VkPipelineCreateFlags", VkPipelineCreateFlagsSets, 41},
@@ -3953,7 +3958,7 @@ EnumType const cEnumTypes[385] = {
     {"VkIndirectCommandsInputModeFlagsEXT", VkIndirectCommandsInputModeFlagsEXTSets, 2},
     {"VkDirectDriverLoadingFlagsLUNARG", NULL, 0},
     {"VkPipelineCreateFlags2", VkPipelineCreateFlags2Sets, 47},
-    {"VkBufferUsageFlags2", VkBufferUsageFlags2Sets, 39},
+    {"VkBufferUsageFlags2", VkBufferUsageFlags2Sets, 40},
     {"VkCompositeAlphaFlagsKHR", VkCompositeAlphaFlagsKHRSets, 4},
     {"VkDisplayPlaneAlphaFlagsKHR", VkDisplayPlaneAlphaFlagsKHRSets, 4},
     {"VkSurfaceTransformFlagsKHR", VkSurfaceTransformFlagsKHRSets, 9},
@@ -3975,7 +3980,7 @@ EnumType const cEnumTypes[385] = {
     {"VkHeadlessSurfaceCreateFlagsEXT", NULL, 0},
     {"VkScreenSurfaceCreateFlagsQNX", NULL, 0},
     {"VkPeerMemoryFeatureFlags", VkPeerMemoryFeatureFlagsSets, 8},
-    {"VkMemoryAllocateFlags", VkMemoryAllocateFlagsSets, 6},
+    {"VkMemoryAllocateFlags", VkMemoryAllocateFlagsSets, 7},
     {"VkDeviceGroupPresentModeFlagsKHR", VkDeviceGroupPresentModeFlagsKHRSets, 4},
     {"VkDebugReportFlagsEXT", VkDebugReportFlagsEXTSets, 5},
     {"VkCommandPoolTrimFlags", NULL, 0},
@@ -4081,7 +4086,7 @@ EnumType const cEnumTypes[385] = {
     {"VkPolygonMode", VkPolygonModeSets, 4},
     {"VkFormat", VkFormatSets, 307},
     {"VkFrontFace", VkFrontFaceSets, 2},
-    {"VkImageLayout", VkImageLayoutSets, 40},
+    {"VkImageLayout", VkImageLayoutSets, 41},
     {"VkImageTiling", VkImageTilingSets, 3},
     {"VkImageType", VkImageTypeSets, 3},
     {"VkImageViewType", VkImageViewTypeSets, 7},
