@@ -37,13 +37,13 @@ _Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) >= 0,
                "XR_CURRENT_API_VERSION is lower than the minimum supported version (v0)");
 #endif
 
-#if (XR_CURRENT_API_VERSION & 0xffffffffULL) > 48
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) > 49
 #if _MSC_VER
 #pragma message(                                                                                   \
     __FILE__                                                                                       \
-    ": warning: XR_CURRENT_API_VERSION is higher than what the header fully supports (v48)")
+    ": warning: XR_CURRENT_API_VERSION is higher than what the header fully supports (v49)")
 #else
-#warning "XR_CURRENT_API_VERSION is higher than what the header fully supports (v48)"
+#warning "XR_CURRENT_API_VERSION is higher than what the header fully supports (v49)"
 #endif
 #endif
 
@@ -57,6 +57,54 @@ char const *XrResult_to_string(XrResult result) {
   // Check in descending order to get the 'latest' version of the error code text available.
   // Also, because codes have been re-used over time, can't use a switch and have to do this large
   // set of ifs. Luckily this *should* be a relatively rare call.
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 49 && XR_EXT_render_model
+  if (result == XR_ERROR_RENDER_MODEL_ID_INVALID_EXT)
+    return "XR_ERROR_RENDER_MODEL_ID_INVALID_EXT";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 49 && XR_EXT_render_model
+  if (result == XR_ERROR_RENDER_MODEL_ASSET_UNAVAILABLE_EXT)
+    return "XR_ERROR_RENDER_MODEL_ASSET_UNAVAILABLE_EXT";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 49 && XR_EXT_render_model
+  if (result == XR_ERROR_RENDER_MODEL_GLTF_EXTENSION_REQUIRED_EXT)
+    return "XR_ERROR_RENDER_MODEL_GLTF_EXTENSION_REQUIRED_EXT";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 49 && XR_EXT_interaction_render_model
+  if (result == XR_ERROR_NOT_INTERACTION_RENDER_MODEL_EXT)
+    return "XR_ERROR_NOT_INTERACTION_RENDER_MODEL_EXT";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 49 && XR_EXT_spatial_entity
+  if (result == XR_ERROR_SPATIAL_CAPABILITY_UNSUPPORTED_EXT)
+    return "XR_ERROR_SPATIAL_CAPABILITY_UNSUPPORTED_EXT";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 49 && XR_EXT_spatial_entity
+  if (result == XR_ERROR_SPATIAL_ENTITY_ID_INVALID_EXT)
+    return "XR_ERROR_SPATIAL_ENTITY_ID_INVALID_EXT";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 49 && XR_EXT_spatial_entity
+  if (result == XR_ERROR_SPATIAL_BUFFER_ID_INVALID_EXT)
+    return "XR_ERROR_SPATIAL_BUFFER_ID_INVALID_EXT";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 49 && XR_EXT_spatial_entity
+  if (result == XR_ERROR_SPATIAL_COMPONENT_UNSUPPORTED_FOR_CAPABILITY_EXT)
+    return "XR_ERROR_SPATIAL_COMPONENT_UNSUPPORTED_FOR_CAPABILITY_EXT";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 49 && XR_EXT_spatial_entity
+  if (result == XR_ERROR_SPATIAL_CAPABILITY_CONFIGURATION_INVALID_EXT)
+    return "XR_ERROR_SPATIAL_CAPABILITY_CONFIGURATION_INVALID_EXT";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 49 && XR_EXT_spatial_entity
+  if (result == XR_ERROR_SPATIAL_COMPONENT_NOT_ENABLED_EXT)
+    return "XR_ERROR_SPATIAL_COMPONENT_NOT_ENABLED_EXT";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 49 && XR_EXT_spatial_persistence
+  if (result == XR_ERROR_SPATIAL_PERSISTENCE_SCOPE_UNSUPPORTED_EXT)
+    return "XR_ERROR_SPATIAL_PERSISTENCE_SCOPE_UNSUPPORTED_EXT";
+#endif
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 49 && XR_EXT_spatial_persistence_operations
+  if (result == XR_ERROR_SPATIAL_PERSISTENCE_SCOPE_INCOMPATIBLE_EXT)
+    return "XR_ERROR_SPATIAL_PERSISTENCE_SCOPE_INCOMPATIBLE_EXT";
+#endif
 #if (XR_CURRENT_API_VERSION & 0xffffffffULL) >= 47 && XR_BD_spatial_sensing
   if (result == XR_ERROR_SPATIAL_ENTITY_ID_INVALID_BD)
     return "XR_ERROR_SPATIAL_ENTITY_ID_INVALID_BD";
