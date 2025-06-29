@@ -479,6 +479,7 @@ def main(argv):
 
     # Output XML
     tree = ET.ElementTree(dataRoot)
+    ET.indent(tree, space="\t", level=0)
     tree.write(args.cache)
 
 
