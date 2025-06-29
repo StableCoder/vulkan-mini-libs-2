@@ -6,3 +6,11 @@ VkIndirectCommandsLayoutTokenEXT:
 VkIndirectCommandsLayoutCreateInfoEXT:
 VkPhysicalDevicePresentMeteringFeaturesNV:
 VkSetPresentConfigNV:
+VkVideoPictureResourceKHR:
+VkVideoReferenceSlotKHR:
+VkVideoQueueFamilyProperties2KHR:
+VkCudaFunctionCreateInfoNV:
+VkCudaLaunchInfoNV:
+VkCudaModuleCreateInfoNV:
+VkPhysicalDeviceCudaKernelLaunchPropertiesNV:
+VkPhysicalDeviceCudaKernelLaunchFeaturesNV:
