@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 315
+#if VK_HEADER_VERSION > 316
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v315)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v316)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v315)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v316)"
 #endif
 #endif
 
@@ -7480,6 +7480,11 @@ bool compare_VkExternalComputeQueueDataParamsNV(VkExternalComputeQueueDataParams
 bool compare_VkPhysicalDeviceExternalComputeQueuePropertiesNV(
     VkPhysicalDeviceExternalComputeQueuePropertiesNV const *s1,
     VkPhysicalDeviceExternalComputeQueuePropertiesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 316 && (VK_ARM_format_pack)
+bool compare_VkPhysicalDeviceFormatPackFeaturesARM(VkPhysicalDeviceFormatPackFeaturesARM const *s1,
+                                                   VkPhysicalDeviceFormatPackFeaturesARM const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 139 && VK_HEADER_VERSION <= 313 && (VK_EXT_robustness2)
@@ -26401,6 +26406,17 @@ bool compare_VkPhysicalDeviceExternalComputeQueuePropertiesNV(
     VkPhysicalDeviceExternalComputeQueuePropertiesNV const *s2) {
   if ((s1->externalDataSize != s2->externalDataSize) ||
       (s1->maxExternalQueues != s2->maxExternalQueues) || false)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 316 && (VK_ARM_format_pack)
+bool compare_VkPhysicalDeviceFormatPackFeaturesARM(
+    VkPhysicalDeviceFormatPackFeaturesARM const *s1,
+    VkPhysicalDeviceFormatPackFeaturesARM const *s2) {
+  if ((s1->formatPack != s2->formatPack) || false)
     return false;
 
   return true;

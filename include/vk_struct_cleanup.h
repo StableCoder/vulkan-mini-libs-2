@@ -37,12 +37,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 315
+#if VK_HEADER_VERSION > 316
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v315)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v316)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v315)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v316)"
 #endif
 #endif
 
@@ -8226,6 +8226,11 @@ void cleanup_VkPhysicalDeviceRobustness2PropertiesEXT(
 #if VK_HEADER_VERSION >= 315 && (VK_EXT_zero_initialize_device_memory)
 void cleanup_VkPhysicalDeviceZeroInitializeDeviceMemoryFeaturesEXT(
     VkPhysicalDeviceZeroInitializeDeviceMemoryFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 316 && (VK_ARM_format_pack)
+void cleanup_VkPhysicalDeviceFormatPackFeaturesARM(
+    VkPhysicalDeviceFormatPackFeaturesARM const *pData);
 #endif
 
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
@@ -18794,6 +18799,14 @@ void cleanup_vk_struct(void const *pData) {
       VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_ZERO_INITIALIZE_DEVICE_MEMORY_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceZeroInitializeDeviceMemoryFeaturesEXT(
         (VkPhysicalDeviceZeroInitializeDeviceMemoryFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 316 && (VK_ARM_format_pack)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FORMAT_PACK_FEATURES_ARM) {
+    cleanup_VkPhysicalDeviceFormatPackFeaturesARM(
+        (VkPhysicalDeviceFormatPackFeaturesARM const *)pData);
     return;
   }
 #endif
@@ -37519,6 +37532,16 @@ void cleanup_VkPhysicalDeviceRobustness2PropertiesEXT(
 #if VK_HEADER_VERSION >= 315 && (VK_EXT_zero_initialize_device_memory)
 void cleanup_VkPhysicalDeviceZeroInitializeDeviceMemoryFeaturesEXT(
     VkPhysicalDeviceZeroInitializeDeviceMemoryFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 316 && (VK_ARM_format_pack)
+void cleanup_VkPhysicalDeviceFormatPackFeaturesARM(
+    VkPhysicalDeviceFormatPackFeaturesARM const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

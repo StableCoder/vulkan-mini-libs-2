@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 315
+#if VK_HEADER_VERSION > 316
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v315)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v316)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v315)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v316)"
 #endif
 #endif
 
@@ -2400,6 +2400,20 @@ EnumValueSet const VkFormatSets[] = {
     {"R16G16_SFIXED5_NV", 1000464000, false},
     {"A1B5G5R5_UNORM_PACK16", 1000470000, false},
     {"A8_UNORM", 1000470001, false},
+    {"R10X6_UINT_PACK16_ARM", 1000609000, false},
+    {"R10X6G10X6_UINT_2PACK16_ARM", 1000609001, false},
+    {"R10X6G10X6B10X6A10X6_UINT_4PACK16_ARM", 1000609002, false},
+    {"R12X4_UINT_PACK16_ARM", 1000609003, false},
+    {"R12X4G12X4_UINT_2PACK16_ARM", 1000609004, false},
+    {"R12X4G12X4B12X4A12X4_UINT_4PACK16_ARM", 1000609005, false},
+    {"R14X2_UINT_PACK16_ARM", 1000609006, false},
+    {"R14X2G14X2_UINT_2PACK16_ARM", 1000609007, false},
+    {"R14X2G14X2B14X2A14X2_UINT_4PACK16_ARM", 1000609008, false},
+    {"R14X2_UNORM_PACK16_ARM", 1000609009, false},
+    {"R14X2G14X2_UNORM_2PACK16_ARM", 1000609010, false},
+    {"R14X2G14X2B14X2A14X2_UNORM_4PACK16_ARM", 1000609011, false},
+    {"G14X2_B14X2R14X2_2PLANE_420_UNORM_3PACK16_ARM", 1000609012, false},
+    {"G14X2_B14X2R14X2_2PLANE_422_UNORM_3PACK16_ARM", 1000609013, false},
 };
 
 EnumValueSet const VkFrontFaceSets[] = {
@@ -4084,7 +4098,7 @@ EnumType const cEnumTypes[385] = {
     {"VkDescriptorType", VkDescriptorTypeSets, 21},
     {"VkDynamicState", VkDynamicStateSets, 90},
     {"VkPolygonMode", VkPolygonModeSets, 4},
-    {"VkFormat", VkFormatSets, 307},
+    {"VkFormat", VkFormatSets, 321},
     {"VkFrontFace", VkFrontFaceSets, 2},
     {"VkImageLayout", VkImageLayoutSets, 41},
     {"VkImageTiling", VkImageTilingSets, 3},
