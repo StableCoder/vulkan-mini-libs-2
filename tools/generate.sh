@@ -1,4 +1,4 @@
-# Copyright (C) 2022-2023 George Cave.
+# Copyright (C) 2022-2025 George Cave.
 #
 # SPDX-License-Identifier: Apache-2.0
 
@@ -17,7 +17,7 @@ IGNORE_FEATURES=""
 # Type specific vars
 API=vulkan
 XML_PATH=xml/vk.xml
-CACHE=.vk_cache.xml
+CACHE=.vk_cache.json
 REGEX="^v[0-9]*\.[0-9]*\.[0-9]*$"
 
 help_blurb() {
@@ -53,13 +53,23 @@ while [[ $# -gt 0 ]]; do
     --openxr)
         API=openxr
         XML_PATH=specification/registry/xr.xml
-        CACHE=.xr_cache.xml
+        CACHE=.xr_cache.json
         REGEX="^release-[1-9].[0-9]*\.[0-9]*$"
+        shift
+        ;;
+    --vulkansc)
+        API=vulkansc
+        CACHE=.vksc_cache.json
+        REGEX="^vksc[1-9].[0-9]*\.[0-9]*$"
         shift
         ;;
     -h | --help)
         help_blurb
         exit 0
+        ;;
+    *)
+        help_blurb
+        exit 1
         ;;
     esac
 done
@@ -68,6 +78,8 @@ if [[ "$API" == "vulkan" ]]; then
     START=${START:=72} # Prior to v72, vk.xml was not published, so that's the default minimum.
     IGNORE_FEATURES="--ignore-feature VK_VERSION_1_0"
     DOCS_REPO="Vulkan-Docs"
+elif [[ "$API" == "vulkansc" ]]; then
+    DOCS_REPO="VulkanSC-Docs"
 elif [[ "$API" == "openxr" ]]; then
     START=${START:=0}
     DOCS_REPO="OpenXR-Docs"
@@ -110,8 +122,13 @@ fi
 if [[ "$API" == "vulkan" ]]; then
     ./generate_serialization_header.py --input $CACHE --output "${OUTPUT}/vk_value_serialization.h"
     ./generate_result_string_header.py --input $CACHE --output "${OUTPUT}/vk_result_to_string.h"    --api $API
-    ./generate_cleanup_header.py       --input $CACHE --output "${OUTPUT}/vk_struct_cleanup.h"      --yaml ${ROOT_DIR}/data/cleanup_excludes.yaml
-    ./generate_comparison_header.py    --input $CACHE --output "${OUTPUT}/vk_struct_compare.h"      --yaml ${ROOT_DIR}/data/compare_excludes.yaml
+    ./generate_cleanup_header.py       --input $CACHE --output "${OUTPUT}/vk_struct_cleanup.h"
+    ./generate_comparison_header.py    --input $CACHE --output "${OUTPUT}/vk_struct_compare.h"  --verified-void "${ROOT_DIR}/data/vk_verified_voids.txt"
+elif [[ "$API" == "vulkansc" ]]; then
+    ./generate_serialization_header.py --input $CACHE --output "${OUTPUT}/vksc_value_serialization.h"
+    ./generate_result_string_header.py --input $CACHE --output "${OUTPUT}/vksc_result_to_string.h"    --api $API
+    ./generate_cleanup_header.py       --input $CACHE --output "${OUTPUT}/vk_struct_cleanup.h"
+    ./generate_comparison_header.py    --input $CACHE --output "${OUTPUT}/vk_struct_compare.h"
 elif [[ "$API" == "openxr" ]]; then
     ./generate_result_string_header.py --input $CACHE --output "${OUTPUT}/xr_result_to_string.h"    --api $API
 fi

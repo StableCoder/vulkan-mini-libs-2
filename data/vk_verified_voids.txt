@@ -1,0 +1,21 @@
+# the layout is: struct,member
+VkCuLaunchInfoNVX pParams
+VkCuLaunchInfoNVX pExtras
+VkCuModuleCreateInfoNVX pData
+VkCudaLaunchInfoNV pParams
+VkCudaLaunchInfoNV pExtras
+VkCudaModuleCreateInfoNV pData
+VkDebugMarkerObjectTagInfoEXT pTag
+VkDebugUtilsObjectTagInfoEXT pTag
+VkFrameBoundaryEXT pTag
+VkHdrVividDynamicMetadataHUAWEI pDynamicMetadata
+VkPipelineBinaryDataKHR pData
+VkPipelineCacheCreateInfo pInitialData
+VkPipelineExecutableInternalRepresentationKHR pData
+VkPushConstantsInfo pValues
+VkPushConstantsInfoKHR pValues
+VkShaderCreateInfoEXT pCode
+VkSpecializationInfo pData
+VkValidationCacheCreateInfoEXT pInitialData
+VkWriteDescriptorSetInlineUniformBlock pData
+VkWriteDescriptorSetInlineUniformBlockEXT pData

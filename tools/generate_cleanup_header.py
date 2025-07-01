@@ -1,116 +1,115 @@
 #!/usr/bin/env python3
 
-# Copyright (C) 2022-2023 George Cave.
+# Copyright (C) 2022-2025 George Cave.
 #
 # SPDX-License-Identifier: Apache-2.0
 
 import argparse
 import gen_common
+import json
 import sys
-import yaml
 import xml.etree.ElementTree as ET
 
 
-def guardStruct(struct, firstVersion, lastVersion, sTypeCheck, outFile):
+def guard_area(type_data, first_version, last_version, out_file):
     guarded = False
-    if sTypeCheck:
-        firstCheck = struct.find('members/sType').get('first')
-        lastCheck = struct.find('members/sType').get('last')
-    else:
-        firstCheck = struct.get('first')
-        lastCheck = struct.get('last')
-    # Guard check for first version
-    if firstCheck != firstVersion:
+
+    # Guard based on required definitions
+    if 'requires' in type_data:
+        out_file.write('\n#if ')
         guarded = True
-        outFile.write('#if VK_HEADER_VERSION >= {}'.format(
-            firstCheck))
-    # Guard check for last version
-    if lastCheck != lastVersion:
-        if guarded:
-            # If already started, append to it
-            outFile.write(
-                ' && VK_HEADER_VERSION <= {}'.format(lastCheck))
-        else:
-            guarded = True
-            outFile.write(
-                '#if VK_HEADER_VERSION <= {}'.format(lastCheck))
-    # Guard check for platforms
-    platforms = struct.findall('platforms/')
-    if platforms:
-        if guarded:
-            # If already started, append to it
-            outFile.write(' && ')
-        else:
-            guarded = True
-            outFile.write('\n#if ')
+        require_count = 0
 
-        if len(platforms) > 1:
-            outFile.write('(')
-        platformed = False
-        for platform in platforms:
-            defineStr = platform.tag
-            subPlatforms = platform.findall('./')
-            for sub in subPlatforms:
-                defineStr += ' && {}'.format(sub.tag)
+        for require_variant, require_data in type_data['requires'].items():
+            if require_count > 0:
+                out_file.write(' || ')
+            out_file.write('(')
+            check_started = False
 
-            if platformed:
-                outFile.write(' || ({})'.format(defineStr))
+            # check version numbers first
+            if require_data['first'] != first_version:
+                out_file.write('VK_HEADER_VERSION >= {}'.format(require_data['first']))
+                check_started = True
+
+            if require_data['last'] != last_version:
+                if check_started:
+                    out_file.write(' && ')
+                out_file.write('VK_HEADER_VERSION <= {}'.format(require_data['last']))
+                check_started = True
+
+            # add defines
+            for define in require_data['defines']:
+                if check_started:
+                    out_file.write(' && ')
+                # Brackets around OR defines
+                if ',' in define:
+                    out_file.write('({})'.format(define.replace(',', ' || ')))
+                else:
+                    out_file.write(define)
+                check_started = True
+            out_file.write(')')
+            require_count += 1
+    else:
+        # do a guard based only on version numbers for the struct
+        firstCheck = type_data['first']
+        lastCheck = type_data['last']
+
+        # Guard check for first version
+        if firstCheck != first_version:
+            guarded = True
+            out_file.write('#if VK_HEADER_VERSION >= {}'.format(firstCheck))
+
+        # Guard check for last version
+        if lastCheck != last_version:
+            if guarded:
+                # If already started, append to it
+                out_file.write(' && VK_HEADER_VERSION <= {}'.format(lastCheck))
             else:
-                platformed = True
-                outFile.write('({})'.format(defineStr))
-        if len(platforms) > 1:
-            outFile.write(')')
+                guarded = True
+                out_file.write('#if VK_HEADER_VERSION <= {}'.format(lastCheck))
 
     if guarded:
-        outFile.write('\n')
+        out_file.write('\n')
     return guarded
 
 
-def getExternalDataMembers(members):
-    externalMembers = []
-    for member in members:
-        typeSuffix = member.find('type').get('suffix')
-        if not typeSuffix is None and '*' in typeSuffix:
-            externalMembers.append(member)
-
-    return externalMembers
-
-
-def processMultiMember(member, suffix, dataRoot, lenSplit, availableVars, outFile):
-    if len(availableVars) == 0:
-        print('Error, ran out of nestable variable names, add more!')
+def process_multi_member(member, member_data, iteration, suffix, available_characters, data, out_file):
+    if len(available_characters) == 0:
+        print('ERROR: ran out of nestable variable names, add more!')
         sys.exit(1)
-    curVar = availableVars[0]
-    count = lenSplit[0]
-    typeName = member.find('type').text
-    typeNode = dataRoot.find('structs/' + typeName)
+    iter_character = available_characters[0]
 
-    if len(lenSplit) > 1:
-        outFile.write(
-            '    for(uint32_t {0} = 0; {0} < pData->{1}{2}; ++{0}) {{\n'.format(curVar, count, suffix))
-        processMultiMember(member, '[' + curVar + ']', dataRoot,
-                           lenSplit[1:], availableVars[1:], outFile)
-        outFile.write('    }\n')
+    if len(iteration) > 1:
+        # more than one level of indirection
+        if iteration[0].isdigit():
+            out_file.write('    for (size_t {0} = 0; {0} < {1}; ++{0}) {{\n'.format(iter_character, iteration[0]))
+        else:
+            out_file.write('    for (size_t {0} = 0; {0} < pData->{1}; ++{0}) {{\n'.format(iter_character, iteration[0]))
+
+        process_multi_member(member, member_data, iteration[1:], '{}[{}]'.format(suffix, iter_character), available_characters[1:], data, out_file)
+        out_file.write('    }\n')
+
     else:
-        if not typeNode is None:
-            # A Vulkan struct, cleanup first
-            outFile.write(
-                '    if (pData->{}{} != NULL) {{\n'.format(member.tag, suffix))
-            outFile.write(
-                '    for(uint32_t {0} = 0; {0} < pData->{1}{2}; ++{0})\n'.format(curVar, count, suffix))
-            outFile.write(
-                '            cleanup_{}(&pData->{}{}[{}]);\n'.format(typeName, member.tag, suffix, curVar))
-            outFile.write('    }\n')
-    outFile.write('    free((void*)pData->{}{});\n'.format(member.tag, suffix))
+        # last level of indirection
+        if member_data['type'] in data['structs']:
+            # if an API-related structure type, clean it up
+            if iteration[0].isdigit():
+                out_file.write('for (size_t {0} = 0; {0} < {1}; ++{0}) {{\n'.format(iter_character, iteration[0]))
+            else:
+                out_file.write('for (size_t {0} = 0; {0} < pData->{1}{2}; ++{0}) {{\n'.format(iter_character, iteration[0], suffix))
+
+            out_file.write('''\
+                cleanup_{2}(&pData->{3}{1}[{0}]);
+            }}
+            '''.format(iter_character, suffix, member_data['type'], member))
+
+    out_file.write('    free((void *)pData->{}{});\n'.format(member, suffix))
 
 
 def main(argv):
     parser = argparse.ArgumentParser()
     parser.add_argument('-i', '--input',
-                        help='Input XML cache file',
-                        required=True)
-    parser.add_argument('-y', '--yaml',
-                        help='YAML file that specifies what items to be ignored',
+                        help='Input JSON API cache file',
                         required=True)
     parser.add_argument('-o', '--output',
                         help='Output file to write to',
@@ -118,31 +117,27 @@ def main(argv):
     args = parser.parse_args()
 
     try:
-        dataXml = ET.parse(args.input)
-        dataRoot = dataXml.getroot()
+        json_file = open(args.input, 'r')
+        data = json.load(json_file)
     except:
         print("Error: Could not open input file: ", args.input)
         sys.exit(1)
 
-    try:
-        with open(args.yaml, 'r') as file:
-            yamlData = yaml.safe_load(file)
-    except:
-        print("Error: Could not open Yaml file: ", args.yaml)
-        sys.exit(1)
+    # sort struct data
+    data['structs'] = dict(sorted(data['structs'].items()))
 
     # Get first/last versions
-    firstVersion = dataRoot.get('first')
-    lastVersion = dataRoot.get('last')
-    structs = dataRoot.findall('structs/')
+    first_version = data['api']['first']
+    last_version = data['api']['last']
 
-    outFile = open(args.output, "w")
+    out_file = open(args.output, "w")
 
     # Common Header
-    gen_common.writeHeader(outFile)
+    gen_common.writeHeader(out_file)
 
     # Specific Header
-    outFile.write("""#ifndef VK_STRUCT_CLEANUP_H
+    out_file.write("""\
+#ifndef VK_STRUCT_CLEANUP_H
 #define VK_STRUCT_CLEANUP_H
 
 /*  USAGE:
@@ -161,162 +156,148 @@ extern "C" {
 #include <vulkan/vulkan.h>
 """)
 
-    # static asserts
-    outFile.write('\n#ifdef __cplusplus\n')
-    outFile.write(
-        "static_assert(VK_HEADER_VERSION >= {0}, \"VK_HEADER_VERSION is lower than the minimum supported version (v{0})\");\n".format(firstVersion))
-    outFile.write('#else\n')
-    outFile.write(
-        "_Static_assert(VK_HEADER_VERSION >= {0}, \"VK_HEADER_VERSION  is lower than the minimum supported version (v{0})\");\n".format(firstVersion))
-    outFile.write('#endif\n')
+    # static asserts for minimum version
+    out_file.write('''
+#ifdef __cplusplus
+static_assert(VK_HEADER_VERSION >= {0}, "VK_HEADER_VERSION is lower than the minimum supported version (v{0})");
+#else
+_Static_assert(VK_HEADER_VERSION >= {0}, "VK_HEADER_VERSION  is lower than the minimum supported version (v{0})");
+#endif
+'''.format(first_version))
 
-    # version warnings
-    outFile.write('\n#if VK_HEADER_VERSION > {0}\n'.format(lastVersion))
-    outFile.write('#if _MSC_VER\n')
-    outFile.write('#pragma message(__FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v{0})")\n'.format(lastVersion))
-    outFile.write('#else\n')
-    outFile.write('#warning "VK_HEADER_VERSION is higher than what the header fully supports (v{0})"\n'.format(lastVersion))
-    outFile.write('#endif\n')
-    outFile.write('#endif\n')
+    # warnings for above max generated version
+    out_file.write('''
+#if VK_HEADER_VERSION > {0}
+#if _MSC_VER
+#pragma message(__FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v{0})")
+#else
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v{0})"
+#endif
+#endif
+'''.format(last_version))
 
     # Generic struct catchall
-    outFile.write('\nvoid cleanup_vk_struct(void const* pData);\n')
+    out_file.write('\nvoid cleanup_vk_struct(void const* pData);\n')
 
     # Dynamic Declarations
-    currentVersion = int(firstVersion)
-    while currentVersion <= int(lastVersion):
-        for struct in structs:
-            if struct.get('first') != str(currentVersion):
-                continue
-            name = struct.tag
-            if name == 'VkBaseOutStructure' or name == 'VkBaseInStructure':
-                continue
-            if name in yamlData:
-                continue
-            outFile.write('\n')
-            guarded = guardStruct(struct, firstVersion,
-                                  lastVersion, False, outFile)
+    for struct, variants in data['structs'].items():
+        if struct == 'VkBaseInStructure' or struct == 'VkBaseOutStructure':
+            continue
+
+        sorted_variants = dict(sorted(variants.items(), key=lambda item: item[1]['first']))
+        for variant, struct_data in sorted_variants.items():
+            out_file.write('\n')
+            guarded = guard_area(struct_data, first_version, last_version, out_file)
 
             # Normal function declaration
-            outFile.write('void cleanup_{0}({0} const* pData);\n'.format(name))
+            out_file.write('void cleanup_{0}({0} const* pData);\n'.format(struct))
             if guarded:
-                outFile.write('#endif\n')
-        currentVersion += 1
+                out_file.write('#endif\n')
 
     # Definition Header
-    outFile.write("""
+    out_file.write("""
 #ifdef VK_STRUCT_CLEANUP_CONFIG_MAIN
 
 #include <stdlib.h>
 """)
 
     # Definitions
-    outFile.write("""
+    out_file.write("""
 void cleanup_vk_struct(void const* pData) {
     VkBaseInStructure const* pTemp = (VkBaseInStructure const*)pData;
 """)
-    first = True
-    currentVersion = int(firstVersion)
-    while currentVersion <= int(lastVersion):
-        for struct in structs:
-            if struct.get('first') != str(currentVersion):
-                continue
-            if struct.tag in yamlData:
-                continue
 
-            sTypeValue = struct.find('members/sType/value')
-            # Only deal with structs that have defined sType
-            if sTypeValue is None:
-                continue
+    for struct, variants in data['structs'].items():
+        if struct == 'VkBaseInStructure' or struct == 'VkBaseOutStructure':
+            continue
 
-            outFile.write('\n')
-            guarded = guardStruct(struct, firstVersion,
-                                  lastVersion, True, outFile)
-            outFile.write(
-                'if (pTemp->sType =={}) {{\n'.format(sTypeValue.text))
-            outFile.write(
-                '        cleanup_{0}(({0} const*)pData);\n'.format(struct.tag))
-            outFile.write('        return;\n    }')
+        sorted_variants = dict(sorted(variants.items(), key=lambda item: item[1]['first']))
+        for variant, struct_data in sorted_variants.items():
+
+            # only deal with structs that have defined sType
+            if not 'members' in struct_data or 'sType' not in struct_data['members']:
+                continue
+            sTypeValue = struct_data['members']['sType']['value']
+
+            out_file.write('\n')
+            guarded = guard_area(struct_data, first_version,last_version, out_file)
+            out_file.write(
+                'if (pTemp->sType =={}) {{\n'.format(sTypeValue))
+            out_file.write(
+                '        cleanup_{0}(({0} const*)pData);\n'.format(struct))
+            out_file.write('        return;\n    }')
             if guarded:
-                outFile.write('#endif\n')
-        currentVersion += 1
+                out_file.write('\n#endif\n')
 
-    outFile.write('}\n')
+    out_file.write('}\n')
+
 
     # Dynamic Definitions
-    currentVersion = int(firstVersion)
-    while currentVersion <= int(lastVersion):
-        for struct in structs:
-            if struct.get('first') != str(currentVersion):
-                continue
+    for struct, variants in data['structs'].items():
+        if struct == 'VkBaseInStructure' or struct == 'VkBaseOutStructure':
+            continue
 
-            name = struct.tag
-            if name == 'VkBaseOutStructure' or name == 'VkBaseInStructure':
-                continue
-            if name in yamlData:
-                continue
-            members = getExternalDataMembers(struct.findall('members/'))
+        sorted_variants = dict(sorted(variants.items(), key=lambda item: item[1]['first']))
+        for variant, struct_data in sorted_variants.items():
+            out_file.write('\n')
+            guarded = guard_area(struct_data, first_version, last_version, out_file)
 
-            outFile.write('\n')
-            guarded = guardStruct(struct, firstVersion,
-                                  lastVersion, False, outFile)
-
-            if struct.get('alias') != None:
-                outFile.write(
-                    'void cleanup_{0}({0} const* pData) {{ cleanup_{1}(({1} const*)pData); }}\n'.format(name, struct.get('alias')))
-            elif len(members) == 0:
-                outFile.write(
-                    'void cleanup_{0}({0} const* pData) {{}}\n'.format(name))
+            if 'alias' in struct_data:
+                # for an alias struct, use the alias's data
+                struct_data = data['structs'][struct_data['alias']['name']][struct_data['alias']['hash']]
+            
+            if not 'members' in struct_data:
+                # if there are no members, leave an empty function
+                out_file.write(
+                    'void cleanup_{0}({0} const* pData) {{}}\n'.format(struct))
             else:
-                outFile.write(
-                    'void cleanup_{0}({0} const* pData) {{'.format(name))
+                # there are members, deal with them
+                out_file.write(
+                    'void cleanup_{0}({0} const* pData) {{'.format(struct))
 
-                membersNode = struct.find('members')
-                for member in members:
-                    typeName = member.find('type').text
-                    typeNode = dataRoot.find('structs/' + typeName)
-                    outFile.write('\n')
+                for member, member_data in struct_data['members'].items():
+                    if not 'suffix' in member_data or not '*' in member_data['suffix']:
+                        continue
 
-                    guardedMember = guardStruct(
-                        member, membersNode.get('first'), membersNode.get('last'), False, outFile)
-                    if member.get('len') is None:
-                        # Single member, no iteration or counting business here
-                        outFile.write('    // {}\n'.format(member.tag))
-                        if member.tag == 'pNext':
-                            outFile.write('    if (pData->pNext != NULL)\n')
-                            outFile.write(
-                                '        cleanup_vk_struct(pData->pNext);\n')
-                        elif not typeNode is None:
-                            # A Vulkan struct, cleanup first
-                            outFile.write(
-                                '    if (pData->{0} != NULL)\n'.format(member.tag))
-                            outFile.write(
-                                '        cleanup_{0}(pData->{1});\n'.format(typeName, member.tag))
-                        outFile.write(
-                            '    free((void *)pData->{0});\n'.format(member.tag))
+                    member_type = member_data['type']
 
+                    if not 'len' in member_data:
+                        # single item
+                        out_file.write('\n    // {}\n'.format(member))
+
+                        if member == 'pNext':
+                            # pNext could be anything, use dynamic call
+                            out_file.write('''\
+                                if (pData->pNext != NULL)
+                                    cleanup_vk_struct(pData->pNext);
+                                ''')
+                            
+                        elif member_type in data['structs']:
+                            # a Vulkan struct type
+                            out_file.write('''\
+                                if (pData->{0} != NULL)
+                                    cleanup_{1}(pData->{0});
+                                '''.format(member, member_type))
+
+                        out_file.write('    free((void*)pData->{});\n'.format(member))
                     else:
-                        # Multiple member or levels of indirection
-                        outFile.write(
-                            '    // {0} - {1}\n'.format(member.tag, member.get('len')))
-                        processMultiMember(member, '', dataRoot,
-                                           member.get('len').split(','), 'ijklmn', outFile)
-                    if guardedMember:
-                        outFile.write('#endif\n')
-                outFile.write('}\n')
+                        # multiple items
+                        out_file.write('\n    // {} - {}\n'.format(member, member_data['len']))
+                        process_multi_member(member, member_data, member_data['len'].split(','), '', 'ijklmn', data, out_file)
+
+                out_file.write('}\n')
 
             if guarded:
-                outFile.write('#endif\n')
-        currentVersion += 1
+                out_file.write('#endif\n')
 
     # Footer
-    outFile.write('\n#endif // VK_STRUCT_CLEANUP_CONFIG_MAIN\n')
-    outFile.write("""
+    out_file.write('\n#endif // VK_STRUCT_CLEANUP_CONFIG_MAIN\n')
+    out_file.write("""
 #ifdef __cplusplus
 }
 #endif
 """)
-    outFile.write('\n#endif // VK_STRUCT_CLEANUP_H\n')
+    out_file.write('\n#endif // VK_STRUCT_CLEANUP_H\n')
 
 
 if __name__ == "__main__":

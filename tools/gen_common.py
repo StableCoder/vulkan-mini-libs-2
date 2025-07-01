@@ -7,7 +7,8 @@
 from datetime import datetime
 
 def writeHeader(outFile):
-    outFile.write("""/*
+    outFile.write("""\
+/*
     Copyright (C) 2021-{} George Cave - gcave@stablecoder.ca
 
     SPDX-License-Identifier: Apache-2.0

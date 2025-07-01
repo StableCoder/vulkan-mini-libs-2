@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Copyright (C) 2022-2023 George Cave.
+# Copyright (C) 2022-2025 George Cave.
 #
 # SPDX-License-Identifier: Apache-2.0
 
@@ -11,477 +11,489 @@ import hashlib
 import sys
 import re
 import xml.etree.ElementTree as ET
+import json
 
 
-def findVkVersion(rootNode):
-    for type in rootNode.findall('./types/type'):
-        category = type.get('category')
-        if category is not None and category == 'define':
-            for name in type.findall('name'):
-                if name.text == 'VK_HEADER_VERSION':
-                    return str(int(name.tail))
+def parse_dependencies(dependencies):
+    outArr = []
 
-    return ''
+    for item in dependencies.split('+'):
+        outArr.append(item)
+
+    return outArr
 
 
-def findXrVersion(rootNode):
-    for type in rootNode.findall('./types/type'):
-        category = type.get('category')
-        if category is not None and category == 'define':
-            for name in type.findall('name'):
-                if name.text == 'XR_CURRENT_API_VERSION':
-                    verNumbers = type.find('type').tail
-                    parsedNumbers = re.findall(r'\d+', verNumbers)
-                    return parsedNumbers[2]
 
-
-def processVendors(inVendor, outVendors, apiVersion):
-    name = inVendor.get('name')
-    vendor = outVendors.find(name)
-    if vendor is None:
-        vendor = ET.SubElement(
-            outVendors, name, {'first': apiVersion, 'last': apiVersion})
-    else:
-        vendor.set('first', apiVersion)
-
-
-def processEnum(inEnum, outEnum, apiVersion):
-    # If the enum has no type, just return
-    if inEnum.get('type') is None:
-        return
-    # Skip certain named enums
-    enumName = inEnum.get('name').replace('FlagBits', 'Flags')
-    if enumName == 'API Constants' or enumName == 'VkStructureType':
-        return
-
-    # Add or edit
-    enum = outEnum.find(enumName)
-    if enum.get('alias'):
-        # Skip renamed/aliased enums
-        return
-
-    enumValues = enum.find('values')
-    for value in inEnum.findall('enum'):
-        valName = value.get('name')
-        enumVal = enumValues.find(valName)
-        if enumVal is None:
-            enumVal = ET.SubElement(
-                enumValues, valName, {'first': apiVersion, 'last': apiVersion})
-            ET.SubElement(enumVal, 'platforms')
-            if not value.get('value') is None:
-                enumVal.set('value', value.get('value'))
-            elif not value.get('bitpos') is None:
-                enumVal.set('bitpos', value.get('bitpos'))
-            elif not value.get('alias') is None:
-                enumVal.set('alias', value.get('alias'))
-            else:
-                print("Could not determine enum value for ", valName)
-                sys.exit(1)
-        else:
-            enumVal.set('first', apiVersion)
-
-
-def processFeatureEnum(featureEnum, outEnum, apiVersion):
-    extends = featureEnum.get('extends')
-    valName = featureEnum.get('name')
-    if extends is None or extends == 'VkStructureType':
-        return
-
-    # Get the enum
-    enum = outEnum.find(extends.replace('FlagBits', 'Flags'))
-    if enum.get('alias'):
-        # Skip renamed/aliased enums
-        return
-
-    # Value
-    enumValues = enum.find('values')
-    value = enumValues.find(valName)
-    if value is None:
-        value = ET.SubElement(
-            enumValues, valName, {'first': apiVersion, 'last': apiVersion})
-        ET.SubElement(value, 'platforms')
-        if not featureEnum.get('offset') is None:
-            extNum = int(featureEnum.get('extnumber'))
-            if not featureEnum.get('dir') is None and featureEnum.get('dir') == '-':
-                value.set('value', str(-(1000000000 + (extNum - 1)
-                                         * 1000 + int(featureEnum.get('offset')))))
-            else:
-                value.set('value', str(1000000000 + (extNum - 1)
-                                       * 1000 + int(featureEnum.get('offset'))))
-        elif not featureEnum.get('value') is None:
-            value.set('value', featureEnum.get('value'))
-        elif not featureEnum.get('bitpos') is None:
-            value.set('bitpos', featureEnum.get('bitpos'))
-        elif not featureEnum.get('alias') is None:
-            value.set('alias', featureEnum.get('alias'))
-        else:
-            print("Could not determine enum value for ", valName)
-            sys.exit(1)
-    else:
-        value.set('first', apiVersion)
-
-
-def processExtensionEnums(extension, outEnum, apiVersion):
-    extName = extension.get('name')
-    extNum = int(extension.get('number'))
-
-    for extEnum in extension.findall('require/enum'):
-        extends = extEnum.get('extends')
-        valName = extEnum.get('name')
-        if extends is None or extends == 'VkStructureType':
-            continue
-
-        # Enum
-        enum = outEnum.find(extends.replace('FlagBits', 'Flags'))
-        if enum.get('alias'):
-            # Skip renamed/aliased enums
-            continue
-
-        # Value
-        enumValues = enum.find('values')
-        value = enumValues.find(valName)
-        if value is None:
-            value = ET.SubElement(
-                enumValues, valName, {'first': apiVersion, 'last': apiVersion})
-            ET.SubElement(value, 'platforms')
-            if not extEnum.get('offset') is None:
-                tempExtNum = extNum
-                if not extEnum.get('extnumber') is None:
-                    tempExtNum = int(extEnum.get('extnumber'))
-                if not extEnum.get('dir') is None and extEnum.get('dir') == '-':
-                    value.set('value', str(-(1000000000 + (tempExtNum - 1)
-                                             * 1000 + int(extEnum.get('offset')))))
-                else:
-                    value.set('value', str(1000000000 + (tempExtNum - 1)
-                                           * 1000 + int(extEnum.get('offset'))))
-            elif not extEnum.get('value') is None:
-                value.set('value', extEnum.get('value'))
-            elif not extEnum.get('bitpos') is None:
-                value.set('bitpos', extEnum.get('bitpos'))
-            elif not extEnum.get('alias') is None:
-                value.set('alias', extEnum.get('alias'))
-            else:
-                print("Could not determine enum value for ", valName)
-                sys.exit(1)
-        else:
-            value.set('first', apiVersion)
-
-        if value.find('platforms/' + extName) is None:
-            ET.SubElement(value.find('platforms'), extName)
-
-    for extType in extension.findall('require/type'):
-        typeName = extType.get('name')
-        enum = outEnum.find(typeName)
-        if enum is None:
-            continue
-
-        if enum.find('platforms/' + extName) is None:
-            ET.SubElement(enum.find('platforms'), extName)
-
-
-def processStruct(structNode, structData, api, apiVersion):
-    category = structNode.get('category')
-    if category is None or category != 'struct':
-        return
-
-    # If specified, make sure it is the correct API
-    if structNode.get('api') and structNode.get('api') != api:
-        return
-
-    structName = structNode.get('name')
-    alias = structNode.get('alias')
-
-    # Structure members/layouts can change, so need creeate a hash for each to sort/split them out
-    # However, we only want to do variant splits based on pertinent member/name/types, not attribute
-    # or comment changes
-    strippedStructNode = copy.deepcopy(structNode)
-    for member in strippedStructNode.findall('./member'):
-        if member.get('api') and member.get('api') != api:
-            strippedStructNode.remove(member)
-            continue
-        for subMember in member.findall('./'):
-            if subMember.tag != 'name' and subMember.tag != 'type':
-                member.remove(subMember)
-
-    strippedTree = ET.fromstring(ET.tostring(strippedStructNode, encoding='unicode'))
-    strippedTree = ''.join(strippedTree.itertext())
-    strippedTree = ''.join(strippedTree.split())
-    strippedTree = strippedTree.replace('const','')
-
-    structVariantHash = hashlib.sha256(strippedTree.encode('utf-8')).hexdigest()
-
-    struct = None
-    if alias:
-        struct = structData.find('./{}[@variant_hash=\'{}\'][@alias=\'{}\']'.format(structName, structVariantHash, alias))
-    else:
-        struct = structData.find('./{}[@variant_hash=\'{}\']'.format(structName, structVariantHash))
-
-    if struct is None:
-        struct = ET.SubElement(structData, structName, {
-                               'variant_hash': structVariantHash,
-                               'first': apiVersion, 'last': apiVersion})
-        ET.SubElement(struct, 'platforms')
-
-        # uncomment when debugging variants
-        # xml_data = ET.SubElement(struct, 'xml_data')
-        # xml_data.text = strippedTree
-
-        if alias:
-            struct.set('alias', alias)
-        if len(structNode.findall('./member')) != 0:
-            members = ET.SubElement(struct, 'members', {
-                'first': apiVersion, 'last': apiVersion})
-            for member in structNode.findall('./member'):
-                if member.get('api') and member.get('api') != api:
-                    continue
-                nameNode = member.find('name')
-                node = ET.SubElement(members, nameNode.text, {
-                    'first': apiVersion, 'last': apiVersion})
-                if not member.get('values') is None:
-                    value = ET.SubElement(node, 'value')
-                    value.text = member.get('values')
-                if not member.get('altlen') is None:
-                    node.set('len', member.get('altlen'))
-                elif not member.get('len') is None:
-                    node.set('len', member.get('len'))
-                if not member.find('enum') is None:
-                    node.set('suffix', '[' + member.find('enum').text + ']')
-
-                # Type Info
-                type = ET.SubElement(node, 'type')
-                type.text = member.find('type').text
-                # Type Suffix
-                typeSuffix = ''
-                if not member.text is None:
-                    typeSuffix += member.text
-                if not member.find('type').tail is None:
-                    typeSuffix += member.find('type').tail
-                typeSuffix = typeSuffix.strip()
-                if typeSuffix != '':
-                    type.set('suffix', typeSuffix)
-
-                # Array Stuff
-                if not nameNode.tail is None and nameNode.tail != '[':
-                    node.set('suffix', nameNode.tail)
-
-    else:
-        struct.set('first', apiVersion)
-
-        if len(structNode.findall('./member')) != 0:
-            members = struct.find('members')
-            if members is not None:
-                members.set('first', apiVersion)
-            else:
-                members = ET.SubElement(struct, 'members', {
-                    'first': apiVersion, 'last': apiVersion})
-
-            for member in structNode.findall('./member'):
-                nameNode = member.find('name')
-                node = members.find(nameNode.text)
-                if node is not None:
-                    node.set('first', apiVersion)
-                    continue
-
-                node = ET.SubElement(members, nameNode.text, {
-                    'first': apiVersion, 'last': apiVersion})
-                if not member.get('values') is None:
-                    value = ET.SubElement(node, 'value')
-                    value.text = member.get('values')
-                if not member.get('altlen') is None:
-                    node.set('len', member.get('altlen'))
-                elif not member.get('len') is None:
-                    node.set('len', member.get('len'))
-                if not member.find('enum') is None:
-                    node.set('suffix', '[' + member.find('enum').text + ']')
-
-                # Type Info
-                type = ET.SubElement(node, 'type')
-                type.text = member.find('type').text
-                # Type Suffix
-                typeSuffix = ''
-                if not member.text is None:
-                    typeSuffix += member.text
-                if not member.find('type').tail is None:
-                    typeSuffix += member.find('type').tail
-                typeSuffix = typeSuffix.strip()
-                if typeSuffix != '':
-                    type.set('suffix', typeSuffix)
-
-                # Array Stuff
-                if not nameNode.tail is None and nameNode.tail != '[':
-                    node.set('suffix', nameNode.tail)
-
-
-def processFeatureStruct(featureName, featureType, structData, apiVersion):
-    name = featureType.get('name')
-
-    for struct in structData.findall(name):
-        platforms = struct.find('platforms')
-        platform = platforms.find(featureName)
-        if platform is None:
-            ET.SubElement(platforms, featureName, {
-                'first': apiVersion, 'last': apiVersion})
-        else:
-            platform.set('first', apiVersion)
-
-
-def processExtensionStruct(extension, structData, apiVersion):
-    extName = extension.get('name')
-
-    for require in extension.findall('require'):
-        for type in require.findall('type'):
-            typeName = type.get('name')
-            for struct in structData.findall(typeName):
-                platforms = struct.find('platforms')
-                platform = platforms.find(extName)
-                if platform is None:
-                    ET.SubElement(platforms, extName, {
-                                  'first': apiVersion, 'last': apiVersion})
-                else:
-                    platform.set('first', apiVersion)
-
-                platform = platforms.find(extName)
-                if require.get('depends'):
-                    dependencies = require.get('depends').replace('+', ',').split(',')
-                    for dependency in dependencies:
-                        depend = platform.find(dependency)
-                        if depend is None:
-                            ET.SubElement(platform, dependency, {'first': apiVersion,
-                                                                 'last': apiVersion})
-                        else:
-                            depend.set('first', apiVersion)
-
-
-def main(argv):
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-i', '--input',
-                        help='Input Spec XML file',
+parser = argparse.ArgumentParser()
+parser.add_argument('-i', '--input',
+                        help='Input API Spec XML file',
                         required=True
                         )
-    parser.add_argument('-c', '--cache',
+parser.add_argument('-c', '--cache',
                         help='Cache XML file to read/write parsed spex data',
                         required=True
                         )
-    parser.add_argument('-a', '--api',
+parser.add_argument('-a', '--api',
                         help='Khronos API being processed',
                         required=True)
-    parser.add_argument('--ignore-feature', nargs='+',
+parser.add_argument('--ignore-feature', nargs='+',
                         help='Features in the spec to ignore',
                         default=[])
-    args = parser.parse_args()
+args = parser.parse_args()
 
-    dataRoot = ET.Element('root')
-    if exists(args.cache):
-        dataXml = ET.parse(args.cache)
-        dataRoot = dataXml.getroot()
+api_xml = ET.parse(args.input)
+api_data = api_xml.getroot()
 
-    vkXml = ET.parse(args.input)
-    vkRoot = vkXml.getroot()
+# api version information
+api_version = -1
+for api_type in api_data.findall('./types/type'):
+    category = api_type.get('category')
+    if category is not None and category == 'define':
+        for name in api_type.findall('name'):
+            if args.api == 'vulkan' and (not api_type.get('api') or api_type.get('api') == 'vulkan') and name.text == 'VK_HEADER_VERSION':
+                api_version = int(name.tail)
+            elif args.api == 'vulkansc' and api_type.get('api') == 'vulkansc' and name.text == 'VK_HEADER_VERSION':
+                api_version = int(name.tail)
+            elif args.api == 'openxr' and name.text == 'XR_CURRENT_API_VERSION':
+                verNumbers = api_type.find('type').tail
+                parsedNumbers = re.findall(r'\d+', verNumbers)
+                api_version = int(parsedNumbers[2])
 
-    # Version
-    apiVersion = ''
-    if args.api == 'vulkan':
-        apiVersion = findVkVersion(vkRoot)
-    elif args.api == 'openxr':
-        apiVersion = findXrVersion(vkRoot)
-    if apiVersion == '':
-        print("Error: Failed to determine API version")
-        sys.exit(1)
+if api_version == -1:
+    print('ERROR: Failed to determine API version')
+    sys.exit(1)
 
-    dataRoot.set('first', apiVersion)
-    if dataRoot.get('last') is None:
-        dataRoot.set('last', apiVersion)
+# prepare/load parsed data
+data = {
+    'api': {'first': -1, 'last': -1},
+    'vendors': {},
+    'enums': {},
+    'structs': {},
+    'unions': {},
+}
+if exists(args.cache):
+    with open(args.cache) as f:
+        data = json.load(f)
 
-    # Process Vendors
-    if dataRoot.find('vendors') is None:
-        ET.SubElement(dataRoot, 'vendors')
-    vendorData = dataRoot.find('vendors')
+# set api version info
+if data['api']['last'] == -1:
+    data['api']['last'] = api_version
+data['api']['first'] = api_version
 
-    for vendor in vkRoot.findall('./tags/tag'):
-        processVendors(vendor, vendorData, apiVersion)
+# process vendors
+for api_vendor in api_data.findall('./tags/tag'):
+    vendor_name = api_vendor.get('name')
+    if not vendor_name in data['vendors']:
+        data['vendors'][vendor_name] = {'first': api_version, 'last': api_version}
+    data['vendors'][vendor_name]['first'] = api_version
 
-    # Process Enums
-    if dataRoot.find('enums') is None:
-        ET.SubElement(dataRoot, 'enums')
-    enumData = dataRoot.find('enums')
+struct_hash_table = dict()
 
-    for typeData in vkRoot.findall('types/type'):
-        typeCategory = typeData.get('category')
-        if typeCategory == 'enum' or typeCategory == 'bitmask':
-            name = typeData.get('name')
-            if name:
-                if 'FlagBits' in name or name == 'VkStructureType':
-                    continue
-                enum = enumData.find(name)
-                if enum is None:
-                    if typeData.get('alias'):
-                        enum = ET.SubElement(enumData, name, {
-                            'first': apiVersion, 'last': apiVersion, 'alias': typeData.get('alias')})
-                    else:
-                        enum = ET.SubElement(enumData, name, {
-                            'first': apiVersion, 'last': apiVersion})
-                    ET.SubElement(enum, 'values', {})
-                    ET.SubElement(enum, 'platforms', {})
-                else:
-                    enum.set('first', apiVersion)
-            else:
-                name = typeData.find('name').text
-                if 'FlagBits' in name:
-                    continue
-
-                enum = enumData.find(name)
-                if enum is None:
-                    enum = ET.SubElement(enumData, name, {
-                        'first': apiVersion, 'last': apiVersion})
-                    ET.SubElement(enum, 'values', {})
-                    ET.SubElement(enum, 'platforms', {})
-                else:
-                    enum.set('first', apiVersion)
-
-    for enum in vkRoot.findall('enums'):
-        processEnum(enum, enumData, apiVersion)
-
-    for feature in vkRoot.findall('feature'):
-        # If specified, make sure that the feature is for the desired API
-        if feature.get('api'):
-            apiList = feature.get('api').split(',')
-            if not args.api in apiList:
-                continue
-        for featureEnum in feature.findall('require/enum'):
-            processFeatureEnum(featureEnum, enumData, apiVersion)
-    for extension in vkRoot.findall('extensions/extension'):
-        # If specified, make sure that the feature is for the desired API
-        if extension.get('supported'):
-            apiList = extension.get('supported').split(',')
-            if not args.api in apiList:
-                continue
-        processExtensionEnums(extension, enumData, apiVersion)
-
-    # Process Structs
-    if dataRoot.find('structs') is None:
-        ET.SubElement(dataRoot, 'structs')
-    structData = dataRoot.find('structs')
-
-    for struct in vkRoot.findall('types/type'):
-        processStruct(struct, structData, args.api, apiVersion)
-
-    for feature in vkRoot.findall('feature'):
-        featureName = feature.get('name')
-        # Check to see if the feature is supposed to be ignored
-        if featureName in args.ignore_feature:
+# pre-calculate hashes of all struct types for alias
+for api_type in api_data.findall('types/type'):
+    type_category = api_type.get('category')
+    if type_category == 'struct':
+        # check if the desired api between vulkan/vulkansc
+        if api_type.get('api') and not args.api in api_type.get('api'):
             continue
-        for featureType in feature.findall('require/type'):
-            processFeatureStruct(featureName, featureType,
-                                 structData, apiVersion)
+        
+        struct_name = api_type.get('name')
+        alias = api_type.get('alias')
+        
+        # Structure members/layouts can change, so need creeate a hash for each to sort/split them out
+        # However, we only want to do variant splits based on pertinent member/name/types, not attribute
+        # or comment changes
+        stripped_struct = copy.deepcopy(api_type)
+        for api_member in stripped_struct.findall('./member'):
+            if api_member.get('api') and not args.api in api_member.get('api'):
+                stripped_struct.remove(api_member)
+                continue
+            for subMember in api_member.findall('./'):
+                if subMember.tag != 'name' and subMember.tag != 'type':
+                    api_member.remove(subMember)
 
-    for extension in vkRoot.findall('extensions/extension'):
-        processExtensionStruct(extension, structData, apiVersion)
+        strippedTree = ET.fromstring(ET.tostring(stripped_struct, encoding='unicode'))
+        strippedTree = ''.join(strippedTree.itertext())
+        strippedTree = ''.join(strippedTree.split())
+        strippedTree = strippedTree.replace('const','')
+        if alias:
+            strippedTree += alias
 
-    # Output XML
-    tree = ET.ElementTree(dataRoot)
-    ET.indent(tree, space="\t", level=0)
-    tree.write(args.cache)
+        struct_hash_table[struct_name] = hashlib.sha256(strippedTree.encode('utf-8')).hexdigest()
+
+# process types
+for api_type in api_data.findall('types/type'):
+    # iterate through all types
+    type_category = api_type.get('category')
+
+    if type_category == 'enum' or type_category == 'bitmask':
+        # limit to just enums/bitmask types
+        type_name = api_type.get('name')
+
+        # alias types have the name as an attribute, instead of as text
+        if not type_name:
+            # probably a regular enum
+            type_name = api_type.find('name').text
+
+        if 'FlagBits' in type_name:
+            continue
+
+        if not type_name in data['enums']:
+            data['enums'][type_name] = {'first': api_version, 'last': api_version}
+        data['enums'][type_name]['first'] = api_version
+
+        if api_type.get('alias'):
+            data['enums'][type_name]['alias'] = api_type.get('alias')
+
+    elif type_category == 'struct':
+        # check if the desired api between vulkan/vulkansc
+        if api_type.get('api') and not args.api in api_type.get('api'):
+            continue
+        
+        struct_name = api_type.get('name')
+        alias = api_type.get('alias')
+        
+        # get pre-calculated hash
+        struct_hash = struct_hash_table[struct_name]
+
+        # check if a new structure
+        if not struct_name in data['structs']:
+            data['structs'][struct_name] = dict()
+
+        # if not a variant captured before, add it now
+        if not struct_hash in data['structs'][struct_name]:
+            new_struct = {'first': api_version, 'last': api_version}
+
+            if alias:
+                new_struct['alias'] = { 'name': alias, 'hash': struct_hash_table[alias] }
+
+            if len(api_type.findall('./member')) > 0:
+                new_struct['members'] = dict()
+                for api_member in api_type.findall('./member'):
+                    # skip members not of the expected api
+                    if api_member.get('api') and not args.api in api_member.get('api'):
+                        continue
+
+                    member_name = api_member.find('name').text
+                    new_member = dict()
+
+                    # type info
+                    new_member['type'] = api_member.find('type').text
+                    # type suffix
+                    type_suffix = ''
+                    if api_member.text:
+                        type_suffix += api_member.text
+                    if api_member.find('type').tail:
+                        type_suffix += api_member.find('type').tail
+                    if api_member.find('name').tail:
+                        type_suffix += api_member.find('name').tail
+                    type_suffix = type_suffix.strip()
+                    if type_suffix != '':
+                        new_member['suffix'] = type_suffix
+
+                    # add any special items
+                    if not api_member.get('values') is None:
+                        new_member['value'] = api_member.get('values')
+                    if not api_member.get('altlen') is None:
+                        new_member['len'] = api_member.get('altlen')
+                    elif not api_member.get('len') is None:
+                        new_member['len'] = api_member.get('len')
+                    if not api_member.find('enum') is None:
+                        new_member['suffix'] = '[' + api_member.find('enum').text + ']'
+
+                    if api_member.get('selector'):
+                        # union types can be determined by the selector
+                        new_member['selector'] = api_member.get('selector')
+
+                    # set new member data to struct variant
+                    new_struct['members'][member_name] = new_member
+            # add new struct variant
+            data['structs'][struct_name][struct_hash] = new_struct
+        # set struct variant first api_version
+        data['structs'][struct_name][struct_hash]['first'] = api_version
+
+    elif type_category == 'union':
+        if api_type.get('api') and not args.api in api_type.get('api'):
+            continue
+
+        union_name = api_type.get('name')
+        alias = api_type.get('alias')
+
+        if alias:
+            print('ERROR: Unhandled union/alis of {}'.format(union_name))
+            sys.exit(1)
+
+        if not union_name in data['unions']:
+            new_union = {'first': api_version, 'last': api_version, 'members': dict()}
+
+            for api_member in api_type.findall('./member'):
+                # skip members not of the expected api
+                if api_member.get('api') and not args.api in api_member.get('api'):
+                    continue
+                
+                member_name = api_member.find('name').text
+                new_member = dict()
+
+                # type info
+                new_member['type'] = api_member.find('type').text
+                # type suffix
+                type_suffix = ''
+                if api_member.text:
+                    type_suffix += api_member.text
+                if api_member.find('type').tail:
+                    type_suffix += api_member.find('type').tail
+                type_suffix = type_suffix.strip()
+                if type_suffix != '':
+                    new_member['suffix'] = type_suffix
+
+                if api_member.get('selection'):
+                    # union member can be determined by this selector
+                    new_member['selection'] = api_member.get('selection')
+
+                new_union['members'][member_name] = new_member
+            data['unions'][union_name] = new_union
+
+        data['unions'][union_name]['first'] = api_version
+
+        
+
+# process enums / values
+for api_enum in api_data.findall('enums'):
+    # if no type, skip
+    if api_enum.get('type') is None:
+        continue
+    # check to skip specific enums
+    enum_name = api_enum.get('name').replace('FlagBits', 'Flags')
+    if enum_name == 'API Constants':
+        continue
+
+    # shortcut
+    enum_data = data['enums'][enum_name]
+
+    # skip renamed/aliased enums
+    if 'alias' in enum_data:
+        continue
+
+    # iterate through all enum values/members
+    for api_enum_value in api_enum.findall('enum'):
+        if not 'values' in enum_data:
+            enum_data['values'] = dict()
+
+        value_name = api_enum_value.get('name')
+        if not value_name in enum_data['values']:
+            enum_data['values'][value_name] = {'first': api_version, 'last': api_version}
+            if api_enum_value.get('value'):
+                enum_data['values'][value_name]['value'] = api_enum_value.get('value')
+            elif api_enum_value.get('bitpos'):
+                enum_data['values'][value_name]['bitpos'] = api_enum_value.get('bitpos')
+            elif api_enum_value.get('alias'):
+                enum_data['values'][value_name]['alias'] = api_enum_value.get('alias')
+            else:
+                print('ERROR: Unhandled enum value type of {}::{}'.format(enum_name, value_name))
+                sys.exit(1)
+        enum_data['values'][value_name]['first'] = api_version
+
+# process features
+for api_feature in api_data.findall('feature'):
+    feature_name = api_feature.get('name')
+
+    if feature_name in args.ignore_feature:
+        continue
+
+    # process feature enums
+    for api_feature_enum in api_feature.findall('require/enum'):
+        # check to see if feature is part of desired api
+        if api_feature.get('api'):
+            api_feature_list = api_feature.get('api').split(',')
+            if not args.api in api_feature_list:
+                continue
+
+        if not api_feature_enum.get('extends'):
+            continue
+
+        extends_enum = api_feature_enum.get('extends')
+        value_name = api_feature_enum.get('name')
+        extended_enum_data = data['enums'][extends_enum.replace('FlagBits', 'Flags')]
+
+        # skip alias enums
+        if 'alias' in extended_enum_data:
+            continue
+
+        if not 'values' in extended_enum_data:
+            extended_enum_data['values'] = dict()
+        if not value_name in extended_enum_data['values']:
+            new_value = {'first': api_version, 'last': api_version}
+            
+            # feature enums are offset
+            if api_feature_enum.get('offset'):
+                extension_id = int(api_feature_enum.get('extnumber'))
+
+                new_value['value'] = 1000000000 + (extension_id - 1) * 1000 + int(api_feature_enum.get('offset'))
+                if api_feature_enum.get('dir') and api_feature_enum.get('dir') == '-':
+                    new_value['value'] = -new_value['value']
+            elif api_feature_enum.get('value'):
+                new_value['value'] = api_feature_enum.get('value')
+            elif api_feature_enum.get('bitpos'):
+                new_value['bitpos'] = api_feature_enum.get('bitpos')
+            elif api_feature_enum.get('alias'):
+                new_value['alias'] = api_feature_enum.get('alias')
+            else:
+                print('ERROR: Unhandled feature enum value for {}::{}'.format(extends_enum, value_name))
+                sys.exit(1)
+            
+            extended_enum_data['values'][value_name] = new_value
+        extended_enum_data['values'][value_name]['first'] = api_version
+
+    # process feature types
+    for api_feature_type in api_feature.findall('require/type'):
+        type_name = api_feature_type.get('name')
+
+        # type -> struct
+        if type_name in data['structs']:
+            for variant, struct_data in data['structs'][type_name].items():
+                # skip variants not in this version
+                if struct_data['first'] != api_version:
+                    continue
+
+                if not 'new_require_list' in struct_data:
+                    struct_data['new_require_list'] = []
+                if not feature_name in struct_data['new_require_list']:
+                    struct_data['new_require_list'].append(feature_name)
+    
+# process extensions
+for api_extension in api_data.findall('extensions/extension'):
+    extension_name = api_extension.get('name')
+    extension_id = int(api_extension.get('number'))
+
+    extra_extension_define = None
+    if api_extension.get('platform') and api_extension.get('platform') == 'provisional':
+        extra_extension_define = ['VK_ENABLE_BETA_EXTENSIONS']
+    if api_extension.get('provisional') and api_extension.get('provisional') == 'true':
+        extra_extension_define = ['VK_ENABLE_BETA_EXTENSIONS']
+
+    # process extension require sets
+    for api_extension_require in api_extension.findall('require'):
+        # capture extra required extensions
+        extra_require_define = None
+        if api_extension_require.get('depends'):
+            extra_require_define = parse_dependencies(api_extension_require.get('depends'))
+
+        # enums
+        for api_extension_enum in api_extension_require.findall('enum'):
+            extends_enum = api_extension_enum.get('extends')
+            if not extends_enum:
+                continue
+
+            value_name = api_extension_enum.get('name')
+            extended_enum_data = data['enums'][extends_enum.replace('FlagBits', 'Flags')]
+
+            # skip alias enums
+            if 'alias' in extended_enum_data:
+                continue
+
+            # set values
+            if not 'values' in extended_enum_data:
+                extended_enum_data['values'] = dict()
+            if not value_name in extended_enum_data['values']:
+                new_value = {'first': api_version, 'last': api_version}
+
+                if api_extension_enum.get('offset'):
+                    temp_extension_id = extension_id
+
+                    # sometimes there is an override
+                    if api_extension_enum.get('extnumber'):
+                        temp_extension_id = int(api_extension_enum.get('extnumber'))
+
+                    new_value['value'] = 1000000000 + (temp_extension_id - 1) * 1000 + int(api_extension_enum.get('offset'))
+                    if api_extension_enum.get('dir') and api_extension_enum.get('dir') == '-':
+                        new_value['value'] = -new_value['value']
+                elif api_extension_enum.get('value'):
+                    new_value['value'] = api_extension_enum.get('value')
+                elif api_extension_enum.get('bitpos'):
+                    new_value['bitpos'] = api_extension_enum.get('bitpos')
+                elif api_extension_enum.get('alias'):
+                    new_value['alias'] = api_extension_enum.get('alias')
+                else:
+                    print('ERROR: Unhandled extension enum value for {}::{}'.format(extends_enum, value_name))
+                    sys.exit(1)
+
+                extended_enum_data['values'][value_name] = new_value
+            value_data = extended_enum_data['values'][value_name]
+            value_data['first'] = api_version
+
+            # add the extension requirements for the value
+            if not 'new_require_list' in value_data:
+                value_data['new_require_list'] = []
+            if not extension_name in value_data['new_require_list']:
+                value_data['new_require_list'] = [extension_name]
+            if extra_require_define:
+                value_data['new_require_list'] = value_data['new_require_list'] + extra_require_define
+            if extra_extension_define:
+                value_data['new_require_list'] = value_data['new_require_list'] + extra_extension_define
+
+        # types / requires
+        for api_extension_type in api_extension_require.findall('type'):
+            type_name = api_extension_type.get('name')
+
+            # type -> struct
+            if type_name in data['structs']:
+                for variant, struct_data in data['structs'][type_name].items():
+                    # skip variants not in this version
+                    if struct_data['first'] != api_version:
+                        continue
+
+                    if not 'new_require_list' in struct_data:
+                        struct_data['new_require_list'] = []
+                    if not extension_name in struct_data['new_require_list']:
+                        struct_data['new_require_list'].append(extension_name)
+                    if extra_require_define and not extra_require_define in struct_data['new_require_list']:
+                        struct_data['new_require_list'] = struct_data['new_require_list'] + extra_require_define
+                        struct_data['new_require_list'] = list(dict.fromkeys(struct_data['new_require_list']))
+                    if extra_extension_define and not extra_extension_define in struct_data['new_require_list']:
+                        struct_data['new_require_list'] = struct_data['new_require_list'] + extra_extension_define
+                        struct_data['new_require_list'] = list(dict.fromkeys(struct_data['new_require_list']))
+
+# now need to iterate through all enums and structs, and check if the generated require list matches previous lists, or is a new one
+for enum, enum_data in data['enums'].items():
+    if 'values' in enum_data:
+        for value, value_data in enum_data['values'].items():
+            if 'new_require_list' in value_data:
+                # there are struct requirements, process it
+                if not 'requires' in value_data:
+                    value_data['requires'] = dict()
+
+                # sort the list and hash it
+                require_hash = hashlib.sha256(''.join(sorted(value_data['new_require_list'])).encode('utf-8')).hexdigest()
+
+                if not require_hash in value_data['requires']:
+                    # add it new
+                    value_data['requires'][require_hash] = {'first': api_version, 'last': api_version, 'defines': value_data['new_require_list']}
+                value_data['requires'][require_hash]['first'] = api_version
+
+                # remove the new_require_list
+                value_data.pop('new_require_list')
+
+for struct_name, struct_variants in data['structs'].items():
+    for variant, struct_data in struct_variants.items():
+        if 'new_require_list' in struct_data:
+            # there are struct requirements, process it
+            if not 'requires' in struct_data:
+                struct_data['requires'] = dict()
+
+            # sort the list and hash it
+            require_hash = hashlib.sha256(''.join(sorted(struct_data['new_require_list'])).encode('utf-8')).hexdigest()
+
+            if not require_hash in struct_data['requires']:
+                # add it new
+                struct_data['requires'][require_hash] = {'first': api_version, 'last': api_version, 'defines': struct_data['new_require_list']}
+            struct_data['requires'][require_hash]['first'] = api_version
+
+            # remove the new_require_list
+            struct_data.pop('new_require_list')
 
 
-if __name__ == "__main__":
-    main(sys.argv[1:])
+# output to cache file
+with open(args.cache, 'w', encoding='utf-8') as f:
+    json.dump(data, f, ensure_ascii=False, indent=4)
+
+sys.exit(0)

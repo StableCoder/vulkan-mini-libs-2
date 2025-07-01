@@ -7,13 +7,13 @@
 import argparse
 import gen_common
 import sys
-import xml.etree.ElementTree as ET
+import json
 
 
 def main(argv):
     parser = argparse.ArgumentParser()
     parser.add_argument('-i', '--input',
-                        help='Input XML cache file',
+                        help='Input JSON cache file',
                         required=True)
     parser.add_argument('-o', '--output',
                         help='Output file to write to',
@@ -24,15 +24,15 @@ def main(argv):
     args = parser.parse_args()
 
     try:
-        dataXml = ET.parse(args.input)
-        dataRoot = dataXml.getroot()
+        file = open(args.input, 'r')
+        apiData = json.load(file)
     except:
         print("Error: Could not open input file: ", args.input)
         sys.exit(1)
 
     # Get first/last versions
-    firstVersion = int(dataRoot.get('first'))
-    lastVersion = int(dataRoot.get('last'))
+    firstVersion = apiData['api']['first']
+    lastVersion = apiData['api']['last']
 
     outFile = open(args.output, "w")
 
@@ -110,53 +110,27 @@ char const* {1}_to_string({1} result) {{
   // Check in descending order to get the 'latest' version of the error code text available.
   // Also, because codes have been re-used over time, can't use a switch and have to do this large set of ifs.
   // Luckily this *should* be a relatively rare call.
+
+  switch (result) {{
 """.format(guard, enumType))
 
     # Content
-    currentVersion = lastVersion
-    while currentVersion >= firstVersion:
-        for enum in dataRoot.findall('enums/{}/values/'.format(enumType)):
-            if int(enum.get('first')) != currentVersion:
-                continue
+    doneValues = []
+    for key, data in apiData['enums'][enumType]['values'].items():
+        if 'alias' in data:
+            continue
+        if data['value'] in doneValues:
+            continue
 
-            guarded = False
-            # Guard check for first version
-            if int(enum.get('first')) != firstVersion:
-                guarded = True
-                outFile.write(
-                    '#if {} >= {}'.format(apiVersionStr, enum.get('first')))
-            # Guard check for last version
-            if int(enum.get('last')) != lastVersion:
-                if guarded:
-                    # If already started, append to it
-                    outFile.write(
-                        ' && {} <= {}'.format(apiVersionStr, enum.get('last')))
-                else:
-                    guarded = True
-                    outFile.write(
-                        '#if {} <= {}'.format(apiVersionStr, enum.get('last')))
-            # Guard check for platforms
-            for platform in enum.findall('platforms/'):
-                if guarded:
-                    # If already started, append to it
-                    outFile.write(' && {}'.format(platform.tag))
-                else:
-                    guarded = True
-                    outFile.write('#if {}'.format(platform.tag))
-
-            if guarded:
-                outFile.write('\n')
-
-            outFile.write('  if (result == {})\n'.format(enum.tag))
-            outFile.write('    return \"{}\";\n'.format(enum.tag))
-
-            if guarded:
-                outFile.write('#endif\n')
-        currentVersion -= 1
+        outFile.write('  case {}:\n'.format(data['value']))
+        outFile.write('    return \"{}\";\n'.format(key))
+        doneValues.append(data['value'])
 
     # Footer
     outFile.write("""
-  return NULL;
+  default:
+    return NULL;
+  }
 }
 """)
 

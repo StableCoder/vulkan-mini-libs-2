@@ -7,7 +7,7 @@
 import argparse
 import gen_common
 import sys
-import xml.etree.ElementTree as ET
+import json
 
 
 def processVendors(outFile, vendors):
@@ -15,43 +15,47 @@ def processVendors(outFile, vendors):
         '#define cVendorCount sizeof(cVendorList) / sizeof(char const*)')
     outFile.write('\nchar const *cVendorList[{}] = {{\n'.format(len(vendors)))
     for vendor in vendors:
-        outFile.write('  "{}",\n'.format(vendor.tag))
+        outFile.write('  "{}",\n'.format(vendor))
     outFile.write('};\n')
 
 
-def processEnumValue(outFile, enum, value):
-    if not value.get('value') is None:
+def processEnumValue( enum, enum_data, value, value_data):
+    if 'value' in value_data:
         # Spitting out plain values
-        outFile.write(value.get('value'))
-    elif not value.get('bitpos') is None:
+        return str(value_data['value'])
+    elif 'bitpos' in value_data:
         # Bitflag
-        outFile.write('0x{}'.format(
-            format(1 << int(value.get('bitpos')), '08X')))
-    elif not value.get('alias') is None:
-        processEnumValue(outFile, enum, enum.find(
-            './values/{}'.format(value.get('alias'))))
-
+        return '0x{}'.format(format(1 << int(value_data['bitpos']), '08X'))
+    elif 'alias' in value_data:
+        # go through to the alias target and use it's data
+        aliasTarget = value_data['alias']
+        if not aliasTarget in enum_data['values']:
+          return ''
+        return processEnumValue(enum, enum_data, aliasTarget, enum_data['values'][aliasTarget])
+    else:
+        print('Error: Unhandled enum value type {}::{}'.format(enum, value))
+        sys.exit(1)
 
 def processEnums(outFile, enums, vendors, first, last):
-    for enum in enums:
+    for enum, enum_data in enums.items():
         # Skip VkResult
-        if enum.tag == 'VkResult':
+        if enum == 'VkResult' or enum == 'VkStructureType' or 'alias' in enum_data:
             continue
         # Skip if there's no values, MSVC can't do zero-sized arrays
-        if len(enum.findall('./values/')) == 0:
+        if not 'values' in enum_data:
             continue
 
         outFile.write(
-            '\nEnumValueSet const {}Sets[] = {{\n'.format(enum.tag))
+            '\nEnumValueSet const {}Sets[] = {{\n'.format(enum))
 
         # Determine how much to chop off the front
-        strName = enum.tag
+        strName = enum
         typeDigit = ''
         # Determine if type ends with vendor tag
         vendorName = ''
         for vendor in vendors:
-            if strName.endswith(vendor.tag):
-                vendorName = vendor.tag
+            if strName.endswith(vendor):
+                vendorName = vendor
                 strName = strName[:-len(vendorName)]
 
         if strName[-1].isdigit():
@@ -76,14 +80,21 @@ def processEnums(outFile, enums, vendors, first, last):
             mainPrefix += typeDigit
             mainPrefix += '_'
 
+        # items with alias first
         current = first
         while current <= last:
-            for value in enum.findall('./values/'):
-                if int(value.get('first')) != current:
+            for value, value_data in enum_data['values'].items():
+                if not 'alias' in value_data:
                     continue
+                if value_data['first'] != current:
+                    continue
+                value_str = processEnumValue(enum, enum_data, value, value_data)
+                if not value_str:
+                  continue
+
                 outFile.write("  {\"")
 
-                valueStr = value.tag
+                valueStr = value
                 if valueStr.startswith(mainPrefix):
                     valueStr = valueStr[len(mainPrefix):]
                 if vendorName != '' and valueStr.endswith(vendorName):
@@ -95,12 +106,38 @@ def processEnums(outFile, enums, vendors, first, last):
                 outFile.write(valueStr)
                 outFile.write("\", ")
                 # Value
-                processEnumValue(outFile, enum, value)
-                # Alias
-                if value.get('alias'):
-                    outFile.write(', true')
-                else:
-                    outFile.write(', false')
+                outFile.write(value_str)
+
+                outFile.write("},\n")
+            current += 1
+
+        # items without alias last
+        current = first
+        while current <= last:
+            for value, value_data in enum_data['values'].items():
+                if 'alias' in value_data:
+                    continue
+                if value_data['first'] != current:
+                    continue
+                value_str = processEnumValue(enum, enum_data, value, value_data)
+                if not value_str:
+                  continue
+
+                outFile.write("  {\"")
+
+                valueStr = value
+                if valueStr.startswith(mainPrefix):
+                    valueStr = valueStr[len(mainPrefix):]
+                if vendorName != '' and valueStr.endswith(vendorName):
+                    valueStr = valueStr[:-len(vendorName)-1]
+                if valueStr.endswith('_BIT'):
+                    valueStr = valueStr[:-4]
+
+                # Name
+                outFile.write(valueStr)
+                outFile.write("\", ")
+                # Value
+                outFile.write(value_str)
 
                 outFile.write("},\n")
             current += 1
@@ -111,7 +148,7 @@ def processEnums(outFile, enums, vendors, first, last):
 def main(argv):
     parser = argparse.ArgumentParser()
     parser.add_argument('-i', '--input',
-                        help='Input XML cache file',
+                        help='Input JSON cache file',
                         required=True)
     parser.add_argument('-o', '--output',
                         help='Output file to write to',
@@ -119,14 +156,14 @@ def main(argv):
     args = parser.parse_args()
 
     try:
-        dataXml = ET.parse(args.input)
-        dataRoot = dataXml.getroot()
+        file = open(args.input, 'r')
+        apiData = json.load(file)
     except:
         print("Error: Could not open input file: ", args.input)
         sys.exit(1)
 
-    firstVersion = int(dataRoot.get('first'))
-    lastVersion = int(dataRoot.get('last'))
+    firstVersion = apiData['api']['first']
+    lastVersion = apiData['api']['last']
 
     outFile = open(args.output, "w")
 
@@ -286,19 +323,16 @@ STecVkSerializationResult vk_parse64(char const* pVkType, char const *pVkString,
     outFile.write("#include <string.h>\n\n")
 
     # Vendors
-    vendors = dataRoot.findall('vendors/')
-    processVendors(outFile, vendors)
+    processVendors(outFile, apiData['vendors'])
 
     # EnumSet Declaration
     outFile.write("\ntypedef struct EnumValueSet {\n")
     outFile.write("  char const *name;\n")
     outFile.write("  int64_t value;\n")
-    outFile.write("  bool alias;\n")
     outFile.write("} EnumValueSet;\n")
 
     # Enums
-    enums = dataRoot.findall('enums/')
-    processEnums(outFile, enums, vendors, firstVersion, lastVersion)
+    processEnums(outFile, apiData['enums'], apiData['vendors'], firstVersion, lastVersion)
 
     # Enum Type Declaration
     outFile.write("\ntypedef struct EnumType {\n")
@@ -309,8 +343,8 @@ STecVkSerializationResult vk_parse64(char const* pVkType, char const *pVkString,
 
     # Enum Pointer Array
     usefulEnumCount = 0
-    for enum in enums:
-        if enum.tag == 'VkResult' or enum.get('alias'):
+    for enum, enum_data in apiData['enums'].items():
+        if enum == 'VkResult' or enum == 'VkStructureType' or 'alias' in enum_data:
             continue
         usefulEnumCount += 1
 
@@ -318,16 +352,18 @@ STecVkSerializationResult vk_parse64(char const* pVkType, char const *pVkString,
         '\n#define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)\n')
     outFile.write('EnumType const cEnumTypes[{}] = {{\n'.format(
         usefulEnumCount))  # -1 for not doing VkResult
-    for enum in enums:
-        if enum.tag == 'VkResult' or enum.get('alias'):
+    for enum, enum_data in apiData['enums'].items():
+        if enum == 'VkResult' or enum == 'VkStructureType' or 'alias' in enum_data:
             continue
 
-        valueCount = len(enum.findall('./values/'))
+        valueCount = 0
+        if 'values' in enum_data:
+          valueCount = len(enum_data['values'])
         if valueCount == 0:
-            outFile.write('  {{"{}", NULL, 0}},\n'.format(enum.tag))
+            outFile.write('  {{"{}", NULL, 0}},\n'.format(enum))
         else:
             outFile.write('  {{"{0}", {0}Sets, {1}}},\n'.format(
-                enum.tag, valueCount))
+                enum, valueCount))
     outFile.write('};\n')
 
     # Function definitions
@@ -615,7 +651,7 @@ STecVkSerializationResult serializeBitmask(EnumValueSet const *pSearchStart,
       break;
     }
 
-    if (!pSearchStart->alias && (pSearchStart->value & vkValue) == pSearchStart->value) {
+    if ((pSearchStart->value & vkValue) == pSearchStart->value) {
       // Found a compatible bit mask, add it
       if (serializedLength > 0) {
         if (pTempStr == NULL) {
@@ -673,7 +709,7 @@ STecVkSerializationResult serializeEnum(EnumValueSet const *pSearchStart,
                                         uint32_t *pSerializedLength,
                                         char *pSerialized) {
   while (pSearchStart != pSearchEnd) {
-    if (!pSearchStart->alias && pSearchStart->value == vkValue) {
+    if (pSearchStart->value == vkValue) {
       uint32_t const sourceLength = strlen(pSearchStart->name);
       if (pSerialized != NULL) {
         if (*pSerializedLength < sourceLength) {
