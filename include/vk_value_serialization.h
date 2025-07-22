@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 322
+#if VK_HEADER_VERSION > 323
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v322)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v323)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v322)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v323)"
 #endif
 #endif
 
@@ -1018,6 +1018,7 @@ EnumValueSet const VkBuildAccelerationStructureFlagsKHRSets[] = {
     {"ALLOW_OPACITY_MICROMAP_DATA_UPDATE_BIT_EXT", 0x00000100},
     {"ALLOW_DISPLACEMENT_MICROMAP_UPDATE_BIT_NV", 0x00000200},
     {"ALLOW_DATA_ACCESS", 0x00000800},
+    {"ALLOW_CLUSTER_OPACITY_MICROMAPS_BIT_NV", 0x00001000},
 };
 
 EnumValueSet const VkPrivateDataSlotCreateFlagsSets[] = {
@@ -1351,6 +1352,7 @@ EnumValueSet const VkFormatFeatureFlags2Sets[] = {
     {"RESERVED_57_BIT_ARM", 0x200000000000000},
     {"RESERVED_58_BIT_ARM", 0x400000000000000},
     {"TENSOR_DATA_GRAPH_BIT_ARM", 0x1000000000000},
+    {"RESERVED_59_BIT_NV", 0x800000000000000},
 };
 
 EnumValueSet const VkRenderingFlagsSets[] = {
@@ -4311,7 +4313,7 @@ EnumType const cEnumTypes[398] = {
      VkClusterAccelerationStructureClusterFlagsNVSets, 1},
     {"VkClusterAccelerationStructureAddressResolutionFlagsNV",
      VkClusterAccelerationStructureAddressResolutionFlagsNVSets, 7},
-    {"VkBuildAccelerationStructureFlagsKHR", VkBuildAccelerationStructureFlagsKHRSets, 26},
+    {"VkBuildAccelerationStructureFlagsKHR", VkBuildAccelerationStructureFlagsKHRSets, 27},
     {"VkPrivateDataSlotCreateFlags", VkPrivateDataSlotCreateFlagsSets, 1},
     {"VkAccelerationStructureCreateFlagsKHR", VkAccelerationStructureCreateFlagsKHRSets, 5},
     {"VkDescriptorUpdateTemplateCreateFlags", NULL, 0},
@@ -4327,7 +4329,7 @@ EnumType const cEnumTypes[398] = {
     {"VkPipelineStageFlags2", VkPipelineStageFlags2Sets, 87},
     {"VkAccelerationStructureMotionInfoFlagsNV", NULL, 0},
     {"VkAccelerationStructureMotionInstanceFlagsNV", NULL, 0},
-    {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Sets, 103},
+    {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Sets, 104},
     {"VkRenderingFlags", VkRenderingFlagsSets, 16},
     {"VkMemoryDecompressionMethodFlagsNV", VkMemoryDecompressionMethodFlagsNVSets, 1},
     {"VkBuildMicromapFlagsEXT", VkBuildMicromapFlagsEXTSets, 3},

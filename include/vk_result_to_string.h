@@ -37,12 +37,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 322
+#if VK_HEADER_VERSION > 323
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v322)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v323)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v322)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v323)"
 #endif
 #endif
 
@@ -122,8 +122,6 @@ char const *VkResult_to_string(VkResult result) {
     return "VK_ERROR_OUT_OF_DATE_KHR";
   case -1000003001:
     return "VK_ERROR_INCOMPATIBLE_DISPLAY_KHR";
-  case -1000011001:
-    return "VK_ERROR_VALIDATION_FAILED_EXT";
   case -1000012000:
     return "VK_ERROR_INVALID_SHADER_NV";
   case -1000023000:
