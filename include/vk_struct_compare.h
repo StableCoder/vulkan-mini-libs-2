@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 320
+#if VK_HEADER_VERSION > 321
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v320)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v321)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v320)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v321)"
 #endif
 #endif
 
@@ -5540,6 +5540,12 @@ bool compare_VkPhysicalDevicePipelineBinaryPropertiesKHR(
     VkPhysicalDevicePipelineBinaryPropertiesKHR const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 321 && VK_SEC_pipeline_cache_incremental_mode
+bool compare_VkPhysicalDevicePipelineCacheIncrementalModeFeaturesSEC(
+    VkPhysicalDevicePipelineCacheIncrementalModeFeaturesSEC const *s1,
+    VkPhysicalDevicePipelineCacheIncrementalModeFeaturesSEC const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
 bool compare_VkPhysicalDevicePipelineCreationCacheControlFeatures(
     VkPhysicalDevicePipelineCreationCacheControlFeatures const *s1,
@@ -5682,10 +5688,22 @@ bool compare_VkPhysicalDevicePresentMeteringFeaturesNV(
     VkPhysicalDevicePresentMeteringFeaturesNV const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 297 && VK_EXT_present_mode_fifo_latest_ready
+#if VK_HEADER_VERSION >= 297 && VK_HEADER_VERSION <= 320 && VK_EXT_present_mode_fifo_latest_ready
 bool compare_VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT(
     VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT const *s1,
     VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_EXT_present_mode_fifo_latest_ready
+bool compare_VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT(
+    VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT const *s1,
+    VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_KHR_present_mode_fifo_latest_ready
+bool compare_VkPhysicalDevicePresentModeFifoLatestReadyFeaturesKHR(
+    VkPhysicalDevicePresentModeFifoLatestReadyFeaturesKHR const *s1,
+    VkPhysicalDevicePresentModeFifoLatestReadyFeaturesKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 317 && VK_KHR_present_wait2
@@ -6558,10 +6576,22 @@ bool compare_VkPhysicalDeviceSurfaceInfo2KHR(VkPhysicalDeviceSurfaceInfo2KHR con
                                              VkPhysicalDeviceSurfaceInfo2KHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 237 && VK_EXT_swapchain_maintenance1
+#if VK_HEADER_VERSION >= 237 && VK_HEADER_VERSION <= 320 && VK_EXT_swapchain_maintenance1
 bool compare_VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT(
     VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT const *s1,
     VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_EXT_swapchain_maintenance1
+bool compare_VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT(
+    VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT const *s1,
+    VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_KHR_swapchain_maintenance1
+bool compare_VkPhysicalDeviceSwapchainMaintenance1FeaturesKHR(
+    VkPhysicalDeviceSwapchainMaintenance1FeaturesKHR const *s1,
+    VkPhysicalDeviceSwapchainMaintenance1FeaturesKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
@@ -6869,6 +6899,12 @@ bool compare_VkPhysicalDeviceVideoDecodeVP9FeaturesKHR(
 bool compare_VkPhysicalDeviceVideoEncodeAV1FeaturesKHR(
     VkPhysicalDeviceVideoEncodeAV1FeaturesKHR const *s1,
     VkPhysicalDeviceVideoEncodeAV1FeaturesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_KHR_video_encode_intra_refresh
+bool compare_VkPhysicalDeviceVideoEncodeIntraRefreshFeaturesKHR(
+    VkPhysicalDeviceVideoEncodeIntraRefreshFeaturesKHR const *s1,
+    VkPhysicalDeviceVideoEncodeIntraRefreshFeaturesKHR const *s2);
 #endif
 
 #if (VK_HEADER_VERSION >= 274 && VK_KHR_video_encode_queue) ||                                     \
@@ -7885,9 +7921,19 @@ bool compare_VkReleaseCapturedPipelineDataInfoKHR(VkReleaseCapturedPipelineDataI
                                                   VkReleaseCapturedPipelineDataInfoKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 237 && VK_EXT_swapchain_maintenance1
+#if VK_HEADER_VERSION >= 237 && VK_HEADER_VERSION <= 320 && VK_EXT_swapchain_maintenance1
 bool compare_VkReleaseSwapchainImagesInfoEXT(VkReleaseSwapchainImagesInfoEXT const *s1,
                                              VkReleaseSwapchainImagesInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_EXT_swapchain_maintenance1
+bool compare_VkReleaseSwapchainImagesInfoEXT(VkReleaseSwapchainImagesInfoEXT const *s1,
+                                             VkReleaseSwapchainImagesInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_KHR_swapchain_maintenance1
+bool compare_VkReleaseSwapchainImagesInfoKHR(VkReleaseSwapchainImagesInfoKHR const *s1,
+                                             VkReleaseSwapchainImagesInfoKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
@@ -8714,20 +8760,52 @@ bool compare_VkSurfaceFullScreenExclusiveWin32InfoEXT(
     VkSurfaceFullScreenExclusiveWin32InfoEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 237 && VK_EXT_surface_maintenance1
+#if VK_HEADER_VERSION >= 237 && VK_HEADER_VERSION <= 320 && VK_EXT_surface_maintenance1
 bool compare_VkSurfacePresentModeCompatibilityEXT(VkSurfacePresentModeCompatibilityEXT const *s1,
                                                   VkSurfacePresentModeCompatibilityEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 237 && VK_EXT_surface_maintenance1
+#if VK_HEADER_VERSION >= 321 && VK_EXT_surface_maintenance1
+bool compare_VkSurfacePresentModeCompatibilityEXT(VkSurfacePresentModeCompatibilityEXT const *s1,
+                                                  VkSurfacePresentModeCompatibilityEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_KHR_surface_maintenance1
+bool compare_VkSurfacePresentModeCompatibilityKHR(VkSurfacePresentModeCompatibilityKHR const *s1,
+                                                  VkSurfacePresentModeCompatibilityKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 237 && VK_HEADER_VERSION <= 320 && VK_EXT_surface_maintenance1
 bool compare_VkSurfacePresentModeEXT(VkSurfacePresentModeEXT const *s1,
                                      VkSurfacePresentModeEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 237 && VK_EXT_surface_maintenance1
+#if VK_HEADER_VERSION >= 321 && VK_EXT_surface_maintenance1
+bool compare_VkSurfacePresentModeEXT(VkSurfacePresentModeEXT const *s1,
+                                     VkSurfacePresentModeEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_KHR_surface_maintenance1
+bool compare_VkSurfacePresentModeKHR(VkSurfacePresentModeKHR const *s1,
+                                     VkSurfacePresentModeKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 237 && VK_HEADER_VERSION <= 320 && VK_EXT_surface_maintenance1
 bool compare_VkSurfacePresentScalingCapabilitiesEXT(
     VkSurfacePresentScalingCapabilitiesEXT const *s1,
     VkSurfacePresentScalingCapabilitiesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_EXT_surface_maintenance1
+bool compare_VkSurfacePresentScalingCapabilitiesEXT(
+    VkSurfacePresentScalingCapabilitiesEXT const *s1,
+    VkSurfacePresentScalingCapabilitiesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_KHR_surface_maintenance1
+bool compare_VkSurfacePresentScalingCapabilitiesKHR(
+    VkSurfacePresentScalingCapabilitiesKHR const *s1,
+    VkSurfacePresentScalingCapabilitiesKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 104 && VK_KHR_surface_protected_capabilities
@@ -8771,25 +8849,67 @@ bool compare_VkSwapchainPresentBarrierCreateInfoNV(VkSwapchainPresentBarrierCrea
                                                    VkSwapchainPresentBarrierCreateInfoNV const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 237 && VK_EXT_swapchain_maintenance1
+#if VK_HEADER_VERSION >= 237 && VK_HEADER_VERSION <= 320 && VK_EXT_swapchain_maintenance1
 bool compare_VkSwapchainPresentFenceInfoEXT(VkSwapchainPresentFenceInfoEXT const *s1,
                                             VkSwapchainPresentFenceInfoEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 237 && VK_EXT_swapchain_maintenance1
+#if VK_HEADER_VERSION >= 321 && VK_EXT_swapchain_maintenance1
+bool compare_VkSwapchainPresentFenceInfoEXT(VkSwapchainPresentFenceInfoEXT const *s1,
+                                            VkSwapchainPresentFenceInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_KHR_swapchain_maintenance1
+bool compare_VkSwapchainPresentFenceInfoKHR(VkSwapchainPresentFenceInfoKHR const *s1,
+                                            VkSwapchainPresentFenceInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 237 && VK_HEADER_VERSION <= 320 && VK_EXT_swapchain_maintenance1
 bool compare_VkSwapchainPresentModeInfoEXT(VkSwapchainPresentModeInfoEXT const *s1,
                                            VkSwapchainPresentModeInfoEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 237 && VK_EXT_swapchain_maintenance1
+#if VK_HEADER_VERSION >= 321 && VK_EXT_swapchain_maintenance1
+bool compare_VkSwapchainPresentModeInfoEXT(VkSwapchainPresentModeInfoEXT const *s1,
+                                           VkSwapchainPresentModeInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_KHR_swapchain_maintenance1
+bool compare_VkSwapchainPresentModeInfoKHR(VkSwapchainPresentModeInfoKHR const *s1,
+                                           VkSwapchainPresentModeInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 237 && VK_HEADER_VERSION <= 320 && VK_EXT_swapchain_maintenance1
 bool compare_VkSwapchainPresentModesCreateInfoEXT(VkSwapchainPresentModesCreateInfoEXT const *s1,
                                                   VkSwapchainPresentModesCreateInfoEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 237 && VK_EXT_swapchain_maintenance1
+#if VK_HEADER_VERSION >= 321 && VK_EXT_swapchain_maintenance1
+bool compare_VkSwapchainPresentModesCreateInfoEXT(VkSwapchainPresentModesCreateInfoEXT const *s1,
+                                                  VkSwapchainPresentModesCreateInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_KHR_swapchain_maintenance1
+bool compare_VkSwapchainPresentModesCreateInfoKHR(VkSwapchainPresentModesCreateInfoKHR const *s1,
+                                                  VkSwapchainPresentModesCreateInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 237 && VK_HEADER_VERSION <= 320 && VK_EXT_swapchain_maintenance1
 bool compare_VkSwapchainPresentScalingCreateInfoEXT(
     VkSwapchainPresentScalingCreateInfoEXT const *s1,
     VkSwapchainPresentScalingCreateInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_EXT_swapchain_maintenance1
+bool compare_VkSwapchainPresentScalingCreateInfoEXT(
+    VkSwapchainPresentScalingCreateInfoEXT const *s1,
+    VkSwapchainPresentScalingCreateInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_KHR_swapchain_maintenance1
+bool compare_VkSwapchainPresentScalingCreateInfoKHR(
+    VkSwapchainPresentScalingCreateInfoKHR const *s1,
+    VkSwapchainPresentScalingCreateInfoKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
@@ -10278,6 +10398,17 @@ bool compare_VkVideoEncodeInfoKHR(VkVideoEncodeInfoKHR const *s1, VkVideoEncodeI
 bool compare_VkVideoEncodeInfoKHR(VkVideoEncodeInfoKHR const *s1, VkVideoEncodeInfoKHR const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 321 && VK_KHR_video_encode_intra_refresh
+bool compare_VkVideoEncodeIntraRefreshCapabilitiesKHR(
+    VkVideoEncodeIntraRefreshCapabilitiesKHR const *s1,
+    VkVideoEncodeIntraRefreshCapabilitiesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_KHR_video_encode_intra_refresh
+bool compare_VkVideoEncodeIntraRefreshInfoKHR(VkVideoEncodeIntraRefreshInfoKHR const *s1,
+                                              VkVideoEncodeIntraRefreshInfoKHR const *s2);
+#endif
+
 #if (VK_HEADER_VERSION >= 274 && VK_KHR_video_encode_queue) ||                                     \
     (VK_HEADER_VERSION >= 253 && VK_HEADER_VERSION <= 273 && VK_KHR_video_encode_queue &&          \
      VK_ENABLE_BETA_EXTENSIONS)
@@ -10352,6 +10483,12 @@ bool compare_VkVideoEncodeRateControlLayerInfoKHR(VkVideoEncodeRateControlLayerI
      VK_ENABLE_BETA_EXTENSIONS)
 bool compare_VkVideoEncodeRateControlLayerInfoKHR(VkVideoEncodeRateControlLayerInfoKHR const *s1,
                                                   VkVideoEncodeRateControlLayerInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_KHR_video_encode_intra_refresh
+bool compare_VkVideoEncodeSessionIntraRefreshCreateInfoKHR(
+    VkVideoEncodeSessionIntraRefreshCreateInfoKHR const *s1,
+    VkVideoEncodeSessionIntraRefreshCreateInfoKHR const *s2);
 #endif
 
 #if (VK_HEADER_VERSION >= 274 && VK_KHR_video_encode_queue) ||                                     \
@@ -10467,6 +10604,11 @@ bool compare_VkVideoProfilesKHR(VkVideoProfilesKHR const *s1, VkVideoProfilesKHR
     VK_ENABLE_BETA_EXTENSIONS
 bool compare_VkVideoQueueFamilyProperties2KHR(VkVideoQueueFamilyProperties2KHR const *s1,
                                               VkVideoQueueFamilyProperties2KHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_KHR_video_encode_intra_refresh
+bool compare_VkVideoReferenceIntraRefreshInfoKHR(VkVideoReferenceIntraRefreshInfoKHR const *s1,
+                                                 VkVideoReferenceIntraRefreshInfoKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 225 && VK_HEADER_VERSION <= 229 && VK_KHR_video_queue &&                  \
@@ -25610,6 +25752,18 @@ bool compare_VkPhysicalDevicePipelineBinaryPropertiesKHR(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 321 && VK_SEC_pipeline_cache_incremental_mode
+bool compare_VkPhysicalDevicePipelineCacheIncrementalModeFeaturesSEC(
+    VkPhysicalDevicePipelineCacheIncrementalModeFeaturesSEC const *s1,
+    VkPhysicalDevicePipelineCacheIncrementalModeFeaturesSEC const *s2) {
+  // local, simple types
+  if ((s1->pipelineCacheIncrementalMode != s2->pipelineCacheIncrementalMode))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
 bool compare_VkPhysicalDevicePipelineCreationCacheControlFeatures(
     VkPhysicalDevicePipelineCreationCacheControlFeatures const *s1,
@@ -25920,10 +26074,34 @@ bool compare_VkPhysicalDevicePresentMeteringFeaturesNV(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 297 && VK_EXT_present_mode_fifo_latest_ready
+#if VK_HEADER_VERSION >= 297 && VK_HEADER_VERSION <= 320 && VK_EXT_present_mode_fifo_latest_ready
 bool compare_VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT(
     VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT const *s1,
     VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT const *s2) {
+  // local, simple types
+  if ((s1->presentModeFifoLatestReady != s2->presentModeFifoLatestReady))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_EXT_present_mode_fifo_latest_ready
+bool compare_VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT(
+    VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT const *s1,
+    VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT const *s2) {
+  // local, simple types
+  if ((s1->presentModeFifoLatestReady != s2->presentModeFifoLatestReady))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_KHR_present_mode_fifo_latest_ready
+bool compare_VkPhysicalDevicePresentModeFifoLatestReadyFeaturesKHR(
+    VkPhysicalDevicePresentModeFifoLatestReadyFeaturesKHR const *s1,
+    VkPhysicalDevicePresentModeFifoLatestReadyFeaturesKHR const *s2) {
   // local, simple types
   if ((s1->presentModeFifoLatestReady != s2->presentModeFifoLatestReady))
     return false;
@@ -28055,10 +28233,34 @@ bool compare_VkPhysicalDeviceSurfaceInfo2KHR(VkPhysicalDeviceSurfaceInfo2KHR con
 }
 #endif
 
-#if VK_HEADER_VERSION >= 237 && VK_EXT_swapchain_maintenance1
+#if VK_HEADER_VERSION >= 237 && VK_HEADER_VERSION <= 320 && VK_EXT_swapchain_maintenance1
 bool compare_VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT(
     VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT const *s1,
     VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT const *s2) {
+  // local, simple types
+  if ((s1->swapchainMaintenance1 != s2->swapchainMaintenance1))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_EXT_swapchain_maintenance1
+bool compare_VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT(
+    VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT const *s1,
+    VkPhysicalDeviceSwapchainMaintenance1FeaturesEXT const *s2) {
+  // local, simple types
+  if ((s1->swapchainMaintenance1 != s2->swapchainMaintenance1))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_KHR_swapchain_maintenance1
+bool compare_VkPhysicalDeviceSwapchainMaintenance1FeaturesKHR(
+    VkPhysicalDeviceSwapchainMaintenance1FeaturesKHR const *s1,
+    VkPhysicalDeviceSwapchainMaintenance1FeaturesKHR const *s2) {
   // local, simple types
   if ((s1->swapchainMaintenance1 != s2->swapchainMaintenance1))
     return false;
@@ -28781,6 +28983,18 @@ bool compare_VkPhysicalDeviceVideoEncodeAV1FeaturesKHR(
     VkPhysicalDeviceVideoEncodeAV1FeaturesKHR const *s2) {
   // local, simple types
   if ((s1->videoEncodeAV1 != s2->videoEncodeAV1))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_KHR_video_encode_intra_refresh
+bool compare_VkPhysicalDeviceVideoEncodeIntraRefreshFeaturesKHR(
+    VkPhysicalDeviceVideoEncodeIntraRefreshFeaturesKHR const *s1,
+    VkPhysicalDeviceVideoEncodeIntraRefreshFeaturesKHR const *s2) {
+  // local, simple types
+  if ((s1->videoEncodeIntraRefresh != s2->videoEncodeIntraRefresh))
     return false;
 
   return true;
@@ -31721,9 +31935,45 @@ bool compare_VkReleaseCapturedPipelineDataInfoKHR(VkReleaseCapturedPipelineDataI
 }
 #endif
 
-#if VK_HEADER_VERSION >= 237 && VK_EXT_swapchain_maintenance1
+#if VK_HEADER_VERSION >= 237 && VK_HEADER_VERSION <= 320 && VK_EXT_swapchain_maintenance1
 bool compare_VkReleaseSwapchainImagesInfoEXT(VkReleaseSwapchainImagesInfoEXT const *s1,
                                              VkReleaseSwapchainImagesInfoEXT const *s2) {
+  // local, simple types
+  if ((s1->swapchain != s2->swapchain) || (s1->imageIndexCount != s2->imageIndexCount))
+    return false;
+
+  // non-local members
+
+  // pImageIndices - imageIndexCount
+  if (s1->pImageIndices != s2->pImageIndices &&
+      (s1->pImageIndices == NULL || s2->pImageIndices == NULL ||
+       memcmp(s1->pImageIndices, s2->pImageIndices, (s1->imageIndexCount) * sizeof(uint32_t)) != 0))
+    return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_EXT_swapchain_maintenance1
+bool compare_VkReleaseSwapchainImagesInfoEXT(VkReleaseSwapchainImagesInfoEXT const *s1,
+                                             VkReleaseSwapchainImagesInfoEXT const *s2) {
+  // local, simple types
+  if ((s1->swapchain != s2->swapchain) || (s1->imageIndexCount != s2->imageIndexCount))
+    return false;
+
+  // non-local members
+
+  // pImageIndices - imageIndexCount
+  if (s1->pImageIndices != s2->pImageIndices &&
+      (s1->pImageIndices == NULL || s2->pImageIndices == NULL ||
+       memcmp(s1->pImageIndices, s2->pImageIndices, (s1->imageIndexCount) * sizeof(uint32_t)) != 0))
+    return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_KHR_swapchain_maintenance1
+bool compare_VkReleaseSwapchainImagesInfoKHR(VkReleaseSwapchainImagesInfoKHR const *s1,
+                                             VkReleaseSwapchainImagesInfoKHR const *s2) {
   // local, simple types
   if ((s1->swapchain != s2->swapchain) || (s1->imageIndexCount != s2->imageIndexCount))
     return false;
@@ -34126,7 +34376,7 @@ bool compare_VkSurfaceFullScreenExclusiveWin32InfoEXT(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 237 && VK_EXT_surface_maintenance1
+#if VK_HEADER_VERSION >= 237 && VK_HEADER_VERSION <= 320 && VK_EXT_surface_maintenance1
 bool compare_VkSurfacePresentModeCompatibilityEXT(VkSurfacePresentModeCompatibilityEXT const *s1,
                                                   VkSurfacePresentModeCompatibilityEXT const *s2) {
   // local, simple types
@@ -34145,7 +34395,45 @@ bool compare_VkSurfacePresentModeCompatibilityEXT(VkSurfacePresentModeCompatibil
 }
 #endif
 
-#if VK_HEADER_VERSION >= 237 && VK_EXT_surface_maintenance1
+#if VK_HEADER_VERSION >= 321 && VK_EXT_surface_maintenance1
+bool compare_VkSurfacePresentModeCompatibilityEXT(VkSurfacePresentModeCompatibilityEXT const *s1,
+                                                  VkSurfacePresentModeCompatibilityEXT const *s2) {
+  // local, simple types
+  if ((s1->presentModeCount != s2->presentModeCount))
+    return false;
+
+  // non-local members
+
+  // pPresentModes - presentModeCount
+  if (s1->pPresentModes != s2->pPresentModes &&
+      (s1->pPresentModes == NULL || s2->pPresentModes == NULL ||
+       memcmp(s1->pPresentModes, s2->pPresentModes,
+              (s1->presentModeCount) * sizeof(VkPresentModeKHR)) != 0))
+    return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_KHR_surface_maintenance1
+bool compare_VkSurfacePresentModeCompatibilityKHR(VkSurfacePresentModeCompatibilityKHR const *s1,
+                                                  VkSurfacePresentModeCompatibilityKHR const *s2) {
+  // local, simple types
+  if ((s1->presentModeCount != s2->presentModeCount))
+    return false;
+
+  // non-local members
+
+  // pPresentModes - presentModeCount
+  if (s1->pPresentModes != s2->pPresentModes &&
+      (s1->pPresentModes == NULL || s2->pPresentModes == NULL ||
+       memcmp(s1->pPresentModes, s2->pPresentModes,
+              (s1->presentModeCount) * sizeof(VkPresentModeKHR)) != 0))
+    return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 237 && VK_HEADER_VERSION <= 320 && VK_EXT_surface_maintenance1
 bool compare_VkSurfacePresentModeEXT(VkSurfacePresentModeEXT const *s1,
                                      VkSurfacePresentModeEXT const *s2) {
   // local, simple types
@@ -34156,7 +34444,29 @@ bool compare_VkSurfacePresentModeEXT(VkSurfacePresentModeEXT const *s1,
 }
 #endif
 
-#if VK_HEADER_VERSION >= 237 && VK_EXT_surface_maintenance1
+#if VK_HEADER_VERSION >= 321 && VK_EXT_surface_maintenance1
+bool compare_VkSurfacePresentModeEXT(VkSurfacePresentModeEXT const *s1,
+                                     VkSurfacePresentModeEXT const *s2) {
+  // local, simple types
+  if ((s1->presentMode != s2->presentMode))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_KHR_surface_maintenance1
+bool compare_VkSurfacePresentModeKHR(VkSurfacePresentModeKHR const *s1,
+                                     VkSurfacePresentModeKHR const *s2) {
+  // local, simple types
+  if ((s1->presentMode != s2->presentMode))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 237 && VK_HEADER_VERSION <= 320 && VK_EXT_surface_maintenance1
 bool compare_VkSurfacePresentScalingCapabilitiesEXT(
     VkSurfacePresentScalingCapabilitiesEXT const *s1,
     VkSurfacePresentScalingCapabilitiesEXT const *s2) {
@@ -34169,6 +34479,39 @@ bool compare_VkSurfacePresentScalingCapabilitiesEXT(
   // local, Vulkan struct types
   if (!compare_VkExtent2D(&s1->minScaledImageExtent, &s2->minScaledImageExtent) ||
       !compare_VkExtent2D(&s1->maxScaledImageExtent, &s2->maxScaledImageExtent))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_EXT_surface_maintenance1
+bool compare_VkSurfacePresentScalingCapabilitiesEXT(
+    VkSurfacePresentScalingCapabilitiesEXT const *s1,
+    VkSurfacePresentScalingCapabilitiesEXT const *s2) {
+  // local, simple types
+  if ((s1->supportedPresentScaling != s2->supportedPresentScaling) ||
+      (s1->supportedPresentGravityX != s2->supportedPresentGravityX) ||
+      (s1->supportedPresentGravityY != s2->supportedPresentGravityY))
+    return false;
+
+  // local, Vulkan struct types
+  if (!compare_VkExtent2D(&s1->minScaledImageExtent, &s2->minScaledImageExtent) ||
+      !compare_VkExtent2D(&s1->maxScaledImageExtent, &s2->maxScaledImageExtent))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_KHR_surface_maintenance1
+bool compare_VkSurfacePresentScalingCapabilitiesKHR(
+    VkSurfacePresentScalingCapabilitiesKHR const *s1,
+    VkSurfacePresentScalingCapabilitiesKHR const *s2) {
+  // local, simple types
+  if ((s1->supportedPresentScaling != s2->supportedPresentScaling) ||
+      (s1->supportedPresentGravityX != s2->supportedPresentGravityX) ||
+      (s1->supportedPresentGravityY != s2->supportedPresentGravityY))
     return false;
 
   return true;
@@ -34305,7 +34648,7 @@ bool compare_VkSwapchainPresentBarrierCreateInfoNV(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 237 && VK_EXT_swapchain_maintenance1
+#if VK_HEADER_VERSION >= 237 && VK_HEADER_VERSION <= 320 && VK_EXT_swapchain_maintenance1
 bool compare_VkSwapchainPresentFenceInfoEXT(VkSwapchainPresentFenceInfoEXT const *s1,
                                             VkSwapchainPresentFenceInfoEXT const *s2) {
   // local, simple types
@@ -34323,7 +34666,43 @@ bool compare_VkSwapchainPresentFenceInfoEXT(VkSwapchainPresentFenceInfoEXT const
 }
 #endif
 
-#if VK_HEADER_VERSION >= 237 && VK_EXT_swapchain_maintenance1
+#if VK_HEADER_VERSION >= 321 && VK_EXT_swapchain_maintenance1
+bool compare_VkSwapchainPresentFenceInfoEXT(VkSwapchainPresentFenceInfoEXT const *s1,
+                                            VkSwapchainPresentFenceInfoEXT const *s2) {
+  // local, simple types
+  if ((s1->swapchainCount != s2->swapchainCount))
+    return false;
+
+  // non-local members
+
+  // pFences - swapchainCount
+  if (s1->pFences != s2->pFences &&
+      (s1->pFences == NULL || s2->pFences == NULL ||
+       memcmp(s1->pFences, s2->pFences, (s1->swapchainCount) * sizeof(VkFence)) != 0))
+    return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_KHR_swapchain_maintenance1
+bool compare_VkSwapchainPresentFenceInfoKHR(VkSwapchainPresentFenceInfoKHR const *s1,
+                                            VkSwapchainPresentFenceInfoKHR const *s2) {
+  // local, simple types
+  if ((s1->swapchainCount != s2->swapchainCount))
+    return false;
+
+  // non-local members
+
+  // pFences - swapchainCount
+  if (s1->pFences != s2->pFences &&
+      (s1->pFences == NULL || s2->pFences == NULL ||
+       memcmp(s1->pFences, s2->pFences, (s1->swapchainCount) * sizeof(VkFence)) != 0))
+    return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 237 && VK_HEADER_VERSION <= 320 && VK_EXT_swapchain_maintenance1
 bool compare_VkSwapchainPresentModeInfoEXT(VkSwapchainPresentModeInfoEXT const *s1,
                                            VkSwapchainPresentModeInfoEXT const *s2) {
   // local, simple types
@@ -34342,7 +34721,45 @@ bool compare_VkSwapchainPresentModeInfoEXT(VkSwapchainPresentModeInfoEXT const *
 }
 #endif
 
-#if VK_HEADER_VERSION >= 237 && VK_EXT_swapchain_maintenance1
+#if VK_HEADER_VERSION >= 321 && VK_EXT_swapchain_maintenance1
+bool compare_VkSwapchainPresentModeInfoEXT(VkSwapchainPresentModeInfoEXT const *s1,
+                                           VkSwapchainPresentModeInfoEXT const *s2) {
+  // local, simple types
+  if ((s1->swapchainCount != s2->swapchainCount))
+    return false;
+
+  // non-local members
+
+  // pPresentModes - swapchainCount
+  if (s1->pPresentModes != s2->pPresentModes &&
+      (s1->pPresentModes == NULL || s2->pPresentModes == NULL ||
+       memcmp(s1->pPresentModes, s2->pPresentModes,
+              (s1->swapchainCount) * sizeof(VkPresentModeKHR)) != 0))
+    return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_KHR_swapchain_maintenance1
+bool compare_VkSwapchainPresentModeInfoKHR(VkSwapchainPresentModeInfoKHR const *s1,
+                                           VkSwapchainPresentModeInfoKHR const *s2) {
+  // local, simple types
+  if ((s1->swapchainCount != s2->swapchainCount))
+    return false;
+
+  // non-local members
+
+  // pPresentModes - swapchainCount
+  if (s1->pPresentModes != s2->pPresentModes &&
+      (s1->pPresentModes == NULL || s2->pPresentModes == NULL ||
+       memcmp(s1->pPresentModes, s2->pPresentModes,
+              (s1->swapchainCount) * sizeof(VkPresentModeKHR)) != 0))
+    return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 237 && VK_HEADER_VERSION <= 320 && VK_EXT_swapchain_maintenance1
 bool compare_VkSwapchainPresentModesCreateInfoEXT(VkSwapchainPresentModesCreateInfoEXT const *s1,
                                                   VkSwapchainPresentModesCreateInfoEXT const *s2) {
   // local, simple types
@@ -34361,10 +34778,74 @@ bool compare_VkSwapchainPresentModesCreateInfoEXT(VkSwapchainPresentModesCreateI
 }
 #endif
 
-#if VK_HEADER_VERSION >= 237 && VK_EXT_swapchain_maintenance1
+#if VK_HEADER_VERSION >= 321 && VK_EXT_swapchain_maintenance1
+bool compare_VkSwapchainPresentModesCreateInfoEXT(VkSwapchainPresentModesCreateInfoEXT const *s1,
+                                                  VkSwapchainPresentModesCreateInfoEXT const *s2) {
+  // local, simple types
+  if ((s1->presentModeCount != s2->presentModeCount))
+    return false;
+
+  // non-local members
+
+  // pPresentModes - presentModeCount
+  if (s1->pPresentModes != s2->pPresentModes &&
+      (s1->pPresentModes == NULL || s2->pPresentModes == NULL ||
+       memcmp(s1->pPresentModes, s2->pPresentModes,
+              (s1->presentModeCount) * sizeof(VkPresentModeKHR)) != 0))
+    return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_KHR_swapchain_maintenance1
+bool compare_VkSwapchainPresentModesCreateInfoKHR(VkSwapchainPresentModesCreateInfoKHR const *s1,
+                                                  VkSwapchainPresentModesCreateInfoKHR const *s2) {
+  // local, simple types
+  if ((s1->presentModeCount != s2->presentModeCount))
+    return false;
+
+  // non-local members
+
+  // pPresentModes - presentModeCount
+  if (s1->pPresentModes != s2->pPresentModes &&
+      (s1->pPresentModes == NULL || s2->pPresentModes == NULL ||
+       memcmp(s1->pPresentModes, s2->pPresentModes,
+              (s1->presentModeCount) * sizeof(VkPresentModeKHR)) != 0))
+    return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 237 && VK_HEADER_VERSION <= 320 && VK_EXT_swapchain_maintenance1
 bool compare_VkSwapchainPresentScalingCreateInfoEXT(
     VkSwapchainPresentScalingCreateInfoEXT const *s1,
     VkSwapchainPresentScalingCreateInfoEXT const *s2) {
+  // local, simple types
+  if ((s1->scalingBehavior != s2->scalingBehavior) ||
+      (s1->presentGravityX != s2->presentGravityX) || (s1->presentGravityY != s2->presentGravityY))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_EXT_swapchain_maintenance1
+bool compare_VkSwapchainPresentScalingCreateInfoEXT(
+    VkSwapchainPresentScalingCreateInfoEXT const *s1,
+    VkSwapchainPresentScalingCreateInfoEXT const *s2) {
+  // local, simple types
+  if ((s1->scalingBehavior != s2->scalingBehavior) ||
+      (s1->presentGravityX != s2->presentGravityX) || (s1->presentGravityY != s2->presentGravityY))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_KHR_swapchain_maintenance1
+bool compare_VkSwapchainPresentScalingCreateInfoKHR(
+    VkSwapchainPresentScalingCreateInfoKHR const *s1,
+    VkSwapchainPresentScalingCreateInfoKHR const *s2) {
   // local, simple types
   if ((s1->scalingBehavior != s2->scalingBehavior) ||
       (s1->presentGravityX != s2->presentGravityX) || (s1->presentGravityY != s2->presentGravityY))
@@ -38665,6 +39146,35 @@ bool compare_VkVideoEncodeInfoKHR(VkVideoEncodeInfoKHR const *s1, VkVideoEncodeI
 }
 #endif
 
+#if VK_HEADER_VERSION >= 321 && VK_KHR_video_encode_intra_refresh
+bool compare_VkVideoEncodeIntraRefreshCapabilitiesKHR(
+    VkVideoEncodeIntraRefreshCapabilitiesKHR const *s1,
+    VkVideoEncodeIntraRefreshCapabilitiesKHR const *s2) {
+  // local, simple types
+  if ((s1->intraRefreshModes != s2->intraRefreshModes) ||
+      (s1->maxIntraRefreshCycleDuration != s2->maxIntraRefreshCycleDuration) ||
+      (s1->maxIntraRefreshActiveReferencePictures != s2->maxIntraRefreshActiveReferencePictures) ||
+      (s1->partitionIndependentIntraRefreshRegions !=
+       s2->partitionIndependentIntraRefreshRegions) ||
+      (s1->nonRectangularIntraRefreshRegions != s2->nonRectangularIntraRefreshRegions))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_KHR_video_encode_intra_refresh
+bool compare_VkVideoEncodeIntraRefreshInfoKHR(VkVideoEncodeIntraRefreshInfoKHR const *s1,
+                                              VkVideoEncodeIntraRefreshInfoKHR const *s2) {
+  // local, simple types
+  if ((s1->intraRefreshCycleDuration != s2->intraRefreshCycleDuration) ||
+      (s1->intraRefreshIndex != s2->intraRefreshIndex))
+    return false;
+
+  return true;
+}
+#endif
+
 #if (VK_HEADER_VERSION >= 274 && VK_KHR_video_encode_queue) ||                                     \
     (VK_HEADER_VERSION >= 253 && VK_HEADER_VERSION <= 273 && VK_KHR_video_encode_queue &&          \
      VK_ENABLE_BETA_EXTENSIONS)
@@ -38832,6 +39342,18 @@ bool compare_VkVideoEncodeRateControlLayerInfoKHR(VkVideoEncodeRateControlLayerI
   if ((s1->averageBitrate != s2->averageBitrate) || (s1->maxBitrate != s2->maxBitrate) ||
       (s1->frameRateNumerator != s2->frameRateNumerator) ||
       (s1->frameRateDenominator != s2->frameRateDenominator))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_KHR_video_encode_intra_refresh
+bool compare_VkVideoEncodeSessionIntraRefreshCreateInfoKHR(
+    VkVideoEncodeSessionIntraRefreshCreateInfoKHR const *s1,
+    VkVideoEncodeSessionIntraRefreshCreateInfoKHR const *s2) {
+  // local, simple types
+  if ((s1->intraRefreshMode != s2->intraRefreshMode))
     return false;
 
   return true;
@@ -39077,6 +39599,17 @@ bool compare_VkVideoQueueFamilyProperties2KHR(VkVideoQueueFamilyProperties2KHR c
                                               VkVideoQueueFamilyProperties2KHR const *s2) {
   // local, simple types
   if ((s1->videoCodecOperations != s2->videoCodecOperations))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 321 && VK_KHR_video_encode_intra_refresh
+bool compare_VkVideoReferenceIntraRefreshInfoKHR(VkVideoReferenceIntraRefreshInfoKHR const *s1,
+                                                 VkVideoReferenceIntraRefreshInfoKHR const *s2) {
+  // local, simple types
+  if ((s1->dirtyIntraRefreshRegions != s2->dirtyIntraRefreshRegions))
     return false;
 
   return true;
