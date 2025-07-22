@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 318
+#if VK_HEADER_VERSION > 319
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v318)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v319)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v318)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v319)"
 #endif
 #endif
 
@@ -505,6 +505,12 @@ bool compare_VkBindBufferMemoryInfoKHR(VkBindBufferMemoryInfoKHR const *s1,
                                        VkBindBufferMemoryInfoKHR const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkBindDataGraphPipelineSessionMemoryInfoARM(
+    VkBindDataGraphPipelineSessionMemoryInfoARM const *s1,
+    VkBindDataGraphPipelineSessionMemoryInfoARM const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 274 && VK_KHR_maintenance6 && VK_EXT_descriptor_buffer
 bool compare_VkBindDescriptorBufferEmbeddedSamplersInfoEXT(
     VkBindDescriptorBufferEmbeddedSamplersInfoEXT const *s1,
@@ -896,6 +902,12 @@ bool compare_VkClusterAccelerationStructureCommandsInfoNV(
 bool compare_VkClusterAccelerationStructureGeometryIndexAndGeometryFlagsNV(
     VkClusterAccelerationStructureGeometryIndexAndGeometryFlagsNV const *s1,
     VkClusterAccelerationStructureGeometryIndexAndGeometryFlagsNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_NV_cluster_acceleration_structure
+bool compare_VkClusterAccelerationStructureGetTemplateIndicesInfoNV(
+    VkClusterAccelerationStructureGetTemplateIndicesInfoNV const *s1,
+    VkClusterAccelerationStructureGetTemplateIndicesInfoNV const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 307 && VK_NV_cluster_acceleration_structure
@@ -1290,6 +1302,91 @@ bool compare_VkCudaModuleCreateInfoNV(VkCudaModuleCreateInfoNV const *s1,
 #if VK_KHR_external_semaphore_win32
 bool compare_VkD3D12FenceSubmitInfoKHR(VkD3D12FenceSubmitInfoKHR const *s1,
                                        VkD3D12FenceSubmitInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkDataGraphPipelineCompilerControlCreateInfoARM(
+    VkDataGraphPipelineCompilerControlCreateInfoARM const *s1,
+    VkDataGraphPipelineCompilerControlCreateInfoARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkDataGraphPipelineConstantARM(VkDataGraphPipelineConstantARM const *s1,
+                                            VkDataGraphPipelineConstantARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph && VK_ARM_tensors
+bool compare_VkDataGraphPipelineConstantTensorSemiStructuredSparsityInfoARM(
+    VkDataGraphPipelineConstantTensorSemiStructuredSparsityInfoARM const *s1,
+    VkDataGraphPipelineConstantTensorSemiStructuredSparsityInfoARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkDataGraphPipelineCreateInfoARM(VkDataGraphPipelineCreateInfoARM const *s1,
+                                              VkDataGraphPipelineCreateInfoARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkDataGraphPipelineDispatchInfoARM(VkDataGraphPipelineDispatchInfoARM const *s1,
+                                                VkDataGraphPipelineDispatchInfoARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkDataGraphPipelineIdentifierCreateInfoARM(
+    VkDataGraphPipelineIdentifierCreateInfoARM const *s1,
+    VkDataGraphPipelineIdentifierCreateInfoARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkDataGraphPipelineInfoARM(VkDataGraphPipelineInfoARM const *s1,
+                                        VkDataGraphPipelineInfoARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkDataGraphPipelinePropertyQueryResultARM(
+    VkDataGraphPipelinePropertyQueryResultARM const *s1,
+    VkDataGraphPipelinePropertyQueryResultARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkDataGraphPipelineResourceInfoARM(VkDataGraphPipelineResourceInfoARM const *s1,
+                                                VkDataGraphPipelineResourceInfoARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkDataGraphPipelineSessionBindPointRequirementARM(
+    VkDataGraphPipelineSessionBindPointRequirementARM const *s1,
+    VkDataGraphPipelineSessionBindPointRequirementARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkDataGraphPipelineSessionBindPointRequirementsInfoARM(
+    VkDataGraphPipelineSessionBindPointRequirementsInfoARM const *s1,
+    VkDataGraphPipelineSessionBindPointRequirementsInfoARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkDataGraphPipelineSessionCreateInfoARM(
+    VkDataGraphPipelineSessionCreateInfoARM const *s1,
+    VkDataGraphPipelineSessionCreateInfoARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkDataGraphPipelineSessionMemoryRequirementsInfoARM(
+    VkDataGraphPipelineSessionMemoryRequirementsInfoARM const *s1,
+    VkDataGraphPipelineSessionMemoryRequirementsInfoARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkDataGraphPipelineShaderModuleCreateInfoARM(
+    VkDataGraphPipelineShaderModuleCreateInfoARM const *s1,
+    VkDataGraphPipelineShaderModuleCreateInfoARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkDataGraphProcessingEngineCreateInfoARM(
+    VkDataGraphProcessingEngineCreateInfoARM const *s1,
+    VkDataGraphProcessingEngineCreateInfoARM const *s2);
 #endif
 
 #if VK_EXT_debug_marker
@@ -3938,6 +4035,23 @@ bool compare_VkPhysicalDeviceCustomBorderColorPropertiesEXT(
     VkPhysicalDeviceCustomBorderColorPropertiesEXT const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkPhysicalDeviceDataGraphFeaturesARM(VkPhysicalDeviceDataGraphFeaturesARM const *s1,
+                                                  VkPhysicalDeviceDataGraphFeaturesARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkPhysicalDeviceDataGraphOperationSupportARM(
+    VkPhysicalDeviceDataGraphOperationSupportARM const *s1,
+    VkPhysicalDeviceDataGraphOperationSupportARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkPhysicalDeviceDataGraphProcessingEngineARM(
+    VkPhysicalDeviceDataGraphProcessingEngineARM const *s1,
+    VkPhysicalDeviceDataGraphProcessingEngineARM const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 99 && VK_NV_dedicated_allocation_image_aliasing
 bool compare_VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV(
     VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV const *s1,
@@ -5668,6 +5782,12 @@ bool compare_VkPhysicalDevicePushDescriptorPropertiesKHR(
 bool compare_VkPhysicalDevicePushDescriptorPropertiesKHR(
     VkPhysicalDevicePushDescriptorPropertiesKHR const *s1,
     VkPhysicalDevicePushDescriptorPropertiesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM(
+    VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM const *s1,
+    VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 195 && VK_EXT_rgba10x6_formats
@@ -7581,6 +7701,17 @@ bool compare_VkQueueFamilyCheckpointProperties2NV(VkQueueFamilyCheckpointPropert
 #if VK_HEADER_VERSION >= 82 && VK_NV_device_diagnostic_checkpoints
 bool compare_VkQueueFamilyCheckpointPropertiesNV(VkQueueFamilyCheckpointPropertiesNV const *s1,
                                                  VkQueueFamilyCheckpointPropertiesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkQueueFamilyDataGraphProcessingEnginePropertiesARM(
+    VkQueueFamilyDataGraphProcessingEnginePropertiesARM const *s1,
+    VkQueueFamilyDataGraphProcessingEnginePropertiesARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkQueueFamilyDataGraphPropertiesARM(VkQueueFamilyDataGraphPropertiesARM const *s1,
+                                                 VkQueueFamilyDataGraphPropertiesARM const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 303 && VK_VERSION_1_4
@@ -11771,6 +11902,20 @@ bool compare_VkBindBufferMemoryInfoKHR(VkBindBufferMemoryInfoKHR const *s1,
 }
 #endif
 
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkBindDataGraphPipelineSessionMemoryInfoARM(
+    VkBindDataGraphPipelineSessionMemoryInfoARM const *s1,
+    VkBindDataGraphPipelineSessionMemoryInfoARM const *s2) {
+  // local, simple types
+  if ((s1->session != s2->session) || (s1->bindPoint != s2->bindPoint) ||
+      (s1->objectIndex != s2->objectIndex) || (s1->memory != s2->memory) ||
+      (s1->memoryOffset != s2->memoryOffset))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 274 && VK_KHR_maintenance6 && VK_EXT_descriptor_buffer
 bool compare_VkBindDescriptorBufferEmbeddedSamplersInfoEXT(
     VkBindDescriptorBufferEmbeddedSamplersInfoEXT const *s1,
@@ -12905,6 +13050,18 @@ bool compare_VkClusterAccelerationStructureGeometryIndexAndGeometryFlagsNV(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 319 && VK_NV_cluster_acceleration_structure
+bool compare_VkClusterAccelerationStructureGetTemplateIndicesInfoNV(
+    VkClusterAccelerationStructureGetTemplateIndicesInfoNV const *s1,
+    VkClusterAccelerationStructureGetTemplateIndicesInfoNV const *s2) {
+  // local, simple types
+  if ((s1->clusterTemplateAddress != s2->clusterTemplateAddress))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 307 && VK_NV_cluster_acceleration_structure
 bool compare_VkClusterAccelerationStructureInputInfoNV(
     VkClusterAccelerationStructureInputInfoNV const *s1,
@@ -12925,6 +13082,9 @@ bool compare_VkClusterAccelerationStructureInputInfoNV(
   case VK_CLUSTER_ACCELERATION_STRUCTURE_OP_TYPE_BUILD_TRIANGLE_CLUSTER_NV:
   case VK_CLUSTER_ACCELERATION_STRUCTURE_OP_TYPE_BUILD_TRIANGLE_CLUSTER_TEMPLATE_NV:
   case VK_CLUSTER_ACCELERATION_STRUCTURE_OP_TYPE_INSTANTIATE_TRIANGLE_CLUSTER_NV:
+#if VK_HEADER_VERSION >= 319
+  case VK_CLUSTER_ACCELERATION_STRUCTURE_OP_TYPE_GET_CLUSTER_TEMPLATE_INDICES_NV:
+#endif
     if (!compare_VkClusterAccelerationStructureTriangleClusterInputNV(
             s1->opInput.pTriangleClusters, s2->opInput.pTriangleClusters))
       return false;
@@ -14047,6 +14207,213 @@ bool compare_VkD3D12FenceSubmitInfoKHR(VkD3D12FenceSubmitInfoKHR const *s1,
        memcmp(s1->pSignalSemaphoreValues, s2->pSignalSemaphoreValues,
               (s1->signalSemaphoreValuesCount) * sizeof(uint64_t)) != 0))
     return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkDataGraphPipelineCompilerControlCreateInfoARM(
+    VkDataGraphPipelineCompilerControlCreateInfoARM const *s1,
+    VkDataGraphPipelineCompilerControlCreateInfoARM const *s2) {
+  // non-local members
+
+  // pVendorOptions - null-terminated
+  if (s1->pVendorOptions != s2->pVendorOptions &&
+      (s1->pVendorOptions == NULL || s2->pVendorOptions == NULL ||
+       strcmp(s1->pVendorOptions, s2->pVendorOptions) != 0))
+    return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkDataGraphPipelineConstantARM(VkDataGraphPipelineConstantARM const *s1,
+                                            VkDataGraphPipelineConstantARM const *s2) {
+  // local, simple types
+  if ((s1->id != s2->id))
+    return false;
+
+  // non-local members
+  if (s1->pConstantData != s2->pConstantData)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph && VK_ARM_tensors
+bool compare_VkDataGraphPipelineConstantTensorSemiStructuredSparsityInfoARM(
+    VkDataGraphPipelineConstantTensorSemiStructuredSparsityInfoARM const *s1,
+    VkDataGraphPipelineConstantTensorSemiStructuredSparsityInfoARM const *s2) {
+  // local, simple types
+  if ((s1->dimension != s2->dimension) || (s1->zeroCount != s2->zeroCount) ||
+      (s1->groupSize != s2->groupSize))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkDataGraphPipelineCreateInfoARM(VkDataGraphPipelineCreateInfoARM const *s1,
+                                              VkDataGraphPipelineCreateInfoARM const *s2) {
+  // local, simple types
+  if ((s1->flags != s2->flags) || (s1->layout != s2->layout) ||
+      (s1->resourceInfoCount != s2->resourceInfoCount))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkDataGraphPipelineDispatchInfoARM(VkDataGraphPipelineDispatchInfoARM const *s1,
+                                                VkDataGraphPipelineDispatchInfoARM const *s2) {
+  // local, simple types
+  if ((s1->flags != s2->flags))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkDataGraphPipelineIdentifierCreateInfoARM(
+    VkDataGraphPipelineIdentifierCreateInfoARM const *s1,
+    VkDataGraphPipelineIdentifierCreateInfoARM const *s2) {
+  // local, simple types
+  if ((s1->identifierSize != s2->identifierSize))
+    return false;
+
+  // non-local members
+
+  // pIdentifier - identifierSize
+  if (s1->pIdentifier != s2->pIdentifier &&
+      (s1->pIdentifier == NULL || s2->pIdentifier == NULL ||
+       memcmp(s1->pIdentifier, s2->pIdentifier, (s1->identifierSize) * sizeof(uint8_t)) != 0))
+    return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkDataGraphPipelineInfoARM(VkDataGraphPipelineInfoARM const *s1,
+                                        VkDataGraphPipelineInfoARM const *s2) {
+  // local, simple types
+  if ((s1->dataGraphPipeline != s2->dataGraphPipeline))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkDataGraphPipelinePropertyQueryResultARM(
+    VkDataGraphPipelinePropertyQueryResultARM const *s1,
+    VkDataGraphPipelinePropertyQueryResultARM const *s2) {
+  // local, simple types
+  if ((s1->property != s2->property) || (s1->isText != s2->isText) ||
+      (s1->dataSize != s2->dataSize))
+    return false;
+
+  // non-local members
+
+  // pData - dataSize
+  if (s1->pData != s2->pData &&
+      (s1->pData == NULL || s2->pData == NULL || memcmp(s1->pData, s2->pData, s1->dataSize) != 0))
+    return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkDataGraphPipelineResourceInfoARM(VkDataGraphPipelineResourceInfoARM const *s1,
+                                                VkDataGraphPipelineResourceInfoARM const *s2) {
+  // local, simple types
+  if ((s1->descriptorSet != s2->descriptorSet) || (s1->binding != s2->binding) ||
+      (s1->arrayElement != s2->arrayElement))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkDataGraphPipelineSessionBindPointRequirementARM(
+    VkDataGraphPipelineSessionBindPointRequirementARM const *s1,
+    VkDataGraphPipelineSessionBindPointRequirementARM const *s2) {
+  // local, simple types
+  if ((s1->bindPoint != s2->bindPoint) || (s1->bindPointType != s2->bindPointType) ||
+      (s1->numObjects != s2->numObjects))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkDataGraphPipelineSessionBindPointRequirementsInfoARM(
+    VkDataGraphPipelineSessionBindPointRequirementsInfoARM const *s1,
+    VkDataGraphPipelineSessionBindPointRequirementsInfoARM const *s2) {
+  // local, simple types
+  if ((s1->session != s2->session))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkDataGraphPipelineSessionCreateInfoARM(
+    VkDataGraphPipelineSessionCreateInfoARM const *s1,
+    VkDataGraphPipelineSessionCreateInfoARM const *s2) {
+  // local, simple types
+  if ((s1->flags != s2->flags) || (s1->dataGraphPipeline != s2->dataGraphPipeline))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkDataGraphPipelineSessionMemoryRequirementsInfoARM(
+    VkDataGraphPipelineSessionMemoryRequirementsInfoARM const *s1,
+    VkDataGraphPipelineSessionMemoryRequirementsInfoARM const *s2) {
+  // local, simple types
+  if ((s1->session != s2->session) || (s1->bindPoint != s2->bindPoint) ||
+      (s1->objectIndex != s2->objectIndex))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkDataGraphPipelineShaderModuleCreateInfoARM(
+    VkDataGraphPipelineShaderModuleCreateInfoARM const *s1,
+    VkDataGraphPipelineShaderModuleCreateInfoARM const *s2) {
+  // local, simple types
+  if ((s1->module != s2->module) || (s1->constantCount != s2->constantCount))
+    return false;
+
+  // non-local members
+
+  // pName - null-terminated
+  if (s1->pName != s2->pName &&
+      (s1->pName == NULL || s2->pName == NULL || strcmp(s1->pName, s2->pName) != 0))
+    return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkDataGraphProcessingEngineCreateInfoARM(
+    VkDataGraphProcessingEngineCreateInfoARM const *s1,
+    VkDataGraphProcessingEngineCreateInfoARM const *s2) {
+  // local, simple types
+  if ((s1->processingEngineCount != s2->processingEngineCount))
+    return false;
+
   return true;
 }
 #endif
@@ -21201,6 +21568,49 @@ bool compare_VkPhysicalDeviceCustomBorderColorPropertiesEXT(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkPhysicalDeviceDataGraphFeaturesARM(VkPhysicalDeviceDataGraphFeaturesARM const *s1,
+                                                  VkPhysicalDeviceDataGraphFeaturesARM const *s2) {
+  // local, simple types
+  if ((s1->dataGraph != s2->dataGraph) ||
+      (s1->dataGraphUpdateAfterBind != s2->dataGraphUpdateAfterBind) ||
+      (s1->dataGraphSpecializationConstants != s2->dataGraphSpecializationConstants) ||
+      (s1->dataGraphDescriptorBuffer != s2->dataGraphDescriptorBuffer) ||
+      (s1->dataGraphShaderModule != s2->dataGraphShaderModule))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkPhysicalDeviceDataGraphOperationSupportARM(
+    VkPhysicalDeviceDataGraphOperationSupportARM const *s1,
+    VkPhysicalDeviceDataGraphOperationSupportARM const *s2) {
+  // local, simple types
+  if ((s1->operationType != s2->operationType) || (s1->version != s2->version))
+    return false;
+
+  // local array members
+  if (memcmp(s1->name, s2->name,
+             VK_MAX_PHYSICAL_DEVICE_DATA_GRAPH_OPERATION_SET_NAME_SIZE_ARM * sizeof(char)) != 0)
+    return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkPhysicalDeviceDataGraphProcessingEngineARM(
+    VkPhysicalDeviceDataGraphProcessingEngineARM const *s1,
+    VkPhysicalDeviceDataGraphProcessingEngineARM const *s2) {
+  // local, simple types
+  if ((s1->type != s2->type) || (s1->isForeign != s2->isForeign))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 99 && VK_NV_dedicated_allocation_image_aliasing
 bool compare_VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV(
     VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV const *s1,
@@ -25721,6 +26131,18 @@ bool compare_VkPhysicalDevicePushDescriptorPropertiesKHR(
     VkPhysicalDevicePushDescriptorPropertiesKHR const *s2) {
   // local, simple types
   if ((s1->maxPushDescriptors != s2->maxPushDescriptors))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM(
+    VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM const *s1,
+    VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM const *s2) {
+  // local, simple types
+  if ((s1->queueFamilyIndex != s2->queueFamilyIndex) || (s1->engineType != s2->engineType))
     return false;
 
   return true;
@@ -30845,6 +31267,31 @@ bool compare_VkQueueFamilyCheckpointPropertiesNV(VkQueueFamilyCheckpointProperti
                                                  VkQueueFamilyCheckpointPropertiesNV const *s2) {
   // local, simple types
   if ((s1->checkpointExecutionStageMask != s2->checkpointExecutionStageMask))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkQueueFamilyDataGraphProcessingEnginePropertiesARM(
+    VkQueueFamilyDataGraphProcessingEnginePropertiesARM const *s1,
+    VkQueueFamilyDataGraphProcessingEnginePropertiesARM const *s2) {
+  // local, simple types
+  if ((s1->foreignSemaphoreHandleTypes != s2->foreignSemaphoreHandleTypes) ||
+      (s1->foreignMemoryHandleTypes != s2->foreignMemoryHandleTypes))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+bool compare_VkQueueFamilyDataGraphPropertiesARM(VkQueueFamilyDataGraphPropertiesARM const *s1,
+                                                 VkQueueFamilyDataGraphPropertiesARM const *s2) {
+  // local, Vulkan struct types
+  if (!compare_VkPhysicalDeviceDataGraphProcessingEngineARM(&s1->engine, &s2->engine) ||
+      !compare_VkPhysicalDeviceDataGraphOperationSupportARM(&s1->operation, &s2->operation))
     return false;
 
   return true;

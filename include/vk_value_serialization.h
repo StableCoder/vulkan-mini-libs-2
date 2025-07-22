@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 318
+#if VK_HEADER_VERSION > 319
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v318)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v319)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v318)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v319)"
 #endif
 #endif
 
@@ -287,6 +287,7 @@ EnumValueSet const VkQueueFlagsSets[] = {
     {"OPTICAL_FLOW_BIT_NV", 0x00000100},
     {"RESERVED_11_BIT_ARM", 0x00000800},
     {"RESERVED_10_BIT_EXT", 0x00000400},
+    {"DATA_GRAPH_BIT_ARM", 0x00000400},
 };
 
 EnumValueSet const VkMemoryPropertyFlagsSets[] = {
@@ -981,9 +982,13 @@ EnumValueSet const VkClusterAccelerationStructureClusterFlagsNVSets[] = {
 };
 
 EnumValueSet const VkClusterAccelerationStructureAddressResolutionFlagsNVSets[] = {
-    {"INDIRECTED_DST_IMPLICIT_DATA", 0x00000001}, {"INDIRECTED_SCRATCH_DATA", 0x00000002},
-    {"INDIRECTED_DST_ADDRESS_ARRAY", 0x00000004}, {"INDIRECTED_DST_SIZES_ARRAY", 0x00000008},
-    {"INDIRECTED_SRC_INFOS_ARRAY", 0x00000010},   {"INDIRECTED_SRC_INFOS_COUNT", 0x00000020},
+    {"INDIRECTED_DST_IMPLICIT_DATA", 0x00000001},
+    {"INDIRECTED_SCRATCH_DATA", 0x00000002},
+    {"INDIRECTED_DST_ADDRESS_ARRAY", 0x00000004},
+    {"INDIRECTED_DST_SIZES_ARRAY", 0x00000008},
+    {"INDIRECTED_SRC_INFOS_ARRAY", 0x00000010},
+    {"INDIRECTED_SRC_INFOS_COUNT", 0x00000020},
+    {"NONE", 0},
 };
 
 EnumValueSet const VkBuildAccelerationStructureFlagsKHRSets[] = {
@@ -1148,6 +1153,8 @@ EnumValueSet const VkAccessFlags2Sets[] = {
     {"COMMAND_PREPROCESS_WRITE_BIT_EXT", 0x00040000},
     {"SHADER_TILE_ATTACHMENT_READ_BIT_QCOM", 0x8000000000000},
     {"SHADER_TILE_ATTACHMENT_WRITE_BIT_QCOM", 0x10000000000000},
+    {"DATA_GRAPH_READ_BIT_ARM", 0x800000000000},
+    {"DATA_GRAPH_WRITE_BIT_ARM", 0x1000000000000},
 };
 
 EnumValueSet const VkPipelineStageFlags2Sets[] = {
@@ -1237,6 +1244,7 @@ EnumValueSet const VkPipelineStageFlags2Sets[] = {
     {"COMMAND_PREPROCESS_BIT_EXT", 0x00020000},
     {"RESERVED_46_BIT_NV", 0x400000000000},
     {"CONVERT_COOPERATIVE_VECTOR_MATRIX_BIT_NV", 0x100000000000},
+    {"DATA_GRAPH_BIT_ARM", 0x40000000000},
 };
 
 EnumValueSet const VkFormatFeatureFlags2Sets[] = {
@@ -1342,6 +1350,7 @@ EnumValueSet const VkFormatFeatureFlags2Sets[] = {
     {"RESERVED_56_BIT_ARM", 0x100000000000000},
     {"RESERVED_57_BIT_ARM", 0x200000000000000},
     {"RESERVED_58_BIT_ARM", 0x400000000000000},
+    {"TENSOR_DATA_GRAPH_BIT_ARM", 0x1000000000000},
 };
 
 EnumValueSet const VkRenderingFlagsSets[] = {
@@ -1493,6 +1502,7 @@ EnumValueSet const VkBufferUsageFlags2Sets[] = {
     {"TILE_MEMORY_BIT_QCOM", 0x08000000},
     {"RESERVED_33_AMD", 0x200000000},
     {"RESERVED_29_BIT_EXT", 0x20000000},
+    {"DATA_GRAPH_FOREIGN_DESCRIPTOR_BIT_ARM", 0x20000000},
 };
 
 EnumValueSet const VkTensorCreateFlagsARMSets[] = {
@@ -1502,14 +1512,16 @@ EnumValueSet const VkTensorCreateFlagsARMSets[] = {
 };
 
 EnumValueSet const VkTensorUsageFlagsARMSets[] = {
-    {"SHADER", 0x00000002},
-    {"TRANSFER_SRC", 0x00000004},
-    {"TRANSFER_DST", 0x00000008},
-    {"IMAGE_ALIASING", 0x00000010},
+    {"SHADER", 0x00000002},         {"TRANSFER_SRC", 0x00000004}, {"TRANSFER_DST", 0x00000008},
+    {"IMAGE_ALIASING", 0x00000010}, {"DATA_GRAPH", 0x00000020},
 };
 
 EnumValueSet const VkTensorViewCreateFlagsARMSets[] = {
     {"DESCRIPTOR_BUFFER_CAPTURE_REPLAY", 0x00000001},
+};
+
+EnumValueSet const VkDataGraphPipelineSessionCreateFlagsARMSets[] = {
+    {"PROTECTED", 0x00000001},
 };
 
 EnumValueSet const VkCompositeAlphaFlagsKHRSets[] = {
@@ -2883,6 +2895,7 @@ EnumValueSet const VkPipelineBindPointSets[] = {
     {"RAY_TRACING_KHR", 1000165000},
     {"SUBPASS_SHADING_HUAWEI", 1000369003},
     {"EXECUTION_GRAPH_AMDX", 1000134000},
+    {"DATA_GRAPH_ARM", 1000507000},
 };
 
 EnumValueSet const VkPrimitiveTopologySets[] = {
@@ -2984,6 +2997,7 @@ EnumValueSet const VkClusterAccelerationStructureOpTypeNVSets[] = {
     {"BUILD_TRIANGLE_CLUSTER", 2},
     {"BUILD_TRIANGLE_CLUSTER_TEMPLATE", 3},
     {"INSTANTIATE_TRIANGLE_CLUSTER", 4},
+    {"GET_CLUSTER_TEMPLATE_INDICES", 5},
 };
 
 EnumValueSet const VkClusterAccelerationStructureOpModeNVSets[] = {
@@ -3057,6 +3071,7 @@ EnumValueSet const VkObjectTypeSets[] = {
     {"EXTERNAL_COMPUTE_QUEUE_NV", 1000556000},
     {"TENSOR_ARM", 1000460000},
     {"TENSOR_VIEW_ARM", 1000460001},
+    {"DATA_GRAPH_PIPELINE_SESSION_ARM", 1000507000},
 };
 
 EnumValueSet const VkRayTracingInvocationReorderModeNVSets[] = {
@@ -3504,6 +3519,27 @@ EnumValueSet const VkCooperativeVectorMatrixLayoutNVSets[] = {
 EnumValueSet const VkTensorTilingARMSets[] = {
     {"OPTIMAL", 0},
     {"LINEAR", 1},
+};
+
+EnumValueSet const VkDataGraphPipelinePropertyARMSets[] = {
+    {"CREATION_LOG", 0},
+    {"IDENTIFIER", 1},
+};
+
+EnumValueSet const VkDataGraphPipelineSessionBindPointARMSets[] = {
+    {"TRANSIENT", 0},
+};
+
+EnumValueSet const VkDataGraphPipelineSessionBindPointTypeARMSets[] = {
+    {"MEMORY", 0},
+};
+
+EnumValueSet const VkPhysicalDeviceDataGraphProcessingEngineTypeARMSets[] = {
+    {"DEFAULT", 0},
+};
+
+EnumValueSet const VkPhysicalDeviceDataGraphOperationTypeARMSets[] = {
+    {"SPIRV_EXTENDED_INSTRUCTION_SET", 0},
 };
 
 EnumValueSet const VkColorSpaceKHRSets[] = {
@@ -4181,7 +4217,7 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[390] = {
+EnumType const cEnumTypes[397] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", VkQueryPoolCreateFlagsSets, 1},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 5},
@@ -4203,7 +4239,7 @@ EnumType const cEnumTypes[390] = {
     {"VkInstanceCreateFlags", VkInstanceCreateFlagsSets, 1},
     {"VkDeviceCreateFlags", NULL, 0},
     {"VkDeviceQueueCreateFlags", VkDeviceQueueCreateFlagsSets, 3},
-    {"VkQueueFlags", VkQueueFlagsSets, 15},
+    {"VkQueueFlags", VkQueueFlagsSets, 16},
     {"VkMemoryPropertyFlags", VkMemoryPropertyFlagsSets, 11},
     {"VkMemoryHeapFlags", VkMemoryHeapFlagsSets, 6},
     {"VkAccessFlags", VkAccessFlagsSets, 47},
@@ -4251,7 +4287,7 @@ EnumType const cEnumTypes[390] = {
     {"VkClusterAccelerationStructureClusterFlagsNV",
      VkClusterAccelerationStructureClusterFlagsNVSets, 1},
     {"VkClusterAccelerationStructureAddressResolutionFlagsNV",
-     VkClusterAccelerationStructureAddressResolutionFlagsNVSets, 6},
+     VkClusterAccelerationStructureAddressResolutionFlagsNVSets, 7},
     {"VkBuildAccelerationStructureFlagsKHR", VkBuildAccelerationStructureFlagsKHRSets, 26},
     {"VkPrivateDataSlotCreateFlags", VkPrivateDataSlotCreateFlagsSets, 1},
     {"VkAccelerationStructureCreateFlagsKHR", VkAccelerationStructureCreateFlagsKHRSets, 5},
@@ -4264,11 +4300,11 @@ EnumType const cEnumTypes[390] = {
     {"VkShaderCorePropertiesFlagsAMD", NULL, 0},
     {"VkDeviceDiagnosticsConfigFlagsNV", VkDeviceDiagnosticsConfigFlagsNVSets, 4},
     {"VkRefreshObjectFlagsKHR", NULL, 0},
-    {"VkAccessFlags2", VkAccessFlags2Sets, 92},
-    {"VkPipelineStageFlags2", VkPipelineStageFlags2Sets, 86},
+    {"VkAccessFlags2", VkAccessFlags2Sets, 94},
+    {"VkPipelineStageFlags2", VkPipelineStageFlags2Sets, 87},
     {"VkAccelerationStructureMotionInfoFlagsNV", NULL, 0},
     {"VkAccelerationStructureMotionInstanceFlagsNV", NULL, 0},
-    {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Sets, 102},
+    {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Sets, 103},
     {"VkRenderingFlags", VkRenderingFlagsSets, 16},
     {"VkMemoryDecompressionMethodFlagsNV", VkMemoryDecompressionMethodFlagsNVSets, 1},
     {"VkBuildMicromapFlagsEXT", VkBuildMicromapFlagsEXTSets, 3},
@@ -4277,10 +4313,12 @@ EnumType const cEnumTypes[390] = {
     {"VkIndirectCommandsInputModeFlagsEXT", VkIndirectCommandsInputModeFlagsEXTSets, 2},
     {"VkDirectDriverLoadingFlagsLUNARG", NULL, 0},
     {"VkPipelineCreateFlags2", VkPipelineCreateFlags2Sets, 57},
-    {"VkBufferUsageFlags2", VkBufferUsageFlags2Sets, 45},
+    {"VkBufferUsageFlags2", VkBufferUsageFlags2Sets, 46},
     {"VkTensorCreateFlagsARM", VkTensorCreateFlagsARMSets, 3},
-    {"VkTensorUsageFlagsARM", VkTensorUsageFlagsARMSets, 4},
+    {"VkTensorUsageFlagsARM", VkTensorUsageFlagsARMSets, 5},
     {"VkTensorViewCreateFlagsARM", VkTensorViewCreateFlagsARMSets, 1},
+    {"VkDataGraphPipelineSessionCreateFlagsARM", VkDataGraphPipelineSessionCreateFlagsARMSets, 1},
+    {"VkDataGraphPipelineDispatchFlagsARM", NULL, 0},
     {"VkCompositeAlphaFlagsKHR", VkCompositeAlphaFlagsKHRSets, 4},
     {"VkDisplayPlaneAlphaFlagsKHR", VkDisplayPlaneAlphaFlagsKHRSets, 4},
     {"VkSurfaceTransformFlagsKHR", VkSurfaceTransformFlagsKHRSets, 9},
@@ -4418,7 +4456,7 @@ EnumType const cEnumTypes[390] = {
     {"VkIndexType", VkIndexTypeSets, 7},
     {"VkLogicOp", VkLogicOpSets, 16},
     {"VkPhysicalDeviceType", VkPhysicalDeviceTypeSets, 5},
-    {"VkPipelineBindPoint", VkPipelineBindPointSets, 7},
+    {"VkPipelineBindPoint", VkPipelineBindPointSets, 8},
     {"VkPrimitiveTopology", VkPrimitiveTopologySets, 11},
     {"VkQueryType", VkQueryTypeSets, 21},
     {"VkSubpassContents", VkSubpassContentsSets, 4},
@@ -4430,9 +4468,9 @@ EnumType const cEnumTypes[390] = {
     {"VkSamplerMipmapMode", VkSamplerMipmapModeSets, 2},
     {"VkVertexInputRate", VkVertexInputRateSets, 2},
     {"VkClusterAccelerationStructureTypeNV", VkClusterAccelerationStructureTypeNVSets, 3},
-    {"VkClusterAccelerationStructureOpTypeNV", VkClusterAccelerationStructureOpTypeNVSets, 5},
+    {"VkClusterAccelerationStructureOpTypeNV", VkClusterAccelerationStructureOpTypeNVSets, 6},
     {"VkClusterAccelerationStructureOpModeNV", VkClusterAccelerationStructureOpModeNVSets, 3},
-    {"VkObjectType", VkObjectTypeSets, 64},
+    {"VkObjectType", VkObjectTypeSets, 65},
     {"VkRayTracingInvocationReorderModeNV", VkRayTracingInvocationReorderModeNVSets, 2},
     {"VkIndirectCommandsTokenTypeNV", VkIndirectCommandsTokenTypeNVSets, 11},
     {"VkDescriptorUpdateTemplateType", VkDescriptorUpdateTemplateTypeSets, 4},
@@ -4505,6 +4543,13 @@ EnumType const cEnumTypes[390] = {
     {"VkDepthClampModeEXT", VkDepthClampModeEXTSets, 2},
     {"VkCooperativeVectorMatrixLayoutNV", VkCooperativeVectorMatrixLayoutNVSets, 4},
     {"VkTensorTilingARM", VkTensorTilingARMSets, 2},
+    {"VkDataGraphPipelinePropertyARM", VkDataGraphPipelinePropertyARMSets, 2},
+    {"VkDataGraphPipelineSessionBindPointARM", VkDataGraphPipelineSessionBindPointARMSets, 1},
+    {"VkDataGraphPipelineSessionBindPointTypeARM", VkDataGraphPipelineSessionBindPointTypeARMSets,
+     1},
+    {"VkPhysicalDeviceDataGraphProcessingEngineTypeARM",
+     VkPhysicalDeviceDataGraphProcessingEngineTypeARMSets, 1},
+    {"VkPhysicalDeviceDataGraphOperationTypeARM", VkPhysicalDeviceDataGraphOperationTypeARMSets, 1},
     {"VkColorSpaceKHR", VkColorSpaceKHRSets, 18},
     {"VkPresentModeKHR", VkPresentModeKHRSets, 7},
     {"VkDisplaySurfaceStereoTypeNV", VkDisplaySurfaceStereoTypeNVSets, 4},

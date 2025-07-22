@@ -37,12 +37,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 318
+#if VK_HEADER_VERSION > 319
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v318)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v319)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v318)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v319)"
 #endif
 #endif
 
@@ -434,6 +434,11 @@ void cleanup_VkBindBufferMemoryInfo(VkBindBufferMemoryInfo const *pData);
 void cleanup_VkBindBufferMemoryInfoKHR(VkBindBufferMemoryInfoKHR const *pData);
 #endif
 
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkBindDataGraphPipelineSessionMemoryInfoARM(
+    VkBindDataGraphPipelineSessionMemoryInfoARM const *pData);
+#endif
+
 #if (VK_HEADER_VERSION >= 274 && VK_KHR_maintenance6 && VK_EXT_descriptor_buffer)
 void cleanup_VkBindDescriptorBufferEmbeddedSamplersInfoEXT(
     VkBindDescriptorBufferEmbeddedSamplersInfoEXT const *pData);
@@ -765,6 +770,11 @@ void cleanup_VkClusterAccelerationStructureGeometryIndexAndGeometryFlagsNV(
     VkClusterAccelerationStructureGeometryIndexAndGeometryFlagsNV const *pData);
 #endif
 
+#if (VK_HEADER_VERSION >= 319 && VK_NV_cluster_acceleration_structure)
+void cleanup_VkClusterAccelerationStructureGetTemplateIndicesInfoNV(
+    VkClusterAccelerationStructureGetTemplateIndicesInfoNV const *pData);
+#endif
+
 #if (VK_HEADER_VERSION >= 307 && VK_NV_cluster_acceleration_structure)
 void cleanup_VkClusterAccelerationStructureInputInfoNV(
     VkClusterAccelerationStructureInputInfoNV const *pData);
@@ -1093,6 +1103,76 @@ void cleanup_VkCudaModuleCreateInfoNV(VkCudaModuleCreateInfoNV const *pData);
 
 #if (VK_KHR_external_semaphore_win32)
 void cleanup_VkD3D12FenceSubmitInfoKHR(VkD3D12FenceSubmitInfoKHR const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkDataGraphPipelineCompilerControlCreateInfoARM(
+    VkDataGraphPipelineCompilerControlCreateInfoARM const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkDataGraphPipelineConstantARM(VkDataGraphPipelineConstantARM const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph && VK_ARM_tensors)
+void cleanup_VkDataGraphPipelineConstantTensorSemiStructuredSparsityInfoARM(
+    VkDataGraphPipelineConstantTensorSemiStructuredSparsityInfoARM const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkDataGraphPipelineCreateInfoARM(VkDataGraphPipelineCreateInfoARM const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkDataGraphPipelineDispatchInfoARM(VkDataGraphPipelineDispatchInfoARM const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkDataGraphPipelineIdentifierCreateInfoARM(
+    VkDataGraphPipelineIdentifierCreateInfoARM const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkDataGraphPipelineInfoARM(VkDataGraphPipelineInfoARM const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkDataGraphPipelinePropertyQueryResultARM(
+    VkDataGraphPipelinePropertyQueryResultARM const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkDataGraphPipelineResourceInfoARM(VkDataGraphPipelineResourceInfoARM const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkDataGraphPipelineSessionBindPointRequirementARM(
+    VkDataGraphPipelineSessionBindPointRequirementARM const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkDataGraphPipelineSessionBindPointRequirementsInfoARM(
+    VkDataGraphPipelineSessionBindPointRequirementsInfoARM const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkDataGraphPipelineSessionCreateInfoARM(
+    VkDataGraphPipelineSessionCreateInfoARM const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkDataGraphPipelineSessionMemoryRequirementsInfoARM(
+    VkDataGraphPipelineSessionMemoryRequirementsInfoARM const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkDataGraphPipelineShaderModuleCreateInfoARM(
+    VkDataGraphPipelineShaderModuleCreateInfoARM const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkDataGraphProcessingEngineCreateInfoARM(
+    VkDataGraphProcessingEngineCreateInfoARM const *pData);
 #endif
 
 #if (VK_EXT_debug_marker)
@@ -3319,6 +3399,21 @@ void cleanup_VkPhysicalDeviceCustomBorderColorPropertiesEXT(
     VkPhysicalDeviceCustomBorderColorPropertiesEXT const *pData);
 #endif
 
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkPhysicalDeviceDataGraphFeaturesARM(
+    VkPhysicalDeviceDataGraphFeaturesARM const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkPhysicalDeviceDataGraphOperationSupportARM(
+    VkPhysicalDeviceDataGraphOperationSupportARM const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkPhysicalDeviceDataGraphProcessingEngineARM(
+    VkPhysicalDeviceDataGraphProcessingEngineARM const *pData);
+#endif
+
 #if (VK_HEADER_VERSION >= 99 && VK_NV_dedicated_allocation_image_aliasing)
 void cleanup_VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV(
     VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV const *pData);
@@ -4769,6 +4864,11 @@ void cleanup_VkPhysicalDevicePushDescriptorPropertiesKHR(
 #if (VK_HEADER_VERSION >= 303 && VK_KHR_push_descriptor)
 void cleanup_VkPhysicalDevicePushDescriptorPropertiesKHR(
     VkPhysicalDevicePushDescriptorPropertiesKHR const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM(
+    VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM const *pData);
 #endif
 
 #if (VK_HEADER_VERSION >= 195 && VK_EXT_rgba10x6_formats)
@@ -6367,6 +6467,15 @@ void cleanup_VkQueueFamilyCheckpointProperties2NV(
 
 #if (VK_HEADER_VERSION >= 82 && VK_NV_device_diagnostic_checkpoints)
 void cleanup_VkQueueFamilyCheckpointPropertiesNV(VkQueueFamilyCheckpointPropertiesNV const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkQueueFamilyDataGraphProcessingEnginePropertiesARM(
+    VkQueueFamilyDataGraphProcessingEnginePropertiesARM const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkQueueFamilyDataGraphPropertiesARM(VkQueueFamilyDataGraphPropertiesARM const *pData);
 #endif
 
 #if (VK_HEADER_VERSION >= 303 && VK_VERSION_1_4)
@@ -9316,6 +9425,14 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_BIND_DATA_GRAPH_PIPELINE_SESSION_MEMORY_INFO_ARM) {
+    cleanup_VkBindDataGraphPipelineSessionMemoryInfoARM(
+        (VkBindDataGraphPipelineSessionMemoryInfoARM const *)pData);
+    return;
+  }
+#endif
+
 #if (VK_HEADER_VERSION >= 274 && VK_KHR_maintenance6 && VK_EXT_descriptor_buffer)
   if (pTemp->sType == VK_STRUCTURE_TYPE_BIND_DESCRIPTOR_BUFFER_EMBEDDED_SAMPLERS_INFO_EXT) {
     cleanup_VkBindDescriptorBufferEmbeddedSamplersInfoEXT(
@@ -10081,6 +10198,123 @@ void cleanup_vk_struct(void const *pData) {
 #if (VK_KHR_external_semaphore_win32)
   if (pTemp->sType == VK_STRUCTURE_TYPE_D3D12_FENCE_SUBMIT_INFO_KHR) {
     cleanup_VkD3D12FenceSubmitInfoKHR((VkD3D12FenceSubmitInfoKHR const *)pData);
+    return;
+  }
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_COMPILER_CONTROL_CREATE_INFO_ARM) {
+    cleanup_VkDataGraphPipelineCompilerControlCreateInfoARM(
+        (VkDataGraphPipelineCompilerControlCreateInfoARM const *)pData);
+    return;
+  }
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_CONSTANT_ARM) {
+    cleanup_VkDataGraphPipelineConstantARM((VkDataGraphPipelineConstantARM const *)pData);
+    return;
+  }
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph && VK_ARM_tensors)
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_CONSTANT_TENSOR_SEMI_STRUCTURED_SPARSITY_INFO_ARM) {
+    cleanup_VkDataGraphPipelineConstantTensorSemiStructuredSparsityInfoARM(
+        (VkDataGraphPipelineConstantTensorSemiStructuredSparsityInfoARM const *)pData);
+    return;
+  }
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_CREATE_INFO_ARM) {
+    cleanup_VkDataGraphPipelineCreateInfoARM((VkDataGraphPipelineCreateInfoARM const *)pData);
+    return;
+  }
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_DISPATCH_INFO_ARM) {
+    cleanup_VkDataGraphPipelineDispatchInfoARM((VkDataGraphPipelineDispatchInfoARM const *)pData);
+    return;
+  }
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_IDENTIFIER_CREATE_INFO_ARM) {
+    cleanup_VkDataGraphPipelineIdentifierCreateInfoARM(
+        (VkDataGraphPipelineIdentifierCreateInfoARM const *)pData);
+    return;
+  }
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_INFO_ARM) {
+    cleanup_VkDataGraphPipelineInfoARM((VkDataGraphPipelineInfoARM const *)pData);
+    return;
+  }
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_PROPERTY_QUERY_RESULT_ARM) {
+    cleanup_VkDataGraphPipelinePropertyQueryResultARM(
+        (VkDataGraphPipelinePropertyQueryResultARM const *)pData);
+    return;
+  }
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_RESOURCE_INFO_ARM) {
+    cleanup_VkDataGraphPipelineResourceInfoARM((VkDataGraphPipelineResourceInfoARM const *)pData);
+    return;
+  }
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_SESSION_BIND_POINT_REQUIREMENT_ARM) {
+    cleanup_VkDataGraphPipelineSessionBindPointRequirementARM(
+        (VkDataGraphPipelineSessionBindPointRequirementARM const *)pData);
+    return;
+  }
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_SESSION_BIND_POINT_REQUIREMENTS_INFO_ARM) {
+    cleanup_VkDataGraphPipelineSessionBindPointRequirementsInfoARM(
+        (VkDataGraphPipelineSessionBindPointRequirementsInfoARM const *)pData);
+    return;
+  }
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_SESSION_CREATE_INFO_ARM) {
+    cleanup_VkDataGraphPipelineSessionCreateInfoARM(
+        (VkDataGraphPipelineSessionCreateInfoARM const *)pData);
+    return;
+  }
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_SESSION_MEMORY_REQUIREMENTS_INFO_ARM) {
+    cleanup_VkDataGraphPipelineSessionMemoryRequirementsInfoARM(
+        (VkDataGraphPipelineSessionMemoryRequirementsInfoARM const *)pData);
+    return;
+  }
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_SHADER_MODULE_CREATE_INFO_ARM) {
+    cleanup_VkDataGraphPipelineShaderModuleCreateInfoARM(
+        (VkDataGraphPipelineShaderModuleCreateInfoARM const *)pData);
+    return;
+  }
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DATA_GRAPH_PROCESSING_ENGINE_CREATE_INFO_ARM) {
+    cleanup_VkDataGraphProcessingEngineCreateInfoARM(
+        (VkDataGraphProcessingEngineCreateInfoARM const *)pData);
     return;
   }
 #endif
@@ -12897,6 +13131,14 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DATA_GRAPH_FEATURES_ARM) {
+    cleanup_VkPhysicalDeviceDataGraphFeaturesARM(
+        (VkPhysicalDeviceDataGraphFeaturesARM const *)pData);
+    return;
+  }
+#endif
+
 #if (VK_HEADER_VERSION >= 99 && VK_NV_dedicated_allocation_image_aliasing)
   if (pTemp->sType ==
       VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEDICATED_ALLOCATION_IMAGE_ALIASING_FEATURES_NV) {
@@ -14767,6 +15009,15 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PUSH_DESCRIPTOR_PROPERTIES_KHR) {
     cleanup_VkPhysicalDevicePushDescriptorPropertiesKHR(
         (VkPhysicalDevicePushDescriptorPropertiesKHR const *)pData);
+    return;
+  }
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_QUEUE_FAMILY_DATA_GRAPH_PROCESSING_ENGINE_INFO_ARM) {
+    cleanup_VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM(
+        (VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM const *)pData);
     return;
   }
 #endif
@@ -16863,6 +17114,21 @@ void cleanup_vk_struct(void const *pData) {
 #if (VK_HEADER_VERSION >= 82 && VK_NV_device_diagnostic_checkpoints)
   if (pTemp->sType == VK_STRUCTURE_TYPE_QUEUE_FAMILY_CHECKPOINT_PROPERTIES_NV) {
     cleanup_VkQueueFamilyCheckpointPropertiesNV((VkQueueFamilyCheckpointPropertiesNV const *)pData);
+    return;
+  }
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_QUEUE_FAMILY_DATA_GRAPH_PROCESSING_ENGINE_PROPERTIES_ARM) {
+    cleanup_VkQueueFamilyDataGraphProcessingEnginePropertiesARM(
+        (VkQueueFamilyDataGraphProcessingEnginePropertiesARM const *)pData);
+    return;
+  }
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_QUEUE_FAMILY_DATA_GRAPH_PROPERTIES_ARM) {
+    cleanup_VkQueueFamilyDataGraphPropertiesARM((VkQueueFamilyDataGraphPropertiesARM const *)pData);
     return;
   }
 #endif
@@ -21084,6 +21350,16 @@ void cleanup_VkBindBufferMemoryInfoKHR(VkBindBufferMemoryInfoKHR const *pData) {
 }
 #endif
 
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkBindDataGraphPipelineSessionMemoryInfoARM(
+    VkBindDataGraphPipelineSessionMemoryInfoARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
 #if (VK_HEADER_VERSION >= 274 && VK_KHR_maintenance6 && VK_EXT_descriptor_buffer)
 void cleanup_VkBindDescriptorBufferEmbeddedSamplersInfoEXT(
     VkBindDescriptorBufferEmbeddedSamplersInfoEXT const *pData) {
@@ -21838,6 +22114,11 @@ void cleanup_VkClusterAccelerationStructureCommandsInfoNV(
 #if (VK_HEADER_VERSION >= 307 && VK_NV_cluster_acceleration_structure)
 void cleanup_VkClusterAccelerationStructureGeometryIndexAndGeometryFlagsNV(
     VkClusterAccelerationStructureGeometryIndexAndGeometryFlagsNV const *pData) {}
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_NV_cluster_acceleration_structure)
+void cleanup_VkClusterAccelerationStructureGetTemplateIndicesInfoNV(
+    VkClusterAccelerationStructureGetTemplateIndicesInfoNV const *pData) {}
 #endif
 
 #if (VK_HEADER_VERSION >= 307 && VK_NV_cluster_acceleration_structure)
@@ -22702,6 +22983,189 @@ void cleanup_VkD3D12FenceSubmitInfoKHR(VkD3D12FenceSubmitInfoKHR const *pData) {
 
   // pSignalSemaphoreValues - signalSemaphoreValuesCount
   free((void *)pData->pSignalSemaphoreValues);
+}
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkDataGraphPipelineCompilerControlCreateInfoARM(
+    VkDataGraphPipelineCompilerControlCreateInfoARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pVendorOptions - null-terminated
+  free((void *)pData->pVendorOptions);
+}
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkDataGraphPipelineConstantARM(VkDataGraphPipelineConstantARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pConstantData
+  free((void *)pData->pConstantData);
+}
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph && VK_ARM_tensors)
+void cleanup_VkDataGraphPipelineConstantTensorSemiStructuredSparsityInfoARM(
+    VkDataGraphPipelineConstantTensorSemiStructuredSparsityInfoARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkDataGraphPipelineCreateInfoARM(VkDataGraphPipelineCreateInfoARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pResourceInfos - resourceInfoCount
+  for (size_t i = 0; i < pData->resourceInfoCount; ++i) {
+    cleanup_VkDataGraphPipelineResourceInfoARM(&pData->pResourceInfos[i]);
+  }
+  free((void *)pData->pResourceInfos);
+}
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkDataGraphPipelineDispatchInfoARM(VkDataGraphPipelineDispatchInfoARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkDataGraphPipelineIdentifierCreateInfoARM(
+    VkDataGraphPipelineIdentifierCreateInfoARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pIdentifier - identifierSize
+  free((void *)pData->pIdentifier);
+}
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkDataGraphPipelineInfoARM(VkDataGraphPipelineInfoARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkDataGraphPipelinePropertyQueryResultARM(
+    VkDataGraphPipelinePropertyQueryResultARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pData - dataSize
+  free((void *)pData->pData);
+}
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkDataGraphPipelineResourceInfoARM(VkDataGraphPipelineResourceInfoARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkDataGraphPipelineSessionBindPointRequirementARM(
+    VkDataGraphPipelineSessionBindPointRequirementARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkDataGraphPipelineSessionBindPointRequirementsInfoARM(
+    VkDataGraphPipelineSessionBindPointRequirementsInfoARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkDataGraphPipelineSessionCreateInfoARM(
+    VkDataGraphPipelineSessionCreateInfoARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkDataGraphPipelineSessionMemoryRequirementsInfoARM(
+    VkDataGraphPipelineSessionMemoryRequirementsInfoARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkDataGraphPipelineShaderModuleCreateInfoARM(
+    VkDataGraphPipelineShaderModuleCreateInfoARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pName - null-terminated
+  free((void *)pData->pName);
+
+  // pSpecializationInfo
+  if (pData->pSpecializationInfo != NULL)
+    cleanup_VkSpecializationInfo(pData->pSpecializationInfo);
+  free((void *)pData->pSpecializationInfo);
+
+  // pConstants - constantCount
+  for (size_t i = 0; i < pData->constantCount; ++i) {
+    cleanup_VkDataGraphPipelineConstantARM(&pData->pConstants[i]);
+  }
+  free((void *)pData->pConstants);
+}
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkDataGraphProcessingEngineCreateInfoARM(
+    VkDataGraphProcessingEngineCreateInfoARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pProcessingEngines - processingEngineCount
+  for (size_t i = 0; i < pData->processingEngineCount; ++i) {
+    cleanup_VkPhysicalDeviceDataGraphProcessingEngineARM(&pData->pProcessingEngines[i]);
+  }
+  free((void *)pData->pProcessingEngines);
 }
 #endif
 
@@ -27994,6 +28458,26 @@ void cleanup_VkPhysicalDeviceCustomBorderColorPropertiesEXT(
 }
 #endif
 
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkPhysicalDeviceDataGraphFeaturesARM(
+    VkPhysicalDeviceDataGraphFeaturesARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkPhysicalDeviceDataGraphOperationSupportARM(
+    VkPhysicalDeviceDataGraphOperationSupportARM const *pData) {}
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkPhysicalDeviceDataGraphProcessingEngineARM(
+    VkPhysicalDeviceDataGraphProcessingEngineARM const *pData) {}
+#endif
+
 #if (VK_HEADER_VERSION >= 99 && VK_NV_dedicated_allocation_image_aliasing)
 void cleanup_VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV(
     VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV const *pData) {
@@ -30936,6 +31420,16 @@ void cleanup_VkPhysicalDevicePushDescriptorPropertiesKHR(
 #if (VK_HEADER_VERSION >= 303 && VK_KHR_push_descriptor)
 void cleanup_VkPhysicalDevicePushDescriptorPropertiesKHR(
     VkPhysicalDevicePushDescriptorPropertiesKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM(
+    VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
@@ -34479,6 +34973,25 @@ void cleanup_VkQueueFamilyCheckpointProperties2NV(
 
 #if (VK_HEADER_VERSION >= 82 && VK_NV_device_diagnostic_checkpoints)
 void cleanup_VkQueueFamilyCheckpointPropertiesNV(VkQueueFamilyCheckpointPropertiesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkQueueFamilyDataGraphProcessingEnginePropertiesARM(
+    VkQueueFamilyDataGraphProcessingEnginePropertiesARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+void cleanup_VkQueueFamilyDataGraphPropertiesARM(VkQueueFamilyDataGraphPropertiesARM const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

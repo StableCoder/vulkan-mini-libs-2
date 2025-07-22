@@ -19,3 +19,4 @@ VkSpecializationInfo pData
 VkValidationCacheCreateInfoEXT pInitialData
 VkWriteDescriptorSetInlineUniformBlock pData
 VkWriteDescriptorSetInlineUniformBlockEXT pData
+VkDataGraphPipelinePropertyQueryResultARM pData
