@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 321
+#if VK_HEADER_VERSION > 322
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v321)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v322)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v321)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v322)"
 #endif
 #endif
 
@@ -1510,6 +1510,7 @@ EnumValueSet const VkTensorCreateFlagsARMSets[] = {
     {"MUTABLE_FORMAT", 0x00000001},
     {"PROTECTED", 0x00000002},
     {"DESCRIPTOR_BUFFER_CAPTURE_REPLAY", 0x00000004},
+    {"RESERVED_3", 0x00000008},
 };
 
 EnumValueSet const VkTensorUsageFlagsARMSets[] = {
@@ -4336,7 +4337,7 @@ EnumType const cEnumTypes[398] = {
     {"VkDirectDriverLoadingFlagsLUNARG", NULL, 0},
     {"VkPipelineCreateFlags2", VkPipelineCreateFlags2Sets, 58},
     {"VkBufferUsageFlags2", VkBufferUsageFlags2Sets, 46},
-    {"VkTensorCreateFlagsARM", VkTensorCreateFlagsARMSets, 3},
+    {"VkTensorCreateFlagsARM", VkTensorCreateFlagsARMSets, 4},
     {"VkTensorUsageFlagsARM", VkTensorUsageFlagsARMSets, 5},
     {"VkTensorViewCreateFlagsARM", VkTensorViewCreateFlagsARMSets, 1},
     {"VkDataGraphPipelineSessionCreateFlagsARM", VkDataGraphPipelineSessionCreateFlagsARMSets, 1},
