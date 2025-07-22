@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 317
+#if VK_HEADER_VERSION > 318
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v317)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v318)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v317)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v318)"
 #endif
 #endif
 
@@ -3435,6 +3435,11 @@ bool compare_VkNativeBufferUsage2ANDROID(VkNativeBufferUsage2ANDROID const *s1,
                                          VkNativeBufferUsage2ANDROID const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 318 && VK_OHOS_surface
+bool compare_VkOHSurfaceCreateInfoOHOS(VkOHSurfaceCreateInfoOHOS const *s1,
+                                       VkOHSurfaceCreateInfoOHOS const *s2);
+#endif
+
 #if VK_HEADER_VERSION <= 134 && VK_NVX_device_generated_commands
 bool compare_VkObjectTableCreateInfoNVX(VkObjectTableCreateInfoNVX const *s1,
                                         VkObjectTableCreateInfoNVX const *s2);
@@ -4435,6 +4440,18 @@ bool compare_VkPhysicalDeviceFragmentDensityMap2PropertiesEXT(
 bool compare_VkPhysicalDeviceFragmentDensityMapFeaturesEXT(
     VkPhysicalDeviceFragmentDensityMapFeaturesEXT const *s1,
     VkPhysicalDeviceFragmentDensityMapFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 318 && VK_VALVE_fragment_density_map_layered
+bool compare_VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE(
+    VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE const *s1,
+    VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 318 && VK_VALVE_fragment_density_map_layered
+bool compare_VkPhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE(
+    VkPhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE const *s1,
+    VkPhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 311 && VK_EXT_fragment_density_map_offset
@@ -7086,6 +7103,12 @@ bool compare_VkPipelineExecutableStatisticKHR(VkPipelineExecutableStatisticKHR c
                                               VkPipelineExecutableStatisticKHR const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 318 && VK_VALVE_fragment_density_map_layered
+bool compare_VkPipelineFragmentDensityMapLayeredCreateInfoVALVE(
+    VkPipelineFragmentDensityMapLayeredCreateInfoVALVE const *s1,
+    VkPipelineFragmentDensityMapLayeredCreateInfoVALVE const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 160 && VK_NV_fragment_shading_rate_enums
 bool compare_VkPipelineFragmentShadingRateEnumStateCreateInfoNV(
     VkPipelineFragmentShadingRateEnumStateCreateInfoNV const *s1,
@@ -8527,6 +8550,11 @@ bool compare_VkSurfaceCapabilitiesPresentId2KHR(VkSurfaceCapabilitiesPresentId2K
 #if VK_HEADER_VERSION >= 317 && VK_KHR_present_wait2
 bool compare_VkSurfaceCapabilitiesPresentWait2KHR(VkSurfaceCapabilitiesPresentWait2KHR const *s1,
                                                   VkSurfaceCapabilitiesPresentWait2KHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 318 && VK_OHOS_surface
+bool compare_VkSurfaceCreateInfoOHOS(VkSurfaceCreateInfoOHOS const *s1,
+                                     VkSurfaceCreateInfoOHOS const *s2);
 #endif
 
 #if VK_KHR_get_surface_capabilities2
@@ -19936,6 +19964,21 @@ bool compare_VkNativeBufferUsage2ANDROID(VkNativeBufferUsage2ANDROID const *s1,
 }
 #endif
 
+#if VK_HEADER_VERSION >= 318 && VK_OHOS_surface
+bool compare_VkOHSurfaceCreateInfoOHOS(VkOHSurfaceCreateInfoOHOS const *s1,
+                                       VkOHSurfaceCreateInfoOHOS const *s2) {
+  // local, simple types
+  if ((s1->flags != s2->flags))
+    return false;
+
+  // non-local members
+  if (s1->window != s2->window)
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION <= 134 && VK_NVX_device_generated_commands
 bool compare_VkObjectTableCreateInfoNVX(VkObjectTableCreateInfoNVX const *s1,
                                         VkObjectTableCreateInfoNVX const *s2) {
@@ -22710,6 +22753,30 @@ bool compare_VkPhysicalDeviceFragmentDensityMapFeaturesEXT(
   if ((s1->fragmentDensityMap != s2->fragmentDensityMap) ||
       (s1->fragmentDensityMapDynamic != s2->fragmentDensityMapDynamic) ||
       (s1->fragmentDensityMapNonSubsampledImages != s2->fragmentDensityMapNonSubsampledImages))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 318 && VK_VALVE_fragment_density_map_layered
+bool compare_VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE(
+    VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE const *s1,
+    VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE const *s2) {
+  // local, simple types
+  if ((s1->fragmentDensityMapLayered != s2->fragmentDensityMapLayered))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 318 && VK_VALVE_fragment_density_map_layered
+bool compare_VkPhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE(
+    VkPhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE const *s1,
+    VkPhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE const *s2) {
+  // local, simple types
+  if ((s1->maxFragmentDensityMapLayers != s2->maxFragmentDensityMapLayers))
     return false;
 
   return true;
@@ -29534,6 +29601,18 @@ bool compare_VkPipelineExecutableStatisticKHR(VkPipelineExecutableStatisticKHR c
 }
 #endif
 
+#if VK_HEADER_VERSION >= 318 && VK_VALVE_fragment_density_map_layered
+bool compare_VkPipelineFragmentDensityMapLayeredCreateInfoVALVE(
+    VkPipelineFragmentDensityMapLayeredCreateInfoVALVE const *s1,
+    VkPipelineFragmentDensityMapLayeredCreateInfoVALVE const *s2) {
+  // local, simple types
+  if ((s1->maxFragmentDensityMapLayers != s2->maxFragmentDensityMapLayers))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 160 && VK_NV_fragment_shading_rate_enums
 bool compare_VkPipelineFragmentShadingRateEnumStateCreateInfoNV(
     VkPipelineFragmentShadingRateEnumStateCreateInfoNV const *s1,
@@ -33513,6 +33592,21 @@ bool compare_VkSurfaceCapabilitiesPresentWait2KHR(VkSurfaceCapabilitiesPresentWa
                                                   VkSurfaceCapabilitiesPresentWait2KHR const *s2) {
   // local, simple types
   if ((s1->presentWait2Supported != s2->presentWait2Supported))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 318 && VK_OHOS_surface
+bool compare_VkSurfaceCreateInfoOHOS(VkSurfaceCreateInfoOHOS const *s1,
+                                     VkSurfaceCreateInfoOHOS const *s2) {
+  // local, simple types
+  if ((s1->flags != s2->flags))
+    return false;
+
+  // non-local members
+  if (s1->window != s2->window)
     return false;
 
   return true;

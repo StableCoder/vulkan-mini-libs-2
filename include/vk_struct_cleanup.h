@@ -37,12 +37,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 317
+#if VK_HEADER_VERSION > 318
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v317)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v318)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v317)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v318)"
 #endif
 #endif
 
@@ -2899,6 +2899,10 @@ void cleanup_VkNativeBufferANDROID(VkNativeBufferANDROID const *pData);
 void cleanup_VkNativeBufferUsage2ANDROID(VkNativeBufferUsage2ANDROID const *pData);
 #endif
 
+#if (VK_HEADER_VERSION >= 318 && VK_OHOS_surface)
+void cleanup_VkOHSurfaceCreateInfoOHOS(VkOHSurfaceCreateInfoOHOS const *pData);
+#endif
+
 #if (VK_HEADER_VERSION <= 134 && VK_NVX_device_generated_commands)
 void cleanup_VkObjectTableCreateInfoNVX(VkObjectTableCreateInfoNVX const *pData);
 #endif
@@ -3735,6 +3739,16 @@ void cleanup_VkPhysicalDeviceFragmentDensityMap2PropertiesEXT(
 #if (VK_HEADER_VERSION >= 94 && VK_EXT_fragment_density_map)
 void cleanup_VkPhysicalDeviceFragmentDensityMapFeaturesEXT(
     VkPhysicalDeviceFragmentDensityMapFeaturesEXT const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 318 && VK_VALVE_fragment_density_map_layered)
+void cleanup_VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE(
+    VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 318 && VK_VALVE_fragment_density_map_layered)
+void cleanup_VkPhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE(
+    VkPhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE const *pData);
 #endif
 
 #if (VK_HEADER_VERSION >= 311 && VK_EXT_fragment_density_map_offset)
@@ -5949,6 +5963,11 @@ void cleanup_VkPipelineExecutablePropertiesKHR(VkPipelineExecutablePropertiesKHR
 void cleanup_VkPipelineExecutableStatisticKHR(VkPipelineExecutableStatisticKHR const *pData);
 #endif
 
+#if (VK_HEADER_VERSION >= 318 && VK_VALVE_fragment_density_map_layered)
+void cleanup_VkPipelineFragmentDensityMapLayeredCreateInfoVALVE(
+    VkPipelineFragmentDensityMapLayeredCreateInfoVALVE const *pData);
+#endif
+
 #if (VK_HEADER_VERSION >= 160 && VK_NV_fragment_shading_rate_enums)
 void cleanup_VkPipelineFragmentShadingRateEnumStateCreateInfoNV(
     VkPipelineFragmentShadingRateEnumStateCreateInfoNV const *pData);
@@ -7164,6 +7183,10 @@ void cleanup_VkSurfaceCapabilitiesPresentId2KHR(VkSurfaceCapabilitiesPresentId2K
 #if (VK_HEADER_VERSION >= 317 && VK_KHR_present_wait2)
 void cleanup_VkSurfaceCapabilitiesPresentWait2KHR(
     VkSurfaceCapabilitiesPresentWait2KHR const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 318 && VK_OHOS_surface)
+void cleanup_VkSurfaceCreateInfoOHOS(VkSurfaceCreateInfoOHOS const *pData);
 #endif
 
 #if (VK_KHR_get_surface_capabilities2)
@@ -12309,6 +12332,13 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
+#if (VK_HEADER_VERSION >= 318 && VK_OHOS_surface)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_OH_SURFACE_CREATE_INFO_OHOS) {
+    cleanup_VkOHSurfaceCreateInfoOHOS((VkOHSurfaceCreateInfoOHOS const *)pData);
+    return;
+  }
+#endif
+
 #if (VK_HEADER_VERSION <= 134 && VK_NVX_device_generated_commands)
   if (pTemp->sType == VK_STRUCTURE_TYPE_OBJECT_TABLE_CREATE_INFO_NVX) {
     cleanup_VkObjectTableCreateInfoNVX((VkObjectTableCreateInfoNVX const *)pData);
@@ -13424,6 +13454,24 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceFragmentDensityMapFeaturesEXT(
         (VkPhysicalDeviceFragmentDensityMapFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if (VK_HEADER_VERSION >= 318 && VK_VALVE_fragment_density_map_layered)
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_LAYERED_FEATURES_VALVE) {
+    cleanup_VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE(
+        (VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE const *)pData);
+    return;
+  }
+#endif
+
+#if (VK_HEADER_VERSION >= 318 && VK_VALVE_fragment_density_map_layered)
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FRAGMENT_DENSITY_MAP_LAYERED_PROPERTIES_VALVE) {
+    cleanup_VkPhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE(
+        (VkPhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE const *)pData);
     return;
   }
 #endif
@@ -16273,6 +16321,14 @@ void cleanup_vk_struct(void const *pData) {
 #if (VK_HEADER_VERSION >= 119 && VK_KHR_pipeline_executable_properties)
   if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_EXECUTABLE_STATISTIC_KHR) {
     cleanup_VkPipelineExecutableStatisticKHR((VkPipelineExecutableStatisticKHR const *)pData);
+    return;
+  }
+#endif
+
+#if (VK_HEADER_VERSION >= 318 && VK_VALVE_fragment_density_map_layered)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PIPELINE_FRAGMENT_DENSITY_MAP_LAYERED_CREATE_INFO_VALVE) {
+    cleanup_VkPipelineFragmentDensityMapLayeredCreateInfoVALVE(
+        (VkPipelineFragmentDensityMapLayeredCreateInfoVALVE const *)pData);
     return;
   }
 #endif
@@ -27109,6 +27165,18 @@ void cleanup_VkNativeBufferANDROID(VkNativeBufferANDROID const *pData) {
 void cleanup_VkNativeBufferUsage2ANDROID(VkNativeBufferUsage2ANDROID const *pData) {}
 #endif
 
+#if (VK_HEADER_VERSION >= 318 && VK_OHOS_surface)
+void cleanup_VkOHSurfaceCreateInfoOHOS(VkOHSurfaceCreateInfoOHOS const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // window
+  free((void *)pData->window);
+}
+#endif
+
 #if (VK_HEADER_VERSION <= 134 && VK_NVX_device_generated_commands)
 void cleanup_VkObjectTableCreateInfoNVX(VkObjectTableCreateInfoNVX const *pData) {
   // pNext
@@ -28776,6 +28844,26 @@ void cleanup_VkPhysicalDeviceFragmentDensityMap2PropertiesEXT(
 #if (VK_HEADER_VERSION >= 94 && VK_EXT_fragment_density_map)
 void cleanup_VkPhysicalDeviceFragmentDensityMapFeaturesEXT(
     VkPhysicalDeviceFragmentDensityMapFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if (VK_HEADER_VERSION >= 318 && VK_VALVE_fragment_density_map_layered)
+void cleanup_VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE(
+    VkPhysicalDeviceFragmentDensityMapLayeredFeaturesVALVE const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if (VK_HEADER_VERSION >= 318 && VK_VALVE_fragment_density_map_layered)
+void cleanup_VkPhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE(
+    VkPhysicalDeviceFragmentDensityMapLayeredPropertiesVALVE const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
@@ -33333,6 +33421,16 @@ void cleanup_VkPipelineExecutableStatisticKHR(VkPipelineExecutableStatisticKHR c
 }
 #endif
 
+#if (VK_HEADER_VERSION >= 318 && VK_VALVE_fragment_density_map_layered)
+void cleanup_VkPipelineFragmentDensityMapLayeredCreateInfoVALVE(
+    VkPipelineFragmentDensityMapLayeredCreateInfoVALVE const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
 #if (VK_HEADER_VERSION >= 160 && VK_NV_fragment_shading_rate_enums)
 void cleanup_VkPipelineFragmentShadingRateEnumStateCreateInfoNV(
     VkPipelineFragmentShadingRateEnumStateCreateInfoNV const *pData) {
@@ -36662,6 +36760,18 @@ void cleanup_VkSurfaceCapabilitiesPresentWait2KHR(
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
+}
+#endif
+
+#if (VK_HEADER_VERSION >= 318 && VK_OHOS_surface)
+void cleanup_VkSurfaceCreateInfoOHOS(VkSurfaceCreateInfoOHOS const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // window
+  free((void *)pData->window);
 }
 #endif
 
