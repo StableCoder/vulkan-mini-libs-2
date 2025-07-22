@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 316
+#if VK_HEADER_VERSION > 317
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v316)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v317)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v316)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v317)"
 #endif
 #endif
 
@@ -397,6 +397,12 @@ bool compare_VkAttachmentDescriptionStencilLayoutKHR(
     VkAttachmentDescriptionStencilLayoutKHR const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 317 && VK_KHR_unified_image_layouts &&                                    \
+    VK_EXT_attachment_feedback_loop_layout && ((VK_VERSION_1_3 || VK_KHR_dynamic_rendering))
+bool compare_VkAttachmentFeedbackLoopInfoEXT(VkAttachmentFeedbackLoopInfoEXT const *s1,
+                                             VkAttachmentFeedbackLoopInfoEXT const *s2);
+#endif
+
 bool compare_VkAttachmentReference(VkAttachmentReference const *s1,
                                    VkAttachmentReference const *s2);
 
@@ -592,6 +598,11 @@ bool compare_VkBindShaderGroupIndirectCommandNV(VkBindShaderGroupIndirectCommand
 #endif
 
 bool compare_VkBindSparseInfo(VkBindSparseInfo const *s1, VkBindSparseInfo const *s2);
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkBindTensorMemoryInfoARM(VkBindTensorMemoryInfoARM const *s1,
+                                       VkBindTensorMemoryInfoARM const *s2);
+#endif
 
 #if VK_HEADER_VERSION >= 296 && VK_EXT_device_generated_commands
 bool compare_VkBindVertexBufferIndirectCommandEXT(VkBindVertexBufferIndirectCommandEXT const *s1,
@@ -1239,6 +1250,10 @@ bool compare_VkCopyMicromapToMemoryInfoEXT(VkCopyMicromapToMemoryInfoEXT const *
                                            VkCopyMicromapToMemoryInfoEXT const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkCopyTensorInfoARM(VkCopyTensorInfoARM const *s1, VkCopyTensorInfoARM const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 178 && VK_NVX_binary_import
 bool compare_VkCuFunctionCreateInfoNVX(VkCuFunctionCreateInfoNVX const *s1,
                                        VkCuFunctionCreateInfoNVX const *s2);
@@ -1403,6 +1418,11 @@ bool compare_VkDescriptorBufferInfo(VkDescriptorBufferInfo const *s1,
 #if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
 bool compare_VkDescriptorGetInfoEXT(VkDescriptorGetInfoEXT const *s1,
                                     VkDescriptorGetInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors && VK_EXT_descriptor_buffer
+bool compare_VkDescriptorGetTensorInfoARM(VkDescriptorGetTensorInfoARM const *s1,
+                                          VkDescriptorGetTensorInfoARM const *s2);
 #endif
 
 bool compare_VkDescriptorImageInfo(VkDescriptorImageInfo const *s1,
@@ -1821,6 +1841,11 @@ bool compare_VkDeviceQueueShaderCoreControlCreateInfoARM(
 bool compare_VkDeviceSemaphoreSciSyncPoolReservationCreateInfoNV(
     VkDeviceSemaphoreSciSyncPoolReservationCreateInfoNV const *s1,
     VkDeviceSemaphoreSciSyncPoolReservationCreateInfoNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkDeviceTensorMemoryRequirementsARM(VkDeviceTensorMemoryRequirementsARM const *s1,
+                                                 VkDeviceTensorMemoryRequirementsARM const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 236 && VK_HEADER_VERSION <= 236 && VK_LUNARG_direct_driver_loading
@@ -2244,6 +2269,11 @@ bool compare_VkExternalMemoryPropertiesKHR(VkExternalMemoryPropertiesKHR const *
                                            VkExternalMemoryPropertiesKHR const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkExternalMemoryTensorCreateInfoARM(VkExternalMemoryTensorCreateInfoARM const *s1,
+                                                 VkExternalMemoryTensorCreateInfoARM const *s2);
+#endif
+
 #if VK_VERSION_1_1
 bool compare_VkExternalSemaphoreProperties(VkExternalSemaphoreProperties const *s1,
                                            VkExternalSemaphoreProperties const *s2);
@@ -2252,6 +2282,11 @@ bool compare_VkExternalSemaphoreProperties(VkExternalSemaphoreProperties const *
 #if VK_KHR_external_semaphore_capabilities
 bool compare_VkExternalSemaphorePropertiesKHR(VkExternalSemaphorePropertiesKHR const *s1,
                                               VkExternalSemaphorePropertiesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkExternalTensorPropertiesARM(VkExternalTensorPropertiesARM const *s1,
+                                           VkExternalTensorPropertiesARM const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 241 && VKSC_VERSION_1_0
@@ -2317,6 +2352,11 @@ bool compare_VkFragmentShadingRateAttachmentInfoKHR(
 
 #if VK_HEADER_VERSION >= 264 && VK_EXT_frame_boundary
 bool compare_VkFrameBoundaryEXT(VkFrameBoundaryEXT const *s1, VkFrameBoundaryEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors && VK_EXT_frame_boundary
+bool compare_VkFrameBoundaryTensorsARM(VkFrameBoundaryTensorsARM const *s1,
+                                       VkFrameBoundaryTensorsARM const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 142 && VK_VERSION_1_2
@@ -3101,6 +3141,12 @@ bool compare_VkMemoryDedicatedAllocateInfo(VkMemoryDedicatedAllocateInfo const *
 #if VK_KHR_dedicated_allocation
 bool compare_VkMemoryDedicatedAllocateInfoKHR(VkMemoryDedicatedAllocateInfoKHR const *s1,
                                               VkMemoryDedicatedAllocateInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkMemoryDedicatedAllocateInfoTensorARM(
+    VkMemoryDedicatedAllocateInfoTensorARM const *s1,
+    VkMemoryDedicatedAllocateInfoTensorARM const *s2);
 #endif
 
 #if VK_VERSION_1_1
@@ -3971,6 +4017,18 @@ bool compare_VkPhysicalDeviceDescriptorBufferPropertiesEXT(
     VkPhysicalDeviceDescriptorBufferPropertiesEXT const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors && VK_EXT_descriptor_buffer
+bool compare_VkPhysicalDeviceDescriptorBufferTensorFeaturesARM(
+    VkPhysicalDeviceDescriptorBufferTensorFeaturesARM const *s1,
+    VkPhysicalDeviceDescriptorBufferTensorFeaturesARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors && VK_EXT_descriptor_buffer
+bool compare_VkPhysicalDeviceDescriptorBufferTensorPropertiesARM(
+    VkPhysicalDeviceDescriptorBufferTensorPropertiesARM const *s1,
+    VkPhysicalDeviceDescriptorBufferTensorPropertiesARM const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
 bool compare_VkPhysicalDeviceDescriptorIndexingFeatures(
     VkPhysicalDeviceDescriptorIndexingFeatures const *s1,
@@ -4289,6 +4347,11 @@ bool compare_VkPhysicalDeviceExternalSemaphoreInfo(VkPhysicalDeviceExternalSemap
 bool compare_VkPhysicalDeviceExternalSemaphoreInfoKHR(
     VkPhysicalDeviceExternalSemaphoreInfoKHR const *s1,
     VkPhysicalDeviceExternalSemaphoreInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkPhysicalDeviceExternalTensorInfoARM(VkPhysicalDeviceExternalTensorInfoARM const *s1,
+                                                   VkPhysicalDeviceExternalTensorInfoARM const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 230 && VK_EXT_device_fault
@@ -5082,6 +5145,18 @@ bool compare_VkPhysicalDeviceMaintenance8FeaturesKHR(
     VkPhysicalDeviceMaintenance8FeaturesKHR const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 317 && VK_KHR_maintenance9
+bool compare_VkPhysicalDeviceMaintenance9FeaturesKHR(
+    VkPhysicalDeviceMaintenance9FeaturesKHR const *s1,
+    VkPhysicalDeviceMaintenance9FeaturesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_KHR_maintenance9
+bool compare_VkPhysicalDeviceMaintenance9PropertiesKHR(
+    VkPhysicalDeviceMaintenance9PropertiesKHR const *s1,
+    VkPhysicalDeviceMaintenance9PropertiesKHR const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 278 && VK_EXT_map_memory_placed
 bool compare_VkPhysicalDeviceMapMemoryPlacedFeaturesEXT(
     VkPhysicalDeviceMapMemoryPlacedFeaturesEXT const *s1,
@@ -5454,6 +5529,11 @@ bool compare_VkPhysicalDevicePresentBarrierFeaturesNV(
     VkPhysicalDevicePresentBarrierFeaturesNV const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 317 && VK_KHR_present_id2
+bool compare_VkPhysicalDevicePresentId2FeaturesKHR(VkPhysicalDevicePresentId2FeaturesKHR const *s1,
+                                                   VkPhysicalDevicePresentId2FeaturesKHR const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 185 && VK_KHR_present_id
 bool compare_VkPhysicalDevicePresentIdFeaturesKHR(VkPhysicalDevicePresentIdFeaturesKHR const *s1,
                                                   VkPhysicalDevicePresentIdFeaturesKHR const *s2);
@@ -5469,6 +5549,12 @@ bool compare_VkPhysicalDevicePresentMeteringFeaturesNV(
 bool compare_VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT(
     VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT const *s1,
     VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_KHR_present_wait2
+bool compare_VkPhysicalDevicePresentWait2FeaturesKHR(
+    VkPhysicalDevicePresentWait2FeaturesKHR const *s1,
+    VkPhysicalDevicePresentWait2FeaturesKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 185 && VK_KHR_present_wait
@@ -6022,6 +6108,12 @@ bool compare_VkPhysicalDeviceShaderFloat16Int8FeaturesKHR(
     VkPhysicalDeviceShaderFloat16Int8FeaturesKHR const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 317 && VK_EXT_shader_float8
+bool compare_VkPhysicalDeviceShaderFloat8FeaturesEXT(
+    VkPhysicalDeviceShaderFloat8FeaturesEXT const *s1,
+    VkPhysicalDeviceShaderFloat8FeaturesEXT const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 303 && VK_VERSION_1_4
 bool compare_VkPhysicalDeviceShaderFloatControls2Features(
     VkPhysicalDeviceShaderFloatControls2Features const *s1,
@@ -6347,6 +6439,16 @@ bool compare_VkPhysicalDeviceSynchronization2FeaturesKHR(
     VkPhysicalDeviceSynchronization2FeaturesKHR const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkPhysicalDeviceTensorFeaturesARM(VkPhysicalDeviceTensorFeaturesARM const *s1,
+                                               VkPhysicalDeviceTensorFeaturesARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkPhysicalDeviceTensorPropertiesARM(VkPhysicalDeviceTensorPropertiesARM const *s1,
+                                                 VkPhysicalDeviceTensorPropertiesARM const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 113 && VK_EXT_texel_buffer_alignment
 bool compare_VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT(
     VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT const *s1,
@@ -6482,6 +6584,12 @@ bool compare_VkPhysicalDeviceTransformFeedbackPropertiesEXT(
     VkPhysicalDeviceTransformFeedbackPropertiesEXT const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 317 && VK_KHR_unified_image_layouts
+bool compare_VkPhysicalDeviceUnifiedImageLayoutsFeaturesKHR(
+    VkPhysicalDeviceUnifiedImageLayoutsFeaturesKHR const *s1,
+    VkPhysicalDeviceUnifiedImageLayoutsFeaturesKHR const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
 bool compare_VkPhysicalDeviceUniformBufferStandardLayoutFeatures(
     VkPhysicalDeviceUniformBufferStandardLayoutFeatures const *s1,
@@ -6606,6 +6714,12 @@ bool compare_VkPhysicalDeviceVertexAttributeRobustnessFeaturesEXT(
 bool compare_VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT(
     VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT const *s1,
     VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_KHR_video_decode_vp9
+bool compare_VkPhysicalDeviceVideoDecodeVP9FeaturesKHR(
+    VkPhysicalDeviceVideoDecodeVP9FeaturesKHR const *s1,
+    VkPhysicalDeviceVideoDecodeVP9FeaturesKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 302 && VK_KHR_video_encode_av1
@@ -7284,6 +7398,10 @@ bool compare_VkPresentFrameTokenGGP(VkPresentFrameTokenGGP const *s1,
                                     VkPresentFrameTokenGGP const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 317 && VK_KHR_present_id2
+bool compare_VkPresentId2KHR(VkPresentId2KHR const *s1, VkPresentId2KHR const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 185 && VK_KHR_present_id
 bool compare_VkPresentIdKHR(VkPresentIdKHR const *s1, VkPresentIdKHR const *s2);
 #endif
@@ -7307,6 +7425,11 @@ bool compare_VkPresentTimeGOOGLE(VkPresentTimeGOOGLE const *s1, VkPresentTimeGOO
 #if VK_GOOGLE_display_timing
 bool compare_VkPresentTimesInfoGOOGLE(VkPresentTimesInfoGOOGLE const *s1,
                                       VkPresentTimesInfoGOOGLE const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_KHR_present_wait2
+bool compare_VkPresentWait2InfoKHR(VkPresentWait2InfoKHR const *s1,
+                                   VkPresentWait2InfoKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
@@ -7470,6 +7593,12 @@ bool compare_VkQueueFamilyGlobalPriorityPropertiesKHR(
 bool compare_VkQueueFamilyGlobalPriorityPropertiesKHR(
     VkQueueFamilyGlobalPriorityPropertiesKHR const *s1,
     VkQueueFamilyGlobalPriorityPropertiesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_KHR_maintenance9
+bool compare_VkQueueFamilyOwnershipTransferPropertiesKHR(
+    VkQueueFamilyOwnershipTransferPropertiesKHR const *s1,
+    VkQueueFamilyOwnershipTransferPropertiesKHR const *s2);
 #endif
 
 bool compare_VkQueueFamilyProperties(VkQueueFamilyProperties const *s1,
@@ -8390,6 +8519,16 @@ bool compare_VkSurfaceCapabilitiesPresentBarrierNV(VkSurfaceCapabilitiesPresentB
                                                    VkSurfaceCapabilitiesPresentBarrierNV const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 317 && VK_KHR_present_id2
+bool compare_VkSurfaceCapabilitiesPresentId2KHR(VkSurfaceCapabilitiesPresentId2KHR const *s1,
+                                                VkSurfaceCapabilitiesPresentId2KHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_KHR_present_wait2
+bool compare_VkSurfaceCapabilitiesPresentWait2KHR(VkSurfaceCapabilitiesPresentWait2KHR const *s1,
+                                                  VkSurfaceCapabilitiesPresentWait2KHR const *s2);
+#endif
+
 #if VK_KHR_get_surface_capabilities2
 bool compare_VkSurfaceFormat2KHR(VkSurfaceFormat2KHR const *s1, VkSurfaceFormat2KHR const *s2);
 #endif
@@ -8491,6 +8630,56 @@ bool compare_VkSwapchainPresentScalingCreateInfoEXT(
 #if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
 bool compare_VkSysmemColorSpaceFUCHSIA(VkSysmemColorSpaceFUCHSIA const *s1,
                                        VkSysmemColorSpaceFUCHSIA const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors && VK_EXT_descriptor_buffer
+bool compare_VkTensorCaptureDescriptorDataInfoARM(VkTensorCaptureDescriptorDataInfoARM const *s1,
+                                                  VkTensorCaptureDescriptorDataInfoARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkTensorCopyARM(VkTensorCopyARM const *s1, VkTensorCopyARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkTensorCreateInfoARM(VkTensorCreateInfoARM const *s1,
+                                   VkTensorCreateInfoARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkTensorDependencyInfoARM(VkTensorDependencyInfoARM const *s1,
+                                       VkTensorDependencyInfoARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkTensorDescriptionARM(VkTensorDescriptionARM const *s1,
+                                    VkTensorDescriptionARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkTensorFormatPropertiesARM(VkTensorFormatPropertiesARM const *s1,
+                                         VkTensorFormatPropertiesARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkTensorMemoryBarrierARM(VkTensorMemoryBarrierARM const *s1,
+                                      VkTensorMemoryBarrierARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkTensorMemoryRequirementsInfoARM(VkTensorMemoryRequirementsInfoARM const *s1,
+                                               VkTensorMemoryRequirementsInfoARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors && VK_EXT_descriptor_buffer
+bool compare_VkTensorViewCaptureDescriptorDataInfoARM(
+    VkTensorViewCaptureDescriptorDataInfoARM const *s1,
+    VkTensorViewCaptureDescriptorDataInfoARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkTensorViewCreateInfoARM(VkTensorViewCreateInfoARM const *s1,
+                                       VkTensorViewCreateInfoARM const *s2);
 #endif
 
 #if VK_AMD_texture_gather_bias_lod
@@ -9035,6 +9224,21 @@ bool compare_VkVideoDecodeInfoKHR(VkVideoDecodeInfoKHR const *s1, VkVideoDecodeI
      VK_ENABLE_BETA_EXTENSIONS)
 bool compare_VkVideoDecodeUsageInfoKHR(VkVideoDecodeUsageInfoKHR const *s1,
                                        VkVideoDecodeUsageInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_KHR_video_decode_vp9
+bool compare_VkVideoDecodeVP9CapabilitiesKHR(VkVideoDecodeVP9CapabilitiesKHR const *s1,
+                                             VkVideoDecodeVP9CapabilitiesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_KHR_video_decode_vp9
+bool compare_VkVideoDecodeVP9PictureInfoKHR(VkVideoDecodeVP9PictureInfoKHR const *s1,
+                                            VkVideoDecodeVP9PictureInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_KHR_video_decode_vp9
+bool compare_VkVideoDecodeVP9ProfileInfoKHR(VkVideoDecodeVP9ProfileInfoKHR const *s1,
+                                            VkVideoDecodeVP9ProfileInfoKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 302 && VK_KHR_video_encode_av1
@@ -10248,6 +10452,11 @@ bool compare_VkWriteDescriptorSetPartitionedAccelerationStructureNV(
     VkWriteDescriptorSetPartitionedAccelerationStructureNV const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkWriteDescriptorSetTensorARM(VkWriteDescriptorSetTensorARM const *s1,
+                                           VkWriteDescriptorSetTensorARM const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 296 && VK_EXT_device_generated_commands
 bool compare_VkWriteIndirectExecutionSetPipelineEXT(
     VkWriteIndirectExecutionSetPipelineEXT const *s1,
@@ -11231,6 +11440,18 @@ bool compare_VkAttachmentDescriptionStencilLayoutKHR(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 317 && VK_KHR_unified_image_layouts &&                                    \
+    VK_EXT_attachment_feedback_loop_layout && ((VK_VERSION_1_3 || VK_KHR_dynamic_rendering))
+bool compare_VkAttachmentFeedbackLoopInfoEXT(VkAttachmentFeedbackLoopInfoEXT const *s1,
+                                             VkAttachmentFeedbackLoopInfoEXT const *s2) {
+  // local, simple types
+  if ((s1->feedbackLoopEnable != s2->feedbackLoopEnable))
+    return false;
+
+  return true;
+}
+#endif
+
 bool compare_VkAttachmentReference(VkAttachmentReference const *s1,
                                    VkAttachmentReference const *s2) {
   // local, simple types
@@ -11821,6 +12042,18 @@ bool compare_VkBindSparseInfo(VkBindSparseInfo const *s1, VkBindSparseInfo const
     return false;
   return true;
 }
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkBindTensorMemoryInfoARM(VkBindTensorMemoryInfoARM const *s1,
+                                       VkBindTensorMemoryInfoARM const *s2) {
+  // local, simple types
+  if ((s1->tensor != s2->tensor) || (s1->memory != s2->memory) ||
+      (s1->memoryOffset != s2->memoryOffset))
+    return false;
+
+  return true;
+}
+#endif
 
 #if VK_HEADER_VERSION >= 296 && VK_EXT_device_generated_commands
 bool compare_VkBindVertexBufferIndirectCommandEXT(VkBindVertexBufferIndirectCommandEXT const *s1,
@@ -13623,6 +13856,17 @@ bool compare_VkCopyMicromapToMemoryInfoEXT(VkCopyMicromapToMemoryInfoEXT const *
 }
 #endif
 
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkCopyTensorInfoARM(VkCopyTensorInfoARM const *s1, VkCopyTensorInfoARM const *s2) {
+  // local, simple types
+  if ((s1->srcTensor != s2->srcTensor) || (s1->dstTensor != s2->dstTensor) ||
+      (s1->regionCount != s2->regionCount))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 178 && VK_NVX_binary_import
 bool compare_VkCuFunctionCreateInfoNVX(VkCuFunctionCreateInfoNVX const *s1,
                                        VkCuFunctionCreateInfoNVX const *s2) {
@@ -14202,6 +14446,17 @@ bool compare_VkDescriptorGetInfoEXT(VkDescriptorGetInfoEXT const *s1,
 
   default:;
   }
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors && VK_EXT_descriptor_buffer
+bool compare_VkDescriptorGetTensorInfoARM(VkDescriptorGetTensorInfoARM const *s1,
+                                          VkDescriptorGetTensorInfoARM const *s2) {
+  // local, simple types
+  if ((s1->tensorView != s2->tensorView))
+    return false;
 
   return true;
 }
@@ -15355,6 +15610,13 @@ bool compare_VkDeviceSemaphoreSciSyncPoolReservationCreateInfoNV(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkDeviceTensorMemoryRequirementsARM(VkDeviceTensorMemoryRequirementsARM const *s1,
+                                                 VkDeviceTensorMemoryRequirementsARM const *s2) {
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 236 && VK_HEADER_VERSION <= 236 && VK_LUNARG_direct_driver_loading
 bool compare_VkDirectDriverLoadingInfoLUNARG(VkDirectDriverLoadingInfoLUNARG const *s1,
                                              VkDirectDriverLoadingInfoLUNARG const *s2) {
@@ -16390,6 +16652,17 @@ bool compare_VkExternalMemoryPropertiesKHR(VkExternalMemoryPropertiesKHR const *
 }
 #endif
 
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkExternalMemoryTensorCreateInfoARM(VkExternalMemoryTensorCreateInfoARM const *s1,
+                                                 VkExternalMemoryTensorCreateInfoARM const *s2) {
+  // local, simple types
+  if ((s1->handleTypes != s2->handleTypes))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_VERSION_1_1
 bool compare_VkExternalSemaphoreProperties(VkExternalSemaphoreProperties const *s1,
                                            VkExternalSemaphoreProperties const *s2) {
@@ -16410,6 +16683,18 @@ bool compare_VkExternalSemaphorePropertiesKHR(VkExternalSemaphorePropertiesKHR c
   if ((s1->exportFromImportedHandleTypes != s2->exportFromImportedHandleTypes) ||
       (s1->compatibleHandleTypes != s2->compatibleHandleTypes) ||
       (s1->externalSemaphoreFeatures != s2->externalSemaphoreFeatures))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkExternalTensorPropertiesARM(VkExternalTensorPropertiesARM const *s1,
+                                           VkExternalTensorPropertiesARM const *s2) {
+  // local, Vulkan struct types
+  if (!compare_VkExternalMemoryProperties(&s1->externalMemoryProperties,
+                                          &s2->externalMemoryProperties))
     return false;
 
   return true;
@@ -16590,6 +16875,24 @@ bool compare_VkFrameBoundaryEXT(VkFrameBoundaryEXT const *s1, VkFrameBoundaryEXT
   // pTag - tagSize
   if (s1->pTag != s2->pTag &&
       (s1->pTag == NULL || s2->pTag == NULL || memcmp(s1->pTag, s2->pTag, s1->tagSize) != 0))
+    return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors && VK_EXT_frame_boundary
+bool compare_VkFrameBoundaryTensorsARM(VkFrameBoundaryTensorsARM const *s1,
+                                       VkFrameBoundaryTensorsARM const *s2) {
+  // local, simple types
+  if ((s1->tensorCount != s2->tensorCount))
+    return false;
+
+  // non-local members
+
+  // pTensors - tensorCount
+  if (s1->pTensors != s2->pTensors &&
+      (s1->pTensors == NULL || s2->pTensors == NULL ||
+       memcmp(s1->pTensors, s2->pTensors, (s1->tensorCount) * sizeof(VkTensorARM)) != 0))
     return false;
   return true;
 }
@@ -18896,6 +19199,18 @@ bool compare_VkMemoryDedicatedAllocateInfoKHR(VkMemoryDedicatedAllocateInfoKHR c
 }
 #endif
 
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkMemoryDedicatedAllocateInfoTensorARM(
+    VkMemoryDedicatedAllocateInfoTensorARM const *s1,
+    VkMemoryDedicatedAllocateInfoTensorARM const *s2) {
+  // local, simple types
+  if ((s1->tensor != s2->tensor))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_VERSION_1_1
 bool compare_VkMemoryDedicatedRequirements(VkMemoryDedicatedRequirements const *s1,
                                            VkMemoryDedicatedRequirements const *s2) {
@@ -21066,6 +21381,33 @@ bool compare_VkPhysicalDeviceDescriptorBufferPropertiesEXT(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors && VK_EXT_descriptor_buffer
+bool compare_VkPhysicalDeviceDescriptorBufferTensorFeaturesARM(
+    VkPhysicalDeviceDescriptorBufferTensorFeaturesARM const *s1,
+    VkPhysicalDeviceDescriptorBufferTensorFeaturesARM const *s2) {
+  // local, simple types
+  if ((s1->descriptorBufferTensorDescriptors != s2->descriptorBufferTensorDescriptors))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors && VK_EXT_descriptor_buffer
+bool compare_VkPhysicalDeviceDescriptorBufferTensorPropertiesARM(
+    VkPhysicalDeviceDescriptorBufferTensorPropertiesARM const *s1,
+    VkPhysicalDeviceDescriptorBufferTensorPropertiesARM const *s2) {
+  // local, simple types
+  if ((s1->tensorCaptureReplayDescriptorDataSize != s2->tensorCaptureReplayDescriptorDataSize) ||
+      (s1->tensorViewCaptureReplayDescriptorDataSize !=
+       s2->tensorViewCaptureReplayDescriptorDataSize) ||
+      (s1->tensorDescriptorSize != s2->tensorDescriptorSize))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
 bool compare_VkPhysicalDeviceDescriptorIndexingFeatures(
     VkPhysicalDeviceDescriptorIndexingFeatures const *s1,
@@ -22066,6 +22408,18 @@ bool compare_VkPhysicalDeviceExternalSemaphoreInfoKHR(
     VkPhysicalDeviceExternalSemaphoreInfoKHR const *s2) {
   // local, simple types
   if ((s1->handleType != s2->handleType))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkPhysicalDeviceExternalTensorInfoARM(
+    VkPhysicalDeviceExternalTensorInfoARM const *s1,
+    VkPhysicalDeviceExternalTensorInfoARM const *s2) {
+  // local, simple types
+  if ((s1->flags != s2->flags) || (s1->handleType != s2->handleType))
     return false;
 
   return true;
@@ -24146,6 +24500,31 @@ bool compare_VkPhysicalDeviceMaintenance8FeaturesKHR(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 317 && VK_KHR_maintenance9
+bool compare_VkPhysicalDeviceMaintenance9FeaturesKHR(
+    VkPhysicalDeviceMaintenance9FeaturesKHR const *s1,
+    VkPhysicalDeviceMaintenance9FeaturesKHR const *s2) {
+  // local, simple types
+  if ((s1->maintenance9 != s2->maintenance9))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_KHR_maintenance9
+bool compare_VkPhysicalDeviceMaintenance9PropertiesKHR(
+    VkPhysicalDeviceMaintenance9PropertiesKHR const *s1,
+    VkPhysicalDeviceMaintenance9PropertiesKHR const *s2) {
+  // local, simple types
+  if ((s1->image2DViewOf3DSparse != s2->image2DViewOf3DSparse) ||
+      (s1->defaultVertexAttributeValue != s2->defaultVertexAttributeValue))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 278 && VK_EXT_map_memory_placed
 bool compare_VkPhysicalDeviceMapMemoryPlacedFeaturesEXT(
     VkPhysicalDeviceMapMemoryPlacedFeaturesEXT const *s1,
@@ -25007,6 +25386,18 @@ bool compare_VkPhysicalDevicePresentBarrierFeaturesNV(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 317 && VK_KHR_present_id2
+bool compare_VkPhysicalDevicePresentId2FeaturesKHR(
+    VkPhysicalDevicePresentId2FeaturesKHR const *s1,
+    VkPhysicalDevicePresentId2FeaturesKHR const *s2) {
+  // local, simple types
+  if ((s1->presentId2 != s2->presentId2))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 185 && VK_KHR_present_id
 bool compare_VkPhysicalDevicePresentIdFeaturesKHR(VkPhysicalDevicePresentIdFeaturesKHR const *s1,
                                                   VkPhysicalDevicePresentIdFeaturesKHR const *s2) {
@@ -25036,6 +25427,18 @@ bool compare_VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT(
     VkPhysicalDevicePresentModeFifoLatestReadyFeaturesEXT const *s2) {
   // local, simple types
   if ((s1->presentModeFifoLatestReady != s2->presentModeFifoLatestReady))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_KHR_present_wait2
+bool compare_VkPhysicalDevicePresentWait2FeaturesKHR(
+    VkPhysicalDevicePresentWait2FeaturesKHR const *s1,
+    VkPhysicalDevicePresentWait2FeaturesKHR const *s2) {
+  // local, simple types
+  if ((s1->presentWait2 != s2->presentWait2))
     return false;
 
   return true;
@@ -26307,6 +26710,19 @@ bool compare_VkPhysicalDeviceShaderFloat16Int8FeaturesKHR(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 317 && VK_EXT_shader_float8
+bool compare_VkPhysicalDeviceShaderFloat8FeaturesEXT(
+    VkPhysicalDeviceShaderFloat8FeaturesEXT const *s1,
+    VkPhysicalDeviceShaderFloat8FeaturesEXT const *s2) {
+  // local, simple types
+  if ((s1->shaderFloat8 != s2->shaderFloat8) ||
+      (s1->shaderFloat8CooperativeMatrix != s2->shaderFloat8CooperativeMatrix))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 303 && VK_VERSION_1_4
 bool compare_VkPhysicalDeviceShaderFloatControls2Features(
     VkPhysicalDeviceShaderFloatControls2Features const *s1,
@@ -27176,6 +27592,50 @@ bool compare_VkPhysicalDeviceSynchronization2FeaturesKHR(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkPhysicalDeviceTensorFeaturesARM(VkPhysicalDeviceTensorFeaturesARM const *s1,
+                                               VkPhysicalDeviceTensorFeaturesARM const *s2) {
+  // local, simple types
+  if ((s1->tensorNonPacked != s2->tensorNonPacked) ||
+      (s1->shaderTensorAccess != s2->shaderTensorAccess) ||
+      (s1->shaderStorageTensorArrayDynamicIndexing !=
+       s2->shaderStorageTensorArrayDynamicIndexing) ||
+      (s1->shaderStorageTensorArrayNonUniformIndexing !=
+       s2->shaderStorageTensorArrayNonUniformIndexing) ||
+      (s1->descriptorBindingStorageTensorUpdateAfterBind !=
+       s2->descriptorBindingStorageTensorUpdateAfterBind) ||
+      (s1->tensors != s2->tensors))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkPhysicalDeviceTensorPropertiesARM(VkPhysicalDeviceTensorPropertiesARM const *s1,
+                                                 VkPhysicalDeviceTensorPropertiesARM const *s2) {
+  // local, simple types
+  if ((s1->maxTensorDimensionCount != s2->maxTensorDimensionCount) ||
+      (s1->maxTensorElements != s2->maxTensorElements) ||
+      (s1->maxPerDimensionTensorElements != s2->maxPerDimensionTensorElements) ||
+      (s1->maxTensorStride != s2->maxTensorStride) || (s1->maxTensorSize != s2->maxTensorSize) ||
+      (s1->maxTensorShaderAccessArrayLength != s2->maxTensorShaderAccessArrayLength) ||
+      (s1->maxTensorShaderAccessSize != s2->maxTensorShaderAccessSize) ||
+      (s1->maxDescriptorSetStorageTensors != s2->maxDescriptorSetStorageTensors) ||
+      (s1->maxPerStageDescriptorSetStorageTensors != s2->maxPerStageDescriptorSetStorageTensors) ||
+      (s1->maxDescriptorSetUpdateAfterBindStorageTensors !=
+       s2->maxDescriptorSetUpdateAfterBindStorageTensors) ||
+      (s1->maxPerStageDescriptorUpdateAfterBindStorageTensors !=
+       s2->maxPerStageDescriptorUpdateAfterBindStorageTensors) ||
+      (s1->shaderStorageTensorArrayNonUniformIndexingNative !=
+       s2->shaderStorageTensorArrayNonUniformIndexingNative) ||
+      (s1->shaderTensorSupportedStages != s2->shaderTensorSupportedStages))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 113 && VK_EXT_texel_buffer_alignment
 bool compare_VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT(
     VkPhysicalDeviceTexelBufferAlignmentFeaturesEXT const *s1,
@@ -27512,6 +27972,19 @@ bool compare_VkPhysicalDeviceTransformFeedbackPropertiesEXT(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 317 && VK_KHR_unified_image_layouts
+bool compare_VkPhysicalDeviceUnifiedImageLayoutsFeaturesKHR(
+    VkPhysicalDeviceUnifiedImageLayoutsFeaturesKHR const *s1,
+    VkPhysicalDeviceUnifiedImageLayoutsFeaturesKHR const *s2) {
+  // local, simple types
+  if ((s1->unifiedImageLayouts != s2->unifiedImageLayouts) ||
+      (s1->unifiedImageLayoutsVideo != s2->unifiedImageLayoutsVideo))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
 bool compare_VkPhysicalDeviceUniformBufferStandardLayoutFeatures(
     VkPhysicalDeviceUniformBufferStandardLayoutFeatures const *s1,
@@ -27773,6 +28246,18 @@ bool compare_VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT(
     VkPhysicalDeviceVertexInputDynamicStateFeaturesEXT const *s2) {
   // local, simple types
   if ((s1->vertexInputDynamicState != s2->vertexInputDynamicState))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_KHR_video_decode_vp9
+bool compare_VkPhysicalDeviceVideoDecodeVP9FeaturesKHR(
+    VkPhysicalDeviceVideoDecodeVP9FeaturesKHR const *s1,
+    VkPhysicalDeviceVideoDecodeVP9FeaturesKHR const *s2) {
+  // local, simple types
+  if ((s1->videoDecodeVP9 != s2->videoDecodeVP9))
     return false;
 
   return true;
@@ -29842,6 +30327,23 @@ bool compare_VkPresentFrameTokenGGP(VkPresentFrameTokenGGP const *s1,
 }
 #endif
 
+#if VK_HEADER_VERSION >= 317 && VK_KHR_present_id2
+bool compare_VkPresentId2KHR(VkPresentId2KHR const *s1, VkPresentId2KHR const *s2) {
+  // local, simple types
+  if ((s1->swapchainCount != s2->swapchainCount))
+    return false;
+
+  // non-local members
+
+  // pPresentIds - swapchainCount
+  if (s1->pPresentIds != s2->pPresentIds &&
+      (s1->pPresentIds == NULL || s2->pPresentIds == NULL ||
+       memcmp(s1->pPresentIds, s2->pPresentIds, (s1->swapchainCount) * sizeof(uint64_t)) != 0))
+    return false;
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 185 && VK_KHR_present_id
 bool compare_VkPresentIdKHR(VkPresentIdKHR const *s1, VkPresentIdKHR const *s2) {
   // local, simple types
@@ -29932,6 +30434,17 @@ bool compare_VkPresentTimesInfoGOOGLE(VkPresentTimesInfoGOOGLE const *s1,
                                       VkPresentTimesInfoGOOGLE const *s2) {
   // local, simple types
   if ((s1->swapchainCount != s2->swapchainCount))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_KHR_present_wait2
+bool compare_VkPresentWait2InfoKHR(VkPresentWait2InfoKHR const *s1,
+                                   VkPresentWait2InfoKHR const *s2) {
+  // local, simple types
+  if ((s1->presentId != s2->presentId) || (s1->timeout != s2->timeout))
     return false;
 
   return true;
@@ -30335,6 +30848,18 @@ bool compare_VkQueueFamilyGlobalPriorityPropertiesKHR(
     VkQueueFamilyGlobalPriorityPropertiesKHR const *s2) {
   // local, simple types
   if ((s1->priorityCount != s2->priorityCount))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_KHR_maintenance9
+bool compare_VkQueueFamilyOwnershipTransferPropertiesKHR(
+    VkQueueFamilyOwnershipTransferPropertiesKHR const *s1,
+    VkQueueFamilyOwnershipTransferPropertiesKHR const *s2) {
+  // local, simple types
+  if ((s1->optimalImageTransferToQueueFamilies != s2->optimalImageTransferToQueueFamilies))
     return false;
 
   return true;
@@ -32972,6 +33497,28 @@ bool compare_VkSurfaceCapabilitiesPresentBarrierNV(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 317 && VK_KHR_present_id2
+bool compare_VkSurfaceCapabilitiesPresentId2KHR(VkSurfaceCapabilitiesPresentId2KHR const *s1,
+                                                VkSurfaceCapabilitiesPresentId2KHR const *s2) {
+  // local, simple types
+  if ((s1->presentId2Supported != s2->presentId2Supported))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_KHR_present_wait2
+bool compare_VkSurfaceCapabilitiesPresentWait2KHR(VkSurfaceCapabilitiesPresentWait2KHR const *s1,
+                                                  VkSurfaceCapabilitiesPresentWait2KHR const *s2) {
+  // local, simple types
+  if ((s1->presentWait2Supported != s2->presentWait2Supported))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_KHR_get_surface_capabilities2
 bool compare_VkSurfaceFormat2KHR(VkSurfaceFormat2KHR const *s1, VkSurfaceFormat2KHR const *s2) {
   // local, Vulkan struct types
@@ -33269,6 +33816,162 @@ bool compare_VkSysmemColorSpaceFUCHSIA(VkSysmemColorSpaceFUCHSIA const *s1,
                                        VkSysmemColorSpaceFUCHSIA const *s2) {
   // local, simple types
   if ((s1->colorSpace != s2->colorSpace))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors && VK_EXT_descriptor_buffer
+bool compare_VkTensorCaptureDescriptorDataInfoARM(VkTensorCaptureDescriptorDataInfoARM const *s1,
+                                                  VkTensorCaptureDescriptorDataInfoARM const *s2) {
+  // local, simple types
+  if ((s1->tensor != s2->tensor))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkTensorCopyARM(VkTensorCopyARM const *s1, VkTensorCopyARM const *s2) {
+  // local, simple types
+  if ((s1->dimensionCount != s2->dimensionCount))
+    return false;
+
+  // non-local members
+
+  // pSrcOffset - dimensionCount
+  if (s1->pSrcOffset != s2->pSrcOffset &&
+      (s1->pSrcOffset == NULL || s2->pSrcOffset == NULL ||
+       memcmp(s1->pSrcOffset, s2->pSrcOffset, (s1->dimensionCount) * sizeof(uint64_t)) != 0))
+    return false;
+
+  // pDstOffset - dimensionCount
+  if (s1->pDstOffset != s2->pDstOffset &&
+      (s1->pDstOffset == NULL || s2->pDstOffset == NULL ||
+       memcmp(s1->pDstOffset, s2->pDstOffset, (s1->dimensionCount) * sizeof(uint64_t)) != 0))
+    return false;
+
+  // pExtent - dimensionCount
+  if (s1->pExtent != s2->pExtent &&
+      (s1->pExtent == NULL || s2->pExtent == NULL ||
+       memcmp(s1->pExtent, s2->pExtent, (s1->dimensionCount) * sizeof(uint64_t)) != 0))
+    return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkTensorCreateInfoARM(VkTensorCreateInfoARM const *s1,
+                                   VkTensorCreateInfoARM const *s2) {
+  // local, simple types
+  if ((s1->flags != s2->flags) || (s1->sharingMode != s2->sharingMode) ||
+      (s1->queueFamilyIndexCount != s2->queueFamilyIndexCount))
+    return false;
+
+  // non-local members
+
+  // pQueueFamilyIndices - queueFamilyIndexCount
+  if (s1->pQueueFamilyIndices != s2->pQueueFamilyIndices &&
+      (s1->pQueueFamilyIndices == NULL || s2->pQueueFamilyIndices == NULL ||
+       memcmp(s1->pQueueFamilyIndices, s2->pQueueFamilyIndices,
+              (s1->queueFamilyIndexCount) * sizeof(uint32_t)) != 0))
+    return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkTensorDependencyInfoARM(VkTensorDependencyInfoARM const *s1,
+                                       VkTensorDependencyInfoARM const *s2) {
+  // local, simple types
+  if ((s1->tensorMemoryBarrierCount != s2->tensorMemoryBarrierCount))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkTensorDescriptionARM(VkTensorDescriptionARM const *s1,
+                                    VkTensorDescriptionARM const *s2) {
+  // local, simple types
+  if ((s1->tiling != s2->tiling) || (s1->format != s2->format) ||
+      (s1->dimensionCount != s2->dimensionCount) || (s1->usage != s2->usage))
+    return false;
+
+  // non-local members
+
+  // pDimensions - dimensionCount
+  if (s1->pDimensions != s2->pDimensions &&
+      (s1->pDimensions == NULL || s2->pDimensions == NULL ||
+       memcmp(s1->pDimensions, s2->pDimensions, (s1->dimensionCount) * sizeof(int64_t)) != 0))
+    return false;
+
+  // pStrides - dimensionCount
+  if (s1->pStrides != s2->pStrides &&
+      (s1->pStrides == NULL || s2->pStrides == NULL ||
+       memcmp(s1->pStrides, s2->pStrides, (s1->dimensionCount) * sizeof(int64_t)) != 0))
+    return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkTensorFormatPropertiesARM(VkTensorFormatPropertiesARM const *s1,
+                                         VkTensorFormatPropertiesARM const *s2) {
+  // local, simple types
+  if ((s1->optimalTilingTensorFeatures != s2->optimalTilingTensorFeatures) ||
+      (s1->linearTilingTensorFeatures != s2->linearTilingTensorFeatures))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkTensorMemoryBarrierARM(VkTensorMemoryBarrierARM const *s1,
+                                      VkTensorMemoryBarrierARM const *s2) {
+  // local, simple types
+  if ((s1->srcStageMask != s2->srcStageMask) || (s1->srcAccessMask != s2->srcAccessMask) ||
+      (s1->dstStageMask != s2->dstStageMask) || (s1->dstAccessMask != s2->dstAccessMask) ||
+      (s1->srcQueueFamilyIndex != s2->srcQueueFamilyIndex) ||
+      (s1->dstQueueFamilyIndex != s2->dstQueueFamilyIndex) || (s1->tensor != s2->tensor))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkTensorMemoryRequirementsInfoARM(VkTensorMemoryRequirementsInfoARM const *s1,
+                                               VkTensorMemoryRequirementsInfoARM const *s2) {
+  // local, simple types
+  if ((s1->tensor != s2->tensor))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors && VK_EXT_descriptor_buffer
+bool compare_VkTensorViewCaptureDescriptorDataInfoARM(
+    VkTensorViewCaptureDescriptorDataInfoARM const *s1,
+    VkTensorViewCaptureDescriptorDataInfoARM const *s2) {
+  // local, simple types
+  if ((s1->tensorView != s2->tensorView))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkTensorViewCreateInfoARM(VkTensorViewCreateInfoARM const *s1,
+                                       VkTensorViewCreateInfoARM const *s2) {
+  // local, simple types
+  if ((s1->flags != s2->flags) || (s1->tensor != s2->tensor) || (s1->format != s2->format))
     return false;
 
   return true;
@@ -34796,6 +35499,49 @@ bool compare_VkVideoDecodeUsageInfoKHR(VkVideoDecodeUsageInfoKHR const *s1,
                                        VkVideoDecodeUsageInfoKHR const *s2) {
   // local, simple types
   if ((s1->videoUsageHints != s2->videoUsageHints))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_KHR_video_decode_vp9
+bool compare_VkVideoDecodeVP9CapabilitiesKHR(VkVideoDecodeVP9CapabilitiesKHR const *s1,
+                                             VkVideoDecodeVP9CapabilitiesKHR const *s2) {
+  // local, simple types
+  if ((s1->maxLevel != s2->maxLevel))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_KHR_video_decode_vp9
+bool compare_VkVideoDecodeVP9PictureInfoKHR(VkVideoDecodeVP9PictureInfoKHR const *s1,
+                                            VkVideoDecodeVP9PictureInfoKHR const *s2) {
+  // local, simple types
+  if ((s1->uncompressedHeaderOffset != s2->uncompressedHeaderOffset) ||
+      (s1->compressedHeaderOffset != s2->compressedHeaderOffset) ||
+      (s1->tilesOffset != s2->tilesOffset))
+    return false;
+
+  // local array members
+  if (memcmp(s1->referenceNameSlotIndices, s2->referenceNameSlotIndices,
+             VK_MAX_VIDEO_VP9_REFERENCES_PER_FRAME_KHR * sizeof(int32_t)) != 0)
+    return false;
+  // non-local members
+  if (s1->pStdPictureInfo != s2->pStdPictureInfo)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_KHR_video_decode_vp9
+bool compare_VkVideoDecodeVP9ProfileInfoKHR(VkVideoDecodeVP9ProfileInfoKHR const *s1,
+                                            VkVideoDecodeVP9ProfileInfoKHR const *s2) {
+  // local, simple types
+  if ((s1->stdProfile != s2->stdProfile))
     return false;
 
   return true;
@@ -38253,6 +38999,25 @@ bool compare_VkWriteDescriptorSetPartitionedAccelerationStructureNV(
       (s1->pAccelerationStructures == NULL || s2->pAccelerationStructures == NULL ||
        memcmp(s1->pAccelerationStructures, s2->pAccelerationStructures,
               (s1->accelerationStructureCount) * sizeof(VkDeviceAddress)) != 0))
+    return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+bool compare_VkWriteDescriptorSetTensorARM(VkWriteDescriptorSetTensorARM const *s1,
+                                           VkWriteDescriptorSetTensorARM const *s2) {
+  // local, simple types
+  if ((s1->tensorViewCount != s2->tensorViewCount))
+    return false;
+
+  // non-local members
+
+  // pTensorViews - tensorViewCount
+  if (s1->pTensorViews != s2->pTensorViews &&
+      (s1->pTensorViews == NULL || s2->pTensorViews == NULL ||
+       memcmp(s1->pTensorViews, s2->pTensorViews,
+              (s1->tensorViewCount) * sizeof(VkTensorViewARM)) != 0))
     return false;
   return true;
 }
