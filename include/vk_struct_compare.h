@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 319
+#if VK_HEADER_VERSION > 320
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v319)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v320)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v319)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v320)"
 #endif
 #endif
 
@@ -4040,7 +4040,13 @@ bool compare_VkPhysicalDeviceDataGraphFeaturesARM(VkPhysicalDeviceDataGraphFeatu
                                                   VkPhysicalDeviceDataGraphFeaturesARM const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+#if VK_HEADER_VERSION >= 319 && VK_HEADER_VERSION <= 319 && VK_ARM_data_graph
+bool compare_VkPhysicalDeviceDataGraphOperationSupportARM(
+    VkPhysicalDeviceDataGraphOperationSupportARM const *s1,
+    VkPhysicalDeviceDataGraphOperationSupportARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 320 && VK_ARM_data_graph
 bool compare_VkPhysicalDeviceDataGraphOperationSupportARM(
     VkPhysicalDeviceDataGraphOperationSupportARM const *s1,
     VkPhysicalDeviceDataGraphOperationSupportARM const *s2);
@@ -21583,7 +21589,7 @@ bool compare_VkPhysicalDeviceDataGraphFeaturesARM(VkPhysicalDeviceDataGraphFeatu
 }
 #endif
 
-#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+#if VK_HEADER_VERSION >= 319 && VK_HEADER_VERSION <= 319 && VK_ARM_data_graph
 bool compare_VkPhysicalDeviceDataGraphOperationSupportARM(
     VkPhysicalDeviceDataGraphOperationSupportARM const *s1,
     VkPhysicalDeviceDataGraphOperationSupportARM const *s2) {
@@ -21594,6 +21600,22 @@ bool compare_VkPhysicalDeviceDataGraphOperationSupportARM(
   // local array members
   if (memcmp(s1->name, s2->name,
              VK_MAX_PHYSICAL_DEVICE_DATA_GRAPH_OPERATION_SET_NAME_SIZE_ARM * sizeof(char)) != 0)
+    return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 320 && VK_ARM_data_graph
+bool compare_VkPhysicalDeviceDataGraphOperationSupportARM(
+    VkPhysicalDeviceDataGraphOperationSupportARM const *s1,
+    VkPhysicalDeviceDataGraphOperationSupportARM const *s2) {
+  // local, simple types
+  if ((s1->operationType != s2->operationType) || (s1->version != s2->version))
+    return false;
+
+  // local array members
+  if (strncmp(s1->name, s2->name, VK_MAX_PHYSICAL_DEVICE_DATA_GRAPH_OPERATION_SET_NAME_SIZE_ARM) !=
+      0)
     return false;
   return true;
 }

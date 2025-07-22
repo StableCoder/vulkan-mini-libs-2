@@ -37,12 +37,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 319
+#if VK_HEADER_VERSION > 320
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v319)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v320)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v319)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v320)"
 #endif
 #endif
 
@@ -3404,7 +3404,12 @@ void cleanup_VkPhysicalDeviceDataGraphFeaturesARM(
     VkPhysicalDeviceDataGraphFeaturesARM const *pData);
 #endif
 
-#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+#if (VK_HEADER_VERSION >= 319 && VK_HEADER_VERSION <= 319 && VK_ARM_data_graph)
+void cleanup_VkPhysicalDeviceDataGraphOperationSupportARM(
+    VkPhysicalDeviceDataGraphOperationSupportARM const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 320 && VK_ARM_data_graph)
 void cleanup_VkPhysicalDeviceDataGraphOperationSupportARM(
     VkPhysicalDeviceDataGraphOperationSupportARM const *pData);
 #endif
@@ -28468,7 +28473,12 @@ void cleanup_VkPhysicalDeviceDataGraphFeaturesARM(
 }
 #endif
 
-#if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
+#if (VK_HEADER_VERSION >= 319 && VK_HEADER_VERSION <= 319 && VK_ARM_data_graph)
+void cleanup_VkPhysicalDeviceDataGraphOperationSupportARM(
+    VkPhysicalDeviceDataGraphOperationSupportARM const *pData) {}
+#endif
+
+#if (VK_HEADER_VERSION >= 320 && VK_ARM_data_graph)
 void cleanup_VkPhysicalDeviceDataGraphOperationSupportARM(
     VkPhysicalDeviceDataGraphOperationSupportARM const *pData) {}
 #endif

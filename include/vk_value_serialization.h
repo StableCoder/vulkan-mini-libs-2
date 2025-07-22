@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 319
+#if VK_HEADER_VERSION > 320
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v319)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v320)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v319)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v320)"
 #endif
 #endif
 
@@ -165,13 +165,13 @@ STecVkSerializationResult vk_parse64(char const *pVkType,
 #include <string.h>
 
 #define cVendorCount sizeof(cVendorList) / sizeof(char const *)
-char const *cVendorList[41] = {
+char const *cVendorList[42] = {
     "IMG",     "AMD",   "AMDX",       "ARM",    "FSL",    "BRCM",       "NXP",
     "NV",      "NVX",   "VIV",        "VSI",    "KDAB",   "ANDROID",    "CHROMIUM",
     "FUCHSIA", "GGP",   "GOOGLE",     "QCOM",   "LUNARG", "NZXT",       "SAMSUNG",
     "SEC",     "TIZEN", "RENDERDOC",  "NN",     "MVK",    "KHR",        "KHX",
     "EXT",     "MESA",  "INTEL",      "HUAWEI", "OHOS",   "VALVE",      "QNX",
-    "JUICE",   "FB",    "RASTERGRID", "MSFT",   "SHADY",  "FREDEMMOTT",
+    "JUICE",   "FB",    "RASTERGRID", "MSFT",   "SHADY",  "FREDEMMOTT", "MTK",
 };
 
 typedef struct EnumValueSet {
