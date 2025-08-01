@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 323
+#if VK_HEADER_VERSION > 324
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v323)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v324)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v323)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v324)"
 #endif
 #endif
 
@@ -1457,6 +1457,7 @@ EnumValueSet const VkPipelineCreateFlags2Sets[] = {
     {"RESERVED_43_BIT_EXT", 0x80000000000},
     {"PER_LAYER_FRAGMENT_DENSITY_BIT_VALVE", 0x10000000000},
     {"VK_PIPELINE_CREATE_RESERVED_44_BIT_KHR", 0x100000000000},
+    {"RESERVED_45_BIT_EXT", 0x200000000000},
 };
 
 EnumValueSet const VkBufferUsageFlags2Sets[] = {
@@ -1506,6 +1507,7 @@ EnumValueSet const VkBufferUsageFlags2Sets[] = {
     {"RESERVED_33_AMD", 0x200000000},
     {"RESERVED_29_BIT_EXT", 0x20000000},
     {"DATA_GRAPH_FOREIGN_DESCRIPTOR_BIT_ARM", 0x20000000},
+    {"COMPRESSED_DATA_DGF1_BIT_AMDX", 0x200000000},
 };
 
 EnumValueSet const VkTensorCreateFlagsARMSets[] = {
@@ -3216,6 +3218,7 @@ EnumValueSet const VkGeometryTypeKHRSets[] = {
     {"INSTANCES", 2},
     {"SPHERES_NV", 1000429004},
     {"LINEAR_SWEPT_SPHERES_NV", 1000429005},
+    {"DENSE_GEOMETRY_FORMAT_TRIANGLES_AMDX", 1000478000},
 };
 
 EnumValueSet const VkRayTracingShaderGroupTypeKHRSets[] = {
@@ -3526,6 +3529,10 @@ EnumValueSet const VkLayeredDriverUnderlyingApiMSFTSets[] = {
 
 EnumValueSet const VkPhysicalDeviceLayeredApiKHRSets[] = {
     {"VULKAN", 0}, {"D3D12", 1}, {"METAL", 2}, {"OPENGL", 3}, {"OPENGLES", 4},
+};
+
+EnumValueSet const VkCompressedTriangleFormatAMDXSets[] = {
+    {"DGF1", 0},
 };
 
 EnumValueSet const VkDepthClampModeEXTSets[] = {
@@ -4242,7 +4249,7 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[398] = {
+EnumType const cEnumTypes[399] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", VkQueryPoolCreateFlagsSets, 1},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 5},
@@ -4337,8 +4344,8 @@ EnumType const cEnumTypes[398] = {
     {"VkIndirectCommandsLayoutUsageFlagsEXT", VkIndirectCommandsLayoutUsageFlagsEXTSets, 2},
     {"VkIndirectCommandsInputModeFlagsEXT", VkIndirectCommandsInputModeFlagsEXTSets, 2},
     {"VkDirectDriverLoadingFlagsLUNARG", NULL, 0},
-    {"VkPipelineCreateFlags2", VkPipelineCreateFlags2Sets, 58},
-    {"VkBufferUsageFlags2", VkBufferUsageFlags2Sets, 46},
+    {"VkPipelineCreateFlags2", VkPipelineCreateFlags2Sets, 59},
+    {"VkBufferUsageFlags2", VkBufferUsageFlags2Sets, 47},
     {"VkTensorCreateFlagsARM", VkTensorCreateFlagsARMSets, 4},
     {"VkTensorUsageFlagsARM", VkTensorUsageFlagsARMSets, 5},
     {"VkTensorViewCreateFlagsARM", VkTensorViewCreateFlagsARMSets, 1},
@@ -4514,7 +4521,7 @@ EnumType const cEnumTypes[398] = {
     {"VkBuildAccelerationStructureModeKHR", VkBuildAccelerationStructureModeKHRSets, 2},
     {"VkCopyAccelerationStructureModeKHR", VkCopyAccelerationStructureModeKHRSets, 6},
     {"VkAccelerationStructureTypeKHR", VkAccelerationStructureTypeKHRSets, 5},
-    {"VkGeometryTypeKHR", VkGeometryTypeKHRSets, 7},
+    {"VkGeometryTypeKHR", VkGeometryTypeKHRSets, 8},
     {"VkRayTracingShaderGroupTypeKHR", VkRayTracingShaderGroupTypeKHRSets, 6},
     {"VkAccelerationStructureBuildTypeKHR", VkAccelerationStructureBuildTypeKHRSets, 3},
     {"VkAccelerationStructureCompatibilityKHR", VkAccelerationStructureCompatibilityKHRSets, 2},
@@ -4566,6 +4573,7 @@ EnumType const cEnumTypes[398] = {
     {"VkBlockMatchWindowCompareModeQCOM", VkBlockMatchWindowCompareModeQCOMSets, 2},
     {"VkLayeredDriverUnderlyingApiMSFT", VkLayeredDriverUnderlyingApiMSFTSets, 2},
     {"VkPhysicalDeviceLayeredApiKHR", VkPhysicalDeviceLayeredApiKHRSets, 5},
+    {"VkCompressedTriangleFormatAMDX", VkCompressedTriangleFormatAMDXSets, 1},
     {"VkDepthClampModeEXT", VkDepthClampModeEXTSets, 2},
     {"VkCooperativeVectorMatrixLayoutNV", VkCooperativeVectorMatrixLayoutNVSets, 4},
     {"VkTensorTilingARM", VkTensorTilingARMSets, 2},

@@ -37,12 +37,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 323
+#if VK_HEADER_VERSION > 324
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v323)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v324)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v323)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v324)"
 #endif
 #endif
 
@@ -116,6 +116,11 @@ void cleanup_VkAccelerationStructureCreateInfoNV(VkAccelerationStructureCreateIn
 #if (VK_HEADER_VERSION >= 85 && VK_HEADER_VERSION <= 90 && VK_NVX_raytracing)
 void cleanup_VkAccelerationStructureCreateInfoNVX(
     VkAccelerationStructureCreateInfoNVX const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 324 && VK_AMDX_dense_geometry_format && VK_ENABLE_BETA_EXTENSIONS)
+void cleanup_VkAccelerationStructureDenseGeometryFormatTrianglesDataAMDX(
+    VkAccelerationStructureDenseGeometryFormatTrianglesDataAMDX const *pData);
 #endif
 
 #if (VK_HEADER_VERSION >= 162 && VK_KHR_acceleration_structure) ||                                 \
@@ -3422,6 +3427,11 @@ void cleanup_VkPhysicalDeviceDataGraphProcessingEngineARM(
 #if (VK_HEADER_VERSION >= 99 && VK_NV_dedicated_allocation_image_aliasing)
 void cleanup_VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV(
     VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 324 && VK_AMDX_dense_geometry_format && VK_ENABLE_BETA_EXTENSIONS)
+void cleanup_VkPhysicalDeviceDenseGeometryFormatFeaturesAMDX(
+    VkPhysicalDeviceDenseGeometryFormatFeaturesAMDX const *pData);
 #endif
 
 #if (VK_HEADER_VERSION >= 254 && VK_EXT_depth_bias_control)
@@ -9173,6 +9183,15 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
+#if (VK_HEADER_VERSION >= 324 && VK_AMDX_dense_geometry_format && VK_ENABLE_BETA_EXTENSIONS)
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_ACCELERATION_STRUCTURE_DENSE_GEOMETRY_FORMAT_TRIANGLES_DATA_AMDX) {
+    cleanup_VkAccelerationStructureDenseGeometryFormatTrianglesDataAMDX(
+        (VkAccelerationStructureDenseGeometryFormatTrianglesDataAMDX const *)pData);
+    return;
+  }
+#endif
+
 #if (VK_HEADER_VERSION >= 162 && VK_KHR_acceleration_structure) ||                                 \
     (VK_HEADER_VERSION >= 135 && VK_HEADER_VERSION <= 161 && VK_KHR_ray_tracing &&                 \
      VK_ENABLE_BETA_EXTENSIONS)
@@ -13269,6 +13288,14 @@ void cleanup_vk_struct(void const *pData) {
       VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DEDICATED_ALLOCATION_IMAGE_ALIASING_FEATURES_NV) {
     cleanup_VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV(
         (VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV const *)pData);
+    return;
+  }
+#endif
+
+#if (VK_HEADER_VERSION >= 324 && VK_AMDX_dense_geometry_format && VK_ENABLE_BETA_EXTENSIONS)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DENSE_GEOMETRY_FORMAT_FEATURES_AMDX) {
+    cleanup_VkPhysicalDeviceDenseGeometryFormatFeaturesAMDX(
+        (VkPhysicalDeviceDenseGeometryFormatFeaturesAMDX const *)pData);
     return;
   }
 #endif
@@ -20921,6 +20948,16 @@ void cleanup_VkAccelerationStructureCreateInfoNVX(
     cleanup_VkGeometryNVX(&pData->pGeometries[i]);
   }
   free((void *)pData->pGeometries);
+}
+#endif
+
+#if (VK_HEADER_VERSION >= 324 && VK_AMDX_dense_geometry_format && VK_ENABLE_BETA_EXTENSIONS)
+void cleanup_VkAccelerationStructureDenseGeometryFormatTrianglesDataAMDX(
+    VkAccelerationStructureDenseGeometryFormatTrianglesDataAMDX const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
 }
 #endif
 
@@ -28735,6 +28772,16 @@ void cleanup_VkPhysicalDeviceDataGraphProcessingEngineARM(
 #if (VK_HEADER_VERSION >= 99 && VK_NV_dedicated_allocation_image_aliasing)
 void cleanup_VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV(
     VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if (VK_HEADER_VERSION >= 324 && VK_AMDX_dense_geometry_format && VK_ENABLE_BETA_EXTENSIONS)
+void cleanup_VkPhysicalDeviceDenseGeometryFormatFeaturesAMDX(
+    VkPhysicalDeviceDenseGeometryFormatFeaturesAMDX const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

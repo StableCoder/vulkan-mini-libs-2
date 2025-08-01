@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 323
+#if VK_HEADER_VERSION > 324
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v323)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v324)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v323)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v324)"
 #endif
 #endif
 
@@ -129,6 +129,12 @@ bool compare_VkAccelerationStructureCreateInfoNV(VkAccelerationStructureCreateIn
 #if VK_HEADER_VERSION >= 85 && VK_HEADER_VERSION <= 90 && VK_NVX_raytracing
 bool compare_VkAccelerationStructureCreateInfoNVX(VkAccelerationStructureCreateInfoNVX const *s1,
                                                   VkAccelerationStructureCreateInfoNVX const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 324 && VK_AMDX_dense_geometry_format && VK_ENABLE_BETA_EXTENSIONS
+bool compare_VkAccelerationStructureDenseGeometryFormatTrianglesDataAMDX(
+    VkAccelerationStructureDenseGeometryFormatTrianglesDataAMDX const *s1,
+    VkAccelerationStructureDenseGeometryFormatTrianglesDataAMDX const *s2);
 #endif
 
 #if (VK_HEADER_VERSION >= 162 && VK_KHR_acceleration_structure) ||                                 \
@@ -4062,6 +4068,12 @@ bool compare_VkPhysicalDeviceDataGraphProcessingEngineARM(
 bool compare_VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV(
     VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV const *s1,
     VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 324 && VK_AMDX_dense_geometry_format && VK_ENABLE_BETA_EXTENSIONS
+bool compare_VkPhysicalDeviceDenseGeometryFormatFeaturesAMDX(
+    VkPhysicalDeviceDenseGeometryFormatFeaturesAMDX const *s1,
+    VkPhysicalDeviceDenseGeometryFormatFeaturesAMDX const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 254 && VK_EXT_depth_bias_control
@@ -10977,6 +10989,24 @@ bool compare_VkAccelerationStructureCreateInfoNVX(VkAccelerationStructureCreateI
   if ((s1->type != s2->type) || (s1->flags != s2->flags) ||
       (s1->compactedSize != s2->compactedSize) || (s1->instanceCount != s2->instanceCount) ||
       (s1->geometryCount != s2->geometryCount))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 324 && VK_AMDX_dense_geometry_format && VK_ENABLE_BETA_EXTENSIONS
+bool compare_VkAccelerationStructureDenseGeometryFormatTrianglesDataAMDX(
+    VkAccelerationStructureDenseGeometryFormatTrianglesDataAMDX const *s1,
+    VkAccelerationStructureDenseGeometryFormatTrianglesDataAMDX const *s2) {
+  // local, simple types
+  if ((s1->dataSize != s2->dataSize) || (s1->numTriangles != s2->numTriangles) ||
+      (s1->numVertices != s2->numVertices) || (s1->maxPrimitiveIndex != s2->maxPrimitiveIndex) ||
+      (s1->maxGeometryIndex != s2->maxGeometryIndex) || (s1->format != s2->format))
+    return false;
+
+  // union types (no selector)
+  if (memcmp(&s1->compressedData, &s2->compressedData, sizeof(VkDeviceOrHostAddressConstKHR)) != 0)
     return false;
 
   return true;
@@ -21781,6 +21811,18 @@ bool compare_VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV(
     VkPhysicalDeviceDedicatedAllocationImageAliasingFeaturesNV const *s2) {
   // local, simple types
   if ((s1->dedicatedAllocationImageAliasing != s2->dedicatedAllocationImageAliasing))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 324 && VK_AMDX_dense_geometry_format && VK_ENABLE_BETA_EXTENSIONS
+bool compare_VkPhysicalDeviceDenseGeometryFormatFeaturesAMDX(
+    VkPhysicalDeviceDenseGeometryFormatFeaturesAMDX const *s1,
+    VkPhysicalDeviceDenseGeometryFormatFeaturesAMDX const *s2) {
+  // local, simple types
+  if ((s1->denseGeometryFormat != s2->denseGeometryFormat))
     return false;
 
   return true;
