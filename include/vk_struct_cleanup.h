@@ -37,12 +37,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 324
+#if VK_HEADER_VERSION > 325
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v324)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v325)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v324)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v325)"
 #endif
 #endif
 
@@ -5460,6 +5460,11 @@ void cleanup_VkPhysicalDeviceShaderTileImageFeaturesEXT(
 #if (VK_HEADER_VERSION >= 246 && VK_EXT_shader_tile_image)
 void cleanup_VkPhysicalDeviceShaderTileImagePropertiesEXT(
     VkPhysicalDeviceShaderTileImagePropertiesEXT const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 325 && VK_KHR_shader_untyped_pointers)
+void cleanup_VkPhysicalDeviceShaderUntypedPointersFeaturesKHR(
+    VkPhysicalDeviceShaderUntypedPointersFeaturesKHR const *pData);
 #endif
 
 #if (VK_HEADER_VERSION >= 85 && VK_NV_shading_rate_image)
@@ -15951,6 +15956,14 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_TILE_IMAGE_PROPERTIES_EXT) {
     cleanup_VkPhysicalDeviceShaderTileImagePropertiesEXT(
         (VkPhysicalDeviceShaderTileImagePropertiesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if (VK_HEADER_VERSION >= 325 && VK_KHR_shader_untyped_pointers)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_UNTYPED_POINTERS_FEATURES_KHR) {
+    cleanup_VkPhysicalDeviceShaderUntypedPointersFeaturesKHR(
+        (VkPhysicalDeviceShaderUntypedPointersFeaturesKHR const *)pData);
     return;
   }
 #endif
@@ -32877,6 +32890,16 @@ void cleanup_VkPhysicalDeviceShaderTileImageFeaturesEXT(
 #if (VK_HEADER_VERSION >= 246 && VK_EXT_shader_tile_image)
 void cleanup_VkPhysicalDeviceShaderTileImagePropertiesEXT(
     VkPhysicalDeviceShaderTileImagePropertiesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if (VK_HEADER_VERSION >= 325 && VK_KHR_shader_untyped_pointers)
+void cleanup_VkPhysicalDeviceShaderUntypedPointersFeaturesKHR(
+    VkPhysicalDeviceShaderUntypedPointersFeaturesKHR const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

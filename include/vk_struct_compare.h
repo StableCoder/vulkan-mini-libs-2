@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 324
+#if VK_HEADER_VERSION > 325
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v324)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v325)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v324)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v325)"
 #endif
 #endif
 
@@ -6495,6 +6495,12 @@ bool compare_VkPhysicalDeviceShaderTileImageFeaturesEXT(
 bool compare_VkPhysicalDeviceShaderTileImagePropertiesEXT(
     VkPhysicalDeviceShaderTileImagePropertiesEXT const *s1,
     VkPhysicalDeviceShaderTileImagePropertiesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 325 && VK_KHR_shader_untyped_pointers
+bool compare_VkPhysicalDeviceShaderUntypedPointersFeaturesKHR(
+    VkPhysicalDeviceShaderUntypedPointersFeaturesKHR const *s1,
+    VkPhysicalDeviceShaderUntypedPointersFeaturesKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 85 && VK_NV_shading_rate_image
@@ -28054,6 +28060,18 @@ bool compare_VkPhysicalDeviceShaderTileImagePropertiesEXT(
       (s1->shaderTileImageReadSampleFromPixelRateInvocation !=
        s2->shaderTileImageReadSampleFromPixelRateInvocation) ||
       (s1->shaderTileImageReadFromHelperInvocation != s2->shaderTileImageReadFromHelperInvocation))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 325 && VK_KHR_shader_untyped_pointers
+bool compare_VkPhysicalDeviceShaderUntypedPointersFeaturesKHR(
+    VkPhysicalDeviceShaderUntypedPointersFeaturesKHR const *s1,
+    VkPhysicalDeviceShaderUntypedPointersFeaturesKHR const *s2) {
+  // local, simple types
+  if ((s1->shaderUntypedPointers != s2->shaderUntypedPointers))
     return false;
 
   return true;
