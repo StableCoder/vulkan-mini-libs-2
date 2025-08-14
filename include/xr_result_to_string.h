@@ -37,13 +37,13 @@ _Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) >= 0,
                "XR_CURRENT_API_VERSION is lower than the minimum supported version (v0)");
 #endif
 
-#if (XR_CURRENT_API_VERSION & 0xffffffffULL) > 49
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) > 50
 #if _MSC_VER
 #pragma message(                                                                                   \
     __FILE__                                                                                       \
-    ": warning: XR_CURRENT_API_VERSION is higher than what the header fully supports (v49)")
+    ": warning: XR_CURRENT_API_VERSION is higher than what the header fully supports (v50)")
 #else
-#warning "XR_CURRENT_API_VERSION is higher than what the header fully supports (v49)"
+#warning "XR_CURRENT_API_VERSION is higher than what the header fully supports (v50)"
 #endif
 #endif
 
@@ -279,6 +279,20 @@ char const *XrResult_to_string(XrResult result) {
     return "XR_ERROR_SPACE_NETWORK_REQUEST_FAILED_FB";
   case -1000169004:
     return "XR_ERROR_SPACE_CLOUD_STORAGE_DISABLED_FB";
+  case -1000259000:
+    return "XR_ERROR_SPACE_INSUFFICIENT_RESOURCES_META";
+  case -1000259001:
+    return "XR_ERROR_SPACE_STORAGE_AT_CAPACITY_META";
+  case -1000259002:
+    return "XR_ERROR_SPACE_INSUFFICIENT_VIEW_META";
+  case -1000259003:
+    return "XR_ERROR_SPACE_PERMISSION_INSUFFICIENT_META";
+  case -1000259004:
+    return "XR_ERROR_SPACE_RATE_LIMITED_META";
+  case -1000259005:
+    return "XR_ERROR_SPACE_TOO_DARK_META";
+  case -1000259006:
+    return "XR_ERROR_SPACE_TOO_BRIGHT_META";
   case -1000266000:
     return "XR_ERROR_PASSTHROUGH_COLOR_LUT_BUFFER_SIZE_MISMATCH_META";
   case 1000291000:
@@ -319,6 +333,18 @@ char const *XrResult_to_string(XrResult result) {
     return "XR_ERROR_SPACE_NOT_LOCATABLE_EXT";
   case -1000429001:
     return "XR_ERROR_PLANE_DETECTION_PERMISSION_DENIED_EXT";
+  case -1000455000:
+    return "XR_ERROR_MISMATCHING_TRACKABLE_TYPE_ANDROID";
+  case -1000455001:
+    return "XR_ERROR_TRACKABLE_TYPE_NOT_SUPPORTED_ANDROID";
+  case -1000457000:
+    return "XR_ERROR_ANCHOR_ID_NOT_FOUND_ANDROID";
+  case -1000457001:
+    return "XR_ERROR_ANCHOR_ALREADY_PERSISTED_ANDROID";
+  case -1000457002:
+    return "XR_ERROR_ANCHOR_NOT_TRACKING_ANDROID";
+  case -1000457003:
+    return "XR_ERROR_PERSISTED_DATA_NOT_READY_ANDROID";
   case -1000469001:
     return "XR_ERROR_FUTURE_PENDING_EXT";
   case -1000469002:
@@ -343,6 +369,8 @@ char const *XrResult_to_string(XrResult result) {
     return "XR_COLOCATION_DISCOVERY_ALREADY_DISCOVERING_META";
   case -1000572002:
     return "XR_ERROR_SPACE_GROUP_NOT_FOUND_META";
+  case -1000701000:
+    return "XR_ERROR_ANCHOR_NOT_OWNED_BY_CALLER_ANDROID";
   case -1000740001:
     return "XR_ERROR_SPATIAL_CAPABILITY_UNSUPPORTED_EXT";
   case -1000740002:
