@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 325
+#if VK_HEADER_VERSION > 326
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v325)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v326)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v325)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v326)"
 #endif
 #endif
 
@@ -3538,7 +3538,7 @@ bool compare_VkNativeBufferUsage2ANDROID(VkNativeBufferUsage2ANDROID const *s1,
                                          VkNativeBufferUsage2ANDROID const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 318 && VK_OHOS_surface
+#if VK_HEADER_VERSION >= 318 && VK_HEADER_VERSION <= 325 && VK_OHOS_surface
 bool compare_VkOHSurfaceCreateInfoOHOS(VkOHSurfaceCreateInfoOHOS const *s1,
                                        VkOHSurfaceCreateInfoOHOS const *s2);
 #endif
@@ -8753,7 +8753,12 @@ bool compare_VkSurfaceCapabilitiesPresentWait2KHR(VkSurfaceCapabilitiesPresentWa
                                                   VkSurfaceCapabilitiesPresentWait2KHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 318 && VK_OHOS_surface
+#if VK_HEADER_VERSION >= 318 && VK_HEADER_VERSION <= 325 && VK_OHOS_surface
+bool compare_VkSurfaceCreateInfoOHOS(VkSurfaceCreateInfoOHOS const *s1,
+                                     VkSurfaceCreateInfoOHOS const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 326 && VK_OHOS_surface
 bool compare_VkSurfaceCreateInfoOHOS(VkSurfaceCreateInfoOHOS const *s1,
                                      VkSurfaceCreateInfoOHOS const *s2);
 #endif
@@ -20515,7 +20520,7 @@ bool compare_VkNativeBufferUsage2ANDROID(VkNativeBufferUsage2ANDROID const *s1,
 }
 #endif
 
-#if VK_HEADER_VERSION >= 318 && VK_OHOS_surface
+#if VK_HEADER_VERSION >= 318 && VK_HEADER_VERSION <= 325 && VK_OHOS_surface
 bool compare_VkOHSurfaceCreateInfoOHOS(VkOHSurfaceCreateInfoOHOS const *s1,
                                        VkOHSurfaceCreateInfoOHOS const *s2) {
   // local, simple types
@@ -34377,7 +34382,22 @@ bool compare_VkSurfaceCapabilitiesPresentWait2KHR(VkSurfaceCapabilitiesPresentWa
 }
 #endif
 
-#if VK_HEADER_VERSION >= 318 && VK_OHOS_surface
+#if VK_HEADER_VERSION >= 318 && VK_HEADER_VERSION <= 325 && VK_OHOS_surface
+bool compare_VkSurfaceCreateInfoOHOS(VkSurfaceCreateInfoOHOS const *s1,
+                                     VkSurfaceCreateInfoOHOS const *s2) {
+  // local, simple types
+  if ((s1->flags != s2->flags))
+    return false;
+
+  // non-local members
+  if (s1->window != s2->window)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 326 && VK_OHOS_surface
 bool compare_VkSurfaceCreateInfoOHOS(VkSurfaceCreateInfoOHOS const *s1,
                                      VkSurfaceCreateInfoOHOS const *s2) {
   // local, simple types

@@ -37,12 +37,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 325
+#if VK_HEADER_VERSION > 326
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v325)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v326)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v325)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v326)"
 #endif
 #endif
 
@@ -2984,7 +2984,7 @@ void cleanup_VkNativeBufferANDROID(VkNativeBufferANDROID const *pData);
 void cleanup_VkNativeBufferUsage2ANDROID(VkNativeBufferUsage2ANDROID const *pData);
 #endif
 
-#if (VK_HEADER_VERSION >= 318 && VK_OHOS_surface)
+#if (VK_HEADER_VERSION >= 318 && VK_HEADER_VERSION <= 325 && VK_OHOS_surface)
 void cleanup_VkOHSurfaceCreateInfoOHOS(VkOHSurfaceCreateInfoOHOS const *pData);
 #endif
 
@@ -7352,7 +7352,11 @@ void cleanup_VkSurfaceCapabilitiesPresentWait2KHR(
     VkSurfaceCapabilitiesPresentWait2KHR const *pData);
 #endif
 
-#if (VK_HEADER_VERSION >= 318 && VK_OHOS_surface)
+#if (VK_HEADER_VERSION >= 318 && VK_HEADER_VERSION <= 325 && VK_OHOS_surface)
+void cleanup_VkSurfaceCreateInfoOHOS(VkSurfaceCreateInfoOHOS const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 326 && VK_OHOS_surface)
 void cleanup_VkSurfaceCreateInfoOHOS(VkSurfaceCreateInfoOHOS const *pData);
 #endif
 
@@ -12715,7 +12719,7 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
-#if (VK_HEADER_VERSION >= 318 && VK_OHOS_surface)
+#if (VK_HEADER_VERSION >= 318 && VK_HEADER_VERSION <= 325 && VK_OHOS_surface)
   if (pTemp->sType == VK_STRUCTURE_TYPE_OH_SURFACE_CREATE_INFO_OHOS) {
     cleanup_VkOHSurfaceCreateInfoOHOS((VkOHSurfaceCreateInfoOHOS const *)pData);
     return;
@@ -18280,6 +18284,13 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_PRESENT_WAIT_2_KHR) {
     cleanup_VkSurfaceCapabilitiesPresentWait2KHR(
         (VkSurfaceCapabilitiesPresentWait2KHR const *)pData);
+    return;
+  }
+#endif
+
+#if (VK_HEADER_VERSION >= 326 && VK_OHOS_surface)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_SURFACE_CREATE_INFO_OHOS) {
+    cleanup_VkSurfaceCreateInfoOHOS((VkSurfaceCreateInfoOHOS const *)pData);
     return;
   }
 #endif
@@ -27928,7 +27939,7 @@ void cleanup_VkNativeBufferANDROID(VkNativeBufferANDROID const *pData) {
 void cleanup_VkNativeBufferUsage2ANDROID(VkNativeBufferUsage2ANDROID const *pData) {}
 #endif
 
-#if (VK_HEADER_VERSION >= 318 && VK_OHOS_surface)
+#if (VK_HEADER_VERSION >= 318 && VK_HEADER_VERSION <= 325 && VK_OHOS_surface)
 void cleanup_VkOHSurfaceCreateInfoOHOS(VkOHSurfaceCreateInfoOHOS const *pData) {
   // pNext
   if (pData->pNext != NULL)
@@ -37684,7 +37695,19 @@ void cleanup_VkSurfaceCapabilitiesPresentWait2KHR(
 }
 #endif
 
-#if (VK_HEADER_VERSION >= 318 && VK_OHOS_surface)
+#if (VK_HEADER_VERSION >= 318 && VK_HEADER_VERSION <= 325 && VK_OHOS_surface)
+void cleanup_VkSurfaceCreateInfoOHOS(VkSurfaceCreateInfoOHOS const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // window
+  free((void *)pData->window);
+}
+#endif
+
+#if (VK_HEADER_VERSION >= 326 && VK_OHOS_surface)
 void cleanup_VkSurfaceCreateInfoOHOS(VkSurfaceCreateInfoOHOS const *pData) {
   // pNext
   if (pData->pNext != NULL)
