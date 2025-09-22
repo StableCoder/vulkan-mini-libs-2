@@ -37,12 +37,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 326
+#if VK_HEADER_VERSION > 327
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v326)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v327)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v326)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v327)"
 #endif
 #endif
 
@@ -5829,6 +5829,11 @@ void cleanup_VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR(
     VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR const *pData);
 #endif
 
+#if (VK_HEADER_VERSION >= 327 && VK_VALVE_video_encode_rgb_conversion)
+void cleanup_VkPhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE(
+    VkPhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE const *pData);
+#endif
+
 #if (VK_HEADER_VERSION >= 175 && VK_HEADER_VERSION <= 217 && VK_KHR_video_queue &&                 \
      VK_ENABLE_BETA_EXTENSIONS)
 void cleanup_VkPhysicalDeviceVideoFormatInfoKHR(VkPhysicalDeviceVideoFormatInfoKHR const *pData);
@@ -8778,6 +8783,11 @@ void cleanup_VkVideoEncodeIntraRefreshCapabilitiesKHR(
 void cleanup_VkVideoEncodeIntraRefreshInfoKHR(VkVideoEncodeIntraRefreshInfoKHR const *pData);
 #endif
 
+#if (VK_HEADER_VERSION >= 327 && VK_VALVE_video_encode_rgb_conversion)
+void cleanup_VkVideoEncodeProfileRgbConversionInfoVALVE(
+    VkVideoEncodeProfileRgbConversionInfoVALVE const *pData);
+#endif
+
 #if (VK_HEADER_VERSION >= 274 && VK_KHR_video_encode_queue) ||                                     \
     (VK_HEADER_VERSION >= 253 && VK_HEADER_VERSION <= 273 && VK_KHR_video_encode_queue &&          \
      VK_ENABLE_BETA_EXTENSIONS)
@@ -8845,6 +8855,11 @@ void cleanup_VkVideoEncodeRateControlLayerInfoKHR(
     VkVideoEncodeRateControlLayerInfoKHR const *pData);
 #endif
 
+#if (VK_HEADER_VERSION >= 327 && VK_VALVE_video_encode_rgb_conversion)
+void cleanup_VkVideoEncodeRgbConversionCapabilitiesVALVE(
+    VkVideoEncodeRgbConversionCapabilitiesVALVE const *pData);
+#endif
+
 #if (VK_HEADER_VERSION >= 321 && VK_KHR_video_encode_intra_refresh)
 void cleanup_VkVideoEncodeSessionIntraRefreshCreateInfoKHR(
     VkVideoEncodeSessionIntraRefreshCreateInfoKHR const *pData);
@@ -8862,6 +8877,11 @@ void cleanup_VkVideoEncodeSessionParametersFeedbackInfoKHR(
      VK_ENABLE_BETA_EXTENSIONS)
 void cleanup_VkVideoEncodeSessionParametersGetInfoKHR(
     VkVideoEncodeSessionParametersGetInfoKHR const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 327 && VK_VALVE_video_encode_rgb_conversion)
+void cleanup_VkVideoEncodeSessionRgbConversionCreateInfoVALVE(
+    VkVideoEncodeSessionRgbConversionCreateInfoVALVE const *pData);
 #endif
 
 #if (VK_HEADER_VERSION >= 274 && VK_KHR_video_encode_queue) ||                                     \
@@ -16402,6 +16422,15 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
+#if (VK_HEADER_VERSION >= 327 && VK_VALVE_video_encode_rgb_conversion)
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_ENCODE_RGB_CONVERSION_FEATURES_VALVE) {
+    cleanup_VkPhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE(
+        (VkPhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE const *)pData);
+    return;
+  }
+#endif
+
 #if (VK_HEADER_VERSION >= 175 && VK_HEADER_VERSION <= 217 && VK_KHR_video_queue &&                 \
      VK_ENABLE_BETA_EXTENSIONS)
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_VIDEO_FORMAT_INFO_KHR) {
@@ -20344,6 +20373,14 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
+#if (VK_HEADER_VERSION >= 327 && VK_VALVE_video_encode_rgb_conversion)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_PROFILE_RGB_CONVERSION_INFO_VALVE) {
+    cleanup_VkVideoEncodeProfileRgbConversionInfoVALVE(
+        (VkVideoEncodeProfileRgbConversionInfoVALVE const *)pData);
+    return;
+  }
+#endif
+
 #if (VK_HEADER_VERSION >= 274 && VK_KHR_video_encode_queue) ||                                     \
     (VK_HEADER_VERSION >= 253 && VK_HEADER_VERSION <= 273 && VK_KHR_video_encode_queue &&          \
      VK_ENABLE_BETA_EXTENSIONS)
@@ -20448,6 +20485,14 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
+#if (VK_HEADER_VERSION >= 327 && VK_VALVE_video_encode_rgb_conversion)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_RGB_CONVERSION_CAPABILITIES_VALVE) {
+    cleanup_VkVideoEncodeRgbConversionCapabilitiesVALVE(
+        (VkVideoEncodeRgbConversionCapabilitiesVALVE const *)pData);
+    return;
+  }
+#endif
+
 #if (VK_HEADER_VERSION >= 321 && VK_KHR_video_encode_intra_refresh)
   if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_SESSION_INTRA_REFRESH_CREATE_INFO_KHR) {
     cleanup_VkVideoEncodeSessionIntraRefreshCreateInfoKHR(
@@ -20472,6 +20517,14 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_SESSION_PARAMETERS_GET_INFO_KHR) {
     cleanup_VkVideoEncodeSessionParametersGetInfoKHR(
         (VkVideoEncodeSessionParametersGetInfoKHR const *)pData);
+    return;
+  }
+#endif
+
+#if (VK_HEADER_VERSION >= 327 && VK_VALVE_video_encode_rgb_conversion)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_VIDEO_ENCODE_SESSION_RGB_CONVERSION_CREATE_INFO_VALVE) {
+    cleanup_VkVideoEncodeSessionRgbConversionCreateInfoVALVE(
+        (VkVideoEncodeSessionRgbConversionCreateInfoVALVE const *)pData);
     return;
   }
 #endif
@@ -33650,6 +33703,16 @@ void cleanup_VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR(
 }
 #endif
 
+#if (VK_HEADER_VERSION >= 327 && VK_VALVE_video_encode_rgb_conversion)
+void cleanup_VkPhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE(
+    VkPhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
 #if (VK_HEADER_VERSION >= 175 && VK_HEADER_VERSION <= 217 && VK_KHR_video_queue &&                 \
      VK_ENABLE_BETA_EXTENSIONS)
 void cleanup_VkPhysicalDeviceVideoFormatInfoKHR(VkPhysicalDeviceVideoFormatInfoKHR const *pData) {
@@ -41309,6 +41372,16 @@ void cleanup_VkVideoEncodeIntraRefreshInfoKHR(VkVideoEncodeIntraRefreshInfoKHR c
 }
 #endif
 
+#if (VK_HEADER_VERSION >= 327 && VK_VALVE_video_encode_rgb_conversion)
+void cleanup_VkVideoEncodeProfileRgbConversionInfoVALVE(
+    VkVideoEncodeProfileRgbConversionInfoVALVE const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
 #if (VK_HEADER_VERSION >= 274 && VK_KHR_video_encode_queue) ||                                     \
     (VK_HEADER_VERSION >= 253 && VK_HEADER_VERSION <= 273 && VK_KHR_video_encode_queue &&          \
      VK_ENABLE_BETA_EXTENSIONS)
@@ -41454,6 +41527,16 @@ void cleanup_VkVideoEncodeRateControlLayerInfoKHR(
 }
 #endif
 
+#if (VK_HEADER_VERSION >= 327 && VK_VALVE_video_encode_rgb_conversion)
+void cleanup_VkVideoEncodeRgbConversionCapabilitiesVALVE(
+    VkVideoEncodeRgbConversionCapabilitiesVALVE const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
 #if (VK_HEADER_VERSION >= 321 && VK_KHR_video_encode_intra_refresh)
 void cleanup_VkVideoEncodeSessionIntraRefreshCreateInfoKHR(
     VkVideoEncodeSessionIntraRefreshCreateInfoKHR const *pData) {
@@ -41481,6 +41564,16 @@ void cleanup_VkVideoEncodeSessionParametersFeedbackInfoKHR(
      VK_ENABLE_BETA_EXTENSIONS)
 void cleanup_VkVideoEncodeSessionParametersGetInfoKHR(
     VkVideoEncodeSessionParametersGetInfoKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if (VK_HEADER_VERSION >= 327 && VK_VALVE_video_encode_rgb_conversion)
+void cleanup_VkVideoEncodeSessionRgbConversionCreateInfoVALVE(
+    VkVideoEncodeSessionRgbConversionCreateInfoVALVE const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

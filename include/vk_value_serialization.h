@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 326
+#if VK_HEADER_VERSION > 327
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v326)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v327)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v326)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v327)"
 #endif
 #endif
 
@@ -291,6 +291,7 @@ EnumValueSet const VkQueueFlagsSets[] = {
     {"RESERVED_10_BIT_EXT", 0x00000400},
     {"DATA_GRAPH_BIT_ARM", 0x00000400},
     {"RESERVED_12_BIT_EXT", 0x00001000},
+    {"RESERVED_13_BIT_EXT", 0x00002000},
 };
 
 EnumValueSet const VkMemoryPropertyFlagsSets[] = {
@@ -530,6 +531,8 @@ EnumValueSet const VkImageUsageFlagsSets[] = {
     {"TILE_MEMORY_BIT_QCOM", 0x08000000},
     {"TENSOR_ALIASING_BIT_ARM", 0x00800000},
     {"RESERVED_28_BIT_EXT", 0x10000000},
+    {"RESERVED_29_BIT_KHR", 0x20000000},
+    {"RESERVED_30_BIT_KHR", 0x40000000},
 };
 
 EnumValueSet const VkImageCreateFlagsSets[] = {
@@ -570,6 +573,7 @@ EnumValueSet const VkImageCreateFlagsSets[] = {
     {"VIDEO_PROFILE_INDEPENDENT_BIT_KHR", 0x00100000},
     {"FRAGMENT_DENSITY_MAP_OFFSET_BIT_EXT", 0x00008000},
     {"RESERVED_21_BIT_IMG", 0x00200000},
+    {"RESERVED_22_BIT_KHR", 0x00400000},
 };
 
 EnumValueSet const VkImageViewCreateFlagsSets[] = {
@@ -1162,6 +1166,8 @@ EnumValueSet const VkAccessFlags2Sets[] = {
     {"SHADER_TILE_ATTACHMENT_WRITE_BIT_QCOM", 0x10000000000000},
     {"DATA_GRAPH_READ_BIT_ARM", 0x800000000000},
     {"DATA_GRAPH_WRITE_BIT_ARM", 0x1000000000000},
+    {"RESERVED_60_BIT_KHR", 0x1000000000000000},
+    {"RESERVED_61_BIT_KHR", 0x2000000000000000},
 };
 
 EnumValueSet const VkPipelineStageFlags2Sets[] = {
@@ -1252,6 +1258,7 @@ EnumValueSet const VkPipelineStageFlags2Sets[] = {
     {"RESERVED_46_BIT_NV", 0x400000000000},
     {"CONVERT_COOPERATIVE_VECTOR_MATRIX_BIT_NV", 0x100000000000},
     {"DATA_GRAPH_BIT_ARM", 0x40000000000},
+    {"RESERVED_47_BIT_KHR", 0x800000000000},
 };
 
 EnumValueSet const VkFormatFeatureFlags2Sets[] = {
@@ -1467,6 +1474,7 @@ EnumValueSet const VkPipelineCreateFlags2Sets[] = {
     {"VK_PIPELINE_CREATE_RESERVED_44_BIT_KHR", 0x100000000000},
     {"RESERVED_45_BIT_EXT", 0x200000000000},
     {"RESERVED_46_BIT_IMG", 0x400000000000},
+    {"RESERVED_47_BIT_AMD", 0x800000000000},
 };
 
 EnumValueSet const VkBufferUsageFlags2Sets[] = {
@@ -1518,6 +1526,8 @@ EnumValueSet const VkBufferUsageFlags2Sets[] = {
     {"DATA_GRAPH_FOREIGN_DESCRIPTOR_BIT_ARM", 0x20000000},
     {"COMPRESSED_DATA_DGF1_BIT_AMDX", 0x200000000},
     {"RESERVED_34_BIT_EXT", 0x400000000},
+    {"RESERVED_35_BIT_KHR", 0x800000000},
+    {"RESERVED_36_BIT_KHR", 0x1000000000},
 };
 
 EnumValueSet const VkTensorCreateFlagsARMSets[] = {
@@ -1538,6 +1548,21 @@ EnumValueSet const VkTensorViewCreateFlagsARMSets[] = {
 
 EnumValueSet const VkDataGraphPipelineSessionCreateFlagsARMSets[] = {
     {"PROTECTED", 0x00000001},
+};
+
+EnumValueSet const VkVideoEncodeRgbModelConversionFlagsVALVESets[] = {
+    {"RGB_IDENTITY", 0x00000001}, {"YCBCR_IDENTITY", 0x00000002}, {"YCBCR_709", 0x00000004},
+    {"YCBCR_601", 0x00000008},    {"YCBCR_2020", 0x00000010},
+};
+
+EnumValueSet const VkVideoEncodeRgbRangeCompressionFlagsVALVESets[] = {
+    {"FULL_RANGE", 0x00000001},
+    {"NARROW_RANGE", 0x00000002},
+};
+
+EnumValueSet const VkVideoEncodeRgbChromaOffsetFlagsVALVESets[] = {
+    {"COSITED_EVEN", 0x00000001},
+    {"MIDPOINT", 0x00000002},
 };
 
 EnumValueSet const VkCompositeAlphaFlagsKHRSets[] = {
@@ -1920,6 +1945,7 @@ EnumValueSet const VkShaderCreateFlagsEXTSets[] = {
     {"RESERVED_15", 0x00008000},
     {"RESERVED_16_BIT_KHR", 0x00010000},
     {"RESERVED_17_BIT_IMG", 0x00020000},
+    {"RESERVED_18_BIT_KHR", 0x00040000},
 };
 
 EnumValueSet const VkTileShadingRenderPassFlagsQCOMSets[] = {
@@ -4261,7 +4287,7 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[399] = {
+EnumType const cEnumTypes[402] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", VkQueryPoolCreateFlagsSets, 1},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 6},
@@ -4283,15 +4309,15 @@ EnumType const cEnumTypes[399] = {
     {"VkInstanceCreateFlags", VkInstanceCreateFlagsSets, 2},
     {"VkDeviceCreateFlags", NULL, 0},
     {"VkDeviceQueueCreateFlags", VkDeviceQueueCreateFlagsSets, 3},
-    {"VkQueueFlags", VkQueueFlagsSets, 17},
+    {"VkQueueFlags", VkQueueFlagsSets, 18},
     {"VkMemoryPropertyFlags", VkMemoryPropertyFlagsSets, 11},
     {"VkMemoryHeapFlags", VkMemoryHeapFlagsSets, 6},
     {"VkAccessFlags", VkAccessFlagsSets, 47},
     {"VkBufferUsageFlags", VkBufferUsageFlagsSets, 50},
     {"VkBufferCreateFlags", VkBufferCreateFlagsSets, 13},
     {"VkShaderStageFlags", VkShaderStageFlagsSets, 45},
-    {"VkImageUsageFlags", VkImageUsageFlagsSets, 49},
-    {"VkImageCreateFlags", VkImageCreateFlagsSets, 37},
+    {"VkImageUsageFlags", VkImageUsageFlagsSets, 51},
+    {"VkImageCreateFlags", VkImageCreateFlagsSets, 38},
     {"VkImageViewCreateFlags", VkImageViewCreateFlagsSets, 6},
     {"VkPipelineCreateFlags", VkPipelineCreateFlagsSets, 68},
     {"VkColorComponentFlags", VkColorComponentFlagsSets, 4},
@@ -4344,8 +4370,8 @@ EnumType const cEnumTypes[399] = {
     {"VkShaderCorePropertiesFlagsAMD", NULL, 0},
     {"VkDeviceDiagnosticsConfigFlagsNV", VkDeviceDiagnosticsConfigFlagsNVSets, 4},
     {"VkRefreshObjectFlagsKHR", NULL, 0},
-    {"VkAccessFlags2", VkAccessFlags2Sets, 94},
-    {"VkPipelineStageFlags2", VkPipelineStageFlags2Sets, 87},
+    {"VkAccessFlags2", VkAccessFlags2Sets, 96},
+    {"VkPipelineStageFlags2", VkPipelineStageFlags2Sets, 88},
     {"VkAccelerationStructureMotionInfoFlagsNV", NULL, 0},
     {"VkAccelerationStructureMotionInstanceFlagsNV", NULL, 0},
     {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Sets, 105},
@@ -4356,13 +4382,17 @@ EnumType const cEnumTypes[399] = {
     {"VkIndirectCommandsLayoutUsageFlagsEXT", VkIndirectCommandsLayoutUsageFlagsEXTSets, 2},
     {"VkIndirectCommandsInputModeFlagsEXT", VkIndirectCommandsInputModeFlagsEXTSets, 2},
     {"VkDirectDriverLoadingFlagsLUNARG", NULL, 0},
-    {"VkPipelineCreateFlags2", VkPipelineCreateFlags2Sets, 60},
-    {"VkBufferUsageFlags2", VkBufferUsageFlags2Sets, 48},
+    {"VkPipelineCreateFlags2", VkPipelineCreateFlags2Sets, 61},
+    {"VkBufferUsageFlags2", VkBufferUsageFlags2Sets, 50},
     {"VkTensorCreateFlagsARM", VkTensorCreateFlagsARMSets, 4},
     {"VkTensorUsageFlagsARM", VkTensorUsageFlagsARMSets, 5},
     {"VkTensorViewCreateFlagsARM", VkTensorViewCreateFlagsARMSets, 1},
     {"VkDataGraphPipelineSessionCreateFlagsARM", VkDataGraphPipelineSessionCreateFlagsARMSets, 1},
     {"VkDataGraphPipelineDispatchFlagsARM", NULL, 0},
+    {"VkVideoEncodeRgbModelConversionFlagsVALVE", VkVideoEncodeRgbModelConversionFlagsVALVESets, 5},
+    {"VkVideoEncodeRgbRangeCompressionFlagsVALVE", VkVideoEncodeRgbRangeCompressionFlagsVALVESets,
+     2},
+    {"VkVideoEncodeRgbChromaOffsetFlagsVALVE", VkVideoEncodeRgbChromaOffsetFlagsVALVESets, 2},
     {"VkCompositeAlphaFlagsKHR", VkCompositeAlphaFlagsKHRSets, 4},
     {"VkDisplayPlaneAlphaFlagsKHR", VkDisplayPlaneAlphaFlagsKHRSets, 4},
     {"VkSurfaceTransformFlagsKHR", VkSurfaceTransformFlagsKHRSets, 9},
@@ -4438,7 +4468,7 @@ EnumType const cEnumTypes[399] = {
     {"VkFrameBoundaryFlagsEXT", VkFrameBoundaryFlagsEXTSets, 1},
     {"VkPresentScalingFlagsKHR", VkPresentScalingFlagsKHRSets, 6},
     {"VkPresentGravityFlagsKHR", VkPresentGravityFlagsKHRSets, 6},
-    {"VkShaderCreateFlagsEXT", VkShaderCreateFlagsEXTSets, 19},
+    {"VkShaderCreateFlagsEXT", VkShaderCreateFlagsEXTSets, 20},
     {"VkTileShadingRenderPassFlagsQCOM", VkTileShadingRenderPassFlagsQCOMSets, 2},
     {"VkPhysicalDeviceSchedulingControlsFlagsARM", VkPhysicalDeviceSchedulingControlsFlagsARMSets,
      1},

@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 326
+#if VK_HEADER_VERSION > 327
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v326)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v327)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v326)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v327)"
 #endif
 #endif
 
@@ -6939,6 +6939,12 @@ bool compare_VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR(
     VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 327 && VK_VALVE_video_encode_rgb_conversion
+bool compare_VkPhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE(
+    VkPhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE const *s1,
+    VkPhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 175 && VK_HEADER_VERSION <= 217 && VK_KHR_video_queue &&                  \
     VK_ENABLE_BETA_EXTENSIONS
 bool compare_VkPhysicalDeviceVideoFormatInfoKHR(VkPhysicalDeviceVideoFormatInfoKHR const *s1,
@@ -10432,6 +10438,12 @@ bool compare_VkVideoEncodeIntraRefreshInfoKHR(VkVideoEncodeIntraRefreshInfoKHR c
                                               VkVideoEncodeIntraRefreshInfoKHR const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 327 && VK_VALVE_video_encode_rgb_conversion
+bool compare_VkVideoEncodeProfileRgbConversionInfoVALVE(
+    VkVideoEncodeProfileRgbConversionInfoVALVE const *s1,
+    VkVideoEncodeProfileRgbConversionInfoVALVE const *s2);
+#endif
+
 #if (VK_HEADER_VERSION >= 274 && VK_KHR_video_encode_queue) ||                                     \
     (VK_HEADER_VERSION >= 253 && VK_HEADER_VERSION <= 273 && VK_KHR_video_encode_queue &&          \
      VK_ENABLE_BETA_EXTENSIONS)
@@ -10508,6 +10520,12 @@ bool compare_VkVideoEncodeRateControlLayerInfoKHR(VkVideoEncodeRateControlLayerI
                                                   VkVideoEncodeRateControlLayerInfoKHR const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 327 && VK_VALVE_video_encode_rgb_conversion
+bool compare_VkVideoEncodeRgbConversionCapabilitiesVALVE(
+    VkVideoEncodeRgbConversionCapabilitiesVALVE const *s1,
+    VkVideoEncodeRgbConversionCapabilitiesVALVE const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 321 && VK_KHR_video_encode_intra_refresh
 bool compare_VkVideoEncodeSessionIntraRefreshCreateInfoKHR(
     VkVideoEncodeSessionIntraRefreshCreateInfoKHR const *s1,
@@ -10528,6 +10546,12 @@ bool compare_VkVideoEncodeSessionParametersFeedbackInfoKHR(
 bool compare_VkVideoEncodeSessionParametersGetInfoKHR(
     VkVideoEncodeSessionParametersGetInfoKHR const *s1,
     VkVideoEncodeSessionParametersGetInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 327 && VK_VALVE_video_encode_rgb_conversion
+bool compare_VkVideoEncodeSessionRgbConversionCreateInfoVALVE(
+    VkVideoEncodeSessionRgbConversionCreateInfoVALVE const *s1,
+    VkVideoEncodeSessionRgbConversionCreateInfoVALVE const *s2);
 #endif
 
 #if (VK_HEADER_VERSION >= 274 && VK_KHR_video_encode_queue) ||                                     \
@@ -29092,6 +29116,18 @@ bool compare_VkPhysicalDeviceVideoEncodeQuantizationMapFeaturesKHR(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 327 && VK_VALVE_video_encode_rgb_conversion
+bool compare_VkPhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE(
+    VkPhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE const *s1,
+    VkPhysicalDeviceVideoEncodeRgbConversionFeaturesVALVE const *s2) {
+  // local, simple types
+  if ((s1->videoEncodeRgbConversion != s2->videoEncodeRgbConversion))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 175 && VK_HEADER_VERSION <= 217 && VK_KHR_video_queue &&                  \
     VK_ENABLE_BETA_EXTENSIONS
 bool compare_VkPhysicalDeviceVideoFormatInfoKHR(VkPhysicalDeviceVideoFormatInfoKHR const *s1,
@@ -39255,6 +39291,18 @@ bool compare_VkVideoEncodeIntraRefreshInfoKHR(VkVideoEncodeIntraRefreshInfoKHR c
 }
 #endif
 
+#if VK_HEADER_VERSION >= 327 && VK_VALVE_video_encode_rgb_conversion
+bool compare_VkVideoEncodeProfileRgbConversionInfoVALVE(
+    VkVideoEncodeProfileRgbConversionInfoVALVE const *s1,
+    VkVideoEncodeProfileRgbConversionInfoVALVE const *s2) {
+  // local, simple types
+  if ((s1->performEncodeRgbConversion != s2->performEncodeRgbConversion))
+    return false;
+
+  return true;
+}
+#endif
+
 #if (VK_HEADER_VERSION >= 274 && VK_KHR_video_encode_queue) ||                                     \
     (VK_HEADER_VERSION >= 253 && VK_HEADER_VERSION <= 273 && VK_KHR_video_encode_queue &&          \
      VK_ENABLE_BETA_EXTENSIONS)
@@ -39428,6 +39476,19 @@ bool compare_VkVideoEncodeRateControlLayerInfoKHR(VkVideoEncodeRateControlLayerI
 }
 #endif
 
+#if VK_HEADER_VERSION >= 327 && VK_VALVE_video_encode_rgb_conversion
+bool compare_VkVideoEncodeRgbConversionCapabilitiesVALVE(
+    VkVideoEncodeRgbConversionCapabilitiesVALVE const *s1,
+    VkVideoEncodeRgbConversionCapabilitiesVALVE const *s2) {
+  // local, simple types
+  if ((s1->rgbModels != s2->rgbModels) || (s1->rgbRanges != s2->rgbRanges) ||
+      (s1->xChromaOffsets != s2->xChromaOffsets) || (s1->yChromaOffsets != s2->yChromaOffsets))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 321 && VK_KHR_video_encode_intra_refresh
 bool compare_VkVideoEncodeSessionIntraRefreshCreateInfoKHR(
     VkVideoEncodeSessionIntraRefreshCreateInfoKHR const *s1,
@@ -39462,6 +39523,19 @@ bool compare_VkVideoEncodeSessionParametersGetInfoKHR(
     VkVideoEncodeSessionParametersGetInfoKHR const *s2) {
   // local, simple types
   if ((s1->videoSessionParameters != s2->videoSessionParameters))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 327 && VK_VALVE_video_encode_rgb_conversion
+bool compare_VkVideoEncodeSessionRgbConversionCreateInfoVALVE(
+    VkVideoEncodeSessionRgbConversionCreateInfoVALVE const *s1,
+    VkVideoEncodeSessionRgbConversionCreateInfoVALVE const *s2) {
+  // local, simple types
+  if ((s1->rgbModel != s2->rgbModel) || (s1->rgbRange != s2->rgbRange) ||
+      (s1->xChromaOffset != s2->xChromaOffset) || (s1->yChromaOffset != s2->yChromaOffset))
     return false;
 
   return true;
