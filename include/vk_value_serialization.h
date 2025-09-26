@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 327
+#if VK_HEADER_VERSION > 328
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v327)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v328)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v327)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v328)"
 #endif
 #endif
 
@@ -1259,6 +1259,7 @@ EnumValueSet const VkPipelineStageFlags2Sets[] = {
     {"CONVERT_COOPERATIVE_VECTOR_MATRIX_BIT_NV", 0x100000000000},
     {"DATA_GRAPH_BIT_ARM", 0x40000000000},
     {"RESERVED_47_BIT_KHR", 0x800000000000},
+    {"COPY_INDIRECT_BIT_KHR", 0x400000000000},
 };
 
 EnumValueSet const VkFormatFeatureFlags2Sets[] = {
@@ -1367,6 +1368,7 @@ EnumValueSet const VkFormatFeatureFlags2Sets[] = {
     {"TENSOR_DATA_GRAPH_BIT_ARM", 0x1000000000000},
     {"RESERVED_59_BIT_NV", 0x800000000000000},
     {"RESERVED_60_BIT_EXT", 0x1000000000000000},
+    {"COPY_IMAGE_INDIRECT_DST_BIT_KHR", 0x800000000000000},
 };
 
 EnumValueSet const VkRenderingFlagsSets[] = {
@@ -1528,6 +1530,12 @@ EnumValueSet const VkBufferUsageFlags2Sets[] = {
     {"RESERVED_34_BIT_EXT", 0x400000000},
     {"RESERVED_35_BIT_KHR", 0x800000000},
     {"RESERVED_36_BIT_KHR", 0x1000000000},
+};
+
+EnumValueSet const VkAddressCopyFlagsKHRSets[] = {
+    {"DEVICE_LOCAL", 0x00000001},
+    {"SPARSE", 0x00000002},
+    {"PROTECTED", 0x00000004},
 };
 
 EnumValueSet const VkTensorCreateFlagsARMSets[] = {
@@ -4287,7 +4295,7 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[402] = {
+EnumType const cEnumTypes[403] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", VkQueryPoolCreateFlagsSets, 1},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 6},
@@ -4371,10 +4379,10 @@ EnumType const cEnumTypes[402] = {
     {"VkDeviceDiagnosticsConfigFlagsNV", VkDeviceDiagnosticsConfigFlagsNVSets, 4},
     {"VkRefreshObjectFlagsKHR", NULL, 0},
     {"VkAccessFlags2", VkAccessFlags2Sets, 96},
-    {"VkPipelineStageFlags2", VkPipelineStageFlags2Sets, 88},
+    {"VkPipelineStageFlags2", VkPipelineStageFlags2Sets, 89},
     {"VkAccelerationStructureMotionInfoFlagsNV", NULL, 0},
     {"VkAccelerationStructureMotionInstanceFlagsNV", NULL, 0},
-    {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Sets, 105},
+    {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Sets, 106},
     {"VkRenderingFlags", VkRenderingFlagsSets, 17},
     {"VkMemoryDecompressionMethodFlagsNV", VkMemoryDecompressionMethodFlagsNVSets, 1},
     {"VkBuildMicromapFlagsEXT", VkBuildMicromapFlagsEXTSets, 3},
@@ -4384,6 +4392,7 @@ EnumType const cEnumTypes[402] = {
     {"VkDirectDriverLoadingFlagsLUNARG", NULL, 0},
     {"VkPipelineCreateFlags2", VkPipelineCreateFlags2Sets, 61},
     {"VkBufferUsageFlags2", VkBufferUsageFlags2Sets, 50},
+    {"VkAddressCopyFlagsKHR", VkAddressCopyFlagsKHRSets, 3},
     {"VkTensorCreateFlagsARM", VkTensorCreateFlagsARMSets, 4},
     {"VkTensorUsageFlagsARM", VkTensorUsageFlagsARMSets, 5},
     {"VkTensorViewCreateFlagsARM", VkTensorViewCreateFlagsARMSets, 1},

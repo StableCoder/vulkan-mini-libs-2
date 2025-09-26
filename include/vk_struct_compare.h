@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 327
+#if VK_HEADER_VERSION > 328
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v327)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v328)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v327)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v328)"
 #endif
 #endif
 
@@ -1220,9 +1220,24 @@ bool compare_VkCopyImageToMemoryInfoEXT(VkCopyImageToMemoryInfoEXT const *s1,
                                         VkCopyImageToMemoryInfoEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 233 && VK_NV_copy_memory_indirect
+#if VK_HEADER_VERSION >= 328 && VK_KHR_copy_memory_indirect
+bool compare_VkCopyMemoryIndirectCommandKHR(VkCopyMemoryIndirectCommandKHR const *s1,
+                                            VkCopyMemoryIndirectCommandKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 233 && VK_HEADER_VERSION <= 327 && VK_NV_copy_memory_indirect
 bool compare_VkCopyMemoryIndirectCommandNV(VkCopyMemoryIndirectCommandNV const *s1,
                                            VkCopyMemoryIndirectCommandNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 328 && VK_NV_copy_memory_indirect
+bool compare_VkCopyMemoryIndirectCommandNV(VkCopyMemoryIndirectCommandNV const *s1,
+                                           VkCopyMemoryIndirectCommandNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 328 && VK_KHR_copy_memory_indirect
+bool compare_VkCopyMemoryIndirectInfoKHR(VkCopyMemoryIndirectInfoKHR const *s1,
+                                         VkCopyMemoryIndirectInfoKHR const *s2);
 #endif
 
 #if (VK_HEADER_VERSION >= 162 && VK_KHR_acceleration_structure) ||                                 \
@@ -1233,9 +1248,24 @@ bool compare_VkCopyMemoryToAccelerationStructureInfoKHR(
     VkCopyMemoryToAccelerationStructureInfoKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 233 && VK_NV_copy_memory_indirect
+#if VK_HEADER_VERSION >= 328 && VK_KHR_copy_memory_indirect
+bool compare_VkCopyMemoryToImageIndirectCommandKHR(VkCopyMemoryToImageIndirectCommandKHR const *s1,
+                                                   VkCopyMemoryToImageIndirectCommandKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 233 && VK_HEADER_VERSION <= 327 && VK_NV_copy_memory_indirect
 bool compare_VkCopyMemoryToImageIndirectCommandNV(VkCopyMemoryToImageIndirectCommandNV const *s1,
                                                   VkCopyMemoryToImageIndirectCommandNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 328 && VK_NV_copy_memory_indirect
+bool compare_VkCopyMemoryToImageIndirectCommandNV(VkCopyMemoryToImageIndirectCommandNV const *s1,
+                                                  VkCopyMemoryToImageIndirectCommandNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 328 && VK_KHR_copy_memory_indirect
+bool compare_VkCopyMemoryToImageIndirectInfoKHR(VkCopyMemoryToImageIndirectInfoKHR const *s1,
+                                                VkCopyMemoryToImageIndirectInfoKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 303 && VK_VERSION_1_4
@@ -3981,13 +4011,31 @@ bool compare_VkPhysicalDeviceCooperativeVectorPropertiesNV(
     VkPhysicalDeviceCooperativeVectorPropertiesNV const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 328 && VK_KHR_copy_memory_indirect
+bool compare_VkPhysicalDeviceCopyMemoryIndirectFeaturesKHR(
+    VkPhysicalDeviceCopyMemoryIndirectFeaturesKHR const *s1,
+    VkPhysicalDeviceCopyMemoryIndirectFeaturesKHR const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 233 && VK_NV_copy_memory_indirect
 bool compare_VkPhysicalDeviceCopyMemoryIndirectFeaturesNV(
     VkPhysicalDeviceCopyMemoryIndirectFeaturesNV const *s1,
     VkPhysicalDeviceCopyMemoryIndirectFeaturesNV const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 233 && VK_NV_copy_memory_indirect
+#if VK_HEADER_VERSION >= 328 && VK_KHR_copy_memory_indirect
+bool compare_VkPhysicalDeviceCopyMemoryIndirectPropertiesKHR(
+    VkPhysicalDeviceCopyMemoryIndirectPropertiesKHR const *s1,
+    VkPhysicalDeviceCopyMemoryIndirectPropertiesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 233 && VK_HEADER_VERSION <= 327 && VK_NV_copy_memory_indirect
+bool compare_VkPhysicalDeviceCopyMemoryIndirectPropertiesNV(
+    VkPhysicalDeviceCopyMemoryIndirectPropertiesNV const *s1,
+    VkPhysicalDeviceCopyMemoryIndirectPropertiesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 328 && VK_NV_copy_memory_indirect
 bool compare_VkPhysicalDeviceCopyMemoryIndirectPropertiesNV(
     VkPhysicalDeviceCopyMemoryIndirectPropertiesNV const *s1,
     VkPhysicalDeviceCopyMemoryIndirectPropertiesNV const *s2);
@@ -8548,6 +8596,11 @@ bool compare_VkStridedBufferRegionKHR(VkStridedBufferRegionKHR const *s1,
 #if VK_HEADER_VERSION >= 307 && VK_NV_cluster_acceleration_structure
 bool compare_VkStridedDeviceAddressNV(VkStridedDeviceAddressNV const *s1,
                                       VkStridedDeviceAddressNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 328 && VK_KHR_copy_memory_indirect
+bool compare_VkStridedDeviceAddressRangeKHR(VkStridedDeviceAddressRangeKHR const *s1,
+                                            VkStridedDeviceAddressRangeKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 162 && VK_KHR_ray_tracing_pipeline
@@ -14132,12 +14185,52 @@ bool compare_VkCopyImageToMemoryInfoEXT(VkCopyImageToMemoryInfoEXT const *s1,
 }
 #endif
 
-#if VK_HEADER_VERSION >= 233 && VK_NV_copy_memory_indirect
+#if VK_HEADER_VERSION >= 328 && VK_KHR_copy_memory_indirect
+bool compare_VkCopyMemoryIndirectCommandKHR(VkCopyMemoryIndirectCommandKHR const *s1,
+                                            VkCopyMemoryIndirectCommandKHR const *s2) {
+  // local, simple types
+  if ((s1->srcAddress != s2->srcAddress) || (s1->dstAddress != s2->dstAddress) ||
+      (s1->size != s2->size))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 233 && VK_HEADER_VERSION <= 327 && VK_NV_copy_memory_indirect
 bool compare_VkCopyMemoryIndirectCommandNV(VkCopyMemoryIndirectCommandNV const *s1,
                                            VkCopyMemoryIndirectCommandNV const *s2) {
   // local, simple types
   if ((s1->srcAddress != s2->srcAddress) || (s1->dstAddress != s2->dstAddress) ||
       (s1->size != s2->size))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 328 && VK_NV_copy_memory_indirect
+bool compare_VkCopyMemoryIndirectCommandNV(VkCopyMemoryIndirectCommandNV const *s1,
+                                           VkCopyMemoryIndirectCommandNV const *s2) {
+  // local, simple types
+  if ((s1->srcAddress != s2->srcAddress) || (s1->dstAddress != s2->dstAddress) ||
+      (s1->size != s2->size))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 328 && VK_KHR_copy_memory_indirect
+bool compare_VkCopyMemoryIndirectInfoKHR(VkCopyMemoryIndirectInfoKHR const *s1,
+                                         VkCopyMemoryIndirectInfoKHR const *s2) {
+  // local, simple types
+  if ((s1->srcCopyFlags != s2->srcCopyFlags) || (s1->dstCopyFlags != s2->dstCopyFlags) ||
+      (s1->copyCount != s2->copyCount))
+    return false;
+
+  // local, Vulkan struct types
+  if (!compare_VkStridedDeviceAddressRangeKHR(&s1->copyAddressRange, &s2->copyAddressRange))
     return false;
 
   return true;
@@ -14162,7 +14255,26 @@ bool compare_VkCopyMemoryToAccelerationStructureInfoKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 233 && VK_NV_copy_memory_indirect
+#if VK_HEADER_VERSION >= 328 && VK_KHR_copy_memory_indirect
+bool compare_VkCopyMemoryToImageIndirectCommandKHR(
+    VkCopyMemoryToImageIndirectCommandKHR const *s1,
+    VkCopyMemoryToImageIndirectCommandKHR const *s2) {
+  // local, simple types
+  if ((s1->srcAddress != s2->srcAddress) || (s1->bufferRowLength != s2->bufferRowLength) ||
+      (s1->bufferImageHeight != s2->bufferImageHeight))
+    return false;
+
+  // local, Vulkan struct types
+  if (!compare_VkImageSubresourceLayers(&s1->imageSubresource, &s2->imageSubresource) ||
+      !compare_VkOffset3D(&s1->imageOffset, &s2->imageOffset) ||
+      !compare_VkExtent3D(&s1->imageExtent, &s2->imageExtent))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 233 && VK_HEADER_VERSION <= 327 && VK_NV_copy_memory_indirect
 bool compare_VkCopyMemoryToImageIndirectCommandNV(VkCopyMemoryToImageIndirectCommandNV const *s1,
                                                   VkCopyMemoryToImageIndirectCommandNV const *s2) {
   // local, simple types
@@ -14174,6 +14286,34 @@ bool compare_VkCopyMemoryToImageIndirectCommandNV(VkCopyMemoryToImageIndirectCom
   if (!compare_VkImageSubresourceLayers(&s1->imageSubresource, &s2->imageSubresource) ||
       !compare_VkOffset3D(&s1->imageOffset, &s2->imageOffset) ||
       !compare_VkExtent3D(&s1->imageExtent, &s2->imageExtent))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 328 && VK_NV_copy_memory_indirect
+bool compare_VkCopyMemoryToImageIndirectCommandNV(VkCopyMemoryToImageIndirectCommandNV const *s1,
+                                                  VkCopyMemoryToImageIndirectCommandNV const *s2) {
+  // local, simple types
+  if ((s1->srcAddress != s2->srcAddress) || (s1->bufferRowLength != s2->bufferRowLength) ||
+      (s1->bufferImageHeight != s2->bufferImageHeight))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 328 && VK_KHR_copy_memory_indirect
+bool compare_VkCopyMemoryToImageIndirectInfoKHR(VkCopyMemoryToImageIndirectInfoKHR const *s1,
+                                                VkCopyMemoryToImageIndirectInfoKHR const *s2) {
+  // local, simple types
+  if ((s1->srcCopyFlags != s2->srcCopyFlags) || (s1->copyCount != s2->copyCount) ||
+      (s1->dstImage != s2->dstImage) || (s1->dstImageLayout != s2->dstImageLayout))
+    return false;
+
+  // local, Vulkan struct types
+  if (!compare_VkStridedDeviceAddressRangeKHR(&s1->copyAddressRange, &s2->copyAddressRange))
     return false;
 
   return true;
@@ -21659,6 +21799,19 @@ bool compare_VkPhysicalDeviceCooperativeVectorPropertiesNV(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 328 && VK_KHR_copy_memory_indirect
+bool compare_VkPhysicalDeviceCopyMemoryIndirectFeaturesKHR(
+    VkPhysicalDeviceCopyMemoryIndirectFeaturesKHR const *s1,
+    VkPhysicalDeviceCopyMemoryIndirectFeaturesKHR const *s2) {
+  // local, simple types
+  if ((s1->indirectMemoryCopy != s2->indirectMemoryCopy) ||
+      (s1->indirectMemoryToImageCopy != s2->indirectMemoryToImageCopy))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 233 && VK_NV_copy_memory_indirect
 bool compare_VkPhysicalDeviceCopyMemoryIndirectFeaturesNV(
     VkPhysicalDeviceCopyMemoryIndirectFeaturesNV const *s1,
@@ -21671,7 +21824,31 @@ bool compare_VkPhysicalDeviceCopyMemoryIndirectFeaturesNV(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 233 && VK_NV_copy_memory_indirect
+#if VK_HEADER_VERSION >= 328 && VK_KHR_copy_memory_indirect
+bool compare_VkPhysicalDeviceCopyMemoryIndirectPropertiesKHR(
+    VkPhysicalDeviceCopyMemoryIndirectPropertiesKHR const *s1,
+    VkPhysicalDeviceCopyMemoryIndirectPropertiesKHR const *s2) {
+  // local, simple types
+  if ((s1->supportedQueues != s2->supportedQueues))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 233 && VK_HEADER_VERSION <= 327 && VK_NV_copy_memory_indirect
+bool compare_VkPhysicalDeviceCopyMemoryIndirectPropertiesNV(
+    VkPhysicalDeviceCopyMemoryIndirectPropertiesNV const *s1,
+    VkPhysicalDeviceCopyMemoryIndirectPropertiesNV const *s2) {
+  // local, simple types
+  if ((s1->supportedQueues != s2->supportedQueues))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 328 && VK_NV_copy_memory_indirect
 bool compare_VkPhysicalDeviceCopyMemoryIndirectPropertiesNV(
     VkPhysicalDeviceCopyMemoryIndirectPropertiesNV const *s1,
     VkPhysicalDeviceCopyMemoryIndirectPropertiesNV const *s2) {
@@ -33837,6 +34014,17 @@ bool compare_VkStridedDeviceAddressNV(VkStridedDeviceAddressNV const *s1,
                                       VkStridedDeviceAddressNV const *s2) {
   // local, simple types
   if ((s1->startAddress != s2->startAddress) || (s1->strideInBytes != s2->strideInBytes))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 328 && VK_KHR_copy_memory_indirect
+bool compare_VkStridedDeviceAddressRangeKHR(VkStridedDeviceAddressRangeKHR const *s1,
+                                            VkStridedDeviceAddressRangeKHR const *s2) {
+  // local, simple types
+  if ((s1->address != s2->address) || (s1->size != s2->size) || (s1->stride != s2->stride))
     return false;
 
   return true;
