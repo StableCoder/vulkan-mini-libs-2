@@ -37,12 +37,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 328
+#if VK_HEADER_VERSION > 329
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v328)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v329)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v328)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v329)"
 #endif
 #endif
 
@@ -5341,6 +5341,11 @@ void cleanup_VkPhysicalDeviceShaderFloatControls2FeaturesKHR(
 #if (VK_HEADER_VERSION >= 303 && VK_KHR_shader_float_controls2)
 void cleanup_VkPhysicalDeviceShaderFloatControls2FeaturesKHR(
     VkPhysicalDeviceShaderFloatControls2FeaturesKHR const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 329 && VK_KHR_shader_fma)
+void cleanup_VkPhysicalDeviceShaderFmaFeaturesKHR(
+    VkPhysicalDeviceShaderFmaFeaturesKHR const *pData);
 #endif
 
 #if (VK_HEADER_VERSION >= 155 && VK_EXT_shader_image_atomic_int64)
@@ -15836,6 +15841,14 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FLOAT_CONTROLS_2_FEATURES_KHR) {
     cleanup_VkPhysicalDeviceShaderFloatControls2FeaturesKHR(
         (VkPhysicalDeviceShaderFloatControls2FeaturesKHR const *)pData);
+    return;
+  }
+#endif
+
+#if (VK_HEADER_VERSION >= 329 && VK_KHR_shader_fma)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_FMA_FEATURES_KHR) {
+    cleanup_VkPhysicalDeviceShaderFmaFeaturesKHR(
+        (VkPhysicalDeviceShaderFmaFeaturesKHR const *)pData);
     return;
   }
 #endif
@@ -32781,6 +32794,16 @@ void cleanup_VkPhysicalDeviceShaderFloatControls2FeaturesKHR(
 #if (VK_HEADER_VERSION >= 303 && VK_KHR_shader_float_controls2)
 void cleanup_VkPhysicalDeviceShaderFloatControls2FeaturesKHR(
     VkPhysicalDeviceShaderFloatControls2FeaturesKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if (VK_HEADER_VERSION >= 329 && VK_KHR_shader_fma)
+void cleanup_VkPhysicalDeviceShaderFmaFeaturesKHR(
+    VkPhysicalDeviceShaderFmaFeaturesKHR const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

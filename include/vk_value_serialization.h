@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 328
+#if VK_HEADER_VERSION > 329
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v328)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v329)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v328)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v329)"
 #endif
 #endif
 
@@ -1611,6 +1611,7 @@ EnumValueSet const VkSwapchainCreateFlagsKHRSets[] = {
     {"PRESENT_WAIT_2", 0x00000080},
     {"DEFERRED_MEMORY_ALLOCATION", 0x00000008},
     {"RESERVED_8_BIT_EXT", 0x00000100},
+    {"RESERVED_9_BIT_EXT", 0x00000200},
 };
 
 EnumValueSet const VkWaylandSurfaceCreateFlagsKHRSets[] = {
@@ -4405,7 +4406,7 @@ EnumType const cEnumTypes[403] = {
     {"VkCompositeAlphaFlagsKHR", VkCompositeAlphaFlagsKHRSets, 4},
     {"VkDisplayPlaneAlphaFlagsKHR", VkDisplayPlaneAlphaFlagsKHRSets, 4},
     {"VkSurfaceTransformFlagsKHR", VkSurfaceTransformFlagsKHRSets, 9},
-    {"VkSwapchainCreateFlagsKHR", VkSwapchainCreateFlagsKHRSets, 11},
+    {"VkSwapchainCreateFlagsKHR", VkSwapchainCreateFlagsKHRSets, 12},
     {"VkDisplayModeCreateFlagsKHR", NULL, 0},
     {"VkDisplaySurfaceCreateFlagsKHR", NULL, 0},
     {"VkAndroidSurfaceCreateFlagsKHR", NULL, 0},

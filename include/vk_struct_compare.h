@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 328
+#if VK_HEADER_VERSION > 329
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v328)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v329)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v328)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v329)"
 #endif
 #endif
 
@@ -6351,6 +6351,11 @@ bool compare_VkPhysicalDeviceShaderFloatControls2FeaturesKHR(
 bool compare_VkPhysicalDeviceShaderFloatControls2FeaturesKHR(
     VkPhysicalDeviceShaderFloatControls2FeaturesKHR const *s1,
     VkPhysicalDeviceShaderFloatControls2FeaturesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 329 && VK_KHR_shader_fma
+bool compare_VkPhysicalDeviceShaderFmaFeaturesKHR(VkPhysicalDeviceShaderFmaFeaturesKHR const *s1,
+                                                  VkPhysicalDeviceShaderFmaFeaturesKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 155 && VK_EXT_shader_image_atomic_int64
@@ -27696,6 +27701,19 @@ bool compare_VkPhysicalDeviceShaderFloatControls2FeaturesKHR(
     VkPhysicalDeviceShaderFloatControls2FeaturesKHR const *s2) {
   // local, simple types
   if ((s1->shaderFloatControls2 != s2->shaderFloatControls2))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 329 && VK_KHR_shader_fma
+bool compare_VkPhysicalDeviceShaderFmaFeaturesKHR(VkPhysicalDeviceShaderFmaFeaturesKHR const *s1,
+                                                  VkPhysicalDeviceShaderFmaFeaturesKHR const *s2) {
+  // local, simple types
+  if ((s1->shaderFmaFloat16 != s2->shaderFmaFloat16) ||
+      (s1->shaderFmaFloat32 != s2->shaderFmaFloat32) ||
+      (s1->shaderFmaFloat64 != s2->shaderFmaFloat64))
     return false;
 
   return true;
