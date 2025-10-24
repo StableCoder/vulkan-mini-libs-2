@@ -37,12 +37,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 329
+#if VK_HEADER_VERSION > 330
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v329)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v330)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v329)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v330)"
 #endif
 #endif
 
@@ -100,14 +100,16 @@ char const *VkResult_to_string(VkResult result) {
     return "VK_ERROR_FRAGMENTED_POOL";
   case -13:
     return "VK_ERROR_UNKNOWN";
+  case -1000011001:
+    return "VK_ERROR_VALIDATION_FAILED";
   case -1000069000:
     return "VK_ERROR_OUT_OF_POOL_MEMORY";
   case -1000072003:
     return "VK_ERROR_INVALID_EXTERNAL_HANDLE";
-  case -1000161000:
-    return "VK_ERROR_FRAGMENTATION";
   case -1000257000:
     return "VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS";
+  case -1000161000:
+    return "VK_ERROR_FRAGMENTATION";
   case 1000297000:
     return "VK_PIPELINE_COMPILE_REQUIRED";
   case -1000174001:

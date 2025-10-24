@@ -50,7 +50,7 @@ for api_type in api_data.findall('./types/type'):
     category = api_type.get('category')
     if category is not None and category == 'define':
         for name in api_type.findall('name'):
-            if args.api == 'vulkan' and (not api_type.get('api') or api_type.get('api') == 'vulkan') and name.text == 'VK_HEADER_VERSION':
+            if (args.api == 'vulkan' or args.api == 'vulkan,vulkanbase') and (not api_type.get('api') or api_type.get('api') == 'vulkan' or api_type.get('api') == 'vulkan,vulkanbase') and name.text == 'VK_HEADER_VERSION':
                 api_version = int(name.tail)
             elif args.api == 'vulkansc' and api_type.get('api') == 'vulkansc' and name.text == 'VK_HEADER_VERSION':
                 api_version = int(name.tail)
@@ -211,6 +211,7 @@ for api_type in api_data.findall('types/type'):
             data['structs'][struct_name][struct_hash] = new_struct
         # set struct variant first api_version
         data['structs'][struct_name][struct_hash]['first'] = api_version
+        data['structs'][struct_name][struct_hash]['new_require_list'] = []
 
     elif type_category == 'union':
         if api_type.get('api') and not args.api in api_type.get('api'):
