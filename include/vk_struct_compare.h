@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 330
+#if VK_HEADER_VERSION > 331
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v330)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v331)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v330)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v331)"
 #endif
 #endif
 
@@ -2479,6 +2479,10 @@ bool compare_VkExternalFormatANDROID(VkExternalFormatANDROID const *s1,
                                      VkExternalFormatANDROID const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 331 && VK_OHOS_external_memory
+bool compare_VkExternalFormatOHOS(VkExternalFormatOHOS const *s1, VkExternalFormatOHOS const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 254 && VK_QNX_external_memory_screen_buffer
 bool compare_VkExternalFormatQNX(VkExternalFormatQNX const *s1, VkExternalFormatQNX const *s2);
 #endif
@@ -3254,6 +3258,11 @@ bool compare_VkImportMetalTextureInfoEXT(VkImportMetalTextureInfoEXT const *s1,
                                          VkImportMetalTextureInfoEXT const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 331 && VK_OHOS_external_memory
+bool compare_VkImportNativeBufferInfoOHOS(VkImportNativeBufferInfoOHOS const *s1,
+                                          VkImportNativeBufferInfoOHOS const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 254 && VK_QNX_external_memory_screen_buffer
 bool compare_VkImportScreenBufferInfoQNX(VkImportScreenBufferInfoQNX const *s1,
                                          VkImportScreenBufferInfoQNX const *s2);
@@ -3513,6 +3522,11 @@ bool compare_VkMemoryGetFdInfoKHR(VkMemoryGetFdInfoKHR const *s1, VkMemoryGetFdI
 #if VK_HEADER_VERSION >= 306 && VK_EXT_external_memory_metal
 bool compare_VkMemoryGetMetalHandleInfoEXT(VkMemoryGetMetalHandleInfoEXT const *s1,
                                            VkMemoryGetMetalHandleInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 331 && VK_OHOS_external_memory
+bool compare_VkMemoryGetNativeBufferInfoOHOS(VkMemoryGetNativeBufferInfoOHOS const *s1,
+                                             VkMemoryGetNativeBufferInfoOHOS const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 184 && VK_NV_external_memory_rdma
@@ -3777,13 +3791,28 @@ bool compare_VkNativeBufferANDROID(VkNativeBufferANDROID const *s1,
                                    VkNativeBufferANDROID const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 331 && VK_OHOS_external_memory
+bool compare_VkNativeBufferFormatPropertiesOHOS(VkNativeBufferFormatPropertiesOHOS const *s1,
+                                                VkNativeBufferFormatPropertiesOHOS const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 330 && VK_OHOS_native_buffer
 bool compare_VkNativeBufferOHOS(VkNativeBufferOHOS const *s1, VkNativeBufferOHOS const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 331 && VK_OHOS_external_memory
+bool compare_VkNativeBufferPropertiesOHOS(VkNativeBufferPropertiesOHOS const *s1,
+                                          VkNativeBufferPropertiesOHOS const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 117 && VK_ANDROID_native_buffer
 bool compare_VkNativeBufferUsage2ANDROID(VkNativeBufferUsage2ANDROID const *s1,
                                          VkNativeBufferUsage2ANDROID const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 331 && VK_OHOS_external_memory
+bool compare_VkNativeBufferUsageOHOS(VkNativeBufferUsageOHOS const *s1,
+                                     VkNativeBufferUsageOHOS const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 318 && VK_HEADER_VERSION <= 325 && VK_OHOS_surface
@@ -3919,6 +3948,16 @@ bool compare_VkPerTileEndInfoQCOM(VkPerTileEndInfoQCOM const *s1, VkPerTileEndIn
 bool compare_VkPerformanceConfigurationAcquireInfoINTEL(
     VkPerformanceConfigurationAcquireInfoINTEL const *s1,
     VkPerformanceConfigurationAcquireInfoINTEL const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 331 && VK_ARM_performance_counters_by_region
+bool compare_VkPerformanceCounterARM(VkPerformanceCounterARM const *s1,
+                                     VkPerformanceCounterARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 331 && VK_ARM_performance_counters_by_region
+bool compare_VkPerformanceCounterDescriptionARM(VkPerformanceCounterDescriptionARM const *s1,
+                                                VkPerformanceCounterDescriptionARM const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 128 && VK_KHR_performance_query
@@ -5877,6 +5916,18 @@ bool compare_VkPhysicalDevicePartitionedAccelerationStructurePropertiesNV(
 bool compare_VkPhysicalDevicePerStageDescriptorSetFeaturesNV(
     VkPhysicalDevicePerStageDescriptorSetFeaturesNV const *s1,
     VkPhysicalDevicePerStageDescriptorSetFeaturesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 331 && VK_ARM_performance_counters_by_region
+bool compare_VkPhysicalDevicePerformanceCountersByRegionFeaturesARM(
+    VkPhysicalDevicePerformanceCountersByRegionFeaturesARM const *s1,
+    VkPhysicalDevicePerformanceCountersByRegionFeaturesARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 331 && VK_ARM_performance_counters_by_region
+bool compare_VkPhysicalDevicePerformanceCountersByRegionPropertiesARM(
+    VkPhysicalDevicePerformanceCountersByRegionPropertiesARM const *s1,
+    VkPhysicalDevicePerformanceCountersByRegionPropertiesARM const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 128 && VK_KHR_performance_query
@@ -8535,6 +8586,12 @@ bool compare_VkRenderPassMultiviewCreateInfo(VkRenderPassMultiviewCreateInfo con
 #if VK_KHR_multiview
 bool compare_VkRenderPassMultiviewCreateInfoKHR(VkRenderPassMultiviewCreateInfoKHR const *s1,
                                                 VkRenderPassMultiviewCreateInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 331 && VK_ARM_performance_counters_by_region
+bool compare_VkRenderPassPerformanceCountersByRegionBeginInfoARM(
+    VkRenderPassPerformanceCountersByRegionBeginInfoARM const *s1,
+    VkRenderPassPerformanceCountersByRegionBeginInfoARM const *s2);
 #endif
 
 #if VK_EXT_sample_locations
@@ -17944,6 +18001,16 @@ bool compare_VkExternalFormatANDROID(VkExternalFormatANDROID const *s1,
 }
 #endif
 
+#if VK_HEADER_VERSION >= 331 && VK_OHOS_external_memory
+bool compare_VkExternalFormatOHOS(VkExternalFormatOHOS const *s1, VkExternalFormatOHOS const *s2) {
+  // local, simple types
+  if ((s1->externalFormat != s2->externalFormat))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 254 && VK_QNX_external_memory_screen_buffer
 bool compare_VkExternalFormatQNX(VkExternalFormatQNX const *s1, VkExternalFormatQNX const *s2) {
   // local, simple types
@@ -19995,6 +20062,17 @@ bool compare_VkImportMetalTextureInfoEXT(VkImportMetalTextureInfoEXT const *s1,
 }
 #endif
 
+#if VK_HEADER_VERSION >= 331 && VK_OHOS_external_memory
+bool compare_VkImportNativeBufferInfoOHOS(VkImportNativeBufferInfoOHOS const *s1,
+                                          VkImportNativeBufferInfoOHOS const *s2) {
+  // non-local members
+  if (s1->buffer != s2->buffer)
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 254 && VK_QNX_external_memory_screen_buffer
 bool compare_VkImportScreenBufferInfoQNX(VkImportScreenBufferInfoQNX const *s1,
                                          VkImportScreenBufferInfoQNX const *s2) {
@@ -20776,6 +20854,17 @@ bool compare_VkMemoryGetMetalHandleInfoEXT(VkMemoryGetMetalHandleInfoEXT const *
 }
 #endif
 
+#if VK_HEADER_VERSION >= 331 && VK_OHOS_external_memory
+bool compare_VkMemoryGetNativeBufferInfoOHOS(VkMemoryGetNativeBufferInfoOHOS const *s1,
+                                             VkMemoryGetNativeBufferInfoOHOS const *s2) {
+  // local, simple types
+  if ((s1->memory != s2->memory))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 184 && VK_NV_external_memory_rdma
 bool compare_VkMemoryGetRemoteAddressInfoNV(VkMemoryGetRemoteAddressInfoNV const *s1,
                                             VkMemoryGetRemoteAddressInfoNV const *s2) {
@@ -21433,10 +21522,42 @@ bool compare_VkNativeBufferANDROID(VkNativeBufferANDROID const *s1,
 }
 #endif
 
+#if VK_HEADER_VERSION >= 331 && VK_OHOS_external_memory
+bool compare_VkNativeBufferFormatPropertiesOHOS(VkNativeBufferFormatPropertiesOHOS const *s1,
+                                                VkNativeBufferFormatPropertiesOHOS const *s2) {
+  // local, simple types
+  if ((s1->format != s2->format) || (s1->externalFormat != s2->externalFormat) ||
+      (s1->formatFeatures != s2->formatFeatures) ||
+      (s1->suggestedYcbcrModel != s2->suggestedYcbcrModel) ||
+      (s1->suggestedYcbcrRange != s2->suggestedYcbcrRange) ||
+      (s1->suggestedXChromaOffset != s2->suggestedXChromaOffset) ||
+      (s1->suggestedYChromaOffset != s2->suggestedYChromaOffset))
+    return false;
+
+  // local, Vulkan struct types
+  if (!compare_VkComponentMapping(&s1->samplerYcbcrConversionComponents,
+                                  &s2->samplerYcbcrConversionComponents))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 330 && VK_OHOS_native_buffer
 bool compare_VkNativeBufferOHOS(VkNativeBufferOHOS const *s1, VkNativeBufferOHOS const *s2) {
   // non-local members
   if (s1->handle != s2->handle)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 331 && VK_OHOS_external_memory
+bool compare_VkNativeBufferPropertiesOHOS(VkNativeBufferPropertiesOHOS const *s1,
+                                          VkNativeBufferPropertiesOHOS const *s2) {
+  // local, simple types
+  if ((s1->allocationSize != s2->allocationSize) || (s1->memoryTypeBits != s2->memoryTypeBits))
     return false;
 
   return true;
@@ -21448,6 +21569,17 @@ bool compare_VkNativeBufferUsage2ANDROID(VkNativeBufferUsage2ANDROID const *s1,
                                          VkNativeBufferUsage2ANDROID const *s2) {
   // local, simple types
   if ((s1->consumer != s2->consumer) || (s1->producer != s2->producer))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 331 && VK_OHOS_external_memory
+bool compare_VkNativeBufferUsageOHOS(VkNativeBufferUsageOHOS const *s1,
+                                     VkNativeBufferUsageOHOS const *s2) {
+  // local, simple types
+  if ((s1->OHOSNativeBufferUsage != s2->OHOSNativeBufferUsage))
     return false;
 
   return true;
@@ -21797,6 +21929,31 @@ bool compare_VkPerformanceConfigurationAcquireInfoINTEL(
   if ((s1->type != s2->type))
     return false;
 
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 331 && VK_ARM_performance_counters_by_region
+bool compare_VkPerformanceCounterARM(VkPerformanceCounterARM const *s1,
+                                     VkPerformanceCounterARM const *s2) {
+  // local, simple types
+  if ((s1->counterID != s2->counterID))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 331 && VK_ARM_performance_counters_by_region
+bool compare_VkPerformanceCounterDescriptionARM(VkPerformanceCounterDescriptionARM const *s1,
+                                                VkPerformanceCounterDescriptionARM const *s2) {
+  // local, simple types
+  if ((s1->flags != s2->flags))
+    return false;
+
+  // local array members
+  if (strncmp(s1->name, s2->name, VK_MAX_DESCRIPTION_SIZE) != 0)
+    return false;
   return true;
 }
 #endif
@@ -26844,6 +27001,37 @@ bool compare_VkPhysicalDevicePerStageDescriptorSetFeaturesNV(
   // local, simple types
   if ((s1->perStageDescriptorSet != s2->perStageDescriptorSet) ||
       (s1->dynamicPipelineLayout != s2->dynamicPipelineLayout))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 331 && VK_ARM_performance_counters_by_region
+bool compare_VkPhysicalDevicePerformanceCountersByRegionFeaturesARM(
+    VkPhysicalDevicePerformanceCountersByRegionFeaturesARM const *s1,
+    VkPhysicalDevicePerformanceCountersByRegionFeaturesARM const *s2) {
+  // local, simple types
+  if ((s1->performanceCountersByRegion != s2->performanceCountersByRegion))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 331 && VK_ARM_performance_counters_by_region
+bool compare_VkPhysicalDevicePerformanceCountersByRegionPropertiesARM(
+    VkPhysicalDevicePerformanceCountersByRegionPropertiesARM const *s1,
+    VkPhysicalDevicePerformanceCountersByRegionPropertiesARM const *s2) {
+  // local, simple types
+  if ((s1->maxPerRegionPerformanceCounters != s2->maxPerRegionPerformanceCounters) ||
+      (s1->rowStrideAlignment != s2->rowStrideAlignment) ||
+      (s1->regionAlignment != s2->regionAlignment) ||
+      (s1->identityTransformOrder != s2->identityTransformOrder))
+    return false;
+
+  // local, Vulkan struct types
+  if (!compare_VkExtent2D(&s1->performanceCounterRegionSize, &s2->performanceCounterRegionSize))
     return false;
 
   return true;
@@ -33627,6 +33815,27 @@ bool compare_VkRenderPassMultiviewCreateInfoKHR(VkRenderPassMultiviewCreateInfoK
        memcmp(s1->pCorrelationMasks, s2->pCorrelationMasks,
               (s1->correlationMaskCount) * sizeof(uint32_t)) != 0))
     return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 331 && VK_ARM_performance_counters_by_region
+bool compare_VkRenderPassPerformanceCountersByRegionBeginInfoARM(
+    VkRenderPassPerformanceCountersByRegionBeginInfoARM const *s1,
+    VkRenderPassPerformanceCountersByRegionBeginInfoARM const *s2) {
+  // local, simple types
+  if ((s1->counterAddressCount != s2->counterAddressCount) ||
+      (s1->serializeRegions != s2->serializeRegions) ||
+      (s1->counterIndexCount != s2->counterIndexCount))
+    return false;
+
+  // non-local members
+  if (s1->pCounterAddresses != s2->pCounterAddresses)
+    return false;
+
+  if (s1->pCounterIndices != s2->pCounterIndices)
+    return false;
+
   return true;
 }
 #endif

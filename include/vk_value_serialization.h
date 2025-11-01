@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 330
+#if VK_HEADER_VERSION > 331
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v330)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v331)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v330)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v331)"
 #endif
 #endif
 
@@ -1031,6 +1031,7 @@ EnumValueSet const VkBuildAccelerationStructureFlagsKHRSets[] = {
     {"ALLOW_DISPLACEMENT_MICROMAP_UPDATE_BIT_NV", 0x00000200},
     {"ALLOW_DATA_ACCESS", 0x00000800},
     {"ALLOW_CLUSTER_OPACITY_MICROMAPS_BIT_NV", 0x00001000},
+    {"RESERVED_10", 0x00000400},
 };
 
 EnumValueSet const VkPrivateDataSlotCreateFlagsSets[] = {
@@ -1716,6 +1717,7 @@ EnumValueSet const VkExternalMemoryHandleTypeFlagsSets[] = {
     {"MTLBUFFER_BIT_EXT", 0x00010000},
     {"MTLTEXTURE_BIT_EXT", 0x00020000},
     {"MTLHEAP_BIT_EXT", 0x00040000},
+    {"OH_NATIVE_BUFFER_BIT_OHOS", 0x00008000},
 };
 
 EnumValueSet const VkExternalMemoryFeatureFlagsSets[] = {
@@ -4326,7 +4328,7 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[406] = {
+EnumType const cEnumTypes[407] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", VkQueryPoolCreateFlagsSets, 1},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 6},
@@ -4397,7 +4399,7 @@ EnumType const cEnumTypes[406] = {
      VkClusterAccelerationStructureClusterFlagsNVSets, 1},
     {"VkClusterAccelerationStructureAddressResolutionFlagsNV",
      VkClusterAccelerationStructureAddressResolutionFlagsNVSets, 7},
-    {"VkBuildAccelerationStructureFlagsKHR", VkBuildAccelerationStructureFlagsKHRSets, 27},
+    {"VkBuildAccelerationStructureFlagsKHR", VkBuildAccelerationStructureFlagsKHRSets, 28},
     {"VkPrivateDataSlotCreateFlags", VkPrivateDataSlotCreateFlagsSets, 1},
     {"VkAccelerationStructureCreateFlagsKHR", VkAccelerationStructureCreateFlagsKHRSets, 5},
     {"VkDescriptorUpdateTemplateCreateFlags", NULL, 0},
@@ -4462,7 +4464,7 @@ EnumType const cEnumTypes[406] = {
     {"VkClusterAccelerationStructureIndexFormatFlagsNV",
      VkClusterAccelerationStructureIndexFormatFlagsNVSets, 3},
     {"VkExternalMemoryFeatureFlagsNV", VkExternalMemoryFeatureFlagsNVSets, 3},
-    {"VkExternalMemoryHandleTypeFlags", VkExternalMemoryHandleTypeFlagsSets, 31},
+    {"VkExternalMemoryHandleTypeFlags", VkExternalMemoryHandleTypeFlagsSets, 32},
     {"VkExternalMemoryFeatureFlags", VkExternalMemoryFeatureFlagsSets, 6},
     {"VkExternalSemaphoreHandleTypeFlags", VkExternalSemaphoreHandleTypeFlagsSets, 15},
     {"VkExternalSemaphoreFeatureFlags", VkExternalSemaphoreFeatureFlagsSets, 4},
@@ -4516,6 +4518,7 @@ EnumType const cEnumTypes[406] = {
      1},
     {"VkSurfaceCreateFlagsOHOS", NULL, 0},
     {"VkSwapchainImageUsageFlagsOHOS", VkSwapchainImageUsageFlagsOHOSSets, 1},
+    {"VkPerformanceCounterDescriptionFlagsARM", NULL, 0},
     {"VkVideoCodecOperationFlagsKHR", VkVideoCodecOperationFlagsKHRSets, 13},
     {"VkVideoCapabilityFlagsKHR", VkVideoCapabilityFlagsKHRSets, 2},
     {"VkVideoSessionCreateFlagsKHR", VkVideoSessionCreateFlagsKHRSets, 11},
