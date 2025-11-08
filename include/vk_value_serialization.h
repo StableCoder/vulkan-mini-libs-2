@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 331
+#if VK_HEADER_VERSION > 332
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v331)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v332)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v331)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v332)"
 #endif
 #endif
 
@@ -2371,6 +2371,7 @@ EnumValueSet const VkBorderColorSets[] = {
 
 EnumValueSet const VkPipelineCacheHeaderVersionSets[] = {
     {"ONE", 1},
+    {"DATA_GRAPH_QCOM", 1000629000},
 };
 
 EnumValueSet const VkComponentSwizzleSets[] = {
@@ -3645,10 +3646,18 @@ EnumValueSet const VkDataGraphPipelineSessionBindPointTypeARMSets[] = {
 
 EnumValueSet const VkPhysicalDeviceDataGraphProcessingEngineTypeARMSets[] = {
     {"DEFAULT", 0},
+    {"NEURAL_QCOM", 1000629000},
+    {"COMPUTE_QCOM", 1000629001},
 };
 
 EnumValueSet const VkPhysicalDeviceDataGraphOperationTypeARMSets[] = {
     {"SPIRV_EXTENDED_INSTRUCTION_SET", 0},
+    {"NEURAL_MODEL_QCOM", 1000629000},
+    {"BUILTIN_MODEL_QCOM", 1000629001},
+};
+
+EnumValueSet const VkDataGraphModelCacheTypeQCOMSets[] = {
+    {"GENERIC_BINARY", 0},
 };
 
 EnumValueSet const VkColorSpaceKHRSets[] = {
@@ -4328,7 +4337,7 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[407] = {
+EnumType const cEnumTypes[408] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", VkQueryPoolCreateFlagsSets, 1},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 6},
@@ -4559,7 +4568,7 @@ EnumType const cEnumTypes[407] = {
     {"VkBlendFactor", VkBlendFactorSets, 19},
     {"VkBlendOp", VkBlendOpSets, 51},
     {"VkBorderColor", VkBorderColorSets, 8},
-    {"VkPipelineCacheHeaderVersion", VkPipelineCacheHeaderVersionSets, 1},
+    {"VkPipelineCacheHeaderVersion", VkPipelineCacheHeaderVersionSets, 2},
     {"VkComponentSwizzle", VkComponentSwizzleSets, 7},
     {"VkCommandBufferLevel", VkCommandBufferLevelSets, 2},
     {"VkCompareOp", VkCompareOpSets, 8},
@@ -4670,8 +4679,9 @@ EnumType const cEnumTypes[407] = {
     {"VkDataGraphPipelineSessionBindPointTypeARM", VkDataGraphPipelineSessionBindPointTypeARMSets,
      1},
     {"VkPhysicalDeviceDataGraphProcessingEngineTypeARM",
-     VkPhysicalDeviceDataGraphProcessingEngineTypeARMSets, 1},
-    {"VkPhysicalDeviceDataGraphOperationTypeARM", VkPhysicalDeviceDataGraphOperationTypeARMSets, 1},
+     VkPhysicalDeviceDataGraphProcessingEngineTypeARMSets, 3},
+    {"VkPhysicalDeviceDataGraphOperationTypeARM", VkPhysicalDeviceDataGraphOperationTypeARMSets, 3},
+    {"VkDataGraphModelCacheTypeQCOM", VkDataGraphModelCacheTypeQCOMSets, 1},
     {"VkColorSpaceKHR", VkColorSpaceKHRSets, 18},
     {"VkPresentModeKHR", VkPresentModeKHRSets, 8},
     {"VkDisplaySurfaceStereoTypeNV", VkDisplaySurfaceStereoTypeNVSets, 4},

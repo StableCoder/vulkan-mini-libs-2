@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 331
+#if VK_HEADER_VERSION > 332
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v331)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v332)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v331)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v332)"
 #endif
 #endif
 
@@ -1407,6 +1407,12 @@ bool compare_VkCudaModuleCreateInfoNV(VkCudaModuleCreateInfoNV const *s1,
 #if VK_KHR_external_semaphore_win32
 bool compare_VkD3D12FenceSubmitInfoKHR(VkD3D12FenceSubmitInfoKHR const *s1,
                                        VkD3D12FenceSubmitInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 332 && VK_QCOM_data_graph_model
+bool compare_VkDataGraphPipelineBuiltinModelCreateInfoQCOM(
+    VkDataGraphPipelineBuiltinModelCreateInfoQCOM const *s1,
+    VkDataGraphPipelineBuiltinModelCreateInfoQCOM const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
@@ -4356,6 +4362,12 @@ bool compare_VkPhysicalDeviceCustomBorderColorPropertiesEXT(
 #if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
 bool compare_VkPhysicalDeviceDataGraphFeaturesARM(VkPhysicalDeviceDataGraphFeaturesARM const *s1,
                                                   VkPhysicalDeviceDataGraphFeaturesARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 332 && VK_QCOM_data_graph_model
+bool compare_VkPhysicalDeviceDataGraphModelFeaturesQCOM(
+    VkPhysicalDeviceDataGraphModelFeaturesQCOM const *s1,
+    VkPhysicalDeviceDataGraphModelFeaturesQCOM const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 319 && VK_HEADER_VERSION <= 319 && VK_ARM_data_graph
@@ -7619,6 +7631,12 @@ bool compare_VkPipelineCacheCreateInfo(VkPipelineCacheCreateInfo const *s1,
     (VK_HEADER_VERSION >= 241 && VK_HEADER_VERSION <= 329)
 bool compare_VkPipelineCacheCreateInfo(VkPipelineCacheCreateInfo const *s1,
                                        VkPipelineCacheCreateInfo const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 332 && VK_QCOM_data_graph_model
+bool compare_VkPipelineCacheHeaderVersionDataGraphQCOM(
+    VkPipelineCacheHeaderVersionDataGraphQCOM const *s1,
+    VkPipelineCacheHeaderVersionDataGraphQCOM const *s2);
 #endif
 
 #if (VK_HEADER_VERSION >= 330 && VK_COMPUTE_VERSION_1_0) ||                                        \
@@ -15219,6 +15237,14 @@ bool compare_VkD3D12FenceSubmitInfoKHR(VkD3D12FenceSubmitInfoKHR const *s1,
        memcmp(s1->pSignalSemaphoreValues, s2->pSignalSemaphoreValues,
               (s1->signalSemaphoreValuesCount) * sizeof(uint64_t)) != 0))
     return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 332 && VK_QCOM_data_graph_model
+bool compare_VkDataGraphPipelineBuiltinModelCreateInfoQCOM(
+    VkDataGraphPipelineBuiltinModelCreateInfoQCOM const *s1,
+    VkDataGraphPipelineBuiltinModelCreateInfoQCOM const *s2) {
   return true;
 }
 #endif
@@ -22901,6 +22927,18 @@ bool compare_VkPhysicalDeviceDataGraphFeaturesARM(VkPhysicalDeviceDataGraphFeatu
       (s1->dataGraphSpecializationConstants != s2->dataGraphSpecializationConstants) ||
       (s1->dataGraphDescriptorBuffer != s2->dataGraphDescriptorBuffer) ||
       (s1->dataGraphShaderModule != s2->dataGraphShaderModule))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 332 && VK_QCOM_data_graph_model
+bool compare_VkPhysicalDeviceDataGraphModelFeaturesQCOM(
+    VkPhysicalDeviceDataGraphModelFeaturesQCOM const *s1,
+    VkPhysicalDeviceDataGraphModelFeaturesQCOM const *s2) {
+  // local, simple types
+  if ((s1->dataGraphModel != s2->dataGraphModel))
     return false;
 
   return true;
@@ -31292,6 +31330,23 @@ bool compare_VkPipelineCacheCreateInfo(VkPipelineCacheCreateInfo const *s1,
   if (s1->pInitialData != s2->pInitialData &&
       (s1->pInitialData == NULL || s2->pInitialData == NULL ||
        memcmp(s1->pInitialData, s2->pInitialData, s1->initialDataSize) != 0))
+    return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 332 && VK_QCOM_data_graph_model
+bool compare_VkPipelineCacheHeaderVersionDataGraphQCOM(
+    VkPipelineCacheHeaderVersionDataGraphQCOM const *s1,
+    VkPipelineCacheHeaderVersionDataGraphQCOM const *s2) {
+  // local, simple types
+  if ((s1->headerSize != s2->headerSize) || (s1->headerVersion != s2->headerVersion) ||
+      (s1->cacheType != s2->cacheType) || (s1->cacheVersion != s2->cacheVersion))
+    return false;
+
+  // local array members
+  if (memcmp(s1->toolchainVersion, s2->toolchainVersion,
+             VK_DATA_GRAPH_MODEL_TOOLCHAIN_VERSION_LENGTH_QCOM * sizeof(uint32_t)) != 0)
     return false;
   return true;
 }

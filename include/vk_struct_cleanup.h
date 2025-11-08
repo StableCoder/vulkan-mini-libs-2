@@ -37,12 +37,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 331
+#if VK_HEADER_VERSION > 332
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v331)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v332)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v331)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v332)"
 #endif
 #endif
 
@@ -1203,6 +1203,11 @@ void cleanup_VkCudaModuleCreateInfoNV(VkCudaModuleCreateInfoNV const *pData);
 
 #if (VK_KHR_external_semaphore_win32)
 void cleanup_VkD3D12FenceSubmitInfoKHR(VkD3D12FenceSubmitInfoKHR const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 332 && VK_QCOM_data_graph_model)
+void cleanup_VkDataGraphPipelineBuiltinModelCreateInfoQCOM(
+    VkDataGraphPipelineBuiltinModelCreateInfoQCOM const *pData);
 #endif
 
 #if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
@@ -3703,6 +3708,11 @@ void cleanup_VkPhysicalDeviceCustomBorderColorPropertiesEXT(
 #if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
 void cleanup_VkPhysicalDeviceDataGraphFeaturesARM(
     VkPhysicalDeviceDataGraphFeaturesARM const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 332 && VK_QCOM_data_graph_model)
+void cleanup_VkPhysicalDeviceDataGraphModelFeaturesQCOM(
+    VkPhysicalDeviceDataGraphModelFeaturesQCOM const *pData);
 #endif
 
 #if (VK_HEADER_VERSION >= 319 && VK_HEADER_VERSION <= 319 && VK_ARM_data_graph)
@@ -6448,6 +6458,11 @@ void cleanup_VkPipelineCacheCreateInfo(VkPipelineCacheCreateInfo const *pData);
 #if (VK_HEADER_VERSION >= 330 && VK_COMPUTE_VERSION_1_0) ||                                        \
     (VK_HEADER_VERSION >= 241 && VK_HEADER_VERSION <= 329)
 void cleanup_VkPipelineCacheCreateInfo(VkPipelineCacheCreateInfo const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 332 && VK_QCOM_data_graph_model)
+void cleanup_VkPipelineCacheHeaderVersionDataGraphQCOM(
+    VkPipelineCacheHeaderVersionDataGraphQCOM const *pData);
 #endif
 
 #if (VK_HEADER_VERSION >= 330 && VK_COMPUTE_VERSION_1_0) ||                                        \
@@ -11049,6 +11064,14 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
+#if (VK_HEADER_VERSION >= 332 && VK_QCOM_data_graph_model)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_BUILTIN_MODEL_CREATE_INFO_QCOM) {
+    cleanup_VkDataGraphPipelineBuiltinModelCreateInfoQCOM(
+        (VkDataGraphPipelineBuiltinModelCreateInfoQCOM const *)pData);
+    return;
+  }
+#endif
+
 #if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
   if (pTemp->sType == VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_COMPILER_CONTROL_CREATE_INFO_ARM) {
     cleanup_VkDataGraphPipelineCompilerControlCreateInfoARM(
@@ -14160,6 +14183,14 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DATA_GRAPH_FEATURES_ARM) {
     cleanup_VkPhysicalDeviceDataGraphFeaturesARM(
         (VkPhysicalDeviceDataGraphFeaturesARM const *)pData);
+    return;
+  }
+#endif
+
+#if (VK_HEADER_VERSION >= 332 && VK_QCOM_data_graph_model)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DATA_GRAPH_MODEL_FEATURES_QCOM) {
+    cleanup_VkPhysicalDeviceDataGraphModelFeaturesQCOM(
+        (VkPhysicalDeviceDataGraphModelFeaturesQCOM const *)pData);
     return;
   }
 #endif
@@ -24601,6 +24632,21 @@ void cleanup_VkD3D12FenceSubmitInfoKHR(VkD3D12FenceSubmitInfoKHR const *pData) {
 }
 #endif
 
+#if (VK_HEADER_VERSION >= 332 && VK_QCOM_data_graph_model)
+void cleanup_VkDataGraphPipelineBuiltinModelCreateInfoQCOM(
+    VkDataGraphPipelineBuiltinModelCreateInfoQCOM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pOperation
+  if (pData->pOperation != NULL)
+    cleanup_VkPhysicalDeviceDataGraphOperationSupportARM(pData->pOperation);
+  free((void *)pData->pOperation);
+}
+#endif
+
 #if (VK_HEADER_VERSION >= 319 && VK_ARM_data_graph)
 void cleanup_VkDataGraphPipelineCompilerControlCreateInfoARM(
     VkDataGraphPipelineCompilerControlCreateInfoARM const *pData) {
@@ -30360,6 +30406,16 @@ void cleanup_VkPhysicalDeviceDataGraphFeaturesARM(
 }
 #endif
 
+#if (VK_HEADER_VERSION >= 332 && VK_QCOM_data_graph_model)
+void cleanup_VkPhysicalDeviceDataGraphModelFeaturesQCOM(
+    VkPhysicalDeviceDataGraphModelFeaturesQCOM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
 #if (VK_HEADER_VERSION >= 319 && VK_HEADER_VERSION <= 319 && VK_ARM_data_graph)
 void cleanup_VkPhysicalDeviceDataGraphOperationSupportARM(
     VkPhysicalDeviceDataGraphOperationSupportARM const *pData) {}
@@ -35833,6 +35889,11 @@ void cleanup_VkPipelineCacheCreateInfo(VkPipelineCacheCreateInfo const *pData) {
   // pInitialData - initialDataSize
   free((void *)pData->pInitialData);
 }
+#endif
+
+#if (VK_HEADER_VERSION >= 332 && VK_QCOM_data_graph_model)
+void cleanup_VkPipelineCacheHeaderVersionDataGraphQCOM(
+    VkPipelineCacheHeaderVersionDataGraphQCOM const *pData) {}
 #endif
 
 #if (VK_HEADER_VERSION >= 330 && VK_COMPUTE_VERSION_1_0) ||                                        \
