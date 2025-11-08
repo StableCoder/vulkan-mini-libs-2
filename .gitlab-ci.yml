@@ -156,18 +156,22 @@ macOS/AppleClang:
   parallel:
     matrix:
       - ARCH: [arm64]
+        TOOLING: [xclt, xcode]
   tags:
     - macos
     - ${ARCH}
+    - ${TOOLING}
   <<: *platform_macos_template
 
 macOS/Clang:
   parallel:
     matrix:
       - ARCH: [arm64]
+        TOOLING: [xclt]
   tags:
     - macos
     - ${ARCH}
+    - ${TOOLING}
   variables:
     CC: clang
     CXX: clang++
