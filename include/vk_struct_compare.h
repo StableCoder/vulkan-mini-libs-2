@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 332
+#if VK_HEADER_VERSION > 333
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v332)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v333)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v332)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v333)"
 #endif
 #endif
 
@@ -475,6 +475,12 @@ bool compare_VkAttachmentSampleCountInfoNV(VkAttachmentSampleCountInfoNV const *
 #if VK_EXT_sample_locations
 bool compare_VkAttachmentSampleLocationsEXT(VkAttachmentSampleLocationsEXT const *s1,
                                             VkAttachmentSampleLocationsEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 333 && VK_EXT_custom_resolve &&                                           \
+    (VK_KHR_dynamic_rendering || VK_VERSION_1_3)
+bool compare_VkBeginCustomResolveInfoEXT(VkBeginCustomResolveInfoEXT const *s1,
+                                         VkBeginCustomResolveInfoEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 135 && VK_HEADER_VERSION <= 161 && VK_KHR_ray_tracing &&                  \
@@ -1402,6 +1408,12 @@ bool compare_VkCudaLaunchInfoNV(VkCudaLaunchInfoNV const *s1, VkCudaLaunchInfoNV
 #if VK_HEADER_VERSION >= 269 && VK_NV_cuda_kernel_launch && VK_ENABLE_BETA_EXTENSIONS
 bool compare_VkCudaModuleCreateInfoNV(VkCudaModuleCreateInfoNV const *s1,
                                       VkCudaModuleCreateInfoNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 333 && VK_EXT_custom_resolve &&                                           \
+    (VK_KHR_dynamic_rendering || VK_VERSION_1_3)
+bool compare_VkCustomResolveCreateInfoEXT(VkCustomResolveCreateInfoEXT const *s1,
+                                          VkCustomResolveCreateInfoEXT const *s2);
 #endif
 
 #if VK_KHR_external_semaphore_win32
@@ -4359,6 +4371,12 @@ bool compare_VkPhysicalDeviceCustomBorderColorPropertiesEXT(
     VkPhysicalDeviceCustomBorderColorPropertiesEXT const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 333 && VK_EXT_custom_resolve
+bool compare_VkPhysicalDeviceCustomResolveFeaturesEXT(
+    VkPhysicalDeviceCustomResolveFeaturesEXT const *s1,
+    VkPhysicalDeviceCustomResolveFeaturesEXT const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
 bool compare_VkPhysicalDeviceDataGraphFeaturesARM(VkPhysicalDeviceDataGraphFeaturesARM const *s1,
                                                   VkPhysicalDeviceDataGraphFeaturesARM const *s2);
@@ -6300,13 +6318,37 @@ bool compare_VkPhysicalDeviceRayTracingFeaturesKHR(VkPhysicalDeviceRayTracingFea
                                                    VkPhysicalDeviceRayTracingFeaturesKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 233 && VK_NV_ray_tracing_invocation_reorder
+#if VK_HEADER_VERSION >= 333 && VK_EXT_ray_tracing_invocation_reorder
+bool compare_VkPhysicalDeviceRayTracingInvocationReorderFeaturesEXT(
+    VkPhysicalDeviceRayTracingInvocationReorderFeaturesEXT const *s1,
+    VkPhysicalDeviceRayTracingInvocationReorderFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 233 && VK_HEADER_VERSION <= 332 && VK_NV_ray_tracing_invocation_reorder
 bool compare_VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV(
     VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV const *s1,
     VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 233 && VK_NV_ray_tracing_invocation_reorder
+#if VK_HEADER_VERSION >= 333 && VK_NV_ray_tracing_invocation_reorder
+bool compare_VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV(
+    VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV const *s1,
+    VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 333 && VK_EXT_ray_tracing_invocation_reorder
+bool compare_VkPhysicalDeviceRayTracingInvocationReorderPropertiesEXT(
+    VkPhysicalDeviceRayTracingInvocationReorderPropertiesEXT const *s1,
+    VkPhysicalDeviceRayTracingInvocationReorderPropertiesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 233 && VK_HEADER_VERSION <= 332 && VK_NV_ray_tracing_invocation_reorder
+bool compare_VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV(
+    VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV const *s1,
+    VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 333 && VK_NV_ray_tracing_invocation_reorder
 bool compare_VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV(
     VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV const *s1,
     VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV const *s2);
@@ -12640,6 +12682,14 @@ bool compare_VkAttachmentSampleLocationsEXT(VkAttachmentSampleLocationsEXT const
 }
 #endif
 
+#if VK_HEADER_VERSION >= 333 && VK_EXT_custom_resolve &&                                           \
+    (VK_KHR_dynamic_rendering || VK_VERSION_1_3)
+bool compare_VkBeginCustomResolveInfoEXT(VkBeginCustomResolveInfoEXT const *s1,
+                                         VkBeginCustomResolveInfoEXT const *s2) {
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 135 && VK_HEADER_VERSION <= 161 && VK_KHR_ray_tracing &&                  \
     VK_ENABLE_BETA_EXTENSIONS
 bool compare_VkBindAccelerationStructureMemoryInfoKHR(
@@ -15209,6 +15259,29 @@ bool compare_VkCudaModuleCreateInfoNV(VkCudaModuleCreateInfoNV const *s1,
   // pData - dataSize
   if (s1->pData != s2->pData &&
       (s1->pData == NULL || s2->pData == NULL || memcmp(s1->pData, s2->pData, s1->dataSize) != 0))
+    return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 333 && VK_EXT_custom_resolve &&                                           \
+    (VK_KHR_dynamic_rendering || VK_VERSION_1_3)
+bool compare_VkCustomResolveCreateInfoEXT(VkCustomResolveCreateInfoEXT const *s1,
+                                          VkCustomResolveCreateInfoEXT const *s2) {
+  // local, simple types
+  if ((s1->customResolve != s2->customResolve) ||
+      (s1->colorAttachmentCount != s2->colorAttachmentCount) ||
+      (s1->depthAttachmentFormat != s2->depthAttachmentFormat) ||
+      (s1->stencilAttachmentFormat != s2->stencilAttachmentFormat))
+    return false;
+
+  // non-local members
+
+  // pColorAttachmentFormats - colorAttachmentCount
+  if (s1->pColorAttachmentFormats != s2->pColorAttachmentFormats &&
+      (s1->pColorAttachmentFormats == NULL || s2->pColorAttachmentFormats == NULL ||
+       memcmp(s1->pColorAttachmentFormats, s2->pColorAttachmentFormats,
+              (s1->colorAttachmentCount) * sizeof(VkFormat)) != 0))
     return false;
   return true;
 }
@@ -22918,6 +22991,18 @@ bool compare_VkPhysicalDeviceCustomBorderColorPropertiesEXT(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 333 && VK_EXT_custom_resolve
+bool compare_VkPhysicalDeviceCustomResolveFeaturesEXT(
+    VkPhysicalDeviceCustomResolveFeaturesEXT const *s1,
+    VkPhysicalDeviceCustomResolveFeaturesEXT const *s2) {
+  // local, simple types
+  if ((s1->customResolve != s2->customResolve))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
 bool compare_VkPhysicalDeviceDataGraphFeaturesARM(VkPhysicalDeviceDataGraphFeaturesARM const *s1,
                                                   VkPhysicalDeviceDataGraphFeaturesARM const *s2) {
@@ -27863,7 +27948,19 @@ bool compare_VkPhysicalDeviceRayTracingFeaturesKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 233 && VK_NV_ray_tracing_invocation_reorder
+#if VK_HEADER_VERSION >= 333 && VK_EXT_ray_tracing_invocation_reorder
+bool compare_VkPhysicalDeviceRayTracingInvocationReorderFeaturesEXT(
+    VkPhysicalDeviceRayTracingInvocationReorderFeaturesEXT const *s1,
+    VkPhysicalDeviceRayTracingInvocationReorderFeaturesEXT const *s2) {
+  // local, simple types
+  if ((s1->rayTracingInvocationReorder != s2->rayTracingInvocationReorder))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 233 && VK_HEADER_VERSION <= 332 && VK_NV_ray_tracing_invocation_reorder
 bool compare_VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV(
     VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV const *s1,
     VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV const *s2) {
@@ -27875,7 +27972,46 @@ bool compare_VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 233 && VK_NV_ray_tracing_invocation_reorder
+#if VK_HEADER_VERSION >= 333 && VK_NV_ray_tracing_invocation_reorder
+bool compare_VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV(
+    VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV const *s1,
+    VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV const *s2) {
+  // local, simple types
+  if ((s1->rayTracingInvocationReorder != s2->rayTracingInvocationReorder))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 333 && VK_EXT_ray_tracing_invocation_reorder
+bool compare_VkPhysicalDeviceRayTracingInvocationReorderPropertiesEXT(
+    VkPhysicalDeviceRayTracingInvocationReorderPropertiesEXT const *s1,
+    VkPhysicalDeviceRayTracingInvocationReorderPropertiesEXT const *s2) {
+  // local, simple types
+  if ((s1->rayTracingInvocationReorderReorderingHint !=
+       s2->rayTracingInvocationReorderReorderingHint) ||
+      (s1->maxShaderBindingTableRecordIndex != s2->maxShaderBindingTableRecordIndex))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 233 && VK_HEADER_VERSION <= 332 && VK_NV_ray_tracing_invocation_reorder
+bool compare_VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV(
+    VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV const *s1,
+    VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV const *s2) {
+  // local, simple types
+  if ((s1->rayTracingInvocationReorderReorderingHint !=
+       s2->rayTracingInvocationReorderReorderingHint))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 333 && VK_NV_ray_tracing_invocation_reorder
 bool compare_VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV(
     VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV const *s1,
     VkPhysicalDeviceRayTracingInvocationReorderPropertiesNV const *s2) {

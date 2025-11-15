@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 332
+#if VK_HEADER_VERSION > 333
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v332)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v333)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v332)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v333)"
 #endif
 #endif
 
@@ -816,6 +816,8 @@ EnumValueSet const VkSparseImageFormatFlagsSets[] = {
 };
 
 EnumValueSet const VkSubpassDescriptionFlagsSets[] = {
+    {"FRAGMENT_REGION_BIT_QCOM", 0x00000004},
+    {"SHADER_RESOLVE_BIT_QCOM", 0x00000008},
     {"RASTERIZATION_ORDER_ATTACHMENT_COLOR_ACCESS_BIT_ARM", 0x00000010},
     {"RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_BIT_ARM", 0x00000020},
     {"RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_BIT_ARM", 0x00000040},
@@ -823,14 +825,14 @@ EnumValueSet const VkSubpassDescriptionFlagsSets[] = {
     {"PER_VIEW_POSITION_X_ONLY_BIT_NVX", 0x00000002},
     {"RESERVED_2_BIT_QCOM", 0x00000004},
     {"RESERVED_3_BIT_QCOM", 0x00000008},
-    {"FRAGMENT_REGION_BIT_QCOM", 0x00000004},
-    {"SHADER_RESOLVE_BIT_QCOM", 0x00000008},
     {"RESERVED_7_BIT_EXT", 0x00000080},
     {"RASTERIZATION_ORDER_ATTACHMENT_COLOR_ACCESS_BIT_EXT", 0x00000010},
     {"RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_BIT_EXT", 0x00000020},
     {"RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_BIT_EXT", 0x00000040},
     {"ENABLE_LEGACY_DITHERING_BIT_EXT", 0x00000080},
     {"TILE_SHADING_APRON_BIT_QCOM", 0x00000100},
+    {"FRAGMENT_REGION_BIT_EXT", 0x00000004},
+    {"CUSTOM_RESOLVE_BIT_EXT", 0x00000008},
 };
 
 EnumValueSet const VkPipelineStageFlagsSets[] = {
@@ -1400,6 +1402,8 @@ EnumValueSet const VkRenderingFlagsSets[] = {
     {"RESERVED_8_BIT_KHR", 0x00000100},
     {"RESERVED_9_BIT_IMG", 0x00000200},
     {"LOCAL_READ_CONCURRENT_ACCESS_CONTROL_BIT_KHR", 0x00000100},
+    {"FRAGMENT_REGION_BIT_EXT", 0x00000040},
+    {"CUSTOM_RESOLVE_BIT_EXT", 0x00000080},
 };
 
 EnumValueSet const VkMemoryDecompressionMethodFlagsEXTSets[] = {
@@ -1833,6 +1837,7 @@ EnumValueSet const VkResolveModeFlagsSets[] = {
     {"EXTENSION_469_FLAG_4_BIT_ANDROID", 0x00000010},
     {"RESERVED_5_BIT_EXT", 0x00000020},
     {"EXTERNAL_FORMAT_DOWNSAMPLE_BIT_ANDROID", 0x00000010},
+    {"CUSTOM_BIT_EXT", 0x00000020},
 };
 
 EnumValueSet const VkSwapchainImageUsageFlagsANDROIDSets[] = {
@@ -3179,7 +3184,9 @@ EnumValueSet const VkObjectTypeSets[] = {
     {"DATA_GRAPH_PIPELINE_SESSION_ARM", 1000507000},
 };
 
-EnumValueSet const VkRayTracingInvocationReorderModeNVSets[] = {
+EnumValueSet const VkRayTracingInvocationReorderModeEXTSets[] = {
+    {"NONE_NV", 0},
+    {"REORDER_NV", 1},
     {"NONE", 0},
     {"REORDER", 1},
 };
@@ -4388,7 +4395,7 @@ EnumType const cEnumTypes[408] = {
     {"VkImageAspectFlags", VkImageAspectFlagsSets, 16},
     {"VkSparseMemoryBindFlags", VkSparseMemoryBindFlagsSets, 1},
     {"VkSparseImageFormatFlags", VkSparseImageFormatFlagsSets, 3},
-    {"VkSubpassDescriptionFlags", VkSubpassDescriptionFlagsSets, 15},
+    {"VkSubpassDescriptionFlags", VkSubpassDescriptionFlagsSets, 17},
     {"VkPipelineStageFlags", VkPipelineStageFlagsSets, 43},
     {"VkSampleCountFlags", VkSampleCountFlagsSets, 7},
     {"VkAttachmentDescriptionFlags", VkAttachmentDescriptionFlagsSets, 5},
@@ -4425,7 +4432,7 @@ EnumType const cEnumTypes[408] = {
     {"VkAccelerationStructureMotionInfoFlagsNV", NULL, 0},
     {"VkAccelerationStructureMotionInstanceFlagsNV", NULL, 0},
     {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Sets, 110},
-    {"VkRenderingFlags", VkRenderingFlagsSets, 18},
+    {"VkRenderingFlags", VkRenderingFlagsSets, 20},
     {"VkMemoryDecompressionMethodFlagsEXT", VkMemoryDecompressionMethodFlagsEXTSets, 2},
     {"VkBuildMicromapFlagsEXT", VkBuildMicromapFlagsEXTSets, 3},
     {"VkMicromapCreateFlagsEXT", VkMicromapCreateFlagsEXTSets, 1},
@@ -4496,7 +4503,7 @@ EnumType const cEnumTypes[408] = {
     {"VkPipelineRasterizationConservativeStateCreateFlagsEXT", NULL, 0},
     {"VkDescriptorBindingFlags", VkDescriptorBindingFlagsSets, 9},
     {"VkConditionalRenderingFlagsEXT", VkConditionalRenderingFlagsEXTSets, 1},
-    {"VkResolveModeFlags", VkResolveModeFlagsSets, 15},
+    {"VkResolveModeFlags", VkResolveModeFlagsSets, 16},
     {"VkPipelineRasterizationStateStreamCreateFlagsEXT", NULL, 0},
     {"VkPipelineRasterizationDepthClipStateCreateFlagsEXT", NULL, 0},
     {"VkSwapchainImageUsageFlagsANDROID", VkSwapchainImageUsageFlagsANDROIDSets, 1},
@@ -4601,7 +4608,7 @@ EnumType const cEnumTypes[408] = {
     {"VkClusterAccelerationStructureOpTypeNV", VkClusterAccelerationStructureOpTypeNVSets, 6},
     {"VkClusterAccelerationStructureOpModeNV", VkClusterAccelerationStructureOpModeNVSets, 3},
     {"VkObjectType", VkObjectTypeSets, 65},
-    {"VkRayTracingInvocationReorderModeNV", VkRayTracingInvocationReorderModeNVSets, 2},
+    {"VkRayTracingInvocationReorderModeEXT", VkRayTracingInvocationReorderModeEXTSets, 4},
     {"VkIndirectCommandsTokenTypeNV", VkIndirectCommandsTokenTypeNVSets, 11},
     {"VkDescriptorUpdateTemplateType", VkDescriptorUpdateTemplateTypeSets, 4},
     {"VkViewportCoordinateSwizzleNV", VkViewportCoordinateSwizzleNVSets, 8},
