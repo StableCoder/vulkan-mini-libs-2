@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 333
+#if VK_HEADER_VERSION > 334
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v333)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v334)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v333)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v334)"
 #endif
 #endif
 
@@ -479,6 +479,7 @@ EnumValueSet const VkShaderStageFlagsSets[] = {
     {"RESERVED_19_BIT_HUAWEI", 0x00080000},
     {"CLUSTER_CULLING_BIT_HUAWEI", 0x00080000},
     {"RESERVED_15_BIT_NV", 0x00008000},
+    {"RESERVED_16_BIT_HUAWEI", 0x00010000},
 };
 
 EnumValueSet const VkImageUsageFlagsSets[] = {
@@ -533,6 +534,8 @@ EnumValueSet const VkImageUsageFlagsSets[] = {
     {"RESERVED_28_BIT_EXT", 0x10000000},
     {"RESERVED_29_BIT_KHR", 0x20000000},
     {"RESERVED_30_BIT_KHR", 0x40000000},
+    {"RESERVED_16_BIT_HUAWEI", 0x00010000},
+    {"RESERVED_27_BIT_HUAWEI", 0x00020000},
 };
 
 EnumValueSet const VkImageCreateFlagsSets[] = {
@@ -759,6 +762,7 @@ EnumValueSet const VkCommandBufferUsageFlagsSets[] = {
     {"ONE_TIME_SUBMIT", 0x00000001},
     {"RENDER_PASS_CONTINUE", 0x00000002},
     {"SIMULTANEOUS_USE", 0x00000004},
+    {"RESERVED_3_BIT_HUAWEI", 0x00000008},
 };
 
 EnumValueSet const VkQueryPipelineStatisticFlagsSets[] = {
@@ -803,6 +807,7 @@ EnumValueSet const VkImageAspectFlagsSets[] = {
     {"MEMORY_PLANE_2_BIT_EXT", 0x00000200},
     {"MEMORY_PLANE_3_BIT_EXT", 0x00000400},
     {"NONE", 0},
+    {"RESERVED_11_BIT_HUAWEI", 0x00000800},
 };
 
 EnumValueSet const VkSparseMemoryBindFlagsSets[] = {
@@ -1268,6 +1273,7 @@ EnumValueSet const VkPipelineStageFlags2Sets[] = {
     {"RESERVED_47_BIT_KHR", 0x800000000000},
     {"COPY_INDIRECT_BIT_KHR", 0x400000000000},
     {"MEMORY_DECOMPRESSION_BIT_EXT", 0x200000000000},
+    {"RESERVED_48_BIT_HUAWEI", 0x1000000000000},
 };
 
 EnumValueSet const VkFormatFeatureFlags2Sets[] = {
@@ -1381,6 +1387,7 @@ EnumValueSet const VkFormatFeatureFlags2Sets[] = {
     {"DEPTH_COPY_ON_TRANSFER_QUEUE_BIT_KHR", 0x20000000000000},
     {"STENCIL_COPY_ON_COMPUTE_QUEUE_BIT_KHR", 0x40000000000000},
     {"STENCIL_COPY_ON_TRANSFER_QUEUE_BIT_KHR", 0x80000000000000},
+    {"RESERVED_61_BIT_HUAWEI", 0x2000000000000000},
 };
 
 EnumValueSet const VkRenderingFlagsSets[] = {
@@ -1494,6 +1501,7 @@ EnumValueSet const VkPipelineCreateFlags2Sets[] = {
     {"RESERVED_46_BIT_IMG", 0x400000000000},
     {"RESERVED_47_BIT_AMD", 0x800000000000},
     {"64_BIT_INDEXING_BIT_EXT", 0x80000000000},
+    {"RESERVED_48_BIT_HUAWEI", 0x1000000000000},
 };
 
 EnumValueSet const VkBufferUsageFlags2Sets[] = {
@@ -1548,6 +1556,7 @@ EnumValueSet const VkBufferUsageFlags2Sets[] = {
     {"RESERVED_35_BIT_KHR", 0x800000000},
     {"RESERVED_36_BIT_KHR", 0x1000000000},
     {"MEMORY_DECOMPRESSION_BIT_EXT", 0x100000000},
+    {"RESERVED_37_BIT_HUAWEI", 0x2000000000},
 };
 
 EnumValueSet const VkAddressCopyFlagsKHRSets[] = {
@@ -4372,8 +4381,8 @@ EnumType const cEnumTypes[408] = {
     {"VkAccessFlags", VkAccessFlagsSets, 47},
     {"VkBufferUsageFlags", VkBufferUsageFlagsSets, 50},
     {"VkBufferCreateFlags", VkBufferCreateFlagsSets, 13},
-    {"VkShaderStageFlags", VkShaderStageFlagsSets, 45},
-    {"VkImageUsageFlags", VkImageUsageFlagsSets, 51},
+    {"VkShaderStageFlags", VkShaderStageFlagsSets, 46},
+    {"VkImageUsageFlags", VkImageUsageFlagsSets, 53},
     {"VkImageCreateFlags", VkImageCreateFlagsSets, 38},
     {"VkImageViewCreateFlags", VkImageViewCreateFlagsSets, 6},
     {"VkPipelineCreateFlags", VkPipelineCreateFlagsSets, 68},
@@ -4388,11 +4397,11 @@ EnumType const cEnumTypes[408] = {
     {"VkCommandPoolCreateFlags", VkCommandPoolCreateFlagsSets, 3},
     {"VkCommandPoolResetFlags", VkCommandPoolResetFlagsSets, 2},
     {"VkCommandBufferResetFlags", VkCommandBufferResetFlagsSets, 1},
-    {"VkCommandBufferUsageFlags", VkCommandBufferUsageFlagsSets, 3},
+    {"VkCommandBufferUsageFlags", VkCommandBufferUsageFlagsSets, 4},
     {"VkQueryPipelineStatisticFlags", VkQueryPipelineStatisticFlagsSets, 14},
     {"VkMemoryMapFlags", VkMemoryMapFlagsSets, 1},
     {"VkMemoryUnmapFlags", VkMemoryUnmapFlagsSets, 1},
-    {"VkImageAspectFlags", VkImageAspectFlagsSets, 16},
+    {"VkImageAspectFlags", VkImageAspectFlagsSets, 17},
     {"VkSparseMemoryBindFlags", VkSparseMemoryBindFlagsSets, 1},
     {"VkSparseImageFormatFlags", VkSparseImageFormatFlagsSets, 3},
     {"VkSubpassDescriptionFlags", VkSubpassDescriptionFlagsSets, 17},
@@ -4428,10 +4437,10 @@ EnumType const cEnumTypes[408] = {
     {"VkDeviceDiagnosticsConfigFlagsNV", VkDeviceDiagnosticsConfigFlagsNVSets, 4},
     {"VkRefreshObjectFlagsKHR", NULL, 0},
     {"VkAccessFlags2", VkAccessFlags2Sets, 98},
-    {"VkPipelineStageFlags2", VkPipelineStageFlags2Sets, 90},
+    {"VkPipelineStageFlags2", VkPipelineStageFlags2Sets, 91},
     {"VkAccelerationStructureMotionInfoFlagsNV", NULL, 0},
     {"VkAccelerationStructureMotionInstanceFlagsNV", NULL, 0},
-    {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Sets, 110},
+    {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Sets, 111},
     {"VkRenderingFlags", VkRenderingFlagsSets, 20},
     {"VkMemoryDecompressionMethodFlagsEXT", VkMemoryDecompressionMethodFlagsEXTSets, 2},
     {"VkBuildMicromapFlagsEXT", VkBuildMicromapFlagsEXTSets, 3},
@@ -4439,8 +4448,8 @@ EnumType const cEnumTypes[408] = {
     {"VkIndirectCommandsLayoutUsageFlagsEXT", VkIndirectCommandsLayoutUsageFlagsEXTSets, 2},
     {"VkIndirectCommandsInputModeFlagsEXT", VkIndirectCommandsInputModeFlagsEXTSets, 2},
     {"VkDirectDriverLoadingFlagsLUNARG", NULL, 0},
-    {"VkPipelineCreateFlags2", VkPipelineCreateFlags2Sets, 62},
-    {"VkBufferUsageFlags2", VkBufferUsageFlags2Sets, 51},
+    {"VkPipelineCreateFlags2", VkPipelineCreateFlags2Sets, 63},
+    {"VkBufferUsageFlags2", VkBufferUsageFlags2Sets, 52},
     {"VkAddressCopyFlagsKHR", VkAddressCopyFlagsKHRSets, 3},
     {"VkTensorCreateFlagsARM", VkTensorCreateFlagsARMSets, 4},
     {"VkTensorUsageFlagsARM", VkTensorUsageFlagsARMSets, 5},

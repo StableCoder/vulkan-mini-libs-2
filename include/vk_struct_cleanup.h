@@ -37,12 +37,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 333
+#if VK_HEADER_VERSION > 334
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v333)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v334)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v333)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v334)"
 #endif
 #endif
 
@@ -5362,12 +5362,12 @@ void cleanup_VkPhysicalDeviceRayTracingInvocationReorderFeaturesEXT(
     VkPhysicalDeviceRayTracingInvocationReorderFeaturesEXT const *pData);
 #endif
 
-#if (VK_HEADER_VERSION >= 233 && VK_HEADER_VERSION <= 332 && VK_NV_ray_tracing_invocation_reorder)
+#if (VK_HEADER_VERSION >= 233 && VK_NV_ray_tracing_invocation_reorder)
 void cleanup_VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV(
     VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV const *pData);
 #endif
 
-#if (VK_HEADER_VERSION >= 333 && VK_NV_ray_tracing_invocation_reorder)
+#if (VK_HEADER_VERSION >= 333 && VK_HEADER_VERSION <= 333 && VK_NV_ray_tracing_invocation_reorder)
 void cleanup_VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV(
     VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV const *pData);
 #endif
@@ -16327,7 +16327,7 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
-#if (VK_HEADER_VERSION >= 233 && VK_HEADER_VERSION <= 332 && VK_NV_ray_tracing_invocation_reorder)
+#if (VK_HEADER_VERSION >= 233 && VK_NV_ray_tracing_invocation_reorder)
   if (pTemp->sType ==
       VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_RAY_TRACING_INVOCATION_REORDER_FEATURES_NV) {
     cleanup_VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV(
@@ -33774,7 +33774,7 @@ void cleanup_VkPhysicalDeviceRayTracingInvocationReorderFeaturesEXT(
 }
 #endif
 
-#if (VK_HEADER_VERSION >= 233 && VK_HEADER_VERSION <= 332 && VK_NV_ray_tracing_invocation_reorder)
+#if (VK_HEADER_VERSION >= 233 && VK_NV_ray_tracing_invocation_reorder)
 void cleanup_VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV(
     VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV const *pData) {
   // pNext
@@ -33784,7 +33784,7 @@ void cleanup_VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV(
 }
 #endif
 
-#if (VK_HEADER_VERSION >= 333 && VK_NV_ray_tracing_invocation_reorder)
+#if (VK_HEADER_VERSION >= 333 && VK_HEADER_VERSION <= 333 && VK_NV_ray_tracing_invocation_reorder)
 void cleanup_VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV(
     VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV const *pData) {
   // pNext

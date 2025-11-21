@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 333
+#if VK_HEADER_VERSION > 334
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v333)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v334)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v333)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v334)"
 #endif
 #endif
 
@@ -6324,13 +6324,13 @@ bool compare_VkPhysicalDeviceRayTracingInvocationReorderFeaturesEXT(
     VkPhysicalDeviceRayTracingInvocationReorderFeaturesEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 233 && VK_HEADER_VERSION <= 332 && VK_NV_ray_tracing_invocation_reorder
+#if VK_HEADER_VERSION >= 233 && VK_NV_ray_tracing_invocation_reorder
 bool compare_VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV(
     VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV const *s1,
     VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 333 && VK_NV_ray_tracing_invocation_reorder
+#if VK_HEADER_VERSION >= 333 && VK_HEADER_VERSION <= 333 && VK_NV_ray_tracing_invocation_reorder
 bool compare_VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV(
     VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV const *s1,
     VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV const *s2);
@@ -27960,7 +27960,7 @@ bool compare_VkPhysicalDeviceRayTracingInvocationReorderFeaturesEXT(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 233 && VK_HEADER_VERSION <= 332 && VK_NV_ray_tracing_invocation_reorder
+#if VK_HEADER_VERSION >= 233 && VK_NV_ray_tracing_invocation_reorder
 bool compare_VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV(
     VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV const *s1,
     VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV const *s2) {
@@ -27972,7 +27972,7 @@ bool compare_VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 333 && VK_NV_ray_tracing_invocation_reorder
+#if VK_HEADER_VERSION >= 333 && VK_HEADER_VERSION <= 333 && VK_NV_ray_tracing_invocation_reorder
 bool compare_VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV(
     VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV const *s1,
     VkPhysicalDeviceRayTracingInvocationReorderFeaturesNV const *s2) {
