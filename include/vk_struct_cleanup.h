@@ -37,12 +37,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 335
+#if VK_HEADER_VERSION > 336
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v335)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v336)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v335)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v336)"
 #endif
 #endif
 
@@ -957,6 +957,11 @@ void cleanup_VkCommandPoolMemoryReservationCreateInfo(
 
 #if (VK_HEADER_VERSION >= 330 && VK_BASE_VERSION_1_0) || (VK_HEADER_VERSION <= 329)
 void cleanup_VkComponentMapping(VkComponentMapping const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 336 && VK_NV_compute_occupancy_priority)
+void cleanup_VkComputeOccupancyPriorityParametersNV(
+    VkComputeOccupancyPriorityParametersNV const *pData);
 #endif
 
 #if (VK_HEADER_VERSION >= 330 && VK_COMPUTE_VERSION_1_0) || (VK_HEADER_VERSION <= 329)
@@ -3591,6 +3596,11 @@ void cleanup_VkPhysicalDeviceColorWriteEnableFeaturesEXT(
 #if (VK_HEADER_VERSION >= 293 && VK_NV_command_buffer_inheritance)
 void cleanup_VkPhysicalDeviceCommandBufferInheritanceFeaturesNV(
     VkPhysicalDeviceCommandBufferInheritanceFeaturesNV const *pData);
+#endif
+
+#if (VK_HEADER_VERSION >= 336 && VK_NV_compute_occupancy_priority)
+void cleanup_VkPhysicalDeviceComputeOccupancyPriorityFeaturesNV(
+    VkPhysicalDeviceComputeOccupancyPriorityFeaturesNV const *pData);
 #endif
 
 #if (VK_HEADER_VERSION >= 295 && VK_KHR_compute_shader_derivatives)
@@ -10849,6 +10859,14 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
+#if (VK_HEADER_VERSION >= 336 && VK_NV_compute_occupancy_priority)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_COMPUTE_OCCUPANCY_PRIORITY_PARAMETERS_NV) {
+    cleanup_VkComputeOccupancyPriorityParametersNV(
+        (VkComputeOccupancyPriorityParametersNV const *)pData);
+    return;
+  }
+#endif
+
 #if (VK_HEADER_VERSION >= 330 && VK_COMPUTE_VERSION_1_0) || (VK_HEADER_VERSION <= 329)
   if (pTemp->sType == VK_STRUCTURE_TYPE_COMPUTE_PIPELINE_CREATE_INFO) {
     cleanup_VkComputePipelineCreateInfo((VkComputePipelineCreateInfo const *)pData);
@@ -14096,6 +14114,14 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMMAND_BUFFER_INHERITANCE_FEATURES_NV) {
     cleanup_VkPhysicalDeviceCommandBufferInheritanceFeaturesNV(
         (VkPhysicalDeviceCommandBufferInheritanceFeaturesNV const *)pData);
+    return;
+  }
+#endif
+
+#if (VK_HEADER_VERSION >= 336 && VK_NV_compute_occupancy_priority)
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COMPUTE_OCCUPANCY_PRIORITY_FEATURES_NV) {
+    cleanup_VkPhysicalDeviceComputeOccupancyPriorityFeaturesNV(
+        (VkPhysicalDeviceComputeOccupancyPriorityFeaturesNV const *)pData);
     return;
   }
 #endif
@@ -24189,6 +24215,16 @@ void cleanup_VkCommandPoolMemoryReservationCreateInfo(
 void cleanup_VkComponentMapping(VkComponentMapping const *pData) {}
 #endif
 
+#if (VK_HEADER_VERSION >= 336 && VK_NV_compute_occupancy_priority)
+void cleanup_VkComputeOccupancyPriorityParametersNV(
+    VkComputeOccupancyPriorityParametersNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
 #if (VK_HEADER_VERSION >= 330 && VK_COMPUTE_VERSION_1_0) || (VK_HEADER_VERSION <= 329)
 void cleanup_VkComputePipelineCreateInfo(VkComputePipelineCreateInfo const *pData) {
   // pNext
@@ -30392,6 +30428,16 @@ void cleanup_VkPhysicalDeviceColorWriteEnableFeaturesEXT(
 #if (VK_HEADER_VERSION >= 293 && VK_NV_command_buffer_inheritance)
 void cleanup_VkPhysicalDeviceCommandBufferInheritanceFeaturesNV(
     VkPhysicalDeviceCommandBufferInheritanceFeaturesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if (VK_HEADER_VERSION >= 336 && VK_NV_compute_occupancy_priority)
+void cleanup_VkPhysicalDeviceComputeOccupancyPriorityFeaturesNV(
+    VkPhysicalDeviceComputeOccupancyPriorityFeaturesNV const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

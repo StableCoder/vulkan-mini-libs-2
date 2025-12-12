@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 335
+#if VK_HEADER_VERSION > 336
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v335)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v336)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v335)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v336)"
 #endif
 #endif
 
@@ -1121,6 +1121,12 @@ bool compare_VkCommandPoolMemoryReservationCreateInfo(
 
 #if (VK_HEADER_VERSION >= 330 && VK_BASE_VERSION_1_0) || (VK_HEADER_VERSION <= 329)
 bool compare_VkComponentMapping(VkComponentMapping const *s1, VkComponentMapping const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 336 && VK_NV_compute_occupancy_priority
+bool compare_VkComputeOccupancyPriorityParametersNV(
+    VkComputeOccupancyPriorityParametersNV const *s1,
+    VkComputeOccupancyPriorityParametersNV const *s2);
 #endif
 
 #if (VK_HEADER_VERSION >= 330 && VK_COMPUTE_VERSION_1_0) || (VK_HEADER_VERSION <= 329)
@@ -4222,6 +4228,12 @@ bool compare_VkPhysicalDeviceColorWriteEnableFeaturesEXT(
 bool compare_VkPhysicalDeviceCommandBufferInheritanceFeaturesNV(
     VkPhysicalDeviceCommandBufferInheritanceFeaturesNV const *s1,
     VkPhysicalDeviceCommandBufferInheritanceFeaturesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 336 && VK_NV_compute_occupancy_priority
+bool compare_VkPhysicalDeviceComputeOccupancyPriorityFeaturesNV(
+    VkPhysicalDeviceComputeOccupancyPriorityFeaturesNV const *s1,
+    VkPhysicalDeviceComputeOccupancyPriorityFeaturesNV const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 295 && VK_KHR_compute_shader_derivatives
@@ -14531,6 +14543,19 @@ bool compare_VkComponentMapping(VkComponentMapping const *s1, VkComponentMapping
 }
 #endif
 
+#if VK_HEADER_VERSION >= 336 && VK_NV_compute_occupancy_priority
+bool compare_VkComputeOccupancyPriorityParametersNV(
+    VkComputeOccupancyPriorityParametersNV const *s1,
+    VkComputeOccupancyPriorityParametersNV const *s2) {
+  // local, simple types
+  if ((s1->occupancyPriority != s2->occupancyPriority) ||
+      (s1->occupancyThrottling != s2->occupancyThrottling))
+    return false;
+
+  return true;
+}
+#endif
+
 #if (VK_HEADER_VERSION >= 330 && VK_COMPUTE_VERSION_1_0) || (VK_HEADER_VERSION <= 329)
 bool compare_VkComputePipelineCreateInfo(VkComputePipelineCreateInfo const *s1,
                                          VkComputePipelineCreateInfo const *s2) {
@@ -22718,6 +22743,18 @@ bool compare_VkPhysicalDeviceCommandBufferInheritanceFeaturesNV(
     VkPhysicalDeviceCommandBufferInheritanceFeaturesNV const *s2) {
   // local, simple types
   if ((s1->commandBufferInheritance != s2->commandBufferInheritance))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 336 && VK_NV_compute_occupancy_priority
+bool compare_VkPhysicalDeviceComputeOccupancyPriorityFeaturesNV(
+    VkPhysicalDeviceComputeOccupancyPriorityFeaturesNV const *s1,
+    VkPhysicalDeviceComputeOccupancyPriorityFeaturesNV const *s2) {
+  // local, simple types
+  if ((s1->computeOccupancyPriority != s2->computeOccupancyPriority))
     return false;
 
   return true;

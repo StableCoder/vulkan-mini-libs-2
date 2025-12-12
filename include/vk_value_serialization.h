@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 335
+#if VK_HEADER_VERSION > 336
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v335)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v336)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v335)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v336)"
 #endif
 #endif
 
@@ -759,10 +759,9 @@ EnumValueSet const VkCommandBufferResetFlagsSets[] = {
 };
 
 EnumValueSet const VkCommandBufferUsageFlagsSets[] = {
-    {"ONE_TIME_SUBMIT", 0x00000001},
-    {"RENDER_PASS_CONTINUE", 0x00000002},
-    {"SIMULTANEOUS_USE", 0x00000004},
-    {"RESERVED_3_BIT_HUAWEI", 0x00000008},
+    {"ONE_TIME_SUBMIT", 0x00000001},       {"RENDER_PASS_CONTINUE", 0x00000002},
+    {"SIMULTANEOUS_USE", 0x00000004},      {"RESERVED_3_BIT_HUAWEI", 0x00000008},
+    {"RESERVED_4_BIT_HUAWEI", 0x00000010},
 };
 
 EnumValueSet const VkQueryPipelineStatisticFlagsSets[] = {
@@ -4417,7 +4416,7 @@ EnumType const cEnumTypes[411] = {
     {"VkCommandPoolCreateFlags", VkCommandPoolCreateFlagsSets, 3},
     {"VkCommandPoolResetFlags", VkCommandPoolResetFlagsSets, 2},
     {"VkCommandBufferResetFlags", VkCommandBufferResetFlagsSets, 1},
-    {"VkCommandBufferUsageFlags", VkCommandBufferUsageFlagsSets, 4},
+    {"VkCommandBufferUsageFlags", VkCommandBufferUsageFlagsSets, 5},
     {"VkQueryPipelineStatisticFlags", VkQueryPipelineStatisticFlagsSets, 14},
     {"VkMemoryMapFlags", VkMemoryMapFlagsSets, 1},
     {"VkMemoryUnmapFlags", VkMemoryUnmapFlagsSets, 1},
