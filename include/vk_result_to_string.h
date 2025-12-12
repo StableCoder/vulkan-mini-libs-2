@@ -37,12 +37,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 334
+#if VK_HEADER_VERSION > 335
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v334)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v335)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v334)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v335)"
 #endif
 #endif
 
@@ -140,6 +140,8 @@ char const *VkResult_to_string(VkResult result) {
     return "VK_ERROR_VIDEO_STD_VERSION_NOT_SUPPORTED_KHR";
   case -1000158000:
     return "VK_ERROR_INVALID_DRM_FORMAT_MODIFIER_PLANE_LAYOUT_EXT";
+  case -1000208000:
+    return "VK_ERROR_PRESENT_TIMING_QUEUE_FULL_EXT";
   case -1000255000:
     return "VK_ERROR_FULL_SCREEN_EXCLUSIVE_MODE_LOST_EXT";
   case 1000268000:

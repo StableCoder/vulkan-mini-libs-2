@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 334
+#if VK_HEADER_VERSION > 335
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v334)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v335)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v334)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v335)"
 #endif
 #endif
 
@@ -1639,6 +1639,7 @@ EnumValueSet const VkSwapchainCreateFlagsKHRSets[] = {
     {"DEFERRED_MEMORY_ALLOCATION", 0x00000008},
     {"RESERVED_8_BIT_EXT", 0x00000100},
     {"RESERVED_9_BIT_EXT", 0x00000200},
+    {"PRESENT_TIMING_BIT_EXT", 0x00000200},
 };
 
 EnumValueSet const VkWaylandSurfaceCreateFlagsKHRSets[] = {
@@ -2005,6 +2006,23 @@ EnumValueSet const VkTileShadingRenderPassFlagsQCOMSets[] = {
 
 EnumValueSet const VkPhysicalDeviceSchedulingControlsFlagsARMSets[] = {
     {"SHADER_CORE_COUNT", 0x00000001},
+};
+
+EnumValueSet const VkPresentStageFlagsEXTSets[] = {
+    {"QUEUE_OPERATIONS_END", 0x00000001},
+    {"REQUEST_DEQUEUED", 0x00000002},
+    {"IMAGE_FIRST_PIXEL_OUT", 0x00000004},
+    {"IMAGE_FIRST_PIXEL_VISIBLE", 0x00000008},
+};
+
+EnumValueSet const VkPastPresentationTimingFlagsEXTSets[] = {
+    {"ALLOW_PARTIAL_RESULTS", 0x00000001},
+    {"ALLOW_OUT_OF_ORDER_RESULTS", 0x00000002},
+};
+
+EnumValueSet const VkPresentTimingInfoFlagsEXTSets[] = {
+    {"PRESENT_AT_RELATIVE_TIME", 0x00000001},
+    {"PRESENT_AT_NEAREST_REFRESH_CYCLE", 0x00000002},
 };
 
 EnumValueSet const VkSwapchainImageUsageFlagsOHOSSets[] = {
@@ -3275,6 +3293,8 @@ EnumValueSet const VkTimeDomainKHRSets[] = {
     {"CLOCK_MONOTONIC", 1},
     {"CLOCK_MONOTONIC_RAW", 2},
     {"QUERY_PERFORMANCE_COUNTER", 3},
+    {"PRESENT_STAGE_LOCAL_EXT", 1000208000},
+    {"SWAPCHAIN_LOCAL_EXT", 1000208001},
 };
 
 EnumValueSet const VkConservativeRasterizationModeEXTSets[] = {
@@ -4353,7 +4373,7 @@ typedef struct EnumType {
 } EnumType;
 
 #define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[408] = {
+EnumType const cEnumTypes[411] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
     {"VkQueryPoolCreateFlags", VkQueryPoolCreateFlagsSets, 1},
     {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 6},
@@ -4463,7 +4483,7 @@ EnumType const cEnumTypes[408] = {
     {"VkCompositeAlphaFlagsKHR", VkCompositeAlphaFlagsKHRSets, 4},
     {"VkDisplayPlaneAlphaFlagsKHR", VkDisplayPlaneAlphaFlagsKHRSets, 4},
     {"VkSurfaceTransformFlagsKHR", VkSurfaceTransformFlagsKHRSets, 9},
-    {"VkSwapchainCreateFlagsKHR", VkSwapchainCreateFlagsKHRSets, 12},
+    {"VkSwapchainCreateFlagsKHR", VkSwapchainCreateFlagsKHRSets, 13},
     {"VkDisplayModeCreateFlagsKHR", NULL, 0},
     {"VkDisplaySurfaceCreateFlagsKHR", NULL, 0},
     {"VkAndroidSurfaceCreateFlagsKHR", NULL, 0},
@@ -4542,6 +4562,9 @@ EnumType const cEnumTypes[408] = {
     {"VkPhysicalDeviceSchedulingControlsFlagsARM", VkPhysicalDeviceSchedulingControlsFlagsARMSets,
      1},
     {"VkSurfaceCreateFlagsOHOS", NULL, 0},
+    {"VkPresentStageFlagsEXT", VkPresentStageFlagsEXTSets, 4},
+    {"VkPastPresentationTimingFlagsEXT", VkPastPresentationTimingFlagsEXTSets, 2},
+    {"VkPresentTimingInfoFlagsEXT", VkPresentTimingInfoFlagsEXTSets, 2},
     {"VkSwapchainImageUsageFlagsOHOS", VkSwapchainImageUsageFlagsOHOSSets, 1},
     {"VkPerformanceCounterDescriptionFlagsARM", NULL, 0},
     {"VkVideoCodecOperationFlagsKHR", VkVideoCodecOperationFlagsKHRSets, 13},
@@ -4628,7 +4651,7 @@ EnumType const cEnumTypes[408] = {
     {"VkValidationCacheHeaderVersionEXT", VkValidationCacheHeaderVersionEXTSets, 1},
     {"VkShaderInfoTypeAMD", VkShaderInfoTypeAMDSets, 3},
     {"VkQueueGlobalPriority", VkQueueGlobalPrioritySets, 12},
-    {"VkTimeDomainKHR", VkTimeDomainKHRSets, 8},
+    {"VkTimeDomainKHR", VkTimeDomainKHRSets, 10},
     {"VkConservativeRasterizationModeEXT", VkConservativeRasterizationModeEXTSets, 3},
     {"VkSemaphoreType", VkSemaphoreTypeSets, 4},
     {"VkBuildAccelerationStructureModeKHR", VkBuildAccelerationStructureModeKHRSets, 2},

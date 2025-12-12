@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 334
+#if VK_HEADER_VERSION > 335
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v334)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v335)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v334)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v335)"
 #endif
 #endif
 
@@ -3948,9 +3948,24 @@ bool compare_VkPartitionedAccelerationStructureWritePartitionTranslationDataNV(
     VkPartitionedAccelerationStructureWritePartitionTranslationDataNV const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 335 && VK_EXT_present_timing
+bool compare_VkPastPresentationTimingEXT(VkPastPresentationTimingEXT const *s1,
+                                         VkPastPresentationTimingEXT const *s2);
+#endif
+
 #if VK_GOOGLE_display_timing
 bool compare_VkPastPresentationTimingGOOGLE(VkPastPresentationTimingGOOGLE const *s1,
                                             VkPastPresentationTimingGOOGLE const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 335 && VK_EXT_present_timing
+bool compare_VkPastPresentationTimingInfoEXT(VkPastPresentationTimingInfoEXT const *s1,
+                                             VkPastPresentationTimingInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 335 && VK_EXT_present_timing
+bool compare_VkPastPresentationTimingPropertiesEXT(VkPastPresentationTimingPropertiesEXT const *s1,
+                                                   VkPastPresentationTimingPropertiesEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 312 && VK_QCOM_tile_shading
@@ -6155,6 +6170,12 @@ bool compare_VkPhysicalDevicePresentModeFifoLatestReadyFeaturesKHR(
     VkPhysicalDevicePresentModeFifoLatestReadyFeaturesKHR const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 335 && VK_EXT_present_timing
+bool compare_VkPhysicalDevicePresentTimingFeaturesEXT(
+    VkPhysicalDevicePresentTimingFeaturesEXT const *s1,
+    VkPhysicalDevicePresentTimingFeaturesEXT const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 317 && VK_KHR_present_wait2
 bool compare_VkPhysicalDevicePresentWait2FeaturesKHR(
     VkPhysicalDevicePresentWait2FeaturesKHR const *s1,
@@ -8201,6 +8222,11 @@ bool compare_VkPresentRegionKHR(VkPresentRegionKHR const *s1, VkPresentRegionKHR
 bool compare_VkPresentRegionsKHR(VkPresentRegionsKHR const *s1, VkPresentRegionsKHR const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 335 && VK_EXT_present_timing
+bool compare_VkPresentStageTimeEXT(VkPresentStageTimeEXT const *s1,
+                                   VkPresentStageTimeEXT const *s2);
+#endif
+
 #if VK_GOOGLE_display_timing
 bool compare_VkPresentTimeGOOGLE(VkPresentTimeGOOGLE const *s1, VkPresentTimeGOOGLE const *s2);
 #endif
@@ -8208,6 +8234,21 @@ bool compare_VkPresentTimeGOOGLE(VkPresentTimeGOOGLE const *s1, VkPresentTimeGOO
 #if VK_GOOGLE_display_timing
 bool compare_VkPresentTimesInfoGOOGLE(VkPresentTimesInfoGOOGLE const *s1,
                                       VkPresentTimesInfoGOOGLE const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 335 && VK_EXT_present_timing
+bool compare_VkPresentTimingInfoEXT(VkPresentTimingInfoEXT const *s1,
+                                    VkPresentTimingInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 335 && VK_EXT_present_timing
+bool compare_VkPresentTimingSurfaceCapabilitiesEXT(VkPresentTimingSurfaceCapabilitiesEXT const *s1,
+                                                   VkPresentTimingSurfaceCapabilitiesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 335 && VK_EXT_present_timing
+bool compare_VkPresentTimingsInfoEXT(VkPresentTimingsInfoEXT const *s1,
+                                     VkPresentTimingsInfoEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 317 && VK_KHR_present_wait2
@@ -9528,6 +9569,11 @@ bool compare_VkSurfaceProtectedCapabilitiesKHR(VkSurfaceProtectedCapabilitiesKHR
                                                VkSurfaceProtectedCapabilitiesKHR const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 335 && VK_EXT_present_timing
+bool compare_VkSwapchainCalibratedTimestampInfoEXT(VkSwapchainCalibratedTimestampInfoEXT const *s1,
+                                                   VkSwapchainCalibratedTimestampInfoEXT const *s2);
+#endif
+
 #if VK_EXT_display_control
 bool compare_VkSwapchainCounterCreateInfoEXT(VkSwapchainCounterCreateInfoEXT const *s1,
                                              VkSwapchainCounterCreateInfoEXT const *s2);
@@ -9631,6 +9677,16 @@ bool compare_VkSwapchainPresentScalingCreateInfoEXT(
 bool compare_VkSwapchainPresentScalingCreateInfoKHR(
     VkSwapchainPresentScalingCreateInfoKHR const *s1,
     VkSwapchainPresentScalingCreateInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 335 && VK_EXT_present_timing
+bool compare_VkSwapchainTimeDomainPropertiesEXT(VkSwapchainTimeDomainPropertiesEXT const *s1,
+                                                VkSwapchainTimeDomainPropertiesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 335 && VK_EXT_present_timing
+bool compare_VkSwapchainTimingPropertiesEXT(VkSwapchainTimingPropertiesEXT const *s1,
+                                            VkSwapchainTimingPropertiesEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 194 && VK_FUCHSIA_buffer_collection
@@ -21993,6 +22049,19 @@ bool compare_VkPartitionedAccelerationStructureWritePartitionTranslationDataNV(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 335 && VK_EXT_present_timing
+bool compare_VkPastPresentationTimingEXT(VkPastPresentationTimingEXT const *s1,
+                                         VkPastPresentationTimingEXT const *s2) {
+  // local, simple types
+  if ((s1->presentId != s2->presentId) || (s1->targetTime != s2->targetTime) ||
+      (s1->presentStageCount != s2->presentStageCount) || (s1->timeDomain != s2->timeDomain) ||
+      (s1->timeDomainId != s2->timeDomainId) || (s1->reportComplete != s2->reportComplete))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_GOOGLE_display_timing
 bool compare_VkPastPresentationTimingGOOGLE(VkPastPresentationTimingGOOGLE const *s1,
                                             VkPastPresentationTimingGOOGLE const *s2) {
@@ -22001,6 +22070,31 @@ bool compare_VkPastPresentationTimingGOOGLE(VkPastPresentationTimingGOOGLE const
       (s1->actualPresentTime != s2->actualPresentTime) ||
       (s1->earliestPresentTime != s2->earliestPresentTime) ||
       (s1->presentMargin != s2->presentMargin))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 335 && VK_EXT_present_timing
+bool compare_VkPastPresentationTimingInfoEXT(VkPastPresentationTimingInfoEXT const *s1,
+                                             VkPastPresentationTimingInfoEXT const *s2) {
+  // local, simple types
+  if ((s1->flags != s2->flags) || (s1->swapchain != s2->swapchain))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 335 && VK_EXT_present_timing
+bool compare_VkPastPresentationTimingPropertiesEXT(
+    VkPastPresentationTimingPropertiesEXT const *s1,
+    VkPastPresentationTimingPropertiesEXT const *s2) {
+  // local, simple types
+  if ((s1->timingPropertiesCounter != s2->timingPropertiesCounter) ||
+      (s1->timeDomainsCounter != s2->timeDomainsCounter) ||
+      (s1->presentationTimingCount != s2->presentationTimingCount))
     return false;
 
   return true;
@@ -27577,6 +27671,20 @@ bool compare_VkPhysicalDevicePresentModeFifoLatestReadyFeaturesKHR(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 335 && VK_EXT_present_timing
+bool compare_VkPhysicalDevicePresentTimingFeaturesEXT(
+    VkPhysicalDevicePresentTimingFeaturesEXT const *s1,
+    VkPhysicalDevicePresentTimingFeaturesEXT const *s2) {
+  // local, simple types
+  if ((s1->presentTiming != s2->presentTiming) ||
+      (s1->presentAtAbsoluteTime != s2->presentAtAbsoluteTime) ||
+      (s1->presentAtRelativeTime != s2->presentAtRelativeTime))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 317 && VK_KHR_present_wait2
 bool compare_VkPhysicalDevicePresentWait2FeaturesKHR(
     VkPhysicalDevicePresentWait2FeaturesKHR const *s1,
@@ -32848,6 +32956,17 @@ bool compare_VkPresentRegionsKHR(VkPresentRegionsKHR const *s1, VkPresentRegions
 }
 #endif
 
+#if VK_HEADER_VERSION >= 335 && VK_EXT_present_timing
+bool compare_VkPresentStageTimeEXT(VkPresentStageTimeEXT const *s1,
+                                   VkPresentStageTimeEXT const *s2) {
+  // local, simple types
+  if ((s1->stage != s2->stage) || (s1->time != s2->time))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_GOOGLE_display_timing
 bool compare_VkPresentTimeGOOGLE(VkPresentTimeGOOGLE const *s1, VkPresentTimeGOOGLE const *s2) {
   // local, simple types
@@ -32861,6 +32980,46 @@ bool compare_VkPresentTimeGOOGLE(VkPresentTimeGOOGLE const *s1, VkPresentTimeGOO
 #if VK_GOOGLE_display_timing
 bool compare_VkPresentTimesInfoGOOGLE(VkPresentTimesInfoGOOGLE const *s1,
                                       VkPresentTimesInfoGOOGLE const *s2) {
+  // local, simple types
+  if ((s1->swapchainCount != s2->swapchainCount))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 335 && VK_EXT_present_timing
+bool compare_VkPresentTimingInfoEXT(VkPresentTimingInfoEXT const *s1,
+                                    VkPresentTimingInfoEXT const *s2) {
+  // local, simple types
+  if ((s1->flags != s2->flags) || (s1->targetTime != s2->targetTime) ||
+      (s1->timeDomainId != s2->timeDomainId) ||
+      (s1->presentStageQueries != s2->presentStageQueries) ||
+      (s1->targetTimeDomainPresentStage != s2->targetTimeDomainPresentStage))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 335 && VK_EXT_present_timing
+bool compare_VkPresentTimingSurfaceCapabilitiesEXT(
+    VkPresentTimingSurfaceCapabilitiesEXT const *s1,
+    VkPresentTimingSurfaceCapabilitiesEXT const *s2) {
+  // local, simple types
+  if ((s1->presentTimingSupported != s2->presentTimingSupported) ||
+      (s1->presentAtAbsoluteTimeSupported != s2->presentAtAbsoluteTimeSupported) ||
+      (s1->presentAtRelativeTimeSupported != s2->presentAtRelativeTimeSupported) ||
+      (s1->presentStageQueries != s2->presentStageQueries))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 335 && VK_EXT_present_timing
+bool compare_VkPresentTimingsInfoEXT(VkPresentTimingsInfoEXT const *s1,
+                                     VkPresentTimingsInfoEXT const *s2) {
   // local, simple types
   if ((s1->swapchainCount != s2->swapchainCount))
     return false;
@@ -36386,6 +36545,19 @@ bool compare_VkSurfaceProtectedCapabilitiesKHR(VkSurfaceProtectedCapabilitiesKHR
 }
 #endif
 
+#if VK_HEADER_VERSION >= 335 && VK_EXT_present_timing
+bool compare_VkSwapchainCalibratedTimestampInfoEXT(
+    VkSwapchainCalibratedTimestampInfoEXT const *s1,
+    VkSwapchainCalibratedTimestampInfoEXT const *s2) {
+  // local, simple types
+  if ((s1->swapchain != s2->swapchain) || (s1->presentStage != s2->presentStage) ||
+      (s1->timeDomainId != s2->timeDomainId))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_EXT_display_control
 bool compare_VkSwapchainCounterCreateInfoEXT(VkSwapchainCounterCreateInfoEXT const *s1,
                                              VkSwapchainCounterCreateInfoEXT const *s2) {
@@ -36718,6 +36890,43 @@ bool compare_VkSwapchainPresentScalingCreateInfoKHR(
   // local, simple types
   if ((s1->scalingBehavior != s2->scalingBehavior) ||
       (s1->presentGravityX != s2->presentGravityX) || (s1->presentGravityY != s2->presentGravityY))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 335 && VK_EXT_present_timing
+bool compare_VkSwapchainTimeDomainPropertiesEXT(VkSwapchainTimeDomainPropertiesEXT const *s1,
+                                                VkSwapchainTimeDomainPropertiesEXT const *s2) {
+  // local, simple types
+  if ((s1->timeDomainCount != s2->timeDomainCount))
+    return false;
+
+  // non-local members
+
+  // pTimeDomains - timeDomainCount
+  if (s1->pTimeDomains != s2->pTimeDomains &&
+      (s1->pTimeDomains == NULL || s2->pTimeDomains == NULL ||
+       memcmp(s1->pTimeDomains, s2->pTimeDomains,
+              (s1->timeDomainCount) * sizeof(VkTimeDomainKHR)) != 0))
+    return false;
+
+  // pTimeDomainIds - timeDomainCount
+  if (s1->pTimeDomainIds != s2->pTimeDomainIds &&
+      (s1->pTimeDomainIds == NULL || s2->pTimeDomainIds == NULL ||
+       memcmp(s1->pTimeDomainIds, s2->pTimeDomainIds, (s1->timeDomainCount) * sizeof(uint64_t)) !=
+           0))
+    return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 335 && VK_EXT_present_timing
+bool compare_VkSwapchainTimingPropertiesEXT(VkSwapchainTimingPropertiesEXT const *s1,
+                                            VkSwapchainTimingPropertiesEXT const *s2) {
+  // local, simple types
+  if ((s1->refreshDuration != s2->refreshDuration) || (s1->refreshInterval != s2->refreshInterval))
     return false;
 
   return true;
