@@ -27,7 +27,8 @@ help_blurb() {
     echo " -o, --output <DIR> The directory in which to generate header files (default: <repo>/include)"
     echo " --skip-parse       Skips generating new XML cache, just generate header files"
     echo " --skip-fetch       Skips fetching documentation updates from remote"
-    echo " --openxr 
+    echo " --openxr           Parse and generate for OpenXR API instead of Vulkan"
+    echo " --vulkansc         Parse and generate for Vulkan SC instead of regular Vulkan"
 }
 
 # Command-line parsing
