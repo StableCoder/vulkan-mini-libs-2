@@ -1,4 +1,4 @@
-# Copyright (C) 2022-2025 George Cave.
+# Copyright (C) 2022-2026 George Cave.
 #
 # SPDX-License-Identifier: Apache-2.0
 
@@ -11,6 +11,7 @@ START=
 END=
 OUTPUT="${ROOT_DIR}/include"
 SKIP_PARSE=0
+SKIP_FETCH=0
 DOCS_REPO=""
 IGNORE_FEATURES=""
 
@@ -25,6 +26,8 @@ help_blurb() {
     echo " -e, --end <INT>    The ending version of Vulkan to generate for (default: none)"
     echo " -o, --output <DIR> The directory in which to generate header files (default: <repo>/include)"
     echo " --skip-parse       Skips generating new XML cache, just generate header files"
+    echo " --skip-fetch       Skips fetching documentation updates from remote"
+    echo " --openxr 
 }
 
 # Command-line parsing
@@ -48,6 +51,10 @@ while [[ $# -gt 0 ]]; do
         ;;
     --skip-parse)
         SKIP_PARSE=1
+        shift
+        ;;
+    --skip-fetch)
+        SKIP_FETCH=1
         shift
         ;;
     --openxr)
@@ -98,7 +105,9 @@ if [ $SKIP_PARSE -eq 0 ]; then
         git clone https://github.com/KhronosGroup/$DOCS_REPO
     fi
     pushd $DOCS_REPO >/dev/null
-    git fetch -p
+    if [ $SKIP_FETCH -eq 0 ]; then
+        git fetch -p
+    fi
 
     # Collect the per-version XML data
     FIRST=1
