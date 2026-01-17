@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-# Copyright (C) 2022-2023 George Cave.
+# Copyright (C) 2022-2026 George Cave.
 #
 # SPDX-License-Identifier: Apache-2.0
 
@@ -375,7 +375,7 @@ STecVkSerializationResult vk_parse64(char const* pVkType, char const *pVkString,
  * @return Length of the string without the vendor tag, if it was suffixed, otherwise the size
  * originally passed in.
  */
-size_t stripVendor(char const *str, size_t len) {
+static size_t stripVendor(char const *str, size_t len) {
   for (size_t i = 0; i < cVendorCount; ++i) {
     char const *it = cVendorList[i];
     if (strlen(it) > len)
@@ -401,7 +401,7 @@ size_t stripVendor(char const *str, size_t len) {
  * @return Length of the string without the '_BIT'' tag, if it was suffixed, otherwise the size
  * originally passed in.
  */
-size_t stripBit(char const *str, size_t len) {
+static size_t stripBit(char const *str, size_t len) {
   if (len > strlen("_BIT")) {
     if (strncmp(str + len - strlen("_BIT"), "_BIT", strlen("_BIT")) == 0) {
       len -= strlen("_BIT");
@@ -422,7 +422,7 @@ size_t stripBit(char const *str, size_t len) {
  * This iterates through the big cEnumTypes array, attempting to find a matching type and returning
  * data about it.
  */
-bool getEnumType(char const *pVkType,
+static bool getEnumType(char const *pVkType,
                  EnumValueSet const **ppStart,
                  EnumValueSet const **ppEnd) {
   // Check for a conversion from FlagBits -> Flags
@@ -481,7 +481,7 @@ bool getEnumType(char const *pVkType,
  *
  * It also removed the 'Flags' or 'FlagBits' suffixes.
  */
-char const *generateEnumPrefix(char const *pTypeName, size_t nameLength) {
+static char const *generateEnumPrefix(char const *pTypeName, size_t nameLength) {
   // Flag Bits
   char const *pFlags = strstr(pTypeName, "Flags");
   // Flags
@@ -527,7 +527,7 @@ char const *generateEnumPrefix(char const *pTypeName, size_t nameLength) {
  * Using the given Vulkan token string, this function will attempt to find a matching value in the
  * given search set.
  */
-bool parseValue(char const *pValueStr,
+static bool parseValue(char const *pValueStr,
                 size_t valueLength,
                 char const *pPrefixStr,
                 size_t prefixLength,
@@ -577,7 +577,7 @@ bool parseValue(char const *pValueStr,
  * After than, any spaces are replaced with underscores, and finally all the characters are
  * capitalized. This will generate the string closest to the original ones found in the XML spec.
  */
-char *formatString(char **ppStart, char *pEnd) {
+static char *formatString(char **ppStart, char *pEnd) {
   // Trim left
   for (; *ppStart != pEnd;) {
     if (isalnum(**ppStart))
@@ -611,7 +611,7 @@ uint32_t serializeMin(uint32_t lhs, uint32_t rhs) {
   return rhs;
 }
 
-STecVkSerializationResult serializeBitmask(EnumValueSet const *pSearchStart,
+static STecVkSerializationResult serializeBitmask(EnumValueSet const *pSearchStart,
                                            EnumValueSet const *pSearchEnd,
                                            uint64_t vkValue,
                                            uint32_t *pSerializedLength,
@@ -703,7 +703,7 @@ STecVkSerializationResult serializeBitmask(EnumValueSet const *pSearchStart,
   return STEC_VK_SERIALIZATION_RESULT_SUCCESS;
 }
 
-STecVkSerializationResult serializeEnum(EnumValueSet const *pSearchStart,
+static STecVkSerializationResult serializeEnum(EnumValueSet const *pSearchStart,
                                         EnumValueSet const *pSearchEnd,
                                         uint64_t vkValue,
                                         uint32_t *pSerializedLength,
@@ -733,7 +733,7 @@ STecVkSerializationResult serializeEnum(EnumValueSet const *pSearchStart,
   return STEC_VK_SERIALIZATION_RESULT_ERROR_VALUE_NOT_FOUND;
 }
 
-STecVkSerializationResult parseBitmask(char *pVkString,
+static STecVkSerializationResult parseBitmask(char *pVkString,
                                        EnumValueSet const *pSearchStart,
                                        EnumValueSet const *pSearchEnd,
                                        char const *pPrefixStr,
@@ -769,7 +769,7 @@ STecVkSerializationResult parseBitmask(char *pVkString,
   return STEC_VK_SERIALIZATION_RESULT_SUCCESS;
 }
 
-STecVkSerializationResult parseEnum(char *pVkString,
+static STecVkSerializationResult parseEnum(char *pVkString,
                                     EnumValueSet const *pSearchStart,
                                     EnumValueSet const *pSearchEnd,
                                     char const *pPrefixStr,
