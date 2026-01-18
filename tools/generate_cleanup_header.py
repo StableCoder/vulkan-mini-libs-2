@@ -11,66 +11,72 @@ import sys
 import xml.etree.ElementTree as ET
 
 
-def guard_area(type_data, first_version, last_version, out_file):
-    guarded = False
+def get_define_guards(type_data, first_version, last_version):
+    guard_sets = []
 
     # Guard based on required definitions
     if 'requires' in type_data:
-        out_file.write('\n#if ')
-        guarded = True
-        require_count = 0
-
         for require_variant, require_data in type_data['requires'].items():
-            if require_count > 0:
-                out_file.write(' || ')
-            out_file.write('(')
+            guard = ''
             check_started = False
 
             # check version numbers first
             if require_data['first'] != first_version:
-                out_file.write('VK_HEADER_VERSION >= {}'.format(require_data['first']))
+                guard += 'VK_HEADER_VERSION >= {}'.format(require_data['first'])
                 check_started = True
 
             if require_data['last'] != last_version:
                 if check_started:
-                    out_file.write(' && ')
-                out_file.write('VK_HEADER_VERSION <= {}'.format(require_data['last']))
+                    guard += ' && '
+                guard += 'VK_HEADER_VERSION <= {}'.format(require_data['last'])
                 check_started = True
 
             # add defines
             for define in require_data['defines']:
                 if check_started:
-                    out_file.write(' && ')
+                    guard += ' && '
                 # Brackets around OR defines
                 if ',' in define:
-                    out_file.write('({})'.format(define.replace(',', ' || ')))
+                    guard += '({})'.format(define.replace(',', ' || '))
                 else:
-                    out_file.write(define)
+                    guard += define
                 check_started = True
-            out_file.write(')')
-            require_count += 1
+
+            if guard:
+                guard_sets.append(guard)
     else:
         # do a guard based only on version numbers for the struct
         firstCheck = type_data['first']
         lastCheck = type_data['last']
+        guard = ''
 
         # Guard check for first version
         if firstCheck != first_version:
-            guarded = True
-            out_file.write('#if VK_HEADER_VERSION >= {}'.format(firstCheck))
+            guard = 'VK_HEADER_VERSION >= {}'.format(firstCheck)
 
         # Guard check for last version
         if lastCheck != last_version:
-            if guarded:
+            if guard:
                 # If already started, append to it
-                out_file.write(' && VK_HEADER_VERSION <= {}'.format(lastCheck))
-            else:
-                guarded = True
-                out_file.write('#if VK_HEADER_VERSION <= {}'.format(lastCheck))
+                guard += ' && '
+            guard += 'VK_HEADER_VERSION <= {}'.format(lastCheck)
+        if guard:
+            guard_sets.append(guard)
 
-    if guarded:
+    return guard_sets
+
+
+def output_define_guard(guard_list, out_file):
+    if guard_list:
+        out_file.write('#if ')
+        if len(guard_list) == 1:
+            out_file.write('{}'.format(guard_list[0]))
+        else:
+            for idx, guard in enumerate(guard_list):
+                if idx > 0:
+                    out_file.write(' || ')
+                out_file.write('({})'.format(guard))
         out_file.write('\n')
-    return guarded
 
 
 def process_multi_member(member, member_data, iteration, suffix, available_characters, data, out_file):
@@ -187,11 +193,13 @@ _Static_assert(VK_HEADER_VERSION >= {0}, "VK_HEADER_VERSION  is lower than the m
         sorted_variants = dict(sorted(variants.items(), key=lambda item: item[1]['first']))
         for variant, struct_data in sorted_variants.items():
             out_file.write('\n')
-            guarded = guard_area(struct_data, first_version, last_version, out_file)
+            
+            struct_guards = get_define_guards(struct_data, first_version, last_version)
+            output_define_guard(struct_guards, out_file)
 
             # Normal function declaration
             out_file.write('void cleanup_{0}({0} const* pData);\n'.format(struct))
-            if guarded:
+            if struct_guards:
                 out_file.write('#endif\n')
 
     # Definition Header
@@ -220,13 +228,16 @@ void cleanup_vk_struct(void const* pData) {
             sTypeValue = struct_data['members']['sType']['value']
 
             out_file.write('\n')
-            guarded = guard_area(struct_data, first_version,last_version, out_file)
+            
+            struct_guards = get_define_guards(struct_data, first_version, last_version)
+            output_define_guard(struct_guards, out_file)
+
             out_file.write(
                 'if (pTemp->sType =={}) {{\n'.format(sTypeValue))
             out_file.write(
                 '        cleanup_{0}(({0} const*)pData);\n'.format(struct))
             out_file.write('        return;\n    }')
-            if guarded:
+            if struct_guards:
                 out_file.write('\n#endif\n')
 
     out_file.write('}\n')
@@ -240,7 +251,9 @@ void cleanup_vk_struct(void const* pData) {
         sorted_variants = dict(sorted(variants.items(), key=lambda item: item[1]['first']))
         for variant, struct_data in sorted_variants.items():
             out_file.write('\n')
-            guarded = guard_area(struct_data, first_version, last_version, out_file)
+            
+            struct_guards = get_define_guards(struct_data, first_version, last_version)
+            output_define_guard(struct_guards, out_file)
 
             if 'alias' in struct_data:
                 # for an alias struct, use the alias's data
@@ -287,7 +300,7 @@ void cleanup_vk_struct(void const* pData) {
 
                 out_file.write('}\n')
 
-            if guarded:
+            if struct_guards:
                 out_file.write('#endif\n')
 
     # Footer

@@ -43,7 +43,9 @@ def get_define_guards(type_data, first_version, last_version):
                 else:
                     guard += define
                 check_started = True
-            guard_sets.append(guard)
+
+            if guard:
+                guard_sets.append(guard)
     else:
         # do a guard based only on version numbers for the struct
         firstCheck = type_data['first']
