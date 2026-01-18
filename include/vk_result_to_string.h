@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2021-2025 George Cave - gcave@stablecoder.ca
+    Copyright (C) 2021-2026 George Cave - gcave@stablecoder.ca
 
     SPDX-License-Identifier: Apache-2.0
 

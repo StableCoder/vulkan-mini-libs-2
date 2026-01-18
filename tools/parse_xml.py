@@ -359,7 +359,11 @@ for api_feature in api_data.findall('feature'):
                 if not 'new_require_list' in struct_data:
                     struct_data['new_require_list'] = []
                 if not feature_name in struct_data['new_require_list']:
-                    struct_data['new_require_list'].append(feature_name)
+                    if feature_name.startswith('VK_BASE_VERSION_') or feature_name.startswith('VK_COMPUTE_VERSION_') or feature_name.startswith('VK_GRAPHICS_VERSION_'):
+                        if not feature_name.endswith('1_0'):
+                            struct_data['new_require_list'].append('VK_VERSION_{}'.format(feature_name[-3:]))
+                    else:
+                        struct_data['new_require_list'].append(feature_name)
     
 # process extensions
 for api_extension in api_data.findall('extensions/extension'):
