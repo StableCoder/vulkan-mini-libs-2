@@ -174,21 +174,21 @@ char const *cVendorList[43] = {
     "FREDEMMOTT", "MTK",   "OPENXR",
 };
 
-typedef struct EnumValueSet {
+typedef struct EnumValue {
   char const *name;
   int64_t value;
-} EnumValueSet;
+} EnumValue;
 
-EnumValueSet const VkFramebufferCreateFlagsSets[] = {
+EnumValue const VkFramebufferCreateFlagsValues[] = {
     {"IMAGELESS_BIT_KHR", 0x00000001},
     {"IMAGELESS", 0x00000001},
 };
 
-EnumValueSet const VkQueryPoolCreateFlagsSets[] = {
+EnumValue const VkQueryPoolCreateFlagsValues[] = {
     {"RESET_BIT_KHR", 0x00000001},
 };
 
-EnumValueSet const VkRenderPassCreateFlagsSets[] = {
+EnumValue const VkRenderPassCreateFlagsValues[] = {
     {"RESERVED_0_BIT_KHR", 0x00000001},
     {"VK_RENDER_PASS_RESERVED_BIT_1_QCOM", 0x00000002},
     {"TRANSFORM_BIT_QCOM", 0x00000002},
@@ -197,7 +197,7 @@ EnumValueSet const VkRenderPassCreateFlagsSets[] = {
     {"RESERVED_3_BIT_IMG", 0x00000008},
 };
 
-EnumValueSet const VkSamplerCreateFlagsSets[] = {
+EnumValue const VkSamplerCreateFlagsValues[] = {
     {"SUBSAMPLED_BIT_EXT", 0x00000001},
     {"SUBSAMPLED_COARSE_RECONSTRUCTION_BIT_EXT", 0x00000002},
     {"RESERVED_2_BIT_EXT", 0x00000004},
@@ -207,13 +207,13 @@ EnumValueSet const VkSamplerCreateFlagsSets[] = {
     {"DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT", 0x00000008},
 };
 
-EnumValueSet const VkPipelineLayoutCreateFlagsSets[] = {
+EnumValue const VkPipelineLayoutCreateFlagsValues[] = {
     {"RESERVED_0_BIT_AMD", 0x00000001},
     {"RESERVED_1_BIT_AMD", 0x00000002},
     {"INDEPENDENT_SETS_BIT_EXT", 0x00000002},
 };
 
-EnumValueSet const VkPipelineCacheCreateFlagsSets[] = {
+EnumValue const VkPipelineCacheCreateFlagsValues[] = {
     {"EXTERNALLY_SYNCHRONIZED_BIT_EXT", 0x00000001},
     {"RESERVED_1_BIT_KHR", 0x00000002},
     {"RESERVED_1_BIT_EXT", 0x00000002},
@@ -223,19 +223,19 @@ EnumValueSet const VkPipelineCacheCreateFlagsSets[] = {
     {"INTERNALLY_SYNCHRONIZED_MERGE_BIT_KHR", 0x00000008},
 };
 
-EnumValueSet const VkPipelineDepthStencilStateCreateFlagsSets[] = {
+EnumValue const VkPipelineDepthStencilStateCreateFlagsValues[] = {
     {"RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_BIT_ARM", 0x00000001},
     {"RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_BIT_ARM", 0x00000002},
     {"RASTERIZATION_ORDER_ATTACHMENT_DEPTH_ACCESS_BIT_EXT", 0x00000001},
     {"RASTERIZATION_ORDER_ATTACHMENT_STENCIL_ACCESS_BIT_EXT", 0x00000002},
 };
 
-EnumValueSet const VkPipelineColorBlendStateCreateFlagsSets[] = {
+EnumValue const VkPipelineColorBlendStateCreateFlagsValues[] = {
     {"RASTERIZATION_ORDER_ATTACHMENT_ACCESS_BIT_ARM", 0x00000001},
     {"RASTERIZATION_ORDER_ATTACHMENT_ACCESS_BIT_EXT", 0x00000001},
 };
 
-EnumValueSet const VkPipelineShaderStageCreateFlagsSets[] = {
+EnumValue const VkPipelineShaderStageCreateFlagsValues[] = {
     {"ALLOW_VARYING_SUBGROUP_SIZE_BIT_EXT", 0x00000001},
     {"REQUIRE_FULL_SUBGROUPS_BIT_EXT", 0x00000002},
     {"RESERVED_2_BIT_NV", 0x00000004},
@@ -244,7 +244,7 @@ EnumValueSet const VkPipelineShaderStageCreateFlagsSets[] = {
     {"REQUIRE_FULL_SUBGROUPS", 0x00000002},
 };
 
-EnumValueSet const VkDescriptorSetLayoutCreateFlagsSets[] = {
+EnumValue const VkDescriptorSetLayoutCreateFlagsValues[] = {
     {"PUSH_DESCRIPTOR_BIT_KHR", 0x00000001},
     {"UPDATE_AFTER_BIND_POOL_BIT_EXT", 0x00000002},
     {"HOST_ONLY_POOL_BIT_VALVE", 0x00000004},
@@ -262,18 +262,18 @@ EnumValueSet const VkDescriptorSetLayoutCreateFlagsSets[] = {
     {"PUSH_DESCRIPTOR", 0x00000001},
 };
 
-EnumValueSet const VkInstanceCreateFlagsSets[] = {
+EnumValue const VkInstanceCreateFlagsValues[] = {
     {"ENUMERATE_PORTABILITY_BIT_KHR", 0x00000001},
     {"RESERVED_616_BIT_EXT", 0x00000002},
 };
 
-EnumValueSet const VkDeviceQueueCreateFlagsSets[] = {
+EnumValue const VkDeviceQueueCreateFlagsValues[] = {
     {"PROTECTED", 0x00000001},
     {"RESERVED_1_BIT_QCOM", 0x00000002},
     {"RESERVED_2_BIT_EXT", 0x00000004},
 };
 
-EnumValueSet const VkQueueFlagsSets[] = {
+EnumValue const VkQueueFlagsValues[] = {
     {"GRAPHICS", 0x00000001},
     {"COMPUTE", 0x00000002},
     {"TRANSFER", 0x00000004},
@@ -294,7 +294,7 @@ EnumValueSet const VkQueueFlagsSets[] = {
     {"RESERVED_13_BIT_EXT", 0x00002000},
 };
 
-EnumValueSet const VkMemoryPropertyFlagsSets[] = {
+EnumValue const VkMemoryPropertyFlagsValues[] = {
     {"DEVICE_LOCAL", 0x00000001},
     {"HOST_VISIBLE", 0x00000002},
     {"HOST_COHERENT", 0x00000004},
@@ -308,13 +308,13 @@ EnumValueSet const VkMemoryPropertyFlagsSets[] = {
     {"RESERVED_9_QCOM", 0x00000200},
 };
 
-EnumValueSet const VkMemoryHeapFlagsSets[] = {
+EnumValue const VkMemoryHeapFlagsValues[] = {
     {"MULTI_INSTANCE_BIT_KHR", 0x00000002}, {"DEVICE_LOCAL", 0x00000001},
     {"MULTI_INSTANCE", 0x00000002},         {"RESERVED_2_BIT_KHR", 0x00000004},
     {"RESERVED_3_QCOM", 0x00000008},        {"TILE_MEMORY_BIT_QCOM", 0x00000008},
 };
 
-EnumValueSet const VkAccessFlagsSets[] = {
+EnumValue const VkAccessFlagsValues[] = {
     {"SHADING_RATE_IMAGE_READ_BIT_NV", 0x00800000},
     {"ACCELERATION_STRUCTURE_READ_BIT_NV", 0x00200000},
     {"ACCELERATION_STRUCTURE_WRITE_BIT_NV", 0x00400000},
@@ -364,7 +364,7 @@ EnumValueSet const VkAccessFlagsSets[] = {
     {"COMMAND_PREPROCESS_WRITE_BIT_EXT", 0x00040000},
 };
 
-EnumValueSet const VkBufferUsageFlagsSets[] = {
+EnumValue const VkBufferUsageFlagsValues[] = {
     {"RAY_TRACING_BIT_NV", 0x00000400},
     {"SHADER_DEVICE_ADDRESS_BIT_EXT", 0x00020000},
     {"SHADER_DEVICE_ADDRESS_BIT_KHR", 0x00020000},
@@ -417,7 +417,7 @@ EnumValueSet const VkBufferUsageFlagsSets[] = {
     {"TILE_MEMORY_BIT_QCOM", 0x08000000},
 };
 
-EnumValueSet const VkBufferCreateFlagsSets[] = {
+EnumValue const VkBufferCreateFlagsValues[] = {
     {"DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_EXT", 0x00000010},
     {"DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR", 0x00000010},
     {"SPARSE_BINDING", 0x00000001},
@@ -433,7 +433,7 @@ EnumValueSet const VkBufferCreateFlagsSets[] = {
     {"RESERVED_7_BIT_IMG", 0x00000080},
 };
 
-EnumValueSet const VkShaderStageFlagsSets[] = {
+EnumValue const VkShaderStageFlagsValues[] = {
     {"TASK_BIT_NV", 0x00000040},
     {"MESH_BIT_NV", 0x00000080},
     {"RAYGEN_BIT_NV", 0x00000100},
@@ -482,7 +482,7 @@ EnumValueSet const VkShaderStageFlagsSets[] = {
     {"RESERVED_16_BIT_HUAWEI", 0x00010000},
 };
 
-EnumValueSet const VkImageUsageFlagsSets[] = {
+EnumValue const VkImageUsageFlagsValues[] = {
     {"SHADING_RATE_IMAGE_BIT_NV", 0x00000100},
     {"HOST_TRANSFER_BIT_EXT", 0x00400000},
     {"TRANSFER_SRC", 0x00000001},
@@ -538,7 +538,7 @@ EnumValueSet const VkImageUsageFlagsSets[] = {
     {"RESERVED_27_BIT_HUAWEI", 0x00020000},
 };
 
-EnumValueSet const VkImageCreateFlagsSets[] = {
+EnumValue const VkImageCreateFlagsValues[] = {
     {"SPLIT_INSTANCE_BIND_REGIONS_BIT_KHR", 0x00000040},
     {"2D_ARRAY_COMPATIBLE_BIT_KHR", 0x00000020},
     {"BLOCK_TEXEL_VIEW_COMPATIBLE_BIT_KHR", 0x00000080},
@@ -579,7 +579,7 @@ EnumValueSet const VkImageCreateFlagsSets[] = {
     {"RESERVED_22_BIT_KHR", 0x00400000},
 };
 
-EnumValueSet const VkImageViewCreateFlagsSets[] = {
+EnumValue const VkImageViewCreateFlagsValues[] = {
     {"FRAGMENT_DENSITY_MAP_DYNAMIC_BIT_EXT", 0x00000001},
     {"RESERVED_1_BIT_EXT", 0x00000002},
     {"FRAGMENT_DENSITY_MAP_DEFERRED_BIT_EXT", 0x00000002},
@@ -588,7 +588,7 @@ EnumValueSet const VkImageViewCreateFlagsSets[] = {
     {"DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT", 0x00000004},
 };
 
-EnumValueSet const VkPipelineCreateFlagsSets[] = {
+EnumValue const VkPipelineCreateFlagsValues[] = {
     {"DISPATCH_BASE", 0x00000010},
     {"VIEW_INDEX_FROM_DEVICE_INDEX_BIT_KHR", 0x00000008},
     {"DISPATCH_BASE_KHR", 0x00000010},
@@ -659,18 +659,18 @@ EnumValueSet const VkPipelineCreateFlagsSets[] = {
     {"PROTECTED_ACCESS_ONLY", 0x40000000},
 };
 
-EnumValueSet const VkColorComponentFlagsSets[] = {
+EnumValue const VkColorComponentFlagsValues[] = {
     {"R", 0x00000001},
     {"G", 0x00000002},
     {"B", 0x00000004},
     {"A", 0x00000008},
 };
 
-EnumValueSet const VkFenceCreateFlagsSets[] = {
+EnumValue const VkFenceCreateFlagsValues[] = {
     {"SIGNALED", 0x00000001},
 };
 
-EnumValueSet const VkFormatFeatureFlagsSets[] = {
+EnumValue const VkFormatFeatureFlagsValues[] = {
     {"SAMPLED_IMAGE_FILTER_CUBIC_BIT_IMG", 0x00002000},
     {"TRANSFER_SRC_BIT_KHR", 0x00004000},
     {"TRANSFER_DST_BIT_KHR", 0x00008000},
@@ -722,11 +722,11 @@ EnumValueSet const VkFormatFeatureFlagsSets[] = {
     {"VIDEO_ENCODE_DPB_BIT_KHR", 0x10000000},
 };
 
-EnumValueSet const VkQueryControlFlagsSets[] = {
+EnumValue const VkQueryControlFlagsValues[] = {
     {"PRECISE", 0x00000001},
 };
 
-EnumValueSet const VkQueryResultFlagsSets[] = {
+EnumValue const VkQueryResultFlagsValues[] = {
     {"64", 0x00000001},
     {"WAIT", 0x00000002},
     {"WITH_AVAILABILITY", 0x00000004},
@@ -734,37 +734,37 @@ EnumValueSet const VkQueryResultFlagsSets[] = {
     {"WITH_STATUS_BIT_KHR", 0x00000010},
 };
 
-EnumValueSet const VkShaderModuleCreateFlagsSets[] = {
+EnumValue const VkShaderModuleCreateFlagsValues[] = {
     {"RESERVED_0_BIT_NV", 0x00000001},
 };
 
-EnumValueSet const VkEventCreateFlagsSets[] = {
+EnumValue const VkEventCreateFlagsValues[] = {
     {"DEVICE_ONLY_BIT_KHR", 0x00000001},
     {"DEVICE_ONLY", 0x00000001},
 };
 
-EnumValueSet const VkCommandPoolCreateFlagsSets[] = {
+EnumValue const VkCommandPoolCreateFlagsValues[] = {
     {"TRANSIENT", 0x00000001},
     {"RESET_COMMAND_BUFFER", 0x00000002},
     {"PROTECTED", 0x00000004},
 };
 
-EnumValueSet const VkCommandPoolResetFlagsSets[] = {
+EnumValue const VkCommandPoolResetFlagsValues[] = {
     {"RELEASE_RESOURCES", 0x00000001},
     {"RESERVED_1_BIT_COREAVI", 0x00000002},
 };
 
-EnumValueSet const VkCommandBufferResetFlagsSets[] = {
+EnumValue const VkCommandBufferResetFlagsValues[] = {
     {"RELEASE_RESOURCES", 0x00000001},
 };
 
-EnumValueSet const VkCommandBufferUsageFlagsSets[] = {
+EnumValue const VkCommandBufferUsageFlagsValues[] = {
     {"ONE_TIME_SUBMIT", 0x00000001},       {"RENDER_PASS_CONTINUE", 0x00000002},
     {"SIMULTANEOUS_USE", 0x00000004},      {"RESERVED_3_BIT_HUAWEI", 0x00000008},
     {"RESERVED_4_BIT_HUAWEI", 0x00000010},
 };
 
-EnumValueSet const VkQueryPipelineStatisticFlagsSets[] = {
+EnumValue const VkQueryPipelineStatisticFlagsValues[] = {
     {"INPUT_ASSEMBLY_VERTICES", 0x00000001},
     {"INPUT_ASSEMBLY_PRIMITIVES", 0x00000002},
     {"VERTEX_SHADER_INVOCATIONS", 0x00000004},
@@ -781,15 +781,15 @@ EnumValueSet const VkQueryPipelineStatisticFlagsSets[] = {
     {"CLUSTER_CULLING_SHADER_INVOCATIONS_BIT_HUAWEI", 0x00002000},
 };
 
-EnumValueSet const VkMemoryMapFlagsSets[] = {
+EnumValue const VkMemoryMapFlagsValues[] = {
     {"PLACED_BIT_EXT", 0x00000001},
 };
 
-EnumValueSet const VkMemoryUnmapFlagsSets[] = {
+EnumValue const VkMemoryUnmapFlagsValues[] = {
     {"RESERVE_BIT_EXT", 0x00000001},
 };
 
-EnumValueSet const VkImageAspectFlagsSets[] = {
+EnumValue const VkImageAspectFlagsValues[] = {
     {"PLANE_0_BIT_KHR", 0x00000010},
     {"PLANE_1_BIT_KHR", 0x00000020},
     {"PLANE_2_BIT_KHR", 0x00000040},
@@ -809,17 +809,17 @@ EnumValueSet const VkImageAspectFlagsSets[] = {
     {"RESERVED_11_BIT_HUAWEI", 0x00000800},
 };
 
-EnumValueSet const VkSparseMemoryBindFlagsSets[] = {
+EnumValue const VkSparseMemoryBindFlagsValues[] = {
     {"METADATA", 0x00000001},
 };
 
-EnumValueSet const VkSparseImageFormatFlagsSets[] = {
+EnumValue const VkSparseImageFormatFlagsValues[] = {
     {"SINGLE_MIPTAIL", 0x00000001},
     {"ALIGNED_MIP_SIZE", 0x00000002},
     {"NONSTANDARD_BLOCK_SIZE", 0x00000004},
 };
 
-EnumValueSet const VkSubpassDescriptionFlagsSets[] = {
+EnumValue const VkSubpassDescriptionFlagsValues[] = {
     {"FRAGMENT_REGION_BIT_QCOM", 0x00000004},
     {"SHADER_RESOLVE_BIT_QCOM", 0x00000008},
     {"RASTERIZATION_ORDER_ATTACHMENT_COLOR_ACCESS_BIT_ARM", 0x00000010},
@@ -839,7 +839,7 @@ EnumValueSet const VkSubpassDescriptionFlagsSets[] = {
     {"CUSTOM_RESOLVE_BIT_EXT", 0x00000008},
 };
 
-EnumValueSet const VkPipelineStageFlagsSets[] = {
+EnumValue const VkPipelineStageFlagsValues[] = {
     {"SHADING_RATE_IMAGE_BIT_NV", 0x00400000},
     {"TASK_SHADER_BIT_NV", 0x00080000},
     {"MESH_SHADER_BIT_NV", 0x00100000},
@@ -885,12 +885,12 @@ EnumValueSet const VkPipelineStageFlagsSets[] = {
     {"COMMAND_PREPROCESS_BIT_EXT", 0x00020000},
 };
 
-EnumValueSet const VkSampleCountFlagsSets[] = {
+EnumValue const VkSampleCountFlagsValues[] = {
     {"1", 0x00000001},  {"2", 0x00000002},  {"4", 0x00000004},  {"8", 0x00000008},
     {"16", 0x00000010}, {"32", 0x00000020}, {"64", 0x00000040},
 };
 
-EnumValueSet const VkAttachmentDescriptionFlagsSets[] = {
+EnumValue const VkAttachmentDescriptionFlagsValues[] = {
     {"MAY_ALIAS", 0x00000001},
     {"RESERVED_1_BIT_KHR", 0x00000002},
     {"RESERVED_2_BIT_KHR", 0x00000004},
@@ -898,21 +898,21 @@ EnumValueSet const VkAttachmentDescriptionFlagsSets[] = {
     {"RESOLVE_ENABLE_TRANSFER_FUNCTION_BIT_KHR", 0x00000004},
 };
 
-EnumValueSet const VkStencilFaceFlagsSets[] = {
+EnumValue const VkStencilFaceFlagsValues[] = {
     {"VK_STENCIL_FRONT_AND_BACK", 0x00000003},
     {"FRONT", 0x00000001},
     {"BACK", 0x00000002},
     {"FRONT_AND_BACK", 0x00000003},
 };
 
-EnumValueSet const VkCullModeFlagsSets[] = {
+EnumValue const VkCullModeFlagsValues[] = {
     {"NONE", 0},
     {"FRONT", 0x00000001},
     {"BACK", 0x00000002},
     {"FRONT_AND_BACK", 0x00000003},
 };
 
-EnumValueSet const VkDescriptorPoolCreateFlagsSets[] = {
+EnumValue const VkDescriptorPoolCreateFlagsValues[] = {
     {"UPDATE_AFTER_BIND_BIT_EXT", 0x00000002},
     {"HOST_ONLY_BIT_VALVE", 0x00000004},
     {"FREE_DESCRIPTOR_SET", 0x00000001},
@@ -923,7 +923,7 @@ EnumValueSet const VkDescriptorPoolCreateFlagsSets[] = {
     {"ALLOW_OVERALLOCATION_POOLS_BIT_NV", 0x00000010},
 };
 
-EnumValueSet const VkDependencyFlagsSets[] = {
+EnumValue const VkDependencyFlagsValues[] = {
     {"VIEW_LOCAL_BIT_KHR", 0x00000002},
     {"DEVICE_GROUP_BIT_KHR", 0x00000004},
     {"BY_REGION", 0x00000001},
@@ -938,7 +938,7 @@ EnumValueSet const VkDependencyFlagsSets[] = {
     {"ASYMMETRIC_EVENT_BIT_KHR", 0x00000040},
 };
 
-EnumValueSet const VkSubgroupFeatureFlagsSets[] = {
+EnumValue const VkSubgroupFeatureFlagsValues[] = {
     {"ROTATE_BIT_KHR", 0x00000200},
     {"ROTATE_CLUSTERED_BIT_KHR", 0x00000400},
     {"BASIC", 0x00000001},
@@ -954,24 +954,24 @@ EnumValueSet const VkSubgroupFeatureFlagsSets[] = {
     {"ROTATE_CLUSTERED", 0x00000400},
 };
 
-EnumValueSet const VkIndirectCommandsLayoutUsageFlagsNVSets[] = {
+EnumValue const VkIndirectCommandsLayoutUsageFlagsNVValues[] = {
     {"EXPLICIT_PREPROCESS", 0x00000001},
     {"INDEXED_SEQUENCES", 0x00000002},
     {"UNORDERED_SEQUENCES", 0x00000004},
 };
 
-EnumValueSet const VkIndirectStateFlagsNVSets[] = {
+EnumValue const VkIndirectStateFlagsNVValues[] = {
     {"FLAG_FRONTFACE", 0x00000001},
 };
 
-EnumValueSet const VkGeometryFlagsKHRSets[] = {
+EnumValue const VkGeometryFlagsKHRValues[] = {
     {"OPAQUE_BIT_NV", 0x00000001},
     {"NO_DUPLICATE_ANY_HIT_INVOCATION_BIT_NV", 0x00000002},
     {"OPAQUE", 0x00000001},
     {"NO_DUPLICATE_ANY_HIT_INVOCATION", 0x00000002},
 };
 
-EnumValueSet const VkGeometryInstanceFlagsKHRSets[] = {
+EnumValue const VkGeometryInstanceFlagsKHRValues[] = {
     {"TRIANGLE_FRONT_COUNTERCLOCKWISE", 0x00000002},
     {"TRIANGLE_CULL_DISABLE_BIT_NV", 0x00000001},
     {"TRIANGLE_FRONT_COUNTERCLOCKWISE_BIT_NV", 0x00000002},
@@ -989,17 +989,17 @@ EnumValueSet const VkGeometryInstanceFlagsKHRSets[] = {
     {"DISABLE_OPACITY_MICROMAPS_BIT_EXT", 0x00000020},
 };
 
-EnumValueSet const VkClusterAccelerationStructureGeometryFlagsNVSets[] = {
+EnumValue const VkClusterAccelerationStructureGeometryFlagsNVValues[] = {
     {"CULL_DISABLE", 0x00000001},
     {"NO_DUPLICATE_ANYHIT_INVOCATION", 0x00000002},
     {"OPAQUE", 0x00000004},
 };
 
-EnumValueSet const VkClusterAccelerationStructureClusterFlagsNVSets[] = {
+EnumValue const VkClusterAccelerationStructureClusterFlagsNVValues[] = {
     {"ALLOW_DISABLE_OPACITY_MICROMAPS", 0x00000001},
 };
 
-EnumValueSet const VkClusterAccelerationStructureAddressResolutionFlagsNVSets[] = {
+EnumValue const VkClusterAccelerationStructureAddressResolutionFlagsNVValues[] = {
     {"INDIRECTED_DST_IMPLICIT_DATA", 0x00000001},
     {"INDIRECTED_SCRATCH_DATA", 0x00000002},
     {"INDIRECTED_DST_ADDRESS_ARRAY", 0x00000004},
@@ -1009,7 +1009,7 @@ EnumValueSet const VkClusterAccelerationStructureAddressResolutionFlagsNVSets[] 
     {"NONE", 0},
 };
 
-EnumValueSet const VkBuildAccelerationStructureFlagsKHRSets[] = {
+EnumValue const VkBuildAccelerationStructureFlagsKHRValues[] = {
     {"ALLOW_UPDATE_BIT_NV", 0x00000001},
     {"ALLOW_COMPACTION_BIT_NV", 0x00000002},
     {"PREFER_FAST_TRACE_BIT_NV", 0x00000004},
@@ -1040,11 +1040,11 @@ EnumValueSet const VkBuildAccelerationStructureFlagsKHRSets[] = {
     {"RESERVED_10", 0x00000400},
 };
 
-EnumValueSet const VkPrivateDataSlotCreateFlagsSets[] = {
+EnumValue const VkPrivateDataSlotCreateFlagsValues[] = {
     {"RESERVED_0_BIT_NV", 0x00000001},
 };
 
-EnumValueSet const VkAccelerationStructureCreateFlagsKHRSets[] = {
+EnumValue const VkAccelerationStructureCreateFlagsKHRValues[] = {
     {"DEVICE_ADDRESS_CAPTURE_REPLAY", 0x00000001},
     {"RESERVED_BIT_2_NV", 0x00000004},
     {"MOTION_BIT_NV", 0x00000004},
@@ -1052,7 +1052,7 @@ EnumValueSet const VkAccelerationStructureCreateFlagsKHRSets[] = {
     {"DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT", 0x00000008},
 };
 
-EnumValueSet const VkPipelineCreationFeedbackFlagsSets[] = {
+EnumValue const VkPipelineCreationFeedbackFlagsValues[] = {
     {"VALID_BIT_EXT", 0x00000001},
     {"APPLICATION_PIPELINE_CACHE_HIT_BIT_EXT", 0x00000002},
     {"BASE_PIPELINE_ACCELERATION_BIT_EXT", 0x00000004},
@@ -1061,26 +1061,26 @@ EnumValueSet const VkPipelineCreationFeedbackFlagsSets[] = {
     {"BASE_PIPELINE_ACCELERATION", 0x00000004},
 };
 
-EnumValueSet const VkPerformanceCounterDescriptionFlagsKHRSets[] = {
+EnumValue const VkPerformanceCounterDescriptionFlagsKHRValues[] = {
     {"PERFORMANCE_IMPACTING", 0x00000001},
     {"CONCURRENTLY_IMPACTED", 0x00000002},
     {"PERFORMANCE_IMPACTING", 0x00000001},
     {"CONCURRENTLY_IMPACTED", 0x00000002},
 };
 
-EnumValueSet const VkSemaphoreWaitFlagsSets[] = {
+EnumValue const VkSemaphoreWaitFlagsValues[] = {
     {"ANY_BIT_KHR", 0x00000001},
     {"ANY", 0x00000001},
 };
 
-EnumValueSet const VkDeviceDiagnosticsConfigFlagsNVSets[] = {
+EnumValue const VkDeviceDiagnosticsConfigFlagsNVValues[] = {
     {"ENABLE_SHADER_DEBUG_INFO", 0x00000001},
     {"ENABLE_RESOURCE_TRACKING", 0x00000002},
     {"ENABLE_AUTOMATIC_CHECKPOINTS", 0x00000004},
     {"ENABLE_SHADER_ERROR_REPORTING", 0x00000008},
 };
 
-EnumValueSet const VkAccessFlags2Sets[] = {
+EnumValue const VkAccessFlags2Values[] = {
     {"NONE_KHR", 0},
     {"INDIRECT_COMMAND_READ_BIT_KHR", 0x00000001},
     {"INDEX_READ_BIT_KHR", 0x00000002},
@@ -1181,7 +1181,7 @@ EnumValueSet const VkAccessFlags2Sets[] = {
     {"MEMORY_DECOMPRESSION_WRITE_BIT_EXT", 0x100000000000000},
 };
 
-EnumValueSet const VkPipelineStageFlags2Sets[] = {
+EnumValue const VkPipelineStageFlags2Values[] = {
     {"TRANSFER", 0x00001000},
     {"NONE_KHR", 0},
     {"TOP_OF_PIPE_BIT_KHR", 0x00000001},
@@ -1275,7 +1275,7 @@ EnumValueSet const VkPipelineStageFlags2Sets[] = {
     {"RESERVED_48_BIT_HUAWEI", 0x1000000000000},
 };
 
-EnumValueSet const VkFormatFeatureFlags2Sets[] = {
+EnumValue const VkFormatFeatureFlags2Values[] = {
     {"SAMPLED_IMAGE_BIT_KHR", 0x00000001},
     {"STORAGE_IMAGE_BIT_KHR", 0x00000002},
     {"STORAGE_IMAGE_ATOMIC_BIT_KHR", 0x00000004},
@@ -1389,7 +1389,7 @@ EnumValueSet const VkFormatFeatureFlags2Sets[] = {
     {"RESERVED_61_BIT_HUAWEI", 0x2000000000000000},
 };
 
-EnumValueSet const VkRenderingFlagsSets[] = {
+EnumValue const VkRenderingFlagsValues[] = {
     {"CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT_KHR", 0x00000001},
     {"SUSPENDING_BIT_KHR", 0x00000002},
     {"RESUMING_BIT_KHR", 0x00000004},
@@ -1412,32 +1412,32 @@ EnumValueSet const VkRenderingFlagsSets[] = {
     {"CUSTOM_RESOLVE_BIT_EXT", 0x00000080},
 };
 
-EnumValueSet const VkMemoryDecompressionMethodFlagsEXTSets[] = {
+EnumValue const VkMemoryDecompressionMethodFlagsEXTValues[] = {
     {"GDEFLATE_1_0_BIT_NV", 0x00000001},
     {"GDEFLATE_1_0", 0x00000001},
 };
 
-EnumValueSet const VkBuildMicromapFlagsEXTSets[] = {
+EnumValue const VkBuildMicromapFlagsEXTValues[] = {
     {"PREFER_FAST_TRACE", 0x00000001},
     {"PREFER_FAST_BUILD", 0x00000002},
     {"ALLOW_COMPACTION", 0x00000004},
 };
 
-EnumValueSet const VkMicromapCreateFlagsEXTSets[] = {
+EnumValue const VkMicromapCreateFlagsEXTValues[] = {
     {"DEVICE_ADDRESS_CAPTURE_REPLAY", 0x00000001},
 };
 
-EnumValueSet const VkIndirectCommandsLayoutUsageFlagsEXTSets[] = {
+EnumValue const VkIndirectCommandsLayoutUsageFlagsEXTValues[] = {
     {"EXPLICIT_PREPROCESS", 0x00000001},
     {"UNORDERED_SEQUENCES", 0x00000002},
 };
 
-EnumValueSet const VkIndirectCommandsInputModeFlagsEXTSets[] = {
+EnumValue const VkIndirectCommandsInputModeFlagsEXTValues[] = {
     {"VULKAN_INDEX_BUFFER", 0x00000001},
     {"DXGI_INDEX_BUFFER", 0x00000002},
 };
 
-EnumValueSet const VkPipelineCreateFlags2Sets[] = {
+EnumValue const VkPipelineCreateFlags2Values[] = {
     {"DISABLE_OPTIMIZATION_BIT_KHR", 0x00000001},
     {"ALLOW_DERIVATIVES_BIT_KHR", 0x00000002},
     {"DERIVATIVE_BIT_KHR", 0x00000004},
@@ -1503,7 +1503,7 @@ EnumValueSet const VkPipelineCreateFlags2Sets[] = {
     {"RESERVED_48_BIT_HUAWEI", 0x1000000000000},
 };
 
-EnumValueSet const VkBufferUsageFlags2Sets[] = {
+EnumValue const VkBufferUsageFlags2Values[] = {
     {"TRANSFER_SRC_BIT_KHR", 0x00000001},
     {"TRANSFER_DST_BIT_KHR", 0x00000002},
     {"UNIFORM_TEXEL_BUFFER_BIT_KHR", 0x00000004},
@@ -1558,62 +1558,62 @@ EnumValueSet const VkBufferUsageFlags2Sets[] = {
     {"RESERVED_37_BIT_HUAWEI", 0x2000000000},
 };
 
-EnumValueSet const VkAddressCopyFlagsKHRSets[] = {
+EnumValue const VkAddressCopyFlagsKHRValues[] = {
     {"DEVICE_LOCAL", 0x00000001},
     {"SPARSE", 0x00000002},
     {"PROTECTED", 0x00000004},
 };
 
-EnumValueSet const VkTensorCreateFlagsARMSets[] = {
+EnumValue const VkTensorCreateFlagsARMValues[] = {
     {"MUTABLE_FORMAT", 0x00000001},
     {"PROTECTED", 0x00000002},
     {"DESCRIPTOR_BUFFER_CAPTURE_REPLAY", 0x00000004},
     {"RESERVED_3", 0x00000008},
 };
 
-EnumValueSet const VkTensorUsageFlagsARMSets[] = {
+EnumValue const VkTensorUsageFlagsARMValues[] = {
     {"SHADER", 0x00000002},         {"TRANSFER_SRC", 0x00000004}, {"TRANSFER_DST", 0x00000008},
     {"IMAGE_ALIASING", 0x00000010}, {"DATA_GRAPH", 0x00000020},
 };
 
-EnumValueSet const VkTensorViewCreateFlagsARMSets[] = {
+EnumValue const VkTensorViewCreateFlagsARMValues[] = {
     {"DESCRIPTOR_BUFFER_CAPTURE_REPLAY", 0x00000001},
 };
 
-EnumValueSet const VkDataGraphPipelineSessionCreateFlagsARMSets[] = {
+EnumValue const VkDataGraphPipelineSessionCreateFlagsARMValues[] = {
     {"PROTECTED", 0x00000001},
 };
 
-EnumValueSet const VkVideoEncodeRgbModelConversionFlagsVALVESets[] = {
+EnumValue const VkVideoEncodeRgbModelConversionFlagsVALVEValues[] = {
     {"RGB_IDENTITY", 0x00000001}, {"YCBCR_IDENTITY", 0x00000002}, {"YCBCR_709", 0x00000004},
     {"YCBCR_601", 0x00000008},    {"YCBCR_2020", 0x00000010},
 };
 
-EnumValueSet const VkVideoEncodeRgbRangeCompressionFlagsVALVESets[] = {
+EnumValue const VkVideoEncodeRgbRangeCompressionFlagsVALVEValues[] = {
     {"FULL_RANGE", 0x00000001},
     {"NARROW_RANGE", 0x00000002},
 };
 
-EnumValueSet const VkVideoEncodeRgbChromaOffsetFlagsVALVESets[] = {
+EnumValue const VkVideoEncodeRgbChromaOffsetFlagsVALVEValues[] = {
     {"COSITED_EVEN", 0x00000001},
     {"MIDPOINT", 0x00000002},
 };
 
-EnumValueSet const VkCompositeAlphaFlagsKHRSets[] = {
+EnumValue const VkCompositeAlphaFlagsKHRValues[] = {
     {"OPAQUE", 0x00000001},
     {"PRE_MULTIPLIED", 0x00000002},
     {"POST_MULTIPLIED", 0x00000004},
     {"INHERIT", 0x00000008},
 };
 
-EnumValueSet const VkDisplayPlaneAlphaFlagsKHRSets[] = {
+EnumValue const VkDisplayPlaneAlphaFlagsKHRValues[] = {
     {"OPAQUE", 0x00000001},
     {"GLOBAL", 0x00000002},
     {"PER_PIXEL", 0x00000004},
     {"PER_PIXEL_PREMULTIPLIED", 0x00000008},
 };
 
-EnumValueSet const VkSurfaceTransformFlagsKHRSets[] = {
+EnumValue const VkSurfaceTransformFlagsKHRValues[] = {
     {"IDENTITY", 0x00000001},
     {"ROTATE_90", 0x00000002},
     {"ROTATE_180", 0x00000004},
@@ -1625,7 +1625,7 @@ EnumValueSet const VkSurfaceTransformFlagsKHRSets[] = {
     {"INHERIT", 0x00000100},
 };
 
-EnumValueSet const VkSwapchainCreateFlagsKHRSets[] = {
+EnumValue const VkSwapchainCreateFlagsKHRValues[] = {
     {"DEFERRED_MEMORY_ALLOCATION_BIT_EXT", 0x00000008},
     {"SPLIT_INSTANCE_BIND_REGIONS", 0x00000001},
     {"PROTECTED", 0x00000002},
@@ -1641,11 +1641,11 @@ EnumValueSet const VkSwapchainCreateFlagsKHRSets[] = {
     {"PRESENT_TIMING_BIT_EXT", 0x00000200},
 };
 
-EnumValueSet const VkWaylandSurfaceCreateFlagsKHRSets[] = {
+EnumValue const VkWaylandSurfaceCreateFlagsKHRValues[] = {
     {"DISABLE_COLOR_MANAGEMENT", 0x00000001},
 };
 
-EnumValueSet const VkPeerMemoryFeatureFlagsSets[] = {
+EnumValue const VkPeerMemoryFeatureFlagsValues[] = {
     {"COPY_SRC_BIT_KHR", 0x00000001},
     {"COPY_DST_BIT_KHR", 0x00000002},
     {"GENERIC_SRC_BIT_KHR", 0x00000004},
@@ -1656,7 +1656,7 @@ EnumValueSet const VkPeerMemoryFeatureFlagsSets[] = {
     {"GENERIC_DST", 0x00000008},
 };
 
-EnumValueSet const VkMemoryAllocateFlagsSets[] = {
+EnumValue const VkMemoryAllocateFlagsValues[] = {
     {"DEVICE_MASK_BIT_KHR", 0x00000001},
     {"DEVICE_ADDRESS_BIT_KHR", 0x00000002},
     {"DEVICE_ADDRESS_CAPTURE_REPLAY_BIT_KHR", 0x00000004},
@@ -1667,38 +1667,38 @@ EnumValueSet const VkMemoryAllocateFlagsSets[] = {
     {"ZERO_INITIALIZE_BIT_EXT", 0x00000008},
 };
 
-EnumValueSet const VkDeviceGroupPresentModeFlagsKHRSets[] = {
+EnumValue const VkDeviceGroupPresentModeFlagsKHRValues[] = {
     {"LOCAL", 0x00000001},
     {"REMOTE", 0x00000002},
     {"SUM", 0x00000004},
     {"LOCAL_MULTI_DEVICE", 0x00000008},
 };
 
-EnumValueSet const VkDebugReportFlagsEXTSets[] = {
+EnumValue const VkDebugReportFlagsEXTValues[] = {
     {"INFORMATION", 0x00000001}, {"WARNING", 0x00000002}, {"PERFORMANCE_WARNING", 0x00000004},
     {"ERROR", 0x00000008},       {"DEBUG", 0x00000010},
 };
 
-EnumValueSet const VkExternalMemoryHandleTypeFlagsNVSets[] = {
+EnumValue const VkExternalMemoryHandleTypeFlagsNVValues[] = {
     {"OPAQUE_WIN32", 0x00000001},
     {"OPAQUE_WIN32_KMT", 0x00000002},
     {"D3D11_IMAGE", 0x00000004},
     {"D3D11_IMAGE_KMT", 0x00000008},
 };
 
-EnumValueSet const VkClusterAccelerationStructureIndexFormatFlagsNVSets[] = {
+EnumValue const VkClusterAccelerationStructureIndexFormatFlagsNVValues[] = {
     {"8BIT", 0x00000001},
     {"16BIT", 0x00000002},
     {"32BIT", 0x00000004},
 };
 
-EnumValueSet const VkExternalMemoryFeatureFlagsNVSets[] = {
+EnumValue const VkExternalMemoryFeatureFlagsNVValues[] = {
     {"DEDICATED_ONLY", 0x00000001},
     {"EXPORTABLE", 0x00000002},
     {"IMPORTABLE", 0x00000004},
 };
 
-EnumValueSet const VkExternalMemoryHandleTypeFlagsSets[] = {
+EnumValue const VkExternalMemoryHandleTypeFlagsValues[] = {
     {"OPAQUE_FD_BIT_KHR", 0x00000001},
     {"OPAQUE_WIN32_BIT_KHR", 0x00000002},
     {"OPAQUE_WIN32_KMT_BIT_KHR", 0x00000004},
@@ -1733,7 +1733,7 @@ EnumValueSet const VkExternalMemoryHandleTypeFlagsSets[] = {
     {"OH_NATIVE_BUFFER_BIT_OHOS", 0x00008000},
 };
 
-EnumValueSet const VkExternalMemoryFeatureFlagsSets[] = {
+EnumValue const VkExternalMemoryFeatureFlagsValues[] = {
     {"DEDICATED_ONLY_BIT_KHR", 0x00000001},
     {"EXPORTABLE_BIT_KHR", 0x00000002},
     {"IMPORTABLE_BIT_KHR", 0x00000004},
@@ -1742,7 +1742,7 @@ EnumValueSet const VkExternalMemoryFeatureFlagsSets[] = {
     {"IMPORTABLE", 0x00000004},
 };
 
-EnumValueSet const VkExternalSemaphoreHandleTypeFlagsSets[] = {
+EnumValue const VkExternalSemaphoreHandleTypeFlagsValues[] = {
     {"OPAQUE_FD_BIT_KHR", 0x00000001},
     {"OPAQUE_WIN32_BIT_KHR", 0x00000002},
     {"OPAQUE_WIN32_KMT_BIT_KHR", 0x00000004},
@@ -1760,19 +1760,19 @@ EnumValueSet const VkExternalSemaphoreHandleTypeFlagsSets[] = {
     {"SCI_SYNC_OBJ_BIT_NV", 0x00000020},
 };
 
-EnumValueSet const VkExternalSemaphoreFeatureFlagsSets[] = {
+EnumValue const VkExternalSemaphoreFeatureFlagsValues[] = {
     {"EXPORTABLE_BIT_KHR", 0x00000001},
     {"IMPORTABLE_BIT_KHR", 0x00000002},
     {"EXPORTABLE", 0x00000001},
     {"IMPORTABLE", 0x00000002},
 };
 
-EnumValueSet const VkSemaphoreImportFlagsSets[] = {
+EnumValue const VkSemaphoreImportFlagsValues[] = {
     {"TEMPORARY_BIT_KHR", 0x00000001},
     {"TEMPORARY", 0x00000001},
 };
 
-EnumValueSet const VkExternalFenceHandleTypeFlagsSets[] = {
+EnumValue const VkExternalFenceHandleTypeFlagsValues[] = {
     {"OPAQUE_FD_BIT_KHR", 0x00000001},
     {"OPAQUE_WIN32_BIT_KHR", 0x00000002},
     {"OPAQUE_WIN32_KMT_BIT_KHR", 0x00000004},
@@ -1787,38 +1787,38 @@ EnumValueSet const VkExternalFenceHandleTypeFlagsSets[] = {
     {"SCI_SYNC_FENCE_BIT_NV", 0x00000020},
 };
 
-EnumValueSet const VkExternalFenceFeatureFlagsSets[] = {
+EnumValue const VkExternalFenceFeatureFlagsValues[] = {
     {"EXPORTABLE_BIT_KHR", 0x00000001},
     {"IMPORTABLE_BIT_KHR", 0x00000002},
     {"EXPORTABLE", 0x00000001},
     {"IMPORTABLE", 0x00000002},
 };
 
-EnumValueSet const VkFenceImportFlagsSets[] = {
+EnumValue const VkFenceImportFlagsValues[] = {
     {"TEMPORARY_BIT_KHR", 0x00000001},
     {"TEMPORARY", 0x00000001},
 };
 
-EnumValueSet const VkSurfaceCounterFlagsEXTSets[] = {
+EnumValue const VkSurfaceCounterFlagsEXTValues[] = {
     {"VBLANK", 0x00000001},
     {"VBLANK", 0x00000001},
 };
 
-EnumValueSet const VkDebugUtilsMessageSeverityFlagsEXTSets[] = {
+EnumValue const VkDebugUtilsMessageSeverityFlagsEXTValues[] = {
     {"VERBOSE", 0x00000001},
     {"INFO", 0x00000010},
     {"WARNING", 0x00000100},
     {"ERROR", 0x00001000},
 };
 
-EnumValueSet const VkDebugUtilsMessageTypeFlagsEXTSets[] = {
+EnumValue const VkDebugUtilsMessageTypeFlagsEXTValues[] = {
     {"GENERAL", 0x00000001},
     {"VALIDATION", 0x00000002},
     {"PERFORMANCE", 0x00000004},
     {"DEVICE_ADDRESS_BINDING", 0x00000008},
 };
 
-EnumValueSet const VkDescriptorBindingFlagsSets[] = {
+EnumValue const VkDescriptorBindingFlagsValues[] = {
     {"UPDATE_AFTER_BIND_BIT_EXT", 0x00000001}, {"UPDATE_UNUSED_WHILE_PENDING_BIT_EXT", 0x00000002},
     {"PARTIALLY_BOUND_BIT_EXT", 0x00000004},   {"VARIABLE_DESCRIPTOR_COUNT_BIT_EXT", 0x00000008},
     {"UPDATE_AFTER_BIND", 0x00000001},         {"UPDATE_UNUSED_WHILE_PENDING", 0x00000002},
@@ -1826,11 +1826,11 @@ EnumValueSet const VkDescriptorBindingFlagsSets[] = {
     {"RESERVED_4_BIT_QCOM", 0x00000010},
 };
 
-EnumValueSet const VkConditionalRenderingFlagsEXTSets[] = {
+EnumValue const VkConditionalRenderingFlagsEXTValues[] = {
     {"INVERTED", 0x00000001},
 };
 
-EnumValueSet const VkResolveModeFlagsSets[] = {
+EnumValue const VkResolveModeFlagsValues[] = {
     {"NONE_KHR", 0},
     {"SAMPLE_ZERO_BIT_KHR", 0x00000001},
     {"AVERAGE_BIT_KHR", 0x00000002},
@@ -1849,11 +1849,11 @@ EnumValueSet const VkResolveModeFlagsSets[] = {
     {"CUSTOM_BIT_EXT", 0x00000020},
 };
 
-EnumValueSet const VkSwapchainImageUsageFlagsANDROIDSets[] = {
+EnumValue const VkSwapchainImageUsageFlagsANDROIDValues[] = {
     {"SHARED", 0x00000001},
 };
 
-EnumValueSet const VkToolPurposeFlagsSets[] = {
+EnumValue const VkToolPurposeFlagsValues[] = {
     {"VALIDATION_BIT_EXT", 0x00000001},
     {"PROFILING_BIT_EXT", 0x00000002},
     {"TRACING_BIT_EXT", 0x00000004},
@@ -1868,19 +1868,19 @@ EnumValueSet const VkToolPurposeFlagsSets[] = {
     {"DEBUG_MARKERS_BIT_EXT", 0x00000040},
 };
 
-EnumValueSet const VkSubmitFlagsSets[] = {
+EnumValue const VkSubmitFlagsValues[] = {
     {"PROTECTED_BIT_KHR", 0x00000001},
     {"PROTECTED", 0x00000001},
 };
 
-EnumValueSet const VkHostImageCopyFlagsSets[] = {
+EnumValue const VkHostImageCopyFlagsValues[] = {
     {"MEMCPY", 0x00000001},
     {"MEMCPY_EXT", 0x00000001},
     {"MEMCPY_BIT_EXT", 0x00000001},
     {"MEMCPY", 0x00000001},
 };
 
-EnumValueSet const VkPartitionedAccelerationStructureInstanceFlagsNVSets[] = {
+EnumValue const VkPartitionedAccelerationStructureInstanceFlagsNVValues[] = {
     {"FLAG_TRIANGLE_FACING_CULL_DISABLE", 0x00000001},
     {"FLAG_TRIANGLE_FLIP_FACING", 0x00000002},
     {"FLAG_FORCE_OPAQUE", 0x00000004},
@@ -1888,27 +1888,27 @@ EnumValueSet const VkPartitionedAccelerationStructureInstanceFlagsNVSets[] = {
     {"FLAG_ENABLE_EXPLICIT_BOUNDING_BOX", 0x00000010},
 };
 
-EnumValueSet const VkImageConstraintsInfoFlagsFUCHSIASets[] = {
+EnumValue const VkImageConstraintsInfoFlagsFUCHSIAValues[] = {
     {"CPU_READ_RARELY", 0x00000001},    {"CPU_READ_OFTEN", 0x00000002},
     {"CPU_WRITE_RARELY", 0x00000004},   {"CPU_WRITE_OFTEN", 0x00000008},
     {"PROTECTED_OPTIONAL", 0x00000010},
 };
 
-EnumValueSet const VkGraphicsPipelineLibraryFlagsEXTSets[] = {
+EnumValue const VkGraphicsPipelineLibraryFlagsEXTValues[] = {
     {"VERTEX_INPUT_INTERFACE", 0x00000001},
     {"PRE_RASTERIZATION_SHADERS", 0x00000002},
     {"FRAGMENT_SHADER", 0x00000004},
     {"FRAGMENT_OUTPUT_INTERFACE", 0x00000008},
 };
 
-EnumValueSet const VkImageCompressionFlagsEXTSets[] = {
+EnumValue const VkImageCompressionFlagsEXTValues[] = {
     {"DEFAULT", 0},
     {"FIXED_RATE_DEFAULT", 0x00000001},
     {"FIXED_RATE_EXPLICIT", 0x00000002},
     {"DISABLED", 0x00000004},
 };
 
-EnumValueSet const VkImageCompressionFixedRateFlagsEXTSets[] = {
+EnumValue const VkImageCompressionFixedRateFlagsEXTValues[] = {
     {"NONE", 0},           {"1BPC", 0x00000001},  {"2BPC", 0x00000002},  {"3BPC", 0x00000004},
     {"4BPC", 0x00000008},  {"5BPC", 0x00000010},  {"6BPC", 0x00000020},  {"7BPC", 0x00000040},
     {"8BPC", 0x00000080},  {"9BPC", 0x00000100},  {"10BPC", 0x00000200}, {"11BPC", 0x00000400},
@@ -1918,63 +1918,63 @@ EnumValueSet const VkImageCompressionFixedRateFlagsEXTSets[] = {
     {"24BPC", 0x00800000},
 };
 
-EnumValueSet const VkExportMetalObjectTypeFlagsEXTSets[] = {
+EnumValue const VkExportMetalObjectTypeFlagsEXTValues[] = {
     {"METAL_DEVICE", 0x00000001},    {"METAL_COMMAND_QUEUE", 0x00000002},
     {"METAL_BUFFER", 0x00000004},    {"METAL_TEXTURE", 0x00000008},
     {"METAL_IOSURFACE", 0x00000010}, {"METAL_SHARED_EVENT", 0x00000020},
 };
 
-EnumValueSet const VkRenderingAttachmentFlagsKHRSets[] = {
+EnumValue const VkRenderingAttachmentFlagsKHRValues[] = {
     {"INPUT_ATTACHMENT_FEEDBACK", 0x00000001},
     {"RESOLVE_SKIP_TRANSFER_FUNCTION", 0x00000002},
     {"RESOLVE_ENABLE_TRANSFER_FUNCTION", 0x00000004},
 };
 
-EnumValueSet const VkResolveImageFlagsKHRSets[] = {
+EnumValue const VkResolveImageFlagsKHRValues[] = {
     {"SKIP_TRANSFER_FUNCTION", 0x00000001},
     {"ENABLE_TRANSFER_FUNCTION", 0x00000002},
 };
 
-EnumValueSet const VkDeviceAddressBindingFlagsEXTSets[] = {
+EnumValue const VkDeviceAddressBindingFlagsEXTValues[] = {
     {"INTERNAL_OBJECT", 0x00000001},
 };
 
-EnumValueSet const VkOpticalFlowGridSizeFlagsNVSets[] = {
+EnumValue const VkOpticalFlowGridSizeFlagsNVValues[] = {
     {"UNKNOWN", 0},      {"1X1", 0x00000001}, {"2X2", 0x00000002},
     {"4X4", 0x00000004}, {"8X8", 0x00000008},
 };
 
-EnumValueSet const VkOpticalFlowUsageFlagsNVSets[] = {
+EnumValue const VkOpticalFlowUsageFlagsNVValues[] = {
     {"UNKNOWN", 0},       {"INPUT", 0x00000001}, {"OUTPUT", 0x00000002},
     {"HINT", 0x00000004}, {"COST", 0x00000008},  {"GLOBAL_FLOW", 0x00000010},
 };
 
-EnumValueSet const VkOpticalFlowSessionCreateFlagsNVSets[] = {
+EnumValue const VkOpticalFlowSessionCreateFlagsNVValues[] = {
     {"ENABLE_HINT", 0x00000001},        {"ENABLE_COST", 0x00000002},
     {"ENABLE_GLOBAL_FLOW", 0x00000004}, {"ALLOW_REGIONS", 0x00000008},
     {"BOTH_DIRECTIONS", 0x00000010},
 };
 
-EnumValueSet const VkOpticalFlowExecuteFlagsNVSets[] = {
+EnumValue const VkOpticalFlowExecuteFlagsNVValues[] = {
     {"DISABLE_TEMPORAL_HINTS", 0x00000001},
 };
 
-EnumValueSet const VkFrameBoundaryFlagsEXTSets[] = {
+EnumValue const VkFrameBoundaryFlagsEXTValues[] = {
     {"FRAME_END", 0x00000001},
 };
 
-EnumValueSet const VkPresentScalingFlagsKHRSets[] = {
+EnumValue const VkPresentScalingFlagsKHRValues[] = {
     {"ONE_TO_ONE_BIT_EXT", 0x00000001},   {"ASPECT_RATIO_STRETCH_BIT_EXT", 0x00000002},
     {"STRETCH_BIT_EXT", 0x00000004},      {"ONE_TO_ONE", 0x00000001},
     {"ASPECT_RATIO_STRETCH", 0x00000002}, {"STRETCH", 0x00000004},
 };
 
-EnumValueSet const VkPresentGravityFlagsKHRSets[] = {
+EnumValue const VkPresentGravityFlagsKHRValues[] = {
     {"MIN_BIT_EXT", 0x00000001}, {"MAX_BIT_EXT", 0x00000002}, {"CENTERED_BIT_EXT", 0x00000004},
     {"MIN", 0x00000001},         {"MAX", 0x00000002},         {"CENTERED", 0x00000004},
 };
 
-EnumValueSet const VkShaderCreateFlagsEXTSets[] = {
+EnumValue const VkShaderCreateFlagsEXTValues[] = {
     {"LINK_STAGE", 0x00000001},
     {"ALLOW_VARYING_SUBGROUP_SIZE", 0x00000002},
     {"REQUIRE_FULL_SUBGROUPS", 0x00000004},
@@ -1998,37 +1998,37 @@ EnumValueSet const VkShaderCreateFlagsEXTSets[] = {
     {"64_BIT_INDEXING", 0x00008000},
 };
 
-EnumValueSet const VkTileShadingRenderPassFlagsQCOMSets[] = {
+EnumValue const VkTileShadingRenderPassFlagsQCOMValues[] = {
     {"ENABLE", 0x00000001},
     {"PER_TILE_EXECUTION", 0x00000002},
 };
 
-EnumValueSet const VkPhysicalDeviceSchedulingControlsFlagsARMSets[] = {
+EnumValue const VkPhysicalDeviceSchedulingControlsFlagsARMValues[] = {
     {"SHADER_CORE_COUNT", 0x00000001},
 };
 
-EnumValueSet const VkPresentStageFlagsEXTSets[] = {
+EnumValue const VkPresentStageFlagsEXTValues[] = {
     {"QUEUE_OPERATIONS_END", 0x00000001},
     {"REQUEST_DEQUEUED", 0x00000002},
     {"IMAGE_FIRST_PIXEL_OUT", 0x00000004},
     {"IMAGE_FIRST_PIXEL_VISIBLE", 0x00000008},
 };
 
-EnumValueSet const VkPastPresentationTimingFlagsEXTSets[] = {
+EnumValue const VkPastPresentationTimingFlagsEXTValues[] = {
     {"ALLOW_PARTIAL_RESULTS", 0x00000001},
     {"ALLOW_OUT_OF_ORDER_RESULTS", 0x00000002},
 };
 
-EnumValueSet const VkPresentTimingInfoFlagsEXTSets[] = {
+EnumValue const VkPresentTimingInfoFlagsEXTValues[] = {
     {"PRESENT_AT_RELATIVE_TIME", 0x00000001},
     {"PRESENT_AT_NEAREST_REFRESH_CYCLE", 0x00000002},
 };
 
-EnumValueSet const VkSwapchainImageUsageFlagsOHOSSets[] = {
+EnumValue const VkSwapchainImageUsageFlagsOHOSValues[] = {
     {"SHARED", 0x00000001},
 };
 
-EnumValueSet const VkVideoCodecOperationFlagsKHRSets[] = {
+EnumValue const VkVideoCodecOperationFlagsKHRValues[] = {
     {"ENCODE_H264_BIT_EXT", 0x00010000}, {"DECODE_H264_BIT_EXT", 0x00000001},
     {"DECODE_H265_BIT_EXT", 0x00000002}, {"INVALID", 0},
     {"ENCODE_H265_BIT_EXT", 0x00020000}, {"NONE", 0},
@@ -2038,12 +2038,12 @@ EnumValueSet const VkVideoCodecOperationFlagsKHRSets[] = {
     {"DECODE_VP9", 0x00000008},
 };
 
-EnumValueSet const VkVideoCapabilityFlagsKHRSets[] = {
+EnumValue const VkVideoCapabilityFlagsKHRValues[] = {
     {"PROTECTED_CONTENT", 0x00000001},
     {"SEPARATE_REFERENCE_IMAGES", 0x00000002},
 };
 
-EnumValueSet const VkVideoSessionCreateFlagsKHRSets[] = {
+EnumValue const VkVideoSessionCreateFlagsKHRValues[] = {
     {"PROTECTED_CONTENT", 0x00000001},
     {"DEFAULT", 0},
     {"ALLOW_ENCODE_PARAMETER_OPTIMIZATIONS", 0x00000002},
@@ -2057,11 +2057,11 @@ EnumValueSet const VkVideoSessionCreateFlagsKHRSets[] = {
     {"INLINE_SESSION_PARAMETERS", 0x00000020},
 };
 
-EnumValueSet const VkVideoSessionParametersCreateFlagsKHRSets[] = {
+EnumValue const VkVideoSessionParametersCreateFlagsKHRValues[] = {
     {"QUANTIZATION_MAP_COMPATIBLE", 0x00000001},
 };
 
-EnumValueSet const VkVideoCodingControlFlagsKHRSets[] = {
+EnumValue const VkVideoCodingControlFlagsKHRValues[] = {
     {"RESET", 0x00000001},
     {"DEFAULT", 0},
     {"ENCODE_RATE_CONTROL", 0x00000002},
@@ -2069,38 +2069,38 @@ EnumValueSet const VkVideoCodingControlFlagsKHRSets[] = {
     {"ENCODE_QUALITY_LEVEL", 0x00000004},
 };
 
-EnumValueSet const VkVideoDecodeUsageFlagsKHRSets[] = {
+EnumValue const VkVideoDecodeUsageFlagsKHRValues[] = {
     {"DEFAULT", 0},
     {"TRANSCODING", 0x00000001},
     {"OFFLINE", 0x00000002},
     {"STREAMING", 0x00000004},
 };
 
-EnumValueSet const VkVideoDecodeCapabilityFlagsKHRSets[] = {
+EnumValue const VkVideoDecodeCapabilityFlagsKHRValues[] = {
     {"DPB_AND_OUTPUT_COINCIDE", 0x00000001},
     {"DPB_AND_OUTPUT_DISTINCT", 0x00000002},
     {"DEFAULT", 0},
 };
 
-EnumValueSet const VkVideoDecodeFlagsKHRSets[] = {
+EnumValue const VkVideoDecodeFlagsKHRValues[] = {
     {"DEFAULT", 0},
     {"RESERVED_0", 0x00000001},
 };
 
-EnumValueSet const VkVideoDecodeH264PictureLayoutFlagsKHRSets[] = {
+EnumValue const VkVideoDecodeH264PictureLayoutFlagsKHRValues[] = {
     {"PROGRESSIVE", 0},
     {"INTERLACED_INTERLEAVED_LINES", 0x00000001},
     {"INTERLACED_SEPARATE_PLANES", 0x00000002},
 };
 
-EnumValueSet const VkVideoEncodeFlagsKHRSets[] = {
+EnumValue const VkVideoEncodeFlagsKHRValues[] = {
     {"RESERVED_0", 0x00000001},        {"DEFAULT", 0},
     {"RESERVED_1", 0x00000002},        {"WITH_QUANTIZATION_DELTA_MAP", 0x00000001},
     {"WITH_EMPHASIS_MAP", 0x00000002}, {"RESERVED_2", 0x00000004},
     {"INTRA_REFRESH", 0x00000004},
 };
 
-EnumValueSet const VkVideoEncodeUsageFlagsKHRSets[] = {
+EnumValue const VkVideoEncodeUsageFlagsKHRValues[] = {
     {"DEFAULT", 0},
     {"TRANSCODING", 0x00000001},
     {"STREAMING", 0x00000002},
@@ -2108,14 +2108,14 @@ EnumValueSet const VkVideoEncodeUsageFlagsKHRSets[] = {
     {"CONFERENCING", 0x00000008},
 };
 
-EnumValueSet const VkVideoEncodeContentFlagsKHRSets[] = {
+EnumValue const VkVideoEncodeContentFlagsKHRValues[] = {
     {"DEFAULT", 0},
     {"CAMERA", 0x00000001},
     {"DESKTOP", 0x00000002},
     {"RENDERED", 0x00000004},
 };
 
-EnumValueSet const VkVideoEncodeCapabilityFlagsKHRSets[] = {
+EnumValue const VkVideoEncodeCapabilityFlagsKHRValues[] = {
     {"PRECEDING_EXTERNALLY_ENCODED_BYTES", 0x00000001},
     {"DEFAULT", 0},
     {"INSUFFICIENT_BITSTREAM_BUFFER_RANGE_DETECTION", 0x00000002},
@@ -2125,7 +2125,7 @@ EnumValueSet const VkVideoEncodeCapabilityFlagsKHRSets[] = {
     {"EMPHASIS_MAP", 0x00000008},
 };
 
-EnumValueSet const VkVideoEncodeFeedbackFlagsKHRSets[] = {
+EnumValue const VkVideoEncodeFeedbackFlagsKHRValues[] = {
     {"BITSTREAM_BUFFER_OFFSET", 0x00000001},
     {"BITSTREAM_BYTES_WRITTEN", 0x00000002},
     {"BITSTREAM_HAS_OVERRIDES", 0x00000004},
@@ -2138,17 +2138,17 @@ EnumValueSet const VkVideoEncodeFeedbackFlagsKHRSets[] = {
     {"RESERVED_9", 0x00000200},
 };
 
-EnumValueSet const VkVideoEncodeRateControlFlagsKHRSets[] = {
+EnumValue const VkVideoEncodeRateControlFlagsKHRValues[] = {
     {"DEFAULT", 0},
     {"RESET", 0x00000001},
     {"RESERVED_0", 0x00000001},
 };
 
-EnumValueSet const VkVideoEncodeRateControlModeFlagsKHRSets[] = {
+EnumValue const VkVideoEncodeRateControlModeFlagsKHRValues[] = {
     {"CBR", 0x00000002}, {"VBR", 0x00000004}, {"NONE", 0}, {"DEFAULT", 0}, {"DISABLED", 0x00000001},
 };
 
-EnumValueSet const VkVideoEncodeIntraRefreshModeFlagsKHRSets[] = {
+EnumValue const VkVideoEncodeIntraRefreshModeFlagsKHRValues[] = {
     {"NONE", 0},
     {"PER_PICTURE_PARTITION", 0x00000001},
     {"BLOCK_BASED", 0x00000002},
@@ -2156,19 +2156,19 @@ EnumValueSet const VkVideoEncodeIntraRefreshModeFlagsKHRSets[] = {
     {"BLOCK_COLUMN_BASED", 0x00000008},
 };
 
-EnumValueSet const VkVideoChromaSubsamplingFlagsKHRSets[] = {
+EnumValue const VkVideoChromaSubsamplingFlagsKHRValues[] = {
     {"MONOCHROME", 0x00000001}, {"420", 0x00000002}, {"422", 0x00000004},
     {"444", 0x00000008},        {"INVALID", 0},      {"INVALID", 0},
 };
 
-EnumValueSet const VkVideoComponentBitDepthFlagsKHRSets[] = {
+EnumValue const VkVideoComponentBitDepthFlagsKHRValues[] = {
     {"INVALID", 0},
     {"8", 0x00000001},
     {"10", 0x00000004},
     {"12", 0x00000010},
 };
 
-EnumValueSet const VkVideoEncodeH264CapabilityFlagsKHRSets[] = {
+EnumValue const VkVideoEncodeH264CapabilityFlagsKHRValues[] = {
     {"HRD_COMPLIANCE", 0x00000001},
     {"PREDICTION_WEIGHT_TABLE_GENERATED", 0x00000002},
     {"ROW_UNALIGNED_SLICE", 0x00000004},
@@ -2184,7 +2184,7 @@ EnumValueSet const VkVideoEncodeH264CapabilityFlagsKHRSets[] = {
     {"B_PICTURE_INTRA_REFRESH", 0x00000400},
 };
 
-EnumValueSet const VkVideoEncodeH264StdFlagsKHRSets[] = {
+EnumValue const VkVideoEncodeH264StdFlagsKHRValues[] = {
     {"SEPARATE_COLOR_PLANE_FLAG_SET", 0x00000001},
     {"QPPRIME_Y_ZERO_TRANSFORM_BYPASS_FLAG_SET", 0x00000002},
     {"SCALING_MATRIX_PRESENT_FLAG_SET", 0x00000004},
@@ -2207,13 +2207,13 @@ EnumValueSet const VkVideoEncodeH264StdFlagsKHRSets[] = {
     {"DIFFERENT_SLICE_QP_DELTA", 0x00100000},
 };
 
-EnumValueSet const VkVideoEncodeH264RateControlFlagsKHRSets[] = {
+EnumValue const VkVideoEncodeH264RateControlFlagsKHRValues[] = {
     {"ATTEMPT_HRD_COMPLIANCE", 0x00000001},        {"REGULAR_GOP", 0x00000002},
     {"REFERENCE_PATTERN_FLAT", 0x00000004},        {"REFERENCE_PATTERN_DYADIC", 0x00000008},
     {"TEMPORAL_LAYER_PATTERN_DYADIC", 0x00000010},
 };
 
-EnumValueSet const VkVideoEncodeH265CapabilityFlagsKHRSets[] = {
+EnumValue const VkVideoEncodeH265CapabilityFlagsKHRValues[] = {
     {"HRD_COMPLIANCE", 0x00000001},
     {"PREDICTION_WEIGHT_TABLE_GENERATED", 0x00000002},
     {"ROW_UNALIGNED_SLICE_SEGMENT", 0x00000004},
@@ -2230,7 +2230,7 @@ EnumValueSet const VkVideoEncodeH265CapabilityFlagsKHRSets[] = {
     {"B_PICTURE_INTRA_REFRESH", 0x00000800},
 };
 
-EnumValueSet const VkVideoEncodeH265StdFlagsKHRSets[] = {
+EnumValue const VkVideoEncodeH265StdFlagsKHRValues[] = {
     {"SEPARATE_COLOR_PLANE_FLAG_SET", 0x00000001},
     {"SAMPLE_ADAPTIVE_OFFSET_ENABLED_FLAG_SET", 0x00000002},
     {"SCALING_LIST_DATA_PRESENT_FLAG_SET", 0x00000004},
@@ -2254,7 +2254,7 @@ EnumValueSet const VkVideoEncodeH265StdFlagsKHRSets[] = {
     {"DIFFERENT_SLICE_QP_DELTA", 0x00100000},
 };
 
-EnumValueSet const VkVideoEncodeH265RateControlFlagsKHRSets[] = {
+EnumValue const VkVideoEncodeH265RateControlFlagsKHRValues[] = {
     {"ATTEMPT_HRD_COMPLIANCE", 0x00000001},
     {"REGULAR_GOP", 0x00000002},
     {"REFERENCE_PATTERN_FLAT", 0x00000004},
@@ -2262,20 +2262,20 @@ EnumValueSet const VkVideoEncodeH265RateControlFlagsKHRSets[] = {
     {"TEMPORAL_SUB_LAYER_PATTERN_DYADIC", 0x00000010},
 };
 
-EnumValueSet const VkVideoEncodeH265CtbSizeFlagsKHRSets[] = {
+EnumValue const VkVideoEncodeH265CtbSizeFlagsKHRValues[] = {
     {"16", 0x00000001},
     {"32", 0x00000002},
     {"64", 0x00000004},
 };
 
-EnumValueSet const VkVideoEncodeH265TransformBlockSizeFlagsKHRSets[] = {
+EnumValue const VkVideoEncodeH265TransformBlockSizeFlagsKHRValues[] = {
     {"4", 0x00000001},
     {"8", 0x00000002},
     {"16", 0x00000004},
     {"32", 0x00000008},
 };
 
-EnumValueSet const VkVideoEncodeAV1CapabilityFlagsKHRSets[] = {
+EnumValue const VkVideoEncodeAV1CapabilityFlagsKHRValues[] = {
     {"VK_VIDEO_ENCODE_AV1_CAPABILITY_PER_RATE_CONTROL_GROUP_MIN_MAX_Q_INDEX", 0x00000001},
     {"VK_VIDEO_ENCODE_AV1_CAPABILITY_GENERATE_OBU_EXTENSION_HEADER", 0x00000002},
     {"VK_VIDEO_ENCODE_AV1_CAPABILITY_PRIMARY_REFERENCE_CDF_ONLY", 0x00000004},
@@ -2285,40 +2285,40 @@ EnumValueSet const VkVideoEncodeAV1CapabilityFlagsKHRSets[] = {
     {"VK_VIDEO_ENCODE_AV1_CAPABILITY_COMPOUND_PREDICTION_INTRA_REFRESH", 0x00000020},
 };
 
-EnumValueSet const VkVideoEncodeAV1StdFlagsKHRSets[] = {
+EnumValue const VkVideoEncodeAV1StdFlagsKHRValues[] = {
     {"VK_VIDEO_ENCODE_AV1_STD_UNIFORM_TILE_SPACING_FLAG_SET", 0x00000001},
     {"VK_VIDEO_ENCODE_AV1_STD_SKIP_MODE_PRESENT_UNSET", 0x00000002},
     {"VK_VIDEO_ENCODE_AV1_STD_PRIMARY_REF_FRAME", 0x00000004},
     {"VK_VIDEO_ENCODE_AV1_STD_DELTA_Q", 0x00000008},
 };
 
-EnumValueSet const VkVideoEncodeAV1RateControlFlagsKHRSets[] = {
+EnumValue const VkVideoEncodeAV1RateControlFlagsKHRValues[] = {
     {"VK_VIDEO_ENCODE_AV1_RATE_CONTROL_REGULAR_GOP", 0x00000001},
     {"VK_VIDEO_ENCODE_AV1_RATE_CONTROL_TEMPORAL_LAYER_PATTERN_DYADIC", 0x00000002},
     {"VK_VIDEO_ENCODE_AV1_RATE_CONTROL_REFERENCE_PATTERN_FLAT", 0x00000004},
     {"VK_VIDEO_ENCODE_AV1_RATE_CONTROL_REFERENCE_PATTERN_DYADIC", 0x00000008},
 };
 
-EnumValueSet const VkVideoEncodeAV1SuperblockSizeFlagsKHRSets[] = {
+EnumValue const VkVideoEncodeAV1SuperblockSizeFlagsKHRValues[] = {
     {"VK_VIDEO_ENCODE_AV1_SUPERBLOCK_SIZE_64", 0x00000001},
     {"VK_VIDEO_ENCODE_AV1_SUPERBLOCK_SIZE_128", 0x00000002},
 };
 
-EnumValueSet const VkAccessFlags3KHRSets[] = {
+EnumValue const VkAccessFlags3KHRValues[] = {
     {"NONE", 0},
 };
 
-EnumValueSet const VkAttachmentLoadOpSets[] = {
+EnumValue const VkAttachmentLoadOpValues[] = {
     {"NONE_EXT", 1000400000}, {"NONE_KHR", 1000400000}, {"LOAD", 0}, {"CLEAR", 1},
     {"DONT_CARE", 2},         {"NONE", 1000400000},
 };
 
-EnumValueSet const VkAttachmentStoreOpSets[] = {
+EnumValue const VkAttachmentStoreOpValues[] = {
     {"NONE_QCOM", 1000301000}, {"NONE_EXT", 1000301000}, {"NONE_KHR", 1000301000}, {"STORE", 0},
     {"DONT_CARE", 1},          {"NONE", 1000301000},
 };
 
-EnumValueSet const VkBlendFactorSets[] = {
+EnumValue const VkBlendFactorValues[] = {
     {"ZERO", 0},
     {"ONE", 1},
     {"SRC_COLOR", 2},
@@ -2340,7 +2340,7 @@ EnumValueSet const VkBlendFactorSets[] = {
     {"ONE_MINUS_SRC1_ALPHA", 18},
 };
 
-EnumValueSet const VkBlendOpSets[] = {
+EnumValue const VkBlendOpValues[] = {
     {"ADD", 0},
     {"SUBTRACT", 1},
     {"REVERSE_SUBTRACT", 2},
@@ -2394,27 +2394,27 @@ EnumValueSet const VkBlendOpSets[] = {
     {"BLUE_EXT", 1000148045},
 };
 
-EnumValueSet const VkBorderColorSets[] = {
+EnumValue const VkBorderColorValues[] = {
     {"FLOAT_TRANSPARENT_BLACK", 0},   {"INT_TRANSPARENT_BLACK", 1},   {"FLOAT_OPAQUE_BLACK", 2},
     {"INT_OPAQUE_BLACK", 3},          {"FLOAT_OPAQUE_WHITE", 4},      {"INT_OPAQUE_WHITE", 5},
     {"FLOAT_CUSTOM_EXT", 1000287003}, {"INT_CUSTOM_EXT", 1000287004},
 };
 
-EnumValueSet const VkPipelineCacheHeaderVersionSets[] = {
+EnumValue const VkPipelineCacheHeaderVersionValues[] = {
     {"ONE", 1},
     {"DATA_GRAPH_QCOM", 1000629000},
 };
 
-EnumValueSet const VkComponentSwizzleSets[] = {
+EnumValue const VkComponentSwizzleValues[] = {
     {"IDENTITY", 0}, {"ZERO", 1}, {"ONE", 2}, {"R", 3}, {"G", 4}, {"B", 5}, {"A", 6},
 };
 
-EnumValueSet const VkCommandBufferLevelSets[] = {
+EnumValue const VkCommandBufferLevelValues[] = {
     {"PRIMARY", 0},
     {"SECONDARY", 1},
 };
 
-EnumValueSet const VkCompareOpSets[] = {
+EnumValue const VkCompareOpValues[] = {
     {"NEVER", 0},
     {"LESS", 1},
     {"EQUAL", 2},
@@ -2425,7 +2425,7 @@ EnumValueSet const VkCompareOpSets[] = {
     {"ALWAYS", 7},
 };
 
-EnumValueSet const VkDescriptorTypeSets[] = {
+EnumValue const VkDescriptorTypeValues[] = {
     {"INLINE_UNIFORM_BLOCK_EXT", 1000138000},
     {"MUTABLE_VALVE", 1000351000},
     {"SAMPLER", 0},
@@ -2450,7 +2450,7 @@ EnumValueSet const VkDescriptorTypeSets[] = {
     {"TENSOR_ARM", 1000460000},
 };
 
-EnumValueSet const VkDynamicStateSets[] = {
+EnumValue const VkDynamicStateValues[] = {
     {"LINE_STIPPLE_EXT", 1000259000},
     {"CULL_MODE_EXT", 1000267000},
     {"FRONT_FACE_EXT", 1000267001},
@@ -2543,14 +2543,14 @@ EnumValueSet const VkDynamicStateSets[] = {
     {"LINE_STIPPLE", 1000259000},
 };
 
-EnumValueSet const VkPolygonModeSets[] = {
+EnumValue const VkPolygonModeValues[] = {
     {"FILL", 0},
     {"LINE", 1},
     {"POINT", 2},
     {"FILL_RECTANGLE_NV", 1000153000},
 };
 
-EnumValueSet const VkFormatSets[] = {
+EnumValue const VkFormatValues[] = {
     {"G8B8G8R8_422_UNORM_KHR", 1000156000},
     {"B8G8R8G8_422_UNORM_KHR", 1000156001},
     {"G8_B8_R8_3PLANE_420_UNORM_KHR", 1000156002},
@@ -2905,12 +2905,12 @@ EnumValueSet const VkFormatSets[] = {
     {"R8_BOOL_ARM", 1000460000},
 };
 
-EnumValueSet const VkFrontFaceSets[] = {
+EnumValue const VkFrontFaceValues[] = {
     {"COUNTER_CLOCKWISE", 0},
     {"CLOCKWISE", 1},
 };
 
-EnumValueSet const VkImageLayoutSets[] = {
+EnumValue const VkImageLayoutValues[] = {
     {"DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL_KHR", 1000117000},
     {"DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL_KHR", 1000117001},
     {"SHADING_RATE_OPTIMAL_NV", 1000164003},
@@ -2955,24 +2955,24 @@ EnumValueSet const VkImageLayoutSets[] = {
     {"TENSOR_ALIASING_ARM", 1000460000},
 };
 
-EnumValueSet const VkImageTilingSets[] = {
+EnumValue const VkImageTilingValues[] = {
     {"OPTIMAL", 0},
     {"LINEAR", 1},
     {"DRM_FORMAT_MODIFIER_EXT", 1000158000},
 };
 
-EnumValueSet const VkImageTypeSets[] = {
+EnumValue const VkImageTypeValues[] = {
     {"1D", 0},
     {"2D", 1},
     {"3D", 2},
 };
 
-EnumValueSet const VkImageViewTypeSets[] = {
+EnumValue const VkImageViewTypeValues[] = {
     {"1D", 0},       {"2D", 1},       {"3D", 2},         {"CUBE", 3},
     {"1D_ARRAY", 4}, {"2D_ARRAY", 5}, {"CUBE_ARRAY", 6},
 };
 
-EnumValueSet const VkIndirectCommandsTokenTypeEXTSets[] = {
+EnumValue const VkIndirectCommandsTokenTypeEXTValues[] = {
     {"EXECUTION_SET", 0},
     {"PUSH_CONSTANT", 1},
     {"SEQUENCE_INDEX", 2},
@@ -2990,17 +2990,17 @@ EnumValueSet const VkIndirectCommandsTokenTypeEXTSets[] = {
     {"TRACE_RAYS2", 1000386004},
 };
 
-EnumValueSet const VkSharingModeSets[] = {
+EnumValue const VkSharingModeValues[] = {
     {"EXCLUSIVE", 0},
     {"CONCURRENT", 1},
 };
 
-EnumValueSet const VkIndexTypeSets[] = {
+EnumValue const VkIndexTypeValues[] = {
     {"NONE_NV", 1000165000}, {"UINT8_EXT", 1000265000}, {"UINT8_KHR", 1000265000}, {"UINT16", 0},
     {"UINT32", 1},           {"NONE_KHR", 1000165000},  {"UINT8", 1000265000},
 };
 
-EnumValueSet const VkLogicOpSets[] = {
+EnumValue const VkLogicOpValues[] = {
     {"CLEAR", 0},
     {"AND", 1},
     {"AND_REVERSE", 2},
@@ -3019,11 +3019,11 @@ EnumValueSet const VkLogicOpSets[] = {
     {"SET", 15},
 };
 
-EnumValueSet const VkPhysicalDeviceTypeSets[] = {
+EnumValue const VkPhysicalDeviceTypeValues[] = {
     {"OTHER", 0}, {"INTEGRATED_GPU", 1}, {"DISCRETE_GPU", 2}, {"VIRTUAL_GPU", 3}, {"CPU", 4},
 };
 
-EnumValueSet const VkPipelineBindPointSets[] = {
+EnumValue const VkPipelineBindPointValues[] = {
     {"RAY_TRACING_NV", 1000165000},
     {"GRAPHICS", 0},
     {"COMPUTE", 1},
@@ -3034,7 +3034,7 @@ EnumValueSet const VkPipelineBindPointSets[] = {
     {"DATA_GRAPH_ARM", 1000507000},
 };
 
-EnumValueSet const VkPrimitiveTopologySets[] = {
+EnumValue const VkPrimitiveTopologyValues[] = {
     {"POINT_LIST", 0},
     {"LINE_LIST", 1},
     {"LINE_STRIP", 2},
@@ -3048,7 +3048,7 @@ EnumValueSet const VkPrimitiveTopologySets[] = {
     {"PATCH_LIST", 10},
 };
 
-EnumValueSet const VkQueryTypeSets[] = {
+EnumValue const VkQueryTypeValues[] = {
     {"OCCLUSION", 0},
     {"PIPELINE_STATISTICS", 1},
     {"TIMESTAMP", 2},
@@ -3072,14 +3072,14 @@ EnumValueSet const VkQueryTypeSets[] = {
     {"VIDEO_ENCODE_FEEDBACK_KHR", 1000299000},
 };
 
-EnumValueSet const VkSubpassContentsSets[] = {
+EnumValue const VkSubpassContentsValues[] = {
     {"INLINE_AND_SECONDARY_COMMAND_BUFFERS_EXT", 1000451000},
     {"INLINE", 0},
     {"SECONDARY_COMMAND_BUFFERS", 1},
     {"INLINE_AND_SECONDARY_COMMAND_BUFFERS_KHR", 1000451000},
 };
 
-EnumValueSet const VkStencilOpSets[] = {
+EnumValue const VkStencilOpValues[] = {
     {"KEEP", 0},
     {"ZERO", 1},
     {"REPLACE", 2},
@@ -3090,44 +3090,44 @@ EnumValueSet const VkStencilOpSets[] = {
     {"DECREMENT_AND_WRAP", 7},
 };
 
-EnumValueSet const VkSystemAllocationScopeSets[] = {
+EnumValue const VkSystemAllocationScopeValues[] = {
     {"COMMAND", 0}, {"OBJECT", 1}, {"CACHE", 2}, {"DEVICE", 3}, {"INSTANCE", 4},
 };
 
-EnumValueSet const VkInternalAllocationTypeSets[] = {
+EnumValue const VkInternalAllocationTypeValues[] = {
     {"EXECUTABLE", 0},
 };
 
-EnumValueSet const VkSamplerAddressModeSets[] = {
+EnumValue const VkSamplerAddressModeValues[] = {
     {"MIRROR_CLAMP_TO_EDGE_KHR", 4}, {"REPEAT", 0},
     {"MIRRORED_REPEAT", 1},          {"CLAMP_TO_EDGE", 2},
     {"CLAMP_TO_BORDER", 3},          {"MIRROR_CLAMP_TO_EDGE", 4},
 };
 
-EnumValueSet const VkFilterSets[] = {
+EnumValue const VkFilterValues[] = {
     {"CUBIC_IMG", 1000015000},
     {"NEAREST", 0},
     {"LINEAR", 1},
     {"CUBIC_EXT", 1000015000},
 };
 
-EnumValueSet const VkSamplerMipmapModeSets[] = {
+EnumValue const VkSamplerMipmapModeValues[] = {
     {"NEAREST", 0},
     {"LINEAR", 1},
 };
 
-EnumValueSet const VkVertexInputRateSets[] = {
+EnumValue const VkVertexInputRateValues[] = {
     {"VERTEX", 0},
     {"INSTANCE", 1},
 };
 
-EnumValueSet const VkClusterAccelerationStructureTypeNVSets[] = {
+EnumValue const VkClusterAccelerationStructureTypeNVValues[] = {
     {"CLUSTERS_BOTTOM_LEVEL", 0},
     {"TRIANGLE_CLUSTER", 1},
     {"TRIANGLE_CLUSTER_TEMPLATE", 2},
 };
 
-EnumValueSet const VkClusterAccelerationStructureOpTypeNVSets[] = {
+EnumValue const VkClusterAccelerationStructureOpTypeNVValues[] = {
     {"MOVE_OBJECTS", 0},
     {"BUILD_CLUSTERS_BOTTOM_LEVEL", 1},
     {"BUILD_TRIANGLE_CLUSTER", 2},
@@ -3136,13 +3136,13 @@ EnumValueSet const VkClusterAccelerationStructureOpTypeNVSets[] = {
     {"GET_CLUSTER_TEMPLATE_INDICES", 5},
 };
 
-EnumValueSet const VkClusterAccelerationStructureOpModeNVSets[] = {
+EnumValue const VkClusterAccelerationStructureOpModeNVValues[] = {
     {"IMPLICIT_DESTINATIONS", 0},
     {"EXPLICIT_DESTINATIONS", 1},
     {"COMPUTE_SIZES", 2},
 };
 
-EnumValueSet const VkObjectTypeSets[] = {
+EnumValue const VkObjectTypeValues[] = {
     {"DESCRIPTOR_UPDATE_TEMPLATE_KHR", 1000085000},
     {"SAMPLER_YCBCR_CONVERSION_KHR", 1000156000},
     {"PRIVATE_DATA_SLOT_EXT", 1000295000},
@@ -3210,14 +3210,14 @@ EnumValueSet const VkObjectTypeSets[] = {
     {"DATA_GRAPH_PIPELINE_SESSION_ARM", 1000507000},
 };
 
-EnumValueSet const VkRayTracingInvocationReorderModeEXTSets[] = {
+EnumValue const VkRayTracingInvocationReorderModeEXTValues[] = {
     {"NONE_NV", 0},
     {"REORDER_NV", 1},
     {"NONE", 0},
     {"REORDER", 1},
 };
 
-EnumValueSet const VkIndirectCommandsTokenTypeNVSets[] = {
+EnumValue const VkIndirectCommandsTokenTypeNVValues[] = {
     {"SHADER_GROUP", 0},
     {"STATE_FLAGS", 1},
     {"INDEX_BUFFER", 2},
@@ -3231,59 +3231,59 @@ EnumValueSet const VkIndirectCommandsTokenTypeNVSets[] = {
     {"DISPATCH", 1000428004},
 };
 
-EnumValueSet const VkDescriptorUpdateTemplateTypeSets[] = {
+EnumValue const VkDescriptorUpdateTemplateTypeValues[] = {
     {"PUSH_DESCRIPTORS_KHR", 1},
     {"DESCRIPTOR_SET_KHR", 0},
     {"DESCRIPTOR_SET", 0},
     {"PUSH_DESCRIPTORS", 1},
 };
 
-EnumValueSet const VkViewportCoordinateSwizzleNVSets[] = {
+EnumValue const VkViewportCoordinateSwizzleNVValues[] = {
     {"POSITIVE_X", 0}, {"NEGATIVE_X", 1}, {"POSITIVE_Y", 2}, {"NEGATIVE_Y", 3},
     {"POSITIVE_Z", 4}, {"NEGATIVE_Z", 5}, {"POSITIVE_W", 6}, {"NEGATIVE_W", 7},
 };
 
-EnumValueSet const VkDiscardRectangleModeEXTSets[] = {
+EnumValue const VkDiscardRectangleModeEXTValues[] = {
     {"INCLUSIVE", 0},
     {"EXCLUSIVE", 1},
 };
 
-EnumValueSet const VkPointClippingBehaviorSets[] = {
+EnumValue const VkPointClippingBehaviorValues[] = {
     {"ALL_CLIP_PLANES_KHR", 0},
     {"USER_CLIP_PLANES_ONLY_KHR", 1},
     {"ALL_CLIP_PLANES", 0},
     {"USER_CLIP_PLANES_ONLY", 1},
 };
 
-EnumValueSet const VkCoverageModulationModeNVSets[] = {
+EnumValue const VkCoverageModulationModeNVValues[] = {
     {"NONE", 0},
     {"RGB", 1},
     {"ALPHA", 2},
     {"RGBA", 3},
 };
 
-EnumValueSet const VkCoverageReductionModeNVSets[] = {
+EnumValue const VkCoverageReductionModeNVValues[] = {
     {"MERGE", 0},
     {"TRUNCATE", 1},
 };
 
-EnumValueSet const VkValidationCacheHeaderVersionEXTSets[] = {
+EnumValue const VkValidationCacheHeaderVersionEXTValues[] = {
     {"ONE", 1},
 };
 
-EnumValueSet const VkShaderInfoTypeAMDSets[] = {
+EnumValue const VkShaderInfoTypeAMDValues[] = {
     {"STATISTICS", 0},
     {"BINARY", 1},
     {"DISASSEMBLY", 2},
 };
 
-EnumValueSet const VkQueueGlobalPrioritySets[] = {
+EnumValue const VkQueueGlobalPriorityValues[] = {
     {"LOW_EXT", 128}, {"MEDIUM_EXT", 256}, {"HIGH_EXT", 512}, {"REALTIME_EXT", 1024},
     {"LOW_KHR", 128}, {"MEDIUM_KHR", 256}, {"HIGH_KHR", 512}, {"REALTIME_KHR", 1024},
     {"LOW", 128},     {"MEDIUM", 256},     {"HIGH", 512},     {"REALTIME", 1024},
 };
 
-EnumValueSet const VkTimeDomainKHRSets[] = {
+EnumValue const VkTimeDomainKHRValues[] = {
     {"DEVICE_EXT", 0},
     {"CLOCK_MONOTONIC_EXT", 1},
     {"CLOCK_MONOTONIC_RAW_EXT", 2},
@@ -3296,35 +3296,35 @@ EnumValueSet const VkTimeDomainKHRSets[] = {
     {"SWAPCHAIN_LOCAL_EXT", 1000208001},
 };
 
-EnumValueSet const VkConservativeRasterizationModeEXTSets[] = {
+EnumValue const VkConservativeRasterizationModeEXTValues[] = {
     {"DISABLED", 0},
     {"OVERESTIMATE", 1},
     {"UNDERESTIMATE", 2},
 };
 
-EnumValueSet const VkSemaphoreTypeSets[] = {
+EnumValue const VkSemaphoreTypeValues[] = {
     {"BINARY_KHR", 0},
     {"TIMELINE_KHR", 1},
     {"BINARY", 0},
     {"TIMELINE", 1},
 };
 
-EnumValueSet const VkBuildAccelerationStructureModeKHRSets[] = {
+EnumValue const VkBuildAccelerationStructureModeKHRValues[] = {
     {"BUILD", 0},
     {"UPDATE", 1},
 };
 
-EnumValueSet const VkCopyAccelerationStructureModeKHRSets[] = {
+EnumValue const VkCopyAccelerationStructureModeKHRValues[] = {
     {"CLONE_NV", 0}, {"COMPACT_NV", 1}, {"CLONE", 0},
     {"COMPACT", 1},  {"SERIALIZE", 2},  {"DESERIALIZE", 3},
 };
 
-EnumValueSet const VkAccelerationStructureTypeKHRSets[] = {
+EnumValue const VkAccelerationStructureTypeKHRValues[] = {
     {"TOP_LEVEL_NV", 0}, {"BOTTOM_LEVEL_NV", 1}, {"TOP_LEVEL", 0},
     {"BOTTOM_LEVEL", 1}, {"GENERIC", 2},
 };
 
-EnumValueSet const VkGeometryTypeKHRSets[] = {
+EnumValue const VkGeometryTypeKHRValues[] = {
     {"TRIANGLES_NV", 0},
     {"AABBS_NV", 1},
     {"TRIANGLES", 0},
@@ -3335,46 +3335,46 @@ EnumValueSet const VkGeometryTypeKHRSets[] = {
     {"DENSE_GEOMETRY_FORMAT_TRIANGLES_AMDX", 1000478000},
 };
 
-EnumValueSet const VkRayTracingShaderGroupTypeKHRSets[] = {
+EnumValue const VkRayTracingShaderGroupTypeKHRValues[] = {
     {"GENERAL_NV", 0}, {"TRIANGLES_HIT_GROUP_NV", 1}, {"PROCEDURAL_HIT_GROUP_NV", 2},
     {"GENERAL", 0},    {"TRIANGLES_HIT_GROUP", 1},    {"PROCEDURAL_HIT_GROUP", 2},
 };
 
-EnumValueSet const VkAccelerationStructureBuildTypeKHRSets[] = {
+EnumValue const VkAccelerationStructureBuildTypeKHRValues[] = {
     {"HOST", 0},
     {"DEVICE", 1},
     {"HOST_OR_DEVICE", 2},
 };
 
-EnumValueSet const VkAccelerationStructureCompatibilityKHRSets[] = {
+EnumValue const VkAccelerationStructureCompatibilityKHRValues[] = {
     {"COMPATIBLE", 0},
     {"INCOMPATIBLE", 1},
 };
 
-EnumValueSet const VkRayTracingLssIndexingModeNVSets[] = {
+EnumValue const VkRayTracingLssIndexingModeNVValues[] = {
     {"LIST", 0},
     {"SUCCESSIVE", 1},
 };
 
-EnumValueSet const VkRayTracingLssPrimitiveEndCapsModeNVSets[] = {
+EnumValue const VkRayTracingLssPrimitiveEndCapsModeNVValues[] = {
     {"NONE", 0},
     {"CHAINED", 1},
 };
 
-EnumValueSet const VkShaderGroupShaderKHRSets[] = {
+EnumValue const VkShaderGroupShaderKHRValues[] = {
     {"GENERAL", 0},
     {"CLOSEST_HIT", 1},
     {"ANY_HIT", 2},
     {"INTERSECTION", 3},
 };
 
-EnumValueSet const VkMemoryOverallocationBehaviorAMDSets[] = {
+EnumValue const VkMemoryOverallocationBehaviorAMDValues[] = {
     {"DEFAULT", 0},
     {"ALLOWED", 1},
     {"DISALLOWED", 2},
 };
 
-EnumValueSet const VkPerformanceCounterScopeKHRSets[] = {
+EnumValue const VkPerformanceCounterScopeKHRValues[] = {
     {"VK_QUERY_SCOPE_COMMAND_BUFFER", 0},
     {"VK_QUERY_SCOPE_RENDER_PASS", 1},
     {"VK_QUERY_SCOPE_COMMAND", 2},
@@ -3383,76 +3383,76 @@ EnumValueSet const VkPerformanceCounterScopeKHRSets[] = {
     {"COMMAND", 2},
 };
 
-EnumValueSet const VkPerformanceCounterUnitKHRSets[] = {
+EnumValue const VkPerformanceCounterUnitKHRValues[] = {
     {"GENERIC", 0}, {"PERCENTAGE", 1}, {"NANOSECONDS", 2}, {"BYTES", 3}, {"BYTES_PER_SECOND", 4},
     {"KELVIN", 5},  {"WATTS", 6},      {"VOLTS", 7},       {"AMPS", 8},  {"HERTZ", 9},
     {"CYCLES", 10},
 };
 
-EnumValueSet const VkPerformanceCounterStorageKHRSets[] = {
+EnumValue const VkPerformanceCounterStorageKHRValues[] = {
     {"INT32", 0}, {"INT64", 1}, {"UINT32", 2}, {"UINT64", 3}, {"FLOAT32", 4}, {"FLOAT64", 5},
 };
 
-EnumValueSet const VkPerformanceConfigurationTypeINTELSets[] = {
+EnumValue const VkPerformanceConfigurationTypeINTELValues[] = {
     {"COMMAND_QUEUE_METRICS_DISCOVERY_ACTIVATED", 0},
 };
 
-EnumValueSet const VkQueryPoolSamplingModeINTELSets[] = {
+EnumValue const VkQueryPoolSamplingModeINTELValues[] = {
     {"MANUAL", 0},
 };
 
-EnumValueSet const VkPerformanceOverrideTypeINTELSets[] = {
+EnumValue const VkPerformanceOverrideTypeINTELValues[] = {
     {"NULL_HARDWARE", 0},
     {"FLUSH_GPU_CACHES", 1},
 };
 
-EnumValueSet const VkPerformanceParameterTypeINTELSets[] = {
+EnumValue const VkPerformanceParameterTypeINTELValues[] = {
     {"HW_COUNTERS_SUPPORTED", 0},
     {"STREAM_MARKER_VALID_BITS", 1},
 };
 
-EnumValueSet const VkPerformanceValueTypeINTELSets[] = {
+EnumValue const VkPerformanceValueTypeINTELValues[] = {
     {"UINT32", 0}, {"UINT64", 1}, {"FLOAT", 2}, {"BOOL", 3}, {"STRING", 4},
 };
 
-EnumValueSet const VkLineRasterizationModeSets[] = {
+EnumValue const VkLineRasterizationModeValues[] = {
     {"DEFAULT_EXT", 0}, {"RECTANGULAR_EXT", 1}, {"BRESENHAM_EXT", 2}, {"RECTANGULAR_SMOOTH_EXT", 3},
     {"DEFAULT_KHR", 0}, {"RECTANGULAR_KHR", 1}, {"BRESENHAM_KHR", 2}, {"RECTANGULAR_SMOOTH_KHR", 3},
     {"DEFAULT", 0},     {"RECTANGULAR", 1},     {"BRESENHAM", 2},     {"RECTANGULAR_SMOOTH", 3},
 };
 
-EnumValueSet const VkFaultLevelSets[] = {
+EnumValue const VkFaultLevelValues[] = {
     {"UNASSIGNED", 0},
     {"CRITICAL", 1},
     {"RECOVERABLE", 2},
     {"WARNING", 3},
 };
 
-EnumValueSet const VkFaultTypeSets[] = {
+EnumValue const VkFaultTypeValues[] = {
     {"INVALID", 0},         {"UNASSIGNED", 1},          {"IMPLEMENTATION", 2},    {"SYSTEM", 3},
     {"PHYSICAL_DEVICE", 4}, {"COMMAND_BUFFER_FULL", 5}, {"INVALID_API_USAGE", 6},
 };
 
-EnumValueSet const VkFaultQueryBehaviorSets[] = {
+EnumValue const VkFaultQueryBehaviorValues[] = {
     {"GET_AND_CLEAR_ALL_FAULTS", 0},
 };
 
-EnumValueSet const VkPipelineMatchControlSets[] = {
+EnumValue const VkPipelineMatchControlValues[] = {
     {"APPLICATION_UUID_EXACT_MATCH", 0},
 };
 
-EnumValueSet const VkSciSyncClientTypeNVSets[] = {
+EnumValue const VkSciSyncClientTypeNVValues[] = {
     {"SIGNALER", 0},
     {"WAITER", 1},
     {"SIGNALER_WAITER", 2},
 };
 
-EnumValueSet const VkSciSyncPrimitiveTypeNVSets[] = {
+EnumValue const VkSciSyncPrimitiveTypeNVValues[] = {
     {"FENCE", 0},
     {"SEMAPHORE", 1},
 };
 
-EnumValueSet const VkFragmentShadingRateNVSets[] = {
+EnumValue const VkFragmentShadingRateNVValues[] = {
     {"1_INVOCATION_PER_PIXEL", 0},       {"1_INVOCATION_PER_1X2_PIXELS", 1},
     {"1_INVOCATION_PER_2X1_PIXELS", 4},  {"1_INVOCATION_PER_2X2_PIXELS", 5},
     {"1_INVOCATION_PER_2X4_PIXELS", 6},  {"1_INVOCATION_PER_4X2_PIXELS", 9},
@@ -3461,12 +3461,12 @@ EnumValueSet const VkFragmentShadingRateNVSets[] = {
     {"16_INVOCATIONS_PER_PIXEL", 14},    {"NO_INVOCATIONS", 15},
 };
 
-EnumValueSet const VkFragmentShadingRateTypeNVSets[] = {
+EnumValue const VkFragmentShadingRateTypeNVValues[] = {
     {"FRAGMENT_SIZE", 0},
     {"ENUMS", 1},
 };
 
-EnumValueSet const VkSubpassMergeStatusEXTSets[] = {
+EnumValue const VkSubpassMergeStatusEXTValues[] = {
     {"MERGED", 0},
     {"DISALLOWED", 1},
     {"NOT_MERGED_SIDE_EFFECTS", 2},
@@ -3483,55 +3483,55 @@ EnumValueSet const VkSubpassMergeStatusEXTSets[] = {
     {"NOT_MERGED_UNSPECIFIED", 13},
 };
 
-EnumValueSet const VkProvokingVertexModeEXTSets[] = {
+EnumValue const VkProvokingVertexModeEXTValues[] = {
     {"FIRST_VERTEX", 0},
     {"LAST_VERTEX", 1},
 };
 
-EnumValueSet const VkPipelineCacheValidationVersionSets[] = {
+EnumValue const VkPipelineCacheValidationVersionValues[] = {
     {"SAFETY_CRITICAL_ONE", 1},
 };
 
-EnumValueSet const VkPipelineRobustnessBufferBehaviorSets[] = {
+EnumValue const VkPipelineRobustnessBufferBehaviorValues[] = {
     {"DEVICE_DEFAULT_EXT", 0},       {"DISABLED_EXT", 1},
     {"ROBUST_BUFFER_ACCESS_EXT", 2}, {"ROBUST_BUFFER_ACCESS_2_EXT", 3},
     {"DEVICE_DEFAULT", 0},           {"DISABLED", 1},
     {"ROBUST_BUFFER_ACCESS", 2},     {"ROBUST_BUFFER_ACCESS_2", 3},
 };
 
-EnumValueSet const VkPipelineRobustnessImageBehaviorSets[] = {
+EnumValue const VkPipelineRobustnessImageBehaviorValues[] = {
     {"DEVICE_DEFAULT_EXT", 0},        {"DISABLED_EXT", 1},          {"ROBUST_IMAGE_ACCESS_EXT", 2},
     {"ROBUST_IMAGE_ACCESS_2_EXT", 3}, {"DEVICE_DEFAULT", 0},        {"DISABLED", 1},
     {"ROBUST_IMAGE_ACCESS", 2},       {"ROBUST_IMAGE_ACCESS_2", 3},
 };
 
-EnumValueSet const VkDeviceAddressBindingTypeEXTSets[] = {
+EnumValue const VkDeviceAddressBindingTypeEXTValues[] = {
     {"BIND", 0},
     {"UNBIND", 1},
 };
 
-EnumValueSet const VkMicromapTypeEXTSets[] = {
+EnumValue const VkMicromapTypeEXTValues[] = {
     {"OPACITY_MICROMAP", 0},
     {"DISPLACEMENT_MICROMAP_NV", 1000397000},
 };
 
-EnumValueSet const VkBuildMicromapModeEXTSets[] = {
+EnumValue const VkBuildMicromapModeEXTValues[] = {
     {"BUILD", 0},
 };
 
-EnumValueSet const VkCopyMicromapModeEXTSets[] = {
+EnumValue const VkCopyMicromapModeEXTValues[] = {
     {"CLONE", 0},
     {"SERIALIZE", 1},
     {"DESERIALIZE", 2},
     {"COMPACT", 3},
 };
 
-EnumValueSet const VkOpacityMicromapFormatEXTSets[] = {
+EnumValue const VkOpacityMicromapFormatEXTValues[] = {
     {"2_STATE", 1},
     {"4_STATE", 2},
 };
 
-EnumValueSet const VkOpacityMicromapSpecialIndexEXTSets[] = {
+EnumValue const VkOpacityMicromapSpecialIndexEXTValues[] = {
     {"FULLY_TRANSPARENT", -1},
     {"FULLY_OPAQUE", -2},
     {"FULLY_UNKNOWN_TRANSPARENT", -3},
@@ -3539,60 +3539,60 @@ EnumValueSet const VkOpacityMicromapSpecialIndexEXTSets[] = {
     {"CLUSTER_GEOMETRY_DISABLE_OPACITY_MICROMAP_NV", -5},
 };
 
-EnumValueSet const VkDeviceFaultVendorBinaryHeaderVersionEXTSets[] = {
+EnumValue const VkDeviceFaultVendorBinaryHeaderVersionEXTValues[] = {
     {"ONE", 1},
 };
 
-EnumValueSet const VkIndirectExecutionSetInfoTypeEXTSets[] = {
+EnumValue const VkIndirectExecutionSetInfoTypeEXTValues[] = {
     {"PIPELINES", 0},
     {"SHADER_OBJECTS", 1},
 };
 
-EnumValueSet const VkDepthBiasRepresentationEXTSets[] = {
+EnumValue const VkDepthBiasRepresentationEXTValues[] = {
     {"LEAST_REPRESENTABLE_VALUE_FORMAT", 0},
     {"LEAST_REPRESENTABLE_VALUE_FORCE_UNORM", 1},
     {"FLOAT", 2},
 };
 
-EnumValueSet const VkDirectDriverLoadingModeLUNARGSets[] = {
+EnumValue const VkDirectDriverLoadingModeLUNARGValues[] = {
     {"EXCLUSIVE", 0},
     {"INCLUSIVE", 1},
 };
 
-EnumValueSet const VkPartitionedAccelerationStructureOpTypeNVSets[] = {
+EnumValue const VkPartitionedAccelerationStructureOpTypeNVValues[] = {
     {"WRITE_INSTANCE", 0},
     {"UPDATE_INSTANCE", 1},
     {"WRITE_PARTITION_TRANSLATION", 2},
 };
 
-EnumValueSet const VkAntiLagModeAMDSets[] = {
+EnumValue const VkAntiLagModeAMDValues[] = {
     {"DRIVER_CONTROL", 0},
     {"ON", 1},
     {"OFF", 2},
 };
 
-EnumValueSet const VkAntiLagStageAMDSets[] = {
+EnumValue const VkAntiLagStageAMDValues[] = {
     {"INPUT", 0},
     {"PRESENT", 1},
 };
 
-EnumValueSet const VkDisplacementMicromapFormatNVSets[] = {
+EnumValue const VkDisplacementMicromapFormatNVValues[] = {
     {"64_TRIANGLES_64_BYTES", 1},
     {"256_TRIANGLES_128_BYTES", 2},
     {"1024_TRIANGLES_128_BYTES", 3},
 };
 
-EnumValueSet const VkShaderCodeTypeEXTSets[] = {
+EnumValue const VkShaderCodeTypeEXTValues[] = {
     {"BINARY", 0},
     {"SPIRV", 1},
 };
 
-EnumValueSet const VkScopeKHRSets[] = {
+EnumValue const VkScopeKHRValues[] = {
     {"DEVICE_NV", 1}, {"WORKGROUP_NV", 2}, {"SUBGROUP_NV", 3}, {"QUEUE_FAMILY_NV", 5},
     {"DEVICE", 1},    {"WORKGROUP", 2},    {"SUBGROUP", 3},    {"QUEUE_FAMILY", 5},
 };
 
-EnumValueSet const VkComponentTypeKHRSets[] = {
+EnumValue const VkComponentTypeKHRValues[] = {
     {"FLOAT16_NV", 0},
     {"FLOAT32_NV", 1},
     {"FLOAT64_NV", 2},
@@ -3624,78 +3624,78 @@ EnumValueSet const VkComponentTypeKHRSets[] = {
     {"FLOAT8_E5M2_EXT", 1000491003},
 };
 
-EnumValueSet const VkCubicFilterWeightsQCOMSets[] = {
+EnumValue const VkCubicFilterWeightsQCOMValues[] = {
     {"CATMULL_ROM", 0},
     {"ZERO_TANGENT_CARDINAL", 1},
     {"B_SPLINE", 2},
     {"MITCHELL_NETRAVALI", 3},
 };
 
-EnumValueSet const VkBlockMatchWindowCompareModeQCOMSets[] = {
+EnumValue const VkBlockMatchWindowCompareModeQCOMValues[] = {
     {"MIN", 0},
     {"MAX", 1},
 };
 
-EnumValueSet const VkLayeredDriverUnderlyingApiMSFTSets[] = {
+EnumValue const VkLayeredDriverUnderlyingApiMSFTValues[] = {
     {"NONE", 0},
     {"D3D12", 1},
 };
 
-EnumValueSet const VkPhysicalDeviceLayeredApiKHRSets[] = {
+EnumValue const VkPhysicalDeviceLayeredApiKHRValues[] = {
     {"VULKAN", 0}, {"D3D12", 1}, {"METAL", 2}, {"OPENGL", 3}, {"OPENGLES", 4},
 };
 
-EnumValueSet const VkCompressedTriangleFormatAMDXSets[] = {
+EnumValue const VkCompressedTriangleFormatAMDXValues[] = {
     {"DGF1", 0},
 };
 
-EnumValueSet const VkDepthClampModeEXTSets[] = {
+EnumValue const VkDepthClampModeEXTValues[] = {
     {"VIEWPORT_RANGE", 0},
     {"USER_DEFINED_RANGE", 1},
 };
 
-EnumValueSet const VkCooperativeVectorMatrixLayoutNVSets[] = {
+EnumValue const VkCooperativeVectorMatrixLayoutNVValues[] = {
     {"ROW_MAJOR", 0},
     {"COLUMN_MAJOR", 1},
     {"INFERENCING_OPTIMAL", 2},
     {"TRAINING_OPTIMAL", 3},
 };
 
-EnumValueSet const VkTensorTilingARMSets[] = {
+EnumValue const VkTensorTilingARMValues[] = {
     {"OPTIMAL", 0},
     {"LINEAR", 1},
 };
 
-EnumValueSet const VkDataGraphPipelinePropertyARMSets[] = {
+EnumValue const VkDataGraphPipelinePropertyARMValues[] = {
     {"CREATION_LOG", 0},
     {"IDENTIFIER", 1},
 };
 
-EnumValueSet const VkDataGraphPipelineSessionBindPointARMSets[] = {
+EnumValue const VkDataGraphPipelineSessionBindPointARMValues[] = {
     {"TRANSIENT", 0},
 };
 
-EnumValueSet const VkDataGraphPipelineSessionBindPointTypeARMSets[] = {
+EnumValue const VkDataGraphPipelineSessionBindPointTypeARMValues[] = {
     {"MEMORY", 0},
 };
 
-EnumValueSet const VkPhysicalDeviceDataGraphProcessingEngineTypeARMSets[] = {
+EnumValue const VkPhysicalDeviceDataGraphProcessingEngineTypeARMValues[] = {
     {"DEFAULT", 0},
     {"NEURAL_QCOM", 1000629000},
     {"COMPUTE_QCOM", 1000629001},
 };
 
-EnumValueSet const VkPhysicalDeviceDataGraphOperationTypeARMSets[] = {
+EnumValue const VkPhysicalDeviceDataGraphOperationTypeARMValues[] = {
     {"SPIRV_EXTENDED_INSTRUCTION_SET", 0},
     {"NEURAL_MODEL_QCOM", 1000629000},
     {"BUILTIN_MODEL_QCOM", 1000629001},
 };
 
-EnumValueSet const VkDataGraphModelCacheTypeQCOMSets[] = {
+EnumValue const VkDataGraphModelCacheTypeQCOMValues[] = {
     {"GENERIC_BINARY", 0},
 };
 
-EnumValueSet const VkColorSpaceKHRSets[] = {
+EnumValue const VkColorSpaceKHRValues[] = {
     {"DCI_P3_LINEAR_EXT", 1000104003},
     {"VK_COLORSPACE_SRGB_NONLINEAR", 0},
     {"SRGB_NONLINEAR", 0},
@@ -3716,7 +3716,7 @@ EnumValueSet const VkColorSpaceKHRSets[] = {
     {"DISPLAY_P3_LINEAR_EXT", 1000104003},
 };
 
-EnumValueSet const VkPresentModeKHRSets[] = {
+EnumValue const VkPresentModeKHRValues[] = {
     {"FIFO_LATEST_READY_EXT", 1000361000},
     {"IMMEDIATE", 0},
     {"MAILBOX", 1},
@@ -3727,14 +3727,14 @@ EnumValueSet const VkPresentModeKHRSets[] = {
     {"FIFO_LATEST_READY", 1000361000},
 };
 
-EnumValueSet const VkDisplaySurfaceStereoTypeNVSets[] = {
+EnumValue const VkDisplaySurfaceStereoTypeNVValues[] = {
     {"NONE", 0},
     {"ONBOARD_DIN", 1},
     {"HDMI_3D", 2},
     {"INBAND_DISPLAYPORT", 3},
 };
 
-EnumValueSet const VkDebugReportObjectTypeEXTSets[] = {
+EnumValue const VkDebugReportObjectTypeEXTValues[] = {
     {"DESCRIPTOR_UPDATE_TEMPLATE_KHR", 1000085000},
     {"SAMPLER_YCBCR_CONVERSION_KHR", 1000156000},
     {"DEBUG_REPORT", 28},
@@ -3787,26 +3787,26 @@ EnumValueSet const VkDebugReportObjectTypeEXTSets[] = {
     {"CUDA_FUNCTION_NV", 1000307001},
 };
 
-EnumValueSet const VkDeviceMemoryReportEventTypeEXTSets[] = {
+EnumValue const VkDeviceMemoryReportEventTypeEXTValues[] = {
     {"ALLOCATE", 0}, {"FREE", 1}, {"IMPORT", 2}, {"UNIMPORT", 3}, {"ALLOCATION_FAILED", 4},
 };
 
-EnumValueSet const VkRasterizationOrderAMDSets[] = {
+EnumValue const VkRasterizationOrderAMDValues[] = {
     {"STRICT", 0},
     {"RELAXED", 1},
 };
 
-EnumValueSet const VkValidationCheckEXTSets[] = {
+EnumValue const VkValidationCheckEXTValues[] = {
     {"ALL", 0},
     {"SHADERS", 1},
 };
 
-EnumValueSet const VkValidationFeatureEnableEXTSets[] = {
+EnumValue const VkValidationFeatureEnableEXTValues[] = {
     {"GPU_ASSISTED", 0}, {"GPU_ASSISTED_RESERVE_BINDING_SLOT", 1}, {"BEST_PRACTICES", 2},
     {"DEBUG_PRINTF", 3}, {"SYNCHRONIZATION_VALIDATION", 4},
 };
 
-EnumValueSet const VkValidationFeatureDisableEXTSets[] = {
+EnumValue const VkValidationFeatureDisableEXTValues[] = {
     {"ALL", 0},
     {"SHADERS", 1},
     {"THREAD_SAFETY", 2},
@@ -3817,48 +3817,48 @@ EnumValueSet const VkValidationFeatureDisableEXTSets[] = {
     {"SHADER_VALIDATION_CACHE", 7},
 };
 
-EnumValueSet const VkDisplayPowerStateEXTSets[] = {
+EnumValue const VkDisplayPowerStateEXTValues[] = {
     {"OFF", 0},
     {"SUSPEND", 1},
     {"ON", 2},
 };
 
-EnumValueSet const VkDeviceEventTypeEXTSets[] = {
+EnumValue const VkDeviceEventTypeEXTValues[] = {
     {"DISPLAY_HOTPLUG", 0},
 };
 
-EnumValueSet const VkDisplayEventTypeEXTSets[] = {
+EnumValue const VkDisplayEventTypeEXTValues[] = {
     {"FIRST_PIXEL_OUT", 0},
 };
 
-EnumValueSet const VkTessellationDomainOriginSets[] = {
+EnumValue const VkTessellationDomainOriginValues[] = {
     {"UPPER_LEFT_KHR", 0},
     {"LOWER_LEFT_KHR", 1},
     {"UPPER_LEFT", 0},
     {"LOWER_LEFT", 1},
 };
 
-EnumValueSet const VkSamplerYcbcrModelConversionSets[] = {
+EnumValue const VkSamplerYcbcrModelConversionValues[] = {
     {"RGB_IDENTITY_KHR", 0}, {"YCBCR_IDENTITY_KHR", 1}, {"YCBCR_709_KHR", 2},  {"YCBCR_601_KHR", 3},
     {"YCBCR_2020_KHR", 4},   {"RGB_IDENTITY", 0},       {"YCBCR_IDENTITY", 1}, {"YCBCR_709", 2},
     {"YCBCR_601", 3},        {"YCBCR_2020", 4},
 };
 
-EnumValueSet const VkSamplerYcbcrRangeSets[] = {
+EnumValue const VkSamplerYcbcrRangeValues[] = {
     {"ITU_FULL_KHR", 0},
     {"ITU_NARROW_KHR", 1},
     {"ITU_FULL", 0},
     {"ITU_NARROW", 1},
 };
 
-EnumValueSet const VkChromaLocationSets[] = {
+EnumValue const VkChromaLocationValues[] = {
     {"COSITED_EVEN_KHR", 0},
     {"MIDPOINT_KHR", 1},
     {"COSITED_EVEN", 0},
     {"MIDPOINT", 1},
 };
 
-EnumValueSet const VkSamplerReductionModeSets[] = {
+EnumValue const VkSamplerReductionModeValues[] = {
     {"WEIGHTED_AVERAGE_EXT", 0},
     {"MIN_EXT", 1},
     {"MAX_EXT", 2},
@@ -3868,42 +3868,42 @@ EnumValueSet const VkSamplerReductionModeSets[] = {
     {"WEIGHTED_AVERAGE_RANGECLAMP_QCOM", 1000521000},
 };
 
-EnumValueSet const VkBlendOverlapEXTSets[] = {
+EnumValue const VkBlendOverlapEXTValues[] = {
     {"UNCORRELATED", 0},
     {"DISJOINT", 1},
     {"CONJOINT", 2},
 };
 
-EnumValueSet const VkFullScreenExclusiveEXTSets[] = {
+EnumValue const VkFullScreenExclusiveEXTValues[] = {
     {"DEFAULT", 0},
     {"ALLOWED", 1},
     {"DISALLOWED", 2},
     {"APPLICATION_CONTROLLED", 3},
 };
 
-EnumValueSet const VkShaderFloatControlsIndependenceSets[] = {
+EnumValue const VkShaderFloatControlsIndependenceValues[] = {
     {"32_BIT_ONLY_KHR", 0}, {"ALL_KHR", 1}, {"NONE_KHR", 2},
     {"32_BIT_ONLY", 0},     {"ALL", 1},     {"NONE", 2},
 };
 
-EnumValueSet const VkFragmentShadingRateCombinerOpKHRSets[] = {
+EnumValue const VkFragmentShadingRateCombinerOpKHRValues[] = {
     {"KEEP", 0}, {"REPLACE", 1}, {"MIN", 2}, {"MAX", 3}, {"MUL", 4},
 };
 
-EnumValueSet const VkOpticalFlowPerformanceLevelNVSets[] = {
+EnumValue const VkOpticalFlowPerformanceLevelNVValues[] = {
     {"UNKNOWN", 0},
     {"SLOW", 1},
     {"MEDIUM", 2},
     {"FAST", 3},
 };
 
-EnumValueSet const VkOpticalFlowSessionBindingPointNVSets[] = {
+EnumValue const VkOpticalFlowSessionBindingPointNVValues[] = {
     {"UNKNOWN", 0}, {"INPUT", 1},         {"REFERENCE", 2},
     {"HINT", 3},    {"FLOW_VECTOR", 4},   {"BACKWARD_FLOW_VECTOR", 5},
     {"COST", 6},    {"BACKWARD_COST", 7}, {"GLOBAL_FLOW", 8},
 };
 
-EnumValueSet const VkDeviceFaultAddressTypeEXTSets[] = {
+EnumValue const VkDeviceFaultAddressTypeEXTValues[] = {
     {"NONE", 0},
     {"READ_INVALID", 1},
     {"WRITE_INVALID", 2},
@@ -3913,12 +3913,12 @@ EnumValueSet const VkDeviceFaultAddressTypeEXTSets[] = {
     {"INSTRUCTION_POINTER_FAULT", 6},
 };
 
-EnumValueSet const VkLayerSettingTypeEXTSets[] = {
+EnumValue const VkLayerSettingTypeEXTValues[] = {
     {"BOOL32", 0}, {"INT32", 1},   {"INT64", 2},   {"UINT32", 3},
     {"UINT64", 4}, {"FLOAT32", 5}, {"FLOAT64", 6}, {"STRING", 7},
 };
 
-EnumValueSet const VkLatencyMarkerNVSets[] = {
+EnumValue const VkLatencyMarkerNVValues[] = {
     {"SIMULATION_START", 0},
     {"SIMULATION_END", 1},
     {"RENDERSUBMIT_START", 2},
@@ -3933,17 +3933,17 @@ EnumValueSet const VkLatencyMarkerNVSets[] = {
     {"OUT_OF_BAND_PRESENT_END", 11},
 };
 
-EnumValueSet const VkOutOfBandQueueTypeNVSets[] = {
+EnumValue const VkOutOfBandQueueTypeNVValues[] = {
     {"RENDER", 0},
     {"PRESENT", 1},
 };
 
-EnumValueSet const VkVendorIdSets[] = {
+EnumValue const VkVendorIdValues[] = {
     {"VIV", 0x10001},  {"VSI", 0x10002},  {"KAZAN", 0x10003},    {"CODEPLAY", 0x10004},
     {"MESA", 0x10005}, {"POCL", 0x10006}, {"MOBILEYE", 0x10007}, {"KHRONOS", 0x10000},
 };
 
-EnumValueSet const VkDriverIdSets[] = {
+EnumValue const VkDriverIdValues[] = {
     {"AMD_PROPRIETARY_KHR", 1},
     {"AMD_OPEN_SOURCE_KHR", 2},
     {"MESA_RADV_KHR", 3},
@@ -3988,7 +3988,7 @@ EnumValueSet const VkDriverIdSets[] = {
     {"MESA_KOSMICKRISP", 28},
 };
 
-EnumValueSet const VkShadingRatePaletteEntryNVSets[] = {
+EnumValue const VkShadingRatePaletteEntryNVValues[] = {
     {"NO_INVOCATIONS", 0},
     {"16_INVOCATIONS_PER_PIXEL", 1},
     {"8_INVOCATIONS_PER_PIXEL", 2},
@@ -4003,57 +4003,57 @@ EnumValueSet const VkShadingRatePaletteEntryNVSets[] = {
     {"1_INVOCATION_PER_4X4_PIXELS", 11},
 };
 
-EnumValueSet const VkCoarseSampleOrderTypeNVSets[] = {
+EnumValue const VkCoarseSampleOrderTypeNVValues[] = {
     {"DEFAULT", 0},
     {"CUSTOM", 1},
     {"PIXEL_MAJOR", 2},
     {"SAMPLE_MAJOR", 3},
 };
 
-EnumValueSet const VkPipelineExecutableStatisticFormatKHRSets[] = {
+EnumValue const VkPipelineExecutableStatisticFormatKHRValues[] = {
     {"BOOL32", 0},
     {"INT64", 1},
     {"UINT64", 2},
     {"FLOAT64", 3},
 };
 
-EnumValueSet const VkQueryResultStatusKHRSets[] = {
+EnumValue const VkQueryResultStatusKHRValues[] = {
     {"ERROR", -1},
     {"NOT_READY", 0},
     {"COMPLETE", 1},
     {"INSUFFICIENT_BITSTREAM_BUFFER_RANGE", -1000299000},
 };
 
-EnumValueSet const VkVideoEncodeTuningModeKHRSets[] = {
+EnumValue const VkVideoEncodeTuningModeKHRValues[] = {
     {"DEFAULT", 0},           {"HIGH_QUALITY", 1}, {"LOW_LATENCY", 2},
     {"ULTRA_LOW_LATENCY", 3}, {"LOSSLESS", 4},
 };
 
-EnumValueSet const VkVideoEncodeAV1PredictionModeKHRSets[] = {
+EnumValue const VkVideoEncodeAV1PredictionModeKHRValues[] = {
     {"VK_VIDEO_ENCODE_AV1_PREDICTION_MODE_INTRA_ONLY", 0},
     {"VK_VIDEO_ENCODE_AV1_PREDICTION_MODE_SINGLE_REFERENCE", 1},
     {"VK_VIDEO_ENCODE_AV1_PREDICTION_MODE_UNIDIRECTIONAL_COMPOUND", 2},
     {"VK_VIDEO_ENCODE_AV1_PREDICTION_MODE_BIDIRECTIONAL_COMPOUND", 3},
 };
 
-EnumValueSet const VkVideoEncodeAV1RateControlGroupKHRSets[] = {
+EnumValue const VkVideoEncodeAV1RateControlGroupKHRValues[] = {
     {"VK_VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_INTRA", 0},
     {"VK_VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_PREDICTIVE", 1},
     {"VK_VIDEO_ENCODE_AV1_RATE_CONTROL_GROUP_BIPREDICTIVE", 2},
 };
 
-EnumValueSet const VkDefaultVertexAttributeValueKHRSets[] = {
+EnumValue const VkDefaultVertexAttributeValueKHRValues[] = {
     {"ZERO_ZERO_ZERO_ZERO", 0},
     {"ZERO_ZERO_ZERO_ONE", 1},
 };
 
-EnumValueSet const VkAccelerationStructureMotionInstanceTypeNVSets[] = {
+EnumValue const VkAccelerationStructureMotionInstanceTypeNVValues[] = {
     {"STATIC", 0},
     {"MATRIX_MOTION", 1},
     {"SRT_MOTION", 2},
 };
 
-EnumValueSet const VkVideoEncodeH264CapabilityFlagsEXTSets[] = {
+EnumValue const VkVideoEncodeH264CapabilityFlagsEXTValues[] = {
     {"CHROMA_QP_OFFSET", 0x00000040},
     {"SECOND_CHROMA_QP_OFFSET", 0x00000080},
     {"TRANSFORM_8X8", 0x00002000},
@@ -4091,7 +4091,7 @@ EnumValueSet const VkVideoEncodeH264CapabilityFlagsEXTSets[] = {
     {"GENERATE_PREFIX_NALU", 0x00000100},
 };
 
-EnumValueSet const VkVideoEncodeH264StdFlagsEXTSets[] = {
+EnumValue const VkVideoEncodeH264StdFlagsEXTValues[] = {
     {"SEPARATE_COLOR_PLANE_FLAG_SET", 0x00000001},
     {"QPPRIME_Y_ZERO_TRANSFORM_BYPASS_FLAG_SET", 0x00000002},
     {"SCALING_MATRIX_PRESENT_FLAG_SET", 0x00000004},
@@ -4114,13 +4114,13 @@ EnumValueSet const VkVideoEncodeH264StdFlagsEXTSets[] = {
     {"DIFFERENT_SLICE_QP_DELTA", 0x00100000},
 };
 
-EnumValueSet const VkVideoEncodeH264RateControlFlagsEXTSets[] = {
+EnumValue const VkVideoEncodeH264RateControlFlagsEXTValues[] = {
     {"ATTEMPT_HRD_COMPLIANCE", 0x00000001},        {"REGULAR_GOP", 0x00000002},
     {"REFERENCE_PATTERN_FLAT", 0x00000004},        {"REFERENCE_PATTERN_DYADIC", 0x00000008},
     {"TEMPORAL_LAYER_PATTERN_DYADIC", 0x00000010},
 };
 
-EnumValueSet const VkVideoEncodeH265CapabilityFlagsEXTSets[] = {
+EnumValue const VkVideoEncodeH265CapabilityFlagsEXTValues[] = {
     {"WEIGHTED_BI_PRED_IMPLICIT", 0x00000001},
     {"TRANSFORM_8X8", 0x00000002},
     {"CHROMA_QP_OFFSET", 0x00000004},
@@ -4166,7 +4166,7 @@ EnumValueSet const VkVideoEncodeH265CapabilityFlagsEXTSets[] = {
     {"MULTIPLE_SLICE_SEGMENTS_PER_TILE", 0x00000200},
 };
 
-EnumValueSet const VkVideoEncodeH265StdFlagsEXTSets[] = {
+EnumValue const VkVideoEncodeH265StdFlagsEXTValues[] = {
     {"SEPARATE_COLOR_PLANE_FLAG_SET", 0x00000001},
     {"SAMPLE_ADAPTIVE_OFFSET_ENABLED_FLAG_SET", 0x00000002},
     {"SCALING_LIST_DATA_PRESENT_FLAG_SET", 0x00000004},
@@ -4190,7 +4190,7 @@ EnumValueSet const VkVideoEncodeH265StdFlagsEXTSets[] = {
     {"DIFFERENT_SLICE_QP_DELTA", 0x00100000},
 };
 
-EnumValueSet const VkVideoEncodeH265RateControlFlagsEXTSets[] = {
+EnumValue const VkVideoEncodeH265RateControlFlagsEXTValues[] = {
     {"ATTEMPT_HRD_COMPLIANCE", 0x00000001},
     {"REGULAR_GOP", 0x00000002},
     {"REFERENCE_PATTERN_FLAT", 0x00000004},
@@ -4198,100 +4198,100 @@ EnumValueSet const VkVideoEncodeH265RateControlFlagsEXTSets[] = {
     {"TEMPORAL_SUB_LAYER_PATTERN_DYADIC", 0x00000010},
 };
 
-EnumValueSet const VkVideoEncodeH265CtbSizeFlagsEXTSets[] = {
+EnumValue const VkVideoEncodeH265CtbSizeFlagsEXTValues[] = {
     {"16", 0x00000001},
     {"32", 0x00000002},
     {"64", 0x00000004},
     {"8", 0x00000001},
 };
 
-EnumValueSet const VkVideoEncodeH265TransformBlockSizeFlagsEXTSets[] = {
+EnumValue const VkVideoEncodeH265TransformBlockSizeFlagsEXTValues[] = {
     {"4", 0x00000001},
     {"8", 0x00000002},
     {"16", 0x00000004},
     {"32", 0x00000008},
 };
 
-EnumValueSet const VkVideoEncodeH264RateControlStructureEXTSets[] = {
+EnumValue const VkVideoEncodeH264RateControlStructureEXTValues[] = {
     {"UNKNOWN", 0},
     {"FLAT", 1},
     {"DYADIC", 2},
 };
 
-EnumValueSet const VkVideoEncodeH265RateControlStructureEXTSets[] = {
+EnumValue const VkVideoEncodeH265RateControlStructureEXTValues[] = {
     {"UNKNOWN", 0},
     {"FLAT", 1},
     {"DYADIC", 2},
 };
 
-EnumValueSet const VkVideoEncodeH264InputModeFlagsEXTSets[] = {
+EnumValue const VkVideoEncodeH264InputModeFlagsEXTValues[] = {
     {"FRAME", 0x00000001},
     {"SLICE", 0x00000002},
     {"NON_VCL", 0x00000004},
 };
 
-EnumValueSet const VkVideoEncodeH264OutputModeFlagsEXTSets[] = {
+EnumValue const VkVideoEncodeH264OutputModeFlagsEXTValues[] = {
     {"FRAME", 0x00000001},
     {"SLICE", 0x00000002},
     {"NON_VCL", 0x00000004},
 };
 
-EnumValueSet const VkVideoEncodeH265InputModeFlagsEXTSets[] = {
+EnumValue const VkVideoEncodeH265InputModeFlagsEXTValues[] = {
     {"FRAME", 0x00000001},
     {"NON_VCL", 0x00000004},
     {"SLICE", 0x00000002},
     {"SLICE_SEGMENT", 0x00000002},
 };
 
-EnumValueSet const VkVideoEncodeH265OutputModeFlagsEXTSets[] = {
+EnumValue const VkVideoEncodeH265OutputModeFlagsEXTValues[] = {
     {"FRAME", 0x00000001},
     {"NON_VCL", 0x00000004},
     {"SLICE", 0x00000002},
     {"SLICE_SEGMENT", 0x00000002},
 };
 
-EnumValueSet const VkVideoDecodeH264PictureLayoutFlagsEXTSets[] = {
+EnumValue const VkVideoDecodeH264PictureLayoutFlagsEXTValues[] = {
     {"PROGRESSIVE", 0},
     {"INTERLACED_INTERLEAVED_LINES", 0x00000001},
     {"INTERLACED_SEPARATE_PLANES", 0x00000002},
 };
 
-EnumValueSet const VkVideoCodingQualityPresetFlagsKHRSets[] = {
+EnumValue const VkVideoCodingQualityPresetFlagsKHRValues[] = {
     {"NORMAL", 0x00000001},
     {"POWER", 0x00000002},
     {"QUALITY", 0x00000004},
     {"DEFAULT", 0},
 };
 
-EnumValueSet const VkVideoEncodeH264RateControlStructureFlagsEXTSets[] = {
+EnumValue const VkVideoEncodeH264RateControlStructureFlagsEXTValues[] = {
     {"UNKNOWN", 0},
     {"FLAT", 0x00000001},
     {"DYADIC", 0x00000002},
 };
 
-EnumValueSet const VkVideoEncodeH265RateControlStructureFlagsEXTSets[] = {
+EnumValue const VkVideoEncodeH265RateControlStructureFlagsEXTValues[] = {
     {"UNKNOWN", 0},
     {"FLAT", 0x00000001},
     {"DYADIC", 0x00000002},
 };
 
-EnumValueSet const VkVideoEncodeH264CreateFlagsEXTSets[] = {
+EnumValue const VkVideoEncodeH264CreateFlagsEXTValues[] = {
     {"DEFAULT", 0},
     {"RESERVED_0", 0x00000001},
 };
 
-EnumValueSet const VkVideoCapabilitiesFlagsKHRSets[] = {
+EnumValue const VkVideoCapabilitiesFlagsKHRValues[] = {
     {"PROTECTED_CONTENT", 0x00000001},
     {"SEPARATE_REFERENCE_IMAGES", 0x00000002},
 };
 
-EnumValueSet const VkVideoDecodeH264FieldLayoutFlagsEXTSets[] = {
+EnumValue const VkVideoDecodeH264FieldLayoutFlagsEXTValues[] = {
     {"VK_VIDEO_DECODE_H264_PROGRESSIVE_PICTURES_ONLY", 0},
     {"LINE_INTERLACED_PLANE", 0x00000001},
     {"SEPARATE_INTERLACED_PLANE", 0x00000002},
 };
 
-EnumValueSet const VkVideoEncodeH264CapabilitiesFlagsEXTSets[] = {
+EnumValue const VkVideoEncodeH264CapabilitiesFlagsEXTValues[] = {
     {"VK_VIDEO_ENCODE_H264_CAPABILITY_CABAC", 0x00000001},
     {"VK_VIDEO_ENCODE_H264_CAPABILITY_CAVLC", 0x00000002},
     {"VK_VIDEO_ENCODE_H264_CAPABILITY_WEIGHTED_BI_PRED_IMPLICIT", 0x00000004},
@@ -4305,189 +4305,190 @@ EnumValueSet const VkVideoEncodeH264CapabilitiesFlagsEXTSets[] = {
     {"VK_VIDEO_ENCODE_H264_CAPABILITY_EVENLY_DISTRIBUTED_SLICE_SIZE", 0x00000400},
 };
 
-EnumValueSet const VkAccelerationStructureMemoryRequirementsTypeKHRSets[] = {
+EnumValue const VkAccelerationStructureMemoryRequirementsTypeKHRValues[] = {
     {"OBJECT_NV", 0}, {"BUILD_SCRATCH_NV", 1}, {"UPDATE_SCRATCH_NV", 2},
     {"OBJECT", 0},    {"BUILD_SCRATCH", 1},    {"UPDATE_SCRATCH", 2},
 };
 
-EnumValueSet const VkIndirectCommandsLayoutUsageFlagsNVXSets[] = {
+EnumValue const VkIndirectCommandsLayoutUsageFlagsNVXValues[] = {
     {"UNORDERED_SEQUENCES", 0x00000001},
     {"SPARSE_SEQUENCES", 0x00000002},
     {"EMPTY_EXECUTIONS", 0x00000004},
     {"INDEXED_SEQUENCES", 0x00000008},
 };
 
-EnumValueSet const VkObjectEntryUsageFlagsNVXSets[] = {
+EnumValue const VkObjectEntryUsageFlagsNVXValues[] = {
     {"GRAPHICS", 0x00000001},
     {"COMPUTE", 0x00000002},
 };
 
-EnumValueSet const VkIndirectCommandsTokenTypeNVXSets[] = {
+EnumValue const VkIndirectCommandsTokenTypeNVXValues[] = {
     {"PIPELINE", 0},      {"DESCRIPTOR_SET", 1}, {"INDEX_BUFFER", 2}, {"VERTEX_BUFFER", 3},
     {"PUSH_CONSTANT", 4}, {"DRAW_INDEXED", 5},   {"DRAW", 6},         {"DISPATCH", 7},
 };
 
-EnumValueSet const VkObjectEntryTypeNVXSets[] = {
+EnumValue const VkObjectEntryTypeNVXValues[] = {
     {"DESCRIPTOR_SET", 0}, {"PIPELINE", 1},      {"INDEX_BUFFER", 2},
     {"VERTEX_BUFFER", 3},  {"PUSH_CONSTANT", 4},
 };
 
-EnumValueSet const VkGeometryFlagsNVXSets[] = {
+EnumValue const VkGeometryFlagsNVXValues[] = {
     {"OPAQUE", 0x00000001},
     {"NO_DUPLICATE_ANY_HIT_INVOCATION", 0x00000002},
 };
 
-EnumValueSet const VkGeometryInstanceFlagsNVXSets[] = {
+EnumValue const VkGeometryInstanceFlagsNVXValues[] = {
     {"TRIANGLE_CULL_DISABLE", 0x00000001},
     {"TRIANGLE_CULL_FLIP_WINDING", 0x00000002},
     {"FORCE_OPAQUE", 0x00000004},
     {"FORCE_NO_OPAQUE", 0x00000008},
 };
 
-EnumValueSet const VkBuildAccelerationStructureFlagsNVXSets[] = {
+EnumValue const VkBuildAccelerationStructureFlagsNVXValues[] = {
     {"ALLOW_UPDATE", 0x00000001},      {"ALLOW_COMPACTION", 0x00000002},
     {"PREFER_FAST_TRACE", 0x00000004}, {"PREFER_FAST_BUILD", 0x00000008},
     {"LOW_MEMORY", 0x00000010},
 };
 
-EnumValueSet const VkCopyAccelerationStructureModeNVXSets[] = {
+EnumValue const VkCopyAccelerationStructureModeNVXValues[] = {
     {"CLONE", 0},
     {"COMPACT", 1},
 };
 
-EnumValueSet const VkAccelerationStructureTypeNVXSets[] = {
+EnumValue const VkAccelerationStructureTypeNVXValues[] = {
     {"TOP_LEVEL", 0},
     {"BOTTOM_LEVEL", 1},
 };
 
-EnumValueSet const VkGeometryTypeNVXSets[] = {
+EnumValue const VkGeometryTypeNVXValues[] = {
     {"TRIANGLES", 0},
     {"AABBS", 1},
 };
 
-typedef struct EnumType {
+typedef struct ValueSet {
   char const *name;
-  EnumValueSet const *data;
+  EnumValue const *data;
   uint32_t count;
-} EnumType;
+} ValueSet;
 
-#define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)
-EnumType const cEnumTypes[411] = {
-    {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsSets, 2},
-    {"VkQueryPoolCreateFlags", VkQueryPoolCreateFlagsSets, 1},
-    {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsSets, 6},
-    {"VkSamplerCreateFlags", VkSamplerCreateFlagsSets, 7},
-    {"VkPipelineLayoutCreateFlags", VkPipelineLayoutCreateFlagsSets, 3},
-    {"VkPipelineCacheCreateFlags", VkPipelineCacheCreateFlagsSets, 8},
-    {"VkPipelineDepthStencilStateCreateFlags", VkPipelineDepthStencilStateCreateFlagsSets, 4},
+static const uint32_t cValueSetCount = 411;
+static ValueSet const cValueSets[411] = {
+    {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsValues, 2},
+    {"VkQueryPoolCreateFlags", VkQueryPoolCreateFlagsValues, 1},
+    {"VkRenderPassCreateFlags", VkRenderPassCreateFlagsValues, 6},
+    {"VkSamplerCreateFlags", VkSamplerCreateFlagsValues, 7},
+    {"VkPipelineLayoutCreateFlags", VkPipelineLayoutCreateFlagsValues, 3},
+    {"VkPipelineCacheCreateFlags", VkPipelineCacheCreateFlagsValues, 8},
+    {"VkPipelineDepthStencilStateCreateFlags", VkPipelineDepthStencilStateCreateFlagsValues, 4},
     {"VkPipelineDynamicStateCreateFlags", NULL, 0},
-    {"VkPipelineColorBlendStateCreateFlags", VkPipelineColorBlendStateCreateFlagsSets, 2},
+    {"VkPipelineColorBlendStateCreateFlags", VkPipelineColorBlendStateCreateFlagsValues, 2},
     {"VkPipelineMultisampleStateCreateFlags", NULL, 0},
     {"VkPipelineRasterizationStateCreateFlags", NULL, 0},
     {"VkPipelineViewportStateCreateFlags", NULL, 0},
     {"VkPipelineTessellationStateCreateFlags", NULL, 0},
     {"VkPipelineInputAssemblyStateCreateFlags", NULL, 0},
     {"VkPipelineVertexInputStateCreateFlags", NULL, 0},
-    {"VkPipelineShaderStageCreateFlags", VkPipelineShaderStageCreateFlagsSets, 6},
-    {"VkDescriptorSetLayoutCreateFlags", VkDescriptorSetLayoutCreateFlagsSets, 15},
+    {"VkPipelineShaderStageCreateFlags", VkPipelineShaderStageCreateFlagsValues, 6},
+    {"VkDescriptorSetLayoutCreateFlags", VkDescriptorSetLayoutCreateFlagsValues, 15},
     {"VkBufferViewCreateFlags", NULL, 0},
-    {"VkInstanceCreateFlags", VkInstanceCreateFlagsSets, 2},
+    {"VkInstanceCreateFlags", VkInstanceCreateFlagsValues, 2},
     {"VkDeviceCreateFlags", NULL, 0},
-    {"VkDeviceQueueCreateFlags", VkDeviceQueueCreateFlagsSets, 3},
-    {"VkQueueFlags", VkQueueFlagsSets, 18},
-    {"VkMemoryPropertyFlags", VkMemoryPropertyFlagsSets, 11},
-    {"VkMemoryHeapFlags", VkMemoryHeapFlagsSets, 6},
-    {"VkAccessFlags", VkAccessFlagsSets, 47},
-    {"VkBufferUsageFlags", VkBufferUsageFlagsSets, 50},
-    {"VkBufferCreateFlags", VkBufferCreateFlagsSets, 13},
-    {"VkShaderStageFlags", VkShaderStageFlagsSets, 46},
-    {"VkImageUsageFlags", VkImageUsageFlagsSets, 53},
-    {"VkImageCreateFlags", VkImageCreateFlagsSets, 38},
-    {"VkImageViewCreateFlags", VkImageViewCreateFlagsSets, 6},
-    {"VkPipelineCreateFlags", VkPipelineCreateFlagsSets, 68},
-    {"VkColorComponentFlags", VkColorComponentFlagsSets, 4},
-    {"VkFenceCreateFlags", VkFenceCreateFlagsSets, 1},
+    {"VkDeviceQueueCreateFlags", VkDeviceQueueCreateFlagsValues, 3},
+    {"VkQueueFlags", VkQueueFlagsValues, 18},
+    {"VkMemoryPropertyFlags", VkMemoryPropertyFlagsValues, 11},
+    {"VkMemoryHeapFlags", VkMemoryHeapFlagsValues, 6},
+    {"VkAccessFlags", VkAccessFlagsValues, 47},
+    {"VkBufferUsageFlags", VkBufferUsageFlagsValues, 50},
+    {"VkBufferCreateFlags", VkBufferCreateFlagsValues, 13},
+    {"VkShaderStageFlags", VkShaderStageFlagsValues, 46},
+    {"VkImageUsageFlags", VkImageUsageFlagsValues, 53},
+    {"VkImageCreateFlags", VkImageCreateFlagsValues, 38},
+    {"VkImageViewCreateFlags", VkImageViewCreateFlagsValues, 6},
+    {"VkPipelineCreateFlags", VkPipelineCreateFlagsValues, 68},
+    {"VkColorComponentFlags", VkColorComponentFlagsValues, 4},
+    {"VkFenceCreateFlags", VkFenceCreateFlagsValues, 1},
     {"VkSemaphoreCreateFlags", NULL, 0},
-    {"VkFormatFeatureFlags", VkFormatFeatureFlagsSets, 49},
-    {"VkQueryControlFlags", VkQueryControlFlagsSets, 1},
-    {"VkQueryResultFlags", VkQueryResultFlagsSets, 5},
-    {"VkShaderModuleCreateFlags", VkShaderModuleCreateFlagsSets, 1},
-    {"VkEventCreateFlags", VkEventCreateFlagsSets, 2},
-    {"VkCommandPoolCreateFlags", VkCommandPoolCreateFlagsSets, 3},
-    {"VkCommandPoolResetFlags", VkCommandPoolResetFlagsSets, 2},
-    {"VkCommandBufferResetFlags", VkCommandBufferResetFlagsSets, 1},
-    {"VkCommandBufferUsageFlags", VkCommandBufferUsageFlagsSets, 5},
-    {"VkQueryPipelineStatisticFlags", VkQueryPipelineStatisticFlagsSets, 14},
-    {"VkMemoryMapFlags", VkMemoryMapFlagsSets, 1},
-    {"VkMemoryUnmapFlags", VkMemoryUnmapFlagsSets, 1},
-    {"VkImageAspectFlags", VkImageAspectFlagsSets, 17},
-    {"VkSparseMemoryBindFlags", VkSparseMemoryBindFlagsSets, 1},
-    {"VkSparseImageFormatFlags", VkSparseImageFormatFlagsSets, 3},
-    {"VkSubpassDescriptionFlags", VkSubpassDescriptionFlagsSets, 17},
-    {"VkPipelineStageFlags", VkPipelineStageFlagsSets, 43},
-    {"VkSampleCountFlags", VkSampleCountFlagsSets, 7},
-    {"VkAttachmentDescriptionFlags", VkAttachmentDescriptionFlagsSets, 5},
-    {"VkStencilFaceFlags", VkStencilFaceFlagsSets, 4},
-    {"VkCullModeFlags", VkCullModeFlagsSets, 4},
-    {"VkDescriptorPoolCreateFlags", VkDescriptorPoolCreateFlagsSets, 8},
+    {"VkFormatFeatureFlags", VkFormatFeatureFlagsValues, 49},
+    {"VkQueryControlFlags", VkQueryControlFlagsValues, 1},
+    {"VkQueryResultFlags", VkQueryResultFlagsValues, 5},
+    {"VkShaderModuleCreateFlags", VkShaderModuleCreateFlagsValues, 1},
+    {"VkEventCreateFlags", VkEventCreateFlagsValues, 2},
+    {"VkCommandPoolCreateFlags", VkCommandPoolCreateFlagsValues, 3},
+    {"VkCommandPoolResetFlags", VkCommandPoolResetFlagsValues, 2},
+    {"VkCommandBufferResetFlags", VkCommandBufferResetFlagsValues, 1},
+    {"VkCommandBufferUsageFlags", VkCommandBufferUsageFlagsValues, 5},
+    {"VkQueryPipelineStatisticFlags", VkQueryPipelineStatisticFlagsValues, 14},
+    {"VkMemoryMapFlags", VkMemoryMapFlagsValues, 1},
+    {"VkMemoryUnmapFlags", VkMemoryUnmapFlagsValues, 1},
+    {"VkImageAspectFlags", VkImageAspectFlagsValues, 17},
+    {"VkSparseMemoryBindFlags", VkSparseMemoryBindFlagsValues, 1},
+    {"VkSparseImageFormatFlags", VkSparseImageFormatFlagsValues, 3},
+    {"VkSubpassDescriptionFlags", VkSubpassDescriptionFlagsValues, 17},
+    {"VkPipelineStageFlags", VkPipelineStageFlagsValues, 43},
+    {"VkSampleCountFlags", VkSampleCountFlagsValues, 7},
+    {"VkAttachmentDescriptionFlags", VkAttachmentDescriptionFlagsValues, 5},
+    {"VkStencilFaceFlags", VkStencilFaceFlagsValues, 4},
+    {"VkCullModeFlags", VkCullModeFlagsValues, 4},
+    {"VkDescriptorPoolCreateFlags", VkDescriptorPoolCreateFlagsValues, 8},
     {"VkDescriptorPoolResetFlags", NULL, 0},
-    {"VkDependencyFlags", VkDependencyFlagsSets, 12},
-    {"VkSubgroupFeatureFlags", VkSubgroupFeatureFlagsSets, 13},
-    {"VkIndirectCommandsLayoutUsageFlagsNV", VkIndirectCommandsLayoutUsageFlagsNVSets, 3},
-    {"VkIndirectStateFlagsNV", VkIndirectStateFlagsNVSets, 1},
-    {"VkGeometryFlagsKHR", VkGeometryFlagsKHRSets, 4},
-    {"VkGeometryInstanceFlagsKHR", VkGeometryInstanceFlagsKHRSets, 15},
+    {"VkDependencyFlags", VkDependencyFlagsValues, 12},
+    {"VkSubgroupFeatureFlags", VkSubgroupFeatureFlagsValues, 13},
+    {"VkIndirectCommandsLayoutUsageFlagsNV", VkIndirectCommandsLayoutUsageFlagsNVValues, 3},
+    {"VkIndirectStateFlagsNV", VkIndirectStateFlagsNVValues, 1},
+    {"VkGeometryFlagsKHR", VkGeometryFlagsKHRValues, 4},
+    {"VkGeometryInstanceFlagsKHR", VkGeometryInstanceFlagsKHRValues, 15},
     {"VkClusterAccelerationStructureGeometryFlagsNV",
-     VkClusterAccelerationStructureGeometryFlagsNVSets, 3},
+     VkClusterAccelerationStructureGeometryFlagsNVValues, 3},
     {"VkClusterAccelerationStructureClusterFlagsNV",
-     VkClusterAccelerationStructureClusterFlagsNVSets, 1},
+     VkClusterAccelerationStructureClusterFlagsNVValues, 1},
     {"VkClusterAccelerationStructureAddressResolutionFlagsNV",
-     VkClusterAccelerationStructureAddressResolutionFlagsNVSets, 7},
-    {"VkBuildAccelerationStructureFlagsKHR", VkBuildAccelerationStructureFlagsKHRSets, 28},
-    {"VkPrivateDataSlotCreateFlags", VkPrivateDataSlotCreateFlagsSets, 1},
-    {"VkAccelerationStructureCreateFlagsKHR", VkAccelerationStructureCreateFlagsKHRSets, 5},
+     VkClusterAccelerationStructureAddressResolutionFlagsNVValues, 7},
+    {"VkBuildAccelerationStructureFlagsKHR", VkBuildAccelerationStructureFlagsKHRValues, 28},
+    {"VkPrivateDataSlotCreateFlags", VkPrivateDataSlotCreateFlagsValues, 1},
+    {"VkAccelerationStructureCreateFlagsKHR", VkAccelerationStructureCreateFlagsKHRValues, 5},
     {"VkDescriptorUpdateTemplateCreateFlags", NULL, 0},
-    {"VkPipelineCreationFeedbackFlags", VkPipelineCreationFeedbackFlagsSets, 6},
-    {"VkPerformanceCounterDescriptionFlagsKHR", VkPerformanceCounterDescriptionFlagsKHRSets, 4},
+    {"VkPipelineCreationFeedbackFlags", VkPipelineCreationFeedbackFlagsValues, 6},
+    {"VkPerformanceCounterDescriptionFlagsKHR", VkPerformanceCounterDescriptionFlagsKHRValues, 4},
     {"VkAcquireProfilingLockFlagsKHR", NULL, 0},
-    {"VkSemaphoreWaitFlags", VkSemaphoreWaitFlagsSets, 2},
+    {"VkSemaphoreWaitFlags", VkSemaphoreWaitFlagsValues, 2},
     {"VkPipelineCompilerControlFlagsAMD", NULL, 0},
     {"VkShaderCorePropertiesFlagsAMD", NULL, 0},
-    {"VkDeviceDiagnosticsConfigFlagsNV", VkDeviceDiagnosticsConfigFlagsNVSets, 4},
+    {"VkDeviceDiagnosticsConfigFlagsNV", VkDeviceDiagnosticsConfigFlagsNVValues, 4},
     {"VkRefreshObjectFlagsKHR", NULL, 0},
-    {"VkAccessFlags2", VkAccessFlags2Sets, 98},
-    {"VkPipelineStageFlags2", VkPipelineStageFlags2Sets, 91},
+    {"VkAccessFlags2", VkAccessFlags2Values, 98},
+    {"VkPipelineStageFlags2", VkPipelineStageFlags2Values, 91},
     {"VkAccelerationStructureMotionInfoFlagsNV", NULL, 0},
     {"VkAccelerationStructureMotionInstanceFlagsNV", NULL, 0},
-    {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Sets, 111},
-    {"VkRenderingFlags", VkRenderingFlagsSets, 20},
-    {"VkMemoryDecompressionMethodFlagsEXT", VkMemoryDecompressionMethodFlagsEXTSets, 2},
-    {"VkBuildMicromapFlagsEXT", VkBuildMicromapFlagsEXTSets, 3},
-    {"VkMicromapCreateFlagsEXT", VkMicromapCreateFlagsEXTSets, 1},
-    {"VkIndirectCommandsLayoutUsageFlagsEXT", VkIndirectCommandsLayoutUsageFlagsEXTSets, 2},
-    {"VkIndirectCommandsInputModeFlagsEXT", VkIndirectCommandsInputModeFlagsEXTSets, 2},
+    {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Values, 111},
+    {"VkRenderingFlags", VkRenderingFlagsValues, 20},
+    {"VkMemoryDecompressionMethodFlagsEXT", VkMemoryDecompressionMethodFlagsEXTValues, 2},
+    {"VkBuildMicromapFlagsEXT", VkBuildMicromapFlagsEXTValues, 3},
+    {"VkMicromapCreateFlagsEXT", VkMicromapCreateFlagsEXTValues, 1},
+    {"VkIndirectCommandsLayoutUsageFlagsEXT", VkIndirectCommandsLayoutUsageFlagsEXTValues, 2},
+    {"VkIndirectCommandsInputModeFlagsEXT", VkIndirectCommandsInputModeFlagsEXTValues, 2},
     {"VkDirectDriverLoadingFlagsLUNARG", NULL, 0},
-    {"VkPipelineCreateFlags2", VkPipelineCreateFlags2Sets, 63},
-    {"VkBufferUsageFlags2", VkBufferUsageFlags2Sets, 52},
-    {"VkAddressCopyFlagsKHR", VkAddressCopyFlagsKHRSets, 3},
-    {"VkTensorCreateFlagsARM", VkTensorCreateFlagsARMSets, 4},
-    {"VkTensorUsageFlagsARM", VkTensorUsageFlagsARMSets, 5},
-    {"VkTensorViewCreateFlagsARM", VkTensorViewCreateFlagsARMSets, 1},
-    {"VkDataGraphPipelineSessionCreateFlagsARM", VkDataGraphPipelineSessionCreateFlagsARMSets, 1},
+    {"VkPipelineCreateFlags2", VkPipelineCreateFlags2Values, 63},
+    {"VkBufferUsageFlags2", VkBufferUsageFlags2Values, 52},
+    {"VkAddressCopyFlagsKHR", VkAddressCopyFlagsKHRValues, 3},
+    {"VkTensorCreateFlagsARM", VkTensorCreateFlagsARMValues, 4},
+    {"VkTensorUsageFlagsARM", VkTensorUsageFlagsARMValues, 5},
+    {"VkTensorViewCreateFlagsARM", VkTensorViewCreateFlagsARMValues, 1},
+    {"VkDataGraphPipelineSessionCreateFlagsARM", VkDataGraphPipelineSessionCreateFlagsARMValues, 1},
     {"VkDataGraphPipelineDispatchFlagsARM", NULL, 0},
-    {"VkVideoEncodeRgbModelConversionFlagsVALVE", VkVideoEncodeRgbModelConversionFlagsVALVESets, 5},
-    {"VkVideoEncodeRgbRangeCompressionFlagsVALVE", VkVideoEncodeRgbRangeCompressionFlagsVALVESets,
+    {"VkVideoEncodeRgbModelConversionFlagsVALVE", VkVideoEncodeRgbModelConversionFlagsVALVEValues,
+     5},
+    {"VkVideoEncodeRgbRangeCompressionFlagsVALVE", VkVideoEncodeRgbRangeCompressionFlagsVALVEValues,
      2},
-    {"VkVideoEncodeRgbChromaOffsetFlagsVALVE", VkVideoEncodeRgbChromaOffsetFlagsVALVESets, 2},
-    {"VkCompositeAlphaFlagsKHR", VkCompositeAlphaFlagsKHRSets, 4},
-    {"VkDisplayPlaneAlphaFlagsKHR", VkDisplayPlaneAlphaFlagsKHRSets, 4},
-    {"VkSurfaceTransformFlagsKHR", VkSurfaceTransformFlagsKHRSets, 9},
-    {"VkSwapchainCreateFlagsKHR", VkSwapchainCreateFlagsKHRSets, 13},
+    {"VkVideoEncodeRgbChromaOffsetFlagsVALVE", VkVideoEncodeRgbChromaOffsetFlagsVALVEValues, 2},
+    {"VkCompositeAlphaFlagsKHR", VkCompositeAlphaFlagsKHRValues, 4},
+    {"VkDisplayPlaneAlphaFlagsKHR", VkDisplayPlaneAlphaFlagsKHRValues, 4},
+    {"VkSurfaceTransformFlagsKHR", VkSurfaceTransformFlagsKHRValues, 9},
+    {"VkSwapchainCreateFlagsKHR", VkSwapchainCreateFlagsKHRValues, 13},
     {"VkDisplayModeCreateFlagsKHR", NULL, 0},
     {"VkDisplaySurfaceCreateFlagsKHR", NULL, 0},
     {"VkAndroidSurfaceCreateFlagsKHR", NULL, 0},
     {"VkViSurfaceCreateFlagsNN", NULL, 0},
-    {"VkWaylandSurfaceCreateFlagsKHR", VkWaylandSurfaceCreateFlagsKHRSets, 1},
+    {"VkWaylandSurfaceCreateFlagsKHR", VkWaylandSurfaceCreateFlagsKHRValues, 1},
     {"VkWin32SurfaceCreateFlagsKHR", NULL, 0},
     {"VkXlibSurfaceCreateFlagsKHR", NULL, 0},
     {"VkXcbSurfaceCreateFlagsKHR", NULL, 0},
@@ -4499,307 +4500,309 @@ EnumType const cEnumTypes[411] = {
     {"VkStreamDescriptorSurfaceCreateFlagsGGP", NULL, 0},
     {"VkHeadlessSurfaceCreateFlagsEXT", NULL, 0},
     {"VkScreenSurfaceCreateFlagsQNX", NULL, 0},
-    {"VkPeerMemoryFeatureFlags", VkPeerMemoryFeatureFlagsSets, 8},
-    {"VkMemoryAllocateFlags", VkMemoryAllocateFlagsSets, 8},
-    {"VkDeviceGroupPresentModeFlagsKHR", VkDeviceGroupPresentModeFlagsKHRSets, 4},
-    {"VkDebugReportFlagsEXT", VkDebugReportFlagsEXTSets, 5},
+    {"VkPeerMemoryFeatureFlags", VkPeerMemoryFeatureFlagsValues, 8},
+    {"VkMemoryAllocateFlags", VkMemoryAllocateFlagsValues, 8},
+    {"VkDeviceGroupPresentModeFlagsKHR", VkDeviceGroupPresentModeFlagsKHRValues, 4},
+    {"VkDebugReportFlagsEXT", VkDebugReportFlagsEXTValues, 5},
     {"VkCommandPoolTrimFlags", NULL, 0},
-    {"VkExternalMemoryHandleTypeFlagsNV", VkExternalMemoryHandleTypeFlagsNVSets, 4},
+    {"VkExternalMemoryHandleTypeFlagsNV", VkExternalMemoryHandleTypeFlagsNVValues, 4},
     {"VkClusterAccelerationStructureIndexFormatFlagsNV",
-     VkClusterAccelerationStructureIndexFormatFlagsNVSets, 3},
-    {"VkExternalMemoryFeatureFlagsNV", VkExternalMemoryFeatureFlagsNVSets, 3},
-    {"VkExternalMemoryHandleTypeFlags", VkExternalMemoryHandleTypeFlagsSets, 32},
-    {"VkExternalMemoryFeatureFlags", VkExternalMemoryFeatureFlagsSets, 6},
-    {"VkExternalSemaphoreHandleTypeFlags", VkExternalSemaphoreHandleTypeFlagsSets, 15},
-    {"VkExternalSemaphoreFeatureFlags", VkExternalSemaphoreFeatureFlagsSets, 4},
-    {"VkSemaphoreImportFlags", VkSemaphoreImportFlagsSets, 2},
-    {"VkExternalFenceHandleTypeFlags", VkExternalFenceHandleTypeFlagsSets, 12},
-    {"VkExternalFenceFeatureFlags", VkExternalFenceFeatureFlagsSets, 4},
-    {"VkFenceImportFlags", VkFenceImportFlagsSets, 2},
-    {"VkSurfaceCounterFlagsEXT", VkSurfaceCounterFlagsEXTSets, 2},
+     VkClusterAccelerationStructureIndexFormatFlagsNVValues, 3},
+    {"VkExternalMemoryFeatureFlagsNV", VkExternalMemoryFeatureFlagsNVValues, 3},
+    {"VkExternalMemoryHandleTypeFlags", VkExternalMemoryHandleTypeFlagsValues, 32},
+    {"VkExternalMemoryFeatureFlags", VkExternalMemoryFeatureFlagsValues, 6},
+    {"VkExternalSemaphoreHandleTypeFlags", VkExternalSemaphoreHandleTypeFlagsValues, 15},
+    {"VkExternalSemaphoreFeatureFlags", VkExternalSemaphoreFeatureFlagsValues, 4},
+    {"VkSemaphoreImportFlags", VkSemaphoreImportFlagsValues, 2},
+    {"VkExternalFenceHandleTypeFlags", VkExternalFenceHandleTypeFlagsValues, 12},
+    {"VkExternalFenceFeatureFlags", VkExternalFenceFeatureFlagsValues, 4},
+    {"VkFenceImportFlags", VkFenceImportFlagsValues, 2},
+    {"VkSurfaceCounterFlagsEXT", VkSurfaceCounterFlagsEXTValues, 2},
     {"VkPipelineViewportSwizzleStateCreateFlagsNV", NULL, 0},
     {"VkPipelineDiscardRectangleStateCreateFlagsEXT", NULL, 0},
     {"VkPipelineCoverageToColorStateCreateFlagsNV", NULL, 0},
     {"VkPipelineCoverageModulationStateCreateFlagsNV", NULL, 0},
     {"VkPipelineCoverageReductionStateCreateFlagsNV", NULL, 0},
     {"VkValidationCacheCreateFlagsEXT", NULL, 0},
-    {"VkDebugUtilsMessageSeverityFlagsEXT", VkDebugUtilsMessageSeverityFlagsEXTSets, 4},
-    {"VkDebugUtilsMessageTypeFlagsEXT", VkDebugUtilsMessageTypeFlagsEXTSets, 4},
+    {"VkDebugUtilsMessageSeverityFlagsEXT", VkDebugUtilsMessageSeverityFlagsEXTValues, 4},
+    {"VkDebugUtilsMessageTypeFlagsEXT", VkDebugUtilsMessageTypeFlagsEXTValues, 4},
     {"VkDebugUtilsMessengerCreateFlagsEXT", NULL, 0},
     {"VkDebugUtilsMessengerCallbackDataFlagsEXT", NULL, 0},
     {"VkDeviceMemoryReportFlagsEXT", NULL, 0},
     {"VkPipelineRasterizationConservativeStateCreateFlagsEXT", NULL, 0},
-    {"VkDescriptorBindingFlags", VkDescriptorBindingFlagsSets, 9},
-    {"VkConditionalRenderingFlagsEXT", VkConditionalRenderingFlagsEXTSets, 1},
-    {"VkResolveModeFlags", VkResolveModeFlagsSets, 16},
+    {"VkDescriptorBindingFlags", VkDescriptorBindingFlagsValues, 9},
+    {"VkConditionalRenderingFlagsEXT", VkConditionalRenderingFlagsEXTValues, 1},
+    {"VkResolveModeFlags", VkResolveModeFlagsValues, 16},
     {"VkPipelineRasterizationStateStreamCreateFlagsEXT", NULL, 0},
     {"VkPipelineRasterizationDepthClipStateCreateFlagsEXT", NULL, 0},
-    {"VkSwapchainImageUsageFlagsANDROID", VkSwapchainImageUsageFlagsANDROIDSets, 1},
-    {"VkToolPurposeFlags", VkToolPurposeFlagsSets, 12},
-    {"VkSubmitFlags", VkSubmitFlagsSets, 2},
+    {"VkSwapchainImageUsageFlagsANDROID", VkSwapchainImageUsageFlagsANDROIDValues, 1},
+    {"VkToolPurposeFlags", VkToolPurposeFlagsValues, 12},
+    {"VkSubmitFlags", VkSubmitFlagsValues, 2},
     {"VkImageFormatConstraintsFlagsFUCHSIA", NULL, 0},
-    {"VkHostImageCopyFlags", VkHostImageCopyFlagsSets, 4},
+    {"VkHostImageCopyFlags", VkHostImageCopyFlagsValues, 4},
     {"VkPartitionedAccelerationStructureInstanceFlagsNV",
-     VkPartitionedAccelerationStructureInstanceFlagsNVSets, 5},
-    {"VkImageConstraintsInfoFlagsFUCHSIA", VkImageConstraintsInfoFlagsFUCHSIASets, 5},
-    {"VkGraphicsPipelineLibraryFlagsEXT", VkGraphicsPipelineLibraryFlagsEXTSets, 4},
-    {"VkImageCompressionFlagsEXT", VkImageCompressionFlagsEXTSets, 4},
-    {"VkImageCompressionFixedRateFlagsEXT", VkImageCompressionFixedRateFlagsEXTSets, 25},
-    {"VkExportMetalObjectTypeFlagsEXT", VkExportMetalObjectTypeFlagsEXTSets, 6},
-    {"VkRenderingAttachmentFlagsKHR", VkRenderingAttachmentFlagsKHRSets, 3},
-    {"VkResolveImageFlagsKHR", VkResolveImageFlagsKHRSets, 2},
-    {"VkDeviceAddressBindingFlagsEXT", VkDeviceAddressBindingFlagsEXTSets, 1},
-    {"VkOpticalFlowGridSizeFlagsNV", VkOpticalFlowGridSizeFlagsNVSets, 5},
-    {"VkOpticalFlowUsageFlagsNV", VkOpticalFlowUsageFlagsNVSets, 6},
-    {"VkOpticalFlowSessionCreateFlagsNV", VkOpticalFlowSessionCreateFlagsNVSets, 5},
-    {"VkOpticalFlowExecuteFlagsNV", VkOpticalFlowExecuteFlagsNVSets, 1},
-    {"VkFrameBoundaryFlagsEXT", VkFrameBoundaryFlagsEXTSets, 1},
-    {"VkPresentScalingFlagsKHR", VkPresentScalingFlagsKHRSets, 6},
-    {"VkPresentGravityFlagsKHR", VkPresentGravityFlagsKHRSets, 6},
-    {"VkShaderCreateFlagsEXT", VkShaderCreateFlagsEXTSets, 21},
-    {"VkTileShadingRenderPassFlagsQCOM", VkTileShadingRenderPassFlagsQCOMSets, 2},
-    {"VkPhysicalDeviceSchedulingControlsFlagsARM", VkPhysicalDeviceSchedulingControlsFlagsARMSets,
+     VkPartitionedAccelerationStructureInstanceFlagsNVValues, 5},
+    {"VkImageConstraintsInfoFlagsFUCHSIA", VkImageConstraintsInfoFlagsFUCHSIAValues, 5},
+    {"VkGraphicsPipelineLibraryFlagsEXT", VkGraphicsPipelineLibraryFlagsEXTValues, 4},
+    {"VkImageCompressionFlagsEXT", VkImageCompressionFlagsEXTValues, 4},
+    {"VkImageCompressionFixedRateFlagsEXT", VkImageCompressionFixedRateFlagsEXTValues, 25},
+    {"VkExportMetalObjectTypeFlagsEXT", VkExportMetalObjectTypeFlagsEXTValues, 6},
+    {"VkRenderingAttachmentFlagsKHR", VkRenderingAttachmentFlagsKHRValues, 3},
+    {"VkResolveImageFlagsKHR", VkResolveImageFlagsKHRValues, 2},
+    {"VkDeviceAddressBindingFlagsEXT", VkDeviceAddressBindingFlagsEXTValues, 1},
+    {"VkOpticalFlowGridSizeFlagsNV", VkOpticalFlowGridSizeFlagsNVValues, 5},
+    {"VkOpticalFlowUsageFlagsNV", VkOpticalFlowUsageFlagsNVValues, 6},
+    {"VkOpticalFlowSessionCreateFlagsNV", VkOpticalFlowSessionCreateFlagsNVValues, 5},
+    {"VkOpticalFlowExecuteFlagsNV", VkOpticalFlowExecuteFlagsNVValues, 1},
+    {"VkFrameBoundaryFlagsEXT", VkFrameBoundaryFlagsEXTValues, 1},
+    {"VkPresentScalingFlagsKHR", VkPresentScalingFlagsKHRValues, 6},
+    {"VkPresentGravityFlagsKHR", VkPresentGravityFlagsKHRValues, 6},
+    {"VkShaderCreateFlagsEXT", VkShaderCreateFlagsEXTValues, 21},
+    {"VkTileShadingRenderPassFlagsQCOM", VkTileShadingRenderPassFlagsQCOMValues, 2},
+    {"VkPhysicalDeviceSchedulingControlsFlagsARM", VkPhysicalDeviceSchedulingControlsFlagsARMValues,
      1},
     {"VkSurfaceCreateFlagsOHOS", NULL, 0},
-    {"VkPresentStageFlagsEXT", VkPresentStageFlagsEXTSets, 4},
-    {"VkPastPresentationTimingFlagsEXT", VkPastPresentationTimingFlagsEXTSets, 2},
-    {"VkPresentTimingInfoFlagsEXT", VkPresentTimingInfoFlagsEXTSets, 2},
-    {"VkSwapchainImageUsageFlagsOHOS", VkSwapchainImageUsageFlagsOHOSSets, 1},
+    {"VkPresentStageFlagsEXT", VkPresentStageFlagsEXTValues, 4},
+    {"VkPastPresentationTimingFlagsEXT", VkPastPresentationTimingFlagsEXTValues, 2},
+    {"VkPresentTimingInfoFlagsEXT", VkPresentTimingInfoFlagsEXTValues, 2},
+    {"VkSwapchainImageUsageFlagsOHOS", VkSwapchainImageUsageFlagsOHOSValues, 1},
     {"VkPerformanceCounterDescriptionFlagsARM", NULL, 0},
-    {"VkVideoCodecOperationFlagsKHR", VkVideoCodecOperationFlagsKHRSets, 13},
-    {"VkVideoCapabilityFlagsKHR", VkVideoCapabilityFlagsKHRSets, 2},
-    {"VkVideoSessionCreateFlagsKHR", VkVideoSessionCreateFlagsKHRSets, 11},
-    {"VkVideoSessionParametersCreateFlagsKHR", VkVideoSessionParametersCreateFlagsKHRSets, 1},
+    {"VkVideoCodecOperationFlagsKHR", VkVideoCodecOperationFlagsKHRValues, 13},
+    {"VkVideoCapabilityFlagsKHR", VkVideoCapabilityFlagsKHRValues, 2},
+    {"VkVideoSessionCreateFlagsKHR", VkVideoSessionCreateFlagsKHRValues, 11},
+    {"VkVideoSessionParametersCreateFlagsKHR", VkVideoSessionParametersCreateFlagsKHRValues, 1},
     {"VkVideoBeginCodingFlagsKHR", NULL, 0},
     {"VkVideoEndCodingFlagsKHR", NULL, 0},
-    {"VkVideoCodingControlFlagsKHR", VkVideoCodingControlFlagsKHRSets, 5},
-    {"VkVideoDecodeUsageFlagsKHR", VkVideoDecodeUsageFlagsKHRSets, 4},
-    {"VkVideoDecodeCapabilityFlagsKHR", VkVideoDecodeCapabilityFlagsKHRSets, 3},
-    {"VkVideoDecodeFlagsKHR", VkVideoDecodeFlagsKHRSets, 2},
-    {"VkVideoDecodeH264PictureLayoutFlagsKHR", VkVideoDecodeH264PictureLayoutFlagsKHRSets, 3},
-    {"VkVideoEncodeFlagsKHR", VkVideoEncodeFlagsKHRSets, 7},
-    {"VkVideoEncodeUsageFlagsKHR", VkVideoEncodeUsageFlagsKHRSets, 5},
-    {"VkVideoEncodeContentFlagsKHR", VkVideoEncodeContentFlagsKHRSets, 4},
-    {"VkVideoEncodeCapabilityFlagsKHR", VkVideoEncodeCapabilityFlagsKHRSets, 7},
-    {"VkVideoEncodeFeedbackFlagsKHR", VkVideoEncodeFeedbackFlagsKHRSets, 10},
-    {"VkVideoEncodeRateControlFlagsKHR", VkVideoEncodeRateControlFlagsKHRSets, 3},
-    {"VkVideoEncodeRateControlModeFlagsKHR", VkVideoEncodeRateControlModeFlagsKHRSets, 5},
-    {"VkVideoEncodeIntraRefreshModeFlagsKHR", VkVideoEncodeIntraRefreshModeFlagsKHRSets, 5},
-    {"VkVideoChromaSubsamplingFlagsKHR", VkVideoChromaSubsamplingFlagsKHRSets, 6},
-    {"VkVideoComponentBitDepthFlagsKHR", VkVideoComponentBitDepthFlagsKHRSets, 4},
-    {"VkVideoEncodeH264CapabilityFlagsKHR", VkVideoEncodeH264CapabilityFlagsKHRSets, 13},
-    {"VkVideoEncodeH264StdFlagsKHR", VkVideoEncodeH264StdFlagsKHRSets, 20},
-    {"VkVideoEncodeH264RateControlFlagsKHR", VkVideoEncodeH264RateControlFlagsKHRSets, 5},
-    {"VkVideoEncodeH265CapabilityFlagsKHR", VkVideoEncodeH265CapabilityFlagsKHRSets, 14},
-    {"VkVideoEncodeH265StdFlagsKHR", VkVideoEncodeH265StdFlagsKHRSets, 21},
-    {"VkVideoEncodeH265RateControlFlagsKHR", VkVideoEncodeH265RateControlFlagsKHRSets, 5},
-    {"VkVideoEncodeH265CtbSizeFlagsKHR", VkVideoEncodeH265CtbSizeFlagsKHRSets, 3},
-    {"VkVideoEncodeH265TransformBlockSizeFlagsKHR", VkVideoEncodeH265TransformBlockSizeFlagsKHRSets,
-     4},
-    {"VkVideoEncodeAV1CapabilityFlagsKHR", VkVideoEncodeAV1CapabilityFlagsKHRSets, 7},
-    {"VkVideoEncodeAV1StdFlagsKHR", VkVideoEncodeAV1StdFlagsKHRSets, 4},
-    {"VkVideoEncodeAV1RateControlFlagsKHR", VkVideoEncodeAV1RateControlFlagsKHRSets, 4},
-    {"VkVideoEncodeAV1SuperblockSizeFlagsKHR", VkVideoEncodeAV1SuperblockSizeFlagsKHRSets, 2},
-    {"VkAccessFlags3KHR", VkAccessFlags3KHRSets, 1},
-    {"VkAttachmentLoadOp", VkAttachmentLoadOpSets, 6},
-    {"VkAttachmentStoreOp", VkAttachmentStoreOpSets, 6},
-    {"VkBlendFactor", VkBlendFactorSets, 19},
-    {"VkBlendOp", VkBlendOpSets, 51},
-    {"VkBorderColor", VkBorderColorSets, 8},
-    {"VkPipelineCacheHeaderVersion", VkPipelineCacheHeaderVersionSets, 2},
-    {"VkComponentSwizzle", VkComponentSwizzleSets, 7},
-    {"VkCommandBufferLevel", VkCommandBufferLevelSets, 2},
-    {"VkCompareOp", VkCompareOpSets, 8},
-    {"VkDescriptorType", VkDescriptorTypeSets, 22},
-    {"VkDynamicState", VkDynamicStateSets, 90},
-    {"VkPolygonMode", VkPolygonModeSets, 4},
-    {"VkFormat", VkFormatSets, 352},
-    {"VkFrontFace", VkFrontFaceSets, 2},
-    {"VkImageLayout", VkImageLayoutSets, 42},
-    {"VkImageTiling", VkImageTilingSets, 3},
-    {"VkImageType", VkImageTypeSets, 3},
-    {"VkImageViewType", VkImageViewTypeSets, 7},
-    {"VkIndirectCommandsTokenTypeEXT", VkIndirectCommandsTokenTypeEXTSets, 15},
-    {"VkSharingMode", VkSharingModeSets, 2},
-    {"VkIndexType", VkIndexTypeSets, 7},
-    {"VkLogicOp", VkLogicOpSets, 16},
-    {"VkPhysicalDeviceType", VkPhysicalDeviceTypeSets, 5},
-    {"VkPipelineBindPoint", VkPipelineBindPointSets, 8},
-    {"VkPrimitiveTopology", VkPrimitiveTopologySets, 11},
-    {"VkQueryType", VkQueryTypeSets, 21},
-    {"VkSubpassContents", VkSubpassContentsSets, 4},
-    {"VkStencilOp", VkStencilOpSets, 8},
-    {"VkSystemAllocationScope", VkSystemAllocationScopeSets, 5},
-    {"VkInternalAllocationType", VkInternalAllocationTypeSets, 1},
-    {"VkSamplerAddressMode", VkSamplerAddressModeSets, 6},
-    {"VkFilter", VkFilterSets, 4},
-    {"VkSamplerMipmapMode", VkSamplerMipmapModeSets, 2},
-    {"VkVertexInputRate", VkVertexInputRateSets, 2},
-    {"VkClusterAccelerationStructureTypeNV", VkClusterAccelerationStructureTypeNVSets, 3},
-    {"VkClusterAccelerationStructureOpTypeNV", VkClusterAccelerationStructureOpTypeNVSets, 6},
-    {"VkClusterAccelerationStructureOpModeNV", VkClusterAccelerationStructureOpModeNVSets, 3},
-    {"VkObjectType", VkObjectTypeSets, 65},
-    {"VkRayTracingInvocationReorderModeEXT", VkRayTracingInvocationReorderModeEXTSets, 4},
-    {"VkIndirectCommandsTokenTypeNV", VkIndirectCommandsTokenTypeNVSets, 11},
-    {"VkDescriptorUpdateTemplateType", VkDescriptorUpdateTemplateTypeSets, 4},
-    {"VkViewportCoordinateSwizzleNV", VkViewportCoordinateSwizzleNVSets, 8},
-    {"VkDiscardRectangleModeEXT", VkDiscardRectangleModeEXTSets, 2},
-    {"VkPointClippingBehavior", VkPointClippingBehaviorSets, 4},
-    {"VkCoverageModulationModeNV", VkCoverageModulationModeNVSets, 4},
-    {"VkCoverageReductionModeNV", VkCoverageReductionModeNVSets, 2},
-    {"VkValidationCacheHeaderVersionEXT", VkValidationCacheHeaderVersionEXTSets, 1},
-    {"VkShaderInfoTypeAMD", VkShaderInfoTypeAMDSets, 3},
-    {"VkQueueGlobalPriority", VkQueueGlobalPrioritySets, 12},
-    {"VkTimeDomainKHR", VkTimeDomainKHRSets, 10},
-    {"VkConservativeRasterizationModeEXT", VkConservativeRasterizationModeEXTSets, 3},
-    {"VkSemaphoreType", VkSemaphoreTypeSets, 4},
-    {"VkBuildAccelerationStructureModeKHR", VkBuildAccelerationStructureModeKHRSets, 2},
-    {"VkCopyAccelerationStructureModeKHR", VkCopyAccelerationStructureModeKHRSets, 6},
-    {"VkAccelerationStructureTypeKHR", VkAccelerationStructureTypeKHRSets, 5},
-    {"VkGeometryTypeKHR", VkGeometryTypeKHRSets, 8},
-    {"VkRayTracingShaderGroupTypeKHR", VkRayTracingShaderGroupTypeKHRSets, 6},
-    {"VkAccelerationStructureBuildTypeKHR", VkAccelerationStructureBuildTypeKHRSets, 3},
-    {"VkAccelerationStructureCompatibilityKHR", VkAccelerationStructureCompatibilityKHRSets, 2},
-    {"VkRayTracingLssIndexingModeNV", VkRayTracingLssIndexingModeNVSets, 2},
-    {"VkRayTracingLssPrimitiveEndCapsModeNV", VkRayTracingLssPrimitiveEndCapsModeNVSets, 2},
-    {"VkShaderGroupShaderKHR", VkShaderGroupShaderKHRSets, 4},
-    {"VkMemoryOverallocationBehaviorAMD", VkMemoryOverallocationBehaviorAMDSets, 3},
-    {"VkPerformanceCounterScopeKHR", VkPerformanceCounterScopeKHRSets, 6},
-    {"VkPerformanceCounterUnitKHR", VkPerformanceCounterUnitKHRSets, 11},
-    {"VkPerformanceCounterStorageKHR", VkPerformanceCounterStorageKHRSets, 6},
-    {"VkPerformanceConfigurationTypeINTEL", VkPerformanceConfigurationTypeINTELSets, 1},
-    {"VkQueryPoolSamplingModeINTEL", VkQueryPoolSamplingModeINTELSets, 1},
-    {"VkPerformanceOverrideTypeINTEL", VkPerformanceOverrideTypeINTELSets, 2},
-    {"VkPerformanceParameterTypeINTEL", VkPerformanceParameterTypeINTELSets, 2},
-    {"VkPerformanceValueTypeINTEL", VkPerformanceValueTypeINTELSets, 5},
-    {"VkLineRasterizationMode", VkLineRasterizationModeSets, 12},
-    {"VkFaultLevel", VkFaultLevelSets, 4},
-    {"VkFaultType", VkFaultTypeSets, 7},
-    {"VkFaultQueryBehavior", VkFaultQueryBehaviorSets, 1},
-    {"VkPipelineMatchControl", VkPipelineMatchControlSets, 1},
-    {"VkSciSyncClientTypeNV", VkSciSyncClientTypeNVSets, 3},
-    {"VkSciSyncPrimitiveTypeNV", VkSciSyncPrimitiveTypeNVSets, 2},
-    {"VkFragmentShadingRateNV", VkFragmentShadingRateNVSets, 12},
-    {"VkFragmentShadingRateTypeNV", VkFragmentShadingRateTypeNVSets, 2},
-    {"VkSubpassMergeStatusEXT", VkSubpassMergeStatusEXTSets, 14},
-    {"VkProvokingVertexModeEXT", VkProvokingVertexModeEXTSets, 2},
-    {"VkPipelineCacheValidationVersion", VkPipelineCacheValidationVersionSets, 1},
-    {"VkPipelineRobustnessBufferBehavior", VkPipelineRobustnessBufferBehaviorSets, 8},
-    {"VkPipelineRobustnessImageBehavior", VkPipelineRobustnessImageBehaviorSets, 8},
-    {"VkDeviceAddressBindingTypeEXT", VkDeviceAddressBindingTypeEXTSets, 2},
-    {"VkMicromapTypeEXT", VkMicromapTypeEXTSets, 2},
-    {"VkBuildMicromapModeEXT", VkBuildMicromapModeEXTSets, 1},
-    {"VkCopyMicromapModeEXT", VkCopyMicromapModeEXTSets, 4},
-    {"VkOpacityMicromapFormatEXT", VkOpacityMicromapFormatEXTSets, 2},
-    {"VkOpacityMicromapSpecialIndexEXT", VkOpacityMicromapSpecialIndexEXTSets, 5},
-    {"VkDeviceFaultVendorBinaryHeaderVersionEXT", VkDeviceFaultVendorBinaryHeaderVersionEXTSets, 1},
-    {"VkIndirectExecutionSetInfoTypeEXT", VkIndirectExecutionSetInfoTypeEXTSets, 2},
-    {"VkDepthBiasRepresentationEXT", VkDepthBiasRepresentationEXTSets, 3},
-    {"VkDirectDriverLoadingModeLUNARG", VkDirectDriverLoadingModeLUNARGSets, 2},
-    {"VkPartitionedAccelerationStructureOpTypeNV", VkPartitionedAccelerationStructureOpTypeNVSets,
+    {"VkVideoCodingControlFlagsKHR", VkVideoCodingControlFlagsKHRValues, 5},
+    {"VkVideoDecodeUsageFlagsKHR", VkVideoDecodeUsageFlagsKHRValues, 4},
+    {"VkVideoDecodeCapabilityFlagsKHR", VkVideoDecodeCapabilityFlagsKHRValues, 3},
+    {"VkVideoDecodeFlagsKHR", VkVideoDecodeFlagsKHRValues, 2},
+    {"VkVideoDecodeH264PictureLayoutFlagsKHR", VkVideoDecodeH264PictureLayoutFlagsKHRValues, 3},
+    {"VkVideoEncodeFlagsKHR", VkVideoEncodeFlagsKHRValues, 7},
+    {"VkVideoEncodeUsageFlagsKHR", VkVideoEncodeUsageFlagsKHRValues, 5},
+    {"VkVideoEncodeContentFlagsKHR", VkVideoEncodeContentFlagsKHRValues, 4},
+    {"VkVideoEncodeCapabilityFlagsKHR", VkVideoEncodeCapabilityFlagsKHRValues, 7},
+    {"VkVideoEncodeFeedbackFlagsKHR", VkVideoEncodeFeedbackFlagsKHRValues, 10},
+    {"VkVideoEncodeRateControlFlagsKHR", VkVideoEncodeRateControlFlagsKHRValues, 3},
+    {"VkVideoEncodeRateControlModeFlagsKHR", VkVideoEncodeRateControlModeFlagsKHRValues, 5},
+    {"VkVideoEncodeIntraRefreshModeFlagsKHR", VkVideoEncodeIntraRefreshModeFlagsKHRValues, 5},
+    {"VkVideoChromaSubsamplingFlagsKHR", VkVideoChromaSubsamplingFlagsKHRValues, 6},
+    {"VkVideoComponentBitDepthFlagsKHR", VkVideoComponentBitDepthFlagsKHRValues, 4},
+    {"VkVideoEncodeH264CapabilityFlagsKHR", VkVideoEncodeH264CapabilityFlagsKHRValues, 13},
+    {"VkVideoEncodeH264StdFlagsKHR", VkVideoEncodeH264StdFlagsKHRValues, 20},
+    {"VkVideoEncodeH264RateControlFlagsKHR", VkVideoEncodeH264RateControlFlagsKHRValues, 5},
+    {"VkVideoEncodeH265CapabilityFlagsKHR", VkVideoEncodeH265CapabilityFlagsKHRValues, 14},
+    {"VkVideoEncodeH265StdFlagsKHR", VkVideoEncodeH265StdFlagsKHRValues, 21},
+    {"VkVideoEncodeH265RateControlFlagsKHR", VkVideoEncodeH265RateControlFlagsKHRValues, 5},
+    {"VkVideoEncodeH265CtbSizeFlagsKHR", VkVideoEncodeH265CtbSizeFlagsKHRValues, 3},
+    {"VkVideoEncodeH265TransformBlockSizeFlagsKHR",
+     VkVideoEncodeH265TransformBlockSizeFlagsKHRValues, 4},
+    {"VkVideoEncodeAV1CapabilityFlagsKHR", VkVideoEncodeAV1CapabilityFlagsKHRValues, 7},
+    {"VkVideoEncodeAV1StdFlagsKHR", VkVideoEncodeAV1StdFlagsKHRValues, 4},
+    {"VkVideoEncodeAV1RateControlFlagsKHR", VkVideoEncodeAV1RateControlFlagsKHRValues, 4},
+    {"VkVideoEncodeAV1SuperblockSizeFlagsKHR", VkVideoEncodeAV1SuperblockSizeFlagsKHRValues, 2},
+    {"VkAccessFlags3KHR", VkAccessFlags3KHRValues, 1},
+    {"VkAttachmentLoadOp", VkAttachmentLoadOpValues, 6},
+    {"VkAttachmentStoreOp", VkAttachmentStoreOpValues, 6},
+    {"VkBlendFactor", VkBlendFactorValues, 19},
+    {"VkBlendOp", VkBlendOpValues, 51},
+    {"VkBorderColor", VkBorderColorValues, 8},
+    {"VkPipelineCacheHeaderVersion", VkPipelineCacheHeaderVersionValues, 2},
+    {"VkComponentSwizzle", VkComponentSwizzleValues, 7},
+    {"VkCommandBufferLevel", VkCommandBufferLevelValues, 2},
+    {"VkCompareOp", VkCompareOpValues, 8},
+    {"VkDescriptorType", VkDescriptorTypeValues, 22},
+    {"VkDynamicState", VkDynamicStateValues, 90},
+    {"VkPolygonMode", VkPolygonModeValues, 4},
+    {"VkFormat", VkFormatValues, 352},
+    {"VkFrontFace", VkFrontFaceValues, 2},
+    {"VkImageLayout", VkImageLayoutValues, 42},
+    {"VkImageTiling", VkImageTilingValues, 3},
+    {"VkImageType", VkImageTypeValues, 3},
+    {"VkImageViewType", VkImageViewTypeValues, 7},
+    {"VkIndirectCommandsTokenTypeEXT", VkIndirectCommandsTokenTypeEXTValues, 15},
+    {"VkSharingMode", VkSharingModeValues, 2},
+    {"VkIndexType", VkIndexTypeValues, 7},
+    {"VkLogicOp", VkLogicOpValues, 16},
+    {"VkPhysicalDeviceType", VkPhysicalDeviceTypeValues, 5},
+    {"VkPipelineBindPoint", VkPipelineBindPointValues, 8},
+    {"VkPrimitiveTopology", VkPrimitiveTopologyValues, 11},
+    {"VkQueryType", VkQueryTypeValues, 21},
+    {"VkSubpassContents", VkSubpassContentsValues, 4},
+    {"VkStencilOp", VkStencilOpValues, 8},
+    {"VkSystemAllocationScope", VkSystemAllocationScopeValues, 5},
+    {"VkInternalAllocationType", VkInternalAllocationTypeValues, 1},
+    {"VkSamplerAddressMode", VkSamplerAddressModeValues, 6},
+    {"VkFilter", VkFilterValues, 4},
+    {"VkSamplerMipmapMode", VkSamplerMipmapModeValues, 2},
+    {"VkVertexInputRate", VkVertexInputRateValues, 2},
+    {"VkClusterAccelerationStructureTypeNV", VkClusterAccelerationStructureTypeNVValues, 3},
+    {"VkClusterAccelerationStructureOpTypeNV", VkClusterAccelerationStructureOpTypeNVValues, 6},
+    {"VkClusterAccelerationStructureOpModeNV", VkClusterAccelerationStructureOpModeNVValues, 3},
+    {"VkObjectType", VkObjectTypeValues, 65},
+    {"VkRayTracingInvocationReorderModeEXT", VkRayTracingInvocationReorderModeEXTValues, 4},
+    {"VkIndirectCommandsTokenTypeNV", VkIndirectCommandsTokenTypeNVValues, 11},
+    {"VkDescriptorUpdateTemplateType", VkDescriptorUpdateTemplateTypeValues, 4},
+    {"VkViewportCoordinateSwizzleNV", VkViewportCoordinateSwizzleNVValues, 8},
+    {"VkDiscardRectangleModeEXT", VkDiscardRectangleModeEXTValues, 2},
+    {"VkPointClippingBehavior", VkPointClippingBehaviorValues, 4},
+    {"VkCoverageModulationModeNV", VkCoverageModulationModeNVValues, 4},
+    {"VkCoverageReductionModeNV", VkCoverageReductionModeNVValues, 2},
+    {"VkValidationCacheHeaderVersionEXT", VkValidationCacheHeaderVersionEXTValues, 1},
+    {"VkShaderInfoTypeAMD", VkShaderInfoTypeAMDValues, 3},
+    {"VkQueueGlobalPriority", VkQueueGlobalPriorityValues, 12},
+    {"VkTimeDomainKHR", VkTimeDomainKHRValues, 10},
+    {"VkConservativeRasterizationModeEXT", VkConservativeRasterizationModeEXTValues, 3},
+    {"VkSemaphoreType", VkSemaphoreTypeValues, 4},
+    {"VkBuildAccelerationStructureModeKHR", VkBuildAccelerationStructureModeKHRValues, 2},
+    {"VkCopyAccelerationStructureModeKHR", VkCopyAccelerationStructureModeKHRValues, 6},
+    {"VkAccelerationStructureTypeKHR", VkAccelerationStructureTypeKHRValues, 5},
+    {"VkGeometryTypeKHR", VkGeometryTypeKHRValues, 8},
+    {"VkRayTracingShaderGroupTypeKHR", VkRayTracingShaderGroupTypeKHRValues, 6},
+    {"VkAccelerationStructureBuildTypeKHR", VkAccelerationStructureBuildTypeKHRValues, 3},
+    {"VkAccelerationStructureCompatibilityKHR", VkAccelerationStructureCompatibilityKHRValues, 2},
+    {"VkRayTracingLssIndexingModeNV", VkRayTracingLssIndexingModeNVValues, 2},
+    {"VkRayTracingLssPrimitiveEndCapsModeNV", VkRayTracingLssPrimitiveEndCapsModeNVValues, 2},
+    {"VkShaderGroupShaderKHR", VkShaderGroupShaderKHRValues, 4},
+    {"VkMemoryOverallocationBehaviorAMD", VkMemoryOverallocationBehaviorAMDValues, 3},
+    {"VkPerformanceCounterScopeKHR", VkPerformanceCounterScopeKHRValues, 6},
+    {"VkPerformanceCounterUnitKHR", VkPerformanceCounterUnitKHRValues, 11},
+    {"VkPerformanceCounterStorageKHR", VkPerformanceCounterStorageKHRValues, 6},
+    {"VkPerformanceConfigurationTypeINTEL", VkPerformanceConfigurationTypeINTELValues, 1},
+    {"VkQueryPoolSamplingModeINTEL", VkQueryPoolSamplingModeINTELValues, 1},
+    {"VkPerformanceOverrideTypeINTEL", VkPerformanceOverrideTypeINTELValues, 2},
+    {"VkPerformanceParameterTypeINTEL", VkPerformanceParameterTypeINTELValues, 2},
+    {"VkPerformanceValueTypeINTEL", VkPerformanceValueTypeINTELValues, 5},
+    {"VkLineRasterizationMode", VkLineRasterizationModeValues, 12},
+    {"VkFaultLevel", VkFaultLevelValues, 4},
+    {"VkFaultType", VkFaultTypeValues, 7},
+    {"VkFaultQueryBehavior", VkFaultQueryBehaviorValues, 1},
+    {"VkPipelineMatchControl", VkPipelineMatchControlValues, 1},
+    {"VkSciSyncClientTypeNV", VkSciSyncClientTypeNVValues, 3},
+    {"VkSciSyncPrimitiveTypeNV", VkSciSyncPrimitiveTypeNVValues, 2},
+    {"VkFragmentShadingRateNV", VkFragmentShadingRateNVValues, 12},
+    {"VkFragmentShadingRateTypeNV", VkFragmentShadingRateTypeNVValues, 2},
+    {"VkSubpassMergeStatusEXT", VkSubpassMergeStatusEXTValues, 14},
+    {"VkProvokingVertexModeEXT", VkProvokingVertexModeEXTValues, 2},
+    {"VkPipelineCacheValidationVersion", VkPipelineCacheValidationVersionValues, 1},
+    {"VkPipelineRobustnessBufferBehavior", VkPipelineRobustnessBufferBehaviorValues, 8},
+    {"VkPipelineRobustnessImageBehavior", VkPipelineRobustnessImageBehaviorValues, 8},
+    {"VkDeviceAddressBindingTypeEXT", VkDeviceAddressBindingTypeEXTValues, 2},
+    {"VkMicromapTypeEXT", VkMicromapTypeEXTValues, 2},
+    {"VkBuildMicromapModeEXT", VkBuildMicromapModeEXTValues, 1},
+    {"VkCopyMicromapModeEXT", VkCopyMicromapModeEXTValues, 4},
+    {"VkOpacityMicromapFormatEXT", VkOpacityMicromapFormatEXTValues, 2},
+    {"VkOpacityMicromapSpecialIndexEXT", VkOpacityMicromapSpecialIndexEXTValues, 5},
+    {"VkDeviceFaultVendorBinaryHeaderVersionEXT", VkDeviceFaultVendorBinaryHeaderVersionEXTValues,
+     1},
+    {"VkIndirectExecutionSetInfoTypeEXT", VkIndirectExecutionSetInfoTypeEXTValues, 2},
+    {"VkDepthBiasRepresentationEXT", VkDepthBiasRepresentationEXTValues, 3},
+    {"VkDirectDriverLoadingModeLUNARG", VkDirectDriverLoadingModeLUNARGValues, 2},
+    {"VkPartitionedAccelerationStructureOpTypeNV", VkPartitionedAccelerationStructureOpTypeNVValues,
      3},
-    {"VkAntiLagModeAMD", VkAntiLagModeAMDSets, 3},
-    {"VkAntiLagStageAMD", VkAntiLagStageAMDSets, 2},
-    {"VkDisplacementMicromapFormatNV", VkDisplacementMicromapFormatNVSets, 3},
-    {"VkShaderCodeTypeEXT", VkShaderCodeTypeEXTSets, 2},
-    {"VkScopeKHR", VkScopeKHRSets, 8},
-    {"VkComponentTypeKHR", VkComponentTypeKHRSets, 29},
-    {"VkCubicFilterWeightsQCOM", VkCubicFilterWeightsQCOMSets, 4},
-    {"VkBlockMatchWindowCompareModeQCOM", VkBlockMatchWindowCompareModeQCOMSets, 2},
-    {"VkLayeredDriverUnderlyingApiMSFT", VkLayeredDriverUnderlyingApiMSFTSets, 2},
-    {"VkPhysicalDeviceLayeredApiKHR", VkPhysicalDeviceLayeredApiKHRSets, 5},
-    {"VkCompressedTriangleFormatAMDX", VkCompressedTriangleFormatAMDXSets, 1},
-    {"VkDepthClampModeEXT", VkDepthClampModeEXTSets, 2},
-    {"VkCooperativeVectorMatrixLayoutNV", VkCooperativeVectorMatrixLayoutNVSets, 4},
-    {"VkTensorTilingARM", VkTensorTilingARMSets, 2},
-    {"VkDataGraphPipelinePropertyARM", VkDataGraphPipelinePropertyARMSets, 2},
-    {"VkDataGraphPipelineSessionBindPointARM", VkDataGraphPipelineSessionBindPointARMSets, 1},
-    {"VkDataGraphPipelineSessionBindPointTypeARM", VkDataGraphPipelineSessionBindPointTypeARMSets,
+    {"VkAntiLagModeAMD", VkAntiLagModeAMDValues, 3},
+    {"VkAntiLagStageAMD", VkAntiLagStageAMDValues, 2},
+    {"VkDisplacementMicromapFormatNV", VkDisplacementMicromapFormatNVValues, 3},
+    {"VkShaderCodeTypeEXT", VkShaderCodeTypeEXTValues, 2},
+    {"VkScopeKHR", VkScopeKHRValues, 8},
+    {"VkComponentTypeKHR", VkComponentTypeKHRValues, 29},
+    {"VkCubicFilterWeightsQCOM", VkCubicFilterWeightsQCOMValues, 4},
+    {"VkBlockMatchWindowCompareModeQCOM", VkBlockMatchWindowCompareModeQCOMValues, 2},
+    {"VkLayeredDriverUnderlyingApiMSFT", VkLayeredDriverUnderlyingApiMSFTValues, 2},
+    {"VkPhysicalDeviceLayeredApiKHR", VkPhysicalDeviceLayeredApiKHRValues, 5},
+    {"VkCompressedTriangleFormatAMDX", VkCompressedTriangleFormatAMDXValues, 1},
+    {"VkDepthClampModeEXT", VkDepthClampModeEXTValues, 2},
+    {"VkCooperativeVectorMatrixLayoutNV", VkCooperativeVectorMatrixLayoutNVValues, 4},
+    {"VkTensorTilingARM", VkTensorTilingARMValues, 2},
+    {"VkDataGraphPipelinePropertyARM", VkDataGraphPipelinePropertyARMValues, 2},
+    {"VkDataGraphPipelineSessionBindPointARM", VkDataGraphPipelineSessionBindPointARMValues, 1},
+    {"VkDataGraphPipelineSessionBindPointTypeARM", VkDataGraphPipelineSessionBindPointTypeARMValues,
      1},
     {"VkPhysicalDeviceDataGraphProcessingEngineTypeARM",
-     VkPhysicalDeviceDataGraphProcessingEngineTypeARMSets, 3},
-    {"VkPhysicalDeviceDataGraphOperationTypeARM", VkPhysicalDeviceDataGraphOperationTypeARMSets, 3},
-    {"VkDataGraphModelCacheTypeQCOM", VkDataGraphModelCacheTypeQCOMSets, 1},
-    {"VkColorSpaceKHR", VkColorSpaceKHRSets, 18},
-    {"VkPresentModeKHR", VkPresentModeKHRSets, 8},
-    {"VkDisplaySurfaceStereoTypeNV", VkDisplaySurfaceStereoTypeNVSets, 4},
-    {"VkDebugReportObjectTypeEXT", VkDebugReportObjectTypeEXTSets, 50},
-    {"VkDeviceMemoryReportEventTypeEXT", VkDeviceMemoryReportEventTypeEXTSets, 5},
-    {"VkRasterizationOrderAMD", VkRasterizationOrderAMDSets, 2},
-    {"VkValidationCheckEXT", VkValidationCheckEXTSets, 2},
-    {"VkValidationFeatureEnableEXT", VkValidationFeatureEnableEXTSets, 5},
-    {"VkValidationFeatureDisableEXT", VkValidationFeatureDisableEXTSets, 8},
-    {"VkDisplayPowerStateEXT", VkDisplayPowerStateEXTSets, 3},
-    {"VkDeviceEventTypeEXT", VkDeviceEventTypeEXTSets, 1},
-    {"VkDisplayEventTypeEXT", VkDisplayEventTypeEXTSets, 1},
-    {"VkTessellationDomainOrigin", VkTessellationDomainOriginSets, 4},
-    {"VkSamplerYcbcrModelConversion", VkSamplerYcbcrModelConversionSets, 10},
-    {"VkSamplerYcbcrRange", VkSamplerYcbcrRangeSets, 4},
-    {"VkChromaLocation", VkChromaLocationSets, 4},
-    {"VkSamplerReductionMode", VkSamplerReductionModeSets, 7},
-    {"VkBlendOverlapEXT", VkBlendOverlapEXTSets, 3},
-    {"VkFullScreenExclusiveEXT", VkFullScreenExclusiveEXTSets, 4},
-    {"VkShaderFloatControlsIndependence", VkShaderFloatControlsIndependenceSets, 6},
-    {"VkFragmentShadingRateCombinerOpKHR", VkFragmentShadingRateCombinerOpKHRSets, 5},
-    {"VkOpticalFlowPerformanceLevelNV", VkOpticalFlowPerformanceLevelNVSets, 4},
-    {"VkOpticalFlowSessionBindingPointNV", VkOpticalFlowSessionBindingPointNVSets, 9},
-    {"VkDeviceFaultAddressTypeEXT", VkDeviceFaultAddressTypeEXTSets, 7},
-    {"VkLayerSettingTypeEXT", VkLayerSettingTypeEXTSets, 8},
-    {"VkLatencyMarkerNV", VkLatencyMarkerNVSets, 12},
-    {"VkOutOfBandQueueTypeNV", VkOutOfBandQueueTypeNVSets, 2},
-    {"VkVendorId", VkVendorIdSets, 8},
-    {"VkDriverId", VkDriverIdSets, 42},
-    {"VkShadingRatePaletteEntryNV", VkShadingRatePaletteEntryNVSets, 12},
-    {"VkCoarseSampleOrderTypeNV", VkCoarseSampleOrderTypeNVSets, 4},
-    {"VkPipelineExecutableStatisticFormatKHR", VkPipelineExecutableStatisticFormatKHRSets, 4},
-    {"VkQueryResultStatusKHR", VkQueryResultStatusKHRSets, 4},
-    {"VkVideoEncodeTuningModeKHR", VkVideoEncodeTuningModeKHRSets, 5},
-    {"VkVideoEncodeAV1PredictionModeKHR", VkVideoEncodeAV1PredictionModeKHRSets, 4},
-    {"VkVideoEncodeAV1RateControlGroupKHR", VkVideoEncodeAV1RateControlGroupKHRSets, 3},
-    {"VkDefaultVertexAttributeValueKHR", VkDefaultVertexAttributeValueKHRSets, 2},
-    {"VkAccelerationStructureMotionInstanceTypeNV", VkAccelerationStructureMotionInstanceTypeNVSets,
+     VkPhysicalDeviceDataGraphProcessingEngineTypeARMValues, 3},
+    {"VkPhysicalDeviceDataGraphOperationTypeARM", VkPhysicalDeviceDataGraphOperationTypeARMValues,
      3},
-    {"VkVideoEncodeH264CapabilityFlagsEXT", VkVideoEncodeH264CapabilityFlagsEXTSets, 35},
-    {"VkVideoEncodeH264StdFlagsEXT", VkVideoEncodeH264StdFlagsEXTSets, 20},
-    {"VkVideoEncodeH264RateControlFlagsEXT", VkVideoEncodeH264RateControlFlagsEXTSets, 5},
-    {"VkVideoEncodeH265CapabilityFlagsEXT", VkVideoEncodeH265CapabilityFlagsEXTSets, 43},
-    {"VkVideoEncodeH265StdFlagsEXT", VkVideoEncodeH265StdFlagsEXTSets, 21},
-    {"VkVideoEncodeH265RateControlFlagsEXT", VkVideoEncodeH265RateControlFlagsEXTSets, 5},
-    {"VkVideoEncodeH265CtbSizeFlagsEXT", VkVideoEncodeH265CtbSizeFlagsEXTSets, 4},
-    {"VkVideoEncodeH265TransformBlockSizeFlagsEXT", VkVideoEncodeH265TransformBlockSizeFlagsEXTSets,
-     4},
-    {"VkVideoEncodeH264RateControlStructureEXT", VkVideoEncodeH264RateControlStructureEXTSets, 3},
-    {"VkVideoEncodeH265RateControlStructureEXT", VkVideoEncodeH265RateControlStructureEXTSets, 3},
-    {"VkVideoEncodeH264InputModeFlagsEXT", VkVideoEncodeH264InputModeFlagsEXTSets, 3},
-    {"VkVideoEncodeH264OutputModeFlagsEXT", VkVideoEncodeH264OutputModeFlagsEXTSets, 3},
-    {"VkVideoEncodeH265InputModeFlagsEXT", VkVideoEncodeH265InputModeFlagsEXTSets, 4},
-    {"VkVideoEncodeH265OutputModeFlagsEXT", VkVideoEncodeH265OutputModeFlagsEXTSets, 4},
-    {"VkVideoDecodeH264PictureLayoutFlagsEXT", VkVideoDecodeH264PictureLayoutFlagsEXTSets, 3},
-    {"VkVideoCodingQualityPresetFlagsKHR", VkVideoCodingQualityPresetFlagsKHRSets, 4},
+    {"VkDataGraphModelCacheTypeQCOM", VkDataGraphModelCacheTypeQCOMValues, 1},
+    {"VkColorSpaceKHR", VkColorSpaceKHRValues, 18},
+    {"VkPresentModeKHR", VkPresentModeKHRValues, 8},
+    {"VkDisplaySurfaceStereoTypeNV", VkDisplaySurfaceStereoTypeNVValues, 4},
+    {"VkDebugReportObjectTypeEXT", VkDebugReportObjectTypeEXTValues, 50},
+    {"VkDeviceMemoryReportEventTypeEXT", VkDeviceMemoryReportEventTypeEXTValues, 5},
+    {"VkRasterizationOrderAMD", VkRasterizationOrderAMDValues, 2},
+    {"VkValidationCheckEXT", VkValidationCheckEXTValues, 2},
+    {"VkValidationFeatureEnableEXT", VkValidationFeatureEnableEXTValues, 5},
+    {"VkValidationFeatureDisableEXT", VkValidationFeatureDisableEXTValues, 8},
+    {"VkDisplayPowerStateEXT", VkDisplayPowerStateEXTValues, 3},
+    {"VkDeviceEventTypeEXT", VkDeviceEventTypeEXTValues, 1},
+    {"VkDisplayEventTypeEXT", VkDisplayEventTypeEXTValues, 1},
+    {"VkTessellationDomainOrigin", VkTessellationDomainOriginValues, 4},
+    {"VkSamplerYcbcrModelConversion", VkSamplerYcbcrModelConversionValues, 10},
+    {"VkSamplerYcbcrRange", VkSamplerYcbcrRangeValues, 4},
+    {"VkChromaLocation", VkChromaLocationValues, 4},
+    {"VkSamplerReductionMode", VkSamplerReductionModeValues, 7},
+    {"VkBlendOverlapEXT", VkBlendOverlapEXTValues, 3},
+    {"VkFullScreenExclusiveEXT", VkFullScreenExclusiveEXTValues, 4},
+    {"VkShaderFloatControlsIndependence", VkShaderFloatControlsIndependenceValues, 6},
+    {"VkFragmentShadingRateCombinerOpKHR", VkFragmentShadingRateCombinerOpKHRValues, 5},
+    {"VkOpticalFlowPerformanceLevelNV", VkOpticalFlowPerformanceLevelNVValues, 4},
+    {"VkOpticalFlowSessionBindingPointNV", VkOpticalFlowSessionBindingPointNVValues, 9},
+    {"VkDeviceFaultAddressTypeEXT", VkDeviceFaultAddressTypeEXTValues, 7},
+    {"VkLayerSettingTypeEXT", VkLayerSettingTypeEXTValues, 8},
+    {"VkLatencyMarkerNV", VkLatencyMarkerNVValues, 12},
+    {"VkOutOfBandQueueTypeNV", VkOutOfBandQueueTypeNVValues, 2},
+    {"VkVendorId", VkVendorIdValues, 8},
+    {"VkDriverId", VkDriverIdValues, 42},
+    {"VkShadingRatePaletteEntryNV", VkShadingRatePaletteEntryNVValues, 12},
+    {"VkCoarseSampleOrderTypeNV", VkCoarseSampleOrderTypeNVValues, 4},
+    {"VkPipelineExecutableStatisticFormatKHR", VkPipelineExecutableStatisticFormatKHRValues, 4},
+    {"VkQueryResultStatusKHR", VkQueryResultStatusKHRValues, 4},
+    {"VkVideoEncodeTuningModeKHR", VkVideoEncodeTuningModeKHRValues, 5},
+    {"VkVideoEncodeAV1PredictionModeKHR", VkVideoEncodeAV1PredictionModeKHRValues, 4},
+    {"VkVideoEncodeAV1RateControlGroupKHR", VkVideoEncodeAV1RateControlGroupKHRValues, 3},
+    {"VkDefaultVertexAttributeValueKHR", VkDefaultVertexAttributeValueKHRValues, 2},
+    {"VkAccelerationStructureMotionInstanceTypeNV",
+     VkAccelerationStructureMotionInstanceTypeNVValues, 3},
+    {"VkVideoEncodeH264CapabilityFlagsEXT", VkVideoEncodeH264CapabilityFlagsEXTValues, 35},
+    {"VkVideoEncodeH264StdFlagsEXT", VkVideoEncodeH264StdFlagsEXTValues, 20},
+    {"VkVideoEncodeH264RateControlFlagsEXT", VkVideoEncodeH264RateControlFlagsEXTValues, 5},
+    {"VkVideoEncodeH265CapabilityFlagsEXT", VkVideoEncodeH265CapabilityFlagsEXTValues, 43},
+    {"VkVideoEncodeH265StdFlagsEXT", VkVideoEncodeH265StdFlagsEXTValues, 21},
+    {"VkVideoEncodeH265RateControlFlagsEXT", VkVideoEncodeH265RateControlFlagsEXTValues, 5},
+    {"VkVideoEncodeH265CtbSizeFlagsEXT", VkVideoEncodeH265CtbSizeFlagsEXTValues, 4},
+    {"VkVideoEncodeH265TransformBlockSizeFlagsEXT",
+     VkVideoEncodeH265TransformBlockSizeFlagsEXTValues, 4},
+    {"VkVideoEncodeH264RateControlStructureEXT", VkVideoEncodeH264RateControlStructureEXTValues, 3},
+    {"VkVideoEncodeH265RateControlStructureEXT", VkVideoEncodeH265RateControlStructureEXTValues, 3},
+    {"VkVideoEncodeH264InputModeFlagsEXT", VkVideoEncodeH264InputModeFlagsEXTValues, 3},
+    {"VkVideoEncodeH264OutputModeFlagsEXT", VkVideoEncodeH264OutputModeFlagsEXTValues, 3},
+    {"VkVideoEncodeH265InputModeFlagsEXT", VkVideoEncodeH265InputModeFlagsEXTValues, 4},
+    {"VkVideoEncodeH265OutputModeFlagsEXT", VkVideoEncodeH265OutputModeFlagsEXTValues, 4},
+    {"VkVideoDecodeH264PictureLayoutFlagsEXT", VkVideoDecodeH264PictureLayoutFlagsEXTValues, 3},
+    {"VkVideoCodingQualityPresetFlagsKHR", VkVideoCodingQualityPresetFlagsKHRValues, 4},
     {"VkVideoEncodeH264RateControlStructureFlagsEXT",
-     VkVideoEncodeH264RateControlStructureFlagsEXTSets, 3},
+     VkVideoEncodeH264RateControlStructureFlagsEXTValues, 3},
     {"VkVideoEncodeH265RateControlStructureFlagsEXT",
-     VkVideoEncodeH265RateControlStructureFlagsEXTSets, 3},
+     VkVideoEncodeH265RateControlStructureFlagsEXTValues, 3},
     {"VkVideoDecodeH264CreateFlagsEXT", NULL, 0},
     {"VkVideoDecodeH265CreateFlagsEXT", NULL, 0},
-    {"VkVideoEncodeH264CreateFlagsEXT", VkVideoEncodeH264CreateFlagsEXTSets, 2},
+    {"VkVideoEncodeH264CreateFlagsEXT", VkVideoEncodeH264CreateFlagsEXTValues, 2},
     {"VkVideoEncodeH265CreateFlagsEXT", NULL, 0},
-    {"VkVideoCapabilitiesFlagsKHR", VkVideoCapabilitiesFlagsKHRSets, 2},
-    {"VkVideoDecodeH264FieldLayoutFlagsEXT", VkVideoDecodeH264FieldLayoutFlagsEXTSets, 3},
-    {"VkVideoEncodeH264CapabilitiesFlagsEXT", VkVideoEncodeH264CapabilitiesFlagsEXTSets, 11},
+    {"VkVideoCapabilitiesFlagsKHR", VkVideoCapabilitiesFlagsKHRValues, 2},
+    {"VkVideoDecodeH264FieldLayoutFlagsEXT", VkVideoDecodeH264FieldLayoutFlagsEXTValues, 3},
+    {"VkVideoEncodeH264CapabilitiesFlagsEXT", VkVideoEncodeH264CapabilitiesFlagsEXTValues, 11},
     {"VkAccelerationStructureMemoryRequirementsTypeKHR",
-     VkAccelerationStructureMemoryRequirementsTypeKHRSets, 6},
-    {"VkIndirectCommandsLayoutUsageFlagsNVX", VkIndirectCommandsLayoutUsageFlagsNVXSets, 4},
-    {"VkObjectEntryUsageFlagsNVX", VkObjectEntryUsageFlagsNVXSets, 2},
-    {"VkIndirectCommandsTokenTypeNVX", VkIndirectCommandsTokenTypeNVXSets, 8},
-    {"VkObjectEntryTypeNVX", VkObjectEntryTypeNVXSets, 5},
-    {"VkGeometryFlagsNVX", VkGeometryFlagsNVXSets, 2},
-    {"VkGeometryInstanceFlagsNVX", VkGeometryInstanceFlagsNVXSets, 4},
-    {"VkBuildAccelerationStructureFlagsNVX", VkBuildAccelerationStructureFlagsNVXSets, 5},
+     VkAccelerationStructureMemoryRequirementsTypeKHRValues, 6},
+    {"VkIndirectCommandsLayoutUsageFlagsNVX", VkIndirectCommandsLayoutUsageFlagsNVXValues, 4},
+    {"VkObjectEntryUsageFlagsNVX", VkObjectEntryUsageFlagsNVXValues, 2},
+    {"VkIndirectCommandsTokenTypeNVX", VkIndirectCommandsTokenTypeNVXValues, 8},
+    {"VkObjectEntryTypeNVX", VkObjectEntryTypeNVXValues, 5},
+    {"VkGeometryFlagsNVX", VkGeometryFlagsNVXValues, 2},
+    {"VkGeometryInstanceFlagsNVX", VkGeometryInstanceFlagsNVXValues, 4},
+    {"VkBuildAccelerationStructureFlagsNVX", VkBuildAccelerationStructureFlagsNVXValues, 5},
     {"VkMirSurfaceCreateFlagsKHR", NULL, 0},
-    {"VkCopyAccelerationStructureModeNVX", VkCopyAccelerationStructureModeNVXSets, 2},
-    {"VkAccelerationStructureTypeNVX", VkAccelerationStructureTypeNVXSets, 2},
-    {"VkGeometryTypeNVX", VkGeometryTypeNVXSets, 2},
+    {"VkCopyAccelerationStructureModeNVX", VkCopyAccelerationStructureModeNVXValues, 2},
+    {"VkAccelerationStructureTypeNVX", VkAccelerationStructureTypeNVXValues, 2},
+    {"VkGeometryTypeNVX", VkGeometryTypeNVXValues, 2},
 };
 
 /**
@@ -4846,19 +4849,17 @@ static size_t stripBit(char const *str, size_t len) {
 }
 
 /**
- * @brief Iterates through and finds the corresponding type's EnumValueSet
+ * @brief Iterates through and finds the corresponding type data
  * @param pVkType is a pointer to the string name of the Vulkan type
  * @param ppStart is a double-pointer that will point to the start of any found set
  * @param ppEnd is a double-pointer that will point to the end of any found set
  * values
  * @return True if a matching type value set is found, false otherwise.
  *
- * This iterates through the big cEnumTypes array, attempting to find a matching type and returning
+ * This iterates through the big cValueSets array, attempting to find a matching type and returning
  * data about it.
  */
-static bool getEnumType(char const *pVkType,
-                        EnumValueSet const **ppStart,
-                        EnumValueSet const **ppEnd) {
+static bool getValueSet(char const *pVkType, EnumValue const **ppStart, EnumValue const **ppEnd) {
   // Check for a conversion from FlagBits -> Flags
   char localStr[64];
   size_t localLen = strlen(pVkType);
@@ -4879,8 +4880,8 @@ static bool getEnumType(char const *pVkType,
   }
 
   // Try the original name (with flagbits -> flags)
-  for (size_t i = 0; i < cEnumTypeCount; ++i) {
-    EnumType const *it = &cEnumTypes[i];
+  for (size_t i = 0; i < cValueSetCount; ++i) {
+    ValueSet const *it = &cValueSets[i];
     if (strcmp(localStr, it->name) == 0) {
       *ppStart = it->data;
       *ppEnd = it->data + it->count;
@@ -4891,8 +4892,8 @@ static bool getEnumType(char const *pVkType,
 
   // Try a vendor-stripped name
   localStr[stripVendor(localStr, localLen)] = '\0';
-  for (size_t i = 0; i < cEnumTypeCount; ++i) {
-    EnumType const *it = &cEnumTypes[i];
+  for (size_t i = 0; i < cValueSetCount; ++i) {
+    ValueSet const *it = &cValueSets[i];
     if (strcmp(localStr, it->name) == 0) {
       *ppStart = it->data;
       *ppEnd = it->data + it->count;
@@ -4965,8 +4966,8 @@ static bool parseValue(char const *pValueStr,
                        size_t valueLength,
                        char const *pPrefixStr,
                        size_t prefixLength,
-                       EnumValueSet const *pSearchStart,
-                       EnumValueSet const *pSearchEnd,
+                       EnumValue const *pSearchStart,
+                       EnumValue const *pSearchEnd,
                        uint64_t *pParsedValue) {
   // Check if there's a matching prefix
   if (valueLength >= prefixLength && strncmp(pValueStr, pPrefixStr, prefixLength) == 0) {
@@ -4976,7 +4977,7 @@ static bool parseValue(char const *pValueStr,
   }
 
   // Try the initial value
-  for (EnumValueSet const *pStart = pSearchStart; pStart != pSearchEnd; ++pStart) {
+  for (EnumValue const *pStart = pSearchStart; pStart != pSearchEnd; ++pStart) {
     if (valueLength == strlen(pStart->name) && strncmp(pValueStr, pStart->name, valueLength) == 0) {
       *pParsedValue |= pStart->value;
       return true;
@@ -4991,7 +4992,7 @@ static bool parseValue(char const *pValueStr,
   // Remove '_BIT' if it's there
   valueLength = stripBit(pValueStr, valueLength);
 
-  for (EnumValueSet const *pStart = pSearchStart; pStart != pSearchEnd; ++pStart) {
+  for (EnumValue const *pStart = pSearchStart; pStart != pSearchEnd; ++pStart) {
     if (valueLength == strlen(pStart->name) && strncmp(pValueStr, pStart->name, valueLength) == 0) {
       *pParsedValue |= pStart->value;
       return true;
@@ -5045,8 +5046,8 @@ uint32_t serializeMin(uint32_t lhs, uint32_t rhs) {
   return rhs;
 }
 
-static STecVkSerializationResult serializeBitmask(EnumValueSet const *pSearchStart,
-                                                  EnumValueSet const *pSearchEnd,
+static STecVkSerializationResult serializeBitmask(EnumValue const *pSearchStart,
+                                                  EnumValue const *pSearchEnd,
                                                   uint64_t vkValue,
                                                   uint32_t *pSerializedLength,
                                                   char *pSerialized) {
@@ -5059,7 +5060,7 @@ static STecVkSerializationResult serializeBitmask(EnumValueSet const *pSearchSta
   // As we want to search in reverse order (to possible catch values that encompass multiple bits)
   // we decrement both items here, so the 'end' is at a valid value and 'start' is now one 'beyond
   // the end'
-  EnumValueSet const *pSwap = pSearchStart;
+  EnumValue const *pSwap = pSearchStart;
   pSearchStart = pSearchEnd - 1;
   pSearchEnd = pSwap - 1;
 
@@ -5138,8 +5139,8 @@ static STecVkSerializationResult serializeBitmask(EnumValueSet const *pSearchSta
   return STEC_VK_SERIALIZATION_RESULT_SUCCESS;
 }
 
-static STecVkSerializationResult serializeEnum(EnumValueSet const *pSearchStart,
-                                               EnumValueSet const *pSearchEnd,
+static STecVkSerializationResult serializeEnum(EnumValue const *pSearchStart,
+                                               EnumValue const *pSearchEnd,
                                                uint64_t vkValue,
                                                uint32_t *pSerializedLength,
                                                char *pSerialized) {
@@ -5169,8 +5170,8 @@ static STecVkSerializationResult serializeEnum(EnumValueSet const *pSearchStart,
 }
 
 static STecVkSerializationResult parseBitmask(char *pVkString,
-                                              EnumValueSet const *pSearchStart,
-                                              EnumValueSet const *pSearchEnd,
+                                              EnumValue const *pSearchStart,
+                                              EnumValue const *pSearchEnd,
                                               char const *pPrefixStr,
                                               size_t prefixLength,
                                               uint64_t *pParsedValue) {
@@ -5205,8 +5206,8 @@ static STecVkSerializationResult parseBitmask(char *pVkString,
 }
 
 static STecVkSerializationResult parseEnum(char *pVkString,
-                                           EnumValueSet const *pSearchStart,
-                                           EnumValueSet const *pSearchEnd,
+                                           EnumValue const *pSearchStart,
+                                           EnumValue const *pSearchEnd,
                                            char const *pPrefixStr,
                                            size_t prefixLength,
                                            uint64_t *pParsedValue) {
@@ -5238,8 +5239,8 @@ STecVkSerializationResult vk_serialize64(char const *pVkType,
     return STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND;
   }
 
-  EnumValueSet const *pSearchStart, *pSearchEnd;
-  if (!getEnumType(pVkType, &pSearchStart, &pSearchEnd)) {
+  EnumValue const *pSearchStart, *pSearchEnd;
+  if (!getValueSet(pVkType, &pSearchStart, &pSearchEnd)) {
     return STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND;
   }
 
@@ -5268,8 +5269,8 @@ STecVkSerializationResult vk_parse64(char const *pVkType,
     return STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND;
   }
 
-  EnumValueSet const *pSearchStart, *pSearchEnd;
-  if (!getEnumType(pVkType, &pSearchStart, &pSearchEnd)) {
+  EnumValue const *pSearchStart, *pSearchEnd;
+  if (!getValueSet(pVkType, &pSearchStart, &pSearchEnd)) {
     return STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND;
   }
 

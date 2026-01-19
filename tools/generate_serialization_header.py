@@ -46,7 +46,7 @@ def processEnums(outFile, enums, vendors, first, last):
             continue
 
         outFile.write(
-            '\nEnumValueSet const {}Sets[] = {{\n'.format(enum))
+            '\nEnumValue const {}Values[] = {{\n'.format(enum))
 
         # Determine how much to chop off the front
         strName = enum
@@ -326,20 +326,22 @@ STecVkSerializationResult vk_parse64(char const* pVkType, char const *pVkString,
     processVendors(outFile, apiData['vendors'])
 
     # EnumSet Declaration
-    outFile.write("\ntypedef struct EnumValueSet {\n")
-    outFile.write("  char const *name;\n")
-    outFile.write("  int64_t value;\n")
-    outFile.write("} EnumValueSet;\n")
+    outFile.write("""
+typedef struct EnumValue {
+  char const *name;
+  int64_t value;
+} EnumValue;
+""")
 
     # Enums
     processEnums(outFile, apiData['enums'], apiData['vendors'], firstVersion, lastVersion)
 
     # Enum Type Declaration
-    outFile.write("\ntypedef struct EnumType {\n")
+    outFile.write("\ntypedef struct ValueSet {\n")
     outFile.write("  char const *name;\n")
-    outFile.write("  EnumValueSet const* data;\n")
+    outFile.write("  EnumValue const* data;\n")
     outFile.write("  uint32_t count;\n")
-    outFile.write("} EnumType;\n")
+    outFile.write("} ValueSet;\n")
 
     # Enum Pointer Array
     usefulEnumCount = 0
@@ -348,10 +350,10 @@ STecVkSerializationResult vk_parse64(char const* pVkType, char const *pVkString,
             continue
         usefulEnumCount += 1
 
-    outFile.write(
-        '\n#define cEnumTypeCount sizeof(cEnumTypes) / sizeof(EnumType)\n')
-    outFile.write('EnumType const cEnumTypes[{}] = {{\n'.format(
-        usefulEnumCount))  # -1 for not doing VkResult
+    outFile.write("""
+static const uint32_t cValueSetCount = {0};
+static ValueSet const cValueSets[{0}] = {{
+""".format(usefulEnumCount))
     for enum, enum_data in apiData['enums'].items():
         if enum == 'VkResult' or enum == 'VkStructureType' or 'alias' in enum_data:
             continue
@@ -362,7 +364,7 @@ STecVkSerializationResult vk_parse64(char const* pVkType, char const *pVkString,
         if valueCount == 0:
             outFile.write('  {{"{}", NULL, 0}},\n'.format(enum))
         else:
-            outFile.write('  {{"{0}", {0}Sets, {1}}},\n'.format(
+            outFile.write('  {{"{0}", {0}Values, {1}}},\n'.format(
                 enum, valueCount))
     outFile.write('};\n')
 
@@ -412,19 +414,19 @@ static size_t stripBit(char const *str, size_t len) {
 }
 
 /**
- * @brief Iterates through and finds the corresponding type's EnumValueSet
+ * @brief Iterates through and finds the corresponding type data
  * @param pVkType is a pointer to the string name of the Vulkan type
  * @param ppStart is a double-pointer that will point to the start of any found set
  * @param ppEnd is a double-pointer that will point to the end of any found set
  * values
  * @return True if a matching type value set is found, false otherwise.
  *
- * This iterates through the big cEnumTypes array, attempting to find a matching type and returning
+ * This iterates through the big cValueSets array, attempting to find a matching type and returning
  * data about it.
  */
-static bool getEnumType(char const *pVkType,
-                 EnumValueSet const **ppStart,
-                 EnumValueSet const **ppEnd) {
+static bool getValueSet(char const *pVkType,
+                 EnumValue const **ppStart,
+                 EnumValue const **ppEnd) {
   // Check for a conversion from FlagBits -> Flags
   char localStr[64];
   size_t localLen = strlen(pVkType);
@@ -445,8 +447,8 @@ static bool getEnumType(char const *pVkType,
   }
 
   // Try the original name (with flagbits -> flags)
-  for (size_t i = 0; i < cEnumTypeCount; ++i) {
-    EnumType const *it = &cEnumTypes[i];
+  for (size_t i = 0; i < cValueSetCount; ++i) {
+    ValueSet const *it = &cValueSets[i];
     if (strcmp(localStr, it->name) == 0) {
       *ppStart = it->data;
       *ppEnd = it->data + it->count;
@@ -457,8 +459,8 @@ static bool getEnumType(char const *pVkType,
 
   // Try a vendor-stripped name
   localStr[stripVendor(localStr, localLen)] = '\\0';
-  for (size_t i = 0; i < cEnumTypeCount; ++i) {
-    EnumType const *it = &cEnumTypes[i];
+  for (size_t i = 0; i < cValueSetCount; ++i) {
+    ValueSet const *it = &cValueSets[i];
     if (strcmp(localStr, it->name) == 0) {
       *ppStart = it->data;
       *ppEnd = it->data + it->count;
@@ -531,8 +533,8 @@ static bool parseValue(char const *pValueStr,
                 size_t valueLength,
                 char const *pPrefixStr,
                 size_t prefixLength,
-                EnumValueSet const *pSearchStart,
-                EnumValueSet const *pSearchEnd,
+                EnumValue const *pSearchStart,
+                EnumValue const *pSearchEnd,
                 uint64_t *pParsedValue) {
   // Check if there's a matching prefix
   if (valueLength >= prefixLength && strncmp(pValueStr, pPrefixStr, prefixLength) == 0) {
@@ -542,7 +544,7 @@ static bool parseValue(char const *pValueStr,
   }
 
   // Try the initial value
-  for (EnumValueSet const *pStart = pSearchStart; pStart != pSearchEnd; ++pStart) {
+  for (EnumValue const *pStart = pSearchStart; pStart != pSearchEnd; ++pStart) {
     if (valueLength == strlen(pStart->name) && strncmp(pValueStr, pStart->name, valueLength) == 0) {
       *pParsedValue |= pStart->value;
       return true;
@@ -557,7 +559,7 @@ static bool parseValue(char const *pValueStr,
   // Remove '_BIT' if it's there
   valueLength = stripBit(pValueStr, valueLength);
 
-  for (EnumValueSet const *pStart = pSearchStart; pStart != pSearchEnd; ++pStart) {
+  for (EnumValue const *pStart = pSearchStart; pStart != pSearchEnd; ++pStart) {
     if (valueLength == strlen(pStart->name) && strncmp(pValueStr, pStart->name, valueLength) == 0) {
       *pParsedValue |= pStart->value;
       return true;
@@ -611,8 +613,8 @@ uint32_t serializeMin(uint32_t lhs, uint32_t rhs) {
   return rhs;
 }
 
-static STecVkSerializationResult serializeBitmask(EnumValueSet const *pSearchStart,
-                                           EnumValueSet const *pSearchEnd,
+static STecVkSerializationResult serializeBitmask(EnumValue const *pSearchStart,
+                                           EnumValue const *pSearchEnd,
                                            uint64_t vkValue,
                                            uint32_t *pSerializedLength,
                                            char *pSerialized) {
@@ -625,7 +627,7 @@ static STecVkSerializationResult serializeBitmask(EnumValueSet const *pSearchSta
   // As we want to search in reverse order (to possible catch values that encompass multiple bits)
   // we decrement both items here, so the 'end' is at a valid value and 'start' is now one 'beyond
   // the end'
-  EnumValueSet const* pSwap = pSearchStart;
+  EnumValue const* pSwap = pSearchStart;
   pSearchStart = pSearchEnd - 1;
   pSearchEnd = pSwap - 1;
 
@@ -703,8 +705,8 @@ static STecVkSerializationResult serializeBitmask(EnumValueSet const *pSearchSta
   return STEC_VK_SERIALIZATION_RESULT_SUCCESS;
 }
 
-static STecVkSerializationResult serializeEnum(EnumValueSet const *pSearchStart,
-                                        EnumValueSet const *pSearchEnd,
+static STecVkSerializationResult serializeEnum(EnumValue const *pSearchStart,
+                                        EnumValue const *pSearchEnd,
                                         uint64_t vkValue,
                                         uint32_t *pSerializedLength,
                                         char *pSerialized) {
@@ -734,8 +736,8 @@ static STecVkSerializationResult serializeEnum(EnumValueSet const *pSearchStart,
 }
 
 static STecVkSerializationResult parseBitmask(char *pVkString,
-                                       EnumValueSet const *pSearchStart,
-                                       EnumValueSet const *pSearchEnd,
+                                       EnumValue const *pSearchStart,
+                                       EnumValue const *pSearchEnd,
                                        char const *pPrefixStr,
                                        size_t prefixLength,
                                        uint64_t *pParsedValue) {
@@ -770,8 +772,8 @@ static STecVkSerializationResult parseBitmask(char *pVkString,
 }
 
 static STecVkSerializationResult parseEnum(char *pVkString,
-                                    EnumValueSet const *pSearchStart,
-                                    EnumValueSet const *pSearchEnd,
+                                    EnumValue const *pSearchStart,
+                                    EnumValue const *pSearchEnd,
                                     char const *pPrefixStr,
                                     size_t prefixLength,
                                     uint64_t *pParsedValue) {
@@ -803,8 +805,8 @@ STecVkSerializationResult vk_serialize64(char const *pVkType,
     return STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND;
   }
 
-  EnumValueSet const *pSearchStart, *pSearchEnd;
-  if (!getEnumType(pVkType, &pSearchStart, &pSearchEnd)) {
+  EnumValue const *pSearchStart, *pSearchEnd;
+  if (!getValueSet(pVkType, &pSearchStart, &pSearchEnd)) {
     return STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND;
   }
 
@@ -833,8 +835,8 @@ STecVkSerializationResult vk_parse64(char const *pVkType,
     return STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND;
   }
 
-  EnumValueSet const *pSearchStart, *pSearchEnd;
-  if (!getEnumType(pVkType, &pSearchStart, &pSearchEnd)) {
+  EnumValue const *pSearchStart, *pSearchEnd;
+  if (!getValueSet(pVkType, &pSearchStart, &pSearchEnd)) {
     return STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND;
   }
 
