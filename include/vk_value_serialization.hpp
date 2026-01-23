@@ -18,6 +18,7 @@
 #include "vk_value_serialization.h"
 
 #include <string>
+#include <type_traits>
 
 /**
  * @brief Macro that automatically stringifies the given Vulkan type for serialization
@@ -57,20 +58,19 @@ STecVkSerializationResult vk_serialize(char const *pVkType, T vkValue, std::stri
   STecVkSerializationResult result;
   uint32_t serializedLength;
   if constexpr (sizeof(T) == 4) {
-    result = vk_serialize32(pVkType, static_cast<uint32_t>(vkValue), &serializedLength, nullptr);
+    result = vk_serialize32(pVkType, vkValue, &serializedLength, nullptr);
     if (result == STEC_VK_SERIALIZATION_RESULT_SUCCESS) {
       pString->resize(serializedLength);
-      result = vk_serialize32(pVkType, static_cast<uint32_t>(vkValue), &serializedLength,
-                              pString->data());
+      result = vk_serialize32(pVkType, vkValue, &serializedLength, pString->data());
     }
-  } else {
-    result = vk_serialize64(pVkType, static_cast<uint64_t>(vkValue), &serializedLength, nullptr);
+  } else if constexpr (sizeof(T) == 8) {
+    result = vk_serialize64(pVkType, vkValue, &serializedLength, nullptr);
     if (result == STEC_VK_SERIALIZATION_RESULT_SUCCESS) {
       pString->resize(serializedLength);
-      result = vk_serialize64(pVkType, static_cast<uint64_t>(vkValue), &serializedLength,
-                              pString->data());
+      result = vk_serialize64(pVkType, vkValue, &serializedLength, pString->data());
     }
   }
+
   return result;
 }
 
@@ -91,18 +91,11 @@ STecVkSerializationResult vk_parse(char const *pVkType, char const *pVkString, T
 
   STecVkSerializationResult result;
   if constexpr (sizeof(T) == 4) {
-    uint32_t retVal;
-    result = vk_parse32(pVkType, pVkString, &retVal);
-    if (result == STEC_VK_SERIALIZATION_RESULT_SUCCESS) {
-      *pValue = static_cast<T>(retVal);
-    }
-  } else {
-    uint64_t retVal;
-    result = vk_parse64(pVkType, pVkString, &retVal);
-    if (result == STEC_VK_SERIALIZATION_RESULT_SUCCESS) {
-      *pValue = static_cast<T>(retVal);
-    }
+    result = vk_parse32(pVkType, pVkString, pValue);
+  } else if constexpr (sizeof(T) == 8) {
+    result = vk_parse64(pVkType, pVkString, pValue);
   }
+
   return result;
 }
 

@@ -27,7 +27,8 @@ TEST_CASE("Serialize64: Serializing one of the few 64-bit flag types, VkAccessFl
   }
 
   SECTION("Successfully returns an when the bitflag has a zero-value enum") {
-    CHECK(vk_serialize("VkAccessFlagBits2KHR", 0, &retVal) == STEC_VK_SERIALIZATION_RESULT_SUCCESS);
+    CHECK(vk_serialize("VkAccessFlagBits2KHR", (VkAccessFlagBits2KHR)0, &retVal) ==
+          STEC_VK_SERIALIZATION_RESULT_SUCCESS);
     CHECK(retVal == "NONE");
   }
 

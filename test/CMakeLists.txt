@@ -24,7 +24,7 @@ include_directories(../include)
 link_libraries(Catch2::Catch2WithMain Vulkan::Vulkan)
 
 # Compilation Test
-add_library(compilation_test STATIC c_compilation.c cpp_compilation.cpp)
+add_library(compilation_test STATIC c_compilation.c cpp_compilation.cpp underlying_type_check.cpp)
 
 # Error Code
 add_executable(VkErrorCodeTests error_code.cpp)

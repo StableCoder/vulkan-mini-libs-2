@@ -94,16 +94,14 @@ TEST_CASE("Serialize: Bitmask") {
     CHECK(retVal == "");
   }
 
-  SECTION("Success case where there's extra vendor bits on the type name (such "
-          "as after a "
-          "promoted extension)") {
+  SECTION("Success case where there's extra vendor bits on the type name (such as after a promoted "
+          "extension)") {
     CHECK(vk_serialize("VkCullModeFlagBitsVIV", VK_CULL_MODE_BACK_BIT, &retVal) ==
           STEC_VK_SERIALIZATION_RESULT_SUCCESS);
     CHECK(retVal == "BACK");
   }
 
-  SECTION("Successfully returns an empty string when the given type has no "
-          "actual flags") {
+  SECTION("Successfully returns an empty string when the given type has no actual flags") {
     CHECK(vk_serialize("VkAcquireProfilingLockFlagBitsKHR", 0, &retVal) ==
           STEC_VK_SERIALIZATION_RESULT_SUCCESS);
     CHECK(retVal == "");

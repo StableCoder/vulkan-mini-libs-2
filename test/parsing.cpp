@@ -8,7 +8,7 @@
 #define VK_VALUE_SERIALIZATION_CONFIG_MAIN
 #include <vk_value_serialization.hpp>
 
-constexpr uint64_t cDummyNum = 999999;
+constexpr uint32_t cDummyNum = 999999;
 
 TEST_CASE("Parsing: Failure Cases") {
   uint64_t dummy = cDummyNum;
@@ -31,31 +31,37 @@ TEST_CASE("Parsing: Failure Cases") {
           STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND);
     CHECK(dummy == cDummyNum);
   }
+
+  VkImageType imageType = (VkImageType)cDummyNum;
+
   SECTION("Garbage values fails") {
-    CHECK(vk_parse("VkImageType", "6D", &dummy) ==
+    vk_parse("VkImageType", "6D", &imageType);
+    CHECK(vk_parse("VkImageType", "6D", &imageType) ==
           STEC_VK_SERIALIZATION_RESULT_ERROR_VALUE_NOT_FOUND);
-    CHECK(dummy == cDummyNum);
-    CHECK(vk_parse("VkDebugReportFlagBitsEXT", "NOT_EXIST", &dummy) ==
+    CHECK(imageType == cDummyNum);
+
+    VkDebugReportFlagsEXT debugReportFlags = cDummyNum;
+    CHECK(vk_parse("VkDebugReportFlagBitsEXT", "NOT_EXIST", &debugReportFlags) ==
           STEC_VK_SERIALIZATION_RESULT_ERROR_VALUE_NOT_FOUND);
-    CHECK(dummy == cDummyNum);
+    CHECK(debugReportFlags == cDummyNum);
   }
   SECTION("Attempting to do a bitmask for an enum returns nothing") {
-    CHECK(vk_parse("VkImageType", "2D | 3D", &dummy) ==
+    CHECK(vk_parse("VkImageType", "2D | 3D", &imageType) ==
           STEC_VK_SERIALIZATION_RESULT_ERROR_VALUE_NOT_FOUND);
-    CHECK(dummy == cDummyNum);
+    CHECK(imageType == cDummyNum);
   }
   SECTION("Parsing an enum type with a blank value that doesn't allow empty values fails") {
-    CHECK(vk_parse("VkImageType", "", &dummy) ==
+    CHECK(vk_parse("VkImageType", "", &imageType) ==
           STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_HAS_NO_EMPTY_VALUE);
-    CHECK(dummy == cDummyNum);
+    CHECK(imageType == cDummyNum);
   }
   SECTION("Parsing with an empty type fails") {
-    CHECK(vk_parse("", "2D", &dummy) == STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND);
+    CHECK(vk_parse("", "2D", &imageType) == STEC_VK_SERIALIZATION_RESULT_ERROR_TYPE_NOT_FOUND);
   }
 }
 
 TEST_CASE("Parsing: Odd success cases") {
-  uint32_t retVal = cDummyNum;
+  VkPipelineDepthStencilStateCreateFlags retVal = cDummyNum;
 
   SECTION("Parsing a type that allows null with an empty string succeeds, returns 0") {
     CHECK(vk_parse("VkPipelineDepthStencilStateCreateFlagBits", "", &retVal) ==
@@ -65,87 +71,106 @@ TEST_CASE("Parsing: Odd success cases") {
 }
 
 TEST_CASE("Parsing: Checking enum conversions from strings to the values from the  actual header") {
-  uint32_t retVal = cDummyNum;
-
   SECTION("Success where the value is also a vendor name") {
-    CHECK(vk_parse("VkVendorId", "VIV", &retVal) == STEC_VK_SERIALIZATION_RESULT_SUCCESS);
-    CHECK(retVal == VK_VENDOR_ID_VIV);
+    VkVendorId vendorId = (VkVendorId)cDummyNum;
+    CHECK(vk_parse("VkVendorId", "VIV", &vendorId) == STEC_VK_SERIALIZATION_RESULT_SUCCESS);
+    CHECK(vendorId == VK_VENDOR_ID_VIV);
   }
 
   SECTION("With original shortened strings") {
-    CHECK(vk_parse("VkImageLayout", "UNDEFINED", &retVal) == STEC_VK_SERIALIZATION_RESULT_SUCCESS);
-    CHECK(retVal == VK_IMAGE_LAYOUT_UNDEFINED);
+    VkImageLayout imageLayout = (VkImageLayout)cDummyNum;
 
-    CHECK(vk_parse("VkImageLayout", "TRANSFER_DST_OPTIMAL", &retVal) ==
+    CHECK(vk_parse("VkImageLayout", "UNDEFINED", &imageLayout) ==
           STEC_VK_SERIALIZATION_RESULT_SUCCESS);
-    CHECK(retVal == VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
+    CHECK(imageLayout == VK_IMAGE_LAYOUT_UNDEFINED);
 
-    CHECK(vk_parse("VkImageType", "2D", &retVal) == STEC_VK_SERIALIZATION_RESULT_SUCCESS);
-    CHECK(retVal == VK_IMAGE_TYPE_2D);
+    CHECK(vk_parse("VkImageLayout", "TRANSFER_DST_OPTIMAL", &imageLayout) ==
+          STEC_VK_SERIALIZATION_RESULT_SUCCESS);
+    CHECK(imageLayout == VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
+
+    VkImageType imageType = (VkImageType)cDummyNum;
+    CHECK(vk_parse("VkImageType", "2D", &imageType) == STEC_VK_SERIALIZATION_RESULT_SUCCESS);
+    CHECK(imageType == VK_IMAGE_TYPE_2D);
   }
+
   SECTION("With extra spaces around the type") {
-    CHECK(vk_parse("VkImageLayout", "    VK_IMAGE_LAYOUT_UNDEFINED    ", &retVal) ==
+    VkImageLayout imageLayout = (VkImageLayout)cDummyNum;
+    CHECK(vk_parse("VkImageLayout", "    VK_IMAGE_LAYOUT_UNDEFINED    ", &imageLayout) ==
           STEC_VK_SERIALIZATION_RESULT_SUCCESS);
-    CHECK(retVal == VK_IMAGE_LAYOUT_UNDEFINED);
+    CHECK(imageLayout == VK_IMAGE_LAYOUT_UNDEFINED);
   }
+
   SECTION("With mixed capitalization and mixture of underscores/spaces") {
-    CHECK(vk_parse("VkImageLayout", "    vK IMagE_LAyOUt UNDEFIned    ", &retVal) ==
+    VkImageLayout imageLayout = (VkImageLayout)cDummyNum;
+    CHECK(vk_parse("VkImageLayout", "    vK IMagE_LAyOUt UNDEFIned    ", &imageLayout) ==
           STEC_VK_SERIALIZATION_RESULT_SUCCESS);
-    CHECK(retVal == VK_IMAGE_LAYOUT_UNDEFINED);
+    CHECK(imageLayout == VK_IMAGE_LAYOUT_UNDEFINED);
   }
+
   SECTION("With full strings") {
-    CHECK(vk_parse("VkImageLayout", "VK_IMAGE_LAYOUT_UNDEFINED", &retVal) ==
+    VkImageLayout imageLayout = (VkImageLayout)cDummyNum;
+    CHECK(vk_parse("VkImageLayout", "VK_IMAGE_LAYOUT_UNDEFINED", &imageLayout) ==
           STEC_VK_SERIALIZATION_RESULT_SUCCESS);
-    CHECK(retVal == VK_IMAGE_LAYOUT_UNDEFINED);
+    CHECK(imageLayout == VK_IMAGE_LAYOUT_UNDEFINED);
 
-    CHECK(vk_parse("VkImageLayout", "VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL", &retVal) ==
+    CHECK(vk_parse("VkImageLayout", "VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL", &imageLayout) ==
           STEC_VK_SERIALIZATION_RESULT_SUCCESS);
-    CHECK(retVal == VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
+    CHECK(imageLayout == VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
 
-    CHECK(vk_parse("VkImageType", "VK_IMAGE_TYPE_2D", &retVal) ==
+    VkImageType imageType = (VkImageType)cDummyNum;
+    CHECK(vk_parse("VkImageType", "VK_IMAGE_TYPE_2D", &imageType) ==
           STEC_VK_SERIALIZATION_RESULT_SUCCESS);
-    CHECK(retVal == VK_IMAGE_TYPE_2D);
+    CHECK(imageType == VK_IMAGE_TYPE_2D);
   }
 
   SECTION("With Vendor Tags") {
-    CHECK(vk_parse("VkPresentModeKHR", "VK_PRESENT_MODE_IMMEDIATE_KHR", &retVal) ==
+    VkPresentModeKHR presentMode = (VkPresentModeKHR)cDummyNum;
+    CHECK(vk_parse("VkPresentModeKHR", "VK_PRESENT_MODE_IMMEDIATE_KHR", &presentMode) ==
           STEC_VK_SERIALIZATION_RESULT_SUCCESS);
-    CHECK(retVal == VK_PRESENT_MODE_IMMEDIATE_KHR);
+    CHECK(presentMode == VK_PRESENT_MODE_IMMEDIATE_KHR);
 
-    CHECK(vk_parse("VkPresentModeKHR", "IMMEDIATE_KHR", &retVal) ==
+    presentMode = (VkPresentModeKHR)cDummyNum;
+    CHECK(vk_parse("VkPresentModeKHR", "IMMEDIATE_KHR", &presentMode) ==
           STEC_VK_SERIALIZATION_RESULT_SUCCESS);
-    CHECK(retVal == VK_PRESENT_MODE_IMMEDIATE_KHR);
+    CHECK(presentMode == VK_PRESENT_MODE_IMMEDIATE_KHR);
 
-    CHECK(vk_parse("VkPresentModeKHR", "VK_PRESENT_MODE_IMMEDIATE", &retVal) ==
+    presentMode = (VkPresentModeKHR)cDummyNum;
+    CHECK(vk_parse("VkPresentModeKHR", "VK_PRESENT_MODE_IMMEDIATE", &presentMode) ==
           STEC_VK_SERIALIZATION_RESULT_SUCCESS);
-    CHECK(retVal == VK_PRESENT_MODE_IMMEDIATE_KHR);
+    CHECK(presentMode == VK_PRESENT_MODE_IMMEDIATE_KHR);
 
-    CHECK(vk_parse("VkPresentModeKHR", "IMMEDIATE", &retVal) ==
+    presentMode = (VkPresentModeKHR)cDummyNum;
+    CHECK(vk_parse("VkPresentModeKHR", "IMMEDIATE", &presentMode) ==
           STEC_VK_SERIALIZATION_RESULT_SUCCESS);
-    CHECK(retVal == VK_PRESENT_MODE_IMMEDIATE_KHR);
+    CHECK(presentMode == VK_PRESENT_MODE_IMMEDIATE_KHR);
   }
 
   SECTION("With replaced enum sets through promotion") {
-    CHECK(vk_parse("VkExternalMemoryFeatureFlagBits", "EXPORTABLE_BIT_KHR", &retVal) ==
-          STEC_VK_SERIALIZATION_RESULT_SUCCESS);
-    CHECK(retVal == VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT);
+    VkExternalMemoryFeatureFlagsNV externalMemoryFeatureFlags =
+        (VkExternalMemoryFeatureFlagsNV)cDummyNum;
+    CHECK(vk_parse("VkExternalMemoryFeatureFlagBits", "EXPORTABLE_BIT_KHR",
+                   &externalMemoryFeatureFlags) == STEC_VK_SERIALIZATION_RESULT_SUCCESS);
+    CHECK(externalMemoryFeatureFlags == VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT);
 
-    CHECK(vk_parse("VkExternalMemoryFeatureFlagBits", "EXPORTABLE", &retVal) ==
+    externalMemoryFeatureFlags = (VkExternalMemoryFeatureFlagsNV)cDummyNum;
+    CHECK(vk_parse("VkExternalMemoryFeatureFlagBits", "EXPORTABLE", &externalMemoryFeatureFlags) ==
           STEC_VK_SERIALIZATION_RESULT_SUCCESS);
-    CHECK(retVal == VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT);
+    CHECK(externalMemoryFeatureFlags == VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT);
 
-    CHECK(vk_parse("VkExternalMemoryFeatureFlagBitsNV", "EXPORTABLE_BIT_KHR", &retVal) ==
-          STEC_VK_SERIALIZATION_RESULT_SUCCESS);
-    CHECK(retVal == VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT);
+    externalMemoryFeatureFlags = (VkExternalMemoryFeatureFlagsNV)cDummyNum;
+    CHECK(vk_parse("VkExternalMemoryFeatureFlagBitsNV", "EXPORTABLE_BIT_KHR",
+                   &externalMemoryFeatureFlags) == STEC_VK_SERIALIZATION_RESULT_SUCCESS);
+    CHECK(externalMemoryFeatureFlags == VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT);
 
-    CHECK(vk_parse("VkExternalMemoryFeatureFlagBitsNV", "EXPORTABLE", &retVal) ==
-          STEC_VK_SERIALIZATION_RESULT_SUCCESS);
-    CHECK(retVal == VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT);
+    externalMemoryFeatureFlags = (VkExternalMemoryFeatureFlagsNV)cDummyNum;
+    CHECK(vk_parse("VkExternalMemoryFeatureFlagBitsNV", "EXPORTABLE",
+                   &externalMemoryFeatureFlags) == STEC_VK_SERIALIZATION_RESULT_SUCCESS);
+    CHECK(externalMemoryFeatureFlags == VK_EXTERNAL_MEMORY_FEATURE_EXPORTABLE_BIT);
   }
 }
 
 TEST_CASE("Parsing: Checking bitmask conversions from string to bitmask values") {
-  uint32_t retVal = cDummyNum;
+  VkDebugReportFlagsEXT retVal = cDummyNum;
 
   SECTION("With a bad extra bitmask fails") {
     CHECK(vk_parse("VkDebugReportFlagBitsEXT", "PERFORMANCE_WARNING_BIT | NON_EXISTING_BIT",
@@ -324,7 +349,7 @@ TEST_CASE("Parsing: Checking bitmask conversions from string to bitmask values")
   }
 
   SECTION("With mixed short/full strings (64-bit)") {
-    uint64_t retVal = 0;
+    VkPipelineStageFlags2 retVal = 0;
 
     SECTION("FlagBits") {
       CHECK(vk_parse("VkPipelineStageFlagBits2",

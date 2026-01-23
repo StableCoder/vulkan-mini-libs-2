@@ -140,6 +140,8 @@ for api_type in api_data.findall('types/type'):
 
         if not type_name in data['enums']:
             data['enums'][type_name] = {'first': api_version, 'last': api_version}
+            if  not api_type.find('type') is None:
+                data['enums'][type_name]['type'] = api_type.find('type').text
         data['enums'][type_name]['first'] = api_version
 
         if api_type.get('alias'):
