@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 336
+#if VK_HEADER_VERSION > 337
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v336)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v337)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v336)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v337)"
 #endif
 #endif
 
@@ -2009,7 +2009,7 @@ static uint32_t const VkDeviceDiagnosticsConfigFlagsNVValues[4] = {
     0x00000008, // ENABLE_SHADER_ERROR_REPORTING
 };
 
-static char const *const VkAccessFlags2Strings[98] = {
+static char const *const VkAccessFlags2Strings[100] = {
     "NONE_KHR",                                      // 0
     "INDIRECT_COMMAND_READ_BIT_KHR",                 // 0x00000001
     "INDEX_READ_BIT_KHR",                            // 0x00000002
@@ -2108,9 +2108,11 @@ static char const *const VkAccessFlags2Strings[98] = {
     "RESERVED_61_BIT_KHR",                           // 0x2000000000000000
     "MEMORY_DECOMPRESSION_READ_BIT_EXT",             // 0x80000000000000
     "MEMORY_DECOMPRESSION_WRITE_BIT_EXT",            // 0x100000000000000
+    "RESERVED_62_BIT_EXT",                           // 0x4000000000000000
+    "RESERVED_63_BIT_EXT",                           // 0x8000000000000000
 };
 
-static uint64_t const VkAccessFlags2Values[98] = {
+static uint64_t const VkAccessFlags2Values[100] = {
     0,                  // NONE_KHR
     0x00000001,         // INDIRECT_COMMAND_READ_BIT_KHR
     0x00000002,         // INDEX_READ_BIT_KHR
@@ -2209,9 +2211,11 @@ static uint64_t const VkAccessFlags2Values[98] = {
     0x2000000000000000, // RESERVED_61_BIT_KHR
     0x80000000000000,   // MEMORY_DECOMPRESSION_READ_BIT_EXT
     0x100000000000000,  // MEMORY_DECOMPRESSION_WRITE_BIT_EXT
+    0x4000000000000000, // RESERVED_62_BIT_EXT
+    0x8000000000000000, // RESERVED_63_BIT_EXT
 };
 
-static char const *const VkPipelineStageFlags2Strings[91] = {
+static char const *const VkPipelineStageFlags2Strings[92] = {
     "TRANSFER",                                 // 0x00001000
     "NONE_KHR",                                 // 0
     "TOP_OF_PIPE_BIT_KHR",                      // 0x00000001
@@ -2303,9 +2307,10 @@ static char const *const VkPipelineStageFlags2Strings[91] = {
     "COPY_INDIRECT_BIT_KHR",                    // 0x400000000000
     "MEMORY_DECOMPRESSION_BIT_EXT",             // 0x200000000000
     "RESERVED_48_BIT_HUAWEI",                   // 0x1000000000000
+    "RESERVED_49_BIT_EXT",                      // 0x2000000000000
 };
 
-static uint64_t const VkPipelineStageFlags2Values[91] = {
+static uint64_t const VkPipelineStageFlags2Values[92] = {
     0x00001000,      // TRANSFER
     0,               // NONE_KHR
     0x00000001,      // TOP_OF_PIPE_BIT_KHR
@@ -2397,6 +2402,7 @@ static uint64_t const VkPipelineStageFlags2Values[91] = {
     0x400000000000,  // COPY_INDIRECT_BIT_KHR
     0x200000000000,  // MEMORY_DECOMPRESSION_BIT_EXT
     0x1000000000000, // RESERVED_48_BIT_HUAWEI
+    0x2000000000000, // RESERVED_49_BIT_EXT
 };
 
 static char const *const VkFormatFeatureFlags2Strings[111] = {
@@ -9239,8 +9245,8 @@ static ValueSet const cValueSets[411] = {
     {"VkDeviceDiagnosticsConfigFlagsNV", VkDeviceDiagnosticsConfigFlagsNVStrings,
      VkDeviceDiagnosticsConfigFlagsNVValues, 4, ENUM_TYPE_FLAG32},
     {"VkRefreshObjectFlagsKHR", NULL, NULL, 0, ENUM_TYPE_FLAG32},
-    {"VkAccessFlags2", VkAccessFlags2Strings, VkAccessFlags2Values, 98, ENUM_TYPE_FLAG64},
-    {"VkPipelineStageFlags2", VkPipelineStageFlags2Strings, VkPipelineStageFlags2Values, 91,
+    {"VkAccessFlags2", VkAccessFlags2Strings, VkAccessFlags2Values, 100, ENUM_TYPE_FLAG64},
+    {"VkPipelineStageFlags2", VkPipelineStageFlags2Strings, VkPipelineStageFlags2Values, 92,
      ENUM_TYPE_FLAG64},
     {"VkAccelerationStructureMotionInfoFlagsNV", NULL, NULL, 0, ENUM_TYPE_FLAG32},
     {"VkAccelerationStructureMotionInstanceFlagsNV", NULL, NULL, 0, ENUM_TYPE_FLAG32},

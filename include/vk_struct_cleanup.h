@@ -37,12 +37,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 336
+#if VK_HEADER_VERSION > 337
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v336)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v337)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v336)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v337)"
 #endif
 #endif
 
@@ -5566,6 +5566,16 @@ void cleanup_VkPhysicalDeviceShaderIntegerFunctions2INTEL(
     VkPhysicalDeviceShaderIntegerFunctions2INTEL const *pData);
 #endif
 
+#if VK_HEADER_VERSION >= 337 && VK_EXT_shader_long_vector
+void cleanup_VkPhysicalDeviceShaderLongVectorFeaturesEXT(
+    VkPhysicalDeviceShaderLongVectorFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 337 && VK_EXT_shader_long_vector
+void cleanup_VkPhysicalDeviceShaderLongVectorPropertiesEXT(
+    VkPhysicalDeviceShaderLongVectorPropertiesEXT const *pData);
+#endif
+
 #if VK_HEADER_VERSION >= 276 && VK_KHR_shader_maximal_reconvergence
 void cleanup_VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR(
     VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR const *pData);
@@ -5817,6 +5827,11 @@ void cleanup_VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT(
 #if VK_HEADER_VERSION >= 204 && VK_EXT_texel_buffer_alignment
 void cleanup_VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT(
     VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 337 && VK_EXT_texture_compression_astc_3d
+void cleanup_VkPhysicalDeviceTextureCompressionASTC3DFeaturesEXT(
+    VkPhysicalDeviceTextureCompressionASTC3DFeaturesEXT const *pData);
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
@@ -16375,6 +16390,22 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
+#if VK_HEADER_VERSION >= 337 && VK_EXT_shader_long_vector
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_LONG_VECTOR_FEATURES_EXT) {
+    cleanup_VkPhysicalDeviceShaderLongVectorFeaturesEXT(
+        (VkPhysicalDeviceShaderLongVectorFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 337 && VK_EXT_shader_long_vector
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_LONG_VECTOR_PROPERTIES_EXT) {
+    cleanup_VkPhysicalDeviceShaderLongVectorPropertiesEXT(
+        (VkPhysicalDeviceShaderLongVectorPropertiesEXT const *)pData);
+    return;
+  }
+#endif
+
 #if VK_HEADER_VERSION >= 276 && VK_KHR_shader_maximal_reconvergence
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MAXIMAL_RECONVERGENCE_FEATURES_KHR) {
     cleanup_VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR(
@@ -16707,6 +16738,14 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXEL_BUFFER_ALIGNMENT_PROPERTIES_EXT) {
     cleanup_VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT(
         (VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 337 && VK_EXT_texture_compression_astc_3d
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_TEXTURE_COMPRESSION_ASTC_3D_FEATURES_EXT) {
+    cleanup_VkPhysicalDeviceTextureCompressionASTC3DFeaturesEXT(
+        (VkPhysicalDeviceTextureCompressionASTC3DFeaturesEXT const *)pData);
     return;
   }
 #endif
@@ -33814,6 +33853,26 @@ void cleanup_VkPhysicalDeviceShaderIntegerFunctions2INTEL(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 337 && VK_EXT_shader_long_vector
+void cleanup_VkPhysicalDeviceShaderLongVectorFeaturesEXT(
+    VkPhysicalDeviceShaderLongVectorFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 337 && VK_EXT_shader_long_vector
+void cleanup_VkPhysicalDeviceShaderLongVectorPropertiesEXT(
+    VkPhysicalDeviceShaderLongVectorPropertiesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
 #if VK_HEADER_VERSION >= 276 && VK_KHR_shader_maximal_reconvergence
 void cleanup_VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR(
     VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR const *pData) {
@@ -34315,6 +34374,16 @@ void cleanup_VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT(
 #if VK_HEADER_VERSION >= 204 && VK_EXT_texel_buffer_alignment
 void cleanup_VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT(
     VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 337 && VK_EXT_texture_compression_astc_3d
+void cleanup_VkPhysicalDeviceTextureCompressionASTC3DFeaturesEXT(
+    VkPhysicalDeviceTextureCompressionASTC3DFeaturesEXT const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

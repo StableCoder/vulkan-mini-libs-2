@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 336
+#if VK_HEADER_VERSION > 337
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v336)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v337)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v336)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v337)"
 #endif
 #endif
 
@@ -6619,6 +6619,18 @@ bool compare_VkPhysicalDeviceShaderIntegerFunctions2INTEL(
     VkPhysicalDeviceShaderIntegerFunctions2INTEL const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 337 && VK_EXT_shader_long_vector
+bool compare_VkPhysicalDeviceShaderLongVectorFeaturesEXT(
+    VkPhysicalDeviceShaderLongVectorFeaturesEXT const *s1,
+    VkPhysicalDeviceShaderLongVectorFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 337 && VK_EXT_shader_long_vector
+bool compare_VkPhysicalDeviceShaderLongVectorPropertiesEXT(
+    VkPhysicalDeviceShaderLongVectorPropertiesEXT const *s1,
+    VkPhysicalDeviceShaderLongVectorPropertiesEXT const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 276 && VK_KHR_shader_maximal_reconvergence
 bool compare_VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR(
     VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR const *s1,
@@ -6922,6 +6934,12 @@ bool compare_VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT(
 bool compare_VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT(
     VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT const *s1,
     VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 337 && VK_EXT_texture_compression_astc_3d
+bool compare_VkPhysicalDeviceTextureCompressionASTC3DFeaturesEXT(
+    VkPhysicalDeviceTextureCompressionASTC3DFeaturesEXT const *s1,
+    VkPhysicalDeviceTextureCompressionASTC3DFeaturesEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
@@ -28753,6 +28771,30 @@ bool compare_VkPhysicalDeviceShaderIntegerFunctions2INTEL(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 337 && VK_EXT_shader_long_vector
+bool compare_VkPhysicalDeviceShaderLongVectorFeaturesEXT(
+    VkPhysicalDeviceShaderLongVectorFeaturesEXT const *s1,
+    VkPhysicalDeviceShaderLongVectorFeaturesEXT const *s2) {
+  // local, simple types
+  if ((s1->longVector != s2->longVector))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 337 && VK_EXT_shader_long_vector
+bool compare_VkPhysicalDeviceShaderLongVectorPropertiesEXT(
+    VkPhysicalDeviceShaderLongVectorPropertiesEXT const *s1,
+    VkPhysicalDeviceShaderLongVectorPropertiesEXT const *s2) {
+  // local, simple types
+  if ((s1->maxVectorComponents != s2->maxVectorComponents))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 276 && VK_KHR_shader_maximal_reconvergence
 bool compare_VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR(
     VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR const *s1,
@@ -29440,6 +29482,18 @@ bool compare_VkPhysicalDeviceTexelBufferAlignmentPropertiesEXT(
       (s1->uniformTexelBufferOffsetAlignmentBytes != s2->uniformTexelBufferOffsetAlignmentBytes) ||
       (s1->uniformTexelBufferOffsetSingleTexelAlignment !=
        s2->uniformTexelBufferOffsetSingleTexelAlignment))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 337 && VK_EXT_texture_compression_astc_3d
+bool compare_VkPhysicalDeviceTextureCompressionASTC3DFeaturesEXT(
+    VkPhysicalDeviceTextureCompressionASTC3DFeaturesEXT const *s1,
+    VkPhysicalDeviceTextureCompressionASTC3DFeaturesEXT const *s2) {
+  // local, simple types
+  if ((s1->textureCompressionASTC_3D != s2->textureCompressionASTC_3D))
     return false;
 
   return true;
