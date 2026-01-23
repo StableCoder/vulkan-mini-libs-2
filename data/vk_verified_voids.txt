@@ -20,3 +20,5 @@ VkValidationCacheCreateInfoEXT pInitialData
 VkWriteDescriptorSetInlineUniformBlock pData
 VkWriteDescriptorSetInlineUniformBlockEXT pData
 VkDataGraphPipelinePropertyQueryResultARM pData
+VkHostAddressRangeConstEXT address
+VkHostAddressRangeEXT address

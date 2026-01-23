@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 339
+#if VK_HEADER_VERSION > 340
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v339)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v340)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v339)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v340)"
 #endif
 #endif
 
@@ -544,6 +544,10 @@ bool compare_VkBindDescriptorSetsInfoKHR(VkBindDescriptorSetsInfoKHR const *s1,
                                          VkBindDescriptorSetsInfoKHR const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkBindHeapInfoEXT(VkBindHeapInfoEXT const *s1, VkBindHeapInfoEXT const *s2);
+#endif
+
 #if VK_VERSION_1_1
 bool compare_VkBindImageMemoryDeviceGroupInfo(VkBindImageMemoryDeviceGroupInfo const *s1,
                                               VkBindImageMemoryDeviceGroupInfo const *s2);
@@ -994,6 +998,12 @@ bool compare_VkCommandBufferBeginInfo(VkCommandBufferBeginInfo const *s1,
 bool compare_VkCommandBufferInheritanceConditionalRenderingInfoEXT(
     VkCommandBufferInheritanceConditionalRenderingInfoEXT const *s1,
     VkCommandBufferInheritanceConditionalRenderingInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkCommandBufferInheritanceDescriptorHeapInfoEXT(
+    VkCommandBufferInheritanceDescriptorHeapInfoEXT const *s1,
+    VkCommandBufferInheritanceDescriptorHeapInfoEXT const *s2);
 #endif
 
 bool compare_VkCommandBufferInheritanceInfo(VkCommandBufferInheritanceInfo const *s1,
@@ -1595,6 +1605,46 @@ bool compare_VkDescriptorGetTensorInfoARM(VkDescriptorGetTensorInfoARM const *s1
 bool compare_VkDescriptorImageInfo(VkDescriptorImageInfo const *s1,
                                    VkDescriptorImageInfo const *s2);
 
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkDescriptorMappingSourceConstantOffsetEXT(
+    VkDescriptorMappingSourceConstantOffsetEXT const *s1,
+    VkDescriptorMappingSourceConstantOffsetEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkDescriptorMappingSourceHeapDataEXT(VkDescriptorMappingSourceHeapDataEXT const *s1,
+                                                  VkDescriptorMappingSourceHeapDataEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkDescriptorMappingSourceIndirectAddressEXT(
+    VkDescriptorMappingSourceIndirectAddressEXT const *s1,
+    VkDescriptorMappingSourceIndirectAddressEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkDescriptorMappingSourceIndirectIndexArrayEXT(
+    VkDescriptorMappingSourceIndirectIndexArrayEXT const *s1,
+    VkDescriptorMappingSourceIndirectIndexArrayEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkDescriptorMappingSourceIndirectIndexEXT(
+    VkDescriptorMappingSourceIndirectIndexEXT const *s1,
+    VkDescriptorMappingSourceIndirectIndexEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkDescriptorMappingSourcePushIndexEXT(VkDescriptorMappingSourcePushIndexEXT const *s1,
+                                                   VkDescriptorMappingSourcePushIndexEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkDescriptorMappingSourceShaderRecordIndexEXT(
+    VkDescriptorMappingSourceShaderRecordIndexEXT const *s1,
+    VkDescriptorMappingSourceShaderRecordIndexEXT const *s2);
+#endif
+
 bool compare_VkDescriptorPoolCreateInfo(VkDescriptorPoolCreateInfo const *s1,
                                         VkDescriptorPoolCreateInfo const *s2);
 
@@ -1620,6 +1670,11 @@ bool compare_VkDescriptorPoolSize(VkDescriptorPoolSize const *s1, VkDescriptorPo
 
 bool compare_VkDescriptorSetAllocateInfo(VkDescriptorSetAllocateInfo const *s1,
                                          VkDescriptorSetAllocateInfo const *s2);
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkDescriptorSetAndBindingMappingEXT(VkDescriptorSetAndBindingMappingEXT const *s1,
+                                                 VkDescriptorSetAndBindingMappingEXT const *s2);
+#endif
 
 #if VK_HEADER_VERSION >= 207 && VK_VALVE_descriptor_set_host_mapping
 bool compare_VkDescriptorSetBindingReferenceVALVE(VkDescriptorSetBindingReferenceVALVE const *s1,
@@ -1726,6 +1781,11 @@ bool compare_VkDescriptorUpdateTemplateEntryKHR(VkDescriptorUpdateTemplateEntryK
 #if VK_HEADER_VERSION >= 230 && VK_EXT_device_address_binding_report
 bool compare_VkDeviceAddressBindingCallbackDataEXT(VkDeviceAddressBindingCallbackDataEXT const *s1,
                                                    VkDeviceAddressBindingCallbackDataEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkDeviceAddressRangeEXT(VkDeviceAddressRangeEXT const *s1,
+                                     VkDeviceAddressRangeEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
@@ -2691,6 +2751,16 @@ bool compare_VkHeadlessSurfaceCreateInfoEXT(VkHeadlessSurfaceCreateInfoEXT const
                                             VkHeadlessSurfaceCreateInfoEXT const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkHostAddressRangeConstEXT(VkHostAddressRangeConstEXT const *s1,
+                                        VkHostAddressRangeConstEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkHostAddressRangeEXT(VkHostAddressRangeEXT const *s1,
+                                   VkHostAddressRangeEXT const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 303 && VK_VERSION_1_4
 bool compare_VkHostImageCopyDevicePerformanceQuery(VkHostImageCopyDevicePerformanceQuery const *s1,
                                                    VkHostImageCopyDevicePerformanceQuery const *s2);
@@ -2782,6 +2852,11 @@ bool compare_VkImageCopy2KHR(VkImageCopy2KHR const *s1, VkImageCopy2KHR const *s
 #endif
 
 bool compare_VkImageCreateInfo(VkImageCreateInfo const *s1, VkImageCreateInfo const *s2);
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkImageDescriptorInfoEXT(VkImageDescriptorInfoEXT const *s1,
+                                      VkImageDescriptorInfoEXT const *s2);
+#endif
 
 #if VK_HEADER_VERSION >= 86 && VK_EXT_image_drm_format_modifier
 bool compare_VkImageDrmFormatModifierExplicitCreateInfoEXT(
@@ -3160,6 +3235,12 @@ bool compare_VkIndirectCommandsLayoutCreateInfoNV(VkIndirectCommandsLayoutCreate
 #if VK_HEADER_VERSION <= 134 && VK_NVX_device_generated_commands
 bool compare_VkIndirectCommandsLayoutCreateInfoNVX(VkIndirectCommandsLayoutCreateInfoNVX const *s1,
                                                    VkIndirectCommandsLayoutCreateInfoNVX const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap && VK_NV_device_generated_commands
+bool compare_VkIndirectCommandsLayoutPushDataTokenNV(
+    VkIndirectCommandsLayoutPushDataTokenNV const *s1,
+    VkIndirectCommandsLayoutPushDataTokenNV const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 296 && VK_EXT_device_generated_commands
@@ -3679,6 +3760,11 @@ bool compare_VkObjectTableVertexBufferEntryNVX(VkObjectTableVertexBufferEntryNVX
 bool compare_VkOffset2D(VkOffset2D const *s1, VkOffset2D const *s2);
 
 bool compare_VkOffset3D(VkOffset3D const *s1, VkOffset3D const *s2);
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkOpaqueCaptureDataCreateInfoEXT(VkOpaqueCaptureDataCreateInfoEXT const *s1,
+                                              VkOpaqueCaptureDataCreateInfoEXT const *s2);
+#endif
 
 #if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
 bool compare_VkOpaqueCaptureDescriptorDataCreateInfoEXT(
@@ -4323,6 +4409,24 @@ bool compare_VkPhysicalDeviceDescriptorBufferTensorFeaturesARM(
 bool compare_VkPhysicalDeviceDescriptorBufferTensorPropertiesARM(
     VkPhysicalDeviceDescriptorBufferTensorPropertiesARM const *s1,
     VkPhysicalDeviceDescriptorBufferTensorPropertiesARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkPhysicalDeviceDescriptorHeapFeaturesEXT(
+    VkPhysicalDeviceDescriptorHeapFeaturesEXT const *s1,
+    VkPhysicalDeviceDescriptorHeapFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkPhysicalDeviceDescriptorHeapPropertiesEXT(
+    VkPhysicalDeviceDescriptorHeapPropertiesEXT const *s1,
+    VkPhysicalDeviceDescriptorHeapPropertiesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap && VK_ARM_tensors
+bool compare_VkPhysicalDeviceDescriptorHeapTensorPropertiesARM(
+    VkPhysicalDeviceDescriptorHeapTensorPropertiesARM const *s1,
+    VkPhysicalDeviceDescriptorHeapTensorPropertiesARM const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
@@ -5189,6 +5293,12 @@ bool compare_VkPhysicalDeviceInlineUniformBlockPropertiesEXT(
     VkPhysicalDeviceInlineUniformBlockPropertiesEXT const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 340 && VK_KHR_internally_synchronized_queues
+bool compare_VkPhysicalDeviceInternallySynchronizedQueuesFeaturesKHR(
+    VkPhysicalDeviceInternallySynchronizedQueuesFeaturesKHR const *s1,
+    VkPhysicalDeviceInternallySynchronizedQueuesFeaturesKHR const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 185 && VK_HUAWEI_invocation_mask
 bool compare_VkPhysicalDeviceInvocationMaskFeaturesHUAWEI(
     VkPhysicalDeviceInvocationMaskFeaturesHUAWEI const *s1,
@@ -6021,6 +6131,18 @@ bool compare_VkPhysicalDeviceProvokingVertexPropertiesEXT(
     VkPhysicalDeviceProvokingVertexPropertiesEXT const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 340 && VK_NV_push_constant_bank
+bool compare_VkPhysicalDevicePushConstantBankFeaturesNV(
+    VkPhysicalDevicePushConstantBankFeaturesNV const *s1,
+    VkPhysicalDevicePushConstantBankFeaturesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_NV_push_constant_bank
+bool compare_VkPhysicalDevicePushConstantBankPropertiesNV(
+    VkPhysicalDevicePushConstantBankPropertiesNV const *s1,
+    VkPhysicalDevicePushConstantBankPropertiesNV const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 303 && VK_VERSION_1_4
 bool compare_VkPhysicalDevicePushDescriptorProperties(
     VkPhysicalDevicePushDescriptorProperties const *s1,
@@ -6707,6 +6829,12 @@ bool compare_VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR(
 bool compare_VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR(
     VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR const *s1,
     VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_shader_subgroup_partitioned
+bool compare_VkPhysicalDeviceShaderSubgroupPartitionedFeaturesEXT(
+    VkPhysicalDeviceShaderSubgroupPartitionedFeaturesEXT const *s1,
+    VkPhysicalDeviceShaderSubgroupPartitionedFeaturesEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 303 && VK_VERSION_1_4
@@ -7965,6 +8093,11 @@ bool compare_VkProtectedSubmitInfo(VkProtectedSubmitInfo const *s1,
                                    VkProtectedSubmitInfo const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 340 && VK_NV_push_constant_bank
+bool compare_VkPushConstantBankInfoNV(VkPushConstantBankInfoNV const *s1,
+                                      VkPushConstantBankInfoNV const *s2);
+#endif
+
 bool compare_VkPushConstantRange(VkPushConstantRange const *s1, VkPushConstantRange const *s2);
 
 #if VK_HEADER_VERSION >= 303 && VK_VERSION_1_4
@@ -7979,6 +8112,10 @@ bool compare_VkPushConstantsInfoKHR(VkPushConstantsInfoKHR const *s1,
 #if VK_HEADER_VERSION >= 303 && VK_KHR_maintenance6
 bool compare_VkPushConstantsInfoKHR(VkPushConstantsInfoKHR const *s1,
                                     VkPushConstantsInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkPushDataInfoEXT(VkPushDataInfoEXT const *s1, VkPushDataInfoEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 303 && VK_VERSION_1_4
@@ -8544,6 +8681,11 @@ bool compare_VkResolveImageModeInfoKHR(VkResolveImageModeInfoKHR const *s1,
                                        VkResolveImageModeInfoKHR const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkResourceDescriptorInfoEXT(VkResourceDescriptorInfoEXT const *s1,
+                                         VkResourceDescriptorInfoEXT const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 182 && VK_NV_ray_tracing_motion_blur
 bool compare_VkSRTDataNV(VkSRTDataNV const *s1, VkSRTDataNV const *s2);
 #endif
@@ -8585,6 +8727,12 @@ bool compare_VkSamplerCubicWeightsCreateInfoQCOM(VkSamplerCubicWeightsCreateInfo
 bool compare_VkSamplerCustomBorderColorCreateInfoEXT(
     VkSamplerCustomBorderColorCreateInfoEXT const *s1,
     VkSamplerCustomBorderColorCreateInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap && VK_EXT_custom_border_color
+bool compare_VkSamplerCustomBorderColorIndexCreateInfoEXT(
+    VkSamplerCustomBorderColorIndexCreateInfoEXT const *s1,
+    VkSamplerCustomBorderColorIndexCreateInfoEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
@@ -8774,6 +8922,12 @@ bool compare_VkSetStateFlagsIndirectCommandNV(VkSetStateFlagsIndirectCommandNV c
 #if VK_HEADER_VERSION >= 246 && VK_EXT_shader_object
 bool compare_VkShaderCreateInfoEXT(VkShaderCreateInfoEXT const *s1,
                                    VkShaderCreateInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkShaderDescriptorSetAndBindingMappingInfoEXT(
+    VkShaderDescriptorSetAndBindingMappingInfoEXT const *s1,
+    VkShaderDescriptorSetAndBindingMappingInfoEXT const *s2);
 #endif
 
 bool compare_VkShaderModuleCreateInfo(VkShaderModuleCreateInfo const *s1,
@@ -9056,6 +9210,11 @@ bool compare_VkSubresourceLayout2KHR(VkSubresourceLayout2KHR const *s1,
 #if VK_HEADER_VERSION >= 303 && VK_KHR_maintenance5
 bool compare_VkSubresourceLayout2KHR(VkSubresourceLayout2KHR const *s1,
                                      VkSubresourceLayout2KHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap && VK_EXT_fragment_density_map
+bool compare_VkSubsampledImageFormatPropertiesEXT(VkSubsampledImageFormatPropertiesEXT const *s1,
+                                                  VkSubsampledImageFormatPropertiesEXT const *s2);
 #endif
 
 #if VK_EXT_display_surface_counter
@@ -9347,9 +9506,15 @@ bool compare_VkTensorViewCaptureDescriptorDataInfoARM(
     VkTensorViewCaptureDescriptorDataInfoARM const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+#if (VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap && VK_ARM_tensors) ||                      \
+    (VK_HEADER_VERSION >= 317 && VK_HEADER_VERSION <= 339 && VK_ARM_tensors)
 bool compare_VkTensorViewCreateInfoARM(VkTensorViewCreateInfoARM const *s1,
                                        VkTensorViewCreateInfoARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkTexelBufferDescriptorInfoEXT(VkTexelBufferDescriptorInfoEXT const *s1,
+                                            VkTexelBufferDescriptorInfoEXT const *s2);
 #endif
 
 #if VK_AMD_texture_gather_bias_lod
@@ -12589,6 +12754,21 @@ bool compare_VkBindDescriptorSetsInfoKHR(VkBindDescriptorSetsInfoKHR const *s1,
 }
 #endif
 
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkBindHeapInfoEXT(VkBindHeapInfoEXT const *s1, VkBindHeapInfoEXT const *s2) {
+  // local, simple types
+  if ((s1->reservedRangeOffset != s2->reservedRangeOffset) ||
+      (s1->reservedRangeSize != s2->reservedRangeSize))
+    return false;
+
+  // local, Vulkan struct types
+  if (!compare_VkDeviceAddressRangeEXT(&s1->heapRange, &s2->heapRange))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_VERSION_1_1
 bool compare_VkBindImageMemoryDeviceGroupInfo(VkBindImageMemoryDeviceGroupInfo const *s1,
                                               VkBindImageMemoryDeviceGroupInfo const *s2) {
@@ -13854,6 +14034,14 @@ bool compare_VkCommandBufferInheritanceConditionalRenderingInfoEXT(
   if ((s1->conditionalRenderingEnable != s2->conditionalRenderingEnable))
     return false;
 
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkCommandBufferInheritanceDescriptorHeapInfoEXT(
+    VkCommandBufferInheritanceDescriptorHeapInfoEXT const *s1,
+    VkCommandBufferInheritanceDescriptorHeapInfoEXT const *s2) {
   return true;
 }
 #endif
@@ -15598,6 +15786,119 @@ bool compare_VkDescriptorImageInfo(VkDescriptorImageInfo const *s1,
   return true;
 }
 
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkDescriptorMappingSourceConstantOffsetEXT(
+    VkDescriptorMappingSourceConstantOffsetEXT const *s1,
+    VkDescriptorMappingSourceConstantOffsetEXT const *s2) {
+  // local, simple types
+  if ((s1->heapOffset != s2->heapOffset) || (s1->heapArrayStride != s2->heapArrayStride) ||
+      (s1->samplerHeapOffset != s2->samplerHeapOffset) ||
+      (s1->samplerHeapArrayStride != s2->samplerHeapArrayStride))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkDescriptorMappingSourceHeapDataEXT(VkDescriptorMappingSourceHeapDataEXT const *s1,
+                                                  VkDescriptorMappingSourceHeapDataEXT const *s2) {
+  // local, simple types
+  if ((s1->heapOffset != s2->heapOffset) || (s1->pushOffset != s2->pushOffset))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkDescriptorMappingSourceIndirectAddressEXT(
+    VkDescriptorMappingSourceIndirectAddressEXT const *s1,
+    VkDescriptorMappingSourceIndirectAddressEXT const *s2) {
+  // local, simple types
+  if ((s1->pushOffset != s2->pushOffset) || (s1->addressOffset != s2->addressOffset))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkDescriptorMappingSourceIndirectIndexArrayEXT(
+    VkDescriptorMappingSourceIndirectIndexArrayEXT const *s1,
+    VkDescriptorMappingSourceIndirectIndexArrayEXT const *s2) {
+  // local, simple types
+  if ((s1->heapOffset != s2->heapOffset) || (s1->pushOffset != s2->pushOffset) ||
+      (s1->addressOffset != s2->addressOffset) || (s1->heapIndexStride != s2->heapIndexStride) ||
+      (s1->useCombinedImageSamplerIndex != s2->useCombinedImageSamplerIndex) ||
+      (s1->samplerHeapOffset != s2->samplerHeapOffset) ||
+      (s1->samplerPushOffset != s2->samplerPushOffset) ||
+      (s1->samplerAddressOffset != s2->samplerAddressOffset) ||
+      (s1->samplerHeapIndexStride != s2->samplerHeapIndexStride))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkDescriptorMappingSourceIndirectIndexEXT(
+    VkDescriptorMappingSourceIndirectIndexEXT const *s1,
+    VkDescriptorMappingSourceIndirectIndexEXT const *s2) {
+  // local, simple types
+  if ((s1->heapOffset != s2->heapOffset) || (s1->pushOffset != s2->pushOffset) ||
+      (s1->addressOffset != s2->addressOffset) || (s1->heapIndexStride != s2->heapIndexStride) ||
+      (s1->heapArrayStride != s2->heapArrayStride) ||
+      (s1->useCombinedImageSamplerIndex != s2->useCombinedImageSamplerIndex) ||
+      (s1->samplerHeapOffset != s2->samplerHeapOffset) ||
+      (s1->samplerPushOffset != s2->samplerPushOffset) ||
+      (s1->samplerAddressOffset != s2->samplerAddressOffset) ||
+      (s1->samplerHeapIndexStride != s2->samplerHeapIndexStride) ||
+      (s1->samplerHeapArrayStride != s2->samplerHeapArrayStride))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkDescriptorMappingSourcePushIndexEXT(
+    VkDescriptorMappingSourcePushIndexEXT const *s1,
+    VkDescriptorMappingSourcePushIndexEXT const *s2) {
+  // local, simple types
+  if ((s1->heapOffset != s2->heapOffset) || (s1->pushOffset != s2->pushOffset) ||
+      (s1->heapIndexStride != s2->heapIndexStride) ||
+      (s1->heapArrayStride != s2->heapArrayStride) ||
+      (s1->useCombinedImageSamplerIndex != s2->useCombinedImageSamplerIndex) ||
+      (s1->samplerHeapOffset != s2->samplerHeapOffset) ||
+      (s1->samplerPushOffset != s2->samplerPushOffset) ||
+      (s1->samplerHeapIndexStride != s2->samplerHeapIndexStride) ||
+      (s1->samplerHeapArrayStride != s2->samplerHeapArrayStride))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkDescriptorMappingSourceShaderRecordIndexEXT(
+    VkDescriptorMappingSourceShaderRecordIndexEXT const *s1,
+    VkDescriptorMappingSourceShaderRecordIndexEXT const *s2) {
+  // local, simple types
+  if ((s1->heapOffset != s2->heapOffset) || (s1->shaderRecordOffset != s2->shaderRecordOffset) ||
+      (s1->heapIndexStride != s2->heapIndexStride) ||
+      (s1->heapArrayStride != s2->heapArrayStride) ||
+      (s1->useCombinedImageSamplerIndex != s2->useCombinedImageSamplerIndex) ||
+      (s1->samplerHeapOffset != s2->samplerHeapOffset) ||
+      (s1->samplerShaderRecordOffset != s2->samplerShaderRecordOffset) ||
+      (s1->samplerHeapIndexStride != s2->samplerHeapIndexStride) ||
+      (s1->samplerHeapArrayStride != s2->samplerHeapArrayStride))
+    return false;
+
+  return true;
+}
+#endif
+
 bool compare_VkDescriptorPoolCreateInfo(VkDescriptorPoolCreateInfo const *s1,
                                         VkDescriptorPoolCreateInfo const *s2) {
   // local, simple types
@@ -15669,6 +15970,88 @@ bool compare_VkDescriptorSetAllocateInfo(VkDescriptorSetAllocateInfo const *s1,
     return false;
   return true;
 }
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkDescriptorSetAndBindingMappingEXT(VkDescriptorSetAndBindingMappingEXT const *s1,
+                                                 VkDescriptorSetAndBindingMappingEXT const *s2) {
+  // local, simple types
+  if ((s1->descriptorSet != s2->descriptorSet) || (s1->firstBinding != s2->firstBinding) ||
+      (s1->bindingCount != s2->bindingCount) || (s1->resourceMask != s2->resourceMask) ||
+      (s1->source != s2->source))
+    return false;
+
+  // union types (with selector)
+  switch (s1->source) {
+  // VkDescriptorMappingSourceDataEXT
+  case VK_DESCRIPTOR_MAPPING_SOURCE_HEAP_WITH_CONSTANT_OFFSET_EXT:
+    if (!compare_VkDescriptorMappingSourceConstantOffsetEXT(&s1->sourceData.constantOffset,
+                                                            &s2->sourceData.constantOffset))
+      return false;
+
+  case VK_DESCRIPTOR_MAPPING_SOURCE_HEAP_WITH_PUSH_INDEX_EXT:
+    if (!compare_VkDescriptorMappingSourcePushIndexEXT(&s1->sourceData.pushIndex,
+                                                       &s2->sourceData.pushIndex))
+      return false;
+
+  case VK_DESCRIPTOR_MAPPING_SOURCE_HEAP_WITH_INDIRECT_INDEX_EXT:
+    if (!compare_VkDescriptorMappingSourceIndirectIndexEXT(&s1->sourceData.indirectIndex,
+                                                           &s2->sourceData.indirectIndex))
+      return false;
+
+  case VK_DESCRIPTOR_MAPPING_SOURCE_HEAP_WITH_INDIRECT_INDEX_ARRAY_EXT:
+    if (!compare_VkDescriptorMappingSourceIndirectIndexArrayEXT(&s1->sourceData.indirectIndexArray,
+                                                                &s2->sourceData.indirectIndexArray))
+      return false;
+
+  case VK_DESCRIPTOR_MAPPING_SOURCE_RESOURCE_HEAP_DATA_EXT:
+    if (!compare_VkDescriptorMappingSourceHeapDataEXT(&s1->sourceData.heapData,
+                                                      &s2->sourceData.heapData))
+      return false;
+
+  case VK_DESCRIPTOR_MAPPING_SOURCE_PUSH_DATA_EXT:
+    if (s1->sourceData.pushDataOffset != s2->sourceData.pushDataOffset)
+      return false;
+
+  case VK_DESCRIPTOR_MAPPING_SOURCE_PUSH_ADDRESS_EXT:
+    if (s1->sourceData.pushAddressOffset != s2->sourceData.pushAddressOffset)
+      return false;
+
+  case VK_DESCRIPTOR_MAPPING_SOURCE_INDIRECT_ADDRESS_EXT:
+    if (!compare_VkDescriptorMappingSourceIndirectAddressEXT(&s1->sourceData.indirectAddress,
+                                                             &s2->sourceData.indirectAddress))
+      return false;
+
+#if VK_EXT_descriptor_heap && (VK_KHR_ray_tracing_pipeline || VK_NV_ray_tracing)
+  case VK_DESCRIPTOR_MAPPING_SOURCE_HEAP_WITH_SHADER_RECORD_INDEX_EXT:
+#endif
+#if VK_EXT_descriptor_heap && (VK_KHR_ray_tracing_pipeline || VK_NV_ray_tracing)
+    if (!compare_VkDescriptorMappingSourceShaderRecordIndexEXT(&s1->sourceData.shaderRecordIndex,
+                                                               &s2->sourceData.shaderRecordIndex))
+      return false;
+#endif
+
+#if VK_EXT_descriptor_heap && (VK_KHR_ray_tracing_pipeline || VK_NV_ray_tracing)
+  case VK_DESCRIPTOR_MAPPING_SOURCE_SHADER_RECORD_DATA_EXT:
+#endif
+#if VK_EXT_descriptor_heap && (VK_KHR_ray_tracing_pipeline || VK_NV_ray_tracing)
+    if (s1->sourceData.shaderRecordDataOffset != s2->sourceData.shaderRecordDataOffset)
+      return false;
+#endif
+
+#if VK_EXT_descriptor_heap && (VK_KHR_ray_tracing_pipeline || VK_NV_ray_tracing)
+  case VK_DESCRIPTOR_MAPPING_SOURCE_SHADER_RECORD_ADDRESS_EXT:
+#endif
+#if VK_EXT_descriptor_heap && (VK_KHR_ray_tracing_pipeline || VK_NV_ray_tracing)
+    if (s1->sourceData.shaderRecordAddressOffset != s2->sourceData.shaderRecordAddressOffset)
+      return false;
+#endif
+
+  default:;
+  }
+
+  return true;
+}
+#endif
 
 #if VK_HEADER_VERSION >= 207 && VK_VALVE_descriptor_set_host_mapping
 bool compare_VkDescriptorSetBindingReferenceVALVE(VkDescriptorSetBindingReferenceVALVE const *s1,
@@ -15964,6 +16347,17 @@ bool compare_VkDeviceAddressBindingCallbackDataEXT(
   // local, simple types
   if ((s1->flags != s2->flags) || (s1->baseAddress != s2->baseAddress) || (s1->size != s2->size) ||
       (s1->bindingType != s2->bindingType))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkDeviceAddressRangeEXT(VkDeviceAddressRangeEXT const *s1,
+                                     VkDeviceAddressRangeEXT const *s2) {
+  // local, simple types
+  if ((s1->address != s2->address) || (s1->size != s2->size))
     return false;
 
   return true;
@@ -18515,6 +18909,40 @@ bool compare_VkHeadlessSurfaceCreateInfoEXT(VkHeadlessSurfaceCreateInfoEXT const
 }
 #endif
 
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkHostAddressRangeConstEXT(VkHostAddressRangeConstEXT const *s1,
+                                        VkHostAddressRangeConstEXT const *s2) {
+  // local, simple types
+  if ((s1->size != s2->size))
+    return false;
+
+  // non-local members
+
+  // address - size
+  if (s1->address != s2->address && (s1->address == NULL || s2->address == NULL ||
+                                     memcmp(s1->address, s2->address, s1->size) != 0))
+    return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkHostAddressRangeEXT(VkHostAddressRangeEXT const *s1,
+                                   VkHostAddressRangeEXT const *s2) {
+  // local, simple types
+  if ((s1->size != s2->size))
+    return false;
+
+  // non-local members
+
+  // address - size
+  if (s1->address != s2->address && (s1->address == NULL || s2->address == NULL ||
+                                     memcmp(s1->address, s2->address, s1->size) != 0))
+    return false;
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 303 && VK_VERSION_1_4
 bool compare_VkHostImageCopyDevicePerformanceQuery(
     VkHostImageCopyDevicePerformanceQuery const *s1,
@@ -18803,6 +19231,17 @@ bool compare_VkImageCreateInfo(VkImageCreateInfo const *s1, VkImageCreateInfo co
     return false;
   return true;
 }
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkImageDescriptorInfoEXT(VkImageDescriptorInfoEXT const *s1,
+                                      VkImageDescriptorInfoEXT const *s2) {
+  // local, simple types
+  if ((s1->layout != s2->layout))
+    return false;
+
+  return true;
+}
+#endif
 
 #if VK_HEADER_VERSION >= 86 && VK_EXT_image_drm_format_modifier
 bool compare_VkImageDrmFormatModifierExplicitCreateInfoEXT(
@@ -19794,6 +20233,18 @@ bool compare_VkIndirectCommandsLayoutCreateInfoNVX(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap && VK_NV_device_generated_commands
+bool compare_VkIndirectCommandsLayoutPushDataTokenNV(
+    VkIndirectCommandsLayoutPushDataTokenNV const *s1,
+    VkIndirectCommandsLayoutPushDataTokenNV const *s2) {
+  // local, simple types
+  if ((s1->pushDataOffset != s2->pushDataOffset) || (s1->pushDataSize != s2->pushDataSize))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 296 && VK_EXT_device_generated_commands
 bool compare_VkIndirectCommandsLayoutTokenEXT(VkIndirectCommandsLayoutTokenEXT const *s1,
                                               VkIndirectCommandsLayoutTokenEXT const *s2) {
@@ -19806,6 +20257,12 @@ bool compare_VkIndirectCommandsLayoutTokenEXT(VkIndirectCommandsLayoutTokenEXT c
   // VkIndirectCommandsTokenDataEXT
   case VK_INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_CONSTANT_EXT:
   case VK_INDIRECT_COMMANDS_TOKEN_TYPE_SEQUENCE_INDEX_EXT:
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap && VK_EXT_device_generated_commands
+  case VK_INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_DATA_EXT:
+#endif
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap && VK_EXT_device_generated_commands
+  case VK_INDIRECT_COMMANDS_TOKEN_TYPE_PUSH_DATA_SEQUENCE_INDEX_EXT:
+#endif
     if (!compare_VkIndirectCommandsPushConstantTokenEXT(s1->data.pPushConstant,
                                                         s2->data.pPushConstant))
       return false;
@@ -21285,6 +21742,13 @@ bool compare_VkOffset3D(VkOffset3D const *s1, VkOffset3D const *s2) {
 
   return true;
 }
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkOpaqueCaptureDataCreateInfoEXT(VkOpaqueCaptureDataCreateInfoEXT const *s1,
+                                              VkOpaqueCaptureDataCreateInfoEXT const *s2) {
+  return true;
+}
+#endif
 
 #if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
 bool compare_VkOpaqueCaptureDescriptorDataCreateInfoEXT(
@@ -22836,6 +23300,64 @@ bool compare_VkPhysicalDeviceDescriptorBufferTensorPropertiesARM(
       (s1->tensorViewCaptureReplayDescriptorDataSize !=
        s2->tensorViewCaptureReplayDescriptorDataSize) ||
       (s1->tensorDescriptorSize != s2->tensorDescriptorSize))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkPhysicalDeviceDescriptorHeapFeaturesEXT(
+    VkPhysicalDeviceDescriptorHeapFeaturesEXT const *s1,
+    VkPhysicalDeviceDescriptorHeapFeaturesEXT const *s2) {
+  // local, simple types
+  if ((s1->descriptorHeap != s2->descriptorHeap) ||
+      (s1->descriptorHeapCaptureReplay != s2->descriptorHeapCaptureReplay))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkPhysicalDeviceDescriptorHeapPropertiesEXT(
+    VkPhysicalDeviceDescriptorHeapPropertiesEXT const *s1,
+    VkPhysicalDeviceDescriptorHeapPropertiesEXT const *s2) {
+  // local, simple types
+  if ((s1->samplerHeapAlignment != s2->samplerHeapAlignment) ||
+      (s1->resourceHeapAlignment != s2->resourceHeapAlignment) ||
+      (s1->maxSamplerHeapSize != s2->maxSamplerHeapSize) ||
+      (s1->maxResourceHeapSize != s2->maxResourceHeapSize) ||
+      (s1->minSamplerHeapReservedRange != s2->minSamplerHeapReservedRange) ||
+      (s1->minSamplerHeapReservedRangeWithEmbedded !=
+       s2->minSamplerHeapReservedRangeWithEmbedded) ||
+      (s1->minResourceHeapReservedRange != s2->minResourceHeapReservedRange) ||
+      (s1->samplerDescriptorSize != s2->samplerDescriptorSize) ||
+      (s1->imageDescriptorSize != s2->imageDescriptorSize) ||
+      (s1->bufferDescriptorSize != s2->bufferDescriptorSize) ||
+      (s1->samplerDescriptorAlignment != s2->samplerDescriptorAlignment) ||
+      (s1->imageDescriptorAlignment != s2->imageDescriptorAlignment) ||
+      (s1->bufferDescriptorAlignment != s2->bufferDescriptorAlignment) ||
+      (s1->maxPushDataSize != s2->maxPushDataSize) ||
+      (s1->imageCaptureReplayOpaqueDataSize != s2->imageCaptureReplayOpaqueDataSize) ||
+      (s1->maxDescriptorHeapEmbeddedSamplers != s2->maxDescriptorHeapEmbeddedSamplers) ||
+      (s1->samplerYcbcrConversionCount != s2->samplerYcbcrConversionCount) ||
+      (s1->sparseDescriptorHeaps != s2->sparseDescriptorHeaps) ||
+      (s1->protectedDescriptorHeaps != s2->protectedDescriptorHeaps))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap && VK_ARM_tensors
+bool compare_VkPhysicalDeviceDescriptorHeapTensorPropertiesARM(
+    VkPhysicalDeviceDescriptorHeapTensorPropertiesARM const *s1,
+    VkPhysicalDeviceDescriptorHeapTensorPropertiesARM const *s2) {
+  // local, simple types
+  if ((s1->tensorDescriptorSize != s2->tensorDescriptorSize) ||
+      (s1->tensorDescriptorAlignment != s2->tensorDescriptorAlignment) ||
+      (s1->tensorCaptureReplayOpaqueDataSize != s2->tensorCaptureReplayOpaqueDataSize))
     return false;
 
   return true;
@@ -25234,6 +25756,18 @@ bool compare_VkPhysicalDeviceInlineUniformBlockPropertiesEXT(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 340 && VK_KHR_internally_synchronized_queues
+bool compare_VkPhysicalDeviceInternallySynchronizedQueuesFeaturesKHR(
+    VkPhysicalDeviceInternallySynchronizedQueuesFeaturesKHR const *s1,
+    VkPhysicalDeviceInternallySynchronizedQueuesFeaturesKHR const *s2) {
+  // local, simple types
+  if ((s1->internallySynchronizedQueues != s2->internallySynchronizedQueues))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 185 && VK_HUAWEI_invocation_mask
 bool compare_VkPhysicalDeviceInvocationMaskFeaturesHUAWEI(
     VkPhysicalDeviceInvocationMaskFeaturesHUAWEI const *s1,
@@ -27253,6 +27787,33 @@ bool compare_VkPhysicalDeviceProvokingVertexPropertiesEXT(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 340 && VK_NV_push_constant_bank
+bool compare_VkPhysicalDevicePushConstantBankFeaturesNV(
+    VkPhysicalDevicePushConstantBankFeaturesNV const *s1,
+    VkPhysicalDevicePushConstantBankFeaturesNV const *s2) {
+  // local, simple types
+  if ((s1->pushConstantBank != s2->pushConstantBank))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_NV_push_constant_bank
+bool compare_VkPhysicalDevicePushConstantBankPropertiesNV(
+    VkPhysicalDevicePushConstantBankPropertiesNV const *s1,
+    VkPhysicalDevicePushConstantBankPropertiesNV const *s2) {
+  // local, simple types
+  if ((s1->maxGraphicsPushConstantBanks != s2->maxGraphicsPushConstantBanks) ||
+      (s1->maxComputePushConstantBanks != s2->maxComputePushConstantBanks) ||
+      (s1->maxGraphicsPushDataBanks != s2->maxGraphicsPushDataBanks) ||
+      (s1->maxComputePushDataBanks != s2->maxComputePushDataBanks))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 303 && VK_VERSION_1_4
 bool compare_VkPhysicalDevicePushDescriptorProperties(
     VkPhysicalDevicePushDescriptorProperties const *s1,
@@ -28948,6 +29509,18 @@ bool compare_VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR(
     VkPhysicalDeviceShaderSubgroupExtendedTypesFeaturesKHR const *s2) {
   // local, simple types
   if ((s1->shaderSubgroupExtendedTypes != s2->shaderSubgroupExtendedTypes))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_shader_subgroup_partitioned
+bool compare_VkPhysicalDeviceShaderSubgroupPartitionedFeaturesEXT(
+    VkPhysicalDeviceShaderSubgroupPartitionedFeaturesEXT const *s1,
+    VkPhysicalDeviceShaderSubgroupPartitionedFeaturesEXT const *s2) {
+  // local, simple types
+  if ((s1->shaderSubgroupPartitioned != s2->shaderSubgroupPartitioned))
     return false;
 
   return true;
@@ -32400,6 +32973,17 @@ bool compare_VkProtectedSubmitInfo(VkProtectedSubmitInfo const *s1,
 }
 #endif
 
+#if VK_HEADER_VERSION >= 340 && VK_NV_push_constant_bank
+bool compare_VkPushConstantBankInfoNV(VkPushConstantBankInfoNV const *s1,
+                                      VkPushConstantBankInfoNV const *s2) {
+  // local, simple types
+  if ((s1->bank != s2->bank))
+    return false;
+
+  return true;
+}
+#endif
+
 bool compare_VkPushConstantRange(VkPushConstantRange const *s1, VkPushConstantRange const *s2) {
   // local, simple types
   if ((s1->stageFlags != s2->stageFlags) || (s1->offset != s2->offset) || (s1->size != s2->size))
@@ -32457,6 +33041,20 @@ bool compare_VkPushConstantsInfoKHR(VkPushConstantsInfoKHR const *s1,
   if (s1->pValues != s2->pValues && (s1->pValues == NULL || s2->pValues == NULL ||
                                      memcmp(s1->pValues, s2->pValues, s1->size) != 0))
     return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkPushDataInfoEXT(VkPushDataInfoEXT const *s1, VkPushDataInfoEXT const *s2) {
+  // local, simple types
+  if ((s1->offset != s2->offset))
+    return false;
+
+  // local, Vulkan struct types
+  if (!compare_VkHostAddressRangeConstEXT(&s1->data, &s2->data))
+    return false;
+
   return true;
 }
 #endif
@@ -34004,6 +34602,58 @@ bool compare_VkResolveImageModeInfoKHR(VkResolveImageModeInfoKHR const *s1,
 }
 #endif
 
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkResourceDescriptorInfoEXT(VkResourceDescriptorInfoEXT const *s1,
+                                         VkResourceDescriptorInfoEXT const *s2) {
+  // local, simple types
+  if ((s1->type != s2->type))
+    return false;
+
+  // union types (with selector)
+  switch (s1->type) {
+  // VkResourceDescriptorDataEXT
+  case VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE:
+  case VK_DESCRIPTOR_TYPE_STORAGE_IMAGE:
+  case VK_DESCRIPTOR_TYPE_INPUT_ATTACHMENT:
+#if VK_HEADER_VERSION >= 222 && VK_QCOM_image_processing
+  case VK_DESCRIPTOR_TYPE_BLOCK_MATCH_IMAGE_QCOM:
+#endif
+#if VK_HEADER_VERSION >= 222 && VK_QCOM_image_processing
+  case VK_DESCRIPTOR_TYPE_SAMPLE_WEIGHT_IMAGE_QCOM:
+#endif
+    if (!compare_VkImageDescriptorInfoEXT(s1->data.pImage, s2->data.pImage))
+      return false;
+
+  case VK_DESCRIPTOR_TYPE_UNIFORM_TEXEL_BUFFER:
+  case VK_DESCRIPTOR_TYPE_STORAGE_TEXEL_BUFFER:
+    if (!compare_VkTexelBufferDescriptorInfoEXT(s1->data.pTexelBuffer, s2->data.pTexelBuffer))
+      return false;
+
+#if (VK_HEADER_VERSION >= 162 && VK_KHR_acceleration_structure) ||                                 \
+    (VK_HEADER_VERSION >= 135 && VK_HEADER_VERSION <= 161 && VK_KHR_ray_tracing &&                 \
+     VK_ENABLE_BETA_EXTENSIONS)
+  case VK_DESCRIPTOR_TYPE_ACCELERATION_STRUCTURE_KHR:
+#endif
+  case VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER:
+  case VK_DESCRIPTOR_TYPE_STORAGE_BUFFER:
+    if (!compare_VkDeviceAddressRangeEXT(s1->data.pAddressRange, s2->data.pAddressRange))
+      return false;
+
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+  case VK_DESCRIPTOR_TYPE_TENSOR_ARM:
+#endif
+#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+    if (!compare_VkTensorViewCreateInfoARM(s1->data.pTensorARM, s2->data.pTensorARM))
+      return false;
+#endif
+
+  default:;
+  }
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 182 && VK_NV_ray_tracing_motion_blur
 bool compare_VkSRTDataNV(VkSRTDataNV const *s1, VkSRTDataNV const *s2) {
   // local, simple types
@@ -34124,6 +34774,18 @@ bool compare_VkSamplerCustomBorderColorCreateInfoEXT(
 
   // union types (no selector)
   if (memcmp(&s1->customBorderColor, &s2->customBorderColor, sizeof(VkClearColorValue)) != 0)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap && VK_EXT_custom_border_color
+bool compare_VkSamplerCustomBorderColorIndexCreateInfoEXT(
+    VkSamplerCustomBorderColorIndexCreateInfoEXT const *s1,
+    VkSamplerCustomBorderColorIndexCreateInfoEXT const *s2) {
+  // local, simple types
+  if ((s1->index != s2->index))
     return false;
 
   return true;
@@ -34655,6 +35317,18 @@ bool compare_VkShaderCreateInfoEXT(VkShaderCreateInfoEXT const *s1,
        memcmp(s1->pSetLayouts, s2->pSetLayouts,
               (s1->setLayoutCount) * sizeof(VkDescriptorSetLayout)) != 0))
     return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkShaderDescriptorSetAndBindingMappingInfoEXT(
+    VkShaderDescriptorSetAndBindingMappingInfoEXT const *s1,
+    VkShaderDescriptorSetAndBindingMappingInfoEXT const *s2) {
+  // local, simple types
+  if ((s1->mappingCount != s2->mappingCount))
+    return false;
+
   return true;
 }
 #endif
@@ -35448,6 +36122,17 @@ bool compare_VkSubresourceLayout2KHR(VkSubresourceLayout2KHR const *s1,
 #if VK_HEADER_VERSION >= 303 && VK_KHR_maintenance5
 bool compare_VkSubresourceLayout2KHR(VkSubresourceLayout2KHR const *s1,
                                      VkSubresourceLayout2KHR const *s2) {
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap && VK_EXT_fragment_density_map
+bool compare_VkSubsampledImageFormatPropertiesEXT(VkSubsampledImageFormatPropertiesEXT const *s1,
+                                                  VkSubsampledImageFormatPropertiesEXT const *s2) {
+  // local, simple types
+  if ((s1->subsampledImageDescriptorCount != s2->subsampledImageDescriptorCount))
+    return false;
+
   return true;
 }
 #endif
@@ -36325,11 +37010,27 @@ bool compare_VkTensorViewCaptureDescriptorDataInfoARM(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
+#if (VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap && VK_ARM_tensors) ||                      \
+    (VK_HEADER_VERSION >= 317 && VK_HEADER_VERSION <= 339 && VK_ARM_tensors)
 bool compare_VkTensorViewCreateInfoARM(VkTensorViewCreateInfoARM const *s1,
                                        VkTensorViewCreateInfoARM const *s2) {
   // local, simple types
   if ((s1->flags != s2->flags) || (s1->tensor != s2->tensor) || (s1->format != s2->format))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 340 && VK_EXT_descriptor_heap
+bool compare_VkTexelBufferDescriptorInfoEXT(VkTexelBufferDescriptorInfoEXT const *s1,
+                                            VkTexelBufferDescriptorInfoEXT const *s2) {
+  // local, simple types
+  if ((s1->format != s2->format))
+    return false;
+
+  // local, Vulkan struct types
+  if (!compare_VkDeviceAddressRangeEXT(&s1->addressRange, &s2->addressRange))
     return false;
 
   return true;
