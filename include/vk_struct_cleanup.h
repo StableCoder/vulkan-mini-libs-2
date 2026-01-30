@@ -37,12 +37,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 341
+#if VK_HEADER_VERSION > 342
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v341)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v342)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v341)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v342)"
 #endif
 #endif
 
@@ -3504,6 +3504,11 @@ void cleanup_VkPhysicalDeviceCooperativeMatrix2FeaturesNV(
 #if VK_HEADER_VERSION >= 300 && VK_NV_cooperative_matrix2
 void cleanup_VkPhysicalDeviceCooperativeMatrix2PropertiesNV(
     VkPhysicalDeviceCooperativeMatrix2PropertiesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 342 && VK_QCOM_cooperative_matrix_conversion
+void cleanup_VkPhysicalDeviceCooperativeMatrixConversionFeaturesQCOM(
+    VkPhysicalDeviceCooperativeMatrixConversionFeaturesQCOM const *pData);
 #endif
 
 #if VK_HEADER_VERSION >= 255 && VK_KHR_cooperative_matrix
@@ -13776,6 +13781,15 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_2_PROPERTIES_NV) {
     cleanup_VkPhysicalDeviceCooperativeMatrix2PropertiesNV(
         (VkPhysicalDeviceCooperativeMatrix2PropertiesNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 342 && VK_QCOM_cooperative_matrix_conversion
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_CONVERSION_FEATURES_QCOM) {
+    cleanup_VkPhysicalDeviceCooperativeMatrixConversionFeaturesQCOM(
+        (VkPhysicalDeviceCooperativeMatrixConversionFeaturesQCOM const *)pData);
     return;
   }
 #endif
@@ -30004,6 +30018,16 @@ void cleanup_VkPhysicalDeviceCooperativeMatrix2FeaturesNV(
 #if VK_HEADER_VERSION >= 300 && VK_NV_cooperative_matrix2
 void cleanup_VkPhysicalDeviceCooperativeMatrix2PropertiesNV(
     VkPhysicalDeviceCooperativeMatrix2PropertiesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 342 && VK_QCOM_cooperative_matrix_conversion
+void cleanup_VkPhysicalDeviceCooperativeMatrixConversionFeaturesQCOM(
+    VkPhysicalDeviceCooperativeMatrixConversionFeaturesQCOM const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 341
+#if VK_HEADER_VERSION > 342
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v341)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v342)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v341)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v342)"
 #endif
 #endif
 
@@ -4158,6 +4158,12 @@ bool compare_VkPhysicalDeviceCooperativeMatrix2FeaturesNV(
 bool compare_VkPhysicalDeviceCooperativeMatrix2PropertiesNV(
     VkPhysicalDeviceCooperativeMatrix2PropertiesNV const *s1,
     VkPhysicalDeviceCooperativeMatrix2PropertiesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 342 && VK_QCOM_cooperative_matrix_conversion
+bool compare_VkPhysicalDeviceCooperativeMatrixConversionFeaturesQCOM(
+    VkPhysicalDeviceCooperativeMatrixConversionFeaturesQCOM const *s1,
+    VkPhysicalDeviceCooperativeMatrixConversionFeaturesQCOM const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 255 && VK_KHR_cooperative_matrix
@@ -22716,6 +22722,18 @@ bool compare_VkPhysicalDeviceCooperativeMatrix2PropertiesNV(
        s2->cooperativeMatrixFlexibleDimensionsMaxDimension) ||
       (s1->cooperativeMatrixWorkgroupScopeReservedSharedMemory !=
        s2->cooperativeMatrixWorkgroupScopeReservedSharedMemory))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 342 && VK_QCOM_cooperative_matrix_conversion
+bool compare_VkPhysicalDeviceCooperativeMatrixConversionFeaturesQCOM(
+    VkPhysicalDeviceCooperativeMatrixConversionFeaturesQCOM const *s1,
+    VkPhysicalDeviceCooperativeMatrixConversionFeaturesQCOM const *s2) {
+  // local, simple types
+  if ((s1->cooperativeMatrixConversion != s2->cooperativeMatrixConversion))
     return false;
 
   return true;
