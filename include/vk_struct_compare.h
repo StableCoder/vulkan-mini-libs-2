@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 342
+#if VK_HEADER_VERSION > 343
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v342)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v343)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v342)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v343)"
 #endif
 #endif
 
@@ -9584,6 +9584,11 @@ bool compare_VkTransformMatrixKHR(VkTransformMatrixKHR const *s1, VkTransformMat
 
 #if VK_HEADER_VERSION >= 135 && VK_NV_ray_tracing
 bool compare_VkTransformMatrixNV(VkTransformMatrixNV const *s1, VkTransformMatrixNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 343 && VK_SEC_ubm_surface
+bool compare_VkUbmSurfaceCreateInfoSEC(VkUbmSurfaceCreateInfoSEC const *s1,
+                                       VkUbmSurfaceCreateInfoSEC const *s2);
 #endif
 
 #if VK_EXT_validation_cache
@@ -37243,6 +37248,24 @@ bool compare_VkTransformMatrixKHR(VkTransformMatrixKHR const *s1, VkTransformMat
 
 #if VK_HEADER_VERSION >= 135 && VK_NV_ray_tracing
 bool compare_VkTransformMatrixNV(VkTransformMatrixNV const *s1, VkTransformMatrixNV const *s2) {
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 343 && VK_SEC_ubm_surface
+bool compare_VkUbmSurfaceCreateInfoSEC(VkUbmSurfaceCreateInfoSEC const *s1,
+                                       VkUbmSurfaceCreateInfoSEC const *s2) {
+  // local, simple types
+  if ((s1->flags != s2->flags))
+    return false;
+
+  // non-local members
+  if (s1->ubm_device != s2->ubm_device)
+    return false;
+
+  if (s1->ubm_surface != s2->ubm_surface)
+    return false;
+
   return true;
 }
 #endif

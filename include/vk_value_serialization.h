@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 342
+#if VK_HEADER_VERSION > 343
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v342)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v343)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v342)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v343)"
 #endif
 #endif
 
@@ -5185,7 +5185,7 @@ static int32_t const VkPolygonModeValues[4] = {
     1000153000, // FILL_RECTANGLE_NV
 };
 
-static char const *const VkFormatStrings[352] = {
+static char const *const VkFormatStrings[355] = {
     "G8B8G8R8_422_UNORM_KHR",                         // 1000156000
     "B8G8R8G8_422_UNORM_KHR",                         // 1000156001
     "G8_B8_R8_3PLANE_420_UNORM_KHR",                  // 1000156002
@@ -5538,9 +5538,12 @@ static char const *const VkFormatStrings[352] = {
     "G14X2_B14X2R14X2_2PLANE_420_UNORM_3PACK16_ARM",  // 1000609012
     "G14X2_B14X2R14X2_2PLANE_422_UNORM_3PACK16_ARM",  // 1000609013
     "R8_BOOL_ARM",                                    // 1000460000
+    "R16_SFLOAT_FPENCODING_BFLOAT16_ARM",             // 1000460001
+    "R8_SFLOAT_FPENCODING_FLOAT8E4M3_ARM",            // 1000460002
+    "R8_SFLOAT_FPENCODING_FLOAT8E5M2_ARM",            // 1000460003
 };
 
-static int32_t const VkFormatValues[352] = {
+static int32_t const VkFormatValues[355] = {
     1000156000, // G8B8G8R8_422_UNORM_KHR
     1000156001, // B8G8R8G8_422_UNORM_KHR
     1000156002, // G8_B8_R8_3PLANE_420_UNORM_KHR
@@ -5893,6 +5896,9 @@ static int32_t const VkFormatValues[352] = {
     1000609012, // G14X2_B14X2R14X2_2PLANE_420_UNORM_3PACK16_ARM
     1000609013, // G14X2_B14X2R14X2_2PLANE_422_UNORM_3PACK16_ARM
     1000460000, // R8_BOOL_ARM
+    1000460001, // R16_SFLOAT_FPENCODING_BFLOAT16_ARM
+    1000460002, // R8_SFLOAT_FPENCODING_FLOAT8E4M3_ARM
+    1000460003, // R8_SFLOAT_FPENCODING_FLOAT8E5M2_ARM
 };
 
 static char const *const VkFrontFaceStrings[2] = {
@@ -9189,8 +9195,8 @@ typedef struct ValueSet {
   EnumType type;
 } ValueSet;
 
-static const uint32_t cValueSetCount = 413;
-static ValueSet const cValueSets[413] = {
+static const uint32_t cValueSetCount = 414;
+static ValueSet const cValueSets[414] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsStrings, VkFramebufferCreateFlagsValues, 2,
      ENUM_TYPE_FLAG32},
     {"VkQueryPoolCreateFlags", VkQueryPoolCreateFlagsStrings, VkQueryPoolCreateFlagsValues, 1,
@@ -9386,6 +9392,7 @@ static ValueSet const cValueSets[413] = {
     {"VkViSurfaceCreateFlagsNN", NULL, NULL, 0, ENUM_TYPE_FLAG32},
     {"VkWaylandSurfaceCreateFlagsKHR", VkWaylandSurfaceCreateFlagsKHRStrings,
      VkWaylandSurfaceCreateFlagsKHRValues, 1, ENUM_TYPE_FLAG32},
+    {"VkUbmSurfaceCreateFlagsSEC", NULL, NULL, 0, ENUM_TYPE_FLAG32},
     {"VkWin32SurfaceCreateFlagsKHR", NULL, NULL, 0, ENUM_TYPE_FLAG32},
     {"VkXlibSurfaceCreateFlagsKHR", NULL, NULL, 0, ENUM_TYPE_FLAG32},
     {"VkXcbSurfaceCreateFlagsKHR", NULL, NULL, 0, ENUM_TYPE_FLAG32},
@@ -9592,7 +9599,7 @@ static ValueSet const cValueSets[413] = {
     {"VkDescriptorType", VkDescriptorTypeStrings, VkDescriptorTypeValues, 22, ENUM_TYPE_ENUM},
     {"VkDynamicState", VkDynamicStateStrings, VkDynamicStateValues, 90, ENUM_TYPE_ENUM},
     {"VkPolygonMode", VkPolygonModeStrings, VkPolygonModeValues, 4, ENUM_TYPE_ENUM},
-    {"VkFormat", VkFormatStrings, VkFormatValues, 352, ENUM_TYPE_ENUM},
+    {"VkFormat", VkFormatStrings, VkFormatValues, 355, ENUM_TYPE_ENUM},
     {"VkFrontFace", VkFrontFaceStrings, VkFrontFaceValues, 2, ENUM_TYPE_ENUM},
     {"VkImageLayout", VkImageLayoutStrings, VkImageLayoutValues, 42, ENUM_TYPE_ENUM},
     {"VkImageTiling", VkImageTilingStrings, VkImageTilingValues, 3, ENUM_TYPE_ENUM},

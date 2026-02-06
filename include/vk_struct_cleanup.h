@@ -37,12 +37,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 342
+#if VK_HEADER_VERSION > 343
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v342)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v343)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v342)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v343)"
 #endif
 #endif
 
@@ -8054,6 +8054,10 @@ void cleanup_VkTransformMatrixKHR(VkTransformMatrixKHR const *pData);
 
 #if VK_HEADER_VERSION >= 135 && VK_NV_ray_tracing
 void cleanup_VkTransformMatrixNV(VkTransformMatrixNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 343 && VK_SEC_ubm_surface
+void cleanup_VkUbmSurfaceCreateInfoSEC(VkUbmSurfaceCreateInfoSEC const *pData);
 #endif
 
 #if VK_EXT_validation_cache
@@ -19602,6 +19606,13 @@ void cleanup_vk_struct(void const *pData) {
 #if VK_HEADER_VERSION >= 124 && VK_HEADER_VERSION <= 130 && VK_KHR_timeline_semaphore
   if (pTemp->sType == VK_STRUCTURE_TYPE_TIMELINE_SEMAPHORE_SUBMIT_INFO_KHR) {
     cleanup_VkTimelineSemaphoreSubmitInfoKHR((VkTimelineSemaphoreSubmitInfoKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 343 && VK_SEC_ubm_surface
+  if (pTemp->sType == VK_STRUCTURE_TYPE_UBM_SURFACE_CREATE_INFO_SEC) {
+    cleanup_VkUbmSurfaceCreateInfoSEC((VkUbmSurfaceCreateInfoSEC const *)pData);
     return;
   }
 #endif
@@ -40280,6 +40291,21 @@ void cleanup_VkTransformMatrixKHR(VkTransformMatrixKHR const *pData) {}
 
 #if VK_HEADER_VERSION >= 135 && VK_NV_ray_tracing
 void cleanup_VkTransformMatrixNV(VkTransformMatrixNV const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 343 && VK_SEC_ubm_surface
+void cleanup_VkUbmSurfaceCreateInfoSEC(VkUbmSurfaceCreateInfoSEC const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // ubm_device
+  free((void *)pData->ubm_device);
+
+  // ubm_surface
+  free((void *)pData->ubm_surface);
+}
 #endif
 
 #if VK_EXT_validation_cache
