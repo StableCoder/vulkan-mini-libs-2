@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 343
+#if VK_HEADER_VERSION > 344
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v343)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v344)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v343)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v344)"
 #endif
 #endif
 
@@ -6765,6 +6765,12 @@ bool compare_VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR(
     VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 344 && VK_VALVE_shader_mixed_float_dot_product
+bool compare_VkPhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE(
+    VkPhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE const *s1,
+    VkPhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 219 && VK_EXT_shader_module_identifier
 bool compare_VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT(
     VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT const *s1,
@@ -9586,7 +9592,12 @@ bool compare_VkTransformMatrixKHR(VkTransformMatrixKHR const *s1, VkTransformMat
 bool compare_VkTransformMatrixNV(VkTransformMatrixNV const *s1, VkTransformMatrixNV const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 343 && VK_SEC_ubm_surface
+#if VK_HEADER_VERSION >= 343 && VK_HEADER_VERSION <= 343 && VK_SEC_ubm_surface
+bool compare_VkUbmSurfaceCreateInfoSEC(VkUbmSurfaceCreateInfoSEC const *s1,
+                                       VkUbmSurfaceCreateInfoSEC const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 344 && VK_SEC_ubm_surface
 bool compare_VkUbmSurfaceCreateInfoSEC(VkUbmSurfaceCreateInfoSEC const *s1,
                                        VkUbmSurfaceCreateInfoSEC const *s2);
 #endif
@@ -29391,6 +29402,24 @@ bool compare_VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 344 && VK_VALVE_shader_mixed_float_dot_product
+bool compare_VkPhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE(
+    VkPhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE const *s1,
+    VkPhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE const *s2) {
+  // local, simple types
+  if ((s1->shaderMixedFloatDotProductFloat16AccFloat32 !=
+       s2->shaderMixedFloatDotProductFloat16AccFloat32) ||
+      (s1->shaderMixedFloatDotProductFloat16AccFloat16 !=
+       s2->shaderMixedFloatDotProductFloat16AccFloat16) ||
+      (s1->shaderMixedFloatDotProductBFloat16Acc != s2->shaderMixedFloatDotProductBFloat16Acc) ||
+      (s1->shaderMixedFloatDotProductFloat8AccFloat32 !=
+       s2->shaderMixedFloatDotProductFloat8AccFloat32))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 219 && VK_EXT_shader_module_identifier
 bool compare_VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT(
     VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT const *s1,
@@ -37252,7 +37281,7 @@ bool compare_VkTransformMatrixNV(VkTransformMatrixNV const *s1, VkTransformMatri
 }
 #endif
 
-#if VK_HEADER_VERSION >= 343 && VK_SEC_ubm_surface
+#if VK_HEADER_VERSION >= 343 && VK_HEADER_VERSION <= 343 && VK_SEC_ubm_surface
 bool compare_VkUbmSurfaceCreateInfoSEC(VkUbmSurfaceCreateInfoSEC const *s1,
                                        VkUbmSurfaceCreateInfoSEC const *s2) {
   // local, simple types
@@ -37264,6 +37293,24 @@ bool compare_VkUbmSurfaceCreateInfoSEC(VkUbmSurfaceCreateInfoSEC const *s1,
     return false;
 
   if (s1->ubm_surface != s2->ubm_surface)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 344 && VK_SEC_ubm_surface
+bool compare_VkUbmSurfaceCreateInfoSEC(VkUbmSurfaceCreateInfoSEC const *s1,
+                                       VkUbmSurfaceCreateInfoSEC const *s2) {
+  // local, simple types
+  if ((s1->flags != s2->flags))
+    return false;
+
+  // non-local members
+  if (s1->device != s2->device)
+    return false;
+
+  if (s1->surface != s2->surface)
     return false;
 
   return true;

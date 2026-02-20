@@ -37,12 +37,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 343
+#if VK_HEADER_VERSION > 344
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v343)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v344)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v343)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v344)"
 #endif
 #endif
 
@@ -5689,6 +5689,11 @@ void cleanup_VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR(
     VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR const *pData);
 #endif
 
+#if VK_HEADER_VERSION >= 344 && VK_VALVE_shader_mixed_float_dot_product
+void cleanup_VkPhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE(
+    VkPhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE const *pData);
+#endif
+
 #if VK_HEADER_VERSION >= 219 && VK_EXT_shader_module_identifier
 void cleanup_VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT(
     VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT const *pData);
@@ -8056,7 +8061,11 @@ void cleanup_VkTransformMatrixKHR(VkTransformMatrixKHR const *pData);
 void cleanup_VkTransformMatrixNV(VkTransformMatrixNV const *pData);
 #endif
 
-#if VK_HEADER_VERSION >= 343 && VK_SEC_ubm_surface
+#if VK_HEADER_VERSION >= 343 && VK_HEADER_VERSION <= 343 && VK_SEC_ubm_surface
+void cleanup_VkUbmSurfaceCreateInfoSEC(VkUbmSurfaceCreateInfoSEC const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 344 && VK_SEC_ubm_surface
 void cleanup_VkUbmSurfaceCreateInfoSEC(VkUbmSurfaceCreateInfoSEC const *pData);
 #endif
 
@@ -16665,6 +16674,15 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
+#if VK_HEADER_VERSION >= 344 && VK_VALVE_shader_mixed_float_dot_product
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MIXED_FLOAT_DOT_PRODUCT_FEATURES_VALVE) {
+    cleanup_VkPhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE(
+        (VkPhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE const *)pData);
+    return;
+  }
+#endif
+
 #if VK_HEADER_VERSION >= 219 && VK_EXT_shader_module_identifier
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MODULE_IDENTIFIER_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT(
@@ -19610,7 +19628,14 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
-#if VK_HEADER_VERSION >= 343 && VK_SEC_ubm_surface
+#if VK_HEADER_VERSION >= 343 && VK_HEADER_VERSION <= 343 && VK_SEC_ubm_surface
+  if (pTemp->sType == VK_STRUCTURE_TYPE_UBM_SURFACE_CREATE_INFO_SEC) {
+    cleanup_VkUbmSurfaceCreateInfoSEC((VkUbmSurfaceCreateInfoSEC const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 344 && VK_SEC_ubm_surface
   if (pTemp->sType == VK_STRUCTURE_TYPE_UBM_SURFACE_CREATE_INFO_SEC) {
     cleanup_VkUbmSurfaceCreateInfoSEC((VkUbmSurfaceCreateInfoSEC const *)pData);
     return;
@@ -34426,6 +34451,16 @@ void cleanup_VkPhysicalDeviceShaderMaximalReconvergenceFeaturesKHR(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 344 && VK_VALVE_shader_mixed_float_dot_product
+void cleanup_VkPhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE(
+    VkPhysicalDeviceShaderMixedFloatDotProductFeaturesVALVE const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
 #if VK_HEADER_VERSION >= 219 && VK_EXT_shader_module_identifier
 void cleanup_VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT(
     VkPhysicalDeviceShaderModuleIdentifierFeaturesEXT const *pData) {
@@ -40293,7 +40328,7 @@ void cleanup_VkTransformMatrixKHR(VkTransformMatrixKHR const *pData) {}
 void cleanup_VkTransformMatrixNV(VkTransformMatrixNV const *pData) {}
 #endif
 
-#if VK_HEADER_VERSION >= 343 && VK_SEC_ubm_surface
+#if VK_HEADER_VERSION >= 343 && VK_HEADER_VERSION <= 343 && VK_SEC_ubm_surface
 void cleanup_VkUbmSurfaceCreateInfoSEC(VkUbmSurfaceCreateInfoSEC const *pData) {
   // pNext
   if (pData->pNext != NULL)
@@ -40305,6 +40340,21 @@ void cleanup_VkUbmSurfaceCreateInfoSEC(VkUbmSurfaceCreateInfoSEC const *pData) {
 
   // ubm_surface
   free((void *)pData->ubm_surface);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 344 && VK_SEC_ubm_surface
+void cleanup_VkUbmSurfaceCreateInfoSEC(VkUbmSurfaceCreateInfoSEC const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // device
+  free((void *)pData->device);
+
+  // surface
+  free((void *)pData->surface);
 }
 #endif
 
