@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2021-2025 George Cave - gcave@stablecoder.ca
+    Copyright (C) 2021-2026 George Cave - gcave@stablecoder.ca
 
     SPDX-License-Identifier: Apache-2.0
 
@@ -37,13 +37,13 @@ _Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) >= 0,
                "XR_CURRENT_API_VERSION is lower than the minimum supported version (v0)");
 #endif
 
-#if (XR_CURRENT_API_VERSION & 0xffffffffULL) > 54
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) > 57
 #if _MSC_VER
 #pragma message(                                                                                   \
     __FILE__                                                                                       \
-    ": warning: XR_CURRENT_API_VERSION is higher than what the header fully supports (v54)")
+    ": warning: XR_CURRENT_API_VERSION is higher than what the header fully supports (v57)")
 #else
-#warning "XR_CURRENT_API_VERSION is higher than what the header fully supports (v54)"
+#warning "XR_CURRENT_API_VERSION is higher than what the header fully supports (v57)"
 #endif
 #endif
 
@@ -373,6 +373,8 @@ char const *XrResult_to_string(XrResult result) {
     return "XR_ERROR_SPACE_GROUP_NOT_FOUND_META";
   case -1000701000:
     return "XR_ERROR_ANCHOR_NOT_OWNED_BY_CALLER_ANDROID";
+  case -1000709000:
+    return "XR_ERROR_IMAGE_FORMAT_UNSUPPORTED_ANDROID";
   case -1000740001:
     return "XR_ERROR_SPATIAL_CAPABILITY_UNSUPPORTED_EXT";
   case -1000740002:
