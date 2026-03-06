@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 344
+#if VK_HEADER_VERSION > 345
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v344)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v345)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v344)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v345)"
 #endif
 #endif
 
@@ -6017,7 +6017,9 @@ bool compare_VkPhysicalDevicePresentIdFeaturesKHR(VkPhysicalDevicePresentIdFeatu
                                                   VkPhysicalDevicePresentIdFeaturesKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 308 && VK_NV_present_metering && VK_ENABLE_BETA_EXTENSIONS
+#if (VK_HEADER_VERSION >= 345 && VK_NV_present_metering) ||                                        \
+    (VK_HEADER_VERSION >= 308 && VK_HEADER_VERSION <= 344 && VK_NV_present_metering &&             \
+     VK_ENABLE_BETA_EXTENSIONS)
 bool compare_VkPhysicalDevicePresentMeteringFeaturesNV(
     VkPhysicalDevicePresentMeteringFeaturesNV const *s1,
     VkPhysicalDevicePresentMeteringFeaturesNV const *s2);
@@ -6697,6 +6699,18 @@ bool compare_VkPhysicalDeviceShaderImageAtomicInt64FeaturesEXT(
 bool compare_VkPhysicalDeviceShaderImageFootprintFeaturesNV(
     VkPhysicalDeviceShaderImageFootprintFeaturesNV const *s1,
     VkPhysicalDeviceShaderImageFootprintFeaturesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 345 && VK_ARM_shader_instrumentation
+bool compare_VkPhysicalDeviceShaderInstrumentationFeaturesARM(
+    VkPhysicalDeviceShaderInstrumentationFeaturesARM const *s1,
+    VkPhysicalDeviceShaderInstrumentationFeaturesARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 345 && VK_ARM_shader_instrumentation
+bool compare_VkPhysicalDeviceShaderInstrumentationPropertiesARM(
+    VkPhysicalDeviceShaderInstrumentationPropertiesARM const *s1,
+    VkPhysicalDeviceShaderInstrumentationPropertiesARM const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
@@ -8922,7 +8936,9 @@ bool compare_VkSetLatencyMarkerInfoNV(VkSetLatencyMarkerInfoNV const *s1,
                                       VkSetLatencyMarkerInfoNV const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 308 && VK_NV_present_metering && VK_ENABLE_BETA_EXTENSIONS
+#if (VK_HEADER_VERSION >= 345 && VK_NV_present_metering) ||                                        \
+    (VK_HEADER_VERSION >= 308 && VK_HEADER_VERSION <= 344 && VK_NV_present_metering &&             \
+     VK_ENABLE_BETA_EXTENSIONS)
 bool compare_VkSetPresentConfigNV(VkSetPresentConfigNV const *s1, VkSetPresentConfigNV const *s2);
 #endif
 
@@ -8940,6 +8956,23 @@ bool compare_VkShaderCreateInfoEXT(VkShaderCreateInfoEXT const *s1,
 bool compare_VkShaderDescriptorSetAndBindingMappingInfoEXT(
     VkShaderDescriptorSetAndBindingMappingInfoEXT const *s1,
     VkShaderDescriptorSetAndBindingMappingInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 345 && VK_ARM_shader_instrumentation
+bool compare_VkShaderInstrumentationCreateInfoARM(VkShaderInstrumentationCreateInfoARM const *s1,
+                                                  VkShaderInstrumentationCreateInfoARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 345 && VK_ARM_shader_instrumentation
+bool compare_VkShaderInstrumentationMetricDataHeaderARM(
+    VkShaderInstrumentationMetricDataHeaderARM const *s1,
+    VkShaderInstrumentationMetricDataHeaderARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 345 && VK_ARM_shader_instrumentation
+bool compare_VkShaderInstrumentationMetricDescriptionARM(
+    VkShaderInstrumentationMetricDescriptionARM const *s1,
+    VkShaderInstrumentationMetricDescriptionARM const *s2);
 #endif
 
 bool compare_VkShaderModuleCreateInfo(VkShaderModuleCreateInfo const *s1,
@@ -27556,7 +27589,9 @@ bool compare_VkPhysicalDevicePresentIdFeaturesKHR(VkPhysicalDevicePresentIdFeatu
 }
 #endif
 
-#if VK_HEADER_VERSION >= 308 && VK_NV_present_metering && VK_ENABLE_BETA_EXTENSIONS
+#if (VK_HEADER_VERSION >= 345 && VK_NV_present_metering) ||                                        \
+    (VK_HEADER_VERSION >= 308 && VK_HEADER_VERSION <= 344 && VK_NV_present_metering &&             \
+     VK_ENABLE_BETA_EXTENSIONS)
 bool compare_VkPhysicalDevicePresentMeteringFeaturesNV(
     VkPhysicalDevicePresentMeteringFeaturesNV const *s1,
     VkPhysicalDevicePresentMeteringFeaturesNV const *s2) {
@@ -29090,6 +29125,31 @@ bool compare_VkPhysicalDeviceShaderImageFootprintFeaturesNV(
     VkPhysicalDeviceShaderImageFootprintFeaturesNV const *s2) {
   // local, simple types
   if ((s1->imageFootprint != s2->imageFootprint))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 345 && VK_ARM_shader_instrumentation
+bool compare_VkPhysicalDeviceShaderInstrumentationFeaturesARM(
+    VkPhysicalDeviceShaderInstrumentationFeaturesARM const *s1,
+    VkPhysicalDeviceShaderInstrumentationFeaturesARM const *s2) {
+  // local, simple types
+  if ((s1->shaderInstrumentation != s2->shaderInstrumentation))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 345 && VK_ARM_shader_instrumentation
+bool compare_VkPhysicalDeviceShaderInstrumentationPropertiesARM(
+    VkPhysicalDeviceShaderInstrumentationPropertiesARM const *s1,
+    VkPhysicalDeviceShaderInstrumentationPropertiesARM const *s2) {
+  // local, simple types
+  if ((s1->numMetrics != s2->numMetrics) ||
+      (s1->perBasicBlockGranularity != s2->perBasicBlockGranularity))
     return false;
 
   return true;
@@ -34124,12 +34184,20 @@ bool compare_VkRenderPassPerformanceCountersByRegionBeginInfoARM(
     return false;
 
   // non-local members
-  if (s1->pCounterAddresses != s2->pCounterAddresses)
+
+  // pCounterAddresses - counterAddressCount
+  if (s1->pCounterAddresses != s2->pCounterAddresses &&
+      (s1->pCounterAddresses == NULL || s2->pCounterAddresses == NULL ||
+       memcmp(s1->pCounterAddresses, s2->pCounterAddresses,
+              (s1->counterAddressCount) * sizeof(VkDeviceAddress)) != 0))
     return false;
 
-  if (s1->pCounterIndices != s2->pCounterIndices)
+  // pCounterIndices - counterIndexCount
+  if (s1->pCounterIndices != s2->pCounterIndices &&
+      (s1->pCounterIndices == NULL || s2->pCounterIndices == NULL ||
+       memcmp(s1->pCounterIndices, s2->pCounterIndices,
+              (s1->counterIndexCount) * sizeof(uint32_t)) != 0))
     return false;
-
   return true;
 }
 #endif
@@ -35319,7 +35387,9 @@ bool compare_VkSetLatencyMarkerInfoNV(VkSetLatencyMarkerInfoNV const *s1,
 }
 #endif
 
-#if VK_HEADER_VERSION >= 308 && VK_NV_present_metering && VK_ENABLE_BETA_EXTENSIONS
+#if (VK_HEADER_VERSION >= 345 && VK_NV_present_metering) ||                                        \
+    (VK_HEADER_VERSION >= 308 && VK_HEADER_VERSION <= 344 && VK_NV_present_metering &&             \
+     VK_ENABLE_BETA_EXTENSIONS)
 bool compare_VkSetPresentConfigNV(VkSetPresentConfigNV const *s1, VkSetPresentConfigNV const *s2) {
   // local, simple types
   if ((s1->numFramesPerBatch != s2->numFramesPerBatch) ||
@@ -35381,6 +35451,39 @@ bool compare_VkShaderDescriptorSetAndBindingMappingInfoEXT(
   if ((s1->mappingCount != s2->mappingCount))
     return false;
 
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 345 && VK_ARM_shader_instrumentation
+bool compare_VkShaderInstrumentationCreateInfoARM(VkShaderInstrumentationCreateInfoARM const *s1,
+                                                  VkShaderInstrumentationCreateInfoARM const *s2) {
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 345 && VK_ARM_shader_instrumentation
+bool compare_VkShaderInstrumentationMetricDataHeaderARM(
+    VkShaderInstrumentationMetricDataHeaderARM const *s1,
+    VkShaderInstrumentationMetricDataHeaderARM const *s2) {
+  // local, simple types
+  if ((s1->resultIndex != s2->resultIndex) || (s1->resultSubIndex != s2->resultSubIndex) ||
+      (s1->stages != s2->stages) || (s1->basicBlockIndex != s2->basicBlockIndex))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 345 && VK_ARM_shader_instrumentation
+bool compare_VkShaderInstrumentationMetricDescriptionARM(
+    VkShaderInstrumentationMetricDescriptionARM const *s1,
+    VkShaderInstrumentationMetricDescriptionARM const *s2) {
+  // local array members
+  if (strncmp(s1->name, s2->name, VK_MAX_DESCRIPTION_SIZE) != 0)
+    return false;
+  if (strncmp(s1->description, s2->description, VK_MAX_DESCRIPTION_SIZE) != 0)
+    return false;
   return true;
 }
 #endif

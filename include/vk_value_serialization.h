@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 344
+#if VK_HEADER_VERSION > 345
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v344)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v345)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v344)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v345)"
 #endif
 #endif
 
@@ -2743,7 +2743,7 @@ static uint32_t const VkIndirectCommandsInputModeFlagsEXTValues[2] = {
     0x00000002, // DXGI_INDEX_BUFFER
 };
 
-static char const *const VkPipelineCreateFlags2Strings[65] = {
+static char const *const VkPipelineCreateFlags2Strings[66] = {
     "DISABLE_OPTIMIZATION_BIT_KHR",                              // 0x00000001
     "ALLOW_DERIVATIVES_BIT_KHR",                                 // 0x00000002
     "DERIVATIVE_BIT_KHR",                                        // 0x00000004
@@ -2809,9 +2809,10 @@ static char const *const VkPipelineCreateFlags2Strings[65] = {
     "RESERVED_48_BIT_HUAWEI",                                    // 0x1000000000000
     "DESCRIPTOR_HEAP_BIT_EXT",                                   // 0x1000000000
     "RESERVED_39_BIT_ARM",                                       // 0x8000000000
+    "INSTRUMENT_SHADERS_BIT_ARM",                                // 0x8000000000
 };
 
-static uint64_t const VkPipelineCreateFlags2Values[65] = {
+static uint64_t const VkPipelineCreateFlags2Values[66] = {
     0x00000001,      // DISABLE_OPTIMIZATION_BIT_KHR
     0x00000002,      // ALLOW_DERIVATIVES_BIT_KHR
     0x00000004,      // DERIVATIVE_BIT_KHR
@@ -2877,6 +2878,7 @@ static uint64_t const VkPipelineCreateFlags2Values[65] = {
     0x1000000000000, // RESERVED_48_BIT_HUAWEI
     0x1000000000,    // DESCRIPTOR_HEAP_BIT_EXT
     0x8000000000,    // RESERVED_39_BIT_ARM
+    0x8000000000,    // INSTRUMENT_SHADERS_BIT_ARM
 };
 
 static char const *const VkBufferUsageFlags2Strings[53] = {
@@ -3957,7 +3959,7 @@ static uint32_t const VkPresentGravityFlagsKHRValues[6] = {
     0x00000004, // CENTERED
 };
 
-static char const *const VkShaderCreateFlagsEXTStrings[23] = {
+static char const *const VkShaderCreateFlagsEXTStrings[24] = {
     "LINK_STAGE",                       // 0x00000001
     "ALLOW_VARYING_SUBGROUP_SIZE",      // 0x00000002
     "REQUIRE_FULL_SUBGROUPS",           // 0x00000004
@@ -3981,9 +3983,10 @@ static char const *const VkShaderCreateFlagsEXTStrings[23] = {
     "64_BIT_INDEXING",                  // 0x00008000
     "DESCRIPTOR_HEAP",                  // 0x00000400
     "RESERVED_11_BIT_ARM",              // 0x00000800
+    "INSTRUMENT_SHADER_BIT_ARM",        // 0x00000800
 };
 
-static uint32_t const VkShaderCreateFlagsEXTValues[23] = {
+static uint32_t const VkShaderCreateFlagsEXTValues[24] = {
     0x00000001, // LINK_STAGE
     0x00000002, // ALLOW_VARYING_SUBGROUP_SIZE
     0x00000004, // REQUIRE_FULL_SUBGROUPS
@@ -4007,6 +4010,7 @@ static uint32_t const VkShaderCreateFlagsEXTValues[23] = {
     0x00008000, // 64_BIT_INDEXING
     0x00000400, // DESCRIPTOR_HEAP
     0x00000800, // RESERVED_11_BIT_ARM
+    0x00000800, // INSTRUMENT_SHADER_BIT_ARM
 };
 
 static char const *const VkTileShadingRenderPassFlagsQCOMStrings[2] = {
@@ -6425,7 +6429,7 @@ static int32_t const VkClusterAccelerationStructureOpModeNVValues[3] = {
     2, // COMPUTE_SIZES
 };
 
-static char const *const VkObjectTypeStrings[65] = {
+static char const *const VkObjectTypeStrings[66] = {
     "DESCRIPTOR_UPDATE_TEMPLATE_KHR",  // 1000085000
     "SAMPLER_YCBCR_CONVERSION_KHR",    // 1000156000
     "PRIVATE_DATA_SLOT_EXT",           // 1000295000
@@ -6491,9 +6495,10 @@ static char const *const VkObjectTypeStrings[65] = {
     "TENSOR_ARM",                      // 1000460000
     "TENSOR_VIEW_ARM",                 // 1000460001
     "DATA_GRAPH_PIPELINE_SESSION_ARM", // 1000507000
+    "SHADER_INSTRUMENTATION_ARM",      // 1000607000
 };
 
-static int32_t const VkObjectTypeValues[65] = {
+static int32_t const VkObjectTypeValues[66] = {
     1000085000, // DESCRIPTOR_UPDATE_TEMPLATE_KHR
     1000156000, // SAMPLER_YCBCR_CONVERSION_KHR
     1000295000, // PRIVATE_DATA_SLOT_EXT
@@ -6559,6 +6564,7 @@ static int32_t const VkObjectTypeValues[65] = {
     1000460000, // TENSOR_ARM
     1000460001, // TENSOR_VIEW_ARM
     1000507000, // DATA_GRAPH_PIPELINE_SESSION_ARM
+    1000607000, // SHADER_INSTRUMENTATION_ARM
 };
 
 static char const *const VkRayTracingInvocationReorderModeEXTStrings[4] = {
@@ -9199,8 +9205,8 @@ typedef struct ValueSet {
   EnumType type;
 } ValueSet;
 
-static const uint32_t cValueSetCount = 414;
-static ValueSet const cValueSets[414] = {
+static const uint32_t cValueSetCount = 415;
+static ValueSet const cValueSets[415] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsStrings, VkFramebufferCreateFlagsValues, 2,
      ENUM_TYPE_FLAG32},
     {"VkQueryPoolCreateFlags", VkQueryPoolCreateFlagsStrings, VkQueryPoolCreateFlagsValues, 1,
@@ -9358,7 +9364,7 @@ static ValueSet const cValueSets[414] = {
     {"VkIndirectCommandsInputModeFlagsEXT", VkIndirectCommandsInputModeFlagsEXTStrings,
      VkIndirectCommandsInputModeFlagsEXTValues, 2, ENUM_TYPE_FLAG32},
     {"VkDirectDriverLoadingFlagsLUNARG", NULL, NULL, 0, ENUM_TYPE_FLAG32},
-    {"VkPipelineCreateFlags2", VkPipelineCreateFlags2Strings, VkPipelineCreateFlags2Values, 65,
+    {"VkPipelineCreateFlags2", VkPipelineCreateFlags2Strings, VkPipelineCreateFlags2Values, 66,
      ENUM_TYPE_FLAG64},
     {"VkBufferUsageFlags2", VkBufferUsageFlags2Strings, VkBufferUsageFlags2Values, 53,
      ENUM_TYPE_FLAG64},
@@ -9505,7 +9511,7 @@ static ValueSet const cValueSets[414] = {
      ENUM_TYPE_FLAG32},
     {"VkPresentGravityFlagsKHR", VkPresentGravityFlagsKHRStrings, VkPresentGravityFlagsKHRValues, 6,
      ENUM_TYPE_FLAG32},
-    {"VkShaderCreateFlagsEXT", VkShaderCreateFlagsEXTStrings, VkShaderCreateFlagsEXTValues, 23,
+    {"VkShaderCreateFlagsEXT", VkShaderCreateFlagsEXTStrings, VkShaderCreateFlagsEXTValues, 24,
      ENUM_TYPE_FLAG32},
     {"VkTileShadingRenderPassFlagsQCOM", VkTileShadingRenderPassFlagsQCOMStrings,
      VkTileShadingRenderPassFlagsQCOMValues, 2, ENUM_TYPE_FLAG32},
@@ -9522,6 +9528,7 @@ static ValueSet const cValueSets[414] = {
     {"VkSwapchainImageUsageFlagsOHOS", VkSwapchainImageUsageFlagsOHOSStrings,
      VkSwapchainImageUsageFlagsOHOSValues, 1, ENUM_TYPE_FLAG32},
     {"VkPerformanceCounterDescriptionFlagsARM", NULL, NULL, 0, ENUM_TYPE_FLAG32},
+    {"VkShaderInstrumentationValuesFlagsARM", NULL, NULL, 0, ENUM_TYPE_FLAG32},
     {"VkVideoCodecOperationFlagsKHR", VkVideoCodecOperationFlagsKHRStrings,
      VkVideoCodecOperationFlagsKHRValues, 13, ENUM_TYPE_FLAG32},
     {"VkVideoCapabilityFlagsKHR", VkVideoCapabilityFlagsKHRStrings, VkVideoCapabilityFlagsKHRValues,
@@ -9639,7 +9646,7 @@ static ValueSet const cValueSets[414] = {
      VkClusterAccelerationStructureOpTypeNVValues, 6, ENUM_TYPE_ENUM},
     {"VkClusterAccelerationStructureOpModeNV", VkClusterAccelerationStructureOpModeNVStrings,
      VkClusterAccelerationStructureOpModeNVValues, 3, ENUM_TYPE_ENUM},
-    {"VkObjectType", VkObjectTypeStrings, VkObjectTypeValues, 65, ENUM_TYPE_ENUM},
+    {"VkObjectType", VkObjectTypeStrings, VkObjectTypeValues, 66, ENUM_TYPE_ENUM},
     {"VkRayTracingInvocationReorderModeEXT", VkRayTracingInvocationReorderModeEXTStrings,
      VkRayTracingInvocationReorderModeEXTValues, 4, ENUM_TYPE_ENUM},
     {"VkIndirectCommandsTokenTypeNV", VkIndirectCommandsTokenTypeNVStrings,
