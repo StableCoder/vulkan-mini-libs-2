@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 345
+#if VK_HEADER_VERSION > 346
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v345)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v346)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v345)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v346)"
 #endif
 #endif
 
@@ -3115,6 +3115,24 @@ static uint32_t const VkSpirvResourceTypeFlagsEXTValues[11] = {
     0x00000080, // READ_WRITE_STORAGE_BUFFER
     0x00000100, // ACCELERATION_STRUCTURE
     0x00000200, // TENSOR_BIT_ARM
+};
+
+static char const *const VkAddressCommandFlagsKHRStrings[6] = {
+    "PROTECTED",                               // 0x00000001
+    "FULLY_BOUND",                             // 0x00000002
+    "STORAGE_BUFFER_USAGE",                    // 0x00000004
+    "UNKNOWN_STORAGE_BUFFER_USAGE",            // 0x00000008
+    "TRANSFORM_FEEDBACK_BUFFER_USAGE",         // 0x00000010
+    "UNKNOWN_TRANSFORM_FEEDBACK_BUFFER_USAGE", // 0x00000020
+};
+
+static uint32_t const VkAddressCommandFlagsKHRValues[6] = {
+    0x00000001, // PROTECTED
+    0x00000002, // FULLY_BOUND
+    0x00000004, // STORAGE_BUFFER_USAGE
+    0x00000008, // UNKNOWN_STORAGE_BUFFER_USAGE
+    0x00000010, // TRANSFORM_FEEDBACK_BUFFER_USAGE
+    0x00000020, // UNKNOWN_TRANSFORM_FEEDBACK_BUFFER_USAGE
 };
 
 static char const *const VkCompositeAlphaFlagsKHRStrings[4] = {
@@ -9205,8 +9223,8 @@ typedef struct ValueSet {
   EnumType type;
 } ValueSet;
 
-static const uint32_t cValueSetCount = 415;
-static ValueSet const cValueSets[415] = {
+static const uint32_t cValueSetCount = 416;
+static ValueSet const cValueSets[416] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsStrings, VkFramebufferCreateFlagsValues, 2,
      ENUM_TYPE_FLAG32},
     {"VkQueryPoolCreateFlags", VkQueryPoolCreateFlagsStrings, VkQueryPoolCreateFlagsValues, 1,
@@ -9388,6 +9406,8 @@ static ValueSet const cValueSets[415] = {
      VkVideoEncodeRgbChromaOffsetFlagsVALVEValues, 2, ENUM_TYPE_FLAG32},
     {"VkSpirvResourceTypeFlagsEXT", VkSpirvResourceTypeFlagsEXTStrings,
      VkSpirvResourceTypeFlagsEXTValues, 11, ENUM_TYPE_FLAG32},
+    {"VkAddressCommandFlagsKHR", VkAddressCommandFlagsKHRStrings, VkAddressCommandFlagsKHRValues, 6,
+     ENUM_TYPE_FLAG32},
     {"VkCompositeAlphaFlagsKHR", VkCompositeAlphaFlagsKHRStrings, VkCompositeAlphaFlagsKHRValues, 4,
      ENUM_TYPE_FLAG32},
     {"VkDisplayPlaneAlphaFlagsKHR", VkDisplayPlaneAlphaFlagsKHRStrings,
