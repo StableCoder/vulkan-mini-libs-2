@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 346
+#if VK_HEADER_VERSION > 347
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v346)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v347)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v346)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v347)"
 #endif
 #endif
 
@@ -1865,9 +1865,19 @@ bool compare_VkDeviceDiagnosticsConfigCreateInfoNV(VkDeviceDiagnosticsConfigCrea
 bool compare_VkDeviceEventInfoEXT(VkDeviceEventInfoEXT const *s1, VkDeviceEventInfoEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 230 && VK_EXT_device_fault
+#if VK_HEADER_VERSION >= 230 && VK_HEADER_VERSION <= 346 && VK_EXT_device_fault
 bool compare_VkDeviceFaultAddressInfoEXT(VkDeviceFaultAddressInfoEXT const *s1,
                                          VkDeviceFaultAddressInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 347 && VK_EXT_device_fault
+bool compare_VkDeviceFaultAddressInfoEXT(VkDeviceFaultAddressInfoEXT const *s1,
+                                         VkDeviceFaultAddressInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 347 && VK_KHR_device_fault
+bool compare_VkDeviceFaultAddressInfoKHR(VkDeviceFaultAddressInfoKHR const *s1,
+                                         VkDeviceFaultAddressInfoKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 230 && VK_EXT_device_fault
@@ -1875,8 +1885,27 @@ bool compare_VkDeviceFaultCountsEXT(VkDeviceFaultCountsEXT const *s1,
                                     VkDeviceFaultCountsEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 230 && VK_EXT_device_fault
+#if VK_HEADER_VERSION >= 347 && VK_KHR_device_fault
+bool compare_VkDeviceFaultDebugInfoKHR(VkDeviceFaultDebugInfoKHR const *s1,
+                                       VkDeviceFaultDebugInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_HEADER_VERSION <= 346 && VK_EXT_device_fault
 bool compare_VkDeviceFaultInfoEXT(VkDeviceFaultInfoEXT const *s1, VkDeviceFaultInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 347 && VK_EXT_device_fault
+bool compare_VkDeviceFaultInfoEXT(VkDeviceFaultInfoEXT const *s1, VkDeviceFaultInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 347 && VK_KHR_device_fault
+bool compare_VkDeviceFaultInfoKHR(VkDeviceFaultInfoKHR const *s1, VkDeviceFaultInfoKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 347 && VK_KHR_shader_abort
+bool compare_VkDeviceFaultShaderAbortMessageInfoKHR(
+    VkDeviceFaultShaderAbortMessageInfoKHR const *s1,
+    VkDeviceFaultShaderAbortMessageInfoKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 230 && VK_HEADER_VERSION <= 246 && VK_EXT_device_fault
@@ -1885,15 +1914,37 @@ bool compare_VkDeviceFaultVendorBinaryHeaderVersionOneEXT(
     VkDeviceFaultVendorBinaryHeaderVersionOneEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 247 && VK_EXT_device_fault
+#if VK_HEADER_VERSION >= 247 && VK_HEADER_VERSION <= 346 && VK_EXT_device_fault
 bool compare_VkDeviceFaultVendorBinaryHeaderVersionOneEXT(
     VkDeviceFaultVendorBinaryHeaderVersionOneEXT const *s1,
     VkDeviceFaultVendorBinaryHeaderVersionOneEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 230 && VK_EXT_device_fault
+#if VK_HEADER_VERSION >= 347 && VK_EXT_device_fault
+bool compare_VkDeviceFaultVendorBinaryHeaderVersionOneEXT(
+    VkDeviceFaultVendorBinaryHeaderVersionOneEXT const *s1,
+    VkDeviceFaultVendorBinaryHeaderVersionOneEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 347 && VK_KHR_device_fault
+bool compare_VkDeviceFaultVendorBinaryHeaderVersionOneKHR(
+    VkDeviceFaultVendorBinaryHeaderVersionOneKHR const *s1,
+    VkDeviceFaultVendorBinaryHeaderVersionOneKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_HEADER_VERSION <= 346 && VK_EXT_device_fault
 bool compare_VkDeviceFaultVendorInfoEXT(VkDeviceFaultVendorInfoEXT const *s1,
                                         VkDeviceFaultVendorInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 347 && VK_EXT_device_fault
+bool compare_VkDeviceFaultVendorInfoEXT(VkDeviceFaultVendorInfoEXT const *s1,
+                                        VkDeviceFaultVendorInfoEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 347 && VK_KHR_device_fault
+bool compare_VkDeviceFaultVendorInfoKHR(VkDeviceFaultVendorInfoKHR const *s1,
+                                        VkDeviceFaultVendorInfoKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION <= 134 && VK_NVX_device_generated_commands
@@ -4856,6 +4907,16 @@ bool compare_VkPhysicalDeviceFaultFeaturesEXT(VkPhysicalDeviceFaultFeaturesEXT c
                                               VkPhysicalDeviceFaultFeaturesEXT const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 347 && VK_KHR_device_fault
+bool compare_VkPhysicalDeviceFaultFeaturesKHR(VkPhysicalDeviceFaultFeaturesKHR const *s1,
+                                              VkPhysicalDeviceFaultFeaturesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 347 && VK_KHR_device_fault
+bool compare_VkPhysicalDeviceFaultPropertiesKHR(VkPhysicalDeviceFaultPropertiesKHR const *s1,
+                                                VkPhysicalDeviceFaultPropertiesKHR const *s2);
+#endif
+
 bool compare_VkPhysicalDeviceFeatures(VkPhysicalDeviceFeatures const *s1,
                                       VkPhysicalDeviceFeatures const *s2);
 
@@ -6555,6 +6616,18 @@ bool compare_VkPhysicalDeviceShader64BitIndexingFeaturesEXT(
     VkPhysicalDeviceShader64BitIndexingFeaturesEXT const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 347 && VK_KHR_shader_abort
+bool compare_VkPhysicalDeviceShaderAbortFeaturesKHR(
+    VkPhysicalDeviceShaderAbortFeaturesKHR const *s1,
+    VkPhysicalDeviceShaderAbortFeaturesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 347 && VK_KHR_shader_abort
+bool compare_VkPhysicalDeviceShaderAbortPropertiesKHR(
+    VkPhysicalDeviceShaderAbortPropertiesKHR const *s1,
+    VkPhysicalDeviceShaderAbortPropertiesKHR const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 278 && VK_NV_shader_atomic_float16_vector
 bool compare_VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV(
     VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV const *s1,
@@ -6601,6 +6674,12 @@ bool compare_VkPhysicalDeviceShaderBfloat16FeaturesKHR(
 bool compare_VkPhysicalDeviceShaderClockFeaturesKHR(
     VkPhysicalDeviceShaderClockFeaturesKHR const *s1,
     VkPhysicalDeviceShaderClockFeaturesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 347 && VK_KHR_shader_constant_data
+bool compare_VkPhysicalDeviceShaderConstantDataFeaturesKHR(
+    VkPhysicalDeviceShaderConstantDataFeaturesKHR const *s1,
+    VkPhysicalDeviceShaderConstantDataFeaturesKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 231 && VK_ARM_shader_core_builtins
@@ -16662,14 +16741,8 @@ bool compare_VkDeviceCreateInfo(VkDeviceCreateInfo const *s1, VkDeviceCreateInfo
     return false;
 
   // non-local members
-
-  // ppEnabledLayerNames - enabledLayerCount,null-terminated
-  for (size_t i = 0; i < s1->enabledLayerCount; ++i) {
-    if (s1->ppEnabledLayerNames[i] != s2->ppEnabledLayerNames[i] &&
-        (s1->ppEnabledLayerNames[i] == NULL || s2->ppEnabledLayerNames[i] == NULL ||
-         strcmp(s1->ppEnabledLayerNames[i], s2->ppEnabledLayerNames[i]) != 0))
-      return false;
-  }
+  if (s1->ppEnabledLayerNames != s2->ppEnabledLayerNames)
+    return false;
 
   // ppEnabledExtensionNames - enabledExtensionCount,null-terminated
   for (size_t i = 0; i < s1->enabledExtensionCount; ++i) {
@@ -16719,9 +16792,33 @@ bool compare_VkDeviceEventInfoEXT(VkDeviceEventInfoEXT const *s1, VkDeviceEventI
 }
 #endif
 
-#if VK_HEADER_VERSION >= 230 && VK_EXT_device_fault
+#if VK_HEADER_VERSION >= 230 && VK_HEADER_VERSION <= 346 && VK_EXT_device_fault
 bool compare_VkDeviceFaultAddressInfoEXT(VkDeviceFaultAddressInfoEXT const *s1,
                                          VkDeviceFaultAddressInfoEXT const *s2) {
+  // local, simple types
+  if ((s1->addressType != s2->addressType) || (s1->reportedAddress != s2->reportedAddress) ||
+      (s1->addressPrecision != s2->addressPrecision))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 347 && VK_EXT_device_fault
+bool compare_VkDeviceFaultAddressInfoEXT(VkDeviceFaultAddressInfoEXT const *s1,
+                                         VkDeviceFaultAddressInfoEXT const *s2) {
+  // local, simple types
+  if ((s1->addressType != s2->addressType) || (s1->reportedAddress != s2->reportedAddress) ||
+      (s1->addressPrecision != s2->addressPrecision))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 347 && VK_KHR_device_fault
+bool compare_VkDeviceFaultAddressInfoKHR(VkDeviceFaultAddressInfoKHR const *s1,
+                                         VkDeviceFaultAddressInfoKHR const *s2) {
   // local, simple types
   if ((s1->addressType != s2->addressType) || (s1->reportedAddress != s2->reportedAddress) ||
       (s1->addressPrecision != s2->addressPrecision))
@@ -16744,13 +16841,80 @@ bool compare_VkDeviceFaultCountsEXT(VkDeviceFaultCountsEXT const *s1,
 }
 #endif
 
-#if VK_HEADER_VERSION >= 230 && VK_EXT_device_fault
+#if VK_HEADER_VERSION >= 347 && VK_KHR_device_fault
+bool compare_VkDeviceFaultDebugInfoKHR(VkDeviceFaultDebugInfoKHR const *s1,
+                                       VkDeviceFaultDebugInfoKHR const *s2) {
+  // local, simple types
+  if ((s1->vendorBinarySize != s2->vendorBinarySize))
+    return false;
+
+  // non-local members
+
+  // pVendorBinaryData - vendorBinarySize
+  if (s1->pVendorBinaryData != s2->pVendorBinaryData &&
+      (s1->pVendorBinaryData == NULL || s2->pVendorBinaryData == NULL ||
+       memcmp(s1->pVendorBinaryData, s2->pVendorBinaryData, s1->vendorBinarySize) != 0))
+    return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_HEADER_VERSION <= 346 && VK_EXT_device_fault
 bool compare_VkDeviceFaultInfoEXT(VkDeviceFaultInfoEXT const *s1, VkDeviceFaultInfoEXT const *s2) {
   // local array members
   if (strncmp(s1->description, s2->description, VK_MAX_DESCRIPTION_SIZE) != 0)
     return false;
   // non-local members
   if (s1->pVendorBinaryData != s2->pVendorBinaryData)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 347 && VK_EXT_device_fault
+bool compare_VkDeviceFaultInfoEXT(VkDeviceFaultInfoEXT const *s1, VkDeviceFaultInfoEXT const *s2) {
+  // local array members
+  if (strncmp(s1->description, s2->description, VK_MAX_DESCRIPTION_SIZE) != 0)
+    return false;
+  // non-local members
+  if (s1->pVendorBinaryData != s2->pVendorBinaryData)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 347 && VK_KHR_device_fault
+bool compare_VkDeviceFaultInfoKHR(VkDeviceFaultInfoKHR const *s1, VkDeviceFaultInfoKHR const *s2) {
+  // local, simple types
+  if ((s1->flags != s2->flags) || (s1->groupId != s2->groupId))
+    return false;
+
+  // local, Vulkan struct types
+  if (!compare_VkDeviceFaultAddressInfoKHR(&s1->faultAddressInfo, &s2->faultAddressInfo) ||
+      !compare_VkDeviceFaultAddressInfoKHR(&s1->instructionAddressInfo,
+                                           &s2->instructionAddressInfo) ||
+      !compare_VkDeviceFaultVendorInfoKHR(&s1->vendorInfo, &s2->vendorInfo))
+    return false;
+
+  // local array members
+  if (strncmp(s1->description, s2->description, VK_MAX_DESCRIPTION_SIZE) != 0)
+    return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 347 && VK_KHR_shader_abort
+bool compare_VkDeviceFaultShaderAbortMessageInfoKHR(
+    VkDeviceFaultShaderAbortMessageInfoKHR const *s1,
+    VkDeviceFaultShaderAbortMessageInfoKHR const *s2) {
+  // local, simple types
+  if ((s1->messageDataSize != s2->messageDataSize))
+    return false;
+
+  // non-local members
+  if (s1->pMessageData != s2->pMessageData)
     return false;
 
   return true;
@@ -16777,7 +16941,7 @@ bool compare_VkDeviceFaultVendorBinaryHeaderVersionOneEXT(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 247 && VK_EXT_device_fault
+#if VK_HEADER_VERSION >= 247 && VK_HEADER_VERSION <= 346 && VK_EXT_device_fault
 bool compare_VkDeviceFaultVendorBinaryHeaderVersionOneEXT(
     VkDeviceFaultVendorBinaryHeaderVersionOneEXT const *s1,
     VkDeviceFaultVendorBinaryHeaderVersionOneEXT const *s2) {
@@ -16798,7 +16962,46 @@ bool compare_VkDeviceFaultVendorBinaryHeaderVersionOneEXT(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 230 && VK_EXT_device_fault
+#if VK_HEADER_VERSION >= 347 && VK_EXT_device_fault
+bool compare_VkDeviceFaultVendorBinaryHeaderVersionOneEXT(
+    VkDeviceFaultVendorBinaryHeaderVersionOneEXT const *s1,
+    VkDeviceFaultVendorBinaryHeaderVersionOneEXT const *s2) {
+  // local, simple types
+  if ((s1->headerSize != s2->headerSize) || (s1->headerVersion != s2->headerVersion) ||
+      (s1->vendorID != s2->vendorID) || (s1->deviceID != s2->deviceID) ||
+      (s1->driverVersion != s2->driverVersion) ||
+      (s1->applicationNameOffset != s2->applicationNameOffset) ||
+      (s1->applicationVersion != s2->applicationVersion) ||
+      (s1->engineNameOffset != s2->engineNameOffset) || (s1->engineVersion != s2->engineVersion) ||
+      (s1->apiVersion != s2->apiVersion))
+    return false;
+
+  // local array members
+  if (memcmp(s1->pipelineCacheUUID, s2->pipelineCacheUUID, VK_UUID_SIZE * sizeof(uint8_t)) != 0)
+    return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 347 && VK_KHR_device_fault
+bool compare_VkDeviceFaultVendorBinaryHeaderVersionOneKHR(
+    VkDeviceFaultVendorBinaryHeaderVersionOneKHR const *s1,
+    VkDeviceFaultVendorBinaryHeaderVersionOneKHR const *s2) {
+  // local, simple types
+  if ((s1->headerSize != s2->headerSize) || (s1->headerVersion != s2->headerVersion) ||
+      (s1->vendorID != s2->vendorID) || (s1->deviceID != s2->deviceID) ||
+      (s1->driverVersion != s2->driverVersion) ||
+      (s1->applicationNameOffset != s2->applicationNameOffset) ||
+      (s1->applicationVersion != s2->applicationVersion) ||
+      (s1->engineNameOffset != s2->engineNameOffset) || (s1->engineVersion != s2->engineVersion) ||
+      (s1->apiVersion != s2->apiVersion))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 230 && VK_HEADER_VERSION <= 346 && VK_EXT_device_fault
 bool compare_VkDeviceFaultVendorInfoEXT(VkDeviceFaultVendorInfoEXT const *s1,
                                         VkDeviceFaultVendorInfoEXT const *s2) {
   // local, simple types
@@ -16808,6 +17011,31 @@ bool compare_VkDeviceFaultVendorInfoEXT(VkDeviceFaultVendorInfoEXT const *s1,
   // local array members
   if (strncmp(s1->description, s2->description, VK_MAX_DESCRIPTION_SIZE) != 0)
     return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 347 && VK_EXT_device_fault
+bool compare_VkDeviceFaultVendorInfoEXT(VkDeviceFaultVendorInfoEXT const *s1,
+                                        VkDeviceFaultVendorInfoEXT const *s2) {
+  // local, simple types
+  if ((s1->vendorFaultCode != s2->vendorFaultCode) || (s1->vendorFaultData != s2->vendorFaultData))
+    return false;
+
+  // local array members
+  if (strncmp(s1->description, s2->description, VK_MAX_DESCRIPTION_SIZE) != 0)
+    return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 347 && VK_KHR_device_fault
+bool compare_VkDeviceFaultVendorInfoKHR(VkDeviceFaultVendorInfoKHR const *s1,
+                                        VkDeviceFaultVendorInfoKHR const *s2) {
+  // local, simple types
+  if ((s1->vendorFaultCode != s2->vendorFaultCode) || (s1->vendorFaultData != s2->vendorFaultData))
+    return false;
+
   return true;
 }
 #endif
@@ -24814,6 +25042,31 @@ bool compare_VkPhysicalDeviceFaultFeaturesEXT(VkPhysicalDeviceFaultFeaturesEXT c
 }
 #endif
 
+#if VK_HEADER_VERSION >= 347 && VK_KHR_device_fault
+bool compare_VkPhysicalDeviceFaultFeaturesKHR(VkPhysicalDeviceFaultFeaturesKHR const *s1,
+                                              VkPhysicalDeviceFaultFeaturesKHR const *s2) {
+  // local, simple types
+  if ((s1->deviceFault != s2->deviceFault) ||
+      (s1->deviceFaultVendorBinary != s2->deviceFaultVendorBinary) ||
+      (s1->deviceFaultReportMasked != s2->deviceFaultReportMasked) ||
+      (s1->deviceFaultDeviceLostOnMasked != s2->deviceFaultDeviceLostOnMasked))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 347 && VK_KHR_device_fault
+bool compare_VkPhysicalDeviceFaultPropertiesKHR(VkPhysicalDeviceFaultPropertiesKHR const *s1,
+                                                VkPhysicalDeviceFaultPropertiesKHR const *s2) {
+  // local, simple types
+  if ((s1->maxDeviceFaultCount != s2->maxDeviceFaultCount))
+    return false;
+
+  return true;
+}
+#endif
+
 bool compare_VkPhysicalDeviceFeatures(VkPhysicalDeviceFeatures const *s1,
                                       VkPhysicalDeviceFeatures const *s2) {
   // local, simple types
@@ -28953,6 +29206,30 @@ bool compare_VkPhysicalDeviceShader64BitIndexingFeaturesEXT(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 347 && VK_KHR_shader_abort
+bool compare_VkPhysicalDeviceShaderAbortFeaturesKHR(
+    VkPhysicalDeviceShaderAbortFeaturesKHR const *s1,
+    VkPhysicalDeviceShaderAbortFeaturesKHR const *s2) {
+  // local, simple types
+  if ((s1->shaderAbort != s2->shaderAbort))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 347 && VK_KHR_shader_abort
+bool compare_VkPhysicalDeviceShaderAbortPropertiesKHR(
+    VkPhysicalDeviceShaderAbortPropertiesKHR const *s1,
+    VkPhysicalDeviceShaderAbortPropertiesKHR const *s2) {
+  // local, simple types
+  if ((s1->maxShaderAbortMessageSize != s2->maxShaderAbortMessageSize))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 278 && VK_NV_shader_atomic_float16_vector
 bool compare_VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV(
     VkPhysicalDeviceShaderAtomicFloat16VectorFeaturesNV const *s1,
@@ -29071,6 +29348,18 @@ bool compare_VkPhysicalDeviceShaderClockFeaturesKHR(
   // local, simple types
   if ((s1->shaderSubgroupClock != s2->shaderSubgroupClock) ||
       (s1->shaderDeviceClock != s2->shaderDeviceClock))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 347 && VK_KHR_shader_constant_data
+bool compare_VkPhysicalDeviceShaderConstantDataFeaturesKHR(
+    VkPhysicalDeviceShaderConstantDataFeaturesKHR const *s1,
+    VkPhysicalDeviceShaderConstantDataFeaturesKHR const *s2) {
+  // local, simple types
+  if ((s1->shaderConstantData != s2->shaderConstantData))
     return false;
 
   return true;

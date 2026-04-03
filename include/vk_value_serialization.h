@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 346
+#if VK_HEADER_VERSION > 347
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v346)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v347)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v346)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v347)"
 #endif
 #endif
 
@@ -2701,6 +2701,24 @@ static char const *const VkMemoryDecompressionMethodFlagsEXTStrings[2] = {
 static uint64_t const VkMemoryDecompressionMethodFlagsEXTValues[2] = {
     0x00000001, // GDEFLATE_1_0_BIT_NV
     0x00000001, // GDEFLATE_1_0
+};
+
+static char const *const VkDeviceFaultFlagsKHRStrings[6] = {
+    "FLAG_DEVICE_LOST",         // 0x00000001
+    "FLAG_MEMORY_ADDRESS",      // 0x00000002
+    "FLAG_INSTRUCTION_ADDRESS", // 0x00000004
+    "FLAG_VENDOR",              // 0x00000008
+    "FLAG_WATCHDOG_TIMEOUT",    // 0x00000010
+    "FLAG_OVERFLOW",            // 0x00000020
+};
+
+static uint32_t const VkDeviceFaultFlagsKHRValues[6] = {
+    0x00000001, // FLAG_DEVICE_LOST
+    0x00000002, // FLAG_MEMORY_ADDRESS
+    0x00000004, // FLAG_INSTRUCTION_ADDRESS
+    0x00000008, // FLAG_VENDOR
+    0x00000010, // FLAG_WATCHDOG_TIMEOUT
+    0x00000020, // FLAG_OVERFLOW
 };
 
 static char const *const VkBuildMicromapFlagsEXTStrings[3] = {
@@ -7389,14 +7407,6 @@ static int32_t const VkOpacityMicromapSpecialIndexEXTValues[5] = {
     -5, // CLUSTER_GEOMETRY_DISABLE_OPACITY_MICROMAP_NV
 };
 
-static char const *const VkDeviceFaultVendorBinaryHeaderVersionEXTStrings[1] = {
-    "ONE", // 1
-};
-
-static int32_t const VkDeviceFaultVendorBinaryHeaderVersionEXTValues[1] = {
-    1, // ONE
-};
-
 static char const *const VkIndirectExecutionSetInfoTypeEXTStrings[2] = {
     "PIPELINES",      // 0
     "SHADER_OBJECTS", // 1
@@ -7405,6 +7415,16 @@ static char const *const VkIndirectExecutionSetInfoTypeEXTStrings[2] = {
 static int32_t const VkIndirectExecutionSetInfoTypeEXTValues[2] = {
     0, // PIPELINES
     1, // SHADER_OBJECTS
+};
+
+static char const *const VkDeviceFaultVendorBinaryHeaderVersionKHRStrings[2] = {
+    "ONE_EXT", // 1
+    "ONE",     // 1
+};
+
+static int32_t const VkDeviceFaultVendorBinaryHeaderVersionKHRValues[2] = {
+    1, // ONE_EXT
+    1, // ONE
 };
 
 static char const *const VkDepthBiasRepresentationEXTStrings[3] = {
@@ -8221,17 +8241,31 @@ static int32_t const VkOpticalFlowSessionBindingPointNVValues[9] = {
     8, // GLOBAL_FLOW
 };
 
-static char const *const VkDeviceFaultAddressTypeEXTStrings[7] = {
-    "NONE",                        // 0
-    "READ_INVALID",                // 1
-    "WRITE_INVALID",               // 2
-    "EXECUTE_INVALID",             // 3
-    "INSTRUCTION_POINTER_UNKNOWN", // 4
-    "INSTRUCTION_POINTER_INVALID", // 5
-    "INSTRUCTION_POINTER_FAULT",   // 6
+static char const *const VkDeviceFaultAddressTypeKHRStrings[14] = {
+    "NONE_EXT",                        // 0
+    "READ_INVALID_EXT",                // 1
+    "WRITE_INVALID_EXT",               // 2
+    "EXECUTE_INVALID_EXT",             // 3
+    "INSTRUCTION_POINTER_UNKNOWN_EXT", // 4
+    "INSTRUCTION_POINTER_INVALID_EXT", // 5
+    "INSTRUCTION_POINTER_FAULT_EXT",   // 6
+    "NONE",                            // 0
+    "READ_INVALID",                    // 1
+    "WRITE_INVALID",                   // 2
+    "EXECUTE_INVALID",                 // 3
+    "INSTRUCTION_POINTER_UNKNOWN",     // 4
+    "INSTRUCTION_POINTER_INVALID",     // 5
+    "INSTRUCTION_POINTER_FAULT",       // 6
 };
 
-static int32_t const VkDeviceFaultAddressTypeEXTValues[7] = {
+static int32_t const VkDeviceFaultAddressTypeKHRValues[14] = {
+    0, // NONE_EXT
+    1, // READ_INVALID_EXT
+    2, // WRITE_INVALID_EXT
+    3, // EXECUTE_INVALID_EXT
+    4, // INSTRUCTION_POINTER_UNKNOWN_EXT
+    5, // INSTRUCTION_POINTER_INVALID_EXT
+    6, // INSTRUCTION_POINTER_FAULT_EXT
     0, // NONE
     1, // READ_INVALID
     2, // WRITE_INVALID
@@ -9223,8 +9257,8 @@ typedef struct ValueSet {
   EnumType type;
 } ValueSet;
 
-static const uint32_t cValueSetCount = 416;
-static ValueSet const cValueSets[416] = {
+static const uint32_t cValueSetCount = 417;
+static ValueSet const cValueSets[417] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsStrings, VkFramebufferCreateFlagsValues, 2,
      ENUM_TYPE_FLAG32},
     {"VkQueryPoolCreateFlags", VkQueryPoolCreateFlagsStrings, VkQueryPoolCreateFlagsValues, 1,
@@ -9373,6 +9407,8 @@ static ValueSet const cValueSets[416] = {
     {"VkRenderingFlags", VkRenderingFlagsStrings, VkRenderingFlagsValues, 20, ENUM_TYPE_FLAG32},
     {"VkMemoryDecompressionMethodFlagsEXT", VkMemoryDecompressionMethodFlagsEXTStrings,
      VkMemoryDecompressionMethodFlagsEXTValues, 2, ENUM_TYPE_FLAG64},
+    {"VkDeviceFaultFlagsKHR", VkDeviceFaultFlagsKHRStrings, VkDeviceFaultFlagsKHRValues, 6,
+     ENUM_TYPE_FLAG32},
     {"VkBuildMicromapFlagsEXT", VkBuildMicromapFlagsEXTStrings, VkBuildMicromapFlagsEXTValues, 3,
      ENUM_TYPE_FLAG32},
     {"VkMicromapCreateFlagsEXT", VkMicromapCreateFlagsEXTStrings, VkMicromapCreateFlagsEXTValues, 1,
@@ -9767,10 +9803,10 @@ static ValueSet const cValueSets[416] = {
      VkOpacityMicromapFormatEXTValues, 2, ENUM_TYPE_ENUM},
     {"VkOpacityMicromapSpecialIndexEXT", VkOpacityMicromapSpecialIndexEXTStrings,
      VkOpacityMicromapSpecialIndexEXTValues, 5, ENUM_TYPE_ENUM},
-    {"VkDeviceFaultVendorBinaryHeaderVersionEXT", VkDeviceFaultVendorBinaryHeaderVersionEXTStrings,
-     VkDeviceFaultVendorBinaryHeaderVersionEXTValues, 1, ENUM_TYPE_ENUM},
     {"VkIndirectExecutionSetInfoTypeEXT", VkIndirectExecutionSetInfoTypeEXTStrings,
      VkIndirectExecutionSetInfoTypeEXTValues, 2, ENUM_TYPE_ENUM},
+    {"VkDeviceFaultVendorBinaryHeaderVersionKHR", VkDeviceFaultVendorBinaryHeaderVersionKHRStrings,
+     VkDeviceFaultVendorBinaryHeaderVersionKHRValues, 2, ENUM_TYPE_ENUM},
     {"VkDepthBiasRepresentationEXT", VkDepthBiasRepresentationEXTStrings,
      VkDepthBiasRepresentationEXTValues, 3, ENUM_TYPE_ENUM},
     {"VkDirectDriverLoadingModeLUNARG", VkDirectDriverLoadingModeLUNARGStrings,
@@ -9859,8 +9895,8 @@ static ValueSet const cValueSets[416] = {
      VkOpticalFlowPerformanceLevelNVValues, 4, ENUM_TYPE_ENUM},
     {"VkOpticalFlowSessionBindingPointNV", VkOpticalFlowSessionBindingPointNVStrings,
      VkOpticalFlowSessionBindingPointNVValues, 9, ENUM_TYPE_ENUM},
-    {"VkDeviceFaultAddressTypeEXT", VkDeviceFaultAddressTypeEXTStrings,
-     VkDeviceFaultAddressTypeEXTValues, 7, ENUM_TYPE_ENUM},
+    {"VkDeviceFaultAddressTypeKHR", VkDeviceFaultAddressTypeKHRStrings,
+     VkDeviceFaultAddressTypeKHRValues, 14, ENUM_TYPE_ENUM},
     {"VkLayerSettingTypeEXT", VkLayerSettingTypeEXTStrings, VkLayerSettingTypeEXTValues, 8,
      ENUM_TYPE_ENUM},
     {"VkLatencyMarkerNV", VkLatencyMarkerNVStrings, VkLatencyMarkerNVValues, 12, ENUM_TYPE_ENUM},
