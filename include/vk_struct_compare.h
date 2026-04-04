@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 347
+#if VK_HEADER_VERSION > 348
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v347)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v348)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v347)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v348)"
 #endif
 #endif
 
@@ -204,7 +204,12 @@ bool compare_VkAccelerationStructureGeometryTrianglesDataKHR(
     VkAccelerationStructureGeometryTrianglesDataKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 91 && VK_NV_ray_tracing
+#if VK_HEADER_VERSION >= 91 && VK_HEADER_VERSION <= 347 && VK_NV_ray_tracing
+bool compare_VkAccelerationStructureInfoNV(VkAccelerationStructureInfoNV const *s1,
+                                           VkAccelerationStructureInfoNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 348 && VK_NV_ray_tracing
 bool compare_VkAccelerationStructureInfoNV(VkAccelerationStructureInfoNV const *s1,
                                            VkAccelerationStructureInfoNV const *s2);
 #endif
@@ -1426,7 +1431,12 @@ bool compare_VkDataGraphPipelineConstantTensorSemiStructuredSparsityInfoARM(
     VkDataGraphPipelineConstantTensorSemiStructuredSparsityInfoARM const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+#if VK_HEADER_VERSION >= 319 && VK_HEADER_VERSION <= 347 && VK_ARM_data_graph
+bool compare_VkDataGraphPipelineCreateInfoARM(VkDataGraphPipelineCreateInfoARM const *s1,
+                                              VkDataGraphPipelineCreateInfoARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 348 && VK_ARM_data_graph
 bool compare_VkDataGraphPipelineCreateInfoARM(VkDataGraphPipelineCreateInfoARM const *s1,
                                               VkDataGraphPipelineCreateInfoARM const *s2);
 #endif
@@ -1494,6 +1504,11 @@ bool compare_VkDataGraphProcessingEngineCreateInfoARM(
     VkDataGraphProcessingEngineCreateInfoARM const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 348 && VK_ARM_data_graph_instruction_set_tosa
+bool compare_VkDataGraphTOSANameQualityARM(VkDataGraphTOSANameQualityARM const *s1,
+                                           VkDataGraphTOSANameQualityARM const *s2);
+#endif
+
 #if VK_EXT_debug_marker
 bool compare_VkDebugMarkerMarkerInfoEXT(VkDebugMarkerMarkerInfoEXT const *s1,
                                         VkDebugMarkerMarkerInfoEXT const *s2);
@@ -1548,7 +1563,12 @@ bool compare_VkDecompressMemoryRegionEXT(VkDecompressMemoryRegionEXT const *s1,
                                          VkDecompressMemoryRegionEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 233 && VK_NV_memory_decompression
+#if VK_HEADER_VERSION >= 233 && VK_HEADER_VERSION <= 347 && VK_NV_memory_decompression
+bool compare_VkDecompressMemoryRegionNV(VkDecompressMemoryRegionNV const *s1,
+                                        VkDecompressMemoryRegionNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 348 && VK_NV_memory_decompression
 bool compare_VkDecompressMemoryRegionNV(VkDecompressMemoryRegionNV const *s1,
                                         VkDecompressMemoryRegionNV const *s2);
 #endif
@@ -2218,6 +2238,11 @@ bool compare_VkDispatchIndirect2InfoKHR(VkDispatchIndirect2InfoKHR const *s1,
 
 bool compare_VkDispatchIndirectCommand(VkDispatchIndirectCommand const *s1,
                                        VkDispatchIndirectCommand const *s2);
+
+#if VK_HEADER_VERSION >= 348 && VK_ARM_scheduling_controls
+bool compare_VkDispatchParametersARM(VkDispatchParametersARM const *s1,
+                                     VkDispatchParametersARM const *s2);
+#endif
 
 #if VK_HEADER_VERSION >= 312 && VK_QCOM_tile_shading
 bool compare_VkDispatchTileInfoQCOM(VkDispatchTileInfoQCOM const *s1,
@@ -3998,6 +4023,10 @@ bool compare_VkPerTileBeginInfoQCOM(VkPerTileBeginInfoQCOM const *s1,
 bool compare_VkPerTileEndInfoQCOM(VkPerTileEndInfoQCOM const *s1, VkPerTileEndInfoQCOM const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 348 && VK_QCOM_queue_perf_hint
+bool compare_VkPerfHintInfoQCOM(VkPerfHintInfoQCOM const *s1, VkPerfHintInfoQCOM const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 109 && VK_INTEL_performance_query
 bool compare_VkPerformanceConfigurationAcquireInfoINTEL(
     VkPerformanceConfigurationAcquireInfoINTEL const *s1,
@@ -4523,7 +4552,8 @@ bool compare_VkPhysicalDeviceDepthStencilResolvePropertiesKHR(
     VkPhysicalDeviceDepthStencilResolvePropertiesKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+#if (VK_HEADER_VERSION >= 348 && VK_EXT_descriptor_buffer && VK_EXT_fragment_density_map) ||       \
+    (VK_HEADER_VERSION >= 235 && VK_HEADER_VERSION <= 347 && VK_EXT_descriptor_buffer)
 bool compare_VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT(
     VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT const *s1,
     VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT const *s2);
@@ -6225,6 +6255,12 @@ bool compare_VkPhysicalDevicePresentationPropertiesOHOS(
     VkPhysicalDevicePresentationPropertiesOHOS const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 348 && VK_EXT_primitive_restart_index
+bool compare_VkPhysicalDevicePrimitiveRestartIndexFeaturesEXT(
+    VkPhysicalDevicePrimitiveRestartIndexFeaturesEXT const *s1,
+    VkPhysicalDevicePrimitiveRestartIndexFeaturesEXT const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 190 && VK_EXT_primitive_topology_list_restart
 bool compare_VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT(
     VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT const *s1,
@@ -6325,6 +6361,18 @@ bool compare_VkPhysicalDevicePushDescriptorPropertiesKHR(
 bool compare_VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM(
     VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM const *s1,
     VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 348 && VK_QCOM_queue_perf_hint
+bool compare_VkPhysicalDeviceQueuePerfHintFeaturesQCOM(
+    VkPhysicalDeviceQueuePerfHintFeaturesQCOM const *s1,
+    VkPhysicalDeviceQueuePerfHintFeaturesQCOM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 348 && VK_QCOM_queue_perf_hint
+bool compare_VkPhysicalDeviceQueuePerfHintPropertiesQCOM(
+    VkPhysicalDeviceQueuePerfHintPropertiesQCOM const *s1,
+    VkPhysicalDeviceQueuePerfHintPropertiesQCOM const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 195 && VK_EXT_rgba10x6_formats
@@ -6578,6 +6626,12 @@ bool compare_VkPhysicalDeviceScalarBlockLayoutFeaturesEXT(
 bool compare_VkPhysicalDeviceScalarBlockLayoutFeaturesEXT(
     VkPhysicalDeviceScalarBlockLayoutFeaturesEXT const *s1,
     VkPhysicalDeviceScalarBlockLayoutFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 348 && VK_ARM_scheduling_controls
+bool compare_VkPhysicalDeviceSchedulingControlsDispatchParametersPropertiesARM(
+    VkPhysicalDeviceSchedulingControlsDispatchParametersPropertiesARM const *s1,
+    VkPhysicalDeviceSchedulingControlsDispatchParametersPropertiesARM const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 269 && VK_ARM_scheduling_controls
@@ -8415,6 +8469,12 @@ bool compare_VkQueueFamilyDataGraphProcessingEnginePropertiesARM(
 #if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
 bool compare_VkQueueFamilyDataGraphPropertiesARM(VkQueueFamilyDataGraphPropertiesARM const *s1,
                                                  VkQueueFamilyDataGraphPropertiesARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 348 && VK_ARM_data_graph_instruction_set_tosa
+bool compare_VkQueueFamilyDataGraphTOSAPropertiesARM(
+    VkQueueFamilyDataGraphTOSAPropertiesARM const *s1,
+    VkQueueFamilyDataGraphTOSAPropertiesARM const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 303 && VK_VERSION_1_4
@@ -11992,7 +12052,19 @@ bool compare_VkAccelerationStructureGeometryTrianglesDataKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 91 && VK_NV_ray_tracing
+#if VK_HEADER_VERSION >= 91 && VK_HEADER_VERSION <= 347 && VK_NV_ray_tracing
+bool compare_VkAccelerationStructureInfoNV(VkAccelerationStructureInfoNV const *s1,
+                                           VkAccelerationStructureInfoNV const *s2) {
+  // local, simple types
+  if ((s1->type != s2->type) || (s1->flags != s2->flags) ||
+      (s1->instanceCount != s2->instanceCount) || (s1->geometryCount != s2->geometryCount))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 348 && VK_NV_ray_tracing
 bool compare_VkAccelerationStructureInfoNV(VkAccelerationStructureInfoNV const *s1,
                                            VkAccelerationStructureInfoNV const *s2) {
   // local, simple types
@@ -15476,7 +15548,19 @@ bool compare_VkDataGraphPipelineConstantTensorSemiStructuredSparsityInfoARM(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
+#if VK_HEADER_VERSION >= 319 && VK_HEADER_VERSION <= 347 && VK_ARM_data_graph
+bool compare_VkDataGraphPipelineCreateInfoARM(VkDataGraphPipelineCreateInfoARM const *s1,
+                                              VkDataGraphPipelineCreateInfoARM const *s2) {
+  // local, simple types
+  if ((s1->flags != s2->flags) || (s1->layout != s2->layout) ||
+      (s1->resourceInfoCount != s2->resourceInfoCount))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 348 && VK_ARM_data_graph
 bool compare_VkDataGraphPipelineCreateInfoARM(VkDataGraphPipelineCreateInfoARM const *s1,
                                               VkDataGraphPipelineCreateInfoARM const *s2) {
   // local, simple types
@@ -15636,6 +15720,20 @@ bool compare_VkDataGraphProcessingEngineCreateInfoARM(
   if ((s1->processingEngineCount != s2->processingEngineCount))
     return false;
 
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 348 && VK_ARM_data_graph_instruction_set_tosa
+bool compare_VkDataGraphTOSANameQualityARM(VkDataGraphTOSANameQualityARM const *s1,
+                                           VkDataGraphTOSANameQualityARM const *s2) {
+  // local, simple types
+  if ((s1->qualityFlags != s2->qualityFlags))
+    return false;
+
+  // local array members
+  if (strncmp(s1->name, s2->name, VK_MAX_DATA_GRAPH_TOSA_NAME_SIZE_ARM) != 0)
+    return false;
   return true;
 }
 #endif
@@ -15820,7 +15918,21 @@ bool compare_VkDecompressMemoryRegionEXT(VkDecompressMemoryRegionEXT const *s1,
 }
 #endif
 
-#if VK_HEADER_VERSION >= 233 && VK_NV_memory_decompression
+#if VK_HEADER_VERSION >= 233 && VK_HEADER_VERSION <= 347 && VK_NV_memory_decompression
+bool compare_VkDecompressMemoryRegionNV(VkDecompressMemoryRegionNV const *s1,
+                                        VkDecompressMemoryRegionNV const *s2) {
+  // local, simple types
+  if ((s1->srcAddress != s2->srcAddress) || (s1->dstAddress != s2->dstAddress) ||
+      (s1->compressedSize != s2->compressedSize) ||
+      (s1->decompressedSize != s2->decompressedSize) ||
+      (s1->decompressionMethod != s2->decompressionMethod))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 348 && VK_NV_memory_decompression
 bool compare_VkDecompressMemoryRegionNV(VkDecompressMemoryRegionNV const *s1,
                                         VkDecompressMemoryRegionNV const *s2) {
   // local, simple types
@@ -17774,6 +17886,19 @@ bool compare_VkDispatchIndirectCommand(VkDispatchIndirectCommand const *s1,
 
   return true;
 }
+
+#if VK_HEADER_VERSION >= 348 && VK_ARM_scheduling_controls
+bool compare_VkDispatchParametersARM(VkDispatchParametersARM const *s1,
+                                     VkDispatchParametersARM const *s2) {
+  // local, simple types
+  if ((s1->workGroupBatchSize != s2->workGroupBatchSize) ||
+      (s1->maxQueuedWorkGroupBatches != s2->maxQueuedWorkGroupBatches) ||
+      (s1->maxWarpsPerShaderCore != s2->maxWarpsPerShaderCore))
+    return false;
+
+  return true;
+}
+#endif
 
 #if VK_HEADER_VERSION >= 312 && VK_QCOM_tile_shading
 bool compare_VkDispatchTileInfoQCOM(VkDispatchTileInfoQCOM const *s1,
@@ -22605,6 +22730,16 @@ bool compare_VkPerTileEndInfoQCOM(VkPerTileEndInfoQCOM const *s1, VkPerTileEndIn
 }
 #endif
 
+#if VK_HEADER_VERSION >= 348 && VK_QCOM_queue_perf_hint
+bool compare_VkPerfHintInfoQCOM(VkPerfHintInfoQCOM const *s1, VkPerfHintInfoQCOM const *s2) {
+  // local, simple types
+  if ((s1->type != s2->type) || (s1->scale != s2->scale))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 109 && VK_INTEL_performance_query
 bool compare_VkPerformanceConfigurationAcquireInfoINTEL(
     VkPerformanceConfigurationAcquireInfoINTEL const *s1,
@@ -23837,7 +23972,8 @@ bool compare_VkPhysicalDeviceDepthStencilResolvePropertiesKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 235 && VK_EXT_descriptor_buffer
+#if (VK_HEADER_VERSION >= 348 && VK_EXT_descriptor_buffer && VK_EXT_fragment_density_map) ||       \
+    (VK_HEADER_VERSION >= 235 && VK_HEADER_VERSION <= 347 && VK_EXT_descriptor_buffer)
 bool compare_VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT(
     VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT const *s1,
     VkPhysicalDeviceDescriptorBufferDensityMapPropertiesEXT const *s2) {
@@ -28307,6 +28443,18 @@ bool compare_VkPhysicalDevicePresentationPropertiesOHOS(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 348 && VK_EXT_primitive_restart_index
+bool compare_VkPhysicalDevicePrimitiveRestartIndexFeaturesEXT(
+    VkPhysicalDevicePrimitiveRestartIndexFeaturesEXT const *s1,
+    VkPhysicalDevicePrimitiveRestartIndexFeaturesEXT const *s2) {
+  // local, simple types
+  if ((s1->primitiveRestartIndex != s2->primitiveRestartIndex))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 190 && VK_EXT_primitive_topology_list_restart
 bool compare_VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT(
     VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT const *s1,
@@ -28531,6 +28679,30 @@ bool compare_VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM(
     VkPhysicalDeviceQueueFamilyDataGraphProcessingEngineInfoARM const *s2) {
   // local, simple types
   if ((s1->queueFamilyIndex != s2->queueFamilyIndex) || (s1->engineType != s2->engineType))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 348 && VK_QCOM_queue_perf_hint
+bool compare_VkPhysicalDeviceQueuePerfHintFeaturesQCOM(
+    VkPhysicalDeviceQueuePerfHintFeaturesQCOM const *s1,
+    VkPhysicalDeviceQueuePerfHintFeaturesQCOM const *s2) {
+  // local, simple types
+  if ((s1->queuePerfHint != s2->queuePerfHint))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 348 && VK_QCOM_queue_perf_hint
+bool compare_VkPhysicalDeviceQueuePerfHintPropertiesQCOM(
+    VkPhysicalDeviceQueuePerfHintPropertiesQCOM const *s1,
+    VkPhysicalDeviceQueuePerfHintPropertiesQCOM const *s2) {
+  // local, simple types
+  if ((s1->supportedQueues != s2->supportedQueues))
     return false;
 
   return true;
@@ -29128,6 +29300,21 @@ bool compare_VkPhysicalDeviceScalarBlockLayoutFeaturesEXT(
     VkPhysicalDeviceScalarBlockLayoutFeaturesEXT const *s2) {
   // local, simple types
   if ((s1->scalarBlockLayout != s2->scalarBlockLayout))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 348 && VK_ARM_scheduling_controls
+bool compare_VkPhysicalDeviceSchedulingControlsDispatchParametersPropertiesARM(
+    VkPhysicalDeviceSchedulingControlsDispatchParametersPropertiesARM const *s1,
+    VkPhysicalDeviceSchedulingControlsDispatchParametersPropertiesARM const *s2) {
+  // local, simple types
+  if ((s1->schedulingControlsMaxWarpsCount != s2->schedulingControlsMaxWarpsCount) ||
+      (s1->schedulingControlsMaxQueuedBatchesCount !=
+       s2->schedulingControlsMaxQueuedBatchesCount) ||
+      (s1->schedulingControlsMaxWorkGroupBatchSize != s2->schedulingControlsMaxWorkGroupBatchSize))
     return false;
 
   return true;
@@ -34048,6 +34235,19 @@ bool compare_VkQueueFamilyDataGraphPropertiesARM(VkQueueFamilyDataGraphPropertie
   // local, Vulkan struct types
   if (!compare_VkPhysicalDeviceDataGraphProcessingEngineARM(&s1->engine, &s2->engine) ||
       !compare_VkPhysicalDeviceDataGraphOperationSupportARM(&s1->operation, &s2->operation))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 348 && VK_ARM_data_graph_instruction_set_tosa
+bool compare_VkQueueFamilyDataGraphTOSAPropertiesARM(
+    VkQueueFamilyDataGraphTOSAPropertiesARM const *s1,
+    VkQueueFamilyDataGraphTOSAPropertiesARM const *s2) {
+  // local, simple types
+  if ((s1->profileCount != s2->profileCount) || (s1->extensionCount != s2->extensionCount) ||
+      (s1->level != s2->level))
     return false;
 
   return true;

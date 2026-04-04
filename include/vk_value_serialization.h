@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 347
+#if VK_HEADER_VERSION > 348
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v347)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v348)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v347)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v348)"
 #endif
 #endif
 
@@ -2647,7 +2647,7 @@ static uint64_t const VkFormatFeatureFlags2Values[112] = {
     0x100000000000,     // RESERVED_44_BIT_QCOM
 };
 
-static char const *const VkRenderingFlagsStrings[20] = {
+static char const *const VkRenderingFlagsStrings[23] = {
     "CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT_KHR",   // 0x00000001
     "SUSPENDING_BIT_KHR",                           // 0x00000002
     "RESUMING_BIT_KHR",                             // 0x00000004
@@ -2668,9 +2668,12 @@ static char const *const VkRenderingFlagsStrings[20] = {
     "LOCAL_READ_CONCURRENT_ACCESS_CONTROL_BIT_KHR", // 0x00000100
     "FRAGMENT_REGION_BIT_EXT",                      // 0x00000040
     "CUSTOM_RESOLVE_BIT_EXT",                       // 0x00000080
+    "RESERVED_10_BIT_VALVE",                        // 0x00000400
+    "RESERVED_11_BIT_VALVE",                        // 0x00000800
+    "RESERVED_12_BIT_VALVE",                        // 0x00001000
 };
 
-static uint32_t const VkRenderingFlagsValues[20] = {
+static uint32_t const VkRenderingFlagsValues[23] = {
     0x00000001, // CONTENTS_SECONDARY_COMMAND_BUFFERS_BIT_KHR
     0x00000002, // SUSPENDING_BIT_KHR
     0x00000004, // RESUMING_BIT_KHR
@@ -2691,6 +2694,9 @@ static uint32_t const VkRenderingFlagsValues[20] = {
     0x00000100, // LOCAL_READ_CONCURRENT_ACCESS_CONTROL_BIT_KHR
     0x00000040, // FRAGMENT_REGION_BIT_EXT
     0x00000080, // CUSTOM_RESOLVE_BIT_EXT
+    0x00000400, // RESERVED_10_BIT_VALVE
+    0x00000800, // RESERVED_11_BIT_VALVE
+    0x00001000, // RESERVED_12_BIT_VALVE
 };
 
 static char const *const VkMemoryDecompressionMethodFlagsEXTStrings[2] = {
@@ -4059,12 +4065,14 @@ static uint32_t const VkTileShadingRenderPassFlagsQCOMValues[2] = {
     0x00000002, // PER_TILE_EXECUTION
 };
 
-static char const *const VkPhysicalDeviceSchedulingControlsFlagsARMStrings[1] = {
-    "SHADER_CORE_COUNT", // 0x00000001
+static char const *const VkPhysicalDeviceSchedulingControlsFlagsARMStrings[2] = {
+    "SHADER_CORE_COUNT",   // 0x00000001
+    "DISPATCH_PARAMETERS", // 0x00000002
 };
 
-static uint64_t const VkPhysicalDeviceSchedulingControlsFlagsARMValues[1] = {
+static uint64_t const VkPhysicalDeviceSchedulingControlsFlagsARMValues[2] = {
     0x00000001, // SHADER_CORE_COUNT
+    0x00000002, // DISPATCH_PARAMETERS
 };
 
 static char const *const VkPresentStageFlagsEXTStrings[4] = {
@@ -4107,6 +4115,20 @@ static char const *const VkSwapchainImageUsageFlagsOHOSStrings[1] = {
 
 static uint32_t const VkSwapchainImageUsageFlagsOHOSValues[1] = {
     0x00000001, // SHARED
+};
+
+static char const *const VkDataGraphTOSAQualityFlagsARMStrings[4] = {
+    "VK_DATA_GRAPH_TOSA_QUALITY_ACCELERATED",  // 0x00000001
+    "VK_DATA_GRAPH_TOSA_QUALITY_CONFORMANT",   // 0x00000002
+    "VK_DATA_GRAPH_TOSA_QUALITY_EXPERIMENTAL", // 0x00000004
+    "VK_DATA_GRAPH_TOSA_QUALITY_DEPRECATED",   // 0x00000008
+};
+
+static uint32_t const VkDataGraphTOSAQualityFlagsARMValues[4] = {
+    0x00000001, // VK_DATA_GRAPH_TOSA_QUALITY_ACCELERATED
+    0x00000002, // VK_DATA_GRAPH_TOSA_QUALITY_CONFORMANT
+    0x00000004, // VK_DATA_GRAPH_TOSA_QUALITY_EXPERIMENTAL
+    0x00000008, // VK_DATA_GRAPH_TOSA_QUALITY_DEPRECATED
 };
 
 static char const *const VkVideoCodecOperationFlagsKHRStrings[13] = {
@@ -7741,6 +7763,20 @@ static int32_t const VkDataGraphModelCacheTypeQCOMValues[1] = {
     0, // GENERIC_BINARY
 };
 
+static char const *const VkPerfHintTypeQCOMStrings[4] = {
+    "DEFAULT",          // 0
+    "FREQUENCY_MIN",    // 1
+    "FREQUENCY_MAX",    // 2
+    "FREQUENCY_SCALED", // 3
+};
+
+static int32_t const VkPerfHintTypeQCOMValues[4] = {
+    0, // DEFAULT
+    1, // FREQUENCY_MIN
+    2, // FREQUENCY_MAX
+    3, // FREQUENCY_SCALED
+};
+
 static char const *const VkDescriptorMappingSourceEXTStrings[11] = {
     "HEAP_WITH_CONSTANT_OFFSET",      // 0
     "HEAP_WITH_PUSH_INDEX",           // 1
@@ -7767,6 +7803,16 @@ static int32_t const VkDescriptorMappingSourceEXTValues[11] = {
     8,  // HEAP_WITH_SHADER_RECORD_INDEX
     9,  // SHADER_RECORD_DATA
     10, // SHADER_RECORD_ADDRESS
+};
+
+static char const *const VkDataGraphTOSALevelARMStrings[2] = {
+    "VK_DATA_GRAPH_TOSA_LEVEL_NONE", // 0
+    "VK_DATA_GRAPH_TOSA_LEVEL_8K",   // 1
+};
+
+static int32_t const VkDataGraphTOSALevelARMValues[2] = {
+    0, // VK_DATA_GRAPH_TOSA_LEVEL_NONE
+    1, // VK_DATA_GRAPH_TOSA_LEVEL_8K
 };
 
 static char const *const VkColorSpaceKHRStrings[18] = {
@@ -9257,8 +9303,8 @@ typedef struct ValueSet {
   EnumType type;
 } ValueSet;
 
-static const uint32_t cValueSetCount = 417;
-static ValueSet const cValueSets[417] = {
+static const uint32_t cValueSetCount = 420;
+static ValueSet const cValueSets[420] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsStrings, VkFramebufferCreateFlagsValues, 2,
      ENUM_TYPE_FLAG32},
     {"VkQueryPoolCreateFlags", VkQueryPoolCreateFlagsStrings, VkQueryPoolCreateFlagsValues, 1,
@@ -9404,7 +9450,7 @@ static ValueSet const cValueSets[417] = {
     {"VkAccelerationStructureMotionInstanceFlagsNV", NULL, NULL, 0, ENUM_TYPE_FLAG32},
     {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Strings, VkFormatFeatureFlags2Values, 112,
      ENUM_TYPE_FLAG64},
-    {"VkRenderingFlags", VkRenderingFlagsStrings, VkRenderingFlagsValues, 20, ENUM_TYPE_FLAG32},
+    {"VkRenderingFlags", VkRenderingFlagsStrings, VkRenderingFlagsValues, 23, ENUM_TYPE_FLAG32},
     {"VkMemoryDecompressionMethodFlagsEXT", VkMemoryDecompressionMethodFlagsEXTStrings,
      VkMemoryDecompressionMethodFlagsEXTValues, 2, ENUM_TYPE_FLAG64},
     {"VkDeviceFaultFlagsKHR", VkDeviceFaultFlagsKHRStrings, VkDeviceFaultFlagsKHRValues, 6,
@@ -9573,7 +9619,7 @@ static ValueSet const cValueSets[417] = {
      VkTileShadingRenderPassFlagsQCOMValues, 2, ENUM_TYPE_FLAG32},
     {"VkPhysicalDeviceSchedulingControlsFlagsARM",
      VkPhysicalDeviceSchedulingControlsFlagsARMStrings,
-     VkPhysicalDeviceSchedulingControlsFlagsARMValues, 1, ENUM_TYPE_FLAG64},
+     VkPhysicalDeviceSchedulingControlsFlagsARMValues, 2, ENUM_TYPE_FLAG64},
     {"VkSurfaceCreateFlagsOHOS", NULL, NULL, 0, ENUM_TYPE_FLAG32},
     {"VkPresentStageFlagsEXT", VkPresentStageFlagsEXTStrings, VkPresentStageFlagsEXTValues, 4,
      ENUM_TYPE_FLAG32},
@@ -9585,6 +9631,8 @@ static ValueSet const cValueSets[417] = {
      VkSwapchainImageUsageFlagsOHOSValues, 1, ENUM_TYPE_FLAG32},
     {"VkPerformanceCounterDescriptionFlagsARM", NULL, NULL, 0, ENUM_TYPE_FLAG32},
     {"VkShaderInstrumentationValuesFlagsARM", NULL, NULL, 0, ENUM_TYPE_FLAG32},
+    {"VkDataGraphTOSAQualityFlagsARM", VkDataGraphTOSAQualityFlagsARMStrings,
+     VkDataGraphTOSAQualityFlagsARMValues, 4, ENUM_TYPE_FLAG32},
     {"VkVideoCodecOperationFlagsKHR", VkVideoCodecOperationFlagsKHRStrings,
      VkVideoCodecOperationFlagsKHRValues, 13, ENUM_TYPE_FLAG32},
     {"VkVideoCapabilityFlagsKHR", VkVideoCapabilityFlagsKHRStrings, VkVideoCapabilityFlagsKHRValues,
@@ -9851,8 +9899,11 @@ static ValueSet const cValueSets[417] = {
      VkPhysicalDeviceDataGraphOperationTypeARMValues, 3, ENUM_TYPE_ENUM},
     {"VkDataGraphModelCacheTypeQCOM", VkDataGraphModelCacheTypeQCOMStrings,
      VkDataGraphModelCacheTypeQCOMValues, 1, ENUM_TYPE_ENUM},
+    {"VkPerfHintTypeQCOM", VkPerfHintTypeQCOMStrings, VkPerfHintTypeQCOMValues, 4, ENUM_TYPE_ENUM},
     {"VkDescriptorMappingSourceEXT", VkDescriptorMappingSourceEXTStrings,
      VkDescriptorMappingSourceEXTValues, 11, ENUM_TYPE_ENUM},
+    {"VkDataGraphTOSALevelARM", VkDataGraphTOSALevelARMStrings, VkDataGraphTOSALevelARMValues, 2,
+     ENUM_TYPE_ENUM},
     {"VkColorSpaceKHR", VkColorSpaceKHRStrings, VkColorSpaceKHRValues, 18, ENUM_TYPE_ENUM},
     {"VkPresentModeKHR", VkPresentModeKHRStrings, VkPresentModeKHRValues, 8, ENUM_TYPE_ENUM},
     {"VkDisplaySurfaceStereoTypeNV", VkDisplaySurfaceStereoTypeNVStrings,
