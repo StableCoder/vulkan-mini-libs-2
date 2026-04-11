@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 348
+#if VK_HEADER_VERSION > 349
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v348)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v349)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v348)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v349)"
 #endif
 #endif
 
@@ -2417,7 +2417,7 @@ static uint64_t const VkPipelineStageFlags2Values[92] = {
     0x2000000000000, // RESERVED_49_BIT_EXT
 };
 
-static char const *const VkFormatFeatureFlags2Strings[112] = {
+static char const *const VkFormatFeatureFlags2Strings[115] = {
     "SAMPLED_IMAGE_BIT_KHR",                                                           // 0x00000001
     "STORAGE_IMAGE_BIT_KHR",                                                           // 0x00000002
     "STORAGE_IMAGE_ATOMIC_BIT_KHR",                                                    // 0x00000004
@@ -2530,9 +2530,12 @@ static char const *const VkFormatFeatureFlags2Strings[112] = {
     "STENCIL_COPY_ON_TRANSFER_QUEUE_BIT_KHR",                                  // 0x80000000000000
     "RESERVED_61_BIT_HUAWEI",                                                  // 0x2000000000000000
     "RESERVED_44_BIT_QCOM",                                                    // 0x100000000000
+    "DATA_GRAPH_OPTICAL_FLOW_IMAGE_BIT_ARM",                                   // 0x100000000000000
+    "DATA_GRAPH_OPTICAL_FLOW_VECTOR_BIT_ARM",                                  // 0x200000000000000
+    "DATA_GRAPH_OPTICAL_FLOW_COST_BIT_ARM",                                    // 0x400000000000000
 };
 
-static uint64_t const VkFormatFeatureFlags2Values[112] = {
+static uint64_t const VkFormatFeatureFlags2Values[115] = {
     0x00000001,  // SAMPLED_IMAGE_BIT_KHR
     0x00000002,  // STORAGE_IMAGE_BIT_KHR
     0x00000004,  // STORAGE_IMAGE_ATOMIC_BIT_KHR
@@ -2645,6 +2648,9 @@ static uint64_t const VkFormatFeatureFlags2Values[112] = {
     0x80000000000000,   // STENCIL_COPY_ON_TRANSFER_QUEUE_BIT_KHR
     0x2000000000000000, // RESERVED_61_BIT_HUAWEI
     0x100000000000,     // RESERVED_44_BIT_QCOM
+    0x100000000000000,  // DATA_GRAPH_OPTICAL_FLOW_IMAGE_BIT_ARM
+    0x200000000000000,  // DATA_GRAPH_OPTICAL_FLOW_VECTOR_BIT_ARM
+    0x400000000000000,  // DATA_GRAPH_OPTICAL_FLOW_COST_BIT_ARM
 };
 
 static char const *const VkRenderingFlagsStrings[23] = {
@@ -3069,12 +3075,14 @@ static uint64_t const VkTensorViewCreateFlagsARMValues[1] = {
     0x00000001, // DESCRIPTOR_BUFFER_CAPTURE_REPLAY
 };
 
-static char const *const VkDataGraphPipelineSessionCreateFlagsARMStrings[1] = {
-    "PROTECTED", // 0x00000001
+static char const *const VkDataGraphPipelineSessionCreateFlagsARMStrings[2] = {
+    "PROTECTED",          // 0x00000001
+    "OPTICAL_FLOW_CACHE", // 0x00000002
 };
 
-static uint64_t const VkDataGraphPipelineSessionCreateFlagsARMValues[1] = {
+static uint64_t const VkDataGraphPipelineSessionCreateFlagsARMValues[2] = {
     0x00000001, // PROTECTED
+    0x00000002, // OPTICAL_FLOW_CACHE
 };
 
 static char const *const VkVideoEncodeRgbModelConversionFlagsVALVEStrings[5] = {
@@ -4129,6 +4137,66 @@ static uint32_t const VkDataGraphTOSAQualityFlagsARMValues[4] = {
     0x00000002, // VK_DATA_GRAPH_TOSA_QUALITY_CONFORMANT
     0x00000004, // VK_DATA_GRAPH_TOSA_QUALITY_EXPERIMENTAL
     0x00000008, // VK_DATA_GRAPH_TOSA_QUALITY_DEPRECATED
+};
+
+static char const *const VkDataGraphOpticalFlowGridSizeFlagsARMStrings[5] = {
+    "UNKNOWN", // 0
+    "1X1",     // 0x00000001
+    "2X2",     // 0x00000002
+    "4X4",     // 0x00000004
+    "8X8",     // 0x00000008
+};
+
+static uint32_t const VkDataGraphOpticalFlowGridSizeFlagsARMValues[5] = {
+    0,          // UNKNOWN
+    0x00000001, // 1X1
+    0x00000002, // 2X2
+    0x00000004, // 4X4
+    0x00000008, // 8X8
+};
+
+static char const *const VkDataGraphOpticalFlowImageUsageFlagsARMStrings[5] = {
+    "UNKNOWN", // 0
+    "INPUT",   // 0x00000001
+    "OUTPUT",  // 0x00000002
+    "HINT",    // 0x00000004
+    "COST",    // 0x00000008
+};
+
+static uint32_t const VkDataGraphOpticalFlowImageUsageFlagsARMValues[5] = {
+    0,          // UNKNOWN
+    0x00000001, // INPUT
+    0x00000002, // OUTPUT
+    0x00000004, // HINT
+    0x00000008, // COST
+};
+
+static char const *const VkDataGraphOpticalFlowCreateFlagsARMStrings[3] = {
+    "ENABLE_HINT", // 0x00000001
+    "ENABLE_COST", // 0x00000002
+    "RESERVED_30", // 0x40000000
+};
+
+static uint32_t const VkDataGraphOpticalFlowCreateFlagsARMValues[3] = {
+    0x00000001, // ENABLE_HINT
+    0x00000002, // ENABLE_COST
+    0x40000000, // RESERVED_30
+};
+
+static char const *const VkDataGraphOpticalFlowExecuteFlagsARMStrings[5] = {
+    "DISABLE_TEMPORAL_HINTS",      // 0x00000001
+    "INPUT_UNCHANGED",             // 0x00000002
+    "REFERENCE_UNCHANGED",         // 0x00000004
+    "INPUT_IS_PREVIOUS_REFERENCE", // 0x00000008
+    "REFERENCE_IS_PREVIOUS_INPUT", // 0x00000010
+};
+
+static uint32_t const VkDataGraphOpticalFlowExecuteFlagsARMValues[5] = {
+    0x00000001, // DISABLE_TEMPORAL_HINTS
+    0x00000002, // INPUT_UNCHANGED
+    0x00000004, // REFERENCE_UNCHANGED
+    0x00000008, // INPUT_IS_PREVIOUS_REFERENCE
+    0x00000010, // REFERENCE_IS_PREVIOUS_INPUT
 };
 
 static char const *const VkVideoCodecOperationFlagsKHRStrings[13] = {
@@ -7715,12 +7783,14 @@ static int32_t const VkDataGraphPipelinePropertyARMValues[2] = {
     1, // IDENTIFIER
 };
 
-static char const *const VkDataGraphPipelineSessionBindPointARMStrings[1] = {
-    "TRANSIENT", // 0
+static char const *const VkDataGraphPipelineSessionBindPointARMStrings[2] = {
+    "TRANSIENT",          // 0
+    "OPTICAL_FLOW_CACHE", // 1000631001
 };
 
-static int32_t const VkDataGraphPipelineSessionBindPointARMValues[1] = {
-    0, // TRANSIENT
+static int32_t const VkDataGraphPipelineSessionBindPointARMValues[2] = {
+    0,          // TRANSIENT
+    1000631001, // OPTICAL_FLOW_CACHE
 };
 
 static char const *const VkDataGraphPipelineSessionBindPointTypeARMStrings[1] = {
@@ -7743,16 +7813,18 @@ static int32_t const VkPhysicalDeviceDataGraphProcessingEngineTypeARMValues[3] =
     1000629001, // COMPUTE_QCOM
 };
 
-static char const *const VkPhysicalDeviceDataGraphOperationTypeARMStrings[3] = {
+static char const *const VkPhysicalDeviceDataGraphOperationTypeARMStrings[4] = {
     "SPIRV_EXTENDED_INSTRUCTION_SET", // 0
     "NEURAL_MODEL_QCOM",              // 1000629000
     "BUILTIN_MODEL_QCOM",             // 1000629001
+    "OPTICAL_FLOW",                   // 1000631000
 };
 
-static int32_t const VkPhysicalDeviceDataGraphOperationTypeARMValues[3] = {
+static int32_t const VkPhysicalDeviceDataGraphOperationTypeARMValues[4] = {
     0,          // SPIRV_EXTENDED_INSTRUCTION_SET
     1000629000, // NEURAL_MODEL_QCOM
     1000629001, // BUILTIN_MODEL_QCOM
+    1000631000, // OPTICAL_FLOW
 };
 
 static char const *const VkDataGraphModelCacheTypeQCOMStrings[1] = {
@@ -7813,6 +7885,44 @@ static char const *const VkDataGraphTOSALevelARMStrings[2] = {
 static int32_t const VkDataGraphTOSALevelARMValues[2] = {
     0, // VK_DATA_GRAPH_TOSA_LEVEL_NONE
     1, // VK_DATA_GRAPH_TOSA_LEVEL_8K
+};
+
+static char const *const VkDataGraphOpticalFlowPerformanceLevelARMStrings[4] = {
+    "UNKNOWN", // 0
+    "SLOW",    // 1
+    "MEDIUM",  // 2
+    "FAST",    // 3
+};
+
+static int32_t const VkDataGraphOpticalFlowPerformanceLevelARMValues[4] = {
+    0, // UNKNOWN
+    1, // SLOW
+    2, // MEDIUM
+    3, // FAST
+};
+
+static char const *const VkDataGraphPipelineNodeConnectionTypeARMStrings[5] = {
+    "OPTICAL_FLOW_INPUT",       // 1000631000
+    "OPTICAL_FLOW_REFERENCE",   // 1000631001
+    "OPTICAL_FLOW_HINT",        // 1000631002
+    "OPTICAL_FLOW_FLOW_VECTOR", // 1000631003
+    "OPTICAL_FLOW_COST",        // 1000631004
+};
+
+static int32_t const VkDataGraphPipelineNodeConnectionTypeARMValues[5] = {
+    1000631000, // OPTICAL_FLOW_INPUT
+    1000631001, // OPTICAL_FLOW_REFERENCE
+    1000631002, // OPTICAL_FLOW_HINT
+    1000631003, // OPTICAL_FLOW_FLOW_VECTOR
+    1000631004, // OPTICAL_FLOW_COST
+};
+
+static char const *const VkDataGraphPipelineNodeTypeARMStrings[1] = {
+    "OPTICAL_FLOW", // 1000631000
+};
+
+static int32_t const VkDataGraphPipelineNodeTypeARMValues[1] = {
+    1000631000, // OPTICAL_FLOW
 };
 
 static char const *const VkColorSpaceKHRStrings[18] = {
@@ -9303,8 +9413,8 @@ typedef struct ValueSet {
   EnumType type;
 } ValueSet;
 
-static const uint32_t cValueSetCount = 420;
-static ValueSet const cValueSets[420] = {
+static const uint32_t cValueSetCount = 427;
+static ValueSet const cValueSets[427] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsStrings, VkFramebufferCreateFlagsValues, 2,
      ENUM_TYPE_FLAG32},
     {"VkQueryPoolCreateFlags", VkQueryPoolCreateFlagsStrings, VkQueryPoolCreateFlagsValues, 1,
@@ -9448,7 +9558,7 @@ static ValueSet const cValueSets[420] = {
      ENUM_TYPE_FLAG64},
     {"VkAccelerationStructureMotionInfoFlagsNV", NULL, NULL, 0, ENUM_TYPE_FLAG32},
     {"VkAccelerationStructureMotionInstanceFlagsNV", NULL, NULL, 0, ENUM_TYPE_FLAG32},
-    {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Strings, VkFormatFeatureFlags2Values, 112,
+    {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Strings, VkFormatFeatureFlags2Values, 115,
      ENUM_TYPE_FLAG64},
     {"VkRenderingFlags", VkRenderingFlagsStrings, VkRenderingFlagsValues, 23, ENUM_TYPE_FLAG32},
     {"VkMemoryDecompressionMethodFlagsEXT", VkMemoryDecompressionMethodFlagsEXTStrings,
@@ -9477,7 +9587,7 @@ static ValueSet const cValueSets[420] = {
     {"VkTensorViewCreateFlagsARM", VkTensorViewCreateFlagsARMStrings,
      VkTensorViewCreateFlagsARMValues, 1, ENUM_TYPE_FLAG64},
     {"VkDataGraphPipelineSessionCreateFlagsARM", VkDataGraphPipelineSessionCreateFlagsARMStrings,
-     VkDataGraphPipelineSessionCreateFlagsARMValues, 1, ENUM_TYPE_FLAG64},
+     VkDataGraphPipelineSessionCreateFlagsARMValues, 2, ENUM_TYPE_FLAG64},
     {"VkDataGraphPipelineDispatchFlagsARM", NULL, NULL, 0, ENUM_TYPE_FLAG64},
     {"VkVideoEncodeRgbModelConversionFlagsVALVE", VkVideoEncodeRgbModelConversionFlagsVALVEStrings,
      VkVideoEncodeRgbModelConversionFlagsVALVEValues, 5, ENUM_TYPE_FLAG32},
@@ -9633,6 +9743,14 @@ static ValueSet const cValueSets[420] = {
     {"VkShaderInstrumentationValuesFlagsARM", NULL, NULL, 0, ENUM_TYPE_FLAG32},
     {"VkDataGraphTOSAQualityFlagsARM", VkDataGraphTOSAQualityFlagsARMStrings,
      VkDataGraphTOSAQualityFlagsARMValues, 4, ENUM_TYPE_FLAG32},
+    {"VkDataGraphOpticalFlowGridSizeFlagsARM", VkDataGraphOpticalFlowGridSizeFlagsARMStrings,
+     VkDataGraphOpticalFlowGridSizeFlagsARMValues, 5, ENUM_TYPE_FLAG32},
+    {"VkDataGraphOpticalFlowImageUsageFlagsARM", VkDataGraphOpticalFlowImageUsageFlagsARMStrings,
+     VkDataGraphOpticalFlowImageUsageFlagsARMValues, 5, ENUM_TYPE_FLAG32},
+    {"VkDataGraphOpticalFlowCreateFlagsARM", VkDataGraphOpticalFlowCreateFlagsARMStrings,
+     VkDataGraphOpticalFlowCreateFlagsARMValues, 3, ENUM_TYPE_FLAG32},
+    {"VkDataGraphOpticalFlowExecuteFlagsARM", VkDataGraphOpticalFlowExecuteFlagsARMStrings,
+     VkDataGraphOpticalFlowExecuteFlagsARMValues, 5, ENUM_TYPE_FLAG32},
     {"VkVideoCodecOperationFlagsKHR", VkVideoCodecOperationFlagsKHRStrings,
      VkVideoCodecOperationFlagsKHRValues, 13, ENUM_TYPE_FLAG32},
     {"VkVideoCapabilityFlagsKHR", VkVideoCapabilityFlagsKHRStrings, VkVideoCapabilityFlagsKHRValues,
@@ -9888,7 +10006,7 @@ static ValueSet const cValueSets[420] = {
     {"VkDataGraphPipelinePropertyARM", VkDataGraphPipelinePropertyARMStrings,
      VkDataGraphPipelinePropertyARMValues, 2, ENUM_TYPE_ENUM},
     {"VkDataGraphPipelineSessionBindPointARM", VkDataGraphPipelineSessionBindPointARMStrings,
-     VkDataGraphPipelineSessionBindPointARMValues, 1, ENUM_TYPE_ENUM},
+     VkDataGraphPipelineSessionBindPointARMValues, 2, ENUM_TYPE_ENUM},
     {"VkDataGraphPipelineSessionBindPointTypeARM",
      VkDataGraphPipelineSessionBindPointTypeARMStrings,
      VkDataGraphPipelineSessionBindPointTypeARMValues, 1, ENUM_TYPE_ENUM},
@@ -9896,7 +10014,7 @@ static ValueSet const cValueSets[420] = {
      VkPhysicalDeviceDataGraphProcessingEngineTypeARMStrings,
      VkPhysicalDeviceDataGraphProcessingEngineTypeARMValues, 3, ENUM_TYPE_ENUM},
     {"VkPhysicalDeviceDataGraphOperationTypeARM", VkPhysicalDeviceDataGraphOperationTypeARMStrings,
-     VkPhysicalDeviceDataGraphOperationTypeARMValues, 3, ENUM_TYPE_ENUM},
+     VkPhysicalDeviceDataGraphOperationTypeARMValues, 4, ENUM_TYPE_ENUM},
     {"VkDataGraphModelCacheTypeQCOM", VkDataGraphModelCacheTypeQCOMStrings,
      VkDataGraphModelCacheTypeQCOMValues, 1, ENUM_TYPE_ENUM},
     {"VkPerfHintTypeQCOM", VkPerfHintTypeQCOMStrings, VkPerfHintTypeQCOMValues, 4, ENUM_TYPE_ENUM},
@@ -9904,6 +10022,12 @@ static ValueSet const cValueSets[420] = {
      VkDescriptorMappingSourceEXTValues, 11, ENUM_TYPE_ENUM},
     {"VkDataGraphTOSALevelARM", VkDataGraphTOSALevelARMStrings, VkDataGraphTOSALevelARMValues, 2,
      ENUM_TYPE_ENUM},
+    {"VkDataGraphOpticalFlowPerformanceLevelARM", VkDataGraphOpticalFlowPerformanceLevelARMStrings,
+     VkDataGraphOpticalFlowPerformanceLevelARMValues, 4, ENUM_TYPE_ENUM},
+    {"VkDataGraphPipelineNodeConnectionTypeARM", VkDataGraphPipelineNodeConnectionTypeARMStrings,
+     VkDataGraphPipelineNodeConnectionTypeARMValues, 5, ENUM_TYPE_ENUM},
+    {"VkDataGraphPipelineNodeTypeARM", VkDataGraphPipelineNodeTypeARMStrings,
+     VkDataGraphPipelineNodeTypeARMValues, 1, ENUM_TYPE_ENUM},
     {"VkColorSpaceKHR", VkColorSpaceKHRStrings, VkColorSpaceKHRValues, 18, ENUM_TYPE_ENUM},
     {"VkPresentModeKHR", VkPresentModeKHRStrings, VkPresentModeKHRValues, 8, ENUM_TYPE_ENUM},
     {"VkDisplaySurfaceStereoTypeNV", VkDisplaySurfaceStereoTypeNVStrings,

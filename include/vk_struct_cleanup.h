@@ -37,12 +37,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 348
+#if VK_HEADER_VERSION > 349
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v348)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v349)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v348)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v349)"
 #endif
 #endif
 
@@ -1194,6 +1194,16 @@ void cleanup_VkCustomResolveCreateInfoEXT(VkCustomResolveCreateInfoEXT const *pD
 void cleanup_VkD3D12FenceSubmitInfoKHR(VkD3D12FenceSubmitInfoKHR const *pData);
 #endif
 
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+void cleanup_VkDataGraphOpticalFlowImageFormatInfoARM(
+    VkDataGraphOpticalFlowImageFormatInfoARM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+void cleanup_VkDataGraphOpticalFlowImageFormatPropertiesARM(
+    VkDataGraphOpticalFlowImageFormatPropertiesARM const *pData);
+#endif
+
 #if VK_HEADER_VERSION >= 332 && VK_QCOM_data_graph_model
 void cleanup_VkDataGraphPipelineBuiltinModelCreateInfoQCOM(
     VkDataGraphPipelineBuiltinModelCreateInfoQCOM const *pData);
@@ -1234,6 +1244,16 @@ void cleanup_VkDataGraphPipelineIdentifierCreateInfoARM(
 void cleanup_VkDataGraphPipelineInfoARM(VkDataGraphPipelineInfoARM const *pData);
 #endif
 
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+void cleanup_VkDataGraphPipelineOpticalFlowCreateInfoARM(
+    VkDataGraphPipelineOpticalFlowCreateInfoARM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+void cleanup_VkDataGraphPipelineOpticalFlowDispatchInfoARM(
+    VkDataGraphPipelineOpticalFlowDispatchInfoARM const *pData);
+#endif
+
 #if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
 void cleanup_VkDataGraphPipelinePropertyQueryResultARM(
     VkDataGraphPipelinePropertyQueryResultARM const *pData);
@@ -1241,6 +1261,11 @@ void cleanup_VkDataGraphPipelinePropertyQueryResultARM(
 
 #if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
 void cleanup_VkDataGraphPipelineResourceInfoARM(VkDataGraphPipelineResourceInfoARM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+void cleanup_VkDataGraphPipelineResourceInfoImageLayoutARM(
+    VkDataGraphPipelineResourceInfoImageLayoutARM const *pData);
 #endif
 
 #if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
@@ -1266,6 +1291,16 @@ void cleanup_VkDataGraphPipelineSessionMemoryRequirementsInfoARM(
 #if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
 void cleanup_VkDataGraphPipelineShaderModuleCreateInfoARM(
     VkDataGraphPipelineShaderModuleCreateInfoARM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+void cleanup_VkDataGraphPipelineSingleNodeConnectionARM(
+    VkDataGraphPipelineSingleNodeConnectionARM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+void cleanup_VkDataGraphPipelineSingleNodeCreateInfoARM(
+    VkDataGraphPipelineSingleNodeCreateInfoARM const *pData);
 #endif
 
 #if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
@@ -3766,6 +3801,11 @@ void cleanup_VkPhysicalDeviceDataGraphOperationSupportARM(
 #if VK_HEADER_VERSION >= 320 && VK_ARM_data_graph
 void cleanup_VkPhysicalDeviceDataGraphOperationSupportARM(
     VkPhysicalDeviceDataGraphOperationSupportARM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+void cleanup_VkPhysicalDeviceDataGraphOpticalFlowFeaturesARM(
+    VkPhysicalDeviceDataGraphOpticalFlowFeaturesARM const *pData);
 #endif
 
 #if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
@@ -7101,6 +7141,11 @@ void cleanup_VkQueueFamilyCheckpointProperties2NV(
 
 #if VK_HEADER_VERSION >= 82 && VK_NV_device_diagnostic_checkpoints
 void cleanup_VkQueueFamilyCheckpointPropertiesNV(VkQueueFamilyCheckpointPropertiesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+void cleanup_VkQueueFamilyDataGraphOpticalFlowPropertiesARM(
+    VkQueueFamilyDataGraphOpticalFlowPropertiesARM const *pData);
 #endif
 
 #if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
@@ -11152,6 +11197,22 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DATA_GRAPH_OPTICAL_FLOW_IMAGE_FORMAT_INFO_ARM) {
+    cleanup_VkDataGraphOpticalFlowImageFormatInfoARM(
+        (VkDataGraphOpticalFlowImageFormatInfoARM const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DATA_GRAPH_OPTICAL_FLOW_IMAGE_FORMAT_PROPERTIES_ARM) {
+    cleanup_VkDataGraphOpticalFlowImageFormatPropertiesARM(
+        (VkDataGraphOpticalFlowImageFormatPropertiesARM const *)pData);
+    return;
+  }
+#endif
+
 #if VK_HEADER_VERSION >= 332 && VK_QCOM_data_graph_model
   if (pTemp->sType == VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_BUILTIN_MODEL_CREATE_INFO_QCOM) {
     cleanup_VkDataGraphPipelineBuiltinModelCreateInfoQCOM(
@@ -11220,6 +11281,22 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_OPTICAL_FLOW_CREATE_INFO_ARM) {
+    cleanup_VkDataGraphPipelineOpticalFlowCreateInfoARM(
+        (VkDataGraphPipelineOpticalFlowCreateInfoARM const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_OPTICAL_FLOW_DISPATCH_INFO_ARM) {
+    cleanup_VkDataGraphPipelineOpticalFlowDispatchInfoARM(
+        (VkDataGraphPipelineOpticalFlowDispatchInfoARM const *)pData);
+    return;
+  }
+#endif
+
 #if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
   if (pTemp->sType == VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_PROPERTY_QUERY_RESULT_ARM) {
     cleanup_VkDataGraphPipelinePropertyQueryResultARM(
@@ -11231,6 +11308,14 @@ void cleanup_vk_struct(void const *pData) {
 #if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
   if (pTemp->sType == VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_RESOURCE_INFO_ARM) {
     cleanup_VkDataGraphPipelineResourceInfoARM((VkDataGraphPipelineResourceInfoARM const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_RESOURCE_INFO_IMAGE_LAYOUT_ARM) {
+    cleanup_VkDataGraphPipelineResourceInfoImageLayoutARM(
+        (VkDataGraphPipelineResourceInfoImageLayoutARM const *)pData);
     return;
   }
 #endif
@@ -11272,6 +11357,22 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_SHADER_MODULE_CREATE_INFO_ARM) {
     cleanup_VkDataGraphPipelineShaderModuleCreateInfoARM(
         (VkDataGraphPipelineShaderModuleCreateInfoARM const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_SINGLE_NODE_CONNECTION_ARM) {
+    cleanup_VkDataGraphPipelineSingleNodeConnectionARM(
+        (VkDataGraphPipelineSingleNodeConnectionARM const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+  if (pTemp->sType == VK_STRUCTURE_TYPE_DATA_GRAPH_PIPELINE_SINGLE_NODE_CREATE_INFO_ARM) {
+    cleanup_VkDataGraphPipelineSingleNodeCreateInfoARM(
+        (VkDataGraphPipelineSingleNodeCreateInfoARM const *)pData);
     return;
   }
 #endif
@@ -14356,6 +14457,14 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DATA_GRAPH_MODEL_FEATURES_QCOM) {
     cleanup_VkPhysicalDeviceDataGraphModelFeaturesQCOM(
         (VkPhysicalDeviceDataGraphModelFeaturesQCOM const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_DATA_GRAPH_OPTICAL_FLOW_FEATURES_ARM) {
+    cleanup_VkPhysicalDeviceDataGraphOpticalFlowFeaturesARM(
+        (VkPhysicalDeviceDataGraphOpticalFlowFeaturesARM const *)pData);
     return;
   }
 #endif
@@ -18729,6 +18838,14 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+  if (pTemp->sType == VK_STRUCTURE_TYPE_QUEUE_FAMILY_DATA_GRAPH_OPTICAL_FLOW_PROPERTIES_ARM) {
+    cleanup_VkQueueFamilyDataGraphOpticalFlowPropertiesARM(
+        (VkQueueFamilyDataGraphOpticalFlowPropertiesARM const *)pData);
+    return;
+  }
+#endif
+
 #if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
   if (pTemp->sType == VK_STRUCTURE_TYPE_QUEUE_FAMILY_DATA_GRAPH_PROCESSING_ENGINE_PROPERTIES_ARM) {
     cleanup_VkQueueFamilyDataGraphProcessingEnginePropertiesARM(
@@ -22688,14 +22805,13 @@ void cleanup_VkAccelerationStructureInfoNV(VkAccelerationStructureInfoNV const *
 
 #if VK_HEADER_VERSION >= 135 && VK_HEADER_VERSION <= 138 && VK_KHR_ray_tracing &&                  \
     VK_ENABLE_BETA_EXTENSIONS
-void cleanup_VkAccelerationStructureInstanceKHR(VkAccelerationStructureInstanceKHR const *pData){}
+void cleanup_VkAccelerationStructureInstanceKHR(VkAccelerationStructureInstanceKHR const *pData) {}
 #endif
 
 #if (VK_HEADER_VERSION >= 162 && VK_KHR_acceleration_structure) ||                                 \
     (VK_HEADER_VERSION >= 139 && VK_HEADER_VERSION <= 161 && VK_KHR_ray_tracing &&                 \
      VK_ENABLE_BETA_EXTENSIONS)
-void cleanup_VkAccelerationStructureInstanceKHR(VkAccelerationStructureInstanceKHR const *pData) {
-}
+void cleanup_VkAccelerationStructureInstanceKHR(VkAccelerationStructureInstanceKHR const *pData) {}
 #endif
 
 #if VK_HEADER_VERSION >= 135 && VK_NV_ray_tracing
@@ -23148,7 +23264,7 @@ void cleanup_VkAttachmentSampleCountInfoNV(VkAttachmentSampleCountInfoNV const *
 #endif
 
 #if VK_EXT_sample_locations
-void cleanup_VkAttachmentSampleLocationsEXT(VkAttachmentSampleLocationsEXT const *pData){}
+void cleanup_VkAttachmentSampleLocationsEXT(VkAttachmentSampleLocationsEXT const *pData) {}
 #endif
 
 #if VK_HEADER_VERSION >= 333 && VK_EXT_custom_resolve &&                                           \
@@ -23542,7 +23658,8 @@ void cleanup_VkBindVertexBufferIndirectCommandEXT(
 #endif
 
 #if VK_HEADER_VERSION >= 135 && VK_NV_device_generated_commands
-void cleanup_VkBindVertexBufferIndirectCommandNV(VkBindVertexBufferIndirectCommandNV const *pData){}
+void cleanup_VkBindVertexBufferIndirectCommandNV(VkBindVertexBufferIndirectCommandNV const *pData) {
+}
 #endif
 
 #if (VK_HEADER_VERSION >= 238 && VK_KHR_video_queue) ||                                            \
@@ -24146,13 +24263,12 @@ void cleanup_VkCoarseSampleOrderCustomNV(VkCoarseSampleOrderCustomNV const *pDat
 
 #if (VK_HEADER_VERSION >= 246 && VK_EXT_extended_dynamic_state3 && VK_EXT_shader_object) ||        \
     (VK_HEADER_VERSION >= 230 && VK_HEADER_VERSION <= 245 && VK_EXT_extended_dynamic_state3)
-void cleanup_VkColorBlendAdvancedEXT(VkColorBlendAdvancedEXT const *pData){}
+void cleanup_VkColorBlendAdvancedEXT(VkColorBlendAdvancedEXT const *pData) {}
 #endif
 
 #if (VK_HEADER_VERSION >= 246 && VK_EXT_extended_dynamic_state3 && VK_EXT_shader_object) ||        \
     (VK_HEADER_VERSION >= 230 && VK_HEADER_VERSION <= 245 && VK_EXT_extended_dynamic_state3)
-void cleanup_VkColorBlendEquationEXT(VkColorBlendEquationEXT const *pData) {
-}
+void cleanup_VkColorBlendEquationEXT(VkColorBlendEquationEXT const *pData) {}
 #endif
 
 void cleanup_VkCommandBufferAllocateInfo(VkCommandBufferAllocateInfo const *pData) {
@@ -25055,6 +25171,26 @@ void cleanup_VkD3D12FenceSubmitInfoKHR(VkD3D12FenceSubmitInfoKHR const *pData) {
 }
 #endif
 
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+void cleanup_VkDataGraphOpticalFlowImageFormatInfoARM(
+    VkDataGraphOpticalFlowImageFormatInfoARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+void cleanup_VkDataGraphOpticalFlowImageFormatPropertiesARM(
+    VkDataGraphOpticalFlowImageFormatPropertiesARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
 #if VK_HEADER_VERSION >= 332 && VK_QCOM_data_graph_model
 void cleanup_VkDataGraphPipelineBuiltinModelCreateInfoQCOM(
     VkDataGraphPipelineBuiltinModelCreateInfoQCOM const *pData) {
@@ -25166,6 +25302,26 @@ void cleanup_VkDataGraphPipelineInfoARM(VkDataGraphPipelineInfoARM const *pData)
 }
 #endif
 
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+void cleanup_VkDataGraphPipelineOpticalFlowCreateInfoARM(
+    VkDataGraphPipelineOpticalFlowCreateInfoARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+void cleanup_VkDataGraphPipelineOpticalFlowDispatchInfoARM(
+    VkDataGraphPipelineOpticalFlowDispatchInfoARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
 #if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
 void cleanup_VkDataGraphPipelinePropertyQueryResultARM(
     VkDataGraphPipelinePropertyQueryResultARM const *pData) {
@@ -25181,6 +25337,16 @@ void cleanup_VkDataGraphPipelinePropertyQueryResultARM(
 
 #if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
 void cleanup_VkDataGraphPipelineResourceInfoARM(VkDataGraphPipelineResourceInfoARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+void cleanup_VkDataGraphPipelineResourceInfoImageLayoutARM(
+    VkDataGraphPipelineResourceInfoImageLayoutARM const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
@@ -25249,6 +25415,32 @@ void cleanup_VkDataGraphPipelineShaderModuleCreateInfoARM(
     cleanup_VkDataGraphPipelineConstantARM(&pData->pConstants[i]);
   }
   free((void *)pData->pConstants);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+void cleanup_VkDataGraphPipelineSingleNodeConnectionARM(
+    VkDataGraphPipelineSingleNodeConnectionARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+void cleanup_VkDataGraphPipelineSingleNodeCreateInfoARM(
+    VkDataGraphPipelineSingleNodeCreateInfoARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+
+  // pConnections - connectionCount
+  for (size_t i = 0; i < pData->connectionCount; ++i) {
+    cleanup_VkDataGraphPipelineSingleNodeConnectionARM(&pData->pConnections[i]);
+  }
+  free((void *)pData->pConnections);
 }
 #endif
 
@@ -26180,7 +26372,7 @@ void cleanup_VkDeviceFaultShaderAbortMessageInfoKHR(
     cleanup_vk_struct(pData->pNext);
   free((void *)pData->pNext);
 
-  // pMessageData
+  // pMessageData - messageDataSize
   free((void *)pData->pMessageData);
 }
 #endif
@@ -26996,7 +27188,7 @@ void cleanup_VkDrawMeshTasksIndirectCommandNV(VkDrawMeshTasksIndirectCommandNV c
 #endif
 
 #if VK_HEADER_VERSION >= 195 && VK_HEADER_VERSION <= 203 && VK_EXT_image_drm_format_modifier
-void cleanup_VkDrmFormatModifierProperties2EXT(VkDrmFormatModifierProperties2EXT const *pData){}
+void cleanup_VkDrmFormatModifierProperties2EXT(VkDrmFormatModifierProperties2EXT const *pData) {}
 #endif
 
 #if (VK_HEADER_VERSION >= 281 && VK_EXT_image_drm_format_modifier &&                               \
@@ -27004,12 +27196,11 @@ void cleanup_VkDrmFormatModifierProperties2EXT(VkDrmFormatModifierProperties2EXT
     (VK_HEADER_VERSION >= 241 && VK_HEADER_VERSION <= 280 && VK_EXT_image_drm_format_modifier &&   \
      VK_KHR_format_feature_flags2) ||                                                              \
     (VK_HEADER_VERSION >= 204 && VK_HEADER_VERSION <= 240 && VK_EXT_image_drm_format_modifier)
-void cleanup_VkDrmFormatModifierProperties2EXT(VkDrmFormatModifierProperties2EXT const *pData) {
-}
+void cleanup_VkDrmFormatModifierProperties2EXT(VkDrmFormatModifierProperties2EXT const *pData) {}
 #endif
 
 #if VK_HEADER_VERSION >= 86 && VK_EXT_image_drm_format_modifier
-void cleanup_VkDrmFormatModifierPropertiesEXT(VkDrmFormatModifierPropertiesEXT const *pData){}
+void cleanup_VkDrmFormatModifierPropertiesEXT(VkDrmFormatModifierPropertiesEXT const *pData) {}
 #endif
 
 #if (VK_HEADER_VERSION >= 281 && VK_EXT_image_drm_format_modifier &&                               \
@@ -28705,7 +28896,7 @@ void cleanup_VkImageSubresource2KHR(VkImageSubresource2KHR const *pData) {
 
 void cleanup_VkImageSubresourceLayers(VkImageSubresourceLayers const *pData) {}
 
-void cleanup_VkImageSubresourceRange(VkImageSubresourceRange const *pData){}
+void cleanup_VkImageSubresourceRange(VkImageSubresourceRange const *pData) {}
 
 #if (VK_HEADER_VERSION >= 241 && VK_KHR_swapchain && VK_VERSION_1_1 && VK_KHR_device_group) ||     \
     (VK_HEADER_VERSION <= 240 && VK_KHR_swapchain && VK_KHR_device_group)
@@ -31108,6 +31299,16 @@ void cleanup_VkPhysicalDeviceDataGraphOperationSupportARM(
 #if VK_HEADER_VERSION >= 320 && VK_ARM_data_graph
 void cleanup_VkPhysicalDeviceDataGraphOperationSupportARM(
     VkPhysicalDeviceDataGraphOperationSupportARM const *pData) {}
+#endif
+
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+void cleanup_VkPhysicalDeviceDataGraphOpticalFlowFeaturesARM(
+    VkPhysicalDeviceDataGraphOpticalFlowFeaturesARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
 #endif
 
 #if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
@@ -38168,6 +38369,16 @@ void cleanup_VkQueueFamilyCheckpointPropertiesNV(VkQueueFamilyCheckpointProperti
 }
 #endif
 
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+void cleanup_VkQueueFamilyDataGraphOpticalFlowPropertiesARM(
+    VkQueueFamilyDataGraphOpticalFlowPropertiesARM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
 #if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
 void cleanup_VkQueueFamilyDataGraphProcessingEnginePropertiesARM(
     VkQueueFamilyDataGraphProcessingEnginePropertiesARM const *pData) {
@@ -40053,13 +40264,12 @@ void cleanup_VkStridedBufferRegionKHR(VkStridedBufferRegionKHR const *pData) {}
 #endif
 
 #if VK_HEADER_VERSION >= 307 && VK_NV_cluster_acceleration_structure
-void cleanup_VkStridedDeviceAddressNV(VkStridedDeviceAddressNV const *pData){}
+void cleanup_VkStridedDeviceAddressNV(VkStridedDeviceAddressNV const *pData) {}
 #endif
 
 #if (VK_HEADER_VERSION >= 346 && VK_KHR_device_address_commands && VK_KHR_copy_memory_indirect) || \
     (VK_HEADER_VERSION >= 328 && VK_HEADER_VERSION <= 345 && VK_KHR_copy_memory_indirect)
-void cleanup_VkStridedDeviceAddressRangeKHR(VkStridedDeviceAddressRangeKHR const *pData) {
-}
+void cleanup_VkStridedDeviceAddressRangeKHR(VkStridedDeviceAddressRangeKHR const *pData) {}
 #endif
 
 #if VK_HEADER_VERSION >= 162 && VK_KHR_ray_tracing_pipeline
@@ -41291,20 +41501,19 @@ void cleanup_VkTimelineSemaphoreSubmitInfoKHR(VkTimelineSemaphoreSubmitInfoKHR c
 #if (VK_HEADER_VERSION >= 241 && VK_KHR_ray_tracing_maintenance1 &&                                \
      VK_KHR_ray_tracing_pipeline) ||                                                               \
     (VK_HEADER_VERSION >= 213 && VK_HEADER_VERSION <= 240 && VK_KHR_ray_tracing_maintenance1)
-void cleanup_VkTraceRaysIndirectCommand2KHR(VkTraceRaysIndirectCommand2KHR const *pData){}
+void cleanup_VkTraceRaysIndirectCommand2KHR(VkTraceRaysIndirectCommand2KHR const *pData) {}
 #endif
 
 #if (VK_HEADER_VERSION >= 162 && VK_KHR_ray_tracing_pipeline) ||                                   \
     (VK_HEADER_VERSION >= 135 && VK_HEADER_VERSION <= 161 && VK_KHR_ray_tracing &&                 \
      VK_ENABLE_BETA_EXTENSIONS)
-void cleanup_VkTraceRaysIndirectCommandKHR(VkTraceRaysIndirectCommandKHR const *pData){}
+void cleanup_VkTraceRaysIndirectCommandKHR(VkTraceRaysIndirectCommandKHR const *pData) {}
 #endif
 
 #if (VK_HEADER_VERSION >= 162 && VK_KHR_acceleration_structure) ||                                 \
     (VK_HEADER_VERSION >= 135 && VK_HEADER_VERSION <= 161 && VK_KHR_ray_tracing &&                 \
      VK_ENABLE_BETA_EXTENSIONS)
-void cleanup_VkTransformMatrixKHR(VkTransformMatrixKHR const *pData) {
-}
+void cleanup_VkTransformMatrixKHR(VkTransformMatrixKHR const *pData) {}
 #endif
 
 #if VK_HEADER_VERSION >= 135 && VK_NV_ray_tracing
@@ -41380,7 +41589,7 @@ void cleanup_VkValidationFlagsEXT(VkValidationFlagsEXT const *pData) {
 }
 #endif
 
-void cleanup_VkVertexInputAttributeDescription(VkVertexInputAttributeDescription const *pData){}
+void cleanup_VkVertexInputAttributeDescription(VkVertexInputAttributeDescription const *pData) {}
 
 #if (VK_HEADER_VERSION >= 246 && VK_EXT_vertex_input_dynamic_state && VK_EXT_shader_object) ||     \
     (VK_HEADER_VERSION >= 175 && VK_HEADER_VERSION <= 245 && VK_EXT_vertex_input_dynamic_state)
@@ -41393,7 +41602,7 @@ void cleanup_VkVertexInputAttributeDescription2EXT(
 }
 #endif
 
-void cleanup_VkVertexInputBindingDescription(VkVertexInputBindingDescription const *pData){}
+void cleanup_VkVertexInputBindingDescription(VkVertexInputBindingDescription const *pData) {}
 
 #if (VK_HEADER_VERSION >= 246 && VK_EXT_vertex_input_dynamic_state && VK_EXT_shader_object) ||     \
     (VK_HEADER_VERSION >= 175 && VK_HEADER_VERSION <= 245 && VK_EXT_vertex_input_dynamic_state)

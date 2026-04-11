@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 348
+#if VK_HEADER_VERSION > 349
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v348)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v349)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v348)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v349)"
 #endif
 #endif
 
@@ -1408,6 +1408,18 @@ bool compare_VkD3D12FenceSubmitInfoKHR(VkD3D12FenceSubmitInfoKHR const *s1,
                                        VkD3D12FenceSubmitInfoKHR const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+bool compare_VkDataGraphOpticalFlowImageFormatInfoARM(
+    VkDataGraphOpticalFlowImageFormatInfoARM const *s1,
+    VkDataGraphOpticalFlowImageFormatInfoARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+bool compare_VkDataGraphOpticalFlowImageFormatPropertiesARM(
+    VkDataGraphOpticalFlowImageFormatPropertiesARM const *s1,
+    VkDataGraphOpticalFlowImageFormatPropertiesARM const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 332 && VK_QCOM_data_graph_model
 bool compare_VkDataGraphPipelineBuiltinModelCreateInfoQCOM(
     VkDataGraphPipelineBuiltinModelCreateInfoQCOM const *s1,
@@ -1457,6 +1469,18 @@ bool compare_VkDataGraphPipelineInfoARM(VkDataGraphPipelineInfoARM const *s1,
                                         VkDataGraphPipelineInfoARM const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+bool compare_VkDataGraphPipelineOpticalFlowCreateInfoARM(
+    VkDataGraphPipelineOpticalFlowCreateInfoARM const *s1,
+    VkDataGraphPipelineOpticalFlowCreateInfoARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+bool compare_VkDataGraphPipelineOpticalFlowDispatchInfoARM(
+    VkDataGraphPipelineOpticalFlowDispatchInfoARM const *s1,
+    VkDataGraphPipelineOpticalFlowDispatchInfoARM const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
 bool compare_VkDataGraphPipelinePropertyQueryResultARM(
     VkDataGraphPipelinePropertyQueryResultARM const *s1,
@@ -1466,6 +1490,12 @@ bool compare_VkDataGraphPipelinePropertyQueryResultARM(
 #if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
 bool compare_VkDataGraphPipelineResourceInfoARM(VkDataGraphPipelineResourceInfoARM const *s1,
                                                 VkDataGraphPipelineResourceInfoARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+bool compare_VkDataGraphPipelineResourceInfoImageLayoutARM(
+    VkDataGraphPipelineResourceInfoImageLayoutARM const *s1,
+    VkDataGraphPipelineResourceInfoImageLayoutARM const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
@@ -1496,6 +1526,18 @@ bool compare_VkDataGraphPipelineSessionMemoryRequirementsInfoARM(
 bool compare_VkDataGraphPipelineShaderModuleCreateInfoARM(
     VkDataGraphPipelineShaderModuleCreateInfoARM const *s1,
     VkDataGraphPipelineShaderModuleCreateInfoARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+bool compare_VkDataGraphPipelineSingleNodeConnectionARM(
+    VkDataGraphPipelineSingleNodeConnectionARM const *s1,
+    VkDataGraphPipelineSingleNodeConnectionARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+bool compare_VkDataGraphPipelineSingleNodeCreateInfoARM(
+    VkDataGraphPipelineSingleNodeCreateInfoARM const *s1,
+    VkDataGraphPipelineSingleNodeCreateInfoARM const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
@@ -4472,6 +4514,12 @@ bool compare_VkPhysicalDeviceDataGraphOperationSupportARM(
 bool compare_VkPhysicalDeviceDataGraphOperationSupportARM(
     VkPhysicalDeviceDataGraphOperationSupportARM const *s1,
     VkPhysicalDeviceDataGraphOperationSupportARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+bool compare_VkPhysicalDeviceDataGraphOpticalFlowFeaturesARM(
+    VkPhysicalDeviceDataGraphOpticalFlowFeaturesARM const *s1,
+    VkPhysicalDeviceDataGraphOpticalFlowFeaturesARM const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
@@ -8458,6 +8506,12 @@ bool compare_VkQueueFamilyCheckpointProperties2NV(VkQueueFamilyCheckpointPropert
 #if VK_HEADER_VERSION >= 82 && VK_NV_device_diagnostic_checkpoints
 bool compare_VkQueueFamilyCheckpointPropertiesNV(VkQueueFamilyCheckpointPropertiesNV const *s1,
                                                  VkQueueFamilyCheckpointPropertiesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+bool compare_VkQueueFamilyDataGraphOpticalFlowPropertiesARM(
+    VkQueueFamilyDataGraphOpticalFlowPropertiesARM const *s1,
+    VkQueueFamilyDataGraphOpticalFlowPropertiesARM const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
@@ -15497,6 +15551,30 @@ bool compare_VkD3D12FenceSubmitInfoKHR(VkD3D12FenceSubmitInfoKHR const *s1,
 }
 #endif
 
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+bool compare_VkDataGraphOpticalFlowImageFormatInfoARM(
+    VkDataGraphOpticalFlowImageFormatInfoARM const *s1,
+    VkDataGraphOpticalFlowImageFormatInfoARM const *s2) {
+  // local, simple types
+  if ((s1->usage != s2->usage))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+bool compare_VkDataGraphOpticalFlowImageFormatPropertiesARM(
+    VkDataGraphOpticalFlowImageFormatPropertiesARM const *s1,
+    VkDataGraphOpticalFlowImageFormatPropertiesARM const *s2) {
+  // local, simple types
+  if ((s1->format != s2->format))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 332 && VK_QCOM_data_graph_model
 bool compare_VkDataGraphPipelineBuiltinModelCreateInfoQCOM(
     VkDataGraphPipelineBuiltinModelCreateInfoQCOM const *s1,
@@ -15613,6 +15691,34 @@ bool compare_VkDataGraphPipelineInfoARM(VkDataGraphPipelineInfoARM const *s1,
 }
 #endif
 
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+bool compare_VkDataGraphPipelineOpticalFlowCreateInfoARM(
+    VkDataGraphPipelineOpticalFlowCreateInfoARM const *s1,
+    VkDataGraphPipelineOpticalFlowCreateInfoARM const *s2) {
+  // local, simple types
+  if ((s1->width != s2->width) || (s1->height != s2->height) ||
+      (s1->imageFormat != s2->imageFormat) || (s1->flowVectorFormat != s2->flowVectorFormat) ||
+      (s1->costFormat != s2->costFormat) || (s1->outputGridSize != s2->outputGridSize) ||
+      (s1->hintGridSize != s2->hintGridSize) || (s1->performanceLevel != s2->performanceLevel) ||
+      (s1->flags != s2->flags))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+bool compare_VkDataGraphPipelineOpticalFlowDispatchInfoARM(
+    VkDataGraphPipelineOpticalFlowDispatchInfoARM const *s1,
+    VkDataGraphPipelineOpticalFlowDispatchInfoARM const *s2) {
+  // local, simple types
+  if ((s1->flags != s2->flags) || (s1->meanFlowL1NormHint != s2->meanFlowL1NormHint))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 319 && VK_ARM_data_graph
 bool compare_VkDataGraphPipelinePropertyQueryResultARM(
     VkDataGraphPipelinePropertyQueryResultARM const *s1,
@@ -15638,6 +15744,18 @@ bool compare_VkDataGraphPipelineResourceInfoARM(VkDataGraphPipelineResourceInfoA
   // local, simple types
   if ((s1->descriptorSet != s2->descriptorSet) || (s1->binding != s2->binding) ||
       (s1->arrayElement != s2->arrayElement))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+bool compare_VkDataGraphPipelineResourceInfoImageLayoutARM(
+    VkDataGraphPipelineResourceInfoImageLayoutARM const *s1,
+    VkDataGraphPipelineResourceInfoImageLayoutARM const *s2) {
+  // local, simple types
+  if ((s1->layout != s2->layout))
     return false;
 
   return true;
@@ -15708,6 +15826,30 @@ bool compare_VkDataGraphPipelineShaderModuleCreateInfoARM(
   if (s1->pName != s2->pName &&
       (s1->pName == NULL || s2->pName == NULL || strcmp(s1->pName, s2->pName) != 0))
     return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+bool compare_VkDataGraphPipelineSingleNodeConnectionARM(
+    VkDataGraphPipelineSingleNodeConnectionARM const *s1,
+    VkDataGraphPipelineSingleNodeConnectionARM const *s2) {
+  // local, simple types
+  if ((s1->set != s2->set) || (s1->binding != s2->binding) || (s1->connection != s2->connection))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+bool compare_VkDataGraphPipelineSingleNodeCreateInfoARM(
+    VkDataGraphPipelineSingleNodeCreateInfoARM const *s1,
+    VkDataGraphPipelineSingleNodeCreateInfoARM const *s2) {
+  // local, simple types
+  if ((s1->nodeType != s2->nodeType) || (s1->connectionCount != s2->connectionCount))
+    return false;
+
   return true;
 }
 #endif
@@ -17026,9 +17168,12 @@ bool compare_VkDeviceFaultShaderAbortMessageInfoKHR(
     return false;
 
   // non-local members
-  if (s1->pMessageData != s2->pMessageData)
-    return false;
 
+  // pMessageData - messageDataSize
+  if (s1->pMessageData != s2->pMessageData &&
+      (s1->pMessageData == NULL || s2->pMessageData == NULL ||
+       memcmp(s1->pMessageData, s2->pMessageData, s1->messageDataSize) != 0))
+    return false;
   return true;
 }
 #endif
@@ -23799,6 +23944,18 @@ bool compare_VkPhysicalDeviceDataGraphOperationSupportARM(
   if (strncmp(s1->name, s2->name, VK_MAX_PHYSICAL_DEVICE_DATA_GRAPH_OPERATION_SET_NAME_SIZE_ARM) !=
       0)
     return false;
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+bool compare_VkPhysicalDeviceDataGraphOpticalFlowFeaturesARM(
+    VkPhysicalDeviceDataGraphOpticalFlowFeaturesARM const *s1,
+    VkPhysicalDeviceDataGraphOpticalFlowFeaturesARM const *s2) {
+  // local, simple types
+  if ((s1->dataGraphOpticalFlow != s2->dataGraphOpticalFlow))
+    return false;
+
   return true;
 }
 #endif
@@ -34210,6 +34367,22 @@ bool compare_VkQueueFamilyCheckpointPropertiesNV(VkQueueFamilyCheckpointProperti
                                                  VkQueueFamilyCheckpointPropertiesNV const *s2) {
   // local, simple types
   if ((s1->checkpointExecutionStageMask != s2->checkpointExecutionStageMask))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 349 && VK_ARM_data_graph_optical_flow
+bool compare_VkQueueFamilyDataGraphOpticalFlowPropertiesARM(
+    VkQueueFamilyDataGraphOpticalFlowPropertiesARM const *s1,
+    VkQueueFamilyDataGraphOpticalFlowPropertiesARM const *s2) {
+  // local, simple types
+  if ((s1->supportedOutputGridSizes != s2->supportedOutputGridSizes) ||
+      (s1->supportedHintGridSizes != s2->supportedHintGridSizes) ||
+      (s1->hintSupported != s2->hintSupported) || (s1->costSupported != s2->costSupported) ||
+      (s1->minWidth != s2->minWidth) || (s1->minHeight != s2->minHeight) ||
+      (s1->maxWidth != s2->maxWidth) || (s1->maxHeight != s2->maxHeight))
     return false;
 
   return true;
