@@ -197,11 +197,6 @@ Code Coverage:
     - cmake --build build
     - cmake --build build --target ccov-VkSerializationTests
     - cmake --build build --target ccov-report-VkSerializationTests
-  artifacts:
-    name: CodeCoverage
-    paths:
-      - build/ccov
-    expire_in: 1 day
 
 .analysis_template: &analysis_template
   stage: Analysis
