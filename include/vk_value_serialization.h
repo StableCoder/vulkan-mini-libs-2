@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 350
+#if VK_HEADER_VERSION > 351
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v350)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v351)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v350)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v351)"
 #endif
 #endif
 
@@ -1021,7 +1021,7 @@ static uint32_t const VkImageViewCreateFlagsValues[6] = {
     0x00000004, // DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT
 };
 
-static char const *const VkPipelineCreateFlagsStrings[68] = {
+static char const *const VkPipelineCreateFlagsStrings[69] = {
     "DISPATCH_BASE",                                                                   // 0x00000010
     "VIEW_INDEX_FROM_DEVICE_INDEX_BIT_KHR",                                            // 0x00000008
     "DISPATCH_BASE_KHR",                                                               // 0x00000010
@@ -1029,6 +1029,7 @@ static char const *const VkPipelineCreateFlagsStrings[68] = {
     "EARLY_RETURN_ON_FAILURE_BIT_EXT",                                                 // 0x00000200
     "VK_PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT",  // 0x00400000
     "VK_PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR", // 0x00200000
+    "RAY_TRACING_OPACITY_MICROMAP_BIT_EXT",                                            // 0x01000000
     "NO_PROTECTED_ACCESS_BIT_EXT",                                                     // 0x08000000
     "PROTECTED_ACCESS_ONLY_BIT_EXT",                                                   // 0x40000000
     "DISPATCH_BASE_BIT_KHR",                                                           // 0x00000010
@@ -1085,14 +1086,14 @@ static char const *const VkPipelineCreateFlagsStrings[68] = {
     "RESERVED_BIT_28_NV",                                                              // 0x10000000
     "RESERVED_29_AMD",                                                                 // 0x20000000
     "RESERVED_30_BIT_EXT",                                                             // 0x40000000
-    "RAY_TRACING_OPACITY_MICROMAP_BIT_EXT",                                            // 0x01000000
     "DESCRIPTOR_BUFFER_BIT_EXT",                                                       // 0x20000000
     "RAY_TRACING_DISPLACEMENT_MICROMAP_BIT_NV",                                        // 0x10000000
     "NO_PROTECTED_ACCESS",                                                             // 0x08000000
     "PROTECTED_ACCESS_ONLY",                                                           // 0x40000000
+    "RAY_TRACING_OPACITY_MICROMAP_BIT_KHR",                                            // 0x01000000
 };
 
-static uint32_t const VkPipelineCreateFlagsValues[68] = {
+static uint32_t const VkPipelineCreateFlagsValues[69] = {
     0x00000010, // DISPATCH_BASE
     0x00000008, // VIEW_INDEX_FROM_DEVICE_INDEX_BIT_KHR
     0x00000010, // DISPATCH_BASE_KHR
@@ -1100,6 +1101,7 @@ static uint32_t const VkPipelineCreateFlagsValues[68] = {
     0x00000200, // EARLY_RETURN_ON_FAILURE_BIT_EXT
     0x00400000, // VK_PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT
     0x00200000, // VK_PIPELINE_RASTERIZATION_STATE_CREATE_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR
+    0x01000000, // RAY_TRACING_OPACITY_MICROMAP_BIT_EXT
     0x08000000, // NO_PROTECTED_ACCESS_BIT_EXT
     0x40000000, // PROTECTED_ACCESS_ONLY_BIT_EXT
     0x00000010, // DISPATCH_BASE_BIT_KHR
@@ -1156,11 +1158,11 @@ static uint32_t const VkPipelineCreateFlagsValues[68] = {
     0x10000000, // RESERVED_BIT_28_NV
     0x20000000, // RESERVED_29_AMD
     0x40000000, // RESERVED_30_BIT_EXT
-    0x01000000, // RAY_TRACING_OPACITY_MICROMAP_BIT_EXT
     0x20000000, // DESCRIPTOR_BUFFER_BIT_EXT
     0x10000000, // RAY_TRACING_DISPLACEMENT_MICROMAP_BIT_NV
     0x08000000, // NO_PROTECTED_ACCESS
     0x40000000, // PROTECTED_ACCESS_ONLY
+    0x01000000, // RAY_TRACING_OPACITY_MICROMAP_BIT_KHR
 };
 
 static char const *const VkColorComponentFlagsStrings[4] = {
@@ -1803,7 +1805,7 @@ static uint32_t const VkGeometryFlagsKHRValues[4] = {
     0x00000002, // NO_DUPLICATE_ANY_HIT_INVOCATION
 };
 
-static char const *const VkGeometryInstanceFlagsKHRStrings[15] = {
+static char const *const VkGeometryInstanceFlagsKHRStrings[17] = {
     "TRIANGLE_FRONT_COUNTERCLOCKWISE",        // 0x00000002
     "TRIANGLE_CULL_DISABLE_BIT_NV",           // 0x00000001
     "TRIANGLE_FRONT_COUNTERCLOCKWISE_BIT_NV", // 0x00000002
@@ -1811,17 +1813,19 @@ static char const *const VkGeometryInstanceFlagsKHRStrings[15] = {
     "FORCE_NO_OPAQUE_BIT_NV",                 // 0x00000008
     "FORCE_OPACITY_MICROMAP_2_STATE_EXT",     // 0x00000010
     "DISABLE_OPACITY_MICROMAPS_EXT",          // 0x00000020
+    "FORCE_OPACITY_MICROMAP_2_STATE_BIT_EXT", // 0x00000010
+    "DISABLE_OPACITY_MICROMAPS_BIT_EXT",      // 0x00000020
     "TRIANGLE_FACING_CULL_DISABLE",           // 0x00000001
     "FORCE_OPAQUE",                           // 0x00000004
     "FORCE_NO_OPAQUE",                        // 0x00000008
     "TRIANGLE_FLIP_FACING",                   // 0x00000002
     "RESERVED_4_BIT_NV",                      // 0x00000010
     "RESERVED_5_BIT_NV",                      // 0x00000020
-    "FORCE_OPACITY_MICROMAP_2_STATE_BIT_EXT", // 0x00000010
-    "DISABLE_OPACITY_MICROMAPS_BIT_EXT",      // 0x00000020
+    "FORCE_OPACITY_MICROMAP_2_STATE",         // 0x00000010
+    "DISABLE_OPACITY_MICROMAPS",              // 0x00000020
 };
 
-static uint32_t const VkGeometryInstanceFlagsKHRValues[15] = {
+static uint32_t const VkGeometryInstanceFlagsKHRValues[17] = {
     0x00000002, // TRIANGLE_FRONT_COUNTERCLOCKWISE
     0x00000001, // TRIANGLE_CULL_DISABLE_BIT_NV
     0x00000002, // TRIANGLE_FRONT_COUNTERCLOCKWISE_BIT_NV
@@ -1829,14 +1833,16 @@ static uint32_t const VkGeometryInstanceFlagsKHRValues[15] = {
     0x00000008, // FORCE_NO_OPAQUE_BIT_NV
     0x00000010, // FORCE_OPACITY_MICROMAP_2_STATE_EXT
     0x00000020, // DISABLE_OPACITY_MICROMAPS_EXT
+    0x00000010, // FORCE_OPACITY_MICROMAP_2_STATE_BIT_EXT
+    0x00000020, // DISABLE_OPACITY_MICROMAPS_BIT_EXT
     0x00000001, // TRIANGLE_FACING_CULL_DISABLE
     0x00000004, // FORCE_OPAQUE
     0x00000008, // FORCE_NO_OPAQUE
     0x00000002, // TRIANGLE_FLIP_FACING
     0x00000010, // RESERVED_4_BIT_NV
     0x00000020, // RESERVED_5_BIT_NV
-    0x00000010, // FORCE_OPACITY_MICROMAP_2_STATE_BIT_EXT
-    0x00000020, // DISABLE_OPACITY_MICROMAPS_BIT_EXT
+    0x00000010, // FORCE_OPACITY_MICROMAP_2_STATE
+    0x00000020, // DISABLE_OPACITY_MICROMAPS
 };
 
 static char const *const VkClusterAccelerationStructureGeometryFlagsNVStrings[3] = {
@@ -1879,7 +1885,7 @@ static uint32_t const VkClusterAccelerationStructureAddressResolutionFlagsNVValu
     0,          // NONE
 };
 
-static char const *const VkBuildAccelerationStructureFlagsKHRStrings[28] = {
+static char const *const VkBuildAccelerationStructureFlagsKHRStrings[31] = {
     "ALLOW_UPDATE_BIT_NV",                        // 0x00000001
     "ALLOW_COMPACTION_BIT_NV",                    // 0x00000002
     "PREFER_FAST_TRACE_BIT_NV",                   // 0x00000004
@@ -1890,6 +1896,8 @@ static char const *const VkBuildAccelerationStructureFlagsKHRStrings[28] = {
     "ALLOW_OPACITY_MICROMAP_DATA_UPDATE_EXT",     // 0x00000100
     "ALLOW_DISPLACEMENT_MICROMAP_UPDATE_NV",      // 0x00000200
     "ALLOW_DATA_ACCESS",                          // 0x00000800
+    "ALLOW_OPACITY_MICROMAP_UPDATE_BIT_EXT",      // 0x00000040
+    "ALLOW_DISABLE_OPACITY_MICROMAPS_BIT_EXT",    // 0x00000080
     "ALLOW_UPDATE",                               // 0x00000001
     "ALLOW_COMPACTION",                           // 0x00000002
     "PREFER_FAST_TRACE",                          // 0x00000004
@@ -1901,16 +1909,17 @@ static char const *const VkBuildAccelerationStructureFlagsKHRStrings[28] = {
     "RESERVED_7_BIT_NV",                          // 0x00000080
     "RESERVED_BIT_9_NV",                          // 0x00000200
     "RESERVED_BIT_10_NV",                         // 0x00000400
-    "ALLOW_OPACITY_MICROMAP_UPDATE_BIT_EXT",      // 0x00000040
-    "ALLOW_DISABLE_OPACITY_MICROMAPS_BIT_EXT",    // 0x00000080
     "ALLOW_OPACITY_MICROMAP_DATA_UPDATE_BIT_EXT", // 0x00000100
     "ALLOW_DISPLACEMENT_MICROMAP_UPDATE_BIT_NV",  // 0x00000200
     "ALLOW_DATA_ACCESS",                          // 0x00000800
     "ALLOW_CLUSTER_OPACITY_MICROMAPS_BIT_NV",     // 0x00001000
     "RESERVED_10",                                // 0x00000400
+    "ALLOW_OPACITY_MICROMAP_UPDATE",              // 0x00000040
+    "ALLOW_DISABLE_OPACITY_MICROMAPS",            // 0x00000080
+    "MICROMAP_LOSSY",                             // 0x00000400
 };
 
-static uint32_t const VkBuildAccelerationStructureFlagsKHRValues[28] = {
+static uint32_t const VkBuildAccelerationStructureFlagsKHRValues[31] = {
     0x00000001, // ALLOW_UPDATE_BIT_NV
     0x00000002, // ALLOW_COMPACTION_BIT_NV
     0x00000004, // PREFER_FAST_TRACE_BIT_NV
@@ -1921,6 +1930,8 @@ static uint32_t const VkBuildAccelerationStructureFlagsKHRValues[28] = {
     0x00000100, // ALLOW_OPACITY_MICROMAP_DATA_UPDATE_EXT
     0x00000200, // ALLOW_DISPLACEMENT_MICROMAP_UPDATE_NV
     0x00000800, // ALLOW_DATA_ACCESS
+    0x00000040, // ALLOW_OPACITY_MICROMAP_UPDATE_BIT_EXT
+    0x00000080, // ALLOW_DISABLE_OPACITY_MICROMAPS_BIT_EXT
     0x00000001, // ALLOW_UPDATE
     0x00000002, // ALLOW_COMPACTION
     0x00000004, // PREFER_FAST_TRACE
@@ -1932,13 +1943,14 @@ static uint32_t const VkBuildAccelerationStructureFlagsKHRValues[28] = {
     0x00000080, // RESERVED_7_BIT_NV
     0x00000200, // RESERVED_BIT_9_NV
     0x00000400, // RESERVED_BIT_10_NV
-    0x00000040, // ALLOW_OPACITY_MICROMAP_UPDATE_BIT_EXT
-    0x00000080, // ALLOW_DISABLE_OPACITY_MICROMAPS_BIT_EXT
     0x00000100, // ALLOW_OPACITY_MICROMAP_DATA_UPDATE_BIT_EXT
     0x00000200, // ALLOW_DISPLACEMENT_MICROMAP_UPDATE_BIT_NV
     0x00000800, // ALLOW_DATA_ACCESS
     0x00001000, // ALLOW_CLUSTER_OPACITY_MICROMAPS_BIT_NV
     0x00000400, // RESERVED_10
+    0x00000040, // ALLOW_OPACITY_MICROMAP_UPDATE
+    0x00000080, // ALLOW_DISABLE_OPACITY_MICROMAPS
+    0x00000400, // MICROMAP_LOSSY
 };
 
 static char const *const VkPrivateDataSlotCreateFlagsStrings[1] = {
@@ -2021,7 +2033,7 @@ static uint32_t const VkDeviceDiagnosticsConfigFlagsNVValues[4] = {
     0x00000008, // ENABLE_SHADER_ERROR_REPORTING
 };
 
-static char const *const VkAccessFlags2Strings[104] = {
+static char const *const VkAccessFlags2Strings[106] = {
     "NONE_KHR",                                      // 0
     "INDIRECT_COMMAND_READ_BIT_KHR",                 // 0x00000001
     "INDEX_READ_BIT_KHR",                            // 0x00000002
@@ -2126,9 +2138,11 @@ static char const *const VkAccessFlags2Strings[104] = {
     "RESOURCE_HEAP_READ_BIT_EXT",                    // 0x400000000000000
     "RESERVED_28_BIT_AMD",                           // 0x10000000
     "RESERVED_29_BIT_AMD",                           // 0x20000000
+    "RESERVED_53_BIT_KHR",                           // 0x20000000000000
+    "RESERVED_54_BIT_KHR",                           // 0x40000000000000
 };
 
-static uint64_t const VkAccessFlags2Values[104] = {
+static uint64_t const VkAccessFlags2Values[106] = {
     0,                  // NONE_KHR
     0x00000001,         // INDIRECT_COMMAND_READ_BIT_KHR
     0x00000002,         // INDEX_READ_BIT_KHR
@@ -2233,9 +2247,11 @@ static uint64_t const VkAccessFlags2Values[104] = {
     0x400000000000000,  // RESOURCE_HEAP_READ_BIT_EXT
     0x10000000,         // RESERVED_28_BIT_AMD
     0x20000000,         // RESERVED_29_BIT_AMD
+    0x20000000000000,   // RESERVED_53_BIT_KHR
+    0x40000000000000,   // RESERVED_54_BIT_KHR
 };
 
-static char const *const VkPipelineStageFlags2Strings[93] = {
+static char const *const VkPipelineStageFlags2Strings[94] = {
     "TRANSFER",                                 // 0x00001000
     "NONE_KHR",                                 // 0
     "TOP_OF_PIPE_BIT_KHR",                      // 0x00000001
@@ -2329,9 +2345,10 @@ static char const *const VkPipelineStageFlags2Strings[93] = {
     "RESERVED_48_BIT_HUAWEI",                   // 0x1000000000000
     "RESERVED_49_BIT_EXT",                      // 0x2000000000000
     "RESERVED_31_BIT_AMD",                      // 0x80000000
+    "RESERVED_50_BIT_KHR",                      // 0x4000000000000
 };
 
-static uint64_t const VkPipelineStageFlags2Values[93] = {
+static uint64_t const VkPipelineStageFlags2Values[94] = {
     0x00001000,      // TRANSFER
     0,               // NONE_KHR
     0x00000001,      // TOP_OF_PIPE_BIT_KHR
@@ -2425,9 +2442,10 @@ static uint64_t const VkPipelineStageFlags2Values[93] = {
     0x1000000000000, // RESERVED_48_BIT_HUAWEI
     0x2000000000000, // RESERVED_49_BIT_EXT
     0x80000000,      // RESERVED_31_BIT_AMD
+    0x4000000000000, // RESERVED_50_BIT_KHR
 };
 
-static char const *const VkFormatFeatureFlags2Strings[115] = {
+static char const *const VkFormatFeatureFlags2Strings[116] = {
     "SAMPLED_IMAGE_BIT_KHR",                                                           // 0x00000001
     "STORAGE_IMAGE_BIT_KHR",                                                           // 0x00000002
     "STORAGE_IMAGE_ATOMIC_BIT_KHR",                                                    // 0x00000004
@@ -2543,9 +2561,10 @@ static char const *const VkFormatFeatureFlags2Strings[115] = {
     "DATA_GRAPH_OPTICAL_FLOW_IMAGE_BIT_ARM",                                   // 0x100000000000000
     "DATA_GRAPH_OPTICAL_FLOW_VECTOR_BIT_ARM",                                  // 0x200000000000000
     "DATA_GRAPH_OPTICAL_FLOW_COST_BIT_ARM",                                    // 0x400000000000000
+    "BLOCK_MATCHING_SXD_BIT_QCOM",                                             // 0x100000000000
 };
 
-static uint64_t const VkFormatFeatureFlags2Values[115] = {
+static uint64_t const VkFormatFeatureFlags2Values[116] = {
     0x00000001,  // SAMPLED_IMAGE_BIT_KHR
     0x00000002,  // STORAGE_IMAGE_BIT_KHR
     0x00000004,  // STORAGE_IMAGE_ATOMIC_BIT_KHR
@@ -2661,6 +2680,7 @@ static uint64_t const VkFormatFeatureFlags2Values[115] = {
     0x100000000000000,  // DATA_GRAPH_OPTICAL_FLOW_IMAGE_BIT_ARM
     0x200000000000000,  // DATA_GRAPH_OPTICAL_FLOW_VECTOR_BIT_ARM
     0x400000000000000,  // DATA_GRAPH_OPTICAL_FLOW_COST_BIT_ARM
+    0x100000000000,     // BLOCK_MATCHING_SXD_BIT_QCOM
 };
 
 static char const *const VkRenderingFlagsStrings[23] = {
@@ -2783,7 +2803,8 @@ static uint32_t const VkIndirectCommandsInputModeFlagsEXTValues[2] = {
     0x00000002, // DXGI_INDEX_BUFFER
 };
 
-static char const *const VkPipelineCreateFlags2Strings[66] = {
+static char const *const VkPipelineCreateFlags2Strings[68] = {
+    "RAY_TRACING_OPACITY_MICROMAP_BIT_EXT",                      // 0x01000000
     "DISABLE_OPTIMIZATION_BIT_KHR",                              // 0x00000001
     "ALLOW_DERIVATIVES_BIT_KHR",                                 // 0x00000002
     "DERIVATIVE_BIT_KHR",                                        // 0x00000004
@@ -2822,7 +2843,6 @@ static char const *const VkPipelineCreateFlags2Strings[66] = {
     "RAY_TRACING_ALLOW_MOTION_BIT_NV",                           // 0x00100000
     "RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR",        // 0x00200000
     "RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT",         // 0x00400000
-    "RAY_TRACING_OPACITY_MICROMAP_BIT_EXT",                      // 0x01000000
     "COLOR_ATTACHMENT_FEEDBACK_LOOP_BIT_EXT",                    // 0x02000000
     "DEPTH_STENCIL_ATTACHMENT_FEEDBACK_LOOP_BIT_EXT",            // 0x04000000
     "RAY_TRACING_DISPLACEMENT_MICROMAP_BIT_NV",                  // 0x10000000
@@ -2850,9 +2870,12 @@ static char const *const VkPipelineCreateFlags2Strings[66] = {
     "DESCRIPTOR_HEAP_BIT_EXT",                                   // 0x1000000000
     "RESERVED_39_BIT_ARM",                                       // 0x8000000000
     "INSTRUMENT_SHADERS_BIT_ARM",                                // 0x8000000000
+    "RAY_TRACING_OPACITY_MICROMAP_BIT_KHR",                      // 0x01000000
+    "OPACITY_MICROMAP_DISALLOW_MIXED_SPECIAL_INDEX_BIT_KHR",     // 0x20000000000
 };
 
-static uint64_t const VkPipelineCreateFlags2Values[66] = {
+static uint64_t const VkPipelineCreateFlags2Values[68] = {
+    0x01000000,      // RAY_TRACING_OPACITY_MICROMAP_BIT_EXT
     0x00000001,      // DISABLE_OPTIMIZATION_BIT_KHR
     0x00000002,      // ALLOW_DERIVATIVES_BIT_KHR
     0x00000004,      // DERIVATIVE_BIT_KHR
@@ -2891,7 +2914,6 @@ static uint64_t const VkPipelineCreateFlags2Values[66] = {
     0x00100000,      // RAY_TRACING_ALLOW_MOTION_BIT_NV
     0x00200000,      // RENDERING_FRAGMENT_SHADING_RATE_ATTACHMENT_BIT_KHR
     0x00400000,      // RENDERING_FRAGMENT_DENSITY_MAP_ATTACHMENT_BIT_EXT
-    0x01000000,      // RAY_TRACING_OPACITY_MICROMAP_BIT_EXT
     0x02000000,      // COLOR_ATTACHMENT_FEEDBACK_LOOP_BIT_EXT
     0x04000000,      // DEPTH_STENCIL_ATTACHMENT_FEEDBACK_LOOP_BIT_EXT
     0x10000000,      // RAY_TRACING_DISPLACEMENT_MICROMAP_BIT_NV
@@ -2919,6 +2941,8 @@ static uint64_t const VkPipelineCreateFlags2Values[66] = {
     0x1000000000,    // DESCRIPTOR_HEAP_BIT_EXT
     0x8000000000,    // RESERVED_39_BIT_ARM
     0x8000000000,    // INSTRUMENT_SHADERS_BIT_ARM
+    0x01000000,      // RAY_TRACING_OPACITY_MICROMAP_BIT_KHR
+    0x20000000000,   // OPACITY_MICROMAP_DISALLOW_MIXED_SPECIAL_INDEX_BIT_KHR
 };
 
 static char const *const VkBufferUsageFlags2Strings[55] = {
@@ -2944,6 +2968,8 @@ static char const *const VkBufferUsageFlags2Strings[55] = {
     "INDIRECT_BUFFER",                                      // 0x00000100
     "SHADER_DEVICE_ADDRESS",                                // 0x00020000
     "EXECUTION_GRAPH_SCRATCH_BIT_AMDX",                     // 0x02000000
+    "MICROMAP_BUILD_INPUT_READ_ONLY_BIT_EXT",               // 0x00800000
+    "MICROMAP_STORAGE_BIT_EXT",                             // 0x01000000
     "CONDITIONAL_RENDERING_BIT_EXT",                        // 0x00000200
     "SHADER_BINDING_TABLE_BIT_KHR",                         // 0x00000400
     "TRANSFORM_FEEDBACK_BUFFER_BIT_EXT",                    // 0x00000800
@@ -2957,8 +2983,6 @@ static char const *const VkBufferUsageFlags2Strings[55] = {
     "SAMPLER_DESCRIPTOR_BUFFER_BIT_EXT",                    // 0x00200000
     "RESOURCE_DESCRIPTOR_BUFFER_BIT_EXT",                   // 0x00400000
     "PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_BIT_EXT",           // 0x04000000
-    "MICROMAP_BUILD_INPUT_READ_ONLY_BIT_EXT",               // 0x00800000
-    "MICROMAP_STORAGE_BIT_EXT",                             // 0x01000000
     "PREPROCESS_BUFFER_BIT_EXT",                            // 0x80000000
     "RESERVED_28_BIT_KHR",                                  // 0x10000000
     "RESERVED_27_BIT_QCOM",                                 // 0x08000000
@@ -3002,6 +3026,8 @@ static uint64_t const VkBufferUsageFlags2Values[55] = {
     0x00000100,   // INDIRECT_BUFFER
     0x00020000,   // SHADER_DEVICE_ADDRESS
     0x02000000,   // EXECUTION_GRAPH_SCRATCH_BIT_AMDX
+    0x00800000,   // MICROMAP_BUILD_INPUT_READ_ONLY_BIT_EXT
+    0x01000000,   // MICROMAP_STORAGE_BIT_EXT
     0x00000200,   // CONDITIONAL_RENDERING_BIT_EXT
     0x00000400,   // SHADER_BINDING_TABLE_BIT_KHR
     0x00000800,   // TRANSFORM_FEEDBACK_BUFFER_BIT_EXT
@@ -3015,8 +3041,6 @@ static uint64_t const VkBufferUsageFlags2Values[55] = {
     0x00200000,   // SAMPLER_DESCRIPTOR_BUFFER_BIT_EXT
     0x00400000,   // RESOURCE_DESCRIPTOR_BUFFER_BIT_EXT
     0x04000000,   // PUSH_DESCRIPTORS_DESCRIPTOR_BUFFER_BIT_EXT
-    0x00800000,   // MICROMAP_BUILD_INPUT_READ_ONLY_BIT_EXT
-    0x01000000,   // MICROMAP_STORAGE_BIT_EXT
     0x80000000,   // PREPROCESS_BUFFER_BIT_EXT
     0x10000000,   // RESERVED_28_BIT_KHR
     0x08000000,   // RESERVED_27_BIT_QCOM
@@ -3161,6 +3185,26 @@ static uint32_t const VkSpirvResourceTypeFlagsEXTValues[11] = {
     0x00000080, // READ_WRITE_STORAGE_BUFFER
     0x00000100, // ACCELERATION_STRUCTURE
     0x00000200, // TENSOR_BIT_ARM
+};
+
+static char const *const VkGpaSqShaderStageFlagsAMDStrings[7] = {
+    "PS", // 0x00000001
+    "VS", // 0x00000002
+    "GS", // 0x00000004
+    "ES", // 0x00000008
+    "HS", // 0x00000010
+    "LS", // 0x00000020
+    "CS", // 0x00000040
+};
+
+static uint32_t const VkGpaSqShaderStageFlagsAMDValues[7] = {
+    0x00000001, // PS
+    0x00000002, // VS
+    0x00000004, // GS
+    0x00000008, // ES
+    0x00000010, // HS
+    0x00000020, // LS
+    0x00000040, // CS
 };
 
 static char const *const VkAddressCommandFlagsKHRStrings[6] = {
@@ -4023,35 +4067,36 @@ static uint32_t const VkPresentGravityFlagsKHRValues[6] = {
     0x00000004, // CENTERED
 };
 
-static char const *const VkShaderCreateFlagsEXTStrings[25] = {
-    "LINK_STAGE",                       // 0x00000001
-    "ALLOW_VARYING_SUBGROUP_SIZE",      // 0x00000002
-    "REQUIRE_FULL_SUBGROUPS",           // 0x00000004
-    "NO_TASK_SHADER",                   // 0x00000008
-    "DISPATCH_BASE",                    // 0x00000010
-    "FRAGMENT_SHADING_RATE_ATTACHMENT", // 0x00000020
-    "FRAGMENT_DENSITY_MAP_ATTACHMENT",  // 0x00000040
-    "EXTENSION_573",                    // 0x00000080
-    "RESERVED_8",                       // 0x00000100
-    "RESERVED_9",                       // 0x00000200
-    "RESERVED_10_BIT_KHR",              // 0x00000400
-    "INDIRECT_BINDABLE",                // 0x00000080
-    "RESERVED_11_BIT_KHR",              // 0x00000800
-    "RESERVED_12",                      // 0x00001000
-    "RESERVED_13",                      // 0x00002000
-    "RESERVED_14",                      // 0x00004000
-    "RESERVED_15",                      // 0x00008000
-    "RESERVED_16_BIT_KHR",              // 0x00010000
-    "RESERVED_17_BIT_IMG",              // 0x00020000
-    "RESERVED_18_BIT_KHR",              // 0x00040000
-    "64_BIT_INDEXING",                  // 0x00008000
-    "DESCRIPTOR_HEAP",                  // 0x00000400
-    "RESERVED_11_BIT_ARM",              // 0x00000800
-    "INSTRUMENT_SHADER_BIT_ARM",        // 0x00000800
-    "INDEPENDENT_SETS_BIT_KHR",         // 0x00040000
+static char const *const VkShaderCreateFlagsEXTStrings[26] = {
+    "LINK_STAGE",                                    // 0x00000001
+    "ALLOW_VARYING_SUBGROUP_SIZE",                   // 0x00000002
+    "REQUIRE_FULL_SUBGROUPS",                        // 0x00000004
+    "NO_TASK_SHADER",                                // 0x00000008
+    "DISPATCH_BASE",                                 // 0x00000010
+    "FRAGMENT_SHADING_RATE_ATTACHMENT",              // 0x00000020
+    "FRAGMENT_DENSITY_MAP_ATTACHMENT",               // 0x00000040
+    "EXTENSION_573",                                 // 0x00000080
+    "RESERVED_8",                                    // 0x00000100
+    "RESERVED_9",                                    // 0x00000200
+    "RESERVED_10_BIT_KHR",                           // 0x00000400
+    "INDIRECT_BINDABLE",                             // 0x00000080
+    "RESERVED_11_BIT_KHR",                           // 0x00000800
+    "RESERVED_12",                                   // 0x00001000
+    "RESERVED_13",                                   // 0x00002000
+    "RESERVED_14",                                   // 0x00004000
+    "RESERVED_15",                                   // 0x00008000
+    "RESERVED_16_BIT_KHR",                           // 0x00010000
+    "RESERVED_17_BIT_IMG",                           // 0x00020000
+    "RESERVED_18_BIT_KHR",                           // 0x00040000
+    "64_BIT_INDEXING",                               // 0x00008000
+    "DESCRIPTOR_HEAP",                               // 0x00000400
+    "RESERVED_11_BIT_ARM",                           // 0x00000800
+    "INSTRUMENT_SHADER_BIT_ARM",                     // 0x00000800
+    "INDEPENDENT_SETS_BIT_KHR",                      // 0x00040000
+    "OPACITY_MICROMAP_DISALLOW_MIXED_SPECIAL_INDEX", // 0x00001000
 };
 
-static uint32_t const VkShaderCreateFlagsEXTValues[25] = {
+static uint32_t const VkShaderCreateFlagsEXTValues[26] = {
     0x00000001, // LINK_STAGE
     0x00000002, // ALLOW_VARYING_SUBGROUP_SIZE
     0x00000004, // REQUIRE_FULL_SUBGROUPS
@@ -4077,6 +4122,7 @@ static uint32_t const VkShaderCreateFlagsEXTValues[25] = {
     0x00000800, // RESERVED_11_BIT_ARM
     0x00000800, // INSTRUMENT_SHADER_BIT_ARM
     0x00040000, // INDEPENDENT_SETS_BIT_KHR
+    0x00001000, // OPACITY_MICROMAP_DISALLOW_MIXED_SPECIAL_INDEX
 };
 
 static char const *const VkTileShadingRenderPassFlagsQCOMStrings[2] = {
@@ -6369,7 +6415,7 @@ static int32_t const VkPrimitiveTopologyValues[11] = {
     10, // PATCH_LIST
 };
 
-static char const *const VkQueryTypeStrings[21] = {
+static char const *const VkQueryTypeStrings[22] = {
     "OCCLUSION",                                                      // 0
     "PIPELINE_STATISTICS",                                            // 1
     "TIMESTAMP",                                                      // 2
@@ -6391,9 +6437,10 @@ static char const *const VkQueryTypeStrings[21] = {
     "MICROMAP_SERIALIZATION_SIZE_EXT",                                // 1000396000
     "MICROMAP_COMPACTED_SIZE_EXT",                                    // 1000396001
     "VIDEO_ENCODE_FEEDBACK_KHR",                                      // 1000299000
+    "TIME_ELAPSED_QCOM",                                              // 1000173000
 };
 
-static int32_t const VkQueryTypeValues[21] = {
+static int32_t const VkQueryTypeValues[22] = {
     0,          // OCCLUSION
     1,          // PIPELINE_STATISTICS
     2,          // TIMESTAMP
@@ -6415,6 +6462,7 @@ static int32_t const VkQueryTypeValues[21] = {
     1000396000, // MICROMAP_SERIALIZATION_SIZE_EXT
     1000396001, // MICROMAP_COMPACTED_SIZE_EXT
     1000299000, // VIDEO_ENCODE_FEEDBACK_KHR
+    1000173000, // TIME_ELAPSED_QCOM
 };
 
 static char const *const VkSubpassContentsStrings[4] = {
@@ -6571,7 +6619,7 @@ static int32_t const VkClusterAccelerationStructureOpModeNVValues[3] = {
     2, // COMPUTE_SIZES
 };
 
-static char const *const VkObjectTypeStrings[66] = {
+static char const *const VkObjectTypeStrings[67] = {
     "DESCRIPTOR_UPDATE_TEMPLATE_KHR",  // 1000085000
     "SAMPLER_YCBCR_CONVERSION_KHR",    // 1000156000
     "PRIVATE_DATA_SLOT_EXT",           // 1000295000
@@ -6638,9 +6686,10 @@ static char const *const VkObjectTypeStrings[66] = {
     "TENSOR_VIEW_ARM",                 // 1000460001
     "DATA_GRAPH_PIPELINE_SESSION_ARM", // 1000507000
     "SHADER_INSTRUMENTATION_ARM",      // 1000607000
+    "GPA_SESSION_AMD",                 // 1000133000
 };
 
-static int32_t const VkObjectTypeValues[66] = {
+static int32_t const VkObjectTypeValues[67] = {
     1000085000, // DESCRIPTOR_UPDATE_TEMPLATE_KHR
     1000156000, // SAMPLER_YCBCR_CONVERSION_KHR
     1000295000, // PRIVATE_DATA_SLOT_EXT
@@ -6707,6 +6756,7 @@ static int32_t const VkObjectTypeValues[66] = {
     1000460001, // TENSOR_VIEW_ARM
     1000507000, // DATA_GRAPH_PIPELINE_SESSION_ARM
     1000607000, // SHADER_INSTRUMENTATION_ARM
+    1000133000, // GPA_SESSION_AMD
 };
 
 static char const *const VkRayTracingInvocationReorderModeEXTStrings[4] = {
@@ -6967,23 +7017,25 @@ static int32_t const VkCopyAccelerationStructureModeKHRValues[6] = {
     3, // DESERIALIZE
 };
 
-static char const *const VkAccelerationStructureTypeKHRStrings[5] = {
-    "TOP_LEVEL_NV",    // 0
-    "BOTTOM_LEVEL_NV", // 1
-    "TOP_LEVEL",       // 0
-    "BOTTOM_LEVEL",    // 1
-    "GENERIC",         // 2
+static char const *const VkAccelerationStructureTypeKHRStrings[6] = {
+    "TOP_LEVEL_NV",     // 0
+    "BOTTOM_LEVEL_NV",  // 1
+    "TOP_LEVEL",        // 0
+    "BOTTOM_LEVEL",     // 1
+    "GENERIC",          // 2
+    "OPACITY_MICROMAP", // 1000623000
 };
 
-static int32_t const VkAccelerationStructureTypeKHRValues[5] = {
-    0, // TOP_LEVEL_NV
-    1, // BOTTOM_LEVEL_NV
-    0, // TOP_LEVEL
-    1, // BOTTOM_LEVEL
-    2, // GENERIC
+static int32_t const VkAccelerationStructureTypeKHRValues[6] = {
+    0,          // TOP_LEVEL_NV
+    1,          // BOTTOM_LEVEL_NV
+    0,          // TOP_LEVEL
+    1,          // BOTTOM_LEVEL
+    2,          // GENERIC
+    1000623000, // OPACITY_MICROMAP
 };
 
-static char const *const VkGeometryTypeKHRStrings[8] = {
+static char const *const VkGeometryTypeKHRStrings[9] = {
     "TRIANGLES_NV",                         // 0
     "AABBS_NV",                             // 1
     "TRIANGLES",                            // 0
@@ -6992,9 +7044,10 @@ static char const *const VkGeometryTypeKHRStrings[8] = {
     "SPHERES_NV",                           // 1000429004
     "LINEAR_SWEPT_SPHERES_NV",              // 1000429005
     "DENSE_GEOMETRY_FORMAT_TRIANGLES_AMDX", // 1000478000
+    "MICROMAP",                             // 1000623000
 };
 
-static int32_t const VkGeometryTypeKHRValues[8] = {
+static int32_t const VkGeometryTypeKHRValues[9] = {
     0,          // TRIANGLES_NV
     1,          // AABBS_NV
     0,          // TRIANGLES
@@ -7003,6 +7056,7 @@ static int32_t const VkGeometryTypeKHRValues[8] = {
     1000429004, // SPHERES_NV
     1000429005, // LINEAR_SWEPT_SPHERES_NV
     1000478000, // DENSE_GEOMETRY_FORMAT_TRIANGLES_AMDX
+    1000623000, // MICROMAP
 };
 
 static char const *const VkRayTracingShaderGroupTypeKHRStrings[6] = {
@@ -7487,17 +7541,25 @@ static int32_t const VkCopyMicromapModeEXTValues[4] = {
     3, // COMPACT
 };
 
-static char const *const VkOpacityMicromapFormatEXTStrings[2] = {
-    "2_STATE", // 1
-    "4_STATE", // 2
+static char const *const VkOpacityMicromapFormatKHRStrings[4] = {
+    "2_STATE_EXT", // 1
+    "4_STATE_EXT", // 2
+    "2_STATE",     // 1
+    "4_STATE",     // 2
 };
 
-static int32_t const VkOpacityMicromapFormatEXTValues[2] = {
+static int32_t const VkOpacityMicromapFormatKHRValues[4] = {
+    1, // 2_STATE_EXT
+    2, // 4_STATE_EXT
     1, // 2_STATE
     2, // 4_STATE
 };
 
-static char const *const VkOpacityMicromapSpecialIndexEXTStrings[5] = {
+static char const *const VkOpacityMicromapSpecialIndexKHRStrings[9] = {
+    "FULLY_TRANSPARENT_EXT",                        // -1
+    "FULLY_OPAQUE_EXT",                             // -2
+    "FULLY_UNKNOWN_TRANSPARENT_EXT",                // -3
+    "FULLY_UNKNOWN_OPAQUE_EXT",                     // -4
     "FULLY_TRANSPARENT",                            // -1
     "FULLY_OPAQUE",                                 // -2
     "FULLY_UNKNOWN_TRANSPARENT",                    // -3
@@ -7505,12 +7567,24 @@ static char const *const VkOpacityMicromapSpecialIndexEXTStrings[5] = {
     "CLUSTER_GEOMETRY_DISABLE_OPACITY_MICROMAP_NV", // -5
 };
 
-static int32_t const VkOpacityMicromapSpecialIndexEXTValues[5] = {
+static int32_t const VkOpacityMicromapSpecialIndexKHRValues[9] = {
+    -1, // FULLY_TRANSPARENT_EXT
+    -2, // FULLY_OPAQUE_EXT
+    -3, // FULLY_UNKNOWN_TRANSPARENT_EXT
+    -4, // FULLY_UNKNOWN_OPAQUE_EXT
     -1, // FULLY_TRANSPARENT
     -2, // FULLY_OPAQUE
     -3, // FULLY_UNKNOWN_TRANSPARENT
     -4, // FULLY_UNKNOWN_OPAQUE
     -5, // CLUSTER_GEOMETRY_DISABLE_OPACITY_MICROMAP_NV
+};
+
+static char const *const VkAccelerationStructureSerializedBlockTypeKHRStrings[1] = {
+    "OPACITY_MICROMAP", // 0
+};
+
+static int32_t const VkAccelerationStructureSerializedBlockTypeKHRValues[1] = {
+    0, // OPACITY_MICROMAP
 };
 
 static char const *const VkIndirectExecutionSetInfoTypeEXTStrings[2] = {
@@ -7897,6 +7971,160 @@ static int32_t const VkDescriptorMappingSourceEXTValues[11] = {
     8,  // HEAP_WITH_SHADER_RECORD_INDEX
     9,  // SHADER_RECORD_DATA
     10, // SHADER_RECORD_ADDRESS
+};
+
+static char const *const VkGpaPerfBlockAMDStrings[59] = {
+    "GE1",      // 33
+    "RLCLOCAL", // 56
+    "CPF",      // 0
+    "IA",       // 1
+    "VGT",      // 2
+    "PA",       // 3
+    "SC",       // 4
+    "SPI",      // 5
+    "SQ",       // 6
+    "SX",       // 7
+    "TA",       // 8
+    "TD",       // 9
+    "TCP",      // 10
+    "TCC",      // 11
+    "TCA",      // 12
+    "DB",       // 13
+    "CB",       // 14
+    "GDS",      // 15
+    "SRBM",     // 16
+    "GRBM",     // 17
+    "GRBM_SE",  // 18
+    "RLC",      // 19
+    "DMA",      // 20
+    "MC",       // 21
+    "CPG",      // 22
+    "CPC",      // 23
+    "WD",       // 24
+    "TCS",      // 25
+    "ATC",      // 26
+    "ATC_L2",   // 27
+    "MC_VM_L2", // 28
+    "EA",       // 29
+    "RPB",      // 30
+    "RMI",      // 31
+    "UMCCH",    // 32
+    "GE",       // 33
+    "GL1A",     // 34
+    "GL1C",     // 35
+    "GL1CG",    // 36
+    "GL2A",     // 37
+    "GL2C",     // 38
+    "CHA",      // 39
+    "CHC",      // 40
+    "CHCG",     // 41
+    "GUS",      // 42
+    "GCR",      // 43
+    "PH",       // 44
+    "UTCL1",    // 45
+    "GE_DIST",  // 46
+    "GE_SE",    // 47
+    "DF_MALL",  // 48
+    "SQ_WGP",   // 49
+    "PC",       // 50
+    "GL1XA",    // 51
+    "GL1XC",    // 52
+    "WGS",      // 53
+    "EACPWD",   // 54
+    "EASE",     // 55
+    "RLCUSER",  // 56
+};
+
+static int32_t const VkGpaPerfBlockAMDValues[59] = {
+    33, // GE1
+    56, // RLCLOCAL
+    0,  // CPF
+    1,  // IA
+    2,  // VGT
+    3,  // PA
+    4,  // SC
+    5,  // SPI
+    6,  // SQ
+    7,  // SX
+    8,  // TA
+    9,  // TD
+    10, // TCP
+    11, // TCC
+    12, // TCA
+    13, // DB
+    14, // CB
+    15, // GDS
+    16, // SRBM
+    17, // GRBM
+    18, // GRBM_SE
+    19, // RLC
+    20, // DMA
+    21, // MC
+    22, // CPG
+    23, // CPC
+    24, // WD
+    25, // TCS
+    26, // ATC
+    27, // ATC_L2
+    28, // MC_VM_L2
+    29, // EA
+    30, // RPB
+    31, // RMI
+    32, // UMCCH
+    33, // GE
+    34, // GL1A
+    35, // GL1C
+    36, // GL1CG
+    37, // GL2A
+    38, // GL2C
+    39, // CHA
+    40, // CHC
+    41, // CHCG
+    42, // GUS
+    43, // GCR
+    44, // PH
+    45, // UTCL1
+    46, // GE_DIST
+    47, // GE_SE
+    48, // DF_MALL
+    49, // SQ_WGP
+    50, // PC
+    51, // GL1XA
+    52, // GL1XC
+    53, // WGS
+    54, // EACPWD
+    55, // EASE
+    56, // RLCUSER
+};
+
+static char const *const VkGpaSampleTypeAMDStrings[3] = {
+    "CUMULATIVE", // 0
+    "TRACE",      // 1
+    "TIMING",     // 2
+};
+
+static int32_t const VkGpaSampleTypeAMDValues[3] = {
+    0, // CUMULATIVE
+    1, // TRACE
+    2, // TIMING
+};
+
+static char const *const VkGpaDeviceClockModeAMDStrings[6] = {
+    "DEFAULT",    // 0
+    "QUERY",      // 1
+    "PROFILING",  // 2
+    "MIN_MEMORY", // 3
+    "MIN_ENGINE", // 4
+    "PEAK",       // 5
+};
+
+static int32_t const VkGpaDeviceClockModeAMDValues[6] = {
+    0, // DEFAULT
+    1, // QUERY
+    2, // PROFILING
+    3, // MIN_MEMORY
+    4, // MIN_ENGINE
+    5, // PEAK
 };
 
 static char const *const VkDataGraphTOSALevelARMStrings[2] = {
@@ -9459,8 +9687,8 @@ typedef struct ValueSet {
   EnumType type;
 } ValueSet;
 
-static const uint32_t cValueSetCount = 429;
-static ValueSet const cValueSets[429] = {
+static const uint32_t cValueSetCount = 436;
+static ValueSet const cValueSets[436] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsStrings, VkFramebufferCreateFlagsValues, 2,
      ENUM_TYPE_FLAG32},
     {"VkQueryPoolCreateFlags", VkQueryPoolCreateFlagsStrings, VkQueryPoolCreateFlagsValues, 1,
@@ -9510,7 +9738,7 @@ static ValueSet const cValueSets[429] = {
      ENUM_TYPE_FLAG32},
     {"VkImageViewCreateFlags", VkImageViewCreateFlagsStrings, VkImageViewCreateFlagsValues, 6,
      ENUM_TYPE_FLAG32},
-    {"VkPipelineCreateFlags", VkPipelineCreateFlagsStrings, VkPipelineCreateFlagsValues, 68,
+    {"VkPipelineCreateFlags", VkPipelineCreateFlagsStrings, VkPipelineCreateFlagsValues, 69,
      ENUM_TYPE_FLAG32},
     {"VkColorComponentFlags", VkColorComponentFlagsStrings, VkColorComponentFlagsValues, 4,
      ENUM_TYPE_FLAG32},
@@ -9570,7 +9798,7 @@ static ValueSet const cValueSets[429] = {
     {"VkGeometryFlagsKHR", VkGeometryFlagsKHRStrings, VkGeometryFlagsKHRValues, 4,
      ENUM_TYPE_FLAG32},
     {"VkGeometryInstanceFlagsKHR", VkGeometryInstanceFlagsKHRStrings,
-     VkGeometryInstanceFlagsKHRValues, 15, ENUM_TYPE_FLAG32},
+     VkGeometryInstanceFlagsKHRValues, 17, ENUM_TYPE_FLAG32},
     {"VkClusterAccelerationStructureGeometryFlagsNV",
      VkClusterAccelerationStructureGeometryFlagsNVStrings,
      VkClusterAccelerationStructureGeometryFlagsNVValues, 3, ENUM_TYPE_FLAG32},
@@ -9581,7 +9809,7 @@ static ValueSet const cValueSets[429] = {
      VkClusterAccelerationStructureAddressResolutionFlagsNVStrings,
      VkClusterAccelerationStructureAddressResolutionFlagsNVValues, 7, ENUM_TYPE_FLAG32},
     {"VkBuildAccelerationStructureFlagsKHR", VkBuildAccelerationStructureFlagsKHRStrings,
-     VkBuildAccelerationStructureFlagsKHRValues, 28, ENUM_TYPE_FLAG32},
+     VkBuildAccelerationStructureFlagsKHRValues, 31, ENUM_TYPE_FLAG32},
     {"VkPrivateDataSlotCreateFlags", VkPrivateDataSlotCreateFlagsStrings,
      VkPrivateDataSlotCreateFlagsValues, 1, ENUM_TYPE_FLAG32},
     {"VkAccelerationStructureCreateFlagsKHR", VkAccelerationStructureCreateFlagsKHRStrings,
@@ -9599,12 +9827,12 @@ static ValueSet const cValueSets[429] = {
     {"VkDeviceDiagnosticsConfigFlagsNV", VkDeviceDiagnosticsConfigFlagsNVStrings,
      VkDeviceDiagnosticsConfigFlagsNVValues, 4, ENUM_TYPE_FLAG32},
     {"VkRefreshObjectFlagsKHR", NULL, NULL, 0, ENUM_TYPE_FLAG32},
-    {"VkAccessFlags2", VkAccessFlags2Strings, VkAccessFlags2Values, 104, ENUM_TYPE_FLAG64},
-    {"VkPipelineStageFlags2", VkPipelineStageFlags2Strings, VkPipelineStageFlags2Values, 93,
+    {"VkAccessFlags2", VkAccessFlags2Strings, VkAccessFlags2Values, 106, ENUM_TYPE_FLAG64},
+    {"VkPipelineStageFlags2", VkPipelineStageFlags2Strings, VkPipelineStageFlags2Values, 94,
      ENUM_TYPE_FLAG64},
     {"VkAccelerationStructureMotionInfoFlagsNV", NULL, NULL, 0, ENUM_TYPE_FLAG32},
     {"VkAccelerationStructureMotionInstanceFlagsNV", NULL, NULL, 0, ENUM_TYPE_FLAG32},
-    {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Strings, VkFormatFeatureFlags2Values, 115,
+    {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Strings, VkFormatFeatureFlags2Values, 116,
      ENUM_TYPE_FLAG64},
     {"VkRenderingFlags", VkRenderingFlagsStrings, VkRenderingFlagsValues, 23, ENUM_TYPE_FLAG32},
     {"VkMemoryDecompressionMethodFlagsEXT", VkMemoryDecompressionMethodFlagsEXTStrings,
@@ -9620,7 +9848,7 @@ static ValueSet const cValueSets[429] = {
     {"VkIndirectCommandsInputModeFlagsEXT", VkIndirectCommandsInputModeFlagsEXTStrings,
      VkIndirectCommandsInputModeFlagsEXTValues, 2, ENUM_TYPE_FLAG32},
     {"VkDirectDriverLoadingFlagsLUNARG", NULL, NULL, 0, ENUM_TYPE_FLAG32},
-    {"VkPipelineCreateFlags2", VkPipelineCreateFlags2Strings, VkPipelineCreateFlags2Values, 66,
+    {"VkPipelineCreateFlags2", VkPipelineCreateFlags2Strings, VkPipelineCreateFlags2Values, 68,
      ENUM_TYPE_FLAG64},
     {"VkBufferUsageFlags2", VkBufferUsageFlags2Strings, VkBufferUsageFlags2Values, 55,
      ENUM_TYPE_FLAG64},
@@ -9644,6 +9872,10 @@ static ValueSet const cValueSets[429] = {
      VkVideoEncodeRgbChromaOffsetFlagsVALVEValues, 2, ENUM_TYPE_FLAG32},
     {"VkSpirvResourceTypeFlagsEXT", VkSpirvResourceTypeFlagsEXTStrings,
      VkSpirvResourceTypeFlagsEXTValues, 11, ENUM_TYPE_FLAG32},
+    {"VkGpaSqShaderStageFlagsAMD", VkGpaSqShaderStageFlagsAMDStrings,
+     VkGpaSqShaderStageFlagsAMDValues, 7, ENUM_TYPE_FLAG32},
+    {"VkGpaPerfBlockPropertiesFlagsAMD", NULL, NULL, 0, ENUM_TYPE_FLAG32},
+    {"VkPhysicalDeviceGpaPropertiesFlagsAMD", NULL, NULL, 0, ENUM_TYPE_FLAG32},
     {"VkAddressCommandFlagsKHR", VkAddressCommandFlagsKHRStrings, VkAddressCommandFlagsKHRValues, 6,
      ENUM_TYPE_FLAG32},
     {"VkCompositeAlphaFlagsKHR", VkCompositeAlphaFlagsKHRStrings, VkCompositeAlphaFlagsKHRValues, 4,
@@ -9769,7 +10001,7 @@ static ValueSet const cValueSets[429] = {
      ENUM_TYPE_FLAG32},
     {"VkPresentGravityFlagsKHR", VkPresentGravityFlagsKHRStrings, VkPresentGravityFlagsKHRValues, 6,
      ENUM_TYPE_FLAG32},
-    {"VkShaderCreateFlagsEXT", VkShaderCreateFlagsEXTStrings, VkShaderCreateFlagsEXTValues, 25,
+    {"VkShaderCreateFlagsEXT", VkShaderCreateFlagsEXTStrings, VkShaderCreateFlagsEXTValues, 26,
      ENUM_TYPE_FLAG32},
     {"VkTileShadingRenderPassFlagsQCOM", VkTileShadingRenderPassFlagsQCOMStrings,
      VkTileShadingRenderPassFlagsQCOMValues, 2, ENUM_TYPE_FLAG32},
@@ -9895,7 +10127,7 @@ static ValueSet const cValueSets[429] = {
      ENUM_TYPE_ENUM},
     {"VkPrimitiveTopology", VkPrimitiveTopologyStrings, VkPrimitiveTopologyValues, 11,
      ENUM_TYPE_ENUM},
-    {"VkQueryType", VkQueryTypeStrings, VkQueryTypeValues, 21, ENUM_TYPE_ENUM},
+    {"VkQueryType", VkQueryTypeStrings, VkQueryTypeValues, 22, ENUM_TYPE_ENUM},
     {"VkSubpassContents", VkSubpassContentsStrings, VkSubpassContentsValues, 4, ENUM_TYPE_ENUM},
     {"VkStencilOp", VkStencilOpStrings, VkStencilOpValues, 8, ENUM_TYPE_ENUM},
     {"VkSystemAllocationScope", VkSystemAllocationScopeStrings, VkSystemAllocationScopeValues, 5,
@@ -9914,7 +10146,7 @@ static ValueSet const cValueSets[429] = {
      VkClusterAccelerationStructureOpTypeNVValues, 6, ENUM_TYPE_ENUM},
     {"VkClusterAccelerationStructureOpModeNV", VkClusterAccelerationStructureOpModeNVStrings,
      VkClusterAccelerationStructureOpModeNVValues, 3, ENUM_TYPE_ENUM},
-    {"VkObjectType", VkObjectTypeStrings, VkObjectTypeValues, 66, ENUM_TYPE_ENUM},
+    {"VkObjectType", VkObjectTypeStrings, VkObjectTypeValues, 67, ENUM_TYPE_ENUM},
     {"VkRayTracingInvocationReorderModeEXT", VkRayTracingInvocationReorderModeEXTStrings,
      VkRayTracingInvocationReorderModeEXTValues, 4, ENUM_TYPE_ENUM},
     {"VkIndirectCommandsTokenTypeNV", VkIndirectCommandsTokenTypeNVStrings,
@@ -9946,8 +10178,8 @@ static ValueSet const cValueSets[429] = {
     {"VkCopyAccelerationStructureModeKHR", VkCopyAccelerationStructureModeKHRStrings,
      VkCopyAccelerationStructureModeKHRValues, 6, ENUM_TYPE_ENUM},
     {"VkAccelerationStructureTypeKHR", VkAccelerationStructureTypeKHRStrings,
-     VkAccelerationStructureTypeKHRValues, 5, ENUM_TYPE_ENUM},
-    {"VkGeometryTypeKHR", VkGeometryTypeKHRStrings, VkGeometryTypeKHRValues, 8, ENUM_TYPE_ENUM},
+     VkAccelerationStructureTypeKHRValues, 6, ENUM_TYPE_ENUM},
+    {"VkGeometryTypeKHR", VkGeometryTypeKHRStrings, VkGeometryTypeKHRValues, 9, ENUM_TYPE_ENUM},
     {"VkRayTracingShaderGroupTypeKHR", VkRayTracingShaderGroupTypeKHRStrings,
      VkRayTracingShaderGroupTypeKHRValues, 6, ENUM_TYPE_ENUM},
     {"VkAccelerationStructureBuildTypeKHR", VkAccelerationStructureBuildTypeKHRStrings,
@@ -10011,10 +10243,13 @@ static ValueSet const cValueSets[429] = {
      ENUM_TYPE_ENUM},
     {"VkCopyMicromapModeEXT", VkCopyMicromapModeEXTStrings, VkCopyMicromapModeEXTValues, 4,
      ENUM_TYPE_ENUM},
-    {"VkOpacityMicromapFormatEXT", VkOpacityMicromapFormatEXTStrings,
-     VkOpacityMicromapFormatEXTValues, 2, ENUM_TYPE_ENUM},
-    {"VkOpacityMicromapSpecialIndexEXT", VkOpacityMicromapSpecialIndexEXTStrings,
-     VkOpacityMicromapSpecialIndexEXTValues, 5, ENUM_TYPE_ENUM},
+    {"VkOpacityMicromapFormatKHR", VkOpacityMicromapFormatKHRStrings,
+     VkOpacityMicromapFormatKHRValues, 4, ENUM_TYPE_ENUM},
+    {"VkOpacityMicromapSpecialIndexKHR", VkOpacityMicromapSpecialIndexKHRStrings,
+     VkOpacityMicromapSpecialIndexKHRValues, 9, ENUM_TYPE_ENUM},
+    {"VkAccelerationStructureSerializedBlockTypeKHR",
+     VkAccelerationStructureSerializedBlockTypeKHRStrings,
+     VkAccelerationStructureSerializedBlockTypeKHRValues, 1, ENUM_TYPE_ENUM},
     {"VkIndirectExecutionSetInfoTypeEXT", VkIndirectExecutionSetInfoTypeEXTStrings,
      VkIndirectExecutionSetInfoTypeEXTValues, 2, ENUM_TYPE_ENUM},
     {"VkDeviceFaultVendorBinaryHeaderVersionKHR", VkDeviceFaultVendorBinaryHeaderVersionKHRStrings,
@@ -10066,6 +10301,10 @@ static ValueSet const cValueSets[429] = {
     {"VkPerfHintTypeQCOM", VkPerfHintTypeQCOMStrings, VkPerfHintTypeQCOMValues, 4, ENUM_TYPE_ENUM},
     {"VkDescriptorMappingSourceEXT", VkDescriptorMappingSourceEXTStrings,
      VkDescriptorMappingSourceEXTValues, 11, ENUM_TYPE_ENUM},
+    {"VkGpaPerfBlockAMD", VkGpaPerfBlockAMDStrings, VkGpaPerfBlockAMDValues, 59, ENUM_TYPE_ENUM},
+    {"VkGpaSampleTypeAMD", VkGpaSampleTypeAMDStrings, VkGpaSampleTypeAMDValues, 3, ENUM_TYPE_ENUM},
+    {"VkGpaDeviceClockModeAMD", VkGpaDeviceClockModeAMDStrings, VkGpaDeviceClockModeAMDValues, 6,
+     ENUM_TYPE_ENUM},
     {"VkDataGraphTOSALevelARM", VkDataGraphTOSALevelARMStrings, VkDataGraphTOSALevelARMValues, 2,
      ENUM_TYPE_ENUM},
     {"VkDataGraphOpticalFlowPerformanceLevelARM", VkDataGraphOpticalFlowPerformanceLevelARMStrings,

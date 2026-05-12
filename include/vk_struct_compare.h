@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 350
+#if VK_HEADER_VERSION > 351
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v350)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v351)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v350)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v351)"
 #endif
 #endif
 
@@ -179,6 +179,12 @@ bool compare_VkAccelerationStructureGeometryLinearSweptSpheresDataNV(
     VkAccelerationStructureGeometryLinearSweptSpheresDataNV const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 351 && VK_KHR_opacity_micromap
+bool compare_VkAccelerationStructureGeometryMicromapDataKHR(
+    VkAccelerationStructureGeometryMicromapDataKHR const *s1,
+    VkAccelerationStructureGeometryMicromapDataKHR const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 182 && VK_NV_ray_tracing_motion_blur
 bool compare_VkAccelerationStructureGeometryMotionTrianglesDataNV(
     VkAccelerationStructureGeometryMotionTrianglesDataNV const *s1,
@@ -284,6 +290,12 @@ bool compare_VkAccelerationStructureTrianglesDisplacementMicromapNV(
 bool compare_VkAccelerationStructureTrianglesOpacityMicromapEXT(
     VkAccelerationStructureTrianglesOpacityMicromapEXT const *s1,
     VkAccelerationStructureTrianglesOpacityMicromapEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 351 && VK_KHR_opacity_micromap
+bool compare_VkAccelerationStructureTrianglesOpacityMicromapKHR(
+    VkAccelerationStructureTrianglesOpacityMicromapKHR const *s1,
+    VkAccelerationStructureTrianglesOpacityMicromapKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 162 && VK_KHR_acceleration_structure
@@ -2910,6 +2922,35 @@ bool compare_VkGetLatencyMarkerInfoNV(VkGetLatencyMarkerInfoNV const *s1,
                                       VkGetLatencyMarkerInfoNV const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 351 && VK_AMD_gpa_interface
+bool compare_VkGpaDeviceClockModeInfoAMD(VkGpaDeviceClockModeInfoAMD const *s1,
+                                         VkGpaDeviceClockModeInfoAMD const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 351 && VK_AMD_gpa_interface
+bool compare_VkGpaDeviceGetClockInfoAMD(VkGpaDeviceGetClockInfoAMD const *s1,
+                                        VkGpaDeviceGetClockInfoAMD const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 351 && VK_AMD_gpa_interface
+bool compare_VkGpaPerfBlockPropertiesAMD(VkGpaPerfBlockPropertiesAMD const *s1,
+                                         VkGpaPerfBlockPropertiesAMD const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 351 && VK_AMD_gpa_interface
+bool compare_VkGpaPerfCounterAMD(VkGpaPerfCounterAMD const *s1, VkGpaPerfCounterAMD const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 351 && VK_AMD_gpa_interface
+bool compare_VkGpaSampleBeginInfoAMD(VkGpaSampleBeginInfoAMD const *s1,
+                                     VkGpaSampleBeginInfoAMD const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 351 && VK_AMD_gpa_interface
+bool compare_VkGpaSessionCreateInfoAMD(VkGpaSessionCreateInfoAMD const *s1,
+                                       VkGpaSessionCreateInfoAMD const *s2);
+#endif
+
 #if VK_HEADER_VERSION <= 240
 bool compare_VkGraphicsPipelineCreateInfo(VkGraphicsPipelineCreateInfo const *s1,
                                           VkGraphicsPipelineCreateInfo const *s2);
@@ -3812,13 +3853,27 @@ bool compare_VkMicromapCreateInfoEXT(VkMicromapCreateInfoEXT const *s1,
                                      VkMicromapCreateInfoEXT const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+#if VK_HEADER_VERSION >= 230 && VK_HEADER_VERSION <= 350 && VK_EXT_opacity_micromap
 bool compare_VkMicromapTriangleEXT(VkMicromapTriangleEXT const *s1,
                                    VkMicromapTriangleEXT const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 351 && VK_EXT_opacity_micromap
+bool compare_VkMicromapTriangleEXT(VkMicromapTriangleEXT const *s1,
+                                   VkMicromapTriangleEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 351 && VK_KHR_opacity_micromap
+bool compare_VkMicromapTriangleKHR(VkMicromapTriangleKHR const *s1,
+                                   VkMicromapTriangleKHR const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
 bool compare_VkMicromapUsageEXT(VkMicromapUsageEXT const *s1, VkMicromapUsageEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 351 && VK_KHR_opacity_micromap
+bool compare_VkMicromapUsageKHR(VkMicromapUsageKHR const *s1, VkMicromapUsageKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
@@ -4848,6 +4903,12 @@ bool compare_VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT(
     VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 351 && VK_QCOM_elapsed_timer_query
+bool compare_VkPhysicalDeviceElapsedTimerQueryFeaturesQCOM(
+    VkPhysicalDeviceElapsedTimerQueryFeaturesQCOM const *s1,
+    VkPhysicalDeviceElapsedTimerQueryFeaturesQCOM const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 85 && VK_NV_scissor_exclusive
 bool compare_VkPhysicalDeviceExclusiveScissorFeaturesNV(
     VkPhysicalDeviceExclusiveScissorFeaturesNV const *s1,
@@ -5247,6 +5308,21 @@ bool compare_VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR(
     VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 351 && VK_AMD_gpa_interface
+bool compare_VkPhysicalDeviceGpaFeaturesAMD(VkPhysicalDeviceGpaFeaturesAMD const *s1,
+                                            VkPhysicalDeviceGpaFeaturesAMD const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 351 && VK_AMD_gpa_interface
+bool compare_VkPhysicalDeviceGpaProperties2AMD(VkPhysicalDeviceGpaProperties2AMD const *s1,
+                                               VkPhysicalDeviceGpaProperties2AMD const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 351 && VK_AMD_gpa_interface
+bool compare_VkPhysicalDeviceGpaPropertiesAMD(VkPhysicalDeviceGpaPropertiesAMD const *s1,
+                                              VkPhysicalDeviceGpaPropertiesAMD const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 210 && VK_EXT_graphics_pipeline_library
 bool compare_VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT(
     VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT const *s1,
@@ -5401,6 +5477,12 @@ bool compare_VkPhysicalDeviceImageProcessing2FeaturesQCOM(
 bool compare_VkPhysicalDeviceImageProcessing2PropertiesQCOM(
     VkPhysicalDeviceImageProcessing2PropertiesQCOM const *s1,
     VkPhysicalDeviceImageProcessing2PropertiesQCOM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 351 && VK_QCOM_image_processing3
+bool compare_VkPhysicalDeviceImageProcessing3FeaturesQCOM(
+    VkPhysicalDeviceImageProcessing3FeaturesQCOM const *s1,
+    VkPhysicalDeviceImageProcessing3FeaturesQCOM const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 222 && VK_QCOM_image_processing
@@ -6040,10 +6122,22 @@ bool compare_VkPhysicalDeviceOpacityMicromapFeaturesEXT(
     VkPhysicalDeviceOpacityMicromapFeaturesEXT const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 351 && VK_KHR_opacity_micromap
+bool compare_VkPhysicalDeviceOpacityMicromapFeaturesKHR(
+    VkPhysicalDeviceOpacityMicromapFeaturesKHR const *s1,
+    VkPhysicalDeviceOpacityMicromapFeaturesKHR const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
 bool compare_VkPhysicalDeviceOpacityMicromapPropertiesEXT(
     VkPhysicalDeviceOpacityMicromapPropertiesEXT const *s1,
     VkPhysicalDeviceOpacityMicromapPropertiesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 351 && VK_KHR_opacity_micromap
+bool compare_VkPhysicalDeviceOpacityMicromapPropertiesKHR(
+    VkPhysicalDeviceOpacityMicromapPropertiesKHR const *s1,
+    VkPhysicalDeviceOpacityMicromapPropertiesKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 230 && VK_NV_optical_flow
@@ -7093,6 +7187,18 @@ bool compare_VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT(
     VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 351 && VK_QCOM_shader_multiple_wait_queues
+bool compare_VkPhysicalDeviceShaderMultipleWaitQueuesFeaturesQCOM(
+    VkPhysicalDeviceShaderMultipleWaitQueuesFeaturesQCOM const *s1,
+    VkPhysicalDeviceShaderMultipleWaitQueuesFeaturesQCOM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 351 && VK_QCOM_shader_multiple_wait_queues
+bool compare_VkPhysicalDeviceShaderMultipleWaitQueuesPropertiesQCOM(
+    VkPhysicalDeviceShaderMultipleWaitQueuesPropertiesQCOM const *s1,
+    VkPhysicalDeviceShaderMultipleWaitQueuesPropertiesQCOM const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 246 && VK_EXT_shader_object
 bool compare_VkPhysicalDeviceShaderObjectFeaturesEXT(
     VkPhysicalDeviceShaderObjectFeaturesEXT const *s1,
@@ -7133,6 +7239,18 @@ bool compare_VkPhysicalDeviceShaderSMBuiltinsFeaturesNV(
 bool compare_VkPhysicalDeviceShaderSMBuiltinsPropertiesNV(
     VkPhysicalDeviceShaderSMBuiltinsPropertiesNV const *s1,
     VkPhysicalDeviceShaderSMBuiltinsPropertiesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 351 && VK_EXT_shader_split_barrier
+bool compare_VkPhysicalDeviceShaderSplitBarrierFeaturesEXT(
+    VkPhysicalDeviceShaderSplitBarrierFeaturesEXT const *s1,
+    VkPhysicalDeviceShaderSplitBarrierFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 351 && VK_EXT_shader_split_barrier
+bool compare_VkPhysicalDeviceShaderSplitBarrierPropertiesEXT(
+    VkPhysicalDeviceShaderSplitBarrierPropertiesEXT const *s1,
+    VkPhysicalDeviceShaderSplitBarrierPropertiesEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
@@ -12076,6 +12194,20 @@ bool compare_VkAccelerationStructureGeometryLinearSweptSpheresDataNV(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 351 && VK_KHR_opacity_micromap
+bool compare_VkAccelerationStructureGeometryMicromapDataKHR(
+    VkAccelerationStructureGeometryMicromapDataKHR const *s1,
+    VkAccelerationStructureGeometryMicromapDataKHR const *s2) {
+  // local, simple types
+  if ((s1->usageCountsCount != s2->usageCountsCount) || (s1->data != s2->data) ||
+      (s1->triangleArray != s2->triangleArray) ||
+      (s1->triangleArrayStride != s2->triangleArrayStride))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 182 && VK_NV_ray_tracing_motion_blur
 bool compare_VkAccelerationStructureGeometryMotionTrianglesDataNV(
     VkAccelerationStructureGeometryMotionTrianglesDataNV const *s1,
@@ -12387,6 +12519,20 @@ bool compare_VkAccelerationStructureTrianglesOpacityMicromapEXT(
 
   // union types (no selector)
   if (memcmp(&s1->indexBuffer, &s2->indexBuffer, sizeof(VkDeviceOrHostAddressConstKHR)) != 0)
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 351 && VK_KHR_opacity_micromap
+bool compare_VkAccelerationStructureTrianglesOpacityMicromapKHR(
+    VkAccelerationStructureTrianglesOpacityMicromapKHR const *s1,
+    VkAccelerationStructureTrianglesOpacityMicromapKHR const *s2) {
+  // local, simple types
+  if ((s1->indexType != s2->indexType) || (s1->indexBuffer != s2->indexBuffer) ||
+      (s1->indexStride != s2->indexStride) || (s1->baseTriangle != s2->baseTriangle) ||
+      (s1->micromap != s2->micromap))
     return false;
 
   return true;
@@ -19711,6 +19857,92 @@ bool compare_VkGetLatencyMarkerInfoNV(VkGetLatencyMarkerInfoNV const *s1,
 }
 #endif
 
+#if VK_HEADER_VERSION >= 351 && VK_AMD_gpa_interface
+bool compare_VkGpaDeviceClockModeInfoAMD(VkGpaDeviceClockModeInfoAMD const *s1,
+                                         VkGpaDeviceClockModeInfoAMD const *s2) {
+  // local, simple types
+  if ((s1->clockMode != s2->clockMode) ||
+      (s1->memoryClockRatioToPeak != s2->memoryClockRatioToPeak) ||
+      (s1->engineClockRatioToPeak != s2->engineClockRatioToPeak))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 351 && VK_AMD_gpa_interface
+bool compare_VkGpaDeviceGetClockInfoAMD(VkGpaDeviceGetClockInfoAMD const *s1,
+                                        VkGpaDeviceGetClockInfoAMD const *s2) {
+  // local, simple types
+  if ((s1->memoryClockRatioToPeak != s2->memoryClockRatioToPeak) ||
+      (s1->engineClockRatioToPeak != s2->engineClockRatioToPeak) ||
+      (s1->memoryClockFrequency != s2->memoryClockFrequency) ||
+      (s1->engineClockFrequency != s2->engineClockFrequency))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 351 && VK_AMD_gpa_interface
+bool compare_VkGpaPerfBlockPropertiesAMD(VkGpaPerfBlockPropertiesAMD const *s1,
+                                         VkGpaPerfBlockPropertiesAMD const *s2) {
+  // local, simple types
+  if ((s1->blockType != s2->blockType) || (s1->flags != s2->flags) ||
+      (s1->instanceCount != s2->instanceCount) || (s1->maxEventID != s2->maxEventID) ||
+      (s1->maxGlobalOnlyCounters != s2->maxGlobalOnlyCounters) ||
+      (s1->maxGlobalSharedCounters != s2->maxGlobalSharedCounters) ||
+      (s1->maxStreamingCounters != s2->maxStreamingCounters))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 351 && VK_AMD_gpa_interface
+bool compare_VkGpaPerfCounterAMD(VkGpaPerfCounterAMD const *s1, VkGpaPerfCounterAMD const *s2) {
+  // local, simple types
+  if ((s1->blockType != s2->blockType) || (s1->blockInstance != s2->blockInstance) ||
+      (s1->eventID != s2->eventID))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 351 && VK_AMD_gpa_interface
+bool compare_VkGpaSampleBeginInfoAMD(VkGpaSampleBeginInfoAMD const *s1,
+                                     VkGpaSampleBeginInfoAMD const *s2) {
+  // local, simple types
+  if ((s1->sampleType != s2->sampleType) ||
+      (s1->sampleInternalOperations != s2->sampleInternalOperations) ||
+      (s1->cacheFlushOnCounterCollection != s2->cacheFlushOnCounterCollection) ||
+      (s1->sqShaderMaskEnable != s2->sqShaderMaskEnable) ||
+      (s1->sqShaderMask != s2->sqShaderMask) || (s1->perfCounterCount != s2->perfCounterCount) ||
+      (s1->streamingPerfTraceSampleInterval != s2->streamingPerfTraceSampleInterval) ||
+      (s1->perfCounterDeviceMemoryLimit != s2->perfCounterDeviceMemoryLimit) ||
+      (s1->sqThreadTraceEnable != s2->sqThreadTraceEnable) ||
+      (s1->sqThreadTraceSuppressInstructionTokens != s2->sqThreadTraceSuppressInstructionTokens) ||
+      (s1->sqThreadTraceDeviceMemoryLimit != s2->sqThreadTraceDeviceMemoryLimit) ||
+      (s1->timingPreSample != s2->timingPreSample) ||
+      (s1->timingPostSample != s2->timingPostSample))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 351 && VK_AMD_gpa_interface
+bool compare_VkGpaSessionCreateInfoAMD(VkGpaSessionCreateInfoAMD const *s1,
+                                       VkGpaSessionCreateInfoAMD const *s2) {
+  // local, simple types
+  if ((s1->secondaryCopySource != s2->secondaryCopySource))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION <= 240
 bool compare_VkGraphicsPipelineCreateInfo(VkGraphicsPipelineCreateInfo const *s1,
                                           VkGraphicsPipelineCreateInfo const *s2) {
@@ -22250,7 +22482,7 @@ bool compare_VkMicromapCreateInfoEXT(VkMicromapCreateInfoEXT const *s1,
 }
 #endif
 
-#if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
+#if VK_HEADER_VERSION >= 230 && VK_HEADER_VERSION <= 350 && VK_EXT_opacity_micromap
 bool compare_VkMicromapTriangleEXT(VkMicromapTriangleEXT const *s1,
                                    VkMicromapTriangleEXT const *s2) {
   // local, simple types
@@ -22262,8 +22494,43 @@ bool compare_VkMicromapTriangleEXT(VkMicromapTriangleEXT const *s1,
 }
 #endif
 
+#if VK_HEADER_VERSION >= 351 && VK_EXT_opacity_micromap
+bool compare_VkMicromapTriangleEXT(VkMicromapTriangleEXT const *s1,
+                                   VkMicromapTriangleEXT const *s2) {
+  // local, simple types
+  if ((s1->dataOffset != s2->dataOffset) || (s1->subdivisionLevel != s2->subdivisionLevel) ||
+      (s1->format != s2->format))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 351 && VK_KHR_opacity_micromap
+bool compare_VkMicromapTriangleKHR(VkMicromapTriangleKHR const *s1,
+                                   VkMicromapTriangleKHR const *s2) {
+  // local, simple types
+  if ((s1->dataOffset != s2->dataOffset) || (s1->subdivisionLevel != s2->subdivisionLevel) ||
+      (s1->format != s2->format))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
 bool compare_VkMicromapUsageEXT(VkMicromapUsageEXT const *s1, VkMicromapUsageEXT const *s2) {
+  // local, simple types
+  if ((s1->count != s2->count) || (s1->subdivisionLevel != s2->subdivisionLevel) ||
+      (s1->format != s2->format))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 351 && VK_KHR_opacity_micromap
+bool compare_VkMicromapUsageKHR(VkMicromapUsageKHR const *s1, VkMicromapUsageKHR const *s2) {
   // local, simple types
   if ((s1->count != s2->count) || (s1->subdivisionLevel != s2->subdivisionLevel) ||
       (s1->format != s2->format))
@@ -25036,6 +25303,18 @@ bool compare_VkPhysicalDeviceDynamicRenderingUnusedAttachmentsFeaturesEXT(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 351 && VK_QCOM_elapsed_timer_query
+bool compare_VkPhysicalDeviceElapsedTimerQueryFeaturesQCOM(
+    VkPhysicalDeviceElapsedTimerQueryFeaturesQCOM const *s1,
+    VkPhysicalDeviceElapsedTimerQueryFeaturesQCOM const *s2) {
+  // local, simple types
+  if ((s1->elapsedTimerQuery != s2->elapsedTimerQuery))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 85 && VK_NV_scissor_exclusive
 bool compare_VkPhysicalDeviceExclusiveScissorFeaturesNV(
     VkPhysicalDeviceExclusiveScissorFeaturesNV const *s1,
@@ -26078,6 +26357,43 @@ bool compare_VkPhysicalDeviceGlobalPriorityQueryFeaturesKHR(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 351 && VK_AMD_gpa_interface
+bool compare_VkPhysicalDeviceGpaFeaturesAMD(VkPhysicalDeviceGpaFeaturesAMD const *s1,
+                                            VkPhysicalDeviceGpaFeaturesAMD const *s2) {
+  // local, simple types
+  if ((s1->perfCounters != s2->perfCounters) ||
+      (s1->streamingPerfCounters != s2->streamingPerfCounters) ||
+      (s1->sqThreadTracing != s2->sqThreadTracing) || (s1->clockModes != s2->clockModes))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 351 && VK_AMD_gpa_interface
+bool compare_VkPhysicalDeviceGpaProperties2AMD(VkPhysicalDeviceGpaProperties2AMD const *s1,
+                                               VkPhysicalDeviceGpaProperties2AMD const *s2) {
+  // local, simple types
+  if ((s1->revisionId != s2->revisionId))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 351 && VK_AMD_gpa_interface
+bool compare_VkPhysicalDeviceGpaPropertiesAMD(VkPhysicalDeviceGpaPropertiesAMD const *s1,
+                                              VkPhysicalDeviceGpaPropertiesAMD const *s2) {
+  // local, simple types
+  if ((s1->flags != s2->flags) || (s1->maxSqttSeBufferSize != s2->maxSqttSeBufferSize) ||
+      (s1->shaderEngineCount != s2->shaderEngineCount) ||
+      (s1->perfBlockCount != s2->perfBlockCount))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 210 && VK_EXT_graphics_pipeline_library
 bool compare_VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT(
     VkPhysicalDeviceGraphicsPipelineLibraryFeaturesEXT const *s1,
@@ -26476,6 +26792,20 @@ bool compare_VkPhysicalDeviceImageProcessing2PropertiesQCOM(
     VkPhysicalDeviceImageProcessing2PropertiesQCOM const *s2) {
   // local, Vulkan struct types
   if (!compare_VkExtent2D(&s1->maxBlockMatchWindow, &s2->maxBlockMatchWindow))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 351 && VK_QCOM_image_processing3
+bool compare_VkPhysicalDeviceImageProcessing3FeaturesQCOM(
+    VkPhysicalDeviceImageProcessing3FeaturesQCOM const *s1,
+    VkPhysicalDeviceImageProcessing3FeaturesQCOM const *s2) {
+  // local, simple types
+  if ((s1->imageGatherLinear != s2->imageGatherLinear) ||
+      (s1->imageGatherExtendedModes != s2->imageGatherExtendedModes) ||
+      (s1->blockMatchExtendedClampToEdge != s2->blockMatchExtendedClampToEdge))
     return false;
 
   return true;
@@ -28070,6 +28400,18 @@ bool compare_VkPhysicalDeviceOpacityMicromapFeaturesEXT(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 351 && VK_KHR_opacity_micromap
+bool compare_VkPhysicalDeviceOpacityMicromapFeaturesKHR(
+    VkPhysicalDeviceOpacityMicromapFeaturesKHR const *s1,
+    VkPhysicalDeviceOpacityMicromapFeaturesKHR const *s2) {
+  // local, simple types
+  if ((s1->micromap != s2->micromap))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 230 && VK_EXT_opacity_micromap
 bool compare_VkPhysicalDeviceOpacityMicromapPropertiesEXT(
     VkPhysicalDeviceOpacityMicromapPropertiesEXT const *s1,
@@ -28077,6 +28419,21 @@ bool compare_VkPhysicalDeviceOpacityMicromapPropertiesEXT(
   // local, simple types
   if ((s1->maxOpacity2StateSubdivisionLevel != s2->maxOpacity2StateSubdivisionLevel) ||
       (s1->maxOpacity4StateSubdivisionLevel != s2->maxOpacity4StateSubdivisionLevel))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 351 && VK_KHR_opacity_micromap
+bool compare_VkPhysicalDeviceOpacityMicromapPropertiesKHR(
+    VkPhysicalDeviceOpacityMicromapPropertiesKHR const *s1,
+    VkPhysicalDeviceOpacityMicromapPropertiesKHR const *s2) {
+  // local, simple types
+  if ((s1->maxOpacity2StateSubdivisionLevel != s2->maxOpacity2StateSubdivisionLevel) ||
+      (s1->maxOpacity4StateSubdivisionLevel != s2->maxOpacity4StateSubdivisionLevel) ||
+      (s1->maxOpacityLossy4StateSubdivisionLevel != s2->maxOpacityLossy4StateSubdivisionLevel) ||
+      (s1->maxMicromapTriangles != s2->maxMicromapTriangles))
     return false;
 
   return true;
@@ -30585,6 +30942,30 @@ bool compare_VkPhysicalDeviceShaderModuleIdentifierPropertiesEXT(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 351 && VK_QCOM_shader_multiple_wait_queues
+bool compare_VkPhysicalDeviceShaderMultipleWaitQueuesFeaturesQCOM(
+    VkPhysicalDeviceShaderMultipleWaitQueuesFeaturesQCOM const *s1,
+    VkPhysicalDeviceShaderMultipleWaitQueuesFeaturesQCOM const *s2) {
+  // local, simple types
+  if ((s1->shaderMultipleWaitQueues != s2->shaderMultipleWaitQueues))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 351 && VK_QCOM_shader_multiple_wait_queues
+bool compare_VkPhysicalDeviceShaderMultipleWaitQueuesPropertiesQCOM(
+    VkPhysicalDeviceShaderMultipleWaitQueuesPropertiesQCOM const *s1,
+    VkPhysicalDeviceShaderMultipleWaitQueuesPropertiesQCOM const *s2) {
+  // local, simple types
+  if ((s1->maxShaderWaitQueues != s2->maxShaderWaitQueues))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 246 && VK_EXT_shader_object
 bool compare_VkPhysicalDeviceShaderObjectFeaturesEXT(
     VkPhysicalDeviceShaderObjectFeaturesEXT const *s1,
@@ -30666,6 +31047,30 @@ bool compare_VkPhysicalDeviceShaderSMBuiltinsPropertiesNV(
     VkPhysicalDeviceShaderSMBuiltinsPropertiesNV const *s2) {
   // local, simple types
   if ((s1->shaderSMCount != s2->shaderSMCount) || (s1->shaderWarpsPerSM != s2->shaderWarpsPerSM))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 351 && VK_EXT_shader_split_barrier
+bool compare_VkPhysicalDeviceShaderSplitBarrierFeaturesEXT(
+    VkPhysicalDeviceShaderSplitBarrierFeaturesEXT const *s1,
+    VkPhysicalDeviceShaderSplitBarrierFeaturesEXT const *s2) {
+  // local, simple types
+  if ((s1->shaderSplitBarrier != s2->shaderSplitBarrier))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 351 && VK_EXT_shader_split_barrier
+bool compare_VkPhysicalDeviceShaderSplitBarrierPropertiesEXT(
+    VkPhysicalDeviceShaderSplitBarrierPropertiesEXT const *s1,
+    VkPhysicalDeviceShaderSplitBarrierPropertiesEXT const *s2) {
+  // local, simple types
+  if ((s1->splitBarrierReservedSharedMemory != s2->splitBarrierReservedSharedMemory))
     return false;
 
   return true;
