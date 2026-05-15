@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 351
+#if VK_HEADER_VERSION > 352
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v351)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v352)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v351)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v352)"
 #endif
 #endif
 
@@ -4438,6 +4438,12 @@ bool compare_VkPhysicalDeviceCooperativeMatrix2PropertiesNV(
 bool compare_VkPhysicalDeviceCooperativeMatrixConversionFeaturesQCOM(
     VkPhysicalDeviceCooperativeMatrixConversionFeaturesQCOM const *s1,
     VkPhysicalDeviceCooperativeMatrixConversionFeaturesQCOM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 352 && VK_NV_cooperative_matrix_decode_vector
+bool compare_VkPhysicalDeviceCooperativeMatrixDecodeVectorFeaturesNV(
+    VkPhysicalDeviceCooperativeMatrixDecodeVectorFeaturesNV const *s1,
+    VkPhysicalDeviceCooperativeMatrixDecodeVectorFeaturesNV const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 255 && VK_KHR_cooperative_matrix
@@ -23970,6 +23976,18 @@ bool compare_VkPhysicalDeviceCooperativeMatrixConversionFeaturesQCOM(
     VkPhysicalDeviceCooperativeMatrixConversionFeaturesQCOM const *s2) {
   // local, simple types
   if ((s1->cooperativeMatrixConversion != s2->cooperativeMatrixConversion))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 352 && VK_NV_cooperative_matrix_decode_vector
+bool compare_VkPhysicalDeviceCooperativeMatrixDecodeVectorFeaturesNV(
+    VkPhysicalDeviceCooperativeMatrixDecodeVectorFeaturesNV const *s1,
+    VkPhysicalDeviceCooperativeMatrixDecodeVectorFeaturesNV const *s2) {
+  // local, simple types
+  if ((s1->cooperativeMatrixDecodeVector != s2->cooperativeMatrixDecodeVector))
     return false;
 
   return true;

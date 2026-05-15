@@ -37,12 +37,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 351
+#if VK_HEADER_VERSION > 352
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v351)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v352)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v351)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v352)"
 #endif
 #endif
 
@@ -3737,6 +3737,11 @@ void cleanup_VkPhysicalDeviceCooperativeMatrix2PropertiesNV(
 #if VK_HEADER_VERSION >= 342 && VK_QCOM_cooperative_matrix_conversion
 void cleanup_VkPhysicalDeviceCooperativeMatrixConversionFeaturesQCOM(
     VkPhysicalDeviceCooperativeMatrixConversionFeaturesQCOM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 352 && VK_NV_cooperative_matrix_decode_vector
+void cleanup_VkPhysicalDeviceCooperativeMatrixDecodeVectorFeaturesNV(
+    VkPhysicalDeviceCooperativeMatrixDecodeVectorFeaturesNV const *pData);
 #endif
 
 #if VK_HEADER_VERSION >= 255 && VK_KHR_cooperative_matrix
@@ -14486,6 +14491,15 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
+#if VK_HEADER_VERSION >= 352 && VK_NV_cooperative_matrix_decode_vector
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_DECODE_VECTOR_FEATURES_NV) {
+    cleanup_VkPhysicalDeviceCooperativeMatrixDecodeVectorFeaturesNV(
+        (VkPhysicalDeviceCooperativeMatrixDecodeVectorFeaturesNV const *)pData);
+    return;
+  }
+#endif
+
 #if VK_HEADER_VERSION >= 255 && VK_KHR_cooperative_matrix
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_KHR) {
     cleanup_VkPhysicalDeviceCooperativeMatrixFeaturesKHR(
@@ -23150,13 +23164,14 @@ void cleanup_VkAccelerationStructureInfoNV(VkAccelerationStructureInfoNV const *
 
 #if VK_HEADER_VERSION >= 135 && VK_HEADER_VERSION <= 138 && VK_KHR_ray_tracing &&                  \
     VK_ENABLE_BETA_EXTENSIONS
-void cleanup_VkAccelerationStructureInstanceKHR(VkAccelerationStructureInstanceKHR const *pData) {}
+void cleanup_VkAccelerationStructureInstanceKHR(VkAccelerationStructureInstanceKHR const *pData){}
 #endif
 
 #if (VK_HEADER_VERSION >= 162 && VK_KHR_acceleration_structure) ||                                 \
     (VK_HEADER_VERSION >= 139 && VK_HEADER_VERSION <= 161 && VK_KHR_ray_tracing &&                 \
      VK_ENABLE_BETA_EXTENSIONS)
-void cleanup_VkAccelerationStructureInstanceKHR(VkAccelerationStructureInstanceKHR const *pData) {}
+void cleanup_VkAccelerationStructureInstanceKHR(VkAccelerationStructureInstanceKHR const *pData) {
+}
 #endif
 
 #if VK_HEADER_VERSION >= 135 && VK_NV_ray_tracing
@@ -23619,7 +23634,7 @@ void cleanup_VkAttachmentSampleCountInfoNV(VkAttachmentSampleCountInfoNV const *
 #endif
 
 #if VK_EXT_sample_locations
-void cleanup_VkAttachmentSampleLocationsEXT(VkAttachmentSampleLocationsEXT const *pData) {}
+void cleanup_VkAttachmentSampleLocationsEXT(VkAttachmentSampleLocationsEXT const *pData){}
 #endif
 
 #if VK_HEADER_VERSION >= 333 && VK_EXT_custom_resolve &&                                           \
@@ -24013,8 +24028,7 @@ void cleanup_VkBindVertexBufferIndirectCommandEXT(
 #endif
 
 #if VK_HEADER_VERSION >= 135 && VK_NV_device_generated_commands
-void cleanup_VkBindVertexBufferIndirectCommandNV(VkBindVertexBufferIndirectCommandNV const *pData) {
-}
+void cleanup_VkBindVertexBufferIndirectCommandNV(VkBindVertexBufferIndirectCommandNV const *pData){}
 #endif
 
 #if (VK_HEADER_VERSION >= 238 && VK_KHR_video_queue) ||                                            \
@@ -24618,12 +24632,13 @@ void cleanup_VkCoarseSampleOrderCustomNV(VkCoarseSampleOrderCustomNV const *pDat
 
 #if (VK_HEADER_VERSION >= 246 && VK_EXT_extended_dynamic_state3 && VK_EXT_shader_object) ||        \
     (VK_HEADER_VERSION >= 230 && VK_HEADER_VERSION <= 245 && VK_EXT_extended_dynamic_state3)
-void cleanup_VkColorBlendAdvancedEXT(VkColorBlendAdvancedEXT const *pData) {}
+void cleanup_VkColorBlendAdvancedEXT(VkColorBlendAdvancedEXT const *pData){}
 #endif
 
 #if (VK_HEADER_VERSION >= 246 && VK_EXT_extended_dynamic_state3 && VK_EXT_shader_object) ||        \
     (VK_HEADER_VERSION >= 230 && VK_HEADER_VERSION <= 245 && VK_EXT_extended_dynamic_state3)
-void cleanup_VkColorBlendEquationEXT(VkColorBlendEquationEXT const *pData) {}
+void cleanup_VkColorBlendEquationEXT(VkColorBlendEquationEXT const *pData) {
+}
 #endif
 
 void cleanup_VkCommandBufferAllocateInfo(VkCommandBufferAllocateInfo const *pData) {
@@ -27566,7 +27581,7 @@ void cleanup_VkDrawMeshTasksIndirectCommandNV(VkDrawMeshTasksIndirectCommandNV c
 #endif
 
 #if VK_HEADER_VERSION >= 195 && VK_HEADER_VERSION <= 203 && VK_EXT_image_drm_format_modifier
-void cleanup_VkDrmFormatModifierProperties2EXT(VkDrmFormatModifierProperties2EXT const *pData) {}
+void cleanup_VkDrmFormatModifierProperties2EXT(VkDrmFormatModifierProperties2EXT const *pData){}
 #endif
 
 #if (VK_HEADER_VERSION >= 281 && VK_EXT_image_drm_format_modifier &&                               \
@@ -27574,11 +27589,12 @@ void cleanup_VkDrmFormatModifierProperties2EXT(VkDrmFormatModifierProperties2EXT
     (VK_HEADER_VERSION >= 241 && VK_HEADER_VERSION <= 280 && VK_EXT_image_drm_format_modifier &&   \
      VK_KHR_format_feature_flags2) ||                                                              \
     (VK_HEADER_VERSION >= 204 && VK_HEADER_VERSION <= 240 && VK_EXT_image_drm_format_modifier)
-void cleanup_VkDrmFormatModifierProperties2EXT(VkDrmFormatModifierProperties2EXT const *pData) {}
+void cleanup_VkDrmFormatModifierProperties2EXT(VkDrmFormatModifierProperties2EXT const *pData) {
+}
 #endif
 
 #if VK_HEADER_VERSION >= 86 && VK_EXT_image_drm_format_modifier
-void cleanup_VkDrmFormatModifierPropertiesEXT(VkDrmFormatModifierPropertiesEXT const *pData) {}
+void cleanup_VkDrmFormatModifierPropertiesEXT(VkDrmFormatModifierPropertiesEXT const *pData){}
 #endif
 
 #if (VK_HEADER_VERSION >= 281 && VK_EXT_image_drm_format_modifier &&                               \
@@ -29324,7 +29340,7 @@ void cleanup_VkImageSubresource2KHR(VkImageSubresource2KHR const *pData) {
 
 void cleanup_VkImageSubresourceLayers(VkImageSubresourceLayers const *pData) {}
 
-void cleanup_VkImageSubresourceRange(VkImageSubresourceRange const *pData) {}
+void cleanup_VkImageSubresourceRange(VkImageSubresourceRange const *pData){}
 
 #if (VK_HEADER_VERSION >= 241 && VK_KHR_swapchain && VK_VERSION_1_1 && VK_KHR_device_group) ||     \
     (VK_HEADER_VERSION <= 240 && VK_KHR_swapchain && VK_KHR_device_group)
@@ -31504,6 +31520,16 @@ void cleanup_VkPhysicalDeviceCooperativeMatrix2PropertiesNV(
 #if VK_HEADER_VERSION >= 342 && VK_QCOM_cooperative_matrix_conversion
 void cleanup_VkPhysicalDeviceCooperativeMatrixConversionFeaturesQCOM(
     VkPhysicalDeviceCooperativeMatrixConversionFeaturesQCOM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 352 && VK_NV_cooperative_matrix_decode_vector
+void cleanup_VkPhysicalDeviceCooperativeMatrixDecodeVectorFeaturesNV(
+    VkPhysicalDeviceCooperativeMatrixDecodeVectorFeaturesNV const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
@@ -40857,12 +40883,13 @@ void cleanup_VkStridedBufferRegionKHR(VkStridedBufferRegionKHR const *pData) {}
 #endif
 
 #if VK_HEADER_VERSION >= 307 && VK_NV_cluster_acceleration_structure
-void cleanup_VkStridedDeviceAddressNV(VkStridedDeviceAddressNV const *pData) {}
+void cleanup_VkStridedDeviceAddressNV(VkStridedDeviceAddressNV const *pData){}
 #endif
 
 #if (VK_HEADER_VERSION >= 346 && VK_KHR_device_address_commands && VK_KHR_copy_memory_indirect) || \
     (VK_HEADER_VERSION >= 328 && VK_HEADER_VERSION <= 345 && VK_KHR_copy_memory_indirect)
-void cleanup_VkStridedDeviceAddressRangeKHR(VkStridedDeviceAddressRangeKHR const *pData) {}
+void cleanup_VkStridedDeviceAddressRangeKHR(VkStridedDeviceAddressRangeKHR const *pData) {
+}
 #endif
 
 #if VK_HEADER_VERSION >= 162 && VK_KHR_ray_tracing_pipeline
@@ -42103,19 +42130,20 @@ void cleanup_VkTimelineSemaphoreSubmitInfoKHR(VkTimelineSemaphoreSubmitInfoKHR c
 #if (VK_HEADER_VERSION >= 241 && VK_KHR_ray_tracing_maintenance1 &&                                \
      VK_KHR_ray_tracing_pipeline) ||                                                               \
     (VK_HEADER_VERSION >= 213 && VK_HEADER_VERSION <= 240 && VK_KHR_ray_tracing_maintenance1)
-void cleanup_VkTraceRaysIndirectCommand2KHR(VkTraceRaysIndirectCommand2KHR const *pData) {}
+void cleanup_VkTraceRaysIndirectCommand2KHR(VkTraceRaysIndirectCommand2KHR const *pData){}
 #endif
 
 #if (VK_HEADER_VERSION >= 162 && VK_KHR_ray_tracing_pipeline) ||                                   \
     (VK_HEADER_VERSION >= 135 && VK_HEADER_VERSION <= 161 && VK_KHR_ray_tracing &&                 \
      VK_ENABLE_BETA_EXTENSIONS)
-void cleanup_VkTraceRaysIndirectCommandKHR(VkTraceRaysIndirectCommandKHR const *pData) {}
+void cleanup_VkTraceRaysIndirectCommandKHR(VkTraceRaysIndirectCommandKHR const *pData){}
 #endif
 
 #if (VK_HEADER_VERSION >= 162 && VK_KHR_acceleration_structure) ||                                 \
     (VK_HEADER_VERSION >= 135 && VK_HEADER_VERSION <= 161 && VK_KHR_ray_tracing &&                 \
      VK_ENABLE_BETA_EXTENSIONS)
-void cleanup_VkTransformMatrixKHR(VkTransformMatrixKHR const *pData) {}
+void cleanup_VkTransformMatrixKHR(VkTransformMatrixKHR const *pData) {
+}
 #endif
 
 #if VK_HEADER_VERSION >= 135 && VK_NV_ray_tracing
@@ -42191,7 +42219,7 @@ void cleanup_VkValidationFlagsEXT(VkValidationFlagsEXT const *pData) {
 }
 #endif
 
-void cleanup_VkVertexInputAttributeDescription(VkVertexInputAttributeDescription const *pData) {}
+void cleanup_VkVertexInputAttributeDescription(VkVertexInputAttributeDescription const *pData){}
 
 #if (VK_HEADER_VERSION >= 246 && VK_EXT_vertex_input_dynamic_state && VK_EXT_shader_object) ||     \
     (VK_HEADER_VERSION >= 175 && VK_HEADER_VERSION <= 245 && VK_EXT_vertex_input_dynamic_state)
@@ -42204,7 +42232,7 @@ void cleanup_VkVertexInputAttributeDescription2EXT(
 }
 #endif
 
-void cleanup_VkVertexInputBindingDescription(VkVertexInputBindingDescription const *pData) {}
+void cleanup_VkVertexInputBindingDescription(VkVertexInputBindingDescription const *pData){}
 
 #if (VK_HEADER_VERSION >= 246 && VK_EXT_vertex_input_dynamic_state && VK_EXT_shader_object) ||     \
     (VK_HEADER_VERSION >= 175 && VK_HEADER_VERSION <= 245 && VK_EXT_vertex_input_dynamic_state)

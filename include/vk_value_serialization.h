@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 351
+#if VK_HEADER_VERSION > 352
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v351)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v352)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v351)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v352)"
 #endif
 #endif
 
@@ -8789,7 +8789,7 @@ static int32_t const VkVendorIdValues[8] = {
     0x10000, // KHRONOS
 };
 
-static char const *const VkDriverIdStrings[42] = {
+static char const *const VkDriverIdStrings[43] = {
     "AMD_PROPRIETARY_KHR",           // 1
     "AMD_OPEN_SOURCE_KHR",           // 2
     "MESA_RADV_KHR",                 // 3
@@ -8832,9 +8832,10 @@ static char const *const VkDriverIdStrings[42] = {
     "MESA_HONEYKRISP",               // 26
     "VULKAN_SC_EMULATION_ON_VULKAN", // 27
     "MESA_KOSMICKRISP",              // 28
+    "MESA_GFXSTREAM",                // 29
 };
 
-static int32_t const VkDriverIdValues[42] = {
+static int32_t const VkDriverIdValues[43] = {
     1,  // AMD_PROPRIETARY_KHR
     2,  // AMD_OPEN_SOURCE_KHR
     3,  // MESA_RADV_KHR
@@ -8877,6 +8878,7 @@ static int32_t const VkDriverIdValues[42] = {
     26, // MESA_HONEYKRISP
     27, // VULKAN_SC_EMULATION_ON_VULKAN
     28, // MESA_KOSMICKRISP
+    29, // MESA_GFXSTREAM
 };
 
 static char const *const VkShadingRatePaletteEntryNVStrings[12] = {
@@ -10367,7 +10369,7 @@ static ValueSet const cValueSets[436] = {
     {"VkOutOfBandQueueTypeNV", VkOutOfBandQueueTypeNVStrings, VkOutOfBandQueueTypeNVValues, 2,
      ENUM_TYPE_ENUM},
     {"VkVendorId", VkVendorIdStrings, VkVendorIdValues, 8, ENUM_TYPE_ENUM},
-    {"VkDriverId", VkDriverIdStrings, VkDriverIdValues, 42, ENUM_TYPE_ENUM},
+    {"VkDriverId", VkDriverIdStrings, VkDriverIdValues, 43, ENUM_TYPE_ENUM},
     {"VkShadingRatePaletteEntryNV", VkShadingRatePaletteEntryNVStrings,
      VkShadingRatePaletteEntryNVValues, 12, ENUM_TYPE_ENUM},
     {"VkCoarseSampleOrderTypeNV", VkCoarseSampleOrderTypeNVStrings, VkCoarseSampleOrderTypeNVValues,
