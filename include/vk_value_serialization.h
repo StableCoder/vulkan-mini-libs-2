@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 352
+#if VK_HEADER_VERSION > 353
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v352)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v353)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v352)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v353)"
 #endif
 #endif
 
@@ -805,7 +805,7 @@ static uint32_t const VkShaderStageFlagsValues[46] = {
     0x00010000, // RESERVED_16_BIT_HUAWEI
 };
 
-static char const *const VkImageUsageFlagsStrings[53] = {
+static char const *const VkImageUsageFlagsStrings[54] = {
     "SHADING_RATE_IMAGE_BIT_NV",                   // 0x00000100
     "HOST_TRANSFER_BIT_EXT",                       // 0x00400000
     "TRANSFER_SRC",                                // 0x00000001
@@ -859,9 +859,10 @@ static char const *const VkImageUsageFlagsStrings[53] = {
     "RESERVED_30_BIT_KHR",                         // 0x40000000
     "RESERVED_16_BIT_HUAWEI",                      // 0x00010000
     "RESERVED_27_BIT_HUAWEI",                      // 0x00020000
+    "RESERVED_17_BIT_HUAWEI",                      // 0x00020000
 };
 
-static uint32_t const VkImageUsageFlagsValues[53] = {
+static uint32_t const VkImageUsageFlagsValues[54] = {
     0x00000100, // SHADING_RATE_IMAGE_BIT_NV
     0x00400000, // HOST_TRANSFER_BIT_EXT
     0x00000001, // TRANSFER_SRC
@@ -915,6 +916,7 @@ static uint32_t const VkImageUsageFlagsValues[53] = {
     0x40000000, // RESERVED_30_BIT_KHR
     0x00010000, // RESERVED_16_BIT_HUAWEI
     0x00020000, // RESERVED_27_BIT_HUAWEI
+    0x00020000, // RESERVED_17_BIT_HUAWEI
 };
 
 static char const *const VkImageCreateFlagsStrings[40] = {
@@ -1885,7 +1887,7 @@ static uint32_t const VkClusterAccelerationStructureAddressResolutionFlagsNVValu
     0,          // NONE
 };
 
-static char const *const VkBuildAccelerationStructureFlagsKHRStrings[31] = {
+static char const *const VkBuildAccelerationStructureFlagsKHRStrings[33] = {
     "ALLOW_UPDATE_BIT_NV",                        // 0x00000001
     "ALLOW_COMPACTION_BIT_NV",                    // 0x00000002
     "PREFER_FAST_TRACE_BIT_NV",                   // 0x00000004
@@ -1917,9 +1919,11 @@ static char const *const VkBuildAccelerationStructureFlagsKHRStrings[31] = {
     "ALLOW_OPACITY_MICROMAP_UPDATE",              // 0x00000040
     "ALLOW_DISABLE_OPACITY_MICROMAPS",            // 0x00000080
     "MICROMAP_LOSSY",                             // 0x00000400
+    "RESERVED_14_BIT_EXT",                        // 0x00004000
+    "RESERVED_13_BIT_AMD",                        // 0x00002000
 };
 
-static uint32_t const VkBuildAccelerationStructureFlagsKHRValues[31] = {
+static uint32_t const VkBuildAccelerationStructureFlagsKHRValues[33] = {
     0x00000001, // ALLOW_UPDATE_BIT_NV
     0x00000002, // ALLOW_COMPACTION_BIT_NV
     0x00000004, // PREFER_FAST_TRACE_BIT_NV
@@ -1951,6 +1955,8 @@ static uint32_t const VkBuildAccelerationStructureFlagsKHRValues[31] = {
     0x00000040, // ALLOW_OPACITY_MICROMAP_UPDATE
     0x00000080, // ALLOW_DISABLE_OPACITY_MICROMAPS
     0x00000400, // MICROMAP_LOSSY
+    0x00004000, // RESERVED_14_BIT_EXT
+    0x00002000, // RESERVED_13_BIT_AMD
 };
 
 static char const *const VkPrivateDataSlotCreateFlagsStrings[1] = {
@@ -3061,6 +3067,126 @@ static uint64_t const VkBufferUsageFlags2Values[55] = {
     0x40000000,   // RESERVED_30_BIT_EXT
 };
 
+static char const *const VkImageUsageFlags2KHRStrings[32] = {
+    "TRANSFER_SRC",                        // 0x00000001
+    "TRANSFER_DST",                        // 0x00000002
+    "SAMPLED",                             // 0x00000004
+    "STORAGE",                             // 0x00000008
+    "COLOR_ATTACHMENT",                    // 0x00000010
+    "DEPTH_STENCIL_ATTACHMENT",            // 0x00000020
+    "TRANSIENT_ATTACHMENT",                // 0x00000040
+    "INPUT_ATTACHMENT",                    // 0x00000080
+    "RESERVED_31_BIT_EXT",                 // 0x80000000
+    "RESERVED_24_BIT_COREAVI",             // 0x01000000
+    "RESERVED_28_BIT_EXT",                 // 0x10000000
+    "RESERVED_29",                         // 0x20000000
+    "RESERVED_30",                         // 0x40000000
+    "RESERVED_16_BIT_HUAWEI",              // 0x00010000
+    "RESERVED_27_BIT_HUAWEI",              // 0x00020000
+    "FRAGMENT_SHADING_RATE_ATTACHMENT",    // 0x00000100
+    "FRAGMENT_DENSITY_MAP_BIT_EXT",        // 0x00000200
+    "VIDEO_DECODE_DST",                    // 0x00000400
+    "VIDEO_DECODE_SRC",                    // 0x00000800
+    "VIDEO_DECODE_DPB",                    // 0x00001000
+    "VIDEO_ENCODE_DST",                    // 0x00002000
+    "VIDEO_ENCODE_SRC",                    // 0x00004000
+    "VIDEO_ENCODE_DPB",                    // 0x00008000
+    "INVOCATION_MASK_BIT_HUAWEI",          // 0x00040000
+    "ATTACHMENT_FEEDBACK_LOOP_BIT_EXT",    // 0x00080000
+    "SAMPLE_WEIGHT_BIT_QCOM",              // 0x00100000
+    "SAMPLE_BLOCK_MATCH_BIT_QCOM",         // 0x00200000
+    "HOST_TRANSFER",                       // 0x00400000
+    "TENSOR_ALIASING_BIT_ARM",             // 0x00800000
+    "VIDEO_ENCODE_QUANTIZATION_DELTA_MAP", // 0x02000000
+    "VIDEO_ENCODE_EMPHASIS_MAP",           // 0x04000000
+    "TILE_MEMORY_BIT_QCOM",                // 0x08000000
+};
+
+static uint64_t const VkImageUsageFlags2KHRValues[32] = {
+    0x00000001, // TRANSFER_SRC
+    0x00000002, // TRANSFER_DST
+    0x00000004, // SAMPLED
+    0x00000008, // STORAGE
+    0x00000010, // COLOR_ATTACHMENT
+    0x00000020, // DEPTH_STENCIL_ATTACHMENT
+    0x00000040, // TRANSIENT_ATTACHMENT
+    0x00000080, // INPUT_ATTACHMENT
+    0x80000000, // RESERVED_31_BIT_EXT
+    0x01000000, // RESERVED_24_BIT_COREAVI
+    0x10000000, // RESERVED_28_BIT_EXT
+    0x20000000, // RESERVED_29
+    0x40000000, // RESERVED_30
+    0x00010000, // RESERVED_16_BIT_HUAWEI
+    0x00020000, // RESERVED_27_BIT_HUAWEI
+    0x00000100, // FRAGMENT_SHADING_RATE_ATTACHMENT
+    0x00000200, // FRAGMENT_DENSITY_MAP_BIT_EXT
+    0x00000400, // VIDEO_DECODE_DST
+    0x00000800, // VIDEO_DECODE_SRC
+    0x00001000, // VIDEO_DECODE_DPB
+    0x00002000, // VIDEO_ENCODE_DST
+    0x00004000, // VIDEO_ENCODE_SRC
+    0x00008000, // VIDEO_ENCODE_DPB
+    0x00040000, // INVOCATION_MASK_BIT_HUAWEI
+    0x00080000, // ATTACHMENT_FEEDBACK_LOOP_BIT_EXT
+    0x00100000, // SAMPLE_WEIGHT_BIT_QCOM
+    0x00200000, // SAMPLE_BLOCK_MATCH_BIT_QCOM
+    0x00400000, // HOST_TRANSFER
+    0x00800000, // TENSOR_ALIASING_BIT_ARM
+    0x02000000, // VIDEO_ENCODE_QUANTIZATION_DELTA_MAP
+    0x04000000, // VIDEO_ENCODE_EMPHASIS_MAP
+    0x08000000, // TILE_MEMORY_BIT_QCOM
+};
+
+static char const *const VkImageCreateFlags2KHRStrings[22] = {
+    "SPARSE_BINDING",                                // 0x00000001
+    "SPARSE_RESIDENCY",                              // 0x00000002
+    "SPARSE_ALIASED",                                // 0x00000004
+    "MUTABLE_FORMAT",                                // 0x00000008
+    "CUBE_COMPATIBLE",                               // 0x00000010
+    "RESERVED_21_BIT_IMG",                           // 0x00200000
+    "ALIAS_SINGLE_LAYER_DESCRIPTOR",                 // 0x00400000
+    "2D_ARRAY_COMPATIBLE",                           // 0x00000020
+    "SPLIT_INSTANCE_BIND_REGIONS",                   // 0x00000040
+    "BLOCK_TEXEL_VIEW_COMPATIBLE",                   // 0x00000080
+    "EXTENDED_USAGE",                                // 0x00000100
+    "DISJOINT",                                      // 0x00000200
+    "ALIAS",                                         // 0x00000400
+    "PROTECTED",                                     // 0x00000800
+    "SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT",     // 0x00001000
+    "CORNER_SAMPLED_BIT_NV",                         // 0x00002000
+    "SUBSAMPLED_BIT_EXT",                            // 0x00004000
+    "FRAGMENT_DENSITY_MAP_OFFSET_BIT_EXT",           // 0x00008000
+    "DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT",      // 0x00010000
+    "2D_VIEW_COMPATIBLE_BIT_EXT",                    // 0x00020000
+    "MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_BIT_EXT", // 0x00040000
+    "VIDEO_PROFILE_INDEPENDENT",                     // 0x00100000
+};
+
+static uint64_t const VkImageCreateFlags2KHRValues[22] = {
+    0x00000001, // SPARSE_BINDING
+    0x00000002, // SPARSE_RESIDENCY
+    0x00000004, // SPARSE_ALIASED
+    0x00000008, // MUTABLE_FORMAT
+    0x00000010, // CUBE_COMPATIBLE
+    0x00200000, // RESERVED_21_BIT_IMG
+    0x00400000, // ALIAS_SINGLE_LAYER_DESCRIPTOR
+    0x00000020, // 2D_ARRAY_COMPATIBLE
+    0x00000040, // SPLIT_INSTANCE_BIND_REGIONS
+    0x00000080, // BLOCK_TEXEL_VIEW_COMPATIBLE
+    0x00000100, // EXTENDED_USAGE
+    0x00000200, // DISJOINT
+    0x00000400, // ALIAS
+    0x00000800, // PROTECTED
+    0x00001000, // SAMPLE_LOCATIONS_COMPATIBLE_DEPTH_BIT_EXT
+    0x00002000, // CORNER_SAMPLED_BIT_NV
+    0x00004000, // SUBSAMPLED_BIT_EXT
+    0x00008000, // FRAGMENT_DENSITY_MAP_OFFSET_BIT_EXT
+    0x00010000, // DESCRIPTOR_BUFFER_CAPTURE_REPLAY_BIT_EXT
+    0x00020000, // 2D_VIEW_COMPATIBLE_BIT_EXT
+    0x00040000, // MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_BIT_EXT
+    0x00100000, // VIDEO_PROFILE_INDEPENDENT
+};
+
 static char const *const VkAddressCopyFlagsKHRStrings[3] = {
     "DEVICE_LOCAL", // 0x00000001
     "SPARSE",       // 0x00000002
@@ -3277,23 +3403,24 @@ static uint32_t const VkSurfaceTransformFlagsKHRValues[9] = {
     0x00000100, // INHERIT
 };
 
-static char const *const VkSwapchainCreateFlagsKHRStrings[13] = {
-    "DEFERRED_MEMORY_ALLOCATION_BIT_EXT", // 0x00000008
-    "SPLIT_INSTANCE_BIND_REGIONS",        // 0x00000001
-    "PROTECTED",                          // 0x00000002
-    "MUTABLE_FORMAT",                     // 0x00000004
-    "RESERVED_3_BIT_SEC",                 // 0x00000008
-    "RESERVED_4_BIT_EXT",                 // 0x00000010
-    "RESERVED_5_BIT_EXT",                 // 0x00000020
-    "PRESENT_ID_2",                       // 0x00000040
-    "PRESENT_WAIT_2",                     // 0x00000080
-    "DEFERRED_MEMORY_ALLOCATION",         // 0x00000008
-    "RESERVED_8_BIT_EXT",                 // 0x00000100
-    "RESERVED_9_BIT_EXT",                 // 0x00000200
-    "PRESENT_TIMING_BIT_EXT",             // 0x00000200
+static char const *const VkSwapchainCreateFlagsKHRStrings[14] = {
+    "DEFERRED_MEMORY_ALLOCATION_BIT_EXT",            // 0x00000008
+    "SPLIT_INSTANCE_BIND_REGIONS",                   // 0x00000001
+    "PROTECTED",                                     // 0x00000002
+    "MUTABLE_FORMAT",                                // 0x00000004
+    "RESERVED_3_BIT_SEC",                            // 0x00000008
+    "RESERVED_4_BIT_EXT",                            // 0x00000010
+    "RESERVED_5_BIT_EXT",                            // 0x00000020
+    "PRESENT_ID_2",                                  // 0x00000040
+    "PRESENT_WAIT_2",                                // 0x00000080
+    "DEFERRED_MEMORY_ALLOCATION",                    // 0x00000008
+    "RESERVED_8_BIT_EXT",                            // 0x00000100
+    "RESERVED_9_BIT_EXT",                            // 0x00000200
+    "PRESENT_TIMING_BIT_EXT",                        // 0x00000200
+    "MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_BIT_EXT", // 0x00000100
 };
 
-static uint32_t const VkSwapchainCreateFlagsKHRValues[13] = {
+static uint32_t const VkSwapchainCreateFlagsKHRValues[14] = {
     0x00000008, // DEFERRED_MEMORY_ALLOCATION_BIT_EXT
     0x00000001, // SPLIT_INSTANCE_BIND_REGIONS
     0x00000002, // PROTECTED
@@ -3307,6 +3434,7 @@ static uint32_t const VkSwapchainCreateFlagsKHRValues[13] = {
     0x00000100, // RESERVED_8_BIT_EXT
     0x00000200, // RESERVED_9_BIT_EXT
     0x00000200, // PRESENT_TIMING_BIT_EXT
+    0x00000100, // MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_BIT_EXT
 };
 
 static char const *const VkWaylandSurfaceCreateFlagsKHRStrings[1] = {
@@ -4473,7 +4601,7 @@ static uint32_t const VkVideoEncodeCapabilityFlagsKHRValues[7] = {
     0x00000008, // EMPHASIS_MAP
 };
 
-static char const *const VkVideoEncodeFeedbackFlagsKHRStrings[10] = {
+static char const *const VkVideoEncodeFeedbackFlagsKHRStrings[17] = {
     "BITSTREAM_BUFFER_OFFSET", // 0x00000001
     "BITSTREAM_BYTES_WRITTEN", // 0x00000002
     "BITSTREAM_HAS_OVERRIDES", // 0x00000004
@@ -4484,9 +4612,16 @@ static char const *const VkVideoEncodeFeedbackFlagsKHRStrings[10] = {
     "RESERVED_7",              // 0x00000080
     "RESERVED_8",              // 0x00000100
     "RESERVED_9",              // 0x00000200
+    "AVERAGE_QUANTIZATION",    // 0x00000008
+    "MIN_QUANTIZATION",        // 0x00000010
+    "MAX_QUANTIZATION",        // 0x00000020
+    "INTRA_PIXELS",            // 0x00000040
+    "INTER_PIXELS",            // 0x00000080
+    "SKIPPED_PIXELS",          // 0x00000100
+    "PICTURE_PARTITION_COUNT", // 0x00000200
 };
 
-static uint32_t const VkVideoEncodeFeedbackFlagsKHRValues[10] = {
+static uint32_t const VkVideoEncodeFeedbackFlagsKHRValues[17] = {
     0x00000001, // BITSTREAM_BUFFER_OFFSET
     0x00000002, // BITSTREAM_BYTES_WRITTEN
     0x00000004, // BITSTREAM_HAS_OVERRIDES
@@ -4497,6 +4632,25 @@ static uint32_t const VkVideoEncodeFeedbackFlagsKHRValues[10] = {
     0x00000080, // RESERVED_7
     0x00000100, // RESERVED_8
     0x00000200, // RESERVED_9
+    0x00000008, // AVERAGE_QUANTIZATION
+    0x00000010, // MIN_QUANTIZATION
+    0x00000020, // MAX_QUANTIZATION
+    0x00000040, // INTRA_PIXELS
+    0x00000080, // INTER_PIXELS
+    0x00000100, // SKIPPED_PIXELS
+    0x00000200, // PICTURE_PARTITION_COUNT
+};
+
+static char const *const VkVideoEncodePerPartitionFeedbackFlagsKHRStrings[3] = {
+    "STATUS",                  // 0x00000001
+    "BITSTREAM_BUFFER_OFFSET", // 0x00000002
+    "BITSTREAM_BYTES_WRITTEN", // 0x00000004
+};
+
+static uint32_t const VkVideoEncodePerPartitionFeedbackFlagsKHRValues[3] = {
+    0x00000001, // STATUS
+    0x00000002, // BITSTREAM_BUFFER_OFFSET
+    0x00000004, // BITSTREAM_BYTES_WRITTEN
 };
 
 static char const *const VkVideoEncodeRateControlFlagsKHRStrings[3] = {
@@ -9689,8 +9843,8 @@ typedef struct ValueSet {
   EnumType type;
 } ValueSet;
 
-static const uint32_t cValueSetCount = 436;
-static ValueSet const cValueSets[436] = {
+static const uint32_t cValueSetCount = 440;
+static ValueSet const cValueSets[440] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsStrings, VkFramebufferCreateFlagsValues, 2,
      ENUM_TYPE_FLAG32},
     {"VkQueryPoolCreateFlags", VkQueryPoolCreateFlagsStrings, VkQueryPoolCreateFlagsValues, 1,
@@ -9735,7 +9889,7 @@ static ValueSet const cValueSets[436] = {
      ENUM_TYPE_FLAG32},
     {"VkShaderStageFlags", VkShaderStageFlagsStrings, VkShaderStageFlagsValues, 46,
      ENUM_TYPE_FLAG32},
-    {"VkImageUsageFlags", VkImageUsageFlagsStrings, VkImageUsageFlagsValues, 53, ENUM_TYPE_FLAG32},
+    {"VkImageUsageFlags", VkImageUsageFlagsStrings, VkImageUsageFlagsValues, 54, ENUM_TYPE_FLAG32},
     {"VkImageCreateFlags", VkImageCreateFlagsStrings, VkImageCreateFlagsValues, 40,
      ENUM_TYPE_FLAG32},
     {"VkImageViewCreateFlags", VkImageViewCreateFlagsStrings, VkImageViewCreateFlagsValues, 6,
@@ -9811,7 +9965,7 @@ static ValueSet const cValueSets[436] = {
      VkClusterAccelerationStructureAddressResolutionFlagsNVStrings,
      VkClusterAccelerationStructureAddressResolutionFlagsNVValues, 7, ENUM_TYPE_FLAG32},
     {"VkBuildAccelerationStructureFlagsKHR", VkBuildAccelerationStructureFlagsKHRStrings,
-     VkBuildAccelerationStructureFlagsKHRValues, 31, ENUM_TYPE_FLAG32},
+     VkBuildAccelerationStructureFlagsKHRValues, 33, ENUM_TYPE_FLAG32},
     {"VkPrivateDataSlotCreateFlags", VkPrivateDataSlotCreateFlagsStrings,
      VkPrivateDataSlotCreateFlagsValues, 1, ENUM_TYPE_FLAG32},
     {"VkAccelerationStructureCreateFlagsKHR", VkAccelerationStructureCreateFlagsKHRStrings,
@@ -9836,6 +9990,7 @@ static ValueSet const cValueSets[436] = {
     {"VkAccelerationStructureMotionInstanceFlagsNV", NULL, NULL, 0, ENUM_TYPE_FLAG32},
     {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Strings, VkFormatFeatureFlags2Values, 116,
      ENUM_TYPE_FLAG64},
+    {"VkFormatFeatureFlags4KHR", NULL, NULL, 0, ENUM_TYPE_FLAG64},
     {"VkRenderingFlags", VkRenderingFlagsStrings, VkRenderingFlagsValues, 23, ENUM_TYPE_FLAG32},
     {"VkMemoryDecompressionMethodFlagsEXT", VkMemoryDecompressionMethodFlagsEXTStrings,
      VkMemoryDecompressionMethodFlagsEXTValues, 2, ENUM_TYPE_FLAG64},
@@ -9853,6 +10008,10 @@ static ValueSet const cValueSets[436] = {
     {"VkPipelineCreateFlags2", VkPipelineCreateFlags2Strings, VkPipelineCreateFlags2Values, 68,
      ENUM_TYPE_FLAG64},
     {"VkBufferUsageFlags2", VkBufferUsageFlags2Strings, VkBufferUsageFlags2Values, 55,
+     ENUM_TYPE_FLAG64},
+    {"VkImageUsageFlags2KHR", VkImageUsageFlags2KHRStrings, VkImageUsageFlags2KHRValues, 32,
+     ENUM_TYPE_FLAG64},
+    {"VkImageCreateFlags2KHR", VkImageCreateFlags2KHRStrings, VkImageCreateFlags2KHRValues, 22,
      ENUM_TYPE_FLAG64},
     {"VkAddressCopyFlagsKHR", VkAddressCopyFlagsKHRStrings, VkAddressCopyFlagsKHRValues, 3,
      ENUM_TYPE_FLAG32},
@@ -9887,7 +10046,7 @@ static ValueSet const cValueSets[436] = {
     {"VkSurfaceTransformFlagsKHR", VkSurfaceTransformFlagsKHRStrings,
      VkSurfaceTransformFlagsKHRValues, 9, ENUM_TYPE_FLAG32},
     {"VkSwapchainCreateFlagsKHR", VkSwapchainCreateFlagsKHRStrings, VkSwapchainCreateFlagsKHRValues,
-     13, ENUM_TYPE_FLAG32},
+     14, ENUM_TYPE_FLAG32},
     {"VkDisplayModeCreateFlagsKHR", NULL, NULL, 0, ENUM_TYPE_FLAG32},
     {"VkDisplaySurfaceCreateFlagsKHR", NULL, NULL, 0, ENUM_TYPE_FLAG32},
     {"VkAndroidSurfaceCreateFlagsKHR", NULL, NULL, 0, ENUM_TYPE_FLAG32},
@@ -10060,7 +10219,9 @@ static ValueSet const cValueSets[436] = {
     {"VkVideoEncodeCapabilityFlagsKHR", VkVideoEncodeCapabilityFlagsKHRStrings,
      VkVideoEncodeCapabilityFlagsKHRValues, 7, ENUM_TYPE_FLAG32},
     {"VkVideoEncodeFeedbackFlagsKHR", VkVideoEncodeFeedbackFlagsKHRStrings,
-     VkVideoEncodeFeedbackFlagsKHRValues, 10, ENUM_TYPE_FLAG32},
+     VkVideoEncodeFeedbackFlagsKHRValues, 17, ENUM_TYPE_FLAG32},
+    {"VkVideoEncodePerPartitionFeedbackFlagsKHR", VkVideoEncodePerPartitionFeedbackFlagsKHRStrings,
+     VkVideoEncodePerPartitionFeedbackFlagsKHRValues, 3, ENUM_TYPE_FLAG32},
     {"VkVideoEncodeRateControlFlagsKHR", VkVideoEncodeRateControlFlagsKHRStrings,
      VkVideoEncodeRateControlFlagsKHRValues, 3, ENUM_TYPE_FLAG32},
     {"VkVideoEncodeRateControlModeFlagsKHR", VkVideoEncodeRateControlModeFlagsKHRStrings,
