@@ -37,13 +37,13 @@ _Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) >= 0,
                "XR_CURRENT_API_VERSION is lower than the minimum supported version (v0)");
 #endif
 
-#if (XR_CURRENT_API_VERSION & 0xffffffffULL) > 59
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) > 60
 #if _MSC_VER
 #pragma message(                                                                                   \
     __FILE__                                                                                       \
-    ": warning: XR_CURRENT_API_VERSION is higher than what the header fully supports (v59)")
+    ": warning: XR_CURRENT_API_VERSION is higher than what the header fully supports (v60)")
 #else
-#warning "XR_CURRENT_API_VERSION is higher than what the header fully supports (v59)"
+#warning "XR_CURRENT_API_VERSION is higher than what the header fully supports (v60)"
 #endif
 #endif
 
