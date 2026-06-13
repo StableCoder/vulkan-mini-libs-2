@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 353
+#if VK_HEADER_VERSION > 354
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v353)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v354)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v353)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v354)"
 #endif
 #endif
 
@@ -2451,7 +2451,7 @@ static uint64_t const VkPipelineStageFlags2Values[94] = {
     0x4000000000000, // RESERVED_50_BIT_KHR
 };
 
-static char const *const VkFormatFeatureFlags2Strings[116] = {
+static char const *const VkFormatFeatureFlags2Strings[117] = {
     "SAMPLED_IMAGE_BIT_KHR",                                                           // 0x00000001
     "STORAGE_IMAGE_BIT_KHR",                                                           // 0x00000002
     "STORAGE_IMAGE_ATOMIC_BIT_KHR",                                                    // 0x00000004
@@ -2568,9 +2568,10 @@ static char const *const VkFormatFeatureFlags2Strings[116] = {
     "DATA_GRAPH_OPTICAL_FLOW_VECTOR_BIT_ARM",                                  // 0x200000000000000
     "DATA_GRAPH_OPTICAL_FLOW_COST_BIT_ARM",                                    // 0x400000000000000
     "BLOCK_MATCHING_SXD_BIT_QCOM",                                             // 0x100000000000
+    "SAMPLED_IMAGE_FILTER_LINEAR_2D_BIT_IMG",                                  // 0x200000000000
 };
 
-static uint64_t const VkFormatFeatureFlags2Values[116] = {
+static uint64_t const VkFormatFeatureFlags2Values[117] = {
     0x00000001,  // SAMPLED_IMAGE_BIT_KHR
     0x00000002,  // STORAGE_IMAGE_BIT_KHR
     0x00000004,  // STORAGE_IMAGE_ATOMIC_BIT_KHR
@@ -2687,6 +2688,7 @@ static uint64_t const VkFormatFeatureFlags2Values[116] = {
     0x200000000000000,  // DATA_GRAPH_OPTICAL_FLOW_VECTOR_BIT_ARM
     0x400000000000000,  // DATA_GRAPH_OPTICAL_FLOW_COST_BIT_ARM
     0x100000000000,     // BLOCK_MATCHING_SXD_BIT_QCOM
+    0x200000000000,     // SAMPLED_IMAGE_FILTER_LINEAR_2D_BIT_IMG
 };
 
 static char const *const VkRenderingFlagsStrings[23] = {
@@ -8921,7 +8923,7 @@ static int32_t const VkOutOfBandQueueTypeNVValues[2] = {
     1, // PRESENT
 };
 
-static char const *const VkVendorIdStrings[8] = {
+static char const *const VkVendorIdStrings[9] = {
     "VIV",      // 0x10001
     "VSI",      // 0x10002
     "KAZAN",    // 0x10003
@@ -8930,9 +8932,10 @@ static char const *const VkVendorIdStrings[8] = {
     "POCL",     // 0x10006
     "MOBILEYE", // 0x10007
     "KHRONOS",  // 0x10000
+    "APE",      // 0x10008
 };
 
-static int32_t const VkVendorIdValues[8] = {
+static int32_t const VkVendorIdValues[9] = {
     0x10001, // VIV
     0x10002, // VSI
     0x10003, // KAZAN
@@ -8941,9 +8944,10 @@ static int32_t const VkVendorIdValues[8] = {
     0x10006, // POCL
     0x10007, // MOBILEYE
     0x10000, // KHRONOS
+    0x10008, // APE
 };
 
-static char const *const VkDriverIdStrings[43] = {
+static char const *const VkDriverIdStrings[44] = {
     "AMD_PROPRIETARY_KHR",           // 1
     "AMD_OPEN_SOURCE_KHR",           // 2
     "MESA_RADV_KHR",                 // 3
@@ -8987,9 +8991,10 @@ static char const *const VkDriverIdStrings[43] = {
     "VULKAN_SC_EMULATION_ON_VULKAN", // 27
     "MESA_KOSMICKRISP",              // 28
     "MESA_GFXSTREAM",                // 29
+    "APE_SOFT",                      // 30
 };
 
-static int32_t const VkDriverIdValues[43] = {
+static int32_t const VkDriverIdValues[44] = {
     1,  // AMD_PROPRIETARY_KHR
     2,  // AMD_OPEN_SOURCE_KHR
     3,  // MESA_RADV_KHR
@@ -9033,6 +9038,7 @@ static int32_t const VkDriverIdValues[43] = {
     27, // VULKAN_SC_EMULATION_ON_VULKAN
     28, // MESA_KOSMICKRISP
     29, // MESA_GFXSTREAM
+    30, // APE_SOFT
 };
 
 static char const *const VkShadingRatePaletteEntryNVStrings[12] = {
@@ -9988,7 +9994,7 @@ static ValueSet const cValueSets[440] = {
      ENUM_TYPE_FLAG64},
     {"VkAccelerationStructureMotionInfoFlagsNV", NULL, NULL, 0, ENUM_TYPE_FLAG32},
     {"VkAccelerationStructureMotionInstanceFlagsNV", NULL, NULL, 0, ENUM_TYPE_FLAG32},
-    {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Strings, VkFormatFeatureFlags2Values, 116,
+    {"VkFormatFeatureFlags2", VkFormatFeatureFlags2Strings, VkFormatFeatureFlags2Values, 117,
      ENUM_TYPE_FLAG64},
     {"VkFormatFeatureFlags4KHR", NULL, NULL, 0, ENUM_TYPE_FLAG64},
     {"VkRenderingFlags", VkRenderingFlagsStrings, VkRenderingFlagsValues, 23, ENUM_TYPE_FLAG32},
@@ -10529,8 +10535,8 @@ static ValueSet const cValueSets[440] = {
     {"VkLatencyMarkerNV", VkLatencyMarkerNVStrings, VkLatencyMarkerNVValues, 12, ENUM_TYPE_ENUM},
     {"VkOutOfBandQueueTypeNV", VkOutOfBandQueueTypeNVStrings, VkOutOfBandQueueTypeNVValues, 2,
      ENUM_TYPE_ENUM},
-    {"VkVendorId", VkVendorIdStrings, VkVendorIdValues, 8, ENUM_TYPE_ENUM},
-    {"VkDriverId", VkDriverIdStrings, VkDriverIdValues, 43, ENUM_TYPE_ENUM},
+    {"VkVendorId", VkVendorIdStrings, VkVendorIdValues, 9, ENUM_TYPE_ENUM},
+    {"VkDriverId", VkDriverIdStrings, VkDriverIdValues, 44, ENUM_TYPE_ENUM},
     {"VkShadingRatePaletteEntryNV", VkShadingRatePaletteEntryNVStrings,
      VkShadingRatePaletteEntryNVValues, 12, ENUM_TYPE_ENUM},
     {"VkCoarseSampleOrderTypeNV", VkCoarseSampleOrderTypeNVStrings, VkCoarseSampleOrderTypeNVValues,
