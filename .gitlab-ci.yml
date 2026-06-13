@@ -75,7 +75,7 @@ Arch/Clang:
 Fedora/GCC:
   parallel:
     matrix:
-      - ARCH: [amd64, arm64, ppc64le, s390x]
+      - ARCH: [amd64, arm64, ppc64le]
   image: docker.io/stabletec/build-foe:fedora
   tags:
     - container
@@ -103,7 +103,7 @@ Fedora/Clang:
 Ubuntu/GCC:
   parallel:
     matrix:
-      - ARCH: [amd64, arm64, ppc64le, s390x, riscv64]
+      - ARCH: [amd64, arm64, ppc64le, riscv64]
   image: docker.io/stabletec/build-foe:ubuntu
   tags:
     - container
