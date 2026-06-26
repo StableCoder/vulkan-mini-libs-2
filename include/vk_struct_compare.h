@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 354
+#if VK_HEADER_VERSION > 355
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v354)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v355)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v354)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v355)"
 #endif
 #endif
 
@@ -10040,6 +10040,12 @@ bool compare_VkTensorDescriptionARM(VkTensorDescriptionARM const *s1,
                                     VkTensorDescriptionARM const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 355 && VK_ARM_tensor_controls
+bool compare_VkTensorExplicitTilingFormatPropertiesARM(
+    VkTensorExplicitTilingFormatPropertiesARM const *s1,
+    VkTensorExplicitTilingFormatPropertiesARM const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
 bool compare_VkTensorFormatPropertiesARM(VkTensorFormatPropertiesARM const *s1,
                                          VkTensorFormatPropertiesARM const *s2);
@@ -10053,6 +10059,11 @@ bool compare_VkTensorMemoryBarrierARM(VkTensorMemoryBarrierARM const *s1,
 #if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
 bool compare_VkTensorMemoryRequirementsInfoARM(VkTensorMemoryRequirementsInfoARM const *s1,
                                                VkTensorMemoryRequirementsInfoARM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 355 && VK_ARM_tensor_controls
+bool compare_VkTensorRollingBackingCreateInfoARM(VkTensorRollingBackingCreateInfoARM const *s1,
+                                                 VkTensorRollingBackingCreateInfoARM const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 317 && VK_ARM_tensors && VK_EXT_descriptor_buffer
@@ -38879,6 +38890,22 @@ bool compare_VkTensorDescriptionARM(VkTensorDescriptionARM const *s1,
 }
 #endif
 
+#if VK_HEADER_VERSION >= 355 && VK_ARM_tensor_controls
+bool compare_VkTensorExplicitTilingFormatPropertiesARM(
+    VkTensorExplicitTilingFormatPropertiesARM const *s1,
+    VkTensorExplicitTilingFormatPropertiesARM const *s2) {
+  // local, simple types
+  if ((s1->brick16TilingTensorFeatures != s2->brick16TilingTensorFeatures) ||
+      (s1->brick8TilingTensorFeatures != s2->brick8TilingTensorFeatures) ||
+      (s1->brick4TilingTensorFeatures != s2->brick4TilingTensorFeatures) ||
+      (s1->blockUTilingTensorFeatures != s2->blockUTilingTensorFeatures) ||
+      (s1->blockU64kTilingTensorFeatures != s2->blockU64kTilingTensorFeatures))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 317 && VK_ARM_tensors
 bool compare_VkTensorFormatPropertiesARM(VkTensorFormatPropertiesARM const *s1,
                                          VkTensorFormatPropertiesARM const *s2) {
@@ -38912,6 +38939,17 @@ bool compare_VkTensorMemoryRequirementsInfoARM(VkTensorMemoryRequirementsInfoARM
   if ((s1->tensor != s2->tensor))
     return false;
 
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 355 && VK_ARM_tensor_controls
+bool compare_VkTensorRollingBackingCreateInfoARM(VkTensorRollingBackingCreateInfoARM const *s1,
+                                                 VkTensorRollingBackingCreateInfoARM const *s2) {
+  // local array members
+  if (memcmp(s1->wraps, s2->wraps,
+             VK_MAX_TENSOR_CREATE_INFO_ROLLING_BACKING_WRAP_COUNT_ARM * sizeof(uint32_t)) != 0)
+    return false;
   return true;
 }
 #endif

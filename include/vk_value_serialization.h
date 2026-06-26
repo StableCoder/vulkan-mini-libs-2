@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 354
+#if VK_HEADER_VERSION > 355
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v354)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v355)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v354)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v355)"
 #endif
 #endif
 
@@ -1887,7 +1887,7 @@ static uint32_t const VkClusterAccelerationStructureAddressResolutionFlagsNVValu
     0,          // NONE
 };
 
-static char const *const VkBuildAccelerationStructureFlagsKHRStrings[33] = {
+static char const *const VkBuildAccelerationStructureFlagsKHRStrings[34] = {
     "ALLOW_UPDATE_BIT_NV",                        // 0x00000001
     "ALLOW_COMPACTION_BIT_NV",                    // 0x00000002
     "PREFER_FAST_TRACE_BIT_NV",                   // 0x00000004
@@ -1921,9 +1921,10 @@ static char const *const VkBuildAccelerationStructureFlagsKHRStrings[33] = {
     "MICROMAP_LOSSY",                             // 0x00000400
     "RESERVED_14_BIT_EXT",                        // 0x00004000
     "RESERVED_13_BIT_AMD",                        // 0x00002000
+    "RESERVED_15_BIT_EXT",                        // 0x00008000
 };
 
-static uint32_t const VkBuildAccelerationStructureFlagsKHRValues[33] = {
+static uint32_t const VkBuildAccelerationStructureFlagsKHRValues[34] = {
     0x00000001, // ALLOW_UPDATE_BIT_NV
     0x00000002, // ALLOW_COMPACTION_BIT_NV
     0x00000004, // PREFER_FAST_TRACE_BIT_NV
@@ -1957,6 +1958,7 @@ static uint32_t const VkBuildAccelerationStructureFlagsKHRValues[33] = {
     0x00000400, // MICROMAP_LOSSY
     0x00004000, // RESERVED_14_BIT_EXT
     0x00002000, // RESERVED_13_BIT_AMD
+    0x00008000, // RESERVED_15_BIT_EXT
 };
 
 static char const *const VkPrivateDataSlotCreateFlagsStrings[1] = {
@@ -8009,14 +8011,24 @@ static int32_t const VkCooperativeVectorMatrixLayoutNVValues[4] = {
     3, // TRAINING_OPTIMAL
 };
 
-static char const *const VkTensorTilingARMStrings[2] = {
-    "OPTIMAL", // 0
-    "LINEAR",  // 1
+static char const *const VkTensorTilingARMStrings[7] = {
+    "OPTIMAL",                 // 0
+    "LINEAR",                  // 1
+    "BRICK_16_WIDE",           // 1000565000
+    "BRICK_8_WIDE",            // 1000565001
+    "BRICK_4_WIDE",            // 1000565002
+    "BLOCK_U_INTERLEAVED",     // 1000565003
+    "BLOCK_U_INTERLEAVED_64K", // 1000565004
 };
 
-static int32_t const VkTensorTilingARMValues[2] = {
-    0, // OPTIMAL
-    1, // LINEAR
+static int32_t const VkTensorTilingARMValues[7] = {
+    0,          // OPTIMAL
+    1,          // LINEAR
+    1000565000, // BRICK_16_WIDE
+    1000565001, // BRICK_8_WIDE
+    1000565002, // BRICK_4_WIDE
+    1000565003, // BLOCK_U_INTERLEAVED
+    1000565004, // BLOCK_U_INTERLEAVED_64K
 };
 
 static char const *const VkDataGraphPipelinePropertyARMStrings[4] = {
@@ -9971,7 +9983,7 @@ static ValueSet const cValueSets[440] = {
      VkClusterAccelerationStructureAddressResolutionFlagsNVStrings,
      VkClusterAccelerationStructureAddressResolutionFlagsNVValues, 7, ENUM_TYPE_FLAG32},
     {"VkBuildAccelerationStructureFlagsKHR", VkBuildAccelerationStructureFlagsKHRStrings,
-     VkBuildAccelerationStructureFlagsKHRValues, 33, ENUM_TYPE_FLAG32},
+     VkBuildAccelerationStructureFlagsKHRValues, 34, ENUM_TYPE_FLAG32},
     {"VkPrivateDataSlotCreateFlags", VkPrivateDataSlotCreateFlagsStrings,
      VkPrivateDataSlotCreateFlagsValues, 1, ENUM_TYPE_FLAG32},
     {"VkAccelerationStructureCreateFlagsKHR", VkAccelerationStructureCreateFlagsKHRStrings,
@@ -10452,7 +10464,7 @@ static ValueSet const cValueSets[440] = {
      ENUM_TYPE_ENUM},
     {"VkCooperativeVectorMatrixLayoutNV", VkCooperativeVectorMatrixLayoutNVStrings,
      VkCooperativeVectorMatrixLayoutNVValues, 4, ENUM_TYPE_ENUM},
-    {"VkTensorTilingARM", VkTensorTilingARMStrings, VkTensorTilingARMValues, 2, ENUM_TYPE_ENUM},
+    {"VkTensorTilingARM", VkTensorTilingARMStrings, VkTensorTilingARMValues, 7, ENUM_TYPE_ENUM},
     {"VkDataGraphPipelinePropertyARM", VkDataGraphPipelinePropertyARMStrings,
      VkDataGraphPipelinePropertyARMValues, 4, ENUM_TYPE_ENUM},
     {"VkDataGraphPipelineSessionBindPointARM", VkDataGraphPipelineSessionBindPointARMStrings,
