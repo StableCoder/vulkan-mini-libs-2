@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 355
+#if VK_HEADER_VERSION > 356
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v355)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v356)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v355)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v356)"
 #endif
 #endif
 
@@ -919,7 +919,7 @@ static uint32_t const VkImageUsageFlagsValues[54] = {
     0x00020000, // RESERVED_17_BIT_HUAWEI
 };
 
-static char const *const VkImageCreateFlagsStrings[40] = {
+static char const *const VkImageCreateFlagsStrings[41] = {
     "SPLIT_INSTANCE_BIND_REGIONS_BIT_KHR",           // 0x00000040
     "2D_ARRAY_COMPATIBLE_BIT_KHR",                   // 0x00000020
     "BLOCK_TEXEL_VIEW_COMPATIBLE_BIT_KHR",           // 0x00000080
@@ -960,9 +960,10 @@ static char const *const VkImageCreateFlagsStrings[40] = {
     "RESERVED_22_BIT_KHR",                           // 0x00400000
     "DESCRIPTOR_HEAP_CAPTURE_REPLAY_BIT_EXT",        // 0x00010000
     "ALIAS_SINGLE_LAYER_DESCRIPTOR_BIT_KHR",         // 0x00400000
+    "RESERVED_19_BIT_NV",                            // 0x00080000
 };
 
-static uint32_t const VkImageCreateFlagsValues[40] = {
+static uint32_t const VkImageCreateFlagsValues[41] = {
     0x00000040, // SPLIT_INSTANCE_BIND_REGIONS_BIT_KHR
     0x00000020, // 2D_ARRAY_COMPATIBLE_BIT_KHR
     0x00000080, // BLOCK_TEXEL_VIEW_COMPATIBLE_BIT_KHR
@@ -1003,6 +1004,7 @@ static uint32_t const VkImageCreateFlagsValues[40] = {
     0x00400000, // RESERVED_22_BIT_KHR
     0x00010000, // DESCRIPTOR_HEAP_CAPTURE_REPLAY_BIT_EXT
     0x00400000, // ALIAS_SINGLE_LAYER_DESCRIPTOR_BIT_KHR
+    0x00080000, // RESERVED_19_BIT_NV
 };
 
 static char const *const VkImageViewCreateFlagsStrings[6] = {
@@ -3141,7 +3143,7 @@ static uint64_t const VkImageUsageFlags2KHRValues[32] = {
     0x08000000, // TILE_MEMORY_BIT_QCOM
 };
 
-static char const *const VkImageCreateFlags2KHRStrings[22] = {
+static char const *const VkImageCreateFlags2KHRStrings[23] = {
     "SPARSE_BINDING",                                // 0x00000001
     "SPARSE_RESIDENCY",                              // 0x00000002
     "SPARSE_ALIASED",                                // 0x00000004
@@ -3164,9 +3166,10 @@ static char const *const VkImageCreateFlags2KHRStrings[22] = {
     "2D_VIEW_COMPATIBLE_BIT_EXT",                    // 0x00020000
     "MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_BIT_EXT", // 0x00040000
     "VIDEO_PROFILE_INDEPENDENT",                     // 0x00100000
+    "RESERVED_19_BIT_NV",                            // 0x00080000
 };
 
-static uint64_t const VkImageCreateFlags2KHRValues[22] = {
+static uint64_t const VkImageCreateFlags2KHRValues[23] = {
     0x00000001, // SPARSE_BINDING
     0x00000002, // SPARSE_RESIDENCY
     0x00000004, // SPARSE_ALIASED
@@ -3189,6 +3192,7 @@ static uint64_t const VkImageCreateFlags2KHRValues[22] = {
     0x00020000, // 2D_VIEW_COMPATIBLE_BIT_EXT
     0x00040000, // MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_BIT_EXT
     0x00100000, // VIDEO_PROFILE_INDEPENDENT
+    0x00080000, // RESERVED_19_BIT_NV
 };
 
 static char const *const VkAddressCopyFlagsKHRStrings[3] = {
@@ -7865,39 +7869,44 @@ static int32_t const VkScopeKHRValues[8] = {
     5, // QUEUE_FAMILY
 };
 
-static char const *const VkComponentTypeKHRStrings[29] = {
-    "FLOAT16_NV",      // 0
-    "FLOAT32_NV",      // 1
-    "FLOAT64_NV",      // 2
-    "SINT8_NV",        // 3
-    "SINT16_NV",       // 4
-    "SINT32_NV",       // 5
-    "SINT64_NV",       // 6
-    "UINT8_NV",        // 7
-    "UINT16_NV",       // 8
-    "UINT32_NV",       // 9
-    "UINT64_NV",       // 10
-    "FLOAT_E4M3_NV",   // 1000491002
-    "FLOAT_E5M2_NV",   // 1000491003
-    "FLOAT16",         // 0
-    "FLOAT32",         // 1
-    "FLOAT64",         // 2
-    "SINT8",           // 3
-    "SINT16",          // 4
-    "SINT32",          // 5
-    "SINT64",          // 6
-    "UINT8",           // 7
-    "UINT16",          // 8
-    "UINT32",          // 9
-    "UINT64",          // 10
-    "SINT8_PACKED_NV", // 1000491000
-    "UINT8_PACKED_NV", // 1000491001
-    "BFLOAT16",        // 1000141000
-    "FLOAT8_E4M3_EXT", // 1000491002
-    "FLOAT8_E5M2_EXT", // 1000491003
+static char const *const VkComponentTypeKHRStrings[34] = {
+    "FLOAT16_NV",               // 0
+    "FLOAT32_NV",               // 1
+    "FLOAT64_NV",               // 2
+    "SINT8_NV",                 // 3
+    "SINT16_NV",                // 4
+    "SINT32_NV",                // 5
+    "SINT64_NV",                // 6
+    "UINT8_NV",                 // 7
+    "UINT16_NV",                // 8
+    "UINT32_NV",                // 9
+    "UINT64_NV",                // 10
+    "FLOAT_E4M3_NV",            // 1000491002
+    "FLOAT_E5M2_NV",            // 1000491003
+    "FLOAT16",                  // 0
+    "FLOAT32",                  // 1
+    "FLOAT64",                  // 2
+    "SINT8",                    // 3
+    "SINT16",                   // 4
+    "SINT32",                   // 5
+    "SINT64",                   // 6
+    "UINT8",                    // 7
+    "UINT16",                   // 8
+    "UINT32",                   // 9
+    "UINT64",                   // 10
+    "SINT8_PACKED_NV",          // 1000491000
+    "UINT8_PACKED_NV",          // 1000491001
+    "BFLOAT16",                 // 1000141000
+    "FLOAT8_E4M3_EXT",          // 1000491002
+    "FLOAT8_E5M2_EXT",          // 1000491003
+    "FLOAT6_E2M3_EXT",          // 1000672000
+    "FLOAT6_E3M2_EXT",          // 1000672001
+    "FLOAT4_E2M1_EXT",          // 1000672002
+    "FLOAT8_UNSIGNED_E8M0_EXT", // 1000672003
+    "MXINT8_EXT",               // 1000672004
 };
 
-static int32_t const VkComponentTypeKHRValues[29] = {
+static int32_t const VkComponentTypeKHRValues[34] = {
     0,          // FLOAT16_NV
     1,          // FLOAT32_NV
     2,          // FLOAT64_NV
@@ -7927,6 +7936,11 @@ static int32_t const VkComponentTypeKHRValues[29] = {
     1000141000, // BFLOAT16
     1000491002, // FLOAT8_E4M3_EXT
     1000491003, // FLOAT8_E5M2_EXT
+    1000672000, // FLOAT6_E2M3_EXT
+    1000672001, // FLOAT6_E3M2_EXT
+    1000672002, // FLOAT4_E2M1_EXT
+    1000672003, // FLOAT8_UNSIGNED_E8M0_EXT
+    1000672004, // MXINT8_EXT
 };
 
 static char const *const VkCubicFilterWeightsQCOMStrings[4] = {
@@ -9908,7 +9922,7 @@ static ValueSet const cValueSets[440] = {
     {"VkShaderStageFlags", VkShaderStageFlagsStrings, VkShaderStageFlagsValues, 46,
      ENUM_TYPE_FLAG32},
     {"VkImageUsageFlags", VkImageUsageFlagsStrings, VkImageUsageFlagsValues, 54, ENUM_TYPE_FLAG32},
-    {"VkImageCreateFlags", VkImageCreateFlagsStrings, VkImageCreateFlagsValues, 40,
+    {"VkImageCreateFlags", VkImageCreateFlagsStrings, VkImageCreateFlagsValues, 41,
      ENUM_TYPE_FLAG32},
     {"VkImageViewCreateFlags", VkImageViewCreateFlagsStrings, VkImageViewCreateFlagsValues, 6,
      ENUM_TYPE_FLAG32},
@@ -10029,7 +10043,7 @@ static ValueSet const cValueSets[440] = {
      ENUM_TYPE_FLAG64},
     {"VkImageUsageFlags2KHR", VkImageUsageFlags2KHRStrings, VkImageUsageFlags2KHRValues, 32,
      ENUM_TYPE_FLAG64},
-    {"VkImageCreateFlags2KHR", VkImageCreateFlags2KHRStrings, VkImageCreateFlags2KHRValues, 22,
+    {"VkImageCreateFlags2KHR", VkImageCreateFlags2KHRStrings, VkImageCreateFlags2KHRValues, 23,
      ENUM_TYPE_FLAG64},
     {"VkAddressCopyFlagsKHR", VkAddressCopyFlagsKHRStrings, VkAddressCopyFlagsKHRValues, 3,
      ENUM_TYPE_FLAG32},
@@ -10449,7 +10463,7 @@ static ValueSet const cValueSets[440] = {
     {"VkShaderCodeTypeEXT", VkShaderCodeTypeEXTStrings, VkShaderCodeTypeEXTValues, 2,
      ENUM_TYPE_ENUM},
     {"VkScopeKHR", VkScopeKHRStrings, VkScopeKHRValues, 8, ENUM_TYPE_ENUM},
-    {"VkComponentTypeKHR", VkComponentTypeKHRStrings, VkComponentTypeKHRValues, 29, ENUM_TYPE_ENUM},
+    {"VkComponentTypeKHR", VkComponentTypeKHRStrings, VkComponentTypeKHRValues, 34, ENUM_TYPE_ENUM},
     {"VkCubicFilterWeightsQCOM", VkCubicFilterWeightsQCOMStrings, VkCubicFilterWeightsQCOMValues, 4,
      ENUM_TYPE_ENUM},
     {"VkBlockMatchWindowCompareModeQCOM", VkBlockMatchWindowCompareModeQCOMStrings,

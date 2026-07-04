@@ -37,12 +37,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 355
+#if VK_HEADER_VERSION > 356
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v355)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v356)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v355)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v356)"
 #endif
 #endif
 
@@ -6086,6 +6086,11 @@ void cleanup_VkPhysicalDeviceShaderMultipleWaitQueuesFeaturesQCOM(
 #if VK_HEADER_VERSION >= 351 && VK_QCOM_shader_multiple_wait_queues
 void cleanup_VkPhysicalDeviceShaderMultipleWaitQueuesPropertiesQCOM(
     VkPhysicalDeviceShaderMultipleWaitQueuesPropertiesQCOM const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 356 && VK_EXT_shader_ocp_microscaling_types
+void cleanup_VkPhysicalDeviceShaderOCPMicroscalingTypesFeaturesEXT(
+    VkPhysicalDeviceShaderOCPMicroscalingTypesFeaturesEXT const *pData);
 #endif
 
 #if VK_HEADER_VERSION >= 246 && VK_EXT_shader_object
@@ -17703,6 +17708,15 @@ void cleanup_vk_struct(void const *pData) {
       VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_MULTIPLE_WAIT_QUEUES_PROPERTIES_QCOM) {
     cleanup_VkPhysicalDeviceShaderMultipleWaitQueuesPropertiesQCOM(
         (VkPhysicalDeviceShaderMultipleWaitQueuesPropertiesQCOM const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 356 && VK_EXT_shader_ocp_microscaling_types
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_SHADER_OCP_MICROSCALING_TYPES_FEATURES_EXT) {
+    cleanup_VkPhysicalDeviceShaderOCPMicroscalingTypesFeaturesEXT(
+        (VkPhysicalDeviceShaderOCPMicroscalingTypesFeaturesEXT const *)pData);
     return;
   }
 #endif
@@ -36428,6 +36442,16 @@ void cleanup_VkPhysicalDeviceShaderMultipleWaitQueuesFeaturesQCOM(
 #if VK_HEADER_VERSION >= 351 && VK_QCOM_shader_multiple_wait_queues
 void cleanup_VkPhysicalDeviceShaderMultipleWaitQueuesPropertiesQCOM(
     VkPhysicalDeviceShaderMultipleWaitQueuesPropertiesQCOM const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 356 && VK_EXT_shader_ocp_microscaling_types
+void cleanup_VkPhysicalDeviceShaderOCPMicroscalingTypesFeaturesEXT(
+    VkPhysicalDeviceShaderOCPMicroscalingTypesFeaturesEXT const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 355
+#if VK_HEADER_VERSION > 356
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v355)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v356)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v355)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v356)"
 #endif
 #endif
 
@@ -7243,6 +7243,12 @@ bool compare_VkPhysicalDeviceShaderMultipleWaitQueuesFeaturesQCOM(
 bool compare_VkPhysicalDeviceShaderMultipleWaitQueuesPropertiesQCOM(
     VkPhysicalDeviceShaderMultipleWaitQueuesPropertiesQCOM const *s1,
     VkPhysicalDeviceShaderMultipleWaitQueuesPropertiesQCOM const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 356 && VK_EXT_shader_ocp_microscaling_types
+bool compare_VkPhysicalDeviceShaderOCPMicroscalingTypesFeaturesEXT(
+    VkPhysicalDeviceShaderOCPMicroscalingTypesFeaturesEXT const *s1,
+    VkPhysicalDeviceShaderOCPMicroscalingTypesFeaturesEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 246 && VK_EXT_shader_object
@@ -31143,6 +31149,20 @@ bool compare_VkPhysicalDeviceShaderMultipleWaitQueuesPropertiesQCOM(
     VkPhysicalDeviceShaderMultipleWaitQueuesPropertiesQCOM const *s2) {
   // local, simple types
   if ((s1->maxShaderWaitQueues != s2->maxShaderWaitQueues))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 356 && VK_EXT_shader_ocp_microscaling_types
+bool compare_VkPhysicalDeviceShaderOCPMicroscalingTypesFeaturesEXT(
+    VkPhysicalDeviceShaderOCPMicroscalingTypesFeaturesEXT const *s1,
+    VkPhysicalDeviceShaderOCPMicroscalingTypesFeaturesEXT const *s2) {
+  // local, simple types
+  if ((s1->shaderFloat4 != s2->shaderFloat4) || (s1->shaderFloat6 != s2->shaderFloat6) ||
+      (s1->shaderFloat8UnsignedE8M0 != s2->shaderFloat8UnsignedE8M0) ||
+      (s1->shaderMXInt8 != s2->shaderMXInt8))
     return false;
 
   return true;
