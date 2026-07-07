@@ -752,10 +752,10 @@ static STecVkSerializationResult serializeBitmask(ValueSet const *pValueSet,
       }
 
       if (pSrcStr == NULL) {
-        serializedLength += strlen(*pSearchStart);
+        serializedLength += (uint32_t)strlen(*pSearchStart);
       } else {
         uint32_t toCopy =
-            serializeMin(*pSerializedLength - serializedLength, strlen(*pSearchStart));
+            serializeMin(*pSerializedLength - serializedLength, (uint32_t)strlen(*pSearchStart));
         memcpy(pSrcStr, *pSearchStart, toCopy);
         pSrcStr += toCopy;
         serializedLength += toCopy;
@@ -853,7 +853,7 @@ static STecVkSerializationResult serializeEnum(ValueSet const *pValueSet,
         break;
       }
 
-      uint32_t const sourceLength = strlen(pValueSet->valueNames[offset]);
+      uint32_t const sourceLength = (uint32_t)strlen(pValueSet->valueNames[offset]);
       if (pSerialized != NULL) {
         if (*pSerializedLength < sourceLength) {
           memcpy(pSerialized, pValueSet->valueNames[offset], *pSerializedLength);
