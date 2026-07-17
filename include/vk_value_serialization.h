@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 356
+#if VK_HEADER_VERSION > 357
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v356)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v357)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v356)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v357)"
 #endif
 #endif
 
@@ -3411,7 +3411,7 @@ static uint32_t const VkSurfaceTransformFlagsKHRValues[9] = {
     0x00000100, // INHERIT
 };
 
-static char const *const VkSwapchainCreateFlagsKHRStrings[14] = {
+static char const *const VkSwapchainCreateFlagsKHRStrings[15] = {
     "DEFERRED_MEMORY_ALLOCATION_BIT_EXT",            // 0x00000008
     "SPLIT_INSTANCE_BIND_REGIONS",                   // 0x00000001
     "PROTECTED",                                     // 0x00000002
@@ -3426,9 +3426,10 @@ static char const *const VkSwapchainCreateFlagsKHRStrings[14] = {
     "RESERVED_9_BIT_EXT",                            // 0x00000200
     "PRESENT_TIMING_BIT_EXT",                        // 0x00000200
     "MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_BIT_EXT", // 0x00000100
+    "RESERVED_10_BIT_HUAWEI",                        // 0x00000400
 };
 
-static uint32_t const VkSwapchainCreateFlagsKHRValues[14] = {
+static uint32_t const VkSwapchainCreateFlagsKHRValues[15] = {
     0x00000008, // DEFERRED_MEMORY_ALLOCATION_BIT_EXT
     0x00000001, // SPLIT_INSTANCE_BIND_REGIONS
     0x00000002, // PROTECTED
@@ -3443,6 +3444,7 @@ static uint32_t const VkSwapchainCreateFlagsKHRValues[14] = {
     0x00000200, // RESERVED_9_BIT_EXT
     0x00000200, // PRESENT_TIMING_BIT_EXT
     0x00000100, // MULTISAMPLED_RENDER_TO_SINGLE_SAMPLED_BIT_EXT
+    0x00000400, // RESERVED_10_BIT_HUAWEI
 };
 
 static char const *const VkWaylandSurfaceCreateFlagsKHRStrings[1] = {
@@ -10078,7 +10080,7 @@ static ValueSet const cValueSets[440] = {
     {"VkSurfaceTransformFlagsKHR", VkSurfaceTransformFlagsKHRStrings,
      VkSurfaceTransformFlagsKHRValues, 9, ENUM_TYPE_FLAG32},
     {"VkSwapchainCreateFlagsKHR", VkSwapchainCreateFlagsKHRStrings, VkSwapchainCreateFlagsKHRValues,
-     14, ENUM_TYPE_FLAG32},
+     15, ENUM_TYPE_FLAG32},
     {"VkDisplayModeCreateFlagsKHR", NULL, NULL, 0, ENUM_TYPE_FLAG32},
     {"VkDisplaySurfaceCreateFlagsKHR", NULL, NULL, 0, ENUM_TYPE_FLAG32},
     {"VkAndroidSurfaceCreateFlagsKHR", NULL, NULL, 0, ENUM_TYPE_FLAG32},
