@@ -37,13 +37,13 @@ _Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) >= 0,
                "XR_CURRENT_API_VERSION is lower than the minimum supported version (v0)");
 #endif
 
-#if (XR_CURRENT_API_VERSION & 0xffffffffULL) > 60
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) > 61
 #if _MSC_VER
 #pragma message(                                                                                   \
     __FILE__                                                                                       \
-    ": warning: XR_CURRENT_API_VERSION is higher than what the header fully supports (v60)")
+    ": warning: XR_CURRENT_API_VERSION is higher than what the header fully supports (v61)")
 #else
-#warning "XR_CURRENT_API_VERSION is higher than what the header fully supports (v60)"
+#warning "XR_CURRENT_API_VERSION is higher than what the header fully supports (v61)"
 #endif
 #endif
 
@@ -395,10 +395,22 @@ char const *XrResult_to_string(XrResult result) {
     return "XR_ERROR_SPATIAL_PERSISTENCE_SCOPE_UNSUPPORTED_EXT";
   case -1000781001:
     return "XR_ERROR_SPATIAL_PERSISTENCE_SCOPE_INCOMPATIBLE_EXT";
+  case -1000787000:
+    return "XR_ERROR_KEYLESS_AUTH_NOT_SETUP_ANDROID";
+  case -1000787001:
+    return "XR_ERROR_KEYLESS_AUTH_FAILED_ANDROID";
+  case -1000789000:
+    return "XR_ERROR_GEOSPATIAL_TRACKER_NOT_RUNNING_ANDROID";
+  case -1000789001:
+    return "XR_ERROR_GEOSPATIAL_COORDINATES_INVALID_ANDROID";
+  case -1000789002:
+    return "XR_ERROR_GEOSPATIAL_CLOUD_AUTH_FAILED_ANDROID";
   case -1000790001:
     return "XR_ERROR_SPATIAL_ANCHOR_ATTACHABLE_COMPONENT_NOT_FOUND_ANDROID";
   case -1000795001:
     return "XR_ERROR_SPATIAL_ANCHOR_ENTITY_ID_INVALID_ANDROID";
+  case -1000797000:
+    return "XR_ERROR_SURFACE_ANCHOR_LOCATION_UNSUPPORTED_ANDROID";
 
   default:
     return NULL;
