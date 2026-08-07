@@ -37,12 +37,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 358
+#if VK_HEADER_VERSION > 359
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v358)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v359)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v358)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v359)"
 #endif
 #endif
 
@@ -984,6 +984,10 @@ void cleanup_VkConvertCooperativeVectorMatrixInfoNV(
 #if VK_HEADER_VERSION >= 300 && VK_NV_cooperative_matrix2
 void cleanup_VkCooperativeMatrixFlexibleDimensionsPropertiesNV(
     VkCooperativeMatrixFlexibleDimensionsPropertiesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 359 && VK_EXT_cooperative_matrix_maintenance1
+void cleanup_VkCooperativeMatrixProperties2EXT(VkCooperativeMatrixProperties2EXT const *pData);
 #endif
 
 #if VK_HEADER_VERSION >= 255 && VK_KHR_cooperative_matrix
@@ -3778,6 +3782,16 @@ void cleanup_VkPhysicalDeviceCooperativeMatrixFeaturesKHR(
 #if VK_HEADER_VERSION >= 101 && VK_NV_cooperative_matrix
 void cleanup_VkPhysicalDeviceCooperativeMatrixFeaturesNV(
     VkPhysicalDeviceCooperativeMatrixFeaturesNV const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 359 && VK_EXT_cooperative_matrix_maintenance1
+void cleanup_VkPhysicalDeviceCooperativeMatrixInfo2EXT(
+    VkPhysicalDeviceCooperativeMatrixInfo2EXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 359 && VK_EXT_cooperative_matrix_maintenance1
+void cleanup_VkPhysicalDeviceCooperativeMatrixMaintenance1FeaturesEXT(
+    VkPhysicalDeviceCooperativeMatrixMaintenance1FeaturesEXT const *pData);
 #endif
 
 #if VK_HEADER_VERSION >= 255 && VK_KHR_cooperative_matrix
@@ -11152,6 +11166,13 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
+#if VK_HEADER_VERSION >= 359 && VK_EXT_cooperative_matrix_maintenance1
+  if (pTemp->sType == VK_STRUCTURE_TYPE_COOPERATIVE_MATRIX_PROPERTIES_2_EXT) {
+    cleanup_VkCooperativeMatrixProperties2EXT((VkCooperativeMatrixProperties2EXT const *)pData);
+    return;
+  }
+#endif
+
 #if VK_HEADER_VERSION >= 255 && VK_KHR_cooperative_matrix
   if (pTemp->sType == VK_STRUCTURE_TYPE_COOPERATIVE_MATRIX_PROPERTIES_KHR) {
     cleanup_VkCooperativeMatrixPropertiesKHR((VkCooperativeMatrixPropertiesKHR const *)pData);
@@ -14637,6 +14658,23 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_FEATURES_NV) {
     cleanup_VkPhysicalDeviceCooperativeMatrixFeaturesNV(
         (VkPhysicalDeviceCooperativeMatrixFeaturesNV const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 359 && VK_EXT_cooperative_matrix_maintenance1
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_INFO_2_EXT) {
+    cleanup_VkPhysicalDeviceCooperativeMatrixInfo2EXT(
+        (VkPhysicalDeviceCooperativeMatrixInfo2EXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 359 && VK_EXT_cooperative_matrix_maintenance1
+  if (pTemp->sType ==
+      VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_MAINTENANCE_1_FEATURES_EXT) {
+    cleanup_VkPhysicalDeviceCooperativeMatrixMaintenance1FeaturesEXT(
+        (VkPhysicalDeviceCooperativeMatrixMaintenance1FeaturesEXT const *)pData);
     return;
   }
 #endif
@@ -25125,6 +25163,15 @@ void cleanup_VkCooperativeMatrixFlexibleDimensionsPropertiesNV(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 359 && VK_EXT_cooperative_matrix_maintenance1
+void cleanup_VkCooperativeMatrixProperties2EXT(VkCooperativeMatrixProperties2EXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
 #if VK_HEADER_VERSION >= 255 && VK_KHR_cooperative_matrix
 void cleanup_VkCooperativeMatrixPropertiesKHR(VkCooperativeMatrixPropertiesKHR const *pData) {
   // pNext
@@ -31820,6 +31867,26 @@ void cleanup_VkPhysicalDeviceCooperativeMatrixFeaturesKHR(
 #if VK_HEADER_VERSION >= 101 && VK_NV_cooperative_matrix
 void cleanup_VkPhysicalDeviceCooperativeMatrixFeaturesNV(
     VkPhysicalDeviceCooperativeMatrixFeaturesNV const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 359 && VK_EXT_cooperative_matrix_maintenance1
+void cleanup_VkPhysicalDeviceCooperativeMatrixInfo2EXT(
+    VkPhysicalDeviceCooperativeMatrixInfo2EXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 359 && VK_EXT_cooperative_matrix_maintenance1
+void cleanup_VkPhysicalDeviceCooperativeMatrixMaintenance1FeaturesEXT(
+    VkPhysicalDeviceCooperativeMatrixMaintenance1FeaturesEXT const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

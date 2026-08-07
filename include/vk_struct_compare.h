@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 358
+#if VK_HEADER_VERSION > 359
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v358)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v359)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v358)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v359)"
 #endif
 #endif
 
@@ -1162,6 +1162,11 @@ bool compare_VkConvertCooperativeVectorMatrixInfoNV(
 bool compare_VkCooperativeMatrixFlexibleDimensionsPropertiesNV(
     VkCooperativeMatrixFlexibleDimensionsPropertiesNV const *s1,
     VkCooperativeMatrixFlexibleDimensionsPropertiesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 359 && VK_EXT_cooperative_matrix_maintenance1
+bool compare_VkCooperativeMatrixProperties2EXT(VkCooperativeMatrixProperties2EXT const *s1,
+                                               VkCooperativeMatrixProperties2EXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 255 && VK_KHR_cooperative_matrix
@@ -4488,6 +4493,18 @@ bool compare_VkPhysicalDeviceCooperativeMatrixFeaturesKHR(
 bool compare_VkPhysicalDeviceCooperativeMatrixFeaturesNV(
     VkPhysicalDeviceCooperativeMatrixFeaturesNV const *s1,
     VkPhysicalDeviceCooperativeMatrixFeaturesNV const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 359 && VK_EXT_cooperative_matrix_maintenance1
+bool compare_VkPhysicalDeviceCooperativeMatrixInfo2EXT(
+    VkPhysicalDeviceCooperativeMatrixInfo2EXT const *s1,
+    VkPhysicalDeviceCooperativeMatrixInfo2EXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 359 && VK_EXT_cooperative_matrix_maintenance1
+bool compare_VkPhysicalDeviceCooperativeMatrixMaintenance1FeaturesEXT(
+    VkPhysicalDeviceCooperativeMatrixMaintenance1FeaturesEXT const *s1,
+    VkPhysicalDeviceCooperativeMatrixMaintenance1FeaturesEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 255 && VK_KHR_cooperative_matrix
@@ -15109,6 +15126,19 @@ bool compare_VkCooperativeMatrixFlexibleDimensionsPropertiesNV(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 359 && VK_EXT_cooperative_matrix_maintenance1
+bool compare_VkCooperativeMatrixProperties2EXT(VkCooperativeMatrixProperties2EXT const *s1,
+                                               VkCooperativeMatrixProperties2EXT const *s2) {
+  // local, simple types
+  if ((s1->MGranularity != s2->MGranularity) || (s1->NGranularity != s2->NGranularity) ||
+      (s1->KGranularity != s2->KGranularity) || (s1->AType != s2->AType) ||
+      (s1->BType != s2->BType) || (s1->CType != s2->CType) || (s1->ResultType != s2->ResultType))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 255 && VK_KHR_cooperative_matrix
 bool compare_VkCooperativeMatrixPropertiesKHR(VkCooperativeMatrixPropertiesKHR const *s1,
                                               VkCooperativeMatrixPropertiesKHR const *s2) {
@@ -24182,6 +24212,35 @@ bool compare_VkPhysicalDeviceCooperativeMatrixFeaturesNV(
   // local, simple types
   if ((s1->cooperativeMatrix != s2->cooperativeMatrix) ||
       (s1->cooperativeMatrixRobustBufferAccess != s2->cooperativeMatrixRobustBufferAccess))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 359 && VK_EXT_cooperative_matrix_maintenance1
+bool compare_VkPhysicalDeviceCooperativeMatrixInfo2EXT(
+    VkPhysicalDeviceCooperativeMatrixInfo2EXT const *s1,
+    VkPhysicalDeviceCooperativeMatrixInfo2EXT const *s2) {
+  // local, simple types
+  if ((s1->scope != s2->scope) || (s1->invocations != s2->invocations) ||
+      (s1->subgroupSize != s2->subgroupSize) || (s1->flags != s2->flags))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 359 && VK_EXT_cooperative_matrix_maintenance1
+bool compare_VkPhysicalDeviceCooperativeMatrixMaintenance1FeaturesEXT(
+    VkPhysicalDeviceCooperativeMatrixMaintenance1FeaturesEXT const *s1,
+    VkPhysicalDeviceCooperativeMatrixMaintenance1FeaturesEXT const *s2) {
+  // local, simple types
+  if ((s1->cooperativeMatrixProperties2 != s2->cooperativeMatrixProperties2) ||
+      (s1->cooperativeMatrixReductions != s2->cooperativeMatrixReductions) ||
+      (s1->cooperativeMatrixConversions != s2->cooperativeMatrixConversions) ||
+      (s1->cooperativeMatrixPerElementOperations != s2->cooperativeMatrixPerElementOperations) ||
+      (s1->cooperativeMatrixGetCoordinate != s2->cooperativeMatrixGetCoordinate))
     return false;
 
   return true;

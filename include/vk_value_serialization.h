@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 358
+#if VK_HEADER_VERSION > 359
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v358)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v359)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v358)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v359)"
 #endif
 #endif
 
@@ -5025,6 +5025,14 @@ static uint64_t const VkAccessFlags3KHRValues[1] = {
     0, // NONE
 };
 
+static char const *const VkCooperativeMatrixFlagsEXTStrings[1] = {
+    "SATURATING_ACCUMULATION", // 0x00000001
+};
+
+static uint32_t const VkCooperativeMatrixFlagsEXTValues[1] = {
+    0x00000001, // SATURATING_ACCUMULATION
+};
+
 static char const *const VkAttachmentLoadOpStrings[6] = {
     "NONE_EXT",  // 1000400000
     "NONE_KHR",  // 1000400000
@@ -8989,7 +8997,7 @@ static int32_t const VkVendorIdValues[9] = {
     0x10008, // APE
 };
 
-static char const *const VkDriverIdStrings[44] = {
+static char const *const VkDriverIdStrings[45] = {
     "AMD_PROPRIETARY_KHR",           // 1
     "AMD_OPEN_SOURCE_KHR",           // 2
     "MESA_RADV_KHR",                 // 3
@@ -9034,9 +9042,10 @@ static char const *const VkDriverIdStrings[44] = {
     "MESA_KOSMICKRISP",              // 28
     "MESA_GFXSTREAM",                // 29
     "APE_SOFT",                      // 30
+    "RESERVED_31",                   // 31
 };
 
-static int32_t const VkDriverIdValues[44] = {
+static int32_t const VkDriverIdValues[45] = {
     1,  // AMD_PROPRIETARY_KHR
     2,  // AMD_OPEN_SOURCE_KHR
     3,  // MESA_RADV_KHR
@@ -9081,6 +9090,7 @@ static int32_t const VkDriverIdValues[44] = {
     28, // MESA_KOSMICKRISP
     29, // MESA_GFXSTREAM
     30, // APE_SOFT
+    31, // RESERVED_31
 };
 
 static char const *const VkShadingRatePaletteEntryNVStrings[12] = {
@@ -9891,8 +9901,8 @@ typedef struct ValueSet {
   EnumType type;
 } ValueSet;
 
-static const uint32_t cValueSetCount = 441;
-static ValueSet const cValueSets[441] = {
+static const uint32_t cValueSetCount = 442;
+static ValueSet const cValueSets[442] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsStrings, VkFramebufferCreateFlagsValues, 2,
      ENUM_TYPE_FLAG32},
     {"VkQueryPoolCreateFlags", VkQueryPoolCreateFlagsStrings, VkQueryPoolCreateFlagsValues, 1,
@@ -10306,6 +10316,8 @@ static ValueSet const cValueSets[441] = {
     {"VkVideoEncodeAV1SuperblockSizeFlagsKHR", VkVideoEncodeAV1SuperblockSizeFlagsKHRStrings,
      VkVideoEncodeAV1SuperblockSizeFlagsKHRValues, 2, ENUM_TYPE_FLAG32},
     {"VkAccessFlags3KHR", VkAccessFlags3KHRStrings, VkAccessFlags3KHRValues, 1, ENUM_TYPE_FLAG64},
+    {"VkCooperativeMatrixFlagsEXT", VkCooperativeMatrixFlagsEXTStrings,
+     VkCooperativeMatrixFlagsEXTValues, 1, ENUM_TYPE_FLAG32},
     {"VkAttachmentLoadOp", VkAttachmentLoadOpStrings, VkAttachmentLoadOpValues, 6, ENUM_TYPE_ENUM},
     {"VkAttachmentStoreOp", VkAttachmentStoreOpStrings, VkAttachmentStoreOpValues, 6,
      ENUM_TYPE_ENUM},
@@ -10580,7 +10592,7 @@ static ValueSet const cValueSets[441] = {
     {"VkOutOfBandQueueTypeNV", VkOutOfBandQueueTypeNVStrings, VkOutOfBandQueueTypeNVValues, 2,
      ENUM_TYPE_ENUM},
     {"VkVendorId", VkVendorIdStrings, VkVendorIdValues, 9, ENUM_TYPE_ENUM},
-    {"VkDriverId", VkDriverIdStrings, VkDriverIdValues, 44, ENUM_TYPE_ENUM},
+    {"VkDriverId", VkDriverIdStrings, VkDriverIdValues, 45, ENUM_TYPE_ENUM},
     {"VkShadingRatePaletteEntryNV", VkShadingRatePaletteEntryNVStrings,
      VkShadingRatePaletteEntryNVValues, 12, ENUM_TYPE_ENUM},
     {"VkCoarseSampleOrderTypeNV", VkCoarseSampleOrderTypeNVStrings, VkCoarseSampleOrderTypeNVValues,
