@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 357
+#if VK_HEADER_VERSION > 358
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v357)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v358)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v357)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v358)"
 #endif
 #endif
 
@@ -3294,6 +3294,11 @@ bool compare_VkImageSwapchainCreateInfoKHR(VkImageSwapchainCreateInfoKHR const *
                                            VkImageSwapchainCreateInfoKHR const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 358 && VK_EXT_image_tiling_control
+bool compare_VkImageTilingControlCreateInfoEXT(VkImageTilingControlCreateInfoEXT const *s1,
+                                               VkImageTilingControlCreateInfoEXT const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 303 && VK_VERSION_1_4
 bool compare_VkImageToMemoryCopy(VkImageToMemoryCopy const *s1, VkImageToMemoryCopy const *s2);
 #endif
@@ -5559,6 +5564,12 @@ bool compare_VkPhysicalDeviceImageRobustnessFeaturesEXT(
 bool compare_VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT(
     VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT const *s1,
     VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 358 && VK_EXT_image_tiling_control
+bool compare_VkPhysicalDeviceImageTilingControlFeaturesEXT(
+    VkPhysicalDeviceImageTilingControlFeaturesEXT const *s1,
+    VkPhysicalDeviceImageTilingControlFeaturesEXT const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 99 && VK_EXT_filter_cubic
@@ -20997,6 +21008,17 @@ bool compare_VkImageSwapchainCreateInfoKHR(VkImageSwapchainCreateInfoKHR const *
 }
 #endif
 
+#if VK_HEADER_VERSION >= 358 && VK_EXT_image_tiling_control
+bool compare_VkImageTilingControlCreateInfoEXT(VkImageTilingControlCreateInfoEXT const *s1,
+                                               VkImageTilingControlCreateInfoEXT const *s2) {
+  // local, simple types
+  if ((s1->tilingControl != s2->tilingControl))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 303 && VK_VERSION_1_4
 bool compare_VkImageToMemoryCopy(VkImageToMemoryCopy const *s1, VkImageToMemoryCopy const *s2) {
   // local, simple types
@@ -27063,6 +27085,18 @@ bool compare_VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT(
     VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT const *s2) {
   // local, simple types
   if ((s1->imageSlicedViewOf3D != s2->imageSlicedViewOf3D))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 358 && VK_EXT_image_tiling_control
+bool compare_VkPhysicalDeviceImageTilingControlFeaturesEXT(
+    VkPhysicalDeviceImageTilingControlFeaturesEXT const *s1,
+    VkPhysicalDeviceImageTilingControlFeaturesEXT const *s2) {
+  // local, simple types
+  if ((s1->imageTilingControl != s2->imageTilingControl))
     return false;
 
   return true;

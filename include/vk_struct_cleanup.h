@@ -37,12 +37,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 357
+#if VK_HEADER_VERSION > 358
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v357)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v358)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v357)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v358)"
 #endif
 #endif
 
@@ -2773,6 +2773,10 @@ void cleanup_VkImageSubresourceRange(VkImageSubresourceRange const *pData);
 void cleanup_VkImageSwapchainCreateInfoKHR(VkImageSwapchainCreateInfoKHR const *pData);
 #endif
 
+#if VK_HEADER_VERSION >= 358 && VK_EXT_image_tiling_control
+void cleanup_VkImageTilingControlCreateInfoEXT(VkImageTilingControlCreateInfoEXT const *pData);
+#endif
+
 #if VK_HEADER_VERSION >= 303 && VK_VERSION_1_4
 void cleanup_VkImageToMemoryCopy(VkImageToMemoryCopy const *pData);
 #endif
@@ -4673,6 +4677,11 @@ void cleanup_VkPhysicalDeviceImageRobustnessFeaturesEXT(
 #if VK_HEADER_VERSION >= 241 && VK_EXT_image_sliced_view_of_3d
 void cleanup_VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT(
     VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 358 && VK_EXT_image_tiling_control
+void cleanup_VkPhysicalDeviceImageTilingControlFeaturesEXT(
+    VkPhysicalDeviceImageTilingControlFeaturesEXT const *pData);
 #endif
 
 #if VK_HEADER_VERSION >= 99 && VK_EXT_filter_cubic
@@ -13315,6 +13324,13 @@ void cleanup_vk_struct(void const *pData) {
   }
 #endif
 
+#if VK_HEADER_VERSION >= 358 && VK_EXT_image_tiling_control
+  if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_TILING_CONTROL_CREATE_INFO_EXT) {
+    cleanup_VkImageTilingControlCreateInfoEXT((VkImageTilingControlCreateInfoEXT const *)pData);
+    return;
+  }
+#endif
+
 #if VK_HEADER_VERSION >= 303 && VK_VERSION_1_4
   if (pTemp->sType == VK_STRUCTURE_TYPE_IMAGE_TO_MEMORY_COPY) {
     cleanup_VkImageToMemoryCopy((VkImageToMemoryCopy const *)pData);
@@ -15823,6 +15839,14 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_SLICED_VIEW_OF_3D_FEATURES_EXT) {
     cleanup_VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT(
         (VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 358 && VK_EXT_image_tiling_control
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_TILING_CONTROL_FEATURES_EXT) {
+    cleanup_VkPhysicalDeviceImageTilingControlFeaturesEXT(
+        (VkPhysicalDeviceImageTilingControlFeaturesEXT const *)pData);
     return;
   }
 #endif
@@ -29571,6 +29595,15 @@ void cleanup_VkImageSwapchainCreateInfoKHR(VkImageSwapchainCreateInfoKHR const *
 }
 #endif
 
+#if VK_HEADER_VERSION >= 358 && VK_EXT_image_tiling_control
+void cleanup_VkImageTilingControlCreateInfoEXT(VkImageTilingControlCreateInfoEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
 #if VK_HEADER_VERSION >= 303 && VK_VERSION_1_4
 void cleanup_VkImageToMemoryCopy(VkImageToMemoryCopy const *pData) {
   // pNext
@@ -33618,6 +33651,16 @@ void cleanup_VkPhysicalDeviceImageRobustnessFeaturesEXT(
 #if VK_HEADER_VERSION >= 241 && VK_EXT_image_sliced_view_of_3d
 void cleanup_VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT(
     VkPhysicalDeviceImageSlicedViewOf3DFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 358 && VK_EXT_image_tiling_control
+void cleanup_VkPhysicalDeviceImageTilingControlFeaturesEXT(
+    VkPhysicalDeviceImageTilingControlFeaturesEXT const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

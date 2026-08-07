@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 357
+#if VK_HEADER_VERSION > 358
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v357)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v358)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v357)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v358)"
 #endif
 #endif
 
@@ -379,7 +379,7 @@ static uint32_t const VkDeviceQueueCreateFlagsValues[4] = {
     0x00000004, // INTERNALLY_SYNCHRONIZED_BIT_KHR
 };
 
-static char const *const VkQueueFlagsStrings[18] = {
+static char const *const VkQueueFlagsStrings[19] = {
     "GRAPHICS",             // 0x00000001
     "COMPUTE",              // 0x00000002
     "TRANSFER",             // 0x00000004
@@ -398,9 +398,10 @@ static char const *const VkQueueFlagsStrings[18] = {
     "DATA_GRAPH_BIT_ARM",   // 0x00000400
     "RESERVED_12_BIT_EXT",  // 0x00001000
     "RESERVED_13_BIT_EXT",  // 0x00002000
+    "RESERVED_14_BIT_EXT",  // 0x00004000
 };
 
-static uint32_t const VkQueueFlagsValues[18] = {
+static uint32_t const VkQueueFlagsValues[19] = {
     0x00000001, // GRAPHICS
     0x00000002, // COMPUTE
     0x00000004, // TRANSFER
@@ -419,6 +420,7 @@ static uint32_t const VkQueueFlagsValues[18] = {
     0x00000400, // DATA_GRAPH_BIT_ARM
     0x00001000, // RESERVED_12_BIT_EXT
     0x00002000, // RESERVED_13_BIT_EXT
+    0x00004000, // RESERVED_14_BIT_EXT
 };
 
 static char const *const VkMemoryPropertyFlagsStrings[11] = {
@@ -6937,6 +6939,18 @@ static int32_t const VkRayTracingInvocationReorderModeEXTValues[4] = {
     1, // REORDER
 };
 
+static char const *const VkImageTilingControlEXTStrings[3] = {
+    "DEFAULT",         // 0
+    "MIN_SIZE",        // 1
+    "MAX_PERFORMANCE", // 2
+};
+
+static int32_t const VkImageTilingControlEXTValues[3] = {
+    0, // DEFAULT
+    1, // MIN_SIZE
+    2, // MAX_PERFORMANCE
+};
+
 static char const *const VkIndirectCommandsTokenTypeNVStrings[12] = {
     "SHADER_GROUP",    // 0
     "STATE_FLAGS",     // 1
@@ -9877,8 +9891,8 @@ typedef struct ValueSet {
   EnumType type;
 } ValueSet;
 
-static const uint32_t cValueSetCount = 440;
-static ValueSet const cValueSets[440] = {
+static const uint32_t cValueSetCount = 441;
+static ValueSet const cValueSets[441] = {
     {"VkFramebufferCreateFlags", VkFramebufferCreateFlagsStrings, VkFramebufferCreateFlagsValues, 2,
      ENUM_TYPE_FLAG32},
     {"VkQueryPoolCreateFlags", VkQueryPoolCreateFlagsStrings, VkQueryPoolCreateFlagsValues, 1,
@@ -9912,7 +9926,7 @@ static ValueSet const cValueSets[440] = {
     {"VkDeviceCreateFlags", NULL, NULL, 0, ENUM_TYPE_FLAG32},
     {"VkDeviceQueueCreateFlags", VkDeviceQueueCreateFlagsStrings, VkDeviceQueueCreateFlagsValues, 4,
      ENUM_TYPE_FLAG32},
-    {"VkQueueFlags", VkQueueFlagsStrings, VkQueueFlagsValues, 18, ENUM_TYPE_FLAG32},
+    {"VkQueueFlags", VkQueueFlagsStrings, VkQueueFlagsValues, 19, ENUM_TYPE_FLAG32},
     {"VkMemoryPropertyFlags", VkMemoryPropertyFlagsStrings, VkMemoryPropertyFlagsValues, 11,
      ENUM_TYPE_FLAG32},
     {"VkMemoryHeapFlags", VkMemoryHeapFlagsStrings, VkMemoryHeapFlagsValues, 6, ENUM_TYPE_FLAG32},
@@ -10346,6 +10360,8 @@ static ValueSet const cValueSets[440] = {
     {"VkObjectType", VkObjectTypeStrings, VkObjectTypeValues, 67, ENUM_TYPE_ENUM},
     {"VkRayTracingInvocationReorderModeEXT", VkRayTracingInvocationReorderModeEXTStrings,
      VkRayTracingInvocationReorderModeEXTValues, 4, ENUM_TYPE_ENUM},
+    {"VkImageTilingControlEXT", VkImageTilingControlEXTStrings, VkImageTilingControlEXTValues, 3,
+     ENUM_TYPE_ENUM},
     {"VkIndirectCommandsTokenTypeNV", VkIndirectCommandsTokenTypeNVStrings,
      VkIndirectCommandsTokenTypeNVValues, 12, ENUM_TYPE_ENUM},
     {"VkDescriptorUpdateTemplateType", VkDescriptorUpdateTemplateTypeStrings,
