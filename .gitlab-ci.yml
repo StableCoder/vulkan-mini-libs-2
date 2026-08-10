@@ -192,6 +192,7 @@ Code Coverage:
   variables:
     CC: clang
     CXX: clang++
+  coverage: /TOTAL\s+.*?\s+([\d.]+)%/
   script:
     - cmake -S . -B build -G Ninja -D CMAKE_BUILD_TYPE=Release -D CODE_COVERAGE=ON -D BUILD_TESTS=ON
     - cmake --build build
