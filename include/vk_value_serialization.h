@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 361
+#if VK_HEADER_VERSION > 362
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v361)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v362)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v361)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v362)"
 #endif
 #endif
 
@@ -2873,8 +2873,8 @@ static char const *const VkPipelineCreateFlags2Strings[68] = {
     "DISALLOW_OPACITY_MICROMAP_BIT_ARM",                         // 0x2000000000
     "RAY_TRACING_ALLOW_SPHERES_AND_LINEAR_SWEPT_SPHERES_BIT_NV", // 0x200000000
     "RESERVED_40_BIT_VALVE",                                     // 0x10000000000
-    "RESERVED_41_BIT_KHR",                                       // 0x20000000000
     "RESERVED_42_BIT_KHR",                                       // 0x40000000000
+    "RESERVED_41_BIT_KHR",                                       // 0x20000000000
     "RESERVED_43_BIT_EXT",                                       // 0x80000000000
     "PER_LAYER_FRAGMENT_DENSITY_BIT_VALVE",                      // 0x10000000000
     "VK_PIPELINE_CREATE_RESERVED_44_BIT_KHR",                    // 0x100000000000
@@ -2944,8 +2944,8 @@ static uint64_t const VkPipelineCreateFlags2Values[68] = {
     0x2000000000,    // DISALLOW_OPACITY_MICROMAP_BIT_ARM
     0x200000000,     // RAY_TRACING_ALLOW_SPHERES_AND_LINEAR_SWEPT_SPHERES_BIT_NV
     0x10000000000,   // RESERVED_40_BIT_VALVE
-    0x20000000000,   // RESERVED_41_BIT_KHR
     0x40000000000,   // RESERVED_42_BIT_KHR
+    0x20000000000,   // RESERVED_41_BIT_KHR
     0x80000000000,   // RESERVED_43_BIT_EXT
     0x10000000000,   // PER_LAYER_FRAGMENT_DENSITY_BIT_VALVE
     0x100000000000,  // VK_PIPELINE_CREATE_RESERVED_44_BIT_KHR

@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 361
+#if VK_HEADER_VERSION > 362
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v361)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v362)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v361)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v362)"
 #endif
 #endif
 
@@ -750,6 +750,12 @@ bool compare_VkBufferCopy2KHR(VkBufferCopy2KHR const *s1, VkBufferCopy2KHR const
 #endif
 
 bool compare_VkBufferCreateInfo(VkBufferCreateInfo const *s1, VkBufferCreateInfo const *s2);
+
+#if VK_HEADER_VERSION >= 362 && VK_VALVE_buffer_device_address_allocation_alignment
+bool compare_VkBufferDeviceAddressAlignmentAllocateInfoVALVE(
+    VkBufferDeviceAddressAlignmentAllocateInfoVALVE const *s1,
+    VkBufferDeviceAddressAlignmentAllocateInfoVALVE const *s2);
+#endif
 
 #if VK_HEADER_VERSION >= 97 && VK_HEADER_VERSION <= 103 && VK_EXT_buffer_device_address
 bool compare_VkBufferDeviceAddressCreateInfoEXT(VkBufferDeviceAddressCreateInfoEXT const *s1,
@@ -4339,6 +4345,18 @@ bool compare_VkPhysicalDeviceBufferAddressFeaturesEXT(
     VkPhysicalDeviceBufferAddressFeaturesEXT const *s2);
 #endif
 
+#if VK_HEADER_VERSION >= 362 && VK_VALVE_buffer_device_address_allocation_alignment
+bool compare_VkPhysicalDeviceBufferDeviceAddressAllocationAlignmentFeaturesVALVE(
+    VkPhysicalDeviceBufferDeviceAddressAllocationAlignmentFeaturesVALVE const *s1,
+    VkPhysicalDeviceBufferDeviceAddressAllocationAlignmentFeaturesVALVE const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 362 && VK_VALVE_buffer_device_address_allocation_alignment
+bool compare_VkPhysicalDeviceBufferDeviceAddressAllocationAlignmentPropertiesVALVE(
+    VkPhysicalDeviceBufferDeviceAddressAllocationAlignmentPropertiesVALVE const *s1,
+    VkPhysicalDeviceBufferDeviceAddressAllocationAlignmentPropertiesVALVE const *s2);
+#endif
+
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
 bool compare_VkPhysicalDeviceBufferDeviceAddressFeatures(
     VkPhysicalDeviceBufferDeviceAddressFeatures const *s1,
@@ -6327,10 +6345,22 @@ bool compare_VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR(
     VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR const *s2);
 #endif
 
-#if VK_HEADER_VERSION >= 240 && VK_EXT_pipeline_library_group_handles
+#if VK_HEADER_VERSION >= 240 && VK_HEADER_VERSION <= 361 && VK_EXT_pipeline_library_group_handles
 bool compare_VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT(
     VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT const *s1,
     VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 362 && VK_EXT_pipeline_library_group_handles
+bool compare_VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT(
+    VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT const *s1,
+    VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 362 && VK_KHR_pipeline_library_group_handles
+bool compare_VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesKHR(
+    VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesKHR const *s1,
+    VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesKHR const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 305 && VK_ARM_pipeline_opacity_micromap
@@ -13960,6 +13990,18 @@ bool compare_VkBufferCreateInfo(VkBufferCreateInfo const *s1, VkBufferCreateInfo
     return false;
   return true;
 }
+
+#if VK_HEADER_VERSION >= 362 && VK_VALVE_buffer_device_address_allocation_alignment
+bool compare_VkBufferDeviceAddressAlignmentAllocateInfoVALVE(
+    VkBufferDeviceAddressAlignmentAllocateInfoVALVE const *s1,
+    VkBufferDeviceAddressAlignmentAllocateInfoVALVE const *s2) {
+  // local, simple types
+  if ((s1->alignment != s2->alignment))
+    return false;
+
+  return true;
+}
+#endif
 
 #if VK_HEADER_VERSION >= 97 && VK_HEADER_VERSION <= 103 && VK_EXT_buffer_device_address
 bool compare_VkBufferDeviceAddressCreateInfoEXT(VkBufferDeviceAddressCreateInfoEXT const *s1,
@@ -23857,6 +23899,31 @@ bool compare_VkPhysicalDeviceBufferAddressFeaturesEXT(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 362 && VK_VALVE_buffer_device_address_allocation_alignment
+bool compare_VkPhysicalDeviceBufferDeviceAddressAllocationAlignmentFeaturesVALVE(
+    VkPhysicalDeviceBufferDeviceAddressAllocationAlignmentFeaturesVALVE const *s1,
+    VkPhysicalDeviceBufferDeviceAddressAllocationAlignmentFeaturesVALVE const *s2) {
+  // local, simple types
+  if ((s1->bufferDeviceAddressAllocationAlignment != s2->bufferDeviceAddressAllocationAlignment))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 362 && VK_VALVE_buffer_device_address_allocation_alignment
+bool compare_VkPhysicalDeviceBufferDeviceAddressAllocationAlignmentPropertiesVALVE(
+    VkPhysicalDeviceBufferDeviceAddressAllocationAlignmentPropertiesVALVE const *s1,
+    VkPhysicalDeviceBufferDeviceAddressAllocationAlignmentPropertiesVALVE const *s2) {
+  // local, simple types
+  if ((s1->maxBufferDeviceAddressAllocationAlignment !=
+       s2->maxBufferDeviceAddressAllocationAlignment))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 131 && VK_VERSION_1_2
 bool compare_VkPhysicalDeviceBufferDeviceAddressFeatures(
     VkPhysicalDeviceBufferDeviceAddressFeatures const *s1,
@@ -28978,10 +29045,34 @@ bool compare_VkPhysicalDevicePipelineExecutablePropertiesFeaturesKHR(
 }
 #endif
 
-#if VK_HEADER_VERSION >= 240 && VK_EXT_pipeline_library_group_handles
+#if VK_HEADER_VERSION >= 240 && VK_HEADER_VERSION <= 361 && VK_EXT_pipeline_library_group_handles
 bool compare_VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT(
     VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT const *s1,
     VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT const *s2) {
+  // local, simple types
+  if ((s1->pipelineLibraryGroupHandles != s2->pipelineLibraryGroupHandles))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 362 && VK_EXT_pipeline_library_group_handles
+bool compare_VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT(
+    VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT const *s1,
+    VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesEXT const *s2) {
+  // local, simple types
+  if ((s1->pipelineLibraryGroupHandles != s2->pipelineLibraryGroupHandles))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 362 && VK_KHR_pipeline_library_group_handles
+bool compare_VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesKHR(
+    VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesKHR const *s1,
+    VkPhysicalDevicePipelineLibraryGroupHandlesFeaturesKHR const *s2) {
   // local, simple types
   if ((s1->pipelineLibraryGroupHandles != s2->pipelineLibraryGroupHandles))
     return false;
