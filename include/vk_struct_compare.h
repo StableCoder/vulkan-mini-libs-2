@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 360
+#if VK_HEADER_VERSION > 361
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v360)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v361)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v360)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v361)"
 #endif
 #endif
 
@@ -6511,6 +6511,12 @@ bool compare_VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT(
 bool compare_VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT(
     VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT const *s1,
     VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 361 && VK_NV_private_data_base_handle
+bool compare_VkPhysicalDevicePrivateDataBaseHandleFeaturesNV(
+    VkPhysicalDevicePrivateDataBaseHandleFeaturesNV const *s1,
+    VkPhysicalDevicePrivateDataBaseHandleFeaturesNV const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
@@ -29369,6 +29375,18 @@ bool compare_VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT(
        s2->primitivesGeneratedQueryWithRasterizerDiscard) ||
       (s1->primitivesGeneratedQueryWithNonZeroStreams !=
        s2->primitivesGeneratedQueryWithNonZeroStreams))
+    return false;
+
+  return true;
+}
+#endif
+
+#if VK_HEADER_VERSION >= 361 && VK_NV_private_data_base_handle
+bool compare_VkPhysicalDevicePrivateDataBaseHandleFeaturesNV(
+    VkPhysicalDevicePrivateDataBaseHandleFeaturesNV const *s1,
+    VkPhysicalDevicePrivateDataBaseHandleFeaturesNV const *s2) {
+  // local, simple types
+  if ((s1->privateDataBaseHandle != s2->privateDataBaseHandle))
     return false;
 
   return true;

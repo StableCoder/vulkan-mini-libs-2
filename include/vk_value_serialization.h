@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 360
+#if VK_HEADER_VERSION > 361
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v360)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v361)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v360)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v361)"
 #endif
 #endif
 
@@ -1965,12 +1965,14 @@ static uint32_t const VkBuildAccelerationStructureFlagsKHRValues[34] = {
     0x00008000, // RESERVED_15_BIT_EXT
 };
 
-static char const *const VkPrivateDataSlotCreateFlagsStrings[1] = {
-    "RESERVED_0_BIT_NV", // 0x00000001
+static char const *const VkPrivateDataSlotCreateFlagsStrings[2] = {
+    "RESERVED_0_BIT_NV",         // 0x00000001
+    "BASE_OBJECT_HANDLE_BIT_NV", // 0x00000001
 };
 
-static uint32_t const VkPrivateDataSlotCreateFlagsValues[1] = {
+static uint32_t const VkPrivateDataSlotCreateFlagsValues[2] = {
     0x00000001, // RESERVED_0_BIT_NV
+    0x00000001, // BASE_OBJECT_HANDLE_BIT_NV
 };
 
 static char const *const VkAccelerationStructureCreateFlagsKHRStrings[5] = {
@@ -10025,7 +10027,7 @@ static ValueSet const cValueSets[442] = {
     {"VkBuildAccelerationStructureFlagsKHR", VkBuildAccelerationStructureFlagsKHRStrings,
      VkBuildAccelerationStructureFlagsKHRValues, 34, ENUM_TYPE_FLAG32},
     {"VkPrivateDataSlotCreateFlags", VkPrivateDataSlotCreateFlagsStrings,
-     VkPrivateDataSlotCreateFlagsValues, 1, ENUM_TYPE_FLAG32},
+     VkPrivateDataSlotCreateFlagsValues, 2, ENUM_TYPE_FLAG32},
     {"VkAccelerationStructureCreateFlagsKHR", VkAccelerationStructureCreateFlagsKHRStrings,
      VkAccelerationStructureCreateFlagsKHRValues, 5, ENUM_TYPE_FLAG32},
     {"VkDescriptorUpdateTemplateCreateFlags", NULL, NULL, 0, ENUM_TYPE_FLAG32},

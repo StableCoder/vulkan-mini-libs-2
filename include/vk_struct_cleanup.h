@@ -37,12 +37,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 360
+#if VK_HEADER_VERSION > 361
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v360)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v361)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v360)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v361)"
 #endif
 #endif
 
@@ -5474,6 +5474,11 @@ void cleanup_VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT(
 #if VK_HEADER_VERSION >= 210 && VK_EXT_primitives_generated_query
 void cleanup_VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT(
     VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 361 && VK_NV_private_data_base_handle
+void cleanup_VkPhysicalDevicePrivateDataBaseHandleFeaturesNV(
+    VkPhysicalDevicePrivateDataBaseHandleFeaturesNV const *pData);
 #endif
 
 #if VK_HEADER_VERSION >= 204 && VK_VERSION_1_3
@@ -16893,6 +16898,14 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIMITIVES_GENERATED_QUERY_FEATURES_EXT) {
     cleanup_VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT(
         (VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 361 && VK_NV_private_data_base_handle
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_PRIVATE_DATA_BASE_HANDLE_FEATURES_NV) {
+    cleanup_VkPhysicalDevicePrivateDataBaseHandleFeaturesNV(
+        (VkPhysicalDevicePrivateDataBaseHandleFeaturesNV const *)pData);
     return;
   }
 #endif
@@ -35287,6 +35300,16 @@ void cleanup_VkPhysicalDevicePrimitiveTopologyListRestartFeaturesEXT(
 #if VK_HEADER_VERSION >= 210 && VK_EXT_primitives_generated_query
 void cleanup_VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT(
     VkPhysicalDevicePrimitivesGeneratedQueryFeaturesEXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 361 && VK_NV_private_data_base_handle
+void cleanup_VkPhysicalDevicePrivateDataBaseHandleFeaturesNV(
+    VkPhysicalDevicePrivateDataBaseHandleFeaturesNV const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
