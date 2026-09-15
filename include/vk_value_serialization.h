@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 359
+#if VK_HEADER_VERSION > 360
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v359)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v360)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v359)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v360)"
 #endif
 #endif
 
@@ -178,13 +178,13 @@ STecVkSerializationResult vk_parse64(char const *pVkType,
 #include <string.h>
 
 #define cVendorCount sizeof(cVendorList) / sizeof(char const *)
-char const *cVendorList[43] = {
+char const *cVendorList[44] = {
     "IMG",        "AMD",   "AMDX",   "ARM",   "FSL",     "BRCM",       "NXP",     "NV",
     "NVX",        "VIV",   "VSI",    "KDAB",  "ANDROID", "CHROMIUM",   "FUCHSIA", "GGP",
     "GOOGLE",     "QCOM",  "LUNARG", "NZXT",  "SAMSUNG", "SEC",        "TIZEN",   "RENDERDOC",
     "NN",         "MVK",   "KHR",    "KHX",   "EXT",     "MESA",       "INTEL",   "HUAWEI",
     "OHOS",       "VALVE", "QNX",    "JUICE", "FB",      "RASTERGRID", "MSFT",    "SHADY",
-    "FREDEMMOTT", "MTK",   "OPENXR",
+    "FREDEMMOTT", "MTK",   "OPENXR", "MWS",
 };
 
 static char const *const VkFramebufferCreateFlagsStrings[2] = {
