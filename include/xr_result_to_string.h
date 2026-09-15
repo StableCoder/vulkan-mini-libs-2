@@ -37,13 +37,13 @@ _Static_assert((XR_CURRENT_API_VERSION & 0xffffffffULL) >= 0,
                "XR_CURRENT_API_VERSION is lower than the minimum supported version (v0)");
 #endif
 
-#if (XR_CURRENT_API_VERSION & 0xffffffffULL) > 62
+#if (XR_CURRENT_API_VERSION & 0xffffffffULL) > 63
 #if _MSC_VER
 #pragma message(                                                                                   \
     __FILE__                                                                                       \
-    ": warning: XR_CURRENT_API_VERSION is higher than what the header fully supports (v62)")
+    ": warning: XR_CURRENT_API_VERSION is higher than what the header fully supports (v63)")
 #else
-#warning "XR_CURRENT_API_VERSION is higher than what the header fully supports (v62)"
+#warning "XR_CURRENT_API_VERSION is higher than what the header fully supports (v63)"
 #endif
 #endif
 
@@ -391,10 +391,34 @@ char const *XrResult_to_string(XrResult result) {
     return "XR_ERROR_SPATIAL_CAPABILITY_CONFIGURATION_INVALID_EXT";
   case -1000740006:
     return "XR_ERROR_SPATIAL_COMPONENT_NOT_ENABLED_EXT";
+  case -1000755000:
+    return "XR_ERROR_CAMERA_UNAVAILABLE_BD";
+  case -1000755001:
+    return "XR_ERROR_CAMERA_OCCUPIED_BD";
+  case -1000755002:
+    return "XR_ERROR_CAMERA_CAPTURE_SESSION_CAPTURING_BD";
+  case -1000755003:
+    return "XR_ERROR_CAMERA_CAPTURE_SESSION_NOT_CAPTURING_BD";
+  case -1000755004:
+    return "XR_ERROR_CAMERA_ID_INVALID_BD";
+  case -1000755005:
+    return "XR_ERROR_CAMERA_IMAGE_ID_INVALID_BD";
+  case -1000755006:
+    return "XR_ERROR_CAMERA_PROPERTY_TYPE_INVALID_BD";
+  case -1000755007:
+    return "XR_ERROR_CAMERA_CAPABILITY_TYPE_INVALID_BD";
+  case -1000755008:
+    return "XR_ERROR_IMAGE_BUFFER_EXHAUSTED_BD";
   case -1000763001:
     return "XR_ERROR_SPATIAL_PERSISTENCE_SCOPE_UNSUPPORTED_EXT";
   case -1000781001:
     return "XR_ERROR_SPATIAL_PERSISTENCE_SCOPE_INCOMPATIBLE_EXT";
+  case -1000782001:
+    return "XR_ERROR_SPATIAL_IMAGE_FORMAT_UNSUPPORTED_EXT";
+  case -1000782002:
+    return "XR_ERROR_SPATIAL_IMAGE_INVALID_EXT";
+  case -1000782003:
+    return "XR_ERROR_SPATIAL_IMAGE_SIZE_MISSING_EXT";
   case -1000787000:
     return "XR_ERROR_KEYLESS_AUTH_NOT_SETUP_ANDROID";
   case -1000787001:
@@ -411,6 +435,24 @@ char const *XrResult_to_string(XrResult result) {
     return "XR_ERROR_SPATIAL_ANCHOR_ENTITY_ID_INVALID_ANDROID";
   case -1000797000:
     return "XR_ERROR_SURFACE_ANCHOR_LOCATION_UNSUPPORTED_ANDROID";
+  case -1000810000:
+    return "XR_ERROR_SPATIAL_CONTAINER_CLOSED_EXT";
+  case -1000810001:
+    return "XR_ERROR_SPATIAL_CONTAINERS_ENABLED_EXT";
+  case -1000810002:
+    return "XR_ERROR_SPATIAL_CONTAINERS_NOT_ENABLED_EXT";
+  case -1000810003:
+    return "XR_ERROR_COMPATIBLE_SPATIAL_CONTAINER_MISSING_EXT";
+  case -1000813001:
+    return "XR_ERROR_SPATIAL_CONTAINER_IS_RENDERING_EXT";
+  case -1000813002:
+    return "XR_ERROR_SPATIAL_CONTAINER_NOT_RENDERING_EXT";
+  case -1000813003:
+    return "XR_ERROR_SPATIAL_CONTAINER_MISSING_EXT";
+  case -1000813004:
+    return "XR_ERROR_SPATIAL_CONTAINER_DUPLICATE_EXT";
+  case -1000813005:
+    return "XR_ERROR_SPATIAL_CONTAINER_GRAPHICS_PRESENTATION_MISSING_EXT";
 
   default:
     return NULL;
