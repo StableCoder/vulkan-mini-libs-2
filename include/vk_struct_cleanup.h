@@ -37,12 +37,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 362
+#if VK_HEADER_VERSION > 363
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v362)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v363)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v362)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v363)"
 #endif
 #endif
 
@@ -4766,6 +4766,10 @@ void cleanup_VkPhysicalDeviceIndexTypeUint8FeaturesKHR(
 #if VK_HEADER_VERSION >= 303 && VK_KHR_index_type_uint8
 void cleanup_VkPhysicalDeviceIndexTypeUint8FeaturesKHR(
     VkPhysicalDeviceIndexTypeUint8FeaturesKHR const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 363 && VK_INTEL_device_info
+void cleanup_VkPhysicalDeviceInfoPropertiesINTEL(VkPhysicalDeviceInfoPropertiesINTEL const *pData);
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_NV_inherited_viewport_scissor
@@ -15997,6 +16001,13 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INDEX_TYPE_UINT8_FEATURES_KHR) {
     cleanup_VkPhysicalDeviceIndexTypeUint8FeaturesKHR(
         (VkPhysicalDeviceIndexTypeUint8FeaturesKHR const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 363 && VK_INTEL_device_info
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_INFO_PROPERTIES_INTEL) {
+    cleanup_VkPhysicalDeviceInfoPropertiesINTEL((VkPhysicalDeviceInfoPropertiesINTEL const *)pData);
     return;
   }
 #endif
@@ -33941,6 +33952,15 @@ void cleanup_VkPhysicalDeviceIndexTypeUint8FeaturesKHR(
 #if VK_HEADER_VERSION >= 303 && VK_KHR_index_type_uint8
 void cleanup_VkPhysicalDeviceIndexTypeUint8FeaturesKHR(
     VkPhysicalDeviceIndexTypeUint8FeaturesKHR const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 363 && VK_INTEL_device_info
+void cleanup_VkPhysicalDeviceInfoPropertiesINTEL(VkPhysicalDeviceInfoPropertiesINTEL const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);

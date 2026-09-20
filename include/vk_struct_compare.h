@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 362
+#if VK_HEADER_VERSION > 363
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v362)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v363)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v362)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v363)"
 #endif
 #endif
 
@@ -5671,6 +5671,11 @@ bool compare_VkPhysicalDeviceIndexTypeUint8FeaturesKHR(
 bool compare_VkPhysicalDeviceIndexTypeUint8FeaturesKHR(
     VkPhysicalDeviceIndexTypeUint8FeaturesKHR const *s1,
     VkPhysicalDeviceIndexTypeUint8FeaturesKHR const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 363 && VK_INTEL_device_info
+bool compare_VkPhysicalDeviceInfoPropertiesINTEL(VkPhysicalDeviceInfoPropertiesINTEL const *s1,
+                                                 VkPhysicalDeviceInfoPropertiesINTEL const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 175 && VK_NV_inherited_viewport_scissor
@@ -27367,6 +27372,19 @@ bool compare_VkPhysicalDeviceIndexTypeUint8FeaturesKHR(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 363 && VK_INTEL_device_info
+bool compare_VkPhysicalDeviceInfoPropertiesINTEL(VkPhysicalDeviceInfoPropertiesINTEL const *s1,
+                                                 VkPhysicalDeviceInfoPropertiesINTEL const *s2) {
+  // local, simple types
+  if ((s1->deviceIpVersionArch != s2->deviceIpVersionArch) ||
+      (s1->deviceIpVersionRelease != s2->deviceIpVersionRelease) ||
+      (s1->deviceIpVersionRevision != s2->deviceIpVersionRevision))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 175 && VK_NV_inherited_viewport_scissor
 bool compare_VkPhysicalDeviceInheritedViewportScissorFeaturesNV(
     VkPhysicalDeviceInheritedViewportScissorFeaturesNV const *s1,
@@ -33476,7 +33494,7 @@ bool compare_VkPipelineBinaryKeyKHR(VkPipelineBinaryKeyKHR const *s1,
     return false;
 
   // local array members
-  if (memcmp(s1->key, s2->key, VK_MAX_PIPELINE_BINARY_KEY_SIZE_KHR * sizeof(uint8_t)) != 0)
+  if (memcmp(s1->key, s2->key, s1->keySize) != 0)
     return false;
   return true;
 }
