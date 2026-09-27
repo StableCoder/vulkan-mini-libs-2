@@ -38,12 +38,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 363
+#if VK_HEADER_VERSION > 364
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v363)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v364)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v363)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v364)"
 #endif
 #endif
 
