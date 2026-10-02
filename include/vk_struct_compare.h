@@ -44,12 +44,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 364
+#if VK_HEADER_VERSION > 365
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v364)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v365)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v364)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v365)"
 #endif
 #endif
 
@@ -4517,6 +4517,12 @@ bool compare_VkPhysicalDeviceCooperativeMatrixFeaturesNV(
 bool compare_VkPhysicalDeviceCooperativeMatrixInfo2EXT(
     VkPhysicalDeviceCooperativeMatrixInfo2EXT const *s1,
     VkPhysicalDeviceCooperativeMatrixInfo2EXT const *s2);
+#endif
+
+#if VK_HEADER_VERSION >= 365 && VK_ARM_cooperative_matrix_layouts
+bool compare_VkPhysicalDeviceCooperativeMatrixLayoutsFeaturesARM(
+    VkPhysicalDeviceCooperativeMatrixLayoutsFeaturesARM const *s1,
+    VkPhysicalDeviceCooperativeMatrixLayoutsFeaturesARM const *s2);
 #endif
 
 #if VK_HEADER_VERSION >= 359 && VK_EXT_cooperative_matrix_maintenance1
@@ -24309,6 +24315,18 @@ bool compare_VkPhysicalDeviceCooperativeMatrixInfo2EXT(
 }
 #endif
 
+#if VK_HEADER_VERSION >= 365 && VK_ARM_cooperative_matrix_layouts
+bool compare_VkPhysicalDeviceCooperativeMatrixLayoutsFeaturesARM(
+    VkPhysicalDeviceCooperativeMatrixLayoutsFeaturesARM const *s1,
+    VkPhysicalDeviceCooperativeMatrixLayoutsFeaturesARM const *s2) {
+  // local, simple types
+  if ((s1->cooperativeMatrixArmLayouts != s2->cooperativeMatrixArmLayouts))
+    return false;
+
+  return true;
+}
+#endif
+
 #if VK_HEADER_VERSION >= 359 && VK_EXT_cooperative_matrix_maintenance1
 bool compare_VkPhysicalDeviceCooperativeMatrixMaintenance1FeaturesEXT(
     VkPhysicalDeviceCooperativeMatrixMaintenance1FeaturesEXT const *s1,
@@ -27530,7 +27548,7 @@ bool compare_VkPhysicalDeviceLayeredApiPropertiesKHR(
     return false;
 
   // local array members
-  if (memcmp(s1->deviceName, s2->deviceName, VK_MAX_PHYSICAL_DEVICE_NAME_SIZE * sizeof(char)) != 0)
+  if (strncmp(s1->deviceName, s2->deviceName, VK_MAX_PHYSICAL_DEVICE_NAME_SIZE) != 0)
     return false;
   return true;
 }

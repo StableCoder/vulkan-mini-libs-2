@@ -37,12 +37,12 @@ _Static_assert(VK_HEADER_VERSION >= 72,
                "VK_HEADER_VERSION  is lower than the minimum supported version (v72)");
 #endif
 
-#if VK_HEADER_VERSION > 364
+#if VK_HEADER_VERSION > 365
 #if _MSC_VER
 #pragma message(                                                                                   \
-    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v364)")
+    __FILE__ ": warning: VK_HEADER_VERSION is higher than what the header fully supports (v365)")
 #else
-#warning "VK_HEADER_VERSION is higher than what the header fully supports (v364)"
+#warning "VK_HEADER_VERSION is higher than what the header fully supports (v365)"
 #endif
 #endif
 
@@ -3802,6 +3802,11 @@ void cleanup_VkPhysicalDeviceCooperativeMatrixFeaturesNV(
 #if VK_HEADER_VERSION >= 359 && VK_EXT_cooperative_matrix_maintenance1
 void cleanup_VkPhysicalDeviceCooperativeMatrixInfo2EXT(
     VkPhysicalDeviceCooperativeMatrixInfo2EXT const *pData);
+#endif
+
+#if VK_HEADER_VERSION >= 365 && VK_ARM_cooperative_matrix_layouts
+void cleanup_VkPhysicalDeviceCooperativeMatrixLayoutsFeaturesARM(
+    VkPhysicalDeviceCooperativeMatrixLayoutsFeaturesARM const *pData);
 #endif
 
 #if VK_HEADER_VERSION >= 359 && VK_EXT_cooperative_matrix_maintenance1
@@ -14726,6 +14731,14 @@ void cleanup_vk_struct(void const *pData) {
   if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_INFO_2_EXT) {
     cleanup_VkPhysicalDeviceCooperativeMatrixInfo2EXT(
         (VkPhysicalDeviceCooperativeMatrixInfo2EXT const *)pData);
+    return;
+  }
+#endif
+
+#if VK_HEADER_VERSION >= 365 && VK_ARM_cooperative_matrix_layouts
+  if (pTemp->sType == VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_COOPERATIVE_MATRIX_LAYOUTS_FEATURES_ARM) {
+    cleanup_VkPhysicalDeviceCooperativeMatrixLayoutsFeaturesARM(
+        (VkPhysicalDeviceCooperativeMatrixLayoutsFeaturesARM const *)pData);
     return;
   }
 #endif
@@ -31991,6 +32004,16 @@ void cleanup_VkPhysicalDeviceCooperativeMatrixFeaturesNV(
 #if VK_HEADER_VERSION >= 359 && VK_EXT_cooperative_matrix_maintenance1
 void cleanup_VkPhysicalDeviceCooperativeMatrixInfo2EXT(
     VkPhysicalDeviceCooperativeMatrixInfo2EXT const *pData) {
+  // pNext
+  if (pData->pNext != NULL)
+    cleanup_vk_struct(pData->pNext);
+  free((void *)pData->pNext);
+}
+#endif
+
+#if VK_HEADER_VERSION >= 365 && VK_ARM_cooperative_matrix_layouts
+void cleanup_VkPhysicalDeviceCooperativeMatrixLayoutsFeaturesARM(
+    VkPhysicalDeviceCooperativeMatrixLayoutsFeaturesARM const *pData) {
   // pNext
   if (pData->pNext != NULL)
     cleanup_vk_struct(pData->pNext);
